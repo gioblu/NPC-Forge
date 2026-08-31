@@ -1,0 +1,82 @@
+<!-- ============================================================
+     THEME · BLOG — chronicle masthead
+     Placeholders: {{TITLE}} {{DESCRIPTION}} {{COPYRIGHT}} {{ADDRESS}}
+     {{EMAIL}} {{SOCIALS}} {{STYLES}} {{SCRIPTS}} {{YEAR}} {{THEME}}
+     The crimson bar at the top is the reading-progress hook (.progress,
+     driven by _core.js).
+     ============================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="TERMy · {{THEME}}">
+    <title>{{TITLE}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,500;0,700;1,500&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+    {{STYLES}}
+</head>
+<body>
+    <div class="progress" aria-hidden="true"></div>
+
+    <header class="masthead wrap">
+        <p class="issue">Vol. 03 — Issue 21 · {{YEAR}}</p>
+        <h1>{{TITLE}}</h1>
+        <p class="deck">{{DESCRIPTION}}</p>
+    </header>
+
+    <main class="wrap">
+        <article class="featured" data-reveal>
+            <p class="kicker">Cover story · Distributed systems</p>
+            <h2><a href="#">The quiet return of the monolith</a></h2>
+            <p class="lead">After a decade of microservice sprawl, the most effective platform teams we studied
+               are consolidating back into modular monoliths — and their lead times have dropped by half.
+               Here is the data from 43 codebases, and the three conditions under which the pendulum actually stops swinging.</p>
+            <div class="byline">
+                <span class="avatar">I</span>
+                <span>By <b>Imre Kertész</b> · Staff writer</span>
+                <span>14 min read</span>
+            </div>
+        </article>
+
+        <section>
+            <article class="post" data-reveal>
+                <div>
+                    <p class="kicker">Engineering</p>
+                    <h2><a href="#">Zero-knowledge proofs, explained without the mystique</a></h2>
+                    <p class="excerpt">A prover can convince you a statement is true without revealing why.
+                       We walk through zk-SNARKs with nothing but high-school algebra and one stubborn colour-blind friend.</p>
+                </div>
+                <span class="read">→</span>
+            </article>
+            <article class="post" data-reveal>
+                <div>
+                    <p class="kicker">Architecture</p>
+                    <h2><a href="#">Edge computing grows up: V8 isolates in production</a></h2>
+                    <p class="excerpt">Cold starts under five milliseconds are changing what "a server" means.
+                       A field report from running 400 isolates per node across 31 points of presence.</p>
+                </div>
+                <span class="read">→</span>
+            </article>
+            <article class="post" data-reveal>
+                <div>
+                    <p class="kicker">Open source</p>
+                    <h2><a href="#">We rewrote our CLI in Rust. The benchmarks surprised us.</a></h2>
+                    <p class="excerpt">Memory safety was the pitch, but the 9× throughput win is what got the
+                       migration approved. Full flamegraphs and the two regressions nobody warns you about.</p>
+                </div>
+                <span class="read">→</span>
+            </article>
+        </section>
+    </main>
+
+    <footer class="site wrap">
+        <div class="f-copy">{{COPYRIGHT}}</div>
+        <address class="f-addr">{{ADDRESS}}</address>
+        <nav class="f-links" aria-label="Contact">{{SOCIALS}}{{EMAIL}}</nav>
+    </footer>
+
+    {{SCRIPTS}}
+</body>
+</html>

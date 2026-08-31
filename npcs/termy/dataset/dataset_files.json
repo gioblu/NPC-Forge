@@ -1,0 +1,663 @@
+[
+    {
+        "category": "linux_files",
+        "input": [
+            "list files",
+            "show files",
+            "display files",
+            "list directory contents",
+            "show directory contents",
+            "show me the files in this directory",
+            "show me the contents of this folder",
+            "show me the contents of this directory"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "ls -lah",
+                    "explanation": "Lists the files in the current directory.",
+                    "goal": "Display current directory contents",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "create a file",
+            "i need to create a file",
+            "make a new file",
+            "create a new file",
+            "write a new file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the filename\" > /dev/null 2>&1 && printf \"\\r\\nFilename: \" && read -r fname && if [ -n \"$fname\" ]; then termy_say \"Please enter the content\" > /dev/null 2>&1 && printf \"Content: \" && read -r fcontent && echo \"$fcontent\" > \"$fname\" && printf \"\\nFile \\033[1m%s\\033[22m saved.\\n\" \"$fname\" && termy_say \"File saved successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Operation cancelled.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi",
+                    "explanation": "Creates a new file with content after prompting for the filename and data.",
+                    "goal": "Create a new file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "copy a file to another location",
+            "duplicate a file",
+            "copy file with verification",
+            "copy and verify a file",
+            "copy file",
+            "cp a file",
+            "copy file to path",
+            "make a copy of a file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the source file path\" > /dev/null 2>&1 && printf \"\\r\\n📄 Source file: \" && read -r src && if [ -f \"$src\" ]; then termy_say \"Please enter the destination path\" > /dev/null 2>&1 && printf \"Destination: \" && read -r dst && if [ -n \"$dst\" ]; then cp \"$src\" \"$dst\" && printf \"\\n📋 ✅ Copied \\033[1m%s\\033[22m → \\033[1m%s\\033[22m\\n\" \"$src\" \"$dst\" && termy_say \"File copied successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Destination path cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi; else printf \"\\n⛔ Source file does not exist.\\n\" && termy_say \"Source file not found\" > /dev/null 2>&1; fi",
+                    "explanation": "Copies a file to another location after prompting for source and destination paths.",
+                    "goal": "Copy a file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "rename a file",
+            "rename or move a file",
+            "move a file with confirmation",
+            "rename file with confirmation",
+            "rename file",
+            "change file name",
+            "move file to new name",
+            "how to rename a file",
+            "mv rename file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the current filename\" > /dev/null 2>&1 && printf \"\\r\\n📄 Current filename: \" && read -r old && if [ -e \"$old\" ]; then termy_say \"Please enter the new filename\" > /dev/null 2>&1 && printf \"New filename: \" && read -r new && if [ -n \"$new\" ]; then mv \"$old\" \"$new\" && printf \"\\n📝 ✅ Renamed: \\033[1m%s\\033[22m → \\033[1m%s\\033[22m\\n\" \"$old\" \"$new\" && termy_say \"File renamed successfully\" > /dev/null 2>&1; else printf \"\\n⛔ New filename cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi; else printf \"\\n⛔ File does not exist.\\n\" && termy_say \"File not found\" > /dev/null 2>&1; fi",
+                    "explanation": "Renames a file after prompting for the current and new filenames.",
+                    "goal": "Rename a file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "delete a file",
+            "I want to delete a file",
+            "I want to remove a file",
+            "delete file",
+            "remove file",
+            "remove a file",
+            "erase a file",
+            "how do i delete a file",
+            "get rid of a file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the filename to delete\" > /dev/null 2>&1 && printf \"\\r\\n📄 Enter the filename to delete: \" && read -r fname && if [ -f \"$fname\" ]; then rm -f \"$fname\" && printf \"\\nFile \\033[1m%s\\033[22m has been deleted.\\n\" \"$fname\" && termy_say \"File deleted successfully\" > /dev/null 2>&1; else printf \"\\n⛔ File does not exist.\\n\" && termy_say \"File not found\" > /dev/null 2>&1; fi",
+                    "explanation": "Deletes a file after prompting for the filename and verifying its existence.",
+                    "goal": "Delete a file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "edit a file",
+            "show me the contents of a file",
+            "I want to edit a file",
+            "I want to modify a file",
+            "modify file",
+            "edit file",
+            "open a file to edit",
+            "modify a file",
+            "change file contents",
+            "how do i edit a file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "open_file_with_editor",
+                    "explanation": "Edits a file using nano after prompting for the filename.",
+                    "goal": "Edit a file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "open in browser",
+            "open it in the browser",
+            "open this in browser",
+            "show it in the browser",
+            "launch in browser",
+            "show in browser",
+            "view in browser",
+            "display in browser"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "file_path=\"$(termy_get_context 'active_file')\" && if [ -z \"$file_path\" ]; then termy_say \"Error: No active file in context\"; exit 1; elif [ ! -f \"$file_path\" ]; then termy_say \"Error: File not found at $file_path\"; exit 1; else open_browser \"$file_path\"; fi",
+                    "explanation": "Safely extracts the absolute file path from context, validates it exists, then opens it in the browser with proper argument separation.",
+                    "goal": "Open webpage in browser",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "delete a file in this directory",
+            "remove a file in this location",
+            "delete a file from the current dir",
+            "remove a file from the current dir",
+            "delete local file",
+            "remove this file",
+            "erase file here",
+            "rm a file",
+            "delete file in current directory"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please select a file to delete\" > /dev/null 2>&1 && printf \"\\r\\n📄 Available files:\\n\" && i=0 && for f in *; do if [ -f \"$f\" ]; then i=$((i+1)) && eval \"file_$i=\\\"$f\\\"\" && printf \"  %d) %s\\n\" \"$i\" \"$f\"; fi; done && printf \"Select a number: \" && read -r num && eval \"fname=\\$file_$num\" && if [ -n \"$fname\" ] && [ -f \"$fname\" ]; then rm -f \"$fname\" && printf \"\\nFile \\033[1m%s\\033[22m deleted successfully.\\n\" \"$fname\" && termy_say \"File deleted successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Invalid choice or not a file.\\n\" && termy_say \"Invalid selection\" > /dev/null 2>&1; fi",
+                    "explanation": "Deletes a file in the current directory by providing an interactive selection list.",
+                    "goal": "Delete a local file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "search for a specific word inside a file",
+            "find a word in a file",
+            "look for a word in a file",
+            "find word inside a file",
+            "find something in a file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the word to find\" > /dev/null 2>&1 && printf \"\\r\\n🔍 Word to find: \" && read -r word && if [ -n \"$word\" ]; then termy_say \"Please enter the target file path\" > /dev/null 2>&1 && printf \"📄 Target file: \" && read -r targetfile && if [ -f \"$targetfile\" ]; then printf \"\\nMatches for \\033[1m%s\\033[22m:\\n\" \"$word\" && grep -n \"$word\" \"$targetfile\" && printf \"\\n\" && termy_say \"Search completed\" > /dev/null 2>&1; else printf \"\\n⛔ Target file does not exist.\\n\" && termy_say \"File not found\" > /dev/null 2>&1; fi; else printf \"\\n⛔ Search word cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi",
+                    "explanation": "Searches for a specific word inside a file and displays the matching lines with line numbers.",
+                    "goal": "Search word in a file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "modify file permissions",
+            "change file permissions interactively",
+            "set file permissions",
+            "i want to modify the permissions of a file",
+            "i want to change the permissions of a file",
+            "change the permissions of a file",
+            "modify the permissions of a file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the file or folder path\" > /dev/null 2>&1 && printf \"\\r\\n📄 File or Folder: \" && read -r target && if [ -e \"$target\" ]; then termy_say \"Please enter the octal permissions\" > /dev/null 2>&1 && printf \"Octal permissions 755: \" && read -r mode && if [ -n \"$mode\" ]; then chmod \"$mode\" \"$target\" && printf \"\\nPermissions for \\033[1m%s\\033[22m updated to \\033[1m%s\\033[22m.\\n\" \"$target\" \"$mode\" && termy_say \"Permissions updated successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Permissions mode cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi; else printf \"\\n⛔ File or folder does not exist.\\n\" && termy_say \"Target not found\" > /dev/null 2>&1; fi",
+                    "explanation": "Changes the permissions of a file or folder interactively.",
+                    "goal": "Modify file permissions",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "backup a file",
+            "i want to backup a file",
+            "i want to backup a directory",
+            "backup a directory",
+            "make a backup",
+            "create file backup",
+            "copy file as backup",
+            "save backup of file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please choose a backup option\" > /dev/null 2>&1 && printf \"\\r\\n1) 📄 Backup a File\\n2) 📁 Backup a Directory\\n\\nChoose option 1-2: \" && read -r choice && case \"$choice\" in 1) termy_say \"Please enter the file path\" > /dev/null 2>&1 && printf \"File to backup: \" && read -r f && if [ -f \"$f\" ]; then cp \"$f\" \"$f.bak\" && printf \"\\nSaved as \\033[1m%s.bak\\033[22m\\n\" \"$f\" && termy_say \"File backup completed successfully\" > /dev/null 2>&1; else printf \"\\n⛔ File does not exist.\\n\" && termy_say \"File not found\" > /dev/null 2>&1; fi ;; 2) termy_say \"Please enter the directory path\" > /dev/null 2>&1 && printf \"Directory to backup: \" && read -r d && if [ -d \"$d\" ]; then tar -czf \"$d.tar.gz\" \"$d\" && printf \"\\nCreated archive \\033[1m%s.tar.gz\\033[22m\\n\" \"$d\" && termy_say \"Directory backup completed successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Directory does not exist.\\n\" && termy_say \"Directory not found\" > /dev/null 2>&1; fi ;; *) printf \"\\n⛔ Invalid choice.\\n\" && termy_say \"Invalid selection\" > /dev/null 2>&1 ;; esac",
+                    "explanation": "Backs up a file using cp or a directory using tar after prompting for user selection and target path.",
+                    "goal": "Create a backup",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "delete files with a specific extension",
+            "remove files with a certain extension",
+            "delete all files of a certain type",
+            "delete all files by extension",
+            "remove files by type",
+            "bulk delete by extension",
+            "erase files with a given extension",
+            "clean files of a certain type"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the target directory path\" > /dev/null 2>&1 && printf \"\\r\\n📁 Target directory: \" && read -r searchdir && if [ -d \"$searchdir\" ]; then termy_say \"Please enter the file extension\" > /dev/null 2>&1 && printf \"Extension log, tmp: \" && read -r ext && if [ -n \"$ext\" ]; then printf \"\\nFound files:\\n\" && find \"$searchdir\" -type f -name \"*.$ext\" && printf \"\\n\" && termy_say \"Are you sure you want to delete these files\" > /dev/null 2>&1 && printf \"Are you sure you want to delete these files? y/n: \" && read -r confirm && case \"$confirm\" in [yY]*) find \"$searchdir\" -type f -name \"*.$ext\" -delete && printf \"\\nFiles with extension \\033[1m.%s\\033[22m deleted.\\n\" \"$ext\" && termy_say \"Files deleted successfully\" > /dev/null 2>&1 ;; *) printf \"\\n⛔ Operation aborted.\\n\" && termy_say \"Operation aborted\" > /dev/null 2>&1 ;; esac; else printf \"\\n⛔ Extension cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi; else printf \"\\n⛔ Directory does not exist.\\n\" && termy_say \"Directory not found\" > /dev/null 2>&1; fi",
+                    "explanation": "Deletes all files with a specific extension in a given directory after user confirmation.",
+                    "goal": "Delete files by extension",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files_encryption",
+        "input": [
+            "encrypt a file",
+            "decrypt a file",
+            "encrypt or decrypt a file",
+            "scramble a file",
+            "protect a file with encryption",
+            "secure a file",
+            "encode a file",
+            "decode a file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please choose a cryptographic action\" > /dev/null 2>&1 && printf \"\\r\\n1) Encrypt a file\\n2) Decrypt a file\\n\\nChoose action 1-2: \" && read -r crypto_choice; case \"$crypto_choice\" in 1) termy_say \"Please enter the file to encrypt\" > /dev/null 2>&1 && printf \"File to encrypt: \" && read -r enc_f && if [ -f \"$enc_f\" ]; then gpg -c \"$enc_f\" && printf \"\\nEncrypted file saved as \\033[1m%s.gpg\\033[22m\\n\" \"$enc_f\" && termy_say \"File encrypted successfully\" > /dev/null 2>&1; else printf \"\\n⛔ File does not exist.\\n\" && termy_say \"File not found\" > /dev/null 2>&1; fi ;; 2) termy_say \"Please enter the file to decrypt\" > /dev/null 2>&1 && printf \"File to decrypt: \" && read -r dec_f && if [ -f \"$dec_f\" ]; then gpg \"$dec_f\" && printf \"\\nFile \\033[1m%s\\033[22m decrypted successfully.\\n\" \"$dec_f\" && termy_say \"File decrypted successfully\" > /dev/null 2>&1; else printf \"\\n⛔ File does not exist.\\n\" && termy_say \"File not found\" > /dev/null 2>&1; fi ;; *) printf \"\\n⛔ Invalid action.\\n\" && termy_say \"Invalid selection\" > /dev/null 2>&1 ;; esac",
+                    "explanation": "Encrypts or decrypts a file using GPG.",
+                    "goal": "Encrypt or decrypt a file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "make a script executable",
+            "change script permissions",
+            "set script as executable",
+            "chmod executable",
+            "make file runnable",
+            "add execute permission",
+            "allow script to run",
+            "set executable bit"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the script filename\" > /dev/null 2>&1 && printf \"\\r\\n📜 Enter script filename: \" && read -r sname && if [ -f \"$sname\" ]; then chmod +x \"$sname\" && printf \"\\nFile \\033[1m%s\\033[22m is now executable.\\n\" \"$sname\" && termy_say \"File is now executable\" > /dev/null 2>&1; else printf \"\\n⛔ File not found.\\n\" && termy_say \"File not found\" > /dev/null 2>&1; fi",
+                    "explanation": "Makes a script file executable using chmod +x after verifying its existence.",
+                    "goal": "Make script executable",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files_archives",
+        "input": [
+            "manage archives",
+            "manage archives and compression",
+            "create or extract archives",
+            "archive manager menu",
+            "tar or zip files",
+            "compress files",
+            "archive management",
+            "zip and unzip menu",
+            "compression tools",
+            "file archiving options"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf \"1) Create TAR\\n2) Create ZIP\\n3) Extract\\n\\n\" && read -rp \"Choose (1-3): \" choice && tput cuu 1 && if [ \"$choice\" = \"1\" ]; then termy_say \"Creating tar archive\" > /dev/null 2>&1 && printf \"\\r\\n\" && read -rp \"Folder to tar: \" folder && tar -czf \"${folder}.tar.gz\" \"$folder\" && echo -e \"📦 Created: ${folder}.tar.gz\"; elif [ \"$choice\" = \"2\" ]; then termy_say \"Creating zip archive\" > /dev/null 2>&1 && printf \"\\r\\n\" && read -rp \"Folder to zip: \" folder && zip -r \"${folder}.zip\" \"$folder\" && echo -e \"📦 Created: ${folder}.zip\"; elif [ \"$choice\" = \"3\" ]; then termy_say \"Extracting archive\" > /dev/null 2>&1 && printf \"\\r\\n\" && read -rp \"Archive file to extract: \" archive && extract_dir=\"${archive%.*}\" && mkdir -p \"$extract_dir\" && (tar -xzf \"$archive\" -C \"$extract_dir\" 2>/dev/null || unzip \"$archive\" -d \"$extract_dir\" 2>/dev/null) && echo -e \"📦 Extracted to: \\033[1m$extract_dir\\033[22m\"; else printf \"\\r\\nInvalid option\\n\"; fi && printf \"\"",
+                    "explanation": "Compresses or decompresses directories using tar or zip.",
+                    "goal": "Archives compression, decompression",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "find and replace in file",
+            "search and replace text in a file",
+            "text substitution in file",
+            "replace text in a file",
+            "sed replace text",
+            "substitute text in file",
+            "replace string in file",
+            "text replacement in file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -rp \"📄 File to search: \" file && read -rp \"🔍 Search term: \" search && read -rp \"✏️ Replace with: \" replace && tput cuu 1 && termy_say \"Replacing text in file\" > /dev/null 2>&1 && printf \"\\r\\n\" && sed -i \"s|$search|$replace|g\" \"$file\" && echo -e \"🔄 ✅ Replaced all '\\033[1m$search\\033[22m' with '\\033[1m$replace\\033[22m'\" && printf \"\"",
+                    "explanation": "Prompts for a file path, search pattern, and replacement string, then uses sed to perform an in-place substitution.",
+                    "goal": "Perform global search and replace inside a file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "clean up system files",
+            "system cleanup menu",
+            "remove temp files or cache",
+            "clean temporary files",
+            "cleanup system",
+            "remove junk files",
+            "free up disk space",
+            "clear system cache"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf \"1) Remove temp files\\n2) Clear cache\\n3) Remove old logs\\n\\n\" && read -rp \"Choose (1-3): \" choice && tput cuu 1 && if [ \"$choice\" = \"1\" ]; then termy_say \"Cleaning temporary files\" > /dev/null 2>&1 && printf \"\\r\\n\" && rm -rf /tmp/* 2>/dev/null && echo \"🧹 Cleaned /tmp\"; elif [ \"$choice\" = \"2\" ]; then termy_say \"Clearing system cache\" > /dev/null 2>&1 && printf \"\\r\\n\" && rm -rf ~/.cache/* 2>/dev/null && echo \"🧹 Cleared cache\"; elif [ \"$choice\" = \"3\" ]; then termy_say \"Removing old logs\" > /dev/null 2>&1 && printf \"\\r\\n\" && find /var/log -name \"*.log\" -mtime +30 -delete 2>/dev/null && echo \"🧹 Removed old logs\"; else printf \"\\r\\nInvalid option\\n\"; fi && printf \"\"",
+                    "explanation": "Provides a POSIX-compliant interactive menu to clean temporary files, user cache, or logs older than 30 days while managing specific audio announcements.",
+                    "goal": "Provide a menu to clean up temporary files, cache, and old logs",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "split or join large files",
+            "file splitter joiner menu",
+            "split a large file",
+            "join split files",
+            "split large file",
+            "file splitter",
+            "chunk a large file",
+            "merge split files"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf \"1) Split large file\\n2) Join split files\\n\\n\" && read -rp \"Choose (1-2): \" choice && tput cuu 1 && if [ \"$choice\" = \"1\" ]; then termy_say \"Splitting file\" > /dev/null 2>&1 && printf \"\\r\\n\" && read -rp \"File to split: \" file && read -rp \"Size per part (e.g. 100M): \" size && split -b \"$size\" \"$file\" \"${file}.part\" && echo -e \"📄 Split into parts: \\033[1m${file}.part*\\033[22m\"; elif [ \"$choice\" = \"2\" ]; then termy_say \"Joining files\" > /dev/null 2>&1 && printf \"\\r\\n\" && read -rp \"First part file: \" part && cat \"${part%.*}\".part* > \"${part%.*}\" && echo -e \"📄 Joined into: \\033[1m${part%.*}\\033[22m\"; else printf \"\\r\\nInvalid option\\n\"; fi && printf \"\"",
+                    "explanation": "Provides a POSIX-compliant interactive menu to split a large file into smaller chunks using split, or merge chunks back together using cat.",
+                    "goal": "Split a large file into segments or merge split segments back together",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "count lines in a project",
+            "create alias to count source lines of code sloc",
+            "count total lines of javascript and scss files",
+            "git check how many lines of code in project",
+            "count sloc for tracked git files js and scss",
+            "calculate lines of code in current git repository",
+            "count total lines in project source files",
+            "get total line count of js and scss using git",
+            "alias for counting lines of code in workspace",
+            "git repository code line count alias"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Counting project lines of code\" > /dev/null 2>&1 && printf \"\\r\\n\" && git ls-files \"*.js*\" \"*.scss\" 2>/dev/null | xargs wc -l 2>/dev/null && printf \"\"",
+                    "explanation": "Lists tracked JavaScript and SCSS files in the git repository and pipes them into wc to calculate the total lines of code.",
+                    "goal": "Count lines of code for JavaScript and SCSS files in a git repo",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files_json",
+        "input": [
+            "print json file",
+            "pretty print json file",
+            "format json file",
+            "beautify json",
+            "json pretty print",
+            "format a json file",
+            "indent json file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"📄 JSON file: \" f && tput cuu 1 && termy_say \"Formatting JSON file\" > /dev/null 2>&1 && printf \"\\r\\n\" && python3 -m json.tool \"$f\" && printf \"\"",
+                    "explanation": "Prints JSON file with proper indentation.",
+                    "goal": "Pretty-print and format a JSON file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "find large files",
+            "show big files",
+            "list files larger than 100mb",
+            "find heavy files",
+            "which files are taking space",
+            "show files over 100 megabytes"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Scanning for large files\" > /dev/null 2>&1 && printf \"\\r\\n\" && find . -type f -size +100M -exec ls -lh {} \\; | awk '{print $5, $9}' | sort -rh && printf \"\"",
+                    "explanation": "Scans the current directory tree for files larger than 100MB and displays them sorted by size.",
+                    "goal": "Find and list files larger than 100MB",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "find recently modified files",
+            "show files modified today",
+            "files changed in last 24 hours",
+            "recently changed files",
+            "what files were modified recently",
+            "show newest files"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Finding recently modified files\" > /dev/null 2>&1 && printf \"\\r\\n\" && find . -type f -mtime -1 | sort && printf \"\"",
+                    "explanation": "Finds and lists all files in the current directory and subdirectories that were modified within the last 24 hours.",
+                    "goal": "List files modified in the last 24 hours",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "count lines of code",
+            "count python lines",
+            "how many lines of code",
+            "count code lines",
+            "total lines in python files",
+            "count source lines"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Counting lines of code\" > /dev/null 2>&1 && printf \"\\r\\n\" && find . -name '*.py' -not -path './.venv/*' | xargs wc -l 2>/dev/null | sort -n | tail -5 && printf \"\"",
+                    "explanation": "Recursively finds Python files excluding the virtual environment directory, counts their lines, and shows the top 5 largest files and total count.",
+                    "goal": "Count lines of code in Python files recursively",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "diff two files",
+            "compare two files",
+            "show differences between files",
+            "file comparison",
+            "what is different between two files",
+            "check file differences"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -rp \"📄 First file: \" f1 && read -rp \"📄 Second file: \" f2 && tput cuu 1 && termy_say \"Comparing files\" > /dev/null 2>&1 && printf \"\\r\\n\" && diff --color=always \"$f1\" \"$f2\" && printf \"\"",
+                    "explanation": "Prompts the user for two file paths and uses the diff command with color output to display the differences.",
+                    "goal": "Compare two files and show differences",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "find duplicate files",
+            "show duplicate files",
+            "detect duplicates",
+            "list duplicate files",
+            "find repeated files",
+            "which files are duplicated"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Scanning for duplicate files\" > /dev/null 2>&1 && printf \"\\r\\n\" && find . -type f | xargs md5sum 2>/dev/null | sort | awk 'seen[$1]++{print $2}' | sed 's|^./||' && printf \"\"",
+                    "explanation": "Scans the current directory for files with matching MD5 checksums and lists the duplicates.",
+                    "goal": "Find and list duplicate files by checksum",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "count words in a file",
+            "word count file",
+            "how many words in file",
+            "wc file",
+            "count characters and words",
+            "file word count"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the file path\" > /dev/null 2>&1 && printf \"\\r\\n📄 File: \" && read -r f && if [ -f \"$f\" ]; then STATS=$(wc -l -w -c \"$f\" | xargs) && LINES=$(echo \"$STATS\" | awk '{print $1}') && WORDS=$(echo \"$STATS\" | awk '{print $2}') && CHARS=$(echo \"$STATS\" | awk '{print $3}') && printf \"\\n📊 \\033[1mFile Statistics:\\033[22m\\n  Lines:      \\033[1m%s\\033[22m\\n  Words:      \\033[1m%s\\033[22m\\n  Characters: \\033[1m%s\\033[22m\\n\" \"$LINES\" \"$WORDS\" \"$CHARS\" && termy_say \"The file contains $WORDS words\" > /dev/null 2>&1; else printf \"\\n⛔ File does not exist.\\n\" && termy_say \"File not found\" > /dev/null 2>&1; fi",
+                    "explanation": "Counts lines, words, and characters in a file and displays a formatted summary.",
+                    "goal": "Count words and stats in a file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "compare files",
+            "diff two files",
+            "file diff viewer",
+            "show file differences",
+            "compare text files"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"📄 First file: \" file1 && read -p \"📄 Second file: \" file2 && tput cuu 2 && if [ ! -f \"$file1\" ] || [ ! -f \"$file2\" ]; then printf \"\\r\\n⛔ One or both files not found\\n\"; exit 1; fi && termy_say \"Comparing files\" > /dev/null 2>&1 && printf \"\\r\\n\" && diff -u --color=always \"$file1\" \"$file2\" | head -100 || true && printf \"\\n✅ Comparison complete\\n\"",
+                    "explanation": "Shows a unified diff view with color highlighting between two files, limiting output to first 100 lines.",
+                    "goal": "Quickly compare file differences with visual highlighting",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    }
+]

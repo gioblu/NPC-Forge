@@ -1,0 +1,88 @@
+<!-- ============================================================
+     THEME · LANDING — blueprint engineering
+     Placeholders filled by termy_generate_web_page():
+       {{TITLE}} {{DESCRIPTION}} {{COPYRIGHT}} {{ADDRESS}}
+       {{EMAIL}} {{SOCIALS}} {{STYLES}} {{SCRIPTS}} {{YEAR}} {{THEME}}
+     Edit freely — only the {{…}} marks are substituted.
+     ============================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="TERMy · {{THEME}}">
+    <title>{{TITLE}}</title>
+    <!-- Typefaces: one display face + one body face + one mono. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    {{STYLES}}
+</head>
+<body>
+    <header class="topbar wrap">
+        <div class="logo">TER<b>My</b>_</div>
+        <nav><a href="#">docs</a><a href="#">changelog</a><a href="#">github ↗</a></nav>
+    </header>
+
+    <main class="wrap">
+        <section class="hero">
+            <div>
+                <p class="kicker" data-reveal>v3.0 · 0.5 MB · zero dependencies</p>
+                <h1 data-reveal>{{TITLE}}</h1>
+                <p class="lede" data-reveal>{{DESCRIPTION}}</p>
+                <div class="cta-row" data-reveal>
+                    <a class="btn btn-solid" href="#">curl -sL termy.sh | sh</a>
+                    <a class="btn btn-ghost" href="#">read the docs →</a>
+                </div>
+                <p class="meta-line" data-reveal>★ 4,218 stars · 128 contributors · MIT licensed</p>
+            </div>
+            <!-- Fake terminal: the data-type span is typed out by _core.js -->
+            <div class="term" data-reveal>
+                <div class="term-bar"><span></span><span></span><span></span><em>~/projects — termy</em></div>
+                <pre class="term-body"><span class="p">$</span> <span data-type="termy generate web --theme cyberpunk"></span><span class="caret"></span>
+<span class="out">✓ styles.css compiled · 9.2 KB</span>
+<span class="out">✓ index.html rendered · 0.31 s</span>
+<span class="out">✓ context persisted → active_file</span>
+<span class="p">$</span> <span class="caret"></span></pre>
+            </div>
+        </section>
+    </main>
+
+    <!-- Marquee: content is duplicated once so the loop is seamless -->
+    <div class="ticker" aria-hidden="true">
+        <div class="track">
+            <span>DEPLOY FROM THE TERMINAL <b>◆</b> DETERMINISTIC BUILDS <b>◆</b> ZERO CONFIG <b>◆</b> 0.5&nbsp;MB BINARY <b>◆</b>&nbsp;</span>
+            <span>DEPLOY FROM THE TERMINAL <b>◆</b> DETERMINISTIC BUILDS <b>◆</b> ZERO CONFIG <b>◆</b> 0.5&nbsp;MB BINARY <b>◆</b>&nbsp;</span>
+        </div>
+    </div>
+
+    <section class="ledger wrap">
+        <h2 class="section-title" data-reveal>What it does</h2>
+        <a class="row" href="#" data-reveal>
+            <span class="idx">01</span>
+            <div><h3>Pipeline orchestration</h3><p>Chain shell primitives into reproducible workflows declared in a single TOML file.</p></div>
+            <span class="arrow">→</span>
+        </a>
+        <a class="row" href="#" data-reveal>
+            <span class="idx">02</span>
+            <div><h3>Context persistence</h3><p>Every session writes to a local key-value store, so agents and humans resume exactly where they left off.</p></div>
+            <span class="arrow">→</span>
+        </a>
+        <a class="row" href="#" data-reveal>
+            <span class="idx">03</span>
+            <div><h3>Static site compilation</h3><p>Nine hand-tuned themes rendered to clean HTML, CSS and JS — like the page you are reading.</p></div>
+            <span class="arrow">→</span>
+        </a>
+    </section>
+
+    <!-- Footer fields come from the generator prompts; empty prompts
+         render nothing and the gap layout absorbs them. -->
+    <footer class="site wrap">
+        <div class="f-copy">{{COPYRIGHT}}</div>
+        <address class="f-addr">{{ADDRESS}}</address>
+        <nav class="f-links" aria-label="Contact">{{SOCIALS}}{{EMAIL}}</nav>
+    </footer>
+
+    {{SCRIPTS}}
+</body>
+</html>

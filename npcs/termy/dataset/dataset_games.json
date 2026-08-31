@@ -1,0 +1,106 @@
+[
+    {
+        "category": "games",
+        "input": [
+            "play rock paper scissors",
+            "start rps game in terminal",
+            "play morra cinese",
+            "rock paper scissors script",
+            "terminal mini game rock paper scissors",
+            "i want to play rock paper scissor against bot",
+            "start a game of rps",
+            "play rock paper scissors game",
+            "make game rock paper scissors"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Starting rock paper scissors\" > /dev/null 2>&1 && printf \"\\r\\n\\e[1m\\e[93m██████╗░██████╗░░██████╗██╗\\n██╔══██╗██╔══██╗██╔════╝██║\\n██████╔╝██████╔╝╚█████╗░██║\\n██╔══██╗██╔═══╝░░╚═══██╗╚═╝\\n██║░░██║██║░░░░░██████╔╝██╗\\n╚═╝░░╚═╝╚═╝░░░░░╚═════╝░╚═╝\\e[0m\\n\\e[36m\\n\\tInstructions:\\n\\t\\tR - Rock\\n\\t\\tP - Paper\\n\\t\\tS - Scissor\\n\\e[0m\\e[94mType 'exit' to exit\\n\\e[0m\" && while :; do printf \"\\n\\e[4mWhat Would You Choose?\\e[0m \"; read u; [ \"$u\" = \"exit\" ] && echo \"Exiting...\" && break; if [ \"$u\" = \"r\" ] || [ \"$u\" = \"rock\" ]; then u=\"r\"; elif [ \"$u\" = \"p\" ] || [ \"$u\" = \"paper\" ]; then u=\"p\"; elif [ \"$u\" = \"s\" ] || [ \"$u\" = \"scissor\" ]; then u=\"s\"; else printf \"\\e[1m\\e[31mInvalid Choice\\e[0m\\n\"; continue; fi; rand=$(awk 'BEGIN {srand(); print int(rand() * 3) + 1}'); if [ \"$rand\" = \"1\" ]; then b=\"r\"; elif [ \"$rand\" = \"2\" ]; then b=\"p\"; else b=\"s\"; fi; if [ \"$u\" = \"$b\" ]; then printf \"\\e[95mGame Draw (Bot chose $b)\\e[0m\\n\"; elif { [ \"$u\" = \"r\" ] && [ \"$b\" = \"s\" ]; } || { [ \"$u\" = \"p\" ] && [ \"$b\" = \"r\" ]; } || { [ \"$u\" = \"s\" ] && [ \"$b\" = \"p\" ]; }; then printf \"\\e[92mCongratulations! You Won! 🎉 (Bot chose $b)\\e[0m\\n\"; else printf \"\\e[91mYou Loose! (Bot chose $b)\\e[0m\\n\"; fi; done && printf \"\"",
+                    "explanation": "Launches a fully POSIX-compliant interactive Rock, Paper, Scissors game in the terminal, using awk for cross-shell compliant random generation.",
+                    "goal": "Launch interactive terminal rock paper scissors game with cross-shell support",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "games",
+        "input": [
+            "play snake game",
+            "start classic snake in terminal",
+            "terminal snake game",
+            "play retro snake game",
+            "launch bash snake mini game",
+            "run snake game",
+            "play arcade snake",
+            "start a game of snake",
+            "retro terminal snake",
+            "simple cli snake game"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "cat << 'EOF' > /tmp/bsnake.sh\n#!/bin/bash\nstty -echo; echo -ne \"\\e[?25l\"; H=$(tput lines); W=$(tput cols); ((H=H-4, W=W-2)); sh=0; sw=0; sR=(-1 0 1 0); sC=(0 1 0 -1); d=1; score=0; sr=$((H/2)); sc=$((W/2)); s=\"$sr,$sc\"; for ((i=0;i<4;i++)); do ((sr-=sR[d], sc-=sC[d])); s=\"$s $sr,$sc\"; done; fR=$((RANDOM%H)); fC=$((RANDOM%W)); clear\nwhile :; do\n  echo -ne \"\\e[H\"\n  for ((i=0;i<=W+1;i++)); do echo -ne \"\\e[1;${i}H\\e[30;43m-\\e[0m\\e[$((H+2));${i}H\\e[30;43m-\\e[0m\"; done\n  for ((i=1;i<=H+2;i++)); do echo -ne \"\\e[${i};1H\\e[30;43m|\\e[0m\\e[${i};$((W+2))H\\e[30;43m|\\e[0m\"; done\n  for ((r=0;r<H;r++)); do echo -ne \"\\e[$((r+2));2H\\e[0K\"; done\n  echo -ne \"\\e[$((fR+2));$((fC+2))H\\e[34;44m@\\e[0m\"; echo -e \"\\e[$((H+3));2H\\e[31;43m Score: $score \\e[0m\"\n  for p in $s; do IFS=\",\" read -r r c <<< \"$p\"; echo -ne \"\\e[$((r+2));$((c+2))H\\e[32;42mo\\e[0m\"; done\n  read -s -n 1 -t 0.08 k\n  case \"$k\" in [wWkK]) [ $d -ne 2 ] && d=0;; [dDlL]) [ $d -ne 3 ] && d=1;; [sSjJ]) [ $d -ne 0 ] && d=2;; [aAhH]) [ $d -ne 1 ] && d=3;; [qQ]) break;; esac\n  tail_pos=$(echo $s | awk '{print $NF}'); IFS=\",\" read -r tr tc <<< \"$tail_pos\"; echo -ne \"\\e[$((tr+2));$((tc+2))H \"; head=$(echo $s | cut -d\" \" -f1); IFS=\",\" read -r hr hc <<< \"$head\"; ((hr+=sR[d], hc+=sC[d]))\n  if ((hr<0||hr>=H||hc<0||hc>=W)); then sh=1; fi\n  for p in $s; do if [ \"$hr,$hc\" = \"$p\" ]; then sh=1; fi; done\n  if [ $sh -eq 1 ]; then echo -e \"\\e[$((H/2+2));$((W/2-5))H\\e[31;43m Oh, No! You 0xdead \\e[0m\"; sleep 1.5; break; fi\n  s=\"$hr,$hc $s\"\n  if [ $hr -eq $fR ] && [ $hc -eq $fC ]; then\n    ((score++)); sw=0\n    while [ $sw -eq 0 ]; do fR=$((RANDOM%H)); fC=$((RANDOM%W)); sw=1; for p in $s; do if [ \"$fR,$fC\" = \"$p\" ]; then sw=0; fi; done; done\n  else s=$(echo $s | sed \"s/ [^ ]*$//\"); fi\ndone\nclear; echo -ne \"\\e[0m\\e[?25h\"; stty echo\nEOF\ntput cuu 1 && termy_say \"Starting snake game\" > /dev/null 2>&1 && printf \"\\r\\n\" && bash /tmp/bsnake.sh && rm -f /tmp/bsnake.sh && printf \"\"",
+                    "explanation": "Generates and runs an interactive snake game that manages coordinate-specific rendering and restores the screen, text styles, and cursor state safely upon exit.",
+                    "goal": "Launch interactive terminal snake game with clean exit procedures",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "games",
+        "input": [
+            "i want to measure my typing speed",
+            "how many words per minute i can type",
+            "play typing speed test",
+            "start wpm test in terminal",
+            "terminal typing benchmark",
+            "test how fast i can type",
+            "how fast i can type",
+            "launch typing practice mini game",
+            "start a fast typing challenge",
+            "check words per minute"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "cat << 'EOF' > /tmp/btype.sh\n#!/bin/bash\nphrases=(\n  \"the quick brown fox jumps over the lazy dog\"\n  \"linux is a powerful open source operating system\"\n  \"shell scripting automates boring tasks instantly\"\n  \"cyber security protects data from malicious attacks\"\n  \"artificial intelligence changes how we write code\"\n)\ns=\"${phrases[$((RANDOM % ${#phrases[@]}))]}\"\necho -e \"═══ TYPING SPEED TEST ═══\\r\\n\"\necho -e \"Type this phrase as fast as you can:\\r\\n\\e[1m$s\\e[0m\\r\\n\"\nread -s -p \"Press Enter to START...\"\necho -e \"\\n\\n═══ GO! ═══\\r\\n> $s\\r\"\nt1=$(date +%s); read -re -p \"> \" input; t2=$(date +%s)\nif [ \"$input\" = \"$s\" ]; then\n  duration=$((t2 - t1))\n  [ $duration -eq 0 ] && duration=1\n  chars=${#s}\n  wpm=$(( (chars * 60) / (5 * duration) ))\n  echo -e \"\\r\\nPerfect! 🎉\\r\\nTime taken: $duration seconds | Speed: $wpm WPM ⚡\\r\"\nelse\n  echo -e \"\\r\\nTypos detected! ⛔\\r\\nTry to be more accurate next time.\\r\"\nfi\nEOF\ntput cuu 1 && termy_say \"Starting typing test\" > /dev/null 2>&1 && printf \"\\r\\n\" && bash /tmp/btype.sh && rm -f /tmp/btype.sh && printf \"\"",
+                    "explanation": "Generates and runs a mini-game script to test your typing speed in Words Per Minute (WPM) directly inside the terminal without clearing screen history.",
+                    "goal": "Launch interactive terminal typing speed test",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_games",
+        "input": [
+            "i want to play doom",
+            "play doom",
+            "install doom",
+            "i want to play old shooting game",
+            "i want to play a vintage fps",
+            "show me the best fps",
+            "can you run doom"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "if command -v chocolate-doom >/dev/null 2>&1; then chocolate-doom; else sudo apt update && sudo apt install chocolate-doom -y && termy_say 'I have installed doom, I will run it for you now...' && chocolate-doom; fi",
+                    "explanation": "Installs chocolate-doom (source port that accurately reproduces the experience of Doom as it was played in the 1990s) if not present, or runs it.",
+                    "goal": "Running Doom",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    }
+]

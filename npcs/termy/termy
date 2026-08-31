@@ -1,0 +1,374 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import sys
+import tty
+import termios
+import subprocess
+import urllib.request
+from pathlib import Path
+from FlintNPC import load_json
+
+TERMY_BANNER = r"""
+ _____ ____  _____ __  __      
+|_   _|  __|| ___ \  ||  |      
+  | | | |__ | |_/ /      |_   _ 
+  | | |  __||    /| |\/| | | | |
+  | | | |__ | |\ \| |  | | |_| |
+  |_| |____||_| \_\_|  |_|___  |
+                           __| |
+ Giovanni Blu Mitolo 2026 |____|
+ 
+A cynic, deterministic terminal assistant.
+"""
+
+# ANSI Color Codes & UI Elements
+RED = "\033[31m"
+GREEN = "\033[32m"
+LIGHT_GRAY = "\033[37m"
+GRAY = "\033[90m"
+YELLOW = "\033[33m"
+CYAN = "\033[36m"
+BOLD = "\033[1m"
+UNDERLINE = "\033[4m"
+RESET = "\033[0m"
+CLEAR_LINE = "\033[2K\r"
+
+def get_single_key() -> str:
+    """Read a single key from the terminal without waiting for Enter."""
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(sys.stdin.fileno())
+        ch = sys.stdin.read(1)
+        if ch == "\x1b":
+            ch += sys.stdin.read(2)
+    finally: termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    return ch
+
+
+def prompt_interactive_choice() -> bool:
+    """Show interactive menu with arrow keys and y/n input."""
+    options = ["Yes", "No"]
+    current_idx = 0
+    sys.stderr.write("\033[?25l")
+    sys.stderr.flush()
+
+    try:
+        while True:
+            render_str = f"Execute:{RESET} "
+            for idx, opt in enumerate(options):
+                if idx == current_idx:
+                    render_str += f" {BOLD}▶{RESET} {opt}  "
+                else: render_str += f"   {opt}  "
+
+            sys.stderr.write(f"{CLEAR_LINE}{render_str}")
+            sys.stderr.flush()
+            key = get_single_key()
+
+            if key.lower() in {"y", "e"}:
+                sys.stderr.write(CLEAR_LINE)
+                return True
+            if key.lower() in {"n", "q", "\x03"}:
+                sys.stderr.write(CLEAR_LINE)
+                return False
+            elif key == "\x1b[D": current_idx = 0
+            elif key == "\x1b[C": current_idx = 1
+            elif key in {"\r", "\n", " "}:
+                sys.stderr.write(CLEAR_LINE)
+                return current_idx == 0
+    finally:
+        sys.stderr.write("\033[?25h")
+        sys.stderr.flush()
+
+def try_http_call(
+    query: str, npc_name: str = "termy", timeout: float = 1.0
+) -> dict | None:
+    """Call the running NPC Flask server via HTTP API gateway (fast path)."""
+    try:
+        payload = {"message": query}
+        data = json.dumps(payload).encode("utf-8")
+
+        url = f"http://127.0.0.1:5000/api/chat/{npc_name}"
+        req = urllib.request.Request(
+            url,
+            data=data,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+
+        with urllib.request.urlopen(req, timeout=timeout) as response:
+            if response.status == 200:
+                result = json.loads(response.read().decode("utf-8"))
+                return result
+    except Exception: pass
+    return None
+
+
+def fallback_local_call(query: str, npc_name: str = "termy") -> dict:
+    """Fallback: Load registry directly from local module context (offline execution mode)."""
+    
+    CURRENT_BOT_DIR = Path(os.path.realpath(__file__)).parent
+    FORGE_ROOT_DIR = str(CURRENT_BOT_DIR.parent.parent)
+    
+    if FORGE_ROOT_DIR not in sys.path: 
+        sys.path.insert(0, FORGE_ROOT_DIR)
+
+    try:
+        from registry import get_npc_engine
+
+        engine = get_npc_engine(npc_name)
+        if engine is None:
+            raise RuntimeError(f"NPC Engine Profile '{npc_name}' not found.")
+
+        result = engine.process_messages(query)
+        return result
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc(file=sys.stderr)
+        return {
+            "response": f"Error: {e}",
+            "status": "rejected",
+            "error": str(e),
+        }
+
+
+
+def run_cli() -> int:
+    parser = argparse.ArgumentParser(
+        description="TERMy: Terminal interface for npcforge_v2 new server architecture",
+        usage="termy [QUERY]  or  echo QUERY | termy",
+    )
+    parser.add_argument("query", nargs="*", help="Prompt input string.")
+    parser.add_argument("--npc", default="termy", help="Target NPC instance (default: termy)")
+    parser.add_argument("-y", "--yes", action="store_true", help="Automatically answer yes to prompts (skip confirmation)")
+    args = parser.parse_args()
+
+    if not sys.stdin.isatty(): user_input = sys.stdin.read().strip()
+    elif args.query: user_input = " ".join(args.query).strip()
+    else: parser.error("Provide input via arguments or pipe")
+
+    if not user_input: parser.error("query must not be empty")
+
+    # Pass --yes flag through environment so all subprocess calls inherit it
+    if args.yes:
+        os.environ["TERMY_YES"] = "1"
+
+    CURRENT_BOT_DIR = os.path.dirname(os.path.realpath(__file__))
+    dataset_dir = os.path.join(CURRENT_BOT_DIR, "dataset")
+
+
+    # Try HTTP call to the Flask Gateway first
+    result = try_http_call(user_input, npc_name=args.npc, timeout=1.0)
+    if result is None:
+        # sys.stderr.write(f"{YELLOW}⚠  Server offline, bootstrapping local in-memory fallback...{RESET}\n")
+        result = fallback_local_call(user_input, npc_name=args.npc)
+
+    # Extract dynamic response attributes from the payload
+    response = result.get("response", "")
+    status = str(result.get("status", "rejected")).lower()
+    confidence = result.get("confidence", 0.0)
+    tools_list = result.get("tools", [])
+    emoji = result.get("emoji", "😑")
+    
+    if emoji == "😑": emoji = "" 
+
+    CURRENT_BOT_DIR = Path(os.path.realpath(__file__)).parent
+
+    dataset_dir = CURRENT_BOT_DIR / "dataset"
+
+    config = load_json(CURRENT_BOT_DIR, "config.json")
+    
+    home_dir = os.path.expanduser("~")
+    config_path = os.path.join(home_dir, ".local/share/termy/")
+    context = load_json(config_path, "config.json")    
+        
+    # Simple mapping of metadata status parameters
+    permission = result.get("permission", "ask")
+    thinking = result.get("thinking", "")
+    
+    # Confidence color coding representation output
+    conf_color = GREEN if confidence > 0.7 else (YELLOW if confidence > 0.5 else RED)
+    conf_pct = f"{confidence * 100:.2f}%"
+    
+    meta = (
+        f"\n{GREEN}{BOLD}{config.get("npc_name", "")}{RESET} | "
+        f"{status} | "
+        f"Confidence: {conf_color}{conf_pct}{RESET}\n"
+    )
+    print(meta)
+    if thinking: print(f"{GRAY}Thinking: " + thinking + RESET + "\n")
+
+    # Skip related intents display here - moved to after response
+
+    command = ""
+    description = ""
+    
+    if tools_list:
+        for tool in tools_list:
+            if not tool or not tool[0]: 
+                break
+                
+            tool_data = tool[0]
+            tool_args = tool_data.get("arguments", {})
+            
+            if "command" in tool_args:
+                if command: 
+                    command += " && "
+                command += tool_args["command"]
+            
+            if "explanation" in tool_args or "description" in result:
+                description += " " + tool_args.get("explanation", result.get("description", ""))
+
+        if description: 
+            description = GRAY + f"\n\nDescription: {description.strip()}\n" + RESET
+        
+        if command:
+            print(f"{GREEN}{BOLD}{command}{RESET}{description}")
+    
+    if response: 
+        print(f"Response: {response} {emoji}\n")
+        
+        # Speak response immediately if TTS is on
+        if context.get("tts", "") == "on":
+            try:
+                subprocess.run(
+                    f"pkill -9 -x {config.get("tts", "")}", 
+                    shell=True, 
+                    stdout=subprocess.DEVNULL, 
+                    stderr=subprocess.DEVNULL
+                )
+                clean_response = "'" + response.replace('"', '').replace("'", "") + "'"
+                subprocess.Popen(
+                    [config.get("tts", ""), clean_response],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    start_new_session=True
+                )
+            except Exception as e:
+                sys.stderr.write(f"Audio playback failed: {e}\n")
+    
+    # Display related intents after response if rejected (deduplicated)
+    related = result.get("related", [])
+    if status == "rejected" and related:
+        print(f"Related intents:\n")
+        
+        seen_categories = set()
+        displayed = 0
+        related_list = []
+        for intent in related:
+            if displayed >= config.get("suggestions"): break
+            if isinstance(intent, dict):
+                category = str(intent.get("category", ""))
+                if category in seen_categories: continue
+                seen_categories.add(category)                
+                inputs = intent.get("input", [])
+                clean_input = inputs[0] 
+                explanation = ""
+                tools = intent.get("tools", [])
+                if tools and isinstance(tools, list) and tools[0]:
+                    tool = tools[0]
+                    if isinstance(tool, dict) and "arguments" in tool:
+                        explanation = tool["arguments"].get("explanation", "")
+                
+                displayed += 1
+                related_list.append((displayed, clean_input, explanation, intent))
+                if explanation:
+                    print(f"{displayed}) {clean_input} {GRAY}- {explanation}{RESET}")
+                else: print(f"{displayed}) {clean_input}")
+        print()
+
+        def get_single_char():
+            """Read a single character without waiting for a backspace."""
+            fd = sys.stdin.fileno()
+            old_settings = termios.tcgetattr(fd)
+            try:
+                tty.setraw(sys.stdin.fileno())
+                ch = sys.stdin.read(1)
+            finally:
+                termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+            return ch
+
+        # Interactive prompt for related intents
+        if related_list:
+            prompt_text = f"digit 1 to {len(related_list)} or q to quit"
+            print(f"{prompt_text}:", end=' ', flush=True)
+            try:
+                user_choice = get_single_char().lower()
+                print(user_choice) 
+                if user_choice == 'q': return 0
+                try:
+                    choice_num = int(user_choice)
+                    if 1 <= choice_num <= len(related_list):
+                        selected_input = related_list[choice_num - 1][1]
+                        # Recursively call termy with the selected intent's input
+                        subprocess.run(
+                            [sys.argv[0], selected_input],
+                            executable=sys.argv[0]
+                        )
+                    else:
+                        print(f"Invalid choice. Please enter a number between 1 and {len(related_list)}.")
+                except ValueError:
+                    print(f"Invalid choice. Please enter a number between 1 and {len(related_list)}.")
+            except (EOFError, KeyboardInterrupt):
+                print()
+                return 130
+            
+    if command:
+        scripts_dir = CURRENT_BOT_DIR / "scripts"
+        sources = []
+        
+        # Scan scripts directory to find all .sh script files
+        if scripts_dir.is_dir():
+            for file in sorted(scripts_dir.iterdir()):
+                if file.suffix == ".sh":
+                    sources.append(f"source {file}")
+        
+        if sources:
+            command = f"{' && '.join(sources)} && {command}"
+    
+        if permission == "yolo":
+            try:
+                res = subprocess.run(
+                    command, 
+                    shell=True, 
+                    executable="/bin/bash",
+                    check=True    
+                )
+                print()
+                return res.returncode
+            except subprocess.CalledProcessError as e:
+                sys.stderr.write(f"\n{RED}Command failed, exit code: {e.returncode}{RESET}\n")
+                return e.returncode
+            except KeyboardInterrupt:
+                print("Execution cancelled.\n")
+                return 130
+            except Exception as exc:
+                print(f"Failed to execute command: {exc}\n")
+                return 1
+
+        if args.yes or os.environ.get("TERMY_YES") == "1" or prompt_interactive_choice():
+            try:
+                res = subprocess.run(
+                    command, 
+                    shell=True, 
+                    executable="/bin/bash",
+                    check=True    
+                )
+                print()
+                return res.returncode
+            except KeyboardInterrupt:
+                print("Execution cancelled.\n")
+                return 130
+            except Exception as exc:
+                print(f"Failed to execute command: {exc}\n")
+                return 1
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(run_cli())

@@ -1,0 +1,28 @@
+[
+
+    {
+        "category": "npm_update",
+        "input": [
+            "update npm packages",
+            "run npm update",
+            "update node packages",
+            "npm update dependencies",
+            "update node modules",
+            "upgrade npm packages",
+            "refresh npm packages"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && printf \"\\r\n📦 Updating npm packages...\\n\" && termy_say \"Updating npm packages\" > /dev/null 2>&1 && OUTPUT_TXT=$(npm update 2>&1) && printf \"%s\\n\\n\" \"$OUTPUT_TXT\" && if echo \"$OUTPUT_TXT\" | grep -q \"up to date\"; then termy_say \"All node modules are already up to date\" > /dev/null 2>&1; else termy_say \"N P M update completed\" > /dev/null 2>&1; fi",
+                    "explanation": "Updates the npm packages.",
+                    "goal": "Update npm packages",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "message": "Do you want to update apt packages?",
+        "permission": "ask"
+    }
+]

@@ -1,0 +1,70 @@
+[
+    {
+        "category": "math_unit_conversion",
+        "input": [
+            "start unit converter tool",
+            "convert celsius to fahrenheit bash",
+            "kilometers to miles terminal converter",
+            "convert kilograms to pounds cli",
+            "interactive metrics measurement converter"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "cat << 'EOF' > /tmp/bconv.sh\n#!/bin/bash\necho -e \"══ QUICK UNIT CONVERTER ══\\r\\n1) Celsius to Fahrenheit\\r\\n2) Kilometers to Miles\\r\\n3) Kilograms to Pounds\\r\"\nread -p \"Choose option (1-3): \" opt\nread -p \"Enter value to convert: \" val\nif ! [[ \"$val\" =~ ^[0-9.]+$ ]]; then echo -e \"Invalid number!\\r\"; exit 1; fi\ncase \"$opt\" in\n  1) res=$(echo \"scale=2; ($val * 9/5) + 32\" | bc); echo -e \"$val °C = $res °F\\r\" ;;\n  2) res=$(echo \"scale=2; $val * 0.621371\" | bc); echo -e \"$val Km = $res Miles\\r\" ;;\n  3) res=$(echo \"scale=2; $val * 2.20462\" | bc); echo -e \"$val Kg = $res Lbs\\r\" ;;\n  *) echo -e \"Invalid option\\r\" ;;\nesac\nEOF\ntput cuu 1 && termy_say \"Opening unit converter\" > /dev/null 2>&1 && printf \"\\r\\n\" && bash /tmp/bconv.sh; rm -f /tmp/bconv.sh && printf \"\"",
+                    "explanation": "Generates and runs an interactive bash script to convert metrics like temperature, distance, and weight using bc.",
+                    "goal": "Launch interactive unit converter tool",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "math_calculator",
+        "input": [
+            "open calculator",
+            "start a terminal calculator",
+            "run interactive cli math calculator",
+            "bash calculator with decimal precision bc",
+            "evaluate floating point math expression",
+            "simple terminal math solver tool"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "cat << 'EOF' > /tmp/bcalc.sh\n#!/bin/bash\necho -e \"══ TERMINAL CALCULATOR ══\\r\\nEnter math expression (e.g. 12*4.5 or sqrt(16)). Type 'q' to exit.\\r\"\nwhile :; do\n  read -p \"calc> \" expr\n  [ \"$expr\" = \"q\" ] && break\n  [ -z \"$expr\" ] && continue\n  res=$(echo \"scale=4; $expr\" | bc -l 2>/dev/null)\n  if [ -z \"$res\" ]; then echo -e \"Invalid expression\\r\"; else echo -e \"= $res\\r\"; fi\ndone\nEOF\ntput cuu 1 && termy_say \"Opening calculator\" > /dev/null 2>&1 && printf \"\\r\\n\" && bash /tmp/bcalc.sh && rm -f /tmp/bcalc.sh && printf \"\"",
+                    "explanation": "Generates and runs an interactive bash script that calculates math expressions with decimal precision using bc.",
+                    "goal": "Launch interactive terminal calculator with decimal support",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "math_calculator",
+        "input": [
+            "quick calculation",
+            "calculate expression",
+            "compute a math expression",
+            "math in terminal",
+            "evaluate expression",
+            "python calculator"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"🧮 Expression: \" expr && printf \"\\n\" && res=$(python3 -c \"import math; print(eval('$expr'))\") && printf \"Result: %s\\n\" \"$res\" && termy_say \"Result is $res\" > /dev/null 2>&1",
+                    "explanation": "Evaluates a math expression using Python, prints the result, and speaks it aloud using termy_say.",
+                    "goal": "Evaluate an expression and speak the result",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    }
+]

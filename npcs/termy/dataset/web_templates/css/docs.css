@@ -1,0 +1,92 @@
+/* ============================================================
+   THEME · DOCS — field manual
+   Tokens: shared contract in _base.css.
+   ============================================================ */
+
+/* ---- 1 · design tokens ---- */
+:root {
+    --color-background: #f4f6f2;
+    --color-surface: #ffffff;
+    --color-text-primary: #16211a;
+    --color-text-secondary: #5c6a5f;
+    --color-accent-primary: #0c6b4a;      /* manual green */
+    --color-accent-secondary: #b45309;    /* heads-up amber */
+    --color-accent-tertiary: #5c6a5f;
+    --color-border: #dbe2d6;
+    --font-display: 'Bricolage Grotesque', sans-serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-monospace: 'IBM Plex Mono', monospace;
+}
+
+/* ---- 2 · page + top bar with breadcrumb & faux search ---- */
+body { font-family: var(--font-body); background: var(--color-background); color: var(--color-text-primary); }
+.topbar {
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
+    max-width: 1160px; margin: 0 auto; padding: 1.2rem 2rem; border-bottom: 1px solid var(--color-border);
+}
+.crumb { font-family: var(--font-monospace); font-size: .8rem; color: var(--color-text-secondary); }
+.crumb b { color: var(--color-accent-primary); }
+.top-right { display: flex; align-items: center; gap: .8rem; }
+.search {
+    display: flex; align-items: center; gap: .6rem; min-width: 220px;
+    border: 1px solid var(--color-border); background: var(--color-surface);
+    padding: .45rem .9rem; font-size: .82rem; color: var(--color-text-secondary);
+}
+kbd {
+    font-family: var(--font-monospace); font-size: .72rem;
+    background: var(--color-text-primary); color: var(--color-background); padding: .15em .5em; border-radius: 4px;
+}
+.chip { font-family: var(--font-monospace); font-size: .68rem; background: var(--color-accent-primary); color: #fff; padding: .25rem .55rem; }
+
+/* ---- 3 · shell: sticky TOC + article ---- */
+.shell { display: grid; grid-template-columns: 230px 1fr; gap: 3.5rem; max-width: 1160px; margin: 0 auto; padding: 0 2rem 4rem; }
+.toc { position: sticky; top: 1.5rem; align-self: start; padding: 2.2rem 0; }
+.toc h4 { font-family: var(--font-monospace); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: .8rem; }
+.toc a {
+    display: block; color: var(--color-text-secondary); text-decoration: none;
+    padding: .45rem .8rem; border-left: 2px solid var(--color-border);
+    font-size: .88rem; transition: .2s;
+}
+.toc a:hover, .toc a.active { color: var(--color-text-primary); border-left-color: var(--color-accent-primary); background: var(--color-surface); }
+
+article h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.2rem); letter-spacing: -.02em; padding-top: 2.4rem; }
+.meta { font-family: var(--font-monospace); font-size: .78rem; color: var(--color-text-secondary); margin: .8rem 0 2rem; }
+article h2 {
+    font-family: var(--font-display); font-size: 1.7rem; margin: 3rem 0 .8rem;
+    padding-top: 1.6rem; border-top: 1px solid var(--color-border);
+}
+article h2 .anchor { font-family: var(--font-monospace); color: var(--color-accent-primary); font-size: .8em; margin-right: .4rem; }
+article p { line-height: 1.75; color: #33413a; max-width: 68ch; margin-bottom: 1rem; }
+
+/* ---- 4 · code, inline code, callouts ---- */
+pre {
+    background: #101713; color: #d7e6db; font-family: var(--font-monospace);
+    font-size: .85rem; line-height: 1.8; padding: 1.2rem 1.4rem;
+    border-left: 3px solid var(--color-accent-primary); overflow-x: auto; margin: 1.2rem 0;
+}
+pre .p { color: #7fd1a8; }                       /* the $ prompt */
+code { font-family: var(--font-monospace); font-size: .85em; background: var(--color-surface); border: 1px solid var(--color-border); padding: .1em .4em; }
+.note { border-left: 3px solid var(--color-accent-secondary); background: var(--color-surface); padding: 1rem 1.2rem; margin: 1.4rem 0; font-size: .92rem; }
+.note b { color: var(--color-accent-secondary); }
+
+/* ---- 5 · command tables (rows, not grids of cards) ---- */
+table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; font-size: .92rem; }
+th {
+    text-align: left; font-family: var(--font-monospace); font-size: .7rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--color-text-secondary); padding: .6rem .8rem;
+    border-bottom: 2px solid var(--color-text-primary);
+}
+td { padding: .85rem .8rem; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+tbody tr { transition: background .2s; }
+tbody tr:hover { background: var(--color-surface); }
+td:first-child { font-family: var(--font-monospace); color: var(--color-accent-primary); white-space: nowrap; }
+
+/* ---- 6 · footer ---- */
+footer.site { max-width: 1160px; margin: 0 auto; padding: 0 2rem 3rem; color: var(--color-text-secondary); font-size: .8rem; }
+
+@media (max-width: 860px) {
+    .shell { grid-template-columns: 1fr; }
+    .toc { position: static; display: flex; flex-wrap: wrap; gap: .4rem; padding: 1.5rem 0 0; }
+    .toc h4 { width: 100%; }
+    .toc a { border-left: none; border: 1px solid var(--color-border); }
+}

@@ -1,0 +1,25 @@
+[
+    {
+        "category": "composer_update",
+        "input": [
+            "update composer packages",
+            "run composer update",
+            "update php packages",
+            "composer update",
+            "update php dependencies",
+            "upgrade composer packages"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && printf \"\\r\n📦 Updating composer packages...\\n\" && termy_say \"Updating composer dependencies\" > /dev/null 2>&1 && OUTPUT_TXT=$(composer update 2>&1) && printf \"%s\\n\\n\" \"$OUTPUT_TXT\" && if echo \"$OUTPUT_TXT\" | grep -q \"Nothing to modify\"; then termy_say \"All php packages are already up to date\" > /dev/null 2>&1; else termy_say \"Composer update completed\" > /dev/null 2>&1; fi",
+                    "explanation": "Updates the composer packages.",
+                    "goal": "Update composer packages",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask"
+    }
+]

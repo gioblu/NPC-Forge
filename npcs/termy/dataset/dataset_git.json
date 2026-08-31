@@ -1,0 +1,178 @@
+[
+    {
+        "category": "git_status",
+        "input": [
+            "show me git changes",
+            "show git modifications",
+            "show git status",
+            "git status",
+            "what changed in git",
+            "display git changes",
+            "print git status",
+            "what are the git modifications"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "if [ -d .git ] || git rev-parse --is-inside-work-tree > /dev/null 2>&1; then OUTPUT_TXT=$(git status) && CHANGES=$(git status --porcelain | wc -l) && STATUS=clean && [ $CHANGES -gt 0 ] && STATUS=dirty && tput cuu 1 && printf \"\\r\n🌿 Git status:\\n%s\\n\" \"$OUTPUT_TXT\" && termy_say \"Git repository detected. You have $CHANGES uncommitted changes\" > /dev/null 2>&1 && termy_set_context 'last_git_status' \"$STATUS\" && termy_set_context 'git_changes_count' \"$CHANGES\"; else tput cuu 1 && printf \"\\r⛔ Git status: Not a git repository\\n\\n\" && termy_say \"Not a git repository\" > /dev/null 2>&1; fi",
+                    "explanation": "Displays git status, caches dirty/clean state and change count for CI/CD workflows.",
+                    "goal": "Display git status with context preservation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "git_pull",
+        "input": [
+            "pull latest git changes",
+            "get changes from git",
+            "fetch latest git changes",
+            "git pull",
+            "pull from git",
+            "sync git",
+            "update from git",
+            "get latest from repo",
+            "download git changes"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "if [ -d .git ] || git rev-parse --is-inside-work-tree > /dev/null 2>&1; then OUTPUT_TXT=$(git pull 2>&1) && PULL_STATUS=\"success\" && echo \"$OUTPUT_TXT\" | grep -q \"Already up to date\" && PULL_STATUS=\"uptodate\" && tput cuu 1 && printf \"\\r🔄 Git pull:\\n%s\\n\\n\" \"$OUTPUT_TXT\" && if echo \"$OUTPUT_TXT\" | grep -q \"Already up to date\"; then termy_say \"Repository is already up to date\" > /dev/null 2>&1; else termy_say \"Git pull completed successfully\" > /dev/null 2>&1; fi && termy_set_context 'last_git_pull_status' \"$PULL_STATUS\" && termy_set_context 'last_git_pull_output' \"$OUTPUT_TXT\"; else tput cuu 1 && printf \"\\r⛔ Git pull: Not a git repository\\n\\n\" && termy_say \"Not a git repository\" > /dev/null 2>&1; fi",
+                    "explanation": "Pulls the latest changes from the git repository.",
+                    "goal": "Pull latest git changes",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "git_branches",
+        "input": [
+            "show git branches",
+            "list git branches",
+            "print git branches",
+            "git branch",
+            "list branches",
+            "what branches exist",
+            "show all branches",
+            "display git branches",
+            "which branches are there"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "if [ -d .git ] || git rev-parse --is-inside-work-tree > /dev/null 2>&1; then OUTPUT_TXT=$(git branch) && CURRENT=$(git branch --show-current) && BRANCHES=$(echo \"$OUTPUT_TXT\" | tr '\\n' ',' | sed 's/,$//') && tput cuu 1 && printf \"\\r\n🌿 Git branches:\\n%s\\n\" \"$OUTPUT_TXT\" && termy_say \"Current branch is $CURRENT\" > /dev/null 2>&1 && termy_set_context 'current_git_branch' \"$CURRENT\" && termy_set_context 'all_git_branches' \"$BRANCHES\"; else tput cuu 1 && printf \"\\r⛔ Git branch: Not a git repository\\n\\n\" && termy_say \"Not a git repository\" > /dev/null 2>&1; fi",
+                    "explanation": "Displays git branches, caches current branch for deployment safety.",
+                    "goal": "Display git branches with context preservation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "git_history",
+        "input": [
+            "show git commit history",
+            "list git commits",
+            "print git commit log",
+            "git log",
+            "show commit log",
+            "print git history",
+            "display commits",
+            "list all commits",
+            "show recent commits"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "if [ -d .git ] || git rev-parse --is-inside-work-tree > /dev/null 2>&1; then OUTPUT_TXT=$(git log --oneline -n 5) && LAST_MSG=$(git log -1 --pretty=format:'%s') && COMMIT_HASH=$(git log -1 --pretty=format:'%h') && tput cuu 1 && printf \"\\r\n🌿 Git commits:\\n%s\\n\" \"$OUTPUT_TXT\" && termy_say \"Last commit message was: $LAST_MSG\" > /dev/null 2>&1 && termy_set_context 'last_git_commit_msg' \"$LAST_MSG\" && termy_set_context 'last_commit_hash' \"$COMMIT_HASH\"; else tput cuu 1 && printf \"\\r⛔ Git log: Not a git repository\\n\\n\" && termy_say \"Not a git repository\" > /dev/null 2>&1; fi",
+                    "explanation": "Displays git history, caches last commit for changelog automation.",
+                    "goal": "Display git commit history with context preservation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "git_diff",
+        "input": [
+            "show git differences",
+            "show git diff",
+            "print git changes"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "if [ -d .git ] || git rev-parse --is-inside-work-tree > /dev/null 2>&1; then OUTPUT_TXT=$(git diff) && STATS=$(git diff --stat | tail -n 1 | xargs) && FILES_CHANGED=$(git diff --stat | wc -l) && tput cuu 1 && printf \"\\r🌿 Git diff:\\n%s\\n\\n\" \"$OUTPUT_TXT\" && if [ -z \"$OUTPUT_TXT\" ]; then termy_say \"No differences found\" > /dev/null 2>&1; else termy_say \"Changes summary: $STATS\" > /dev/null 2>&1; fi && termy_set_context 'git_diff_stat' \"$STATS\" && termy_set_context 'git_files_changed' \"$FILES_CHANGED\"; else tput cuu 1 && printf \"\\r⛔ Git diff: Not a git repository\\n\\n\" && termy_say \"Not a git repository\" > /dev/null 2>&1; fi",
+                    "explanation": "Displays the current git differences and speaks the stats summary.",
+                    "goal": "Display git differences",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "git_init",
+        "input": [
+            "initialize a new git repository",
+            "create a new git repo",
+            "start a git repository",
+            "git init",
+            "create git repo",
+            "start git repo",
+            "initialize git",
+            "set up git repository",
+            "make a git repo"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the project directory path\" > /dev/null 2>&1 && printf \"\\r\\n📁 Project directory path: \" && read -r git_dir && if [ -d \"$git_dir\" ]; then cd \"$git_dir\" && git init && termy_say \"Please enter the initial commit message\" > /dev/null 2>&1 && printf \"Initial commit message: \" && read -r commit_msg && if [ -n \"$commit_msg\" ]; then git add . && git commit -m \"$commit_msg\" && printf \"\\nRepository initialized with commit: \\033[1m%s\\033[22m\\n\" \"$commit_msg\" && termy_say \"Git repository initialized successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Commit message cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi; else printf \"\\n⛔ Directory does not exist.\\n\" && termy_say \"Directory not found\" > /dev/null 2>&1; fi",
+                    "explanation": "Initializes a new Git repository in a specified directory and makes the initial commit with a user-provided message.",
+                    "goal": "Initialize a new Git repository",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "count lines in a project",
+            "create alias to count source lines of code sloc",
+            "count total lines of javascript and scss files",
+            "git check how many lines of code in project",
+            "count sloc for tracked git files js and scss",
+            "calculate lines of code in current git repository",
+            "count total lines in project source files",
+            "get total line count of js and scss using git",
+            "alias for counting lines of code in workspace",
+            "git repository code line count alias"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Counting project lines of code\" > /dev/null 2>&1 && printf \"\\r\\n\" && git ls-files \"*.js*\" \"*.scss\" 2>/dev/null | xargs wc -l 2>/dev/null && printf \"\"",
+                    "explanation": "Lists tracked JavaScript and SCSS files in the git repository and pipes them into wc to calculate the total lines of code.",
+                    "goal": "Count lines of code for JavaScript and SCSS files in a git repo",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    }
+]

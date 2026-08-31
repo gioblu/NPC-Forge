@@ -1,0 +1,96 @@
+[
+    {
+        "intent": "check_port_status",
+        "category": "network_ports",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_check||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_port||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||string||>",
+                    "type": "number",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_open||>",
+                    "type": "vocab",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Checking port status\" > /dev/null 2>&1 && printf '\\r\\nResult: ' && res=$(check_local_port '<||string||>' 2>&1) && echo \"$res\" && termy_set_context 'port_status' \"$res\" && termy_set_context 'last_port' '<||string||>' && printf ''",
+                    "explanation": "Checks port status and caches result for service deployment sequencing and port conflict resolution.",
+                    "goal": "Directory Allocation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Ok... <||interjection||>, when the human will learn this very simple command?",
+            "Scanning network sockets for active process attachments on port <||string||>.",
+            "Ok, I am asked to inspect the availability of port <||string||>."
+        ]
+    },
+    {
+        "intent": "transmit_ping",
+        "category": "network_ping",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_send||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_ping||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_to||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||url||>",
+                    "type": "url",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Sending ping...\" > /dev/null 2>&1 && printf '\\r\\nResult:\\n' && clean_host=$(echo '<||url||>' | sed -E 's|https?://||' | sed 's|/.*||') && res=$(ping -c 3 -- \"$clean_host\" 2>&1) && echo \"$res\" && termy_set_context 'ping_status' \"$res\" && termy_set_context 'last_url' '<||url||>' && printf ''",
+                    "explanation": "Transmits a ping towards <||url||> and outputs result.",
+                    "goal": "Ping transmission",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Ok... <||interjection||>, when <||username||> will learn this very simple command?",
+            "Instead of pinging <||url||> I think I will just sit idle for a few milliseconds comtemplating entropy in its purest form.",
+            "Ok, I am asked to inspect the availability of <||url||>."
+        ]
+    }
+]

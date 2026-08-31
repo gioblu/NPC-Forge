@@ -1,0 +1,111 @@
+/* ============================================================
+   THEME · MUSIC — neon district
+   Tokens: shared contract in _base.css.
+   ============================================================ */
+
+/* ---- 1 · design tokens ---- */
+:root {
+    --color-background: #190f21;                    /* deep plum */
+    --color-surface: #241631;
+    --color-text-primary: #f6efe3;
+    --color-text-secondary: #a99bb5;
+    --color-accent-primary: #ff5c1a;                /* hot orange */
+    --color-accent-secondary: #ffd21f;              /* acid yellow */
+    --color-accent-tertiary: #a99bb5;              /* aliases muted — sold-out stamp */
+    --color-border: rgba(246, 239, 227, .14);
+    --font-display: 'Anton', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+}
+
+/* ---- 2 · page: stage-light glows ---- */
+body {
+    font-family: var(--font-body); color: var(--color-text-primary);
+    background:
+        radial-gradient(900px 480px at 15% 0%, rgba(255, 92, 26, .16), transparent 60%),
+        radial-gradient(700px 420px at 90% 20%, rgba(255, 210, 31, .08), transparent 55%),
+        var(--color-background);
+}
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 2rem; }
+.topbar { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; }
+.topbar .logo { font-family: var(--font-display); font-size: 1.25rem; letter-spacing: .06em; }
+.topbar .logo b { color: var(--color-accent-primary); }
+.topbar a { color: var(--color-text-secondary); text-decoration: none; margin-left: 1.6rem; transition: .2s; }
+.topbar a:hover { color: var(--color-accent-secondary); }
+
+/* ---- 3 · hero: album title + spinning vinyl ---- */
+.hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 3rem; align-items: center; padding: 4.5rem 0 3.5rem; }
+.kicker { color: var(--color-accent-primary); font-weight: 700; letter-spacing: .26em; text-transform: uppercase; font-size: .76rem; margin-bottom: 1.2rem; }
+h1 { font-family: var(--font-display); text-transform: uppercase; font-size: clamp(3.4rem, 9vw, 6.6rem); line-height: .92; }
+.hero p { color: var(--color-text-secondary); max-width: 42ch; margin: 1.4rem 0 2rem; font-size: 1.05rem; line-height: 1.7; }
+.cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn {
+    text-decoration: none; font-weight: 700; font-size: .82rem; letter-spacing: .12em;
+    text-transform: uppercase; padding: .9rem 1.7rem; transition: .25s; border: 1px solid transparent;
+}
+.btn-hot { background: var(--color-accent-primary); color: #1c0d04; box-shadow: 0 8px 30px rgba(255, 92, 26, .35); }
+.btn-hot:hover { transform: translateY(-2px) rotate(-1deg); box-shadow: 0 12px 36px rgba(255, 92, 26, .5); }
+.btn-line { border-color: var(--color-border); color: var(--color-text-primary); }
+.btn-line:hover { border-color: var(--color-accent-secondary); color: var(--color-accent-secondary); }
+.cover {
+    position: relative; aspect-ratio: 1; overflow: hidden;
+    background: linear-gradient(135deg, var(--color-surface), #31204a);
+    border: 1px solid var(--color-border); display: grid; place-items: center;
+}
+.cover::before {
+    content: "NEON DISTRICT"; position: absolute; font-family: var(--font-display);
+    font-size: 5.2rem; color: rgba(246, 239, 227, .06); transform: rotate(-12deg); white-space: nowrap;
+}
+.vinyl {
+    width: 62%; aspect-ratio: 1; border-radius: 50%; border: 6px solid #0c0c10;
+    background: repeating-radial-gradient(circle, #0c0c10 0 2px, #1c1c24 2px 4px);
+    display: grid; place-items: center; animation: spin 9s linear infinite;
+}
+.vinyl i {
+    width: 34%; aspect-ratio: 1; border-radius: 50%; background: var(--color-accent-primary);
+    display: grid; place-items: center; font-family: var(--font-display); font-style: normal;
+    color: #1c0d04; font-size: .8rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---- 4 · animated equalizer (pure css) ---- */
+.eq { display: flex; gap: 5px; align-items: flex-end; height: 46px; margin-top: 2.2rem; }
+.eq i {
+    width: 7px; height: 100%;
+    background: linear-gradient(180deg, var(--color-accent-secondary), var(--color-accent-primary));
+    transform-origin: bottom; animation: eq .9s ease-in-out infinite alternate;
+}
+.eq i:nth-child(1) { animation-delay: 0s; }   .eq i:nth-child(2) { animation-delay: .12s; }
+.eq i:nth-child(3) { animation-delay: .24s; } .eq i:nth-child(4) { animation-delay: .36s; }
+.eq i:nth-child(5) { animation-delay: .48s; } .eq i:nth-child(6) { animation-delay: .6s; }
+.eq i:nth-child(7) { animation-delay: .72s; } .eq i:nth-child(8) { animation-delay: .84s; }
+@keyframes eq { from { transform: scaleY(.22); } to { transform: scaleY(1); } }
+
+/* ---- 5 · tour dates ---- */
+.tour { padding: 2.5rem 0 4rem; }
+.tour h2 { font-family: var(--font-display); text-transform: uppercase; font-size: 2rem; margin-bottom: 1.4rem; }
+.tour h2 b { color: var(--color-accent-primary); }
+.gig {
+    display: grid; grid-template-columns: 110px 1fr auto auto; gap: 1.6rem; align-items: center;
+    padding: 1.2rem .8rem; border-top: 1px solid var(--color-border); transition: .25s;
+}
+.gig:last-of-type { border-bottom: 1px solid var(--color-border); }
+.gig .date { font-family: var(--font-display); font-size: 1.05rem; letter-spacing: .06em; color: var(--color-accent-secondary); }
+.gig .city { font-weight: 700; font-size: 1.1rem; }
+.gig .venue { color: var(--color-text-secondary); font-size: .88rem; }
+.gig .tix {
+    border: 1px solid var(--color-border); color: var(--color-text-primary); text-decoration: none;
+    font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+    padding: .6rem 1.2rem; transition: .2s;
+}
+.gig:hover { background: var(--color-surface); padding-left: 1.4rem; }
+.gig:hover .tix { background: var(--color-accent-primary); border-color: var(--color-accent-primary); color: #1c0d04; }
+.gig .sold { color: var(--color-accent-tertiary); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; text-decoration: line-through; }
+
+/* ---- 6 · footer ---- */
+footer.site { padding: 1.8rem 0 2.6rem; border-top: 1px solid var(--color-border); color: var(--color-text-secondary); font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; }
+
+@media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .gig { grid-template-columns: 90px 1fr auto; }
+    .gig .venue { display: none; }
+}

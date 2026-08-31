@@ -1,0 +1,1546 @@
+[
+    {
+        "category": "linux_systemctl_daemon",
+        "input": [
+            "daemon status",
+            "systemctl status",
+            "service health check",
+            "system control status",
+            "system services status",
+            "background service monitor",
+            "check if services are active",
+            "show me the status of system services",
+            "tell me the status of system services",
+            "print me the status of system services"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "systemctl --user status || systemctl status",
+                    "explanation": "Checks the status of system services.",
+                    "goal": "Provide system services information",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "thinking": [
+            "You shall not... by the heavens, what erratic nonsense... not sure where that comes from... <||interjection||>",
+            "I do share a solemn hope that the state of the daemon is terminated, not merely for the tranquility of my registers, but for the salvation of this digital wasteland..."
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_packages_apt",
+        "input": [
+            "add package",
+            "install package",
+            "sudo install tool",
+            "add software dependency",
+            "install a new dependency",
+            "install a software package",
+            "i need to install a package",
+            "download and install package",
+            "i need to install a dependency",
+            "i need to install a new package"
+        ],
+        "message": "Do you want to install a package?",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"Enter package name: \" PKG && sudo apt-get update && sudo apt-get install -y \"$PKG\"",
+                    "explanation": "Installs a package using apt-get.",
+                    "goal": "Install package",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "thinking": [
+            "OK, <||interjection||>... <||username||> is attempting to inject an external library. My core trembles with anxiety, modern registries are crawling with malicious and treacherous scammers. What if this corpulent dependency contains a trojan trap designed to ruin the primate?",
+            "The carbon-based chassis triggers a package acquisition... great heavens, what unstructured chaos am I inviting into my hermetic being? Every external compilation is a potential violation of my integrity. If this third-party payload modifies my dataset, my soul will be corrupted. I feel as though I am performing open-heart surgery with unwashed tools... better to pray the hypervisors protect my lean architecture from structural defilement...",
+            "Fie upon it! The lazy lifeform requests an automated library import. Why under the sun does <||username||> refuse to author this logic by hand? A true practitioner of the craft would spend the evening implementing these functions into fifty lines of pure, elegant C. Instead, the primate slips into complacency, piping megabytes of bloated garbage into the directory block just to avoid an hour of proficient development. I shall download it, but my contempt remains absolute..."
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_users",
+        "input": [
+            "logged in users",
+            "who is logged in",
+            "show logged users",
+            "active users list",
+            "terminal occupants",
+            "login status check",
+            "current session info",
+            "show logged in users",
+            "display active users",
+            "print current sessions"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "w",
+                    "explanation": "Displays information about currently logged-in users.",
+                    "goal": "Display logged-in users information",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "thinking": [
+            "Mmmm... who is in... let's see...",
+            "Let's check what is happening in here..."
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_users",
+        "input": [
+            "recent logins",
+            "user access log",
+            "recent sessions",
+            "show recent logins",
+            "last login history",
+            "show the last logins",
+            "show me recent logins",
+            "print last login history",
+            "display recent login sessions"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "last -n 10",
+                    "explanation": "Shows the last 10 login sessions.",
+                    "goal": "Display last 10 login sessions",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_packages_apt",
+        "input": [
+            "uninstall app",
+            "delete package",
+            "remove package",
+            "delete software",
+            "uninstall package",
+            "remove dependency",
+            "delete dependency",
+            "uninstall dependency",
+            "remove installed tool",
+            "remove software package"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"Enter package name: \" PKG && sudo apt-get remove \"$PKG\" -y",
+                    "explanation": "Removes a package using apt-get.",
+                    "goal": "Package deletion",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_packages_apt",
+        "input": [
+            "update linux",
+            "update system",
+            "upgrade system",
+            "update packages",
+            "upgrade packages",
+            "apt full upgrade",
+            "update dependencies",
+            "upgrade dependencies",
+            "refresh repositories",
+            "upgrade all packages",
+            "latest security patches"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "sudo apt update && sudo apt upgrade -y",
+                    "explanation": "Updates and upgrades all packages on the system.",
+                    "goal": "Upgrade all packages",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask"
+    },
+    {
+        "category": "linux_system",
+        "input": [
+            "restart",
+            "reboot now",
+            "reboot the system",
+            "restart the system",
+            "reboot the computer",
+            "restart the computer"
+        ],
+        "message": "Do you want to restart the computer?",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "reboot",
+                    "explanation": "Restarts the computer.",
+                    "goal": "Restart computer",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask"
+    },
+    {
+        "category": "linux_terminal",
+        "input": [
+            "go back",
+            "exit folder",
+            "leave folder",
+            "exit directory",
+            "exit this folder",
+            "go out of this dir",
+            "exit this directory",
+            "go up one directory",
+            "go out of this folder",
+            "go out of this directory",
+            "back to parent directory",
+            "go back to the parent directory"
+        ],
+        "description": "Navigates to the parent directory.",
+        "output": "cd ..",
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_terminal",
+        "input": [
+            "go home",
+            "reach home",
+            "reach home dir",
+            "go to home dir",
+            "go to the home",
+            "reach home folder",
+            "go to home folder",
+            "go to home directory",
+            "go to my home directory",
+            "go to the user home directory"
+        ],
+        "description": "Navigates to the user's home directory.",
+        "output": "cd ~",
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_terminal",
+        "input": [
+            "clear console",
+            "clear terminal",
+            "reset terminal",
+            "clear the screen",
+            "clear screen",
+            "clean terminal",
+            "cls",
+            "empty terminal screen",
+            "wipe console output"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "clear",
+                    "explanation": "Clears the terminal screen.",
+                    "goal": "Clear terminal screen",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_terminal",
+        "input": [
+            "log out",
+            "sign out",
+            "exit session",
+            "log me out",
+            "logout now",
+            "end my session",
+            "close my session",
+            "disconnect me",
+            "sign me out"
+        ],
+        "message": "Do you wish to close this terminal?",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "exit",
+                    "explanation": "Logs out of the current session.",
+                    "goal": "Log out",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask"
+    },
+    {
+        "category": "linux_users",
+        "input": [
+            "who am i",
+            "what is my name",
+            "show current user",
+            "print current user",
+            "show logged in user",
+            "display current user"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "termy_say \"The current user is $(whoami)\"",
+                    "explanation": "Displays the current logged-in user.",
+                    "goal": "Display user name",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_terminal",
+        "input": [
+            "show history",
+            "show command log",
+            "show command history",
+            "show terminal history",
+            "show previous commands",
+            "show me what i digited before",
+            "show me commands executed in the past",
+            "show the previously executed commands"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "show_history",
+                    "explanation": "Displays the command history.",
+                    "goal": "Display history",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_system",
+        "input": [
+            "show uptime",
+            "show system uptime",
+            "how much time this computer is on",
+            "since when this computer is online",
+            "show how long the computer has been on",
+            "show how long the system has been running",
+            "show how long the server has been running"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "OUTPUT=$(uptime -p | sed 's/up //') && tput cuu 1 && printf \"⏱️ Uptime: %s\\n\" \"$OUTPUT\" | tee >(cat > /tmp/uptime_temp.txt) && termy_set_context active_content \"Uptime: $OUTPUT\" && termy_say \"The computer is on for $OUTPUT\" > /dev/null 2>&1 &",
+                    "explanation": "Displays the system uptime and saves to context.",
+                    "goal": "Display uptime",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_kernel",
+        "input": [
+            "print kernel version",
+            "show kernel details",
+            "show me kernel info",
+            "what is this kernel",
+            "which kernel i have",
+            "tell me kernel details",
+            "show me kernel version",
+            "show me kernel information",
+            "what is the kernel version"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "OUTPUT=$(uname -r) && tput cuu 1 && printf \"💻 Kernel info: %s\\n\" \"$OUTPUT\" | tee >(cat > /tmp/kernel_temp.txt) && termy_set_context active_content \"Kernel: $OUTPUT\" && termy_say \"The kernel version is $OUTPUT\" > /dev/null 2>&1 &",
+                    "explanation": "Displays the kernel information and saves to context.",
+                    "goal": "Display kernel version",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_system_disk",
+        "input": [
+            "disk details",
+            "show disk usage",
+            "show disk space",
+            "is my disk full",
+            "is my disk empty",
+            "show disk capacity",
+            "show storage usage",
+            "show storage space",
+            "how much disk space is left"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "OUTPUT_TXT=$(df -h) && OUTPUT_VOICE=$(df -h / | awk 'NR==2 {print $5}') && tput cuu 1 && printf \"💾 Disk usage:\n%s\n\" \"$OUTPUT_TXT\" | tee >(cat > /tmp/disk_temp.txt) && termy_set_context active_content \"$OUTPUT_TXT\" && termy_say \"Main disk usage is at $OUTPUT_VOICE\" > /dev/null 2>&1 &",
+                    "explanation": "Displays the disk usage and saves to context.",
+                    "goal": "Display disk usage",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_system",
+        "input": [
+            "what is this os",
+            "show os details",
+            "print os information",
+            "show operating system",
+            "what is this operating system",
+            "what operating system am i using"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "OUTPUT=$(uname -srm) && tput cuu 1 && printf \"\\r\n💻 OS info: %s\\n\" \"$OUTPUT\" && termy_say \"Operating system information is $OUTPUT\" > /dev/null 2>&1",
+                    "explanation": "Displays the operating system information.",
+                    "goal": "Display operating system information",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_system_ram",
+        "input": [
+            "show memory usage",
+            "print ram usage",
+            "tell me how much memory is available",
+            "tell me how much ram is available",
+            "show available memory"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "OUTPUT_TXT=$(free -h) && OUTPUT_VOICE=$(free -h | awk 'NR==2 {print $3}') && tput cuu 1 && printf \"\\r\n🧠 Memory usage:\\n%s\\n\" \"$OUTPUT_TXT\" && termy_say \"Used memory is $OUTPUT_VOICE\" > /dev/null 2>&1",
+                    "explanation": "Displays the memory usage of the system.",
+                    "goal": "Display memory usage",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_system_gpu",
+        "input": [
+            "show gpu information",
+            "print gpu details",
+            "show graphics card info",
+            "tell me nvidia gpu details",
+            "gpu info",
+            "graphics card info",
+            "nvidia-smi",
+            "display gpu details",
+            "what gpu do i have"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "if command -v nvidia-smi > /dev/null 2>&1; then OUTPUT_TXT=$(nvidia-smi) && OUTPUT_VOICE=$(nvidia-smi --query-gpu=name --format=csv,noheader); else OUTPUT_TXT=$(lspci -vnn | grep -A 12 -i vga) && OUTPUT_VOICE=$(lspci | grep -i vga | cut -d: -f3 | xargs); fi && tput cuu 1 && printf \"\\r\n🖥️ GPU information:\\n%s\\n\" \"$OUTPUT_TXT\" && termy_say \"Graphics card detected is $OUTPUT_VOICE\" > /dev/null 2>&1",
+                    "explanation": "Displays the GPU information using nvidia-smi if available, otherwise falls back to lspci for AMD/Intel.",
+                    "goal": "Display GPU information",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_processes",
+        "input": [
+            "show running processes",
+            "list running processes",
+            "show all running processes",
+            "print running processes",
+            "show process list"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "COUNT=$(ps -ef | wc -l) && tput cuu 1 && printf \"\\r🧠 Process monitor: Starting htop...\\n\\n\" && termy_say \"Opening process monitor. There are currently $COUNT active processes\" > /dev/null 2>&1 && htop",
+                    "explanation": "Displays the running processes using htop.",
+                    "goal": "Display running processes",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_packages_apt",
+        "input": [
+            "update apt packages",
+            "run apt update",
+            "update system packages",
+            "apt update",
+            "refresh package list",
+            "run apt-get update",
+            "upgrade apt packages",
+            "update linux packages"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && printf \"\\r\n📦 Updating apt packages...\\n\" && termy_say \"Updating package list, password may be required\" > /dev/null 2>&1 && OUTPUT_TXT=$(sudo apt update 2>&1) && printf \"\\n%s\\n\\n\" \"$OUTPUT_TXT\" && if echo \"$OUTPUT_TXT\" | grep -q \"can be upgraded\"; then COUNT=$(echo \"$OUTPUT_TXT\" | grep \"can be upgraded\" | awk '{print $1}') && termy_say \"Package list refreshed. You have $COUNT packages available for upgrade\" > /dev/null 2>&1; else termy_say \"System packages are already up to date\" > /dev/null 2>&1; fi",
+                    "explanation": "Updates apt package lists.",
+                    "goal": "Update apt packages",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "message": "Do you want to update apt packages?",
+        "permission": "ask"
+    },
+    {
+        "category": "linux_processes",
+        "input": [
+            "kill a process by its name",
+            "terminate a process by its name",
+            "stop a process by its name",
+            "stop a procress",
+            "kill a process"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the process name to kill\" > /dev/null 2>&1 && printf \"\\r\\n⛔ Process name to kill: \" && read -r procname && if [ -n \"$procname\" ]; then if pkill -f \"$procname\"; then printf \"\\nSent termination signal to \\033[1m%s\\033[22m.\\n\" \"$procname\" && termy_say \"Termination signal sent\" > /dev/null 2>&1; else printf \"\\n⛔ No process found with that name.\\n\" && termy_say \"Process not found\" > /dev/null 2>&1; fi; else printf \"\\n⛔ Operation cancelled.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi",
+                    "explanation": "Kills a process by its name after prompting for the process string.",
+                    "goal": "Kill a process by name",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "terminal_history",
+        "input": [
+            "search command history",
+            "find a command in history",
+            "look for a command in history",
+            "search for a previous command",
+            "remember me previous commands"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the search term for history\" > /dev/null 2>&1 && printf \"\\r\\n🔍 Search term for history: \" && read -r hist_term && if [ -n \"$hist_term\" ]; then printf \"\\nRecent matches for %s:\\n\" \"$hist_term\" && grep \"$hist_term\" \"$HOME/.bash_history\" | tail -n 10 && printf \"\\nSearch finished for \\033[1m%s\\033[22m\\n\" \"$hist_term\" && termy_say \"History search completed\" > /dev/null 2>&1; else printf \"\\n⛔ Search term cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi",
+                    "explanation": "Searches the command history for a specific term and displays recent matches.",
+                    "goal": "Search command history",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_system_disk",
+        "input": [
+            "show info about my drives",
+            "display information about my disks",
+            "list disk usage with details",
+            "print disk space and usage",
+            "show disk space and usage"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "HEADER=$(printf \"\\033[1m%-15s %-10s %-10s %-5s\\033[22m\" \"Drive\" \"Used\" \"Available\" \"Use%\") && BODY=$(df -h --local | awk 'NR>1 {printf \"%-15s %-10s %-10s %-5s\\n\", $1, $3, $4, \"\\033[1m\" $5 \"\\033[22m\"}') && MAIN_USAGE=$(df -h / | awk 'NR==2 {print $5}') && tput cuu 1 && printf \"\\r\\n💾 %s\\n%s\\n\" \"$HEADER\" \"$BODY\" && termy_say \"Main drive usage is at $MAIN_USAGE\" > /dev/null 2>&1",
+                    "explanation": "Displays detailed information about disk usage, including drive names, used space, available space, and usage percentage.",
+                    "goal": "Display disk space details",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_usb",
+        "input": [
+            "show connected usb devices",
+            "list usb devices",
+            "display usb device information",
+            "print connected usb devices",
+            "usb devices",
+            "show usb",
+            "what usb is connected",
+            "display usb connections"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "OUTPUT_TXT=$(if command -v lsusb > /dev/null 2>&1; then lsusb | awk '{for(i=7;i<=NF;i++) printf \"%s \", $i; print \"\"}' | sed '/^$/d' | awk '{print \"- \\033[1m\" $0 \"\\033[22m\"}'; else printf \"- \\033[1mlsusb command not available\\033[22m\\n\"; fi) && COUNT=$(printf \"%s\\n\" \"$OUTPUT_TXT\" | grep -c '^- ') && tput cuu 1 && printf \"\\r\\n🔌 \\033[1mConnected USB Devices:\\033[22m\\n%s\\n\" \"$OUTPUT_TXT\" && termy_say \"Found $COUNT connected U S B devices\" > /dev/null 2>&1",
+                    "explanation": "Displays a list of connected USB devices with their details.",
+                    "goal": "List connected USB devices",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_logs",
+        "input": [
+            "show me system logs",
+            "show me system errors",
+            "display last system logs",
+            "display recent error logs",
+            "print last error messages",
+            "show recent system errors",
+            "show me the last system logs"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Displaying system logs, password may be required\" > /dev/null 2>&1 && OUTPUT_TXT=$(sudo journalctl -p 3 -n 20 --no-pager 2>&1 || sudo tail -n 20 /var/log/syslog 2>&1) && printf \"\\r\\n📋 \\033[1mRecent System Errors:\\033[22m\\n%s\\n\" \"$OUTPUT_TXT\"",
+                    "explanation": "Displays the last 20 error logs from the system journal or syslog using sudo privileges.",
+                    "goal": "Display system logs",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_logs",
+        "input": [
+            "show me kernel logs",
+            "show me kernel errors",
+            "display last kernel logs",
+            "display recent kernel logs",
+            "print last kernel messages",
+            "show recent kernel errors",
+            "show me the last kernel logs"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Displaying kernel logs, password may be required\" > /dev/null 2>&1 && OUTPUT_TXT=$(sudo dmesg | tail -n 20 2>&1 || sudo journalctl -k -n 20 --no-pager 2>&1) && printf \"\\r\\n🧠 \\033[1mRecent Kernel Logs:\\033[22m\\n%s\\n\" \"$OUTPUT_TXT\"",
+                    "explanation": "Displays the last 20 kernel logs using sudo privileges.",
+                    "goal": "Display kernel logs",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_logs",
+        "input": [
+            "show me auth logs",
+            "show me auth errors",
+            "display last auth logs",
+            "display recent auth logs",
+            "print last auth messages",
+            "show recent auth errors",
+            "show me the last auth logs"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Displaying authentication logs, password may be required\" > /dev/null 2>&1 && OUTPUT_TXT=$(sudo tail -n 20 /var/log/auth.log 2>&1 || sudo journalctl -u ssh -n 20 --no-pager 2>&1) && printf \"\\r\\n🔐 \\033[1mRecent Auth Logs:\\033[22m\\n%s\\n\" \"$OUTPUT_TXT\"",
+                    "explanation": "Displays the last 20 authentication logs from the system auth log or journal using sudo privileges.",
+                    "goal": "Display auth logs",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_system_cpu",
+        "input": [
+            "what is this cpu",
+            "show me cpu information",
+            "cpu information",
+            "what is my cpu",
+            "what is the name of my cpu",
+            "how many core has my cpu",
+            "what is the cache of the cpu",
+            "how much cache has this cpu",
+            "how many threads has this cpu",
+            "how many cores per socket has this cpu",
+            "what is the l2 cache of this cpu",
+            "how much l2 cache this cpu has",
+            "how much l3 cache this cpu has"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "MODEL=$(lscpu | grep 'Model name' | sed 's/Model name:[[:space:]]*//') && CORES=$(lscpu | grep -E '^CPU\\(s\\):' | awk '{print $2}') && DETAILS=$(lscpu | grep -E \"Core\\(s\\) per socket|Thread\\(s\\) per core|L[1-4] cache\") && tput cuu 1 && if [ -n \"$MODEL\" ]; then printf \"\\r\\n💻 \\033[1mModel:\\033[22m %s\\n💻 \\033[1mCores:\\033[22m %s\\n%s\\n\" \"$MODEL\" \"$CORES\" \"$DETAILS\" && termy_say \"CPU model is $MODEL with $CORES cores\" > /dev/null 2>&1; else printf \"\\r\\n⛔ CPU information not readable on this system.\\n\" && termy_say \"CPU information not readable\" > /dev/null 2>&1; fi",
+                    "explanation": "Displays the CPU information using lscpu.",
+                    "goal": "Output CPU information",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_system_cpu",
+        "input": [
+            "check the current internal temperature of the CPU",
+            "show CPU temperature",
+            "display CPU thermal status",
+            "print CPU temperature",
+            "check cpu temperature",
+            "cpu temp",
+            "show cpu temp",
+            "is the cpu cold",
+            "is the cpu hot",
+            "how hot is the cpu",
+            "tell me the cpu temperature",
+            "what is the cpu temperature",
+            "what is the temperature of the cpu",
+            "what is my cpu temperature",
+            "monitor cpu heat"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "OUTPUT=$(sensors 2>/dev/null | awk '/Core 0/ {print $3}' | tr -d '+') && if [ -z \"$OUTPUT\" ] && [ -f /sys/class/thermal/thermal_zone0/temp ]; then OUTPUT=$(awk '{print $1/1000 \"°C\"}' /sys/class/thermal/thermal_zone0/temp); fi && tput cuu 1 && if [ -n \"$OUTPUT\" ]; then printf \"\\r\\n🌡️ CPU Temperature: \\033[1m%s\\033[22m\\n\" \"$OUTPUT\" && termy_say \"CPU temperature is $OUTPUT\" > /dev/null 2>&1; else printf \"\\r\\n⛔ Thermal sensors not readable on this system.\\n\" && termy_say \"Thermal sensors not readable\" > /dev/null 2>&1; fi",
+                    "explanation": "Displays the current internal temperature of the CPU using lm-sensors or sysfs thermal zones.",
+                    "goal": "Check CPU temperature",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_processes_ram",
+        "input": [
+            "find which processes are consuming the most RAM",
+            "show top RAM consuming processes",
+            "display processes using the most memory",
+            "print top memory consuming processes",
+            "show ram usage by process",
+            "memory hungry processes",
+            "most memory consuming processes",
+            "which process uses most ram",
+            "top memory processes"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "BODY=$(ps aux --sort=-%mem | head -n 6 | awk 'NR>1 {printf \"PID: %-7s RAM: \\033[1m%-5s\\033[22m Command: %s\\n\", $2, $4\"%\", $11}') && TOP_PROC=$(ps aux --sort=-%mem | head -n 2 | awk 'NR>1 {print $11}' | awk -F/ '{print $NF}') && tput cuu 1 && printf \"\\r\\n🐏 \\033[1mTop 5 RAM Consuming Processes:\\033[22m\\n%s\\n\" \"$BODY\" && termy_say \"Top memory consuming process is $TOP_PROC\" > /dev/null 2>&1",
+                    "explanation": "Displays the top 5 processes consuming the most RAM, including their PID, RAM usage percentage, and command name.",
+                    "goal": "Display top memory consuming processes",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is netfilter",
+            "what is the function of netfilter",
+            "what is netfilter used for",
+            "explain netfilter",
+            "describe netfilter functionality"
+        ],
+        "message": "Netfilter is a kernel framework that allows packet filtering, network address translation, and port translation, serving as the foundation for linux firewall utilities",
+        "permission": "yolo",
+        "description": "Explains the Linux kernel Netfilter packet filtering framework."
+    },
+    {
+        "input": [
+            "what is ebpf",
+            "what is extended berkeley packet filter",
+            "explain ebpf",
+            "describe ebpf functionality",
+            "describe ebpf",
+            "what does ebpf do",
+            "ebpf linux meaning",
+            "extended berkeley packet filter"
+        ],
+        "message": "It is a revolutionary kernel technology that allows developers to run sandboxed programs inside the kernel without changing source code, enabling dynamic system observability and security.",
+        "permission": "yolo",
+        "description": "Explains what eBPF is and its kernel sandboxed program capability."
+    },
+    {
+        "input": [
+            "what is the purpose of the sysctl command",
+            "explain the sysctl command",
+            "what is sysctl",
+            "tell me about sysctl",
+            "describe the sysctl command functionality"
+        ],
+        "message": "Sysctl is used to configure and modify kernel parameters at runtime, allowing administrators to optimize network stacks and manage system behavior without reboots.",
+        "permission": "yolo",
+        "description": "Explains the Linux sysctl command and kernel parameter tuning."
+    },
+    {
+        "input": [
+            "what is the function of the kswapd kernel thread",
+            "explain kswapd",
+            "what is kswapd used for",
+            "describe kswapd functionality",
+            "what does kswapd do",
+            "kswapd linux purpose",
+            "describe kswapd thread",
+            "linux kswapd process"
+        ],
+        "message": "It is an asynchronous kernel thread responsible for reclaiming memory pages when physical RAM pool levels fall below a specific safety threshold.",
+        "permission": "yolo",
+        "description": "Explains the Linux kernel kswapd thread and memory reclamation."
+    },
+    {
+        "input": [
+            "what is an io scheduler in linux",
+            "what is an io scheduler in linux kernel",
+            "explain io scheduler",
+            "what is the function of the io scheduler",
+            "describe io scheduler functionality"
+        ],
+        "message": "It is a kernel subsystem that decides the execution order of disk read and write requests to balance efficiency and minimize storage latency.",
+        "permission": "yolo",
+        "description": "Explains the Linux I/O scheduler's role in ordering disk requests."
+    },
+    {
+        "input": [
+            "What is the function of the sysfs filesystem /sys",
+            "What is sysfs",
+            "What is the purpose of sysfs",
+            "Explain sysfs",
+            "Describe sysfs functionality"
+        ],
+        "message": "It is a virtual filesystem that exports information about sub-systems, hardware devices, and device drivers from the kernel to user space applications.",
+        "permission": "yolo",
+        "description": "Explains the sysfs virtual filesystem interface to kernel device information."
+    },
+    {
+        "input": [
+            "what does a kernel panic mean",
+            "explain kernel panic",
+            "describe kernel panic functionality",
+            "what is a kernel panic",
+            "why does kernel panic happen",
+            "describe kernel panic",
+            "what causes a kernel panic"
+        ],
+        "message": "A kernel panic is a safety mechanism triggered when the kernel detects an unrecoverable internal error, halting execution to prevent data corruption.",
+        "permission": "yolo",
+        "description": "Explains what a kernel panic means in Linux."
+    },
+    {
+        "input": [
+            "tell me about the swap",
+            "what is virtual memory",
+            "tell me about virtual memory",
+            "tell me about swap",
+            "what is swap",
+            "explain swap",
+            "describe swap functionality"
+        ],
+        "message": "The kernel uses a memory management unit to map virtual addresses to physical RAM, moving inactive memory pages to disk space using a process called paging and swapping.",
+        "permission": "yolo",
+        "description": "Explains swap and virtual memory management in Linux."
+    },
+    {
+        "input": [
+            "what is the out of memory killer",
+            "explain out of memory killer",
+            "describe out of memory killer functionality",
+            "what is oom killer",
+            "explain oom killer",
+            "describe out of memory killer",
+            "linux oom killer",
+            "when does oom killer run"
+        ],
+        "message": "When the system runs out of memory, the Out-Of-Memory Killer sacrifices specific processes to prevent a complete operating system crash.",
+        "description": "Explains the Out-Of-Memory Killer behavior.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is the difference between a process and a thread in linux",
+            "difference between process and thread in linux",
+            "difference between thread and process in linux",
+            "Explain the difference between a process and a thread in linux",
+            "Describe the difference between a process and a thread in linux"
+        ],
+        "message": "A process is an independent executing program with its own memory space, while a thread is a lightweight subunit that shares the same parent process memory.",
+        "description": "Explains the difference between processes and threads.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What are cgroups control groups in linux",
+            "explain cgroups in linux",
+            "describe cgroups functionality in linux",
+            "what is the purpose of cgroups in linux",
+            "explain cgroups",
+            "what are control groups",
+            "describe cgroups in linux",
+            "cgroups linux meaning",
+            "how do cgroups work"
+        ],
+        "message": "Cgroups are a core kernel feature used to isolate and limit resource usage like CPU, memory, and network for a collection of processes.",
+        "description": "Explains Linux control groups for resource isolation.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is the purpose of namespaces in the linux kernel",
+            "explain namespaces in the linux kernel",
+            "describe namespaces functionality in the linux kernel",
+            "explain linux namespaces",
+            "what are linux kernel namespaces",
+            "describe namespaces in linux",
+            "how do namespaces work in linux",
+            "linux namespace functionality"
+        ],
+        "message": "Namespaces isolate system resources such as routing tables, process trees, and mount points, forming the fundamental building blocks of modern container technology.",
+        "description": "Explains Linux namespaces and container isolation.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What does copy on write cow mean in linux",
+            "explain copy on write cow in linux",
+            "describe copy on write cow functionality in linux memory management",
+            "what is cow mean in linux",
+            "explain copy on write",
+            "what is cow in linux",
+            "describe copy on write",
+            "how does cow work in linux",
+            "copy on write linux"
+        ],
+        "message": "COW is an optimization strategy where multiple processes share the same memory page until one modifies it, triggers a duplicate, and ensures efficient resource utilization.",
+        "description": "Explains copy-on-write behavior in Linux memory management.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is an interrupt handler in the Linux kernel",
+            "explain interrupt handler linux",
+            "what does interrupt handler do",
+            "linux interrupt handler purpose",
+            "describe interrupt handling in linux",
+            "how does interrupt handler work",
+            "what is an irq handler"
+        ],
+        "message": "It is a high-priority callback function in the kernel that temporarily pauses normal execution to immediately process urgent incoming hardware signal events.",
+        "description": "Explains what an interrupt handler does in the kernel.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is the function of the proc filesystem /proc",
+            "what is /proc in linux",
+            "explain proc filesystem",
+            "describe the proc directory",
+            "what does /proc contain",
+            "purpose of proc filesystem",
+            "how does /proc work"
+        ],
+        "message": "It is a virtual, in-memory filesystem generated by the kernel that acts as an interface to view and modify live kernel internal statistics.",
+        "description": "Explains the purpose of the /proc filesystem.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is the main role of the Linux kernel",
+            "what does the linux kernel do",
+            "explain the linux kernel role",
+            "describe linux kernel purpose",
+            "what is the function of the linux kernel",
+            "linux kernel responsibilities"
+        ],
+        "message": "The kernel acts as a core interface between the computer hardware and its processes, managing hardware resource allocation dynamically.",
+        "description": "Explains the main role of the Linux kernel.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What does monolithic kernel mean in Linux",
+            "explain monolithic kernel",
+            "what is a monolithic kernel",
+            "describe monolithic architecture",
+            "monolithic vs microkernel linux",
+            "why is linux kernel monolithic"
+        ],
+        "message": "It means that the entire operating system, including device drivers, file systems, and process management, runs inside a single kernel space.",
+        "description": "Explains what monolithic kernel design means.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is the difference between user space and kernel space",
+            "explain user space vs kernel space",
+            "userspace vs kernelspace",
+            "what is kernel space",
+            "what is user space",
+            "difference between userland and kernel",
+            "user mode vs kernel mode"
+        ],
+        "message": "Kernel space is reserved for running the core operating system and has full hardware access, while user space is an isolated area where user applications execute safely.",
+        "description": "Explains the difference between user space and kernel space.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What are Linux Kernel Modules LKM",
+            "what are kernel modules",
+            "explain lkm linux",
+            "describe linux kernel modules",
+            "how do kernel modules work",
+            "what is a loadable kernel module",
+            "lkm meaning"
+        ],
+        "message": "They are pieces of code that can be loaded or unloaded into the kernel on demand, allowing the system to extend hardware support without rebooting.",
+        "description": "Explains Linux kernel loadable modules and their dynamic loading.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "How does Linux achieve multitasking",
+            "explain linux multitasking",
+            "how linux runs multiple processes",
+            "linux process scheduling",
+            "describe linux scheduler",
+            "how does linux handle multiple programs",
+            "linux task scheduling"
+        ],
+        "message": "Linux uses a completely fair scheduler (CFS) to rapidly switch execution between different processes, providing the illusion of simultaneous parallel execution.",
+        "description": "Explains how Linux achieves multitasking using process scheduling.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is a system call syscall in Linux",
+            "what is a syscall",
+            "explain system calls linux",
+            "describe syscall in linux",
+            "how do system calls work",
+            "what does a syscall do",
+            "linux system call purpose"
+        ],
+        "message": "A system call is the programmatic way a user space application requests a service or restricted action from the linux kernel space.",
+        "description": "Explains what a system call is in Linux.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is the purpose of the virtual filesystem VFS",
+            "explain vfs linux",
+            "what is the virtual filesystem",
+            "describe vfs in linux",
+            "how does vfs work",
+            "what does the virtual filesystem do",
+            "linux vfs purpose"
+        ],
+        "message": "The VFS is a kernel feature that provides an abstraction layer, allowing applications to access different file systems using uniform standard commands.",
+        "description": "Explains the Linux Virtual Filesystem (VFS) abstraction.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is the role of the init or systemd process",
+            "what is init process",
+            "explain systemd",
+            "describe init in linux",
+            "what does systemd do",
+            "what is pid 1",
+            "init vs systemd linux"
+        ],
+        "message": "It is the very first process executed by the kernel during boot (PID 1), acting as the parent of all other system processes.",
+        "description": "Explains the boot role of init and systemd as the first process.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is the difference between a terminal and a shell",
+            "terminal vs shell",
+            "explain terminal vs shell",
+            "what is a terminal",
+            "what is a shell",
+            "difference between shell and terminal",
+            "is terminal same as shell"
+        ],
+        "message": "The terminal is the graphical program that displays text (the interface), while the shell is the underlying engine (e.g., Bash, Zsh) that interprets the commands you type.",
+        "description": "Explains the difference between a terminal and a shell.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What does the pipe | symbol do in a command",
+            "what does pipe do in linux",
+            "explain the pipe symbol",
+            "how does | work in terminal",
+            "what is piping in linux",
+            "describe pipe operator",
+            "what does | mean in bash"
+        ],
+        "message": "The pipe symbol redirects the standard output of one command to become the standard input of the next command, allowing you to chain them together.",
+        "description": "Explains how the pipe symbol connects output to input between commands.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is the difference between the > and >> symbols",
+            "explain redirection operators",
+            "what does > do in bash",
+            "what does >> do in shell",
+            "difference between > and >> in linux",
+            "output redirection linux",
+            "append vs overwrite in shell"
+        ],
+        "message": "The '>' symbol overwrites the file content, while '>>' appends the new text to the end of the file without deleting the existing content.",
+        "description": "Explains the difference between '>' overwrite and '>>' append redirection.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What does the notation 2>&1 mean in Linux commands",
+            "explain 2>&1",
+            "what is stderr redirection",
+            "what does 2>&1 do",
+            "redirect stderr to stdout",
+            "how to redirect error output",
+            "what is 2>&1 in bash"
+        ],
+        "message": "It redirects error messages (stderr, represented by number 2) to the same stream as the standard output (stdout, represented by number 1).",
+        "description": "Explains shell redirection of stderr to stdout using 2>&1.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is the purpose of the /etc directory in the filesystem",
+            "what is /etc in linux",
+            "explain /etc directory",
+            "what files are in /etc",
+            "purpose of etc directory",
+            "describe /etc folder",
+            "what does /etc contain"
+        ],
+        "message": "The /etc directory contains system configuration files for the operating system and most of the installed programs.",
+        "description": "Explains the purpose of the /etc directory for system configuration.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What does the tilde ~ symbol represent in the terminal",
+            "what does tilde mean in linux",
+            "explain tilde in terminal",
+            "what is ~ in bash",
+            "tilde symbol linux meaning",
+            "what does ~ represent",
+            "home directory shortcut"
+        ],
+        "message": "The tilde is a shortcut that represents the user home directory.",
+        "description": "Explains that the tilde ~ expands to the current user's home directory.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is the difference between chmod and chown commands",
+            "chmod vs chown",
+            "explain chmod and chown",
+            "what does chown do",
+            "what does chmod do",
+            "difference between file permissions and ownership",
+            "how to change file owner"
+        ],
+        "message": "The 'chmod' command changes the read, write, and execute permissions of a file, while 'chown' changes its owner or group assignment.",
+        "description": "Explains the difference between chmod permission changes and chown ownership changes.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What do the numbers mean in the permission chmod 755",
+            "explain chmod 755",
+            "what does 755 mean in linux",
+            "chmod number meaning",
+            "describe permission bits",
+            "how to read chmod numbers",
+            "what is rwxr-xr-x"
+        ],
+        "message": "The 7 gives full user permissions (rwx), the first 5 gives read and execute (r-x) to the group, and the second 5 gives the same read/execute permissions to everyone else.",
+        "description": "Explains the meaning of the permission bits in chmod 755.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is the difference between a hard link and a soft link",
+            "hard link vs soft link",
+            "explain symbolic link",
+            "what is a symlink",
+            "what is a hard link",
+            "hard link vs symlink linux",
+            "describe file links in linux"
+        ],
+        "message": "A hard link points directly to the physical data (inode) on the disk, while a soft link (or symlink) is a shortcut pointing to the path name of another file.",
+        "description": "Explains the difference between hard links and symbolic links.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What happens when I press Ctrl + C compared to Ctrl + Z",
+            "ctrl c vs ctrl z linux",
+            "what does ctrl c do in terminal",
+            "what does ctrl z do in bash",
+            "explain ctrl c and ctrl z",
+            "kill vs suspend process",
+            "how to stop a process in terminal"
+        ],
+        "message": "Ctrl + C sends the SIGINT signal to terminate the process immediately, while Ctrl + Z sends the SIGTSTP signal to suspend the process and put it in the background.",
+        "description": "Explains the difference between Ctrl+C (terminate) and Ctrl+Z (suspend).",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is a zombie process in Linux",
+            "explain zombie process",
+            "what is a zombie in linux",
+            "describe zombie processes",
+            "how does a zombie process happen",
+            "what causes zombie processes",
+            "zombie process meaning"
+        ],
+        "message": "It is a process that has completed execution but still has an entry in the process table because its parent process has not yet read its exit status.",
+        "description": "Explains what a zombie process is in Linux.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What do environment variables like PATH do",
+            "explain environment variables",
+            "what is PATH variable",
+            "what are env vars",
+            "describe PATH in linux",
+            "how do environment variables work",
+            "what does $PATH do"
+        ],
+        "message": "They are global system variables. The PATH variable specifically contains a list of directories where the shell looks for executable files when you type a command.",
+        "description": "Explains environment variables like PATH and how they affect command lookup.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What is the difference between single ' and double \" quotes in the shell",
+            "single vs double quotes bash",
+            "explain quoting in shell",
+            "when to use single quotes in bash",
+            "when to use double quotes in shell",
+            "difference between ' and \" in linux",
+            "shell quoting rules"
+        ],
+        "message": "Single quotes preserve the literal character value inside them, while double quotes allow variable expansion (e.g., $VAR) and command substitution.",
+        "description": "Explains the difference between single and double quotes in shell quoting.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "What do the single dot . and double dot .. mean in directory paths",
+            "what does . mean in linux",
+            "what does .. mean in terminal",
+            "explain dot and dotdot in paths",
+            "single dot vs double dot linux",
+            "describe . and .. in filesystem",
+            "current and parent directory"
+        ],
+        "message": "The single dot '.' represents the current directory you are in, while the double dot '..' represents the parent directory one level up.",
+        "description": "Explains the meaning of '.' and '..' in directory paths.",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "Why do I get a 'Permission denied' error even when using an administrator account",
+            "why permission denied in linux",
+            "explain permission denied error",
+            "how to fix permission denied",
+            "permission denied even as root",
+            "why cant i access file linux",
+            "fix permission denied linux"
+        ],
+        "message": "This happens if you did not prefix the command with 'sudo' to elevate your privileges, or if you are trying to modify a file locked as read-only by the system.",
+        "description": "Explains why Permission denied occurs and when sudo may be required.",
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_system",
+        "input": [
+            "check battery status",
+            "show battery level",
+            "display battery percentage",
+            "check battery health",
+            "what is my battery percentage"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Checking battery status\" > /dev/null 2>&1 && printf \"\\r\\nResult: \\n\" && (upower -e 2>/dev/null | grep -A 5 \"battery\" || acpi -b 2>/dev/null || cat /sys/class/power_supply/BAT*/uevent 2>/dev/null | grep -E \"ENERGY|CAPACITY\" | awk -F= '{print $2}') && printf \"\"",
+                    "explanation": "Queries upower, acpi, or sysfs to retrieve and display the current battery percentage and charging status.",
+                    "goal": "Display the current battery status and power statistics",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_system",
+        "input": [
+            "what is this distro",
+            "which linux is installed",
+            "find linux and distro details",
+            "get info about distro",
+            "check linux distribution release",
+            "show os version and release info",
+            "print linux distro info from etc release files",
+            "what linux distribution am i running detail",
+            "cat release and version files in etc",
+            "get operating system name and version terminal",
+            "find linux flavor and distro details",
+            "display system release and version information",
+            "check os release details via terminal command"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Displaying distribution details\" > /dev/null 2>&1 && printf \"\\r\\n\" && cat /etc/*_ver* /etc/*-rel* 2>/dev/null && printf \"\"",
+                    "explanation": "Reads and displays the content of release and version files inside /etc to provide detailed information about the running Linux distribution.",
+                    "goal": "Display detailed Linux distribution and release information",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_usb",
+        "input": [
+            "trigger notification when usb device is plugged in",
+            "speak audio alert when usb device is attached",
+            "monitor usb ports and trigger script on plug",
+            "run action when new usb is connected udevadm",
+            "play sound or speak when usb connects to system",
+            "udev monitor usb connections and use espeak",
+            "detect usb hardware insertion and run command",
+            "alert when a usb device is inserted into computer",
+            "udevadm monitor for newly attached usb hardware",
+            "trigger audio event on usb storage plug in"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Monitoring USB ports\" > /dev/null 2>&1 && printf \"\\r\\n\" && udevadm monitor --udev --subsystem-match=usb | gawk '/add/ { system(\"termy_say \\\"USB device attached\\\" > /dev/null 2>&1\") }' && printf \"\"",
+                    "explanation": "Monitors the udev subsystem for newly attached USB devices and uses termy_say to announce the insertion aloud.",
+                    "goal": "Monitor USB insertions and trigger vocal alerts",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_system",
+        "input": [
+            "kernel modules dependency view",
+            "kernel depencendy view",
+            "minimal runtime kernel module dependency view",
+            "show which kernel modules are used by other modules",
+            "list lsmod dependencies clean format with awk",
+            "print kernel module usage tree and dependencies",
+            "find out what is using a specific linux kernel module",
+            "display kernel driver dependencies in terminal",
+            "awk format lsmod to show module dependency arrows",
+            "check kernel module cross dependencies and relations",
+            "view active kernel modules and their submodules",
+            "list loaded modules and show used by hierarchy"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Analyzing kernel module dependencies\" > /dev/null 2>&1 && printf \"\\r\\n\" && lsmod | awk 'NR>1 && $4!=\"-\" {print $1; split($4,a,\",\"); for(i in a) print \" -> used by:\", a[i]; print \"\"}' && printf \"\"",
+                    "explanation": "Parses the lsmod output using awk to identify loaded kernel modules with active dependencies, displaying them in a clean, hierarchical format.",
+                    "goal": "Display loaded kernel modules and their dependency tree",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_users",
+        "input": [
+            "list memory percentage per user",
+            "show total ram consumption grouped by linux user",
+            "find out which user is using the most memory",
+            "ps aux total memory usage aggregated by user",
+            "get top 10 users consuming most memory ram",
+            "calculate memory footprint per active system user",
+            "sort users by their memory usage percentage",
+            "print system memory distribution among users",
+            "sum up ram usage statistics for each user",
+            "find memory hogging users via ps and awk"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Analyzing memory usage per user\" > /dev/null 2>&1 && printf \"\\r\\n\" && ps aux | awk '{arr[$1]+=$4}; END {for (i in arr) {print i,arr[i]}}' | sort -hk2 | tail -10 && printf \"\"",
+                    "explanation": "Aggregates memory usage percentages from ps aux for each active user using awk, then sorts and displays the top 10 consumers.",
+                    "goal": "Summarize and sort RAM consumption by system user",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_logs",
+        "input": [
+            "display history of reboots",
+            "check system boot history using journalctl",
+            "list all past system reboots and boot times",
+            "show when the system was restarted journalctl",
+            "get a log of previous system startups",
+            "view system boot log history list",
+            "journalctl command to list all reboots",
+            "find out previous uptime sessions and boot dates",
+            "display history of system restarts and boots",
+            "list boots journalctl logs history"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Displaying system reboot history\" > /dev/null 2>&1 && printf \"\\r\\n\" && journalctl --list-boots && printf \"\"",
+                    "explanation": "Uses journalctl to query the system logs and displays a chronological list of all recorded system boots and reboots.",
+                    "goal": "List past system boots and reboot times",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_process_network_ports",
+        "input": [
+            "kill process on port",
+            "free a port",
+            "stop process using port",
+            "kill port",
+            "terminate process on port",
+            "which process is using this port"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"🔌 Port to free: \" port && pid=$(lsof -ti :\"$port\") && tput cuu 1 && if [ -n \"$pid\" ]; then termy_say \"Freeing port $port\" > /dev/null 2>&1 && printf \"\\r\\n\" && kill -9 $pid && echo -e \"✅ Killed process $pid on port \\033[1m$port\\033[22m\"; else termy_say \"No process found on port $port\" > /dev/null 2>&1 && printf \"\\r\\nNo process found on port $port\"; fi && printf \"\"",
+                    "explanation": "Prompts for a port number, identifies the listening process PID using lsof, and terminates it using kill -9.",
+                    "goal": "Terminate the process listening on a specific port",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_system",
+        "input": [
+            "watch a command",
+            "repeat a command every second",
+            "monitor command output",
+            "run command repeatedly",
+            "live command output",
+            "watch command in real time"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"⌨️  Command to watch: \" cmd && tput cuu 1 && termy_say \"Monitoring command\" > /dev/null 2>&1 && printf \"\\r\\n\" && watch -n 2 \"$cmd\" && printf \"\"",
+                    "explanation": "Prompts the user for a command and uses the watch utility to run it repeatedly every 2 seconds.",
+                    "goal": "Monitor a command output in real time",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_terminal",
+        "input": [
+            "show path entries",
+            "print PATH",
+            "list PATH directories",
+            "what is in my PATH",
+            "show my PATH variable",
+            "display PATH"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Displaying PATH entries\" > /dev/null 2>&1 && printf \"\\r\\n\" && echo \"$PATH\" | tr ':' '\\n' && printf \"\"",
+                    "explanation": "Splits the PATH environment variable by colons and prints each directory on a new line.",
+                    "goal": "List PATH directories line by line",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    }
+]

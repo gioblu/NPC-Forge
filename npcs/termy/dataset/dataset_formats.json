@@ -1,0 +1,69 @@
+[
+    {
+        "category": "format_ascii",
+        "input": [
+            "show ascii table",
+            "print ascii characters reference chart",
+            "terminal ascii hex dec converter map",
+            "check ascii control characters code",
+            "bash script to display ascii character set",
+            "quick lookup table for ascii hex values"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "cat << 'EOF' > /tmp/bascii.sh\n#!/bin/bash\necho -ne \"═══ ASCII TABLE (0-127) ═══\\r\\n\"\nprintf \"\\r%-7s %-5s %-5s | %-7s %-5s %-5s | %-7s %-5s %-5s | %-7s %-5s %-5s\\r\\n\" \"DEC\" \"HEX\" \"CHR\" \"DEC\" \"HEX\" \"CHR\" \"DEC\" \"HEX\" \"CHR\" \"DEC\" \"HEX\" \"CHR\"\nprintf \"\\r═══════════════════════════════════════════════════════════════════════════════════\\r\\n\"\ncontrol=(NUL SOH STX ETX EOT ENQ ACK BEL BS TAB LF VT FF CR SO SI DLE DC1 DC2 DC3 DC4 NAK SYN ETB CAN EM SUB ESC FS GS RS US SP)\nfor i in {0..31}; do\n  c1=${control[$i]}; h1=$(printf \"%02X\" $i)\n  i2=$((i+32)); h2=$(printf \"%02X\" $i2); c2=$(printf \"\\\\$(printf '%03o' $i2)\")\n  i3=$((i+64)); h3=$(printf \"%02X\" $i3); c3=$(printf \"\\\\$(printf '%03o' $i3)\")\n  i4=$((i+96)); h4=$(printf \"%02X\" $i4); if [ $i4 -eq 127 ]; then c4=\"DEL\"; else c4=$(printf \"\\\\$(printf '%03o' $i4)\"); fi\n  printf \"\\r%-7d %-5s %-5s | %-7d %-5s %-5s | %-7d %-5s %-5s | %-7d %-5s %-5s\\r\\n\" $i \"$h1\" \"$c1\" $i2 \"$h2\" \"$c2\" $i3 \"$h3\" \"$c3\" $i4 \"$h4\" \"$c4\"\ndone\nEOF\ntput cuu 1 && termy_say \"Displaying ASCII table\" > /dev/null 2>&1 && printf \"\\r\\n\" && bash /tmp/bascii.sh && rm -f /tmp/bascii.sh && printf \"\"",
+                    "explanation": "Generates and executes a temporary shell script that prints a formatted table of ASCII characters from 0 to 127 with their decimal and hexadecimal values.",
+                    "goal": "Display a formatted ASCII table in the terminal",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "format_base64",
+        "input": [
+            "base64 encode decode",
+            "encode to base64",
+            "decode from base64",
+            "base64 convert",
+            "base64 encode a string",
+            "base64 decode a string"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf '1) Encode\\n2) Decode\\n\\n' && read -p 'Choose (1-2): ' c && read -p 'String: ' s && tput cuu 1 && if [ \"$c\" = '1' ]; then termy_say \"Encoding string\" > /dev/null 2>&1 && printf \"\\r\\nResult: \" && echo -n \"$s\" | base64; else termy_say \"Decoding string\" > /dev/null 2>&1 && printf \"\\r\\nResult: \" && echo \"$s\" | base64 -d; fi && printf \"\"",
+                    "explanation": "Prompts the user to choose between encoding or decoding, takes the input string, and processes it using the base64 utility.",
+                    "goal": "Encode or decode strings using Base64",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "format_qr",
+        "input": [
+            "generate qr code",
+            "convert link to qr code",
+            "create qr code",
+            "make qr code"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"🔗 Text or Link for QR: \" qrtext && tput cuu 1 && if ! command -v qrencode >/dev/null 2>&1; then termy_say \"Installing QR generator\" > /dev/null 2>&1 && printf \"\\r\\n📦 Installing qrencode...\\n\" && sudo apt update -y >/dev/null 2>&1 && sudo apt install -y qrencode >/dev/null 2>&1; fi && termy_say \"Generating QR code\" > /dev/null 2>&1 && printf \"\\r\\n\" && qrencode -t UTF8 \"$qrtext\" && printf \"\"",
+                    "explanation": "Prompts for text input, guarantees the qrencode utility is present on the OS, and renders an ASCII-art style QR code directly on the console.",
+                    "goal": "Render an interactive QR code inside the terminal window",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    }
+]

@@ -1,0 +1,28 @@
+[
+    {
+        "category": "cron_backup",
+        "input": [
+            "create an automated daily cron job backup task",
+            "set up a daily backup cron job",
+            "schedule a daily backup task",
+            "automate daily backups with cron",
+            "schedule backup with cron",
+            "automate daily backup",
+            "set up cron backup",
+            "cron job for backup",
+            "schedule daily cron task"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the folder to backup\" > /dev/null 2>&1 && printf \"\\r\\n📁 Folder to backup: \" && read -r bdir && if [ -d \"$bdir\" ]; then termy_say \"Please enter the backup destination folder\" > /dev/null 2>&1 && printf \"Backup destination folder: \" && read -r destdir && if [ -d \"$destdir\" ]; then CURRENT_CRON=$(crontab -l 2>/dev/null); printf \"%s\\n0 2 * * * tar -czf %s/backup_\\$(date +%%F).tar.gz %s\\n\" \"$CURRENT_CRON\" \"$destdir\" \"$bdir\" | crontab - && printf \"\\nCron job \\033[1mCREATED\\033[22m. Backup runs daily at 2:00 AM.\\n\" && termy_say \"Cron job created successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Destination directory does not exist.\\n\" && termy_say \"Destination directory not found\" > /dev/null 2>&1; fi; else printf \"\\n⛔ Source directory does not exist.\\n\" && termy_say \"Source directory not found\" > /dev/null 2>&1; fi",
+                    "explanation": "Sets up a daily cron job to back up a specified folder to a destination folder at 2:00 AM.",
+                    "goal": "Set up a daily backup cron job",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    }
+]

@@ -1,0 +1,61 @@
+<!-- ============================================================
+     THEME · GALLERY — contact sheet
+     Placeholders: {{TITLE}} {{DESCRIPTION}} {{COPYRIGHT}} {{ADDRESS}}
+     {{EMAIL}} {{SOCIALS}} {{STYLES}} {{SCRIPTS}} {{YEAR}} {{THEME}}
+     Replace each <span class="ph"> with <img class="ph" src="…" alt="…">
+     — aspect ratios & tones live in gallery.css.
+     ============================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="TERMy · {{THEME}}">
+    <title>{{TITLE}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    {{STYLES}}
+</head>
+<body>
+    <main class="wrap">
+        <header class="masthead">
+            <h1 data-reveal>{{TITLE}}</h1>
+            <div class="meta" data-reveal>film · 2014–{{YEAR}}<br>berlin — palermo</div>
+        </header>
+
+        <p class="statement" data-reveal>{{DESCRIPTION}}</p>
+
+        <div class="chips" data-reveal>
+            <span class="on">All</span><span>Low light</span><span>Transit</span><span>Portraits</span><span>Coast</span>
+        </div>
+
+        <section class="grid">
+            <figure class="frame" data-reveal><span class="ph"></span>
+                <figcaption class="cap"><span>U8, 03:12</span><b>01</b></figcaption></figure>
+            <figure class="frame" data-reveal><span class="ph"></span>
+                <figcaption class="cap"><span>Harbour fog, Palermo</span><b>02</b></figcaption></figure>
+            <figure class="frame" data-reveal><span class="ph"></span>
+                <figcaption class="cap"><span>Night market, Taipei</span><b>03</b></figcaption></figure>
+            <figure class="frame" data-reveal><span class="ph"></span>
+                <figcaption class="cap"><span>Window seat, delayed</span><b>04</b></figcaption></figure>
+            <figure class="frame" data-reveal><span class="ph"></span>
+                <figcaption class="cap"><span>Boxer, round nine</span><b>05</b></figcaption></figure>
+            <figure class="frame" data-reveal><span class="ph"></span>
+                <figcaption class="cap"><span>Tide line, Ostia</span><b>06</b></figcaption></figure>
+            <figure class="frame" data-reveal><span class="ph"></span>
+                <figcaption class="cap"><span>Backstage, 22:40</span><b>07</b></figcaption></figure>
+            <figure class="frame" data-reveal><span class="ph"></span>
+                <figcaption class="cap"><span>Last tram home</span><b>08</b></figcaption></figure>
+        </section>
+    </main>
+
+    <footer class="site wrap">
+        <div class="f-copy">{{COPYRIGHT}}</div>
+        <address class="f-addr">{{ADDRESS}}</address>
+        <nav class="f-links" aria-label="Contact">{{SOCIALS}}{{EMAIL}}</nav>
+    </footer>
+
+    {{SCRIPTS}}
+</body>
+</html>

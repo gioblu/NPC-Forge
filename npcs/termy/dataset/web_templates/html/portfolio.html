@@ -1,0 +1,81 @@
+<!-- ============================================================
+     THEME · PORTFOLIO — editorial engineer
+     Placeholders: {{TITLE}} {{DESCRIPTION}} {{COPYRIGHT}} {{ADDRESS}}
+     {{EMAIL}} {{SOCIALS}} {{STYLES}} {{SCRIPTS}} {{YEAR}} {{THEME}}
+     Note: {{EMAIL}} appears twice (contact section + footer) — the
+     generator substitutes every occurrence.
+     ============================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="TERMy · {{THEME}}">
+    <title>{{TITLE}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,800;1,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    {{STYLES}}
+</head>
+<body>
+    <header class="topbar wrap">
+        <div class="monogram">MV.</div>
+        <span class="status"><i></i>Open to staff roles</span>
+    </header>
+
+    <main class="wrap">
+        <section class="hero">
+            <p class="role" data-reveal>Mara Voss — Systems &amp; Full-Stack Engineer</p>
+            <!-- <em> gives the title its amber highlighter swipe -->
+            <h1 data-reveal><em>{{TITLE}}</em></h1>
+        </section>
+
+        <section class="intro">
+            <div data-reveal>
+                <p>{{DESCRIPTION}}</p>
+                <p>Currently: staff engineer at <b>Ledgerline</b>, where I own the
+                   streaming platform moving <b>2M+ events/sec</b>.</p>
+            </div>
+            <!-- Skill widths & stagger live in portfolio.css (nth-child) -->
+            <div class="skills" data-reveal>
+                <div class="skill"><span>Go</span><span class="bar"><i></i></span><span>92%</span></div>
+                <div class="skill"><span>Rust</span><span class="bar"><i></i></span><span>84%</span></div>
+                <div class="skill"><span>TypeScript</span><span class="bar"><i></i></span><span>88%</span></div>
+                <div class="skill"><span>Postgres</span><span class="bar"><i></i></span><span>90%</span></div>
+            </div>
+        </section>
+
+        <h2 class="section" data-reveal>Selected work</h2>
+        <section class="work">
+            <a href="#" data-reveal>
+                <span class="n">01</span>
+                <div><h3>Ledgerline</h3><p>Real-time analytics engine · Go, Kafka, ClickHouse · 2M events/sec at p99 &lt; 40 ms</p></div>
+                <span class="go">→</span>
+            </a>
+            <a href="#" data-reveal>
+                <span class="n">02</span>
+                <div><h3>Passage</h3><p>Zero-knowledge auth protocol · Rust, WebAssembly · 10k concurrent sessions</p></div>
+                <span class="go">→</span>
+            </a>
+            <a href="#" data-reveal>
+                <span class="n">03</span>
+                <div><h3>Driftwood</h3><p>Edge function runtime · C++, V8 isolates · cold starts under 5 ms</p></div>
+                <span class="go">→</span>
+            </a>
+        </section>
+
+        <section class="contact" data-reveal>
+            <p>Have a hard problem?</p>
+            {{EMAIL}}
+        </section>
+    </main>
+
+    <footer class="site wrap">
+        <div class="f-copy">{{COPYRIGHT}}</div>
+        <address class="f-addr">{{ADDRESS}}</address>
+        <nav class="f-links" aria-label="Contact">{{SOCIALS}}{{EMAIL}}</nav>
+    </footer>
+
+    {{SCRIPTS}}
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!-- ============================================================
+     THEME · PODCAST — the long wave
+     Placeholders: {{TITLE}} {{DESCRIPTION}} {{COPYRIGHT}} {{ADDRESS}}
+     {{EMAIL}} {{SOCIALS}} {{STYLES}} {{SCRIPTS}} {{YEAR}} {{THEME}}
+     [data-elapsed] is ticked by podcast.js; add episodes by copying
+     an .ep block.
+     ============================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="TERMy · {{THEME}}">
+    <title>{{TITLE}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@500;700;800&family=Albert+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    {{STYLES}}
+</head>
+<body>
+    <header class="topbar wrap">
+        <div class="logo">THE LONG<b>WAVE</b></div>
+        <span class="onair"><i></i>ON AIR · THURSDAYS 20:00</span>
+    </header>
+
+    <main class="wrap">
+        <section class="masthead">
+            <p class="kicker" data-reveal>A {{TITLE}} production</p>
+            <h1 data-reveal>{{TITLE}}</h1>
+            <p class="about" data-reveal>{{DESCRIPTION}}</p>
+            <p class="stats" data-reveal><b>142</b> episodes · <b>38k</b> listeners · new every <b>Thursday</b></p>
+        </section>
+
+        <section class="deck" data-reveal>
+            <div class="lbl">NOW PLAYING · EP 142</div>
+            <h2>The Physics of Sleep</h2>
+            <p class="guest">with Dr. Amara Okafor — chronobiologist, University of Leiden</p>
+            <div class="wave" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div class="time"><span><b data-elapsed>34:12</b> / 58:40</span><span>recorded live · no edits</span></div>
+        </section>
+
+        <h3.section></h3.section>
+        <h3 class="section" data-reveal>Recent episodes</h3>
+        <section>
+            <div class="ep" data-reveal>
+                <span class="play">▶</span>
+                <div class="title">EP 141 — The Grid Never Sleeps<small>with Jonas Feld — power systems engineer</small></div>
+                <time>JUL 24</time><span class="dur">54:03</span>
+            </div>
+            <div class="ep" data-reveal>
+                <span class="play">▶</span>
+                <div class="title">EP 140 — Deep Sea Cables<small>with Dr. Lea Brandt — marine infrastructure</small></div>
+                <time>JUL 17</time><span class="dur">61:27</span>
+            </div>
+            <div class="ep" data-reveal>
+                <span class="play">▶</span>
+                <div class="title">EP 139 — The Last Night Shift<small>with Marek Olszewski — emergency medicine</small></div>
+                <time>JUL 10</time><span class="dur">57:48</span>
+            </div>
+            <div class="ep" data-reveal>
+                <span class="play">▶</span>
+                <div class="title">EP 138 — Silent Films, Loud Rooms<small>with Ida Kaplan — film restoration</small></div>
+                <time>JUL 03</time><span class="dur">49:55</span>
+            </div>
+        </section>
+
+        <div class="subscribe" data-reveal>
+            <span>Listen on</span>
+            <a href="#">RSS</a><a href="#">Spotify</a><a href="#">Apple</a><a href="#">Pocket Casts</a>
+        </div>
+    </main>
+
+    <footer class="site wrap">
+        <div class="f-copy">{{COPYRIGHT}}</div>
+        <address class="f-addr">{{ADDRESS}}</address>
+        <nav class="f-links" aria-label="Contact">{{SOCIALS}}{{EMAIL}}</nav>
+    </footer>
+
+    {{SCRIPTS}}
+</body>
+</html>

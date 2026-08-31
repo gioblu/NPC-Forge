@@ -1,0 +1,87 @@
+<!-- ============================================================
+     THEME · BARBERSHOP — fade & sons
+     Placeholders: {{TITLE}} {{DESCRIPTION}} {{COPYRIGHT}} {{ADDRESS}}
+     {{EMAIL}} {{SOCIALS}} {{STYLES}} {{SCRIPTS}} {{YEAR}} {{THEME}}
+     The animated pole strip at the top is pure css (.pole).
+     ============================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="TERMy · {{THEME}}">
+    <title>{{TITLE}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    {{STYLES}}
+</head>
+<body>
+    <div class="pole" aria-hidden="true"></div>
+
+    <header class="topbar wrap">
+        <span class="est">Est. 1962 · three chairs deep</span>
+        <span class="walkin">Walk-ins today until 19:00</span>
+    </header>
+
+    <main class="wrap">
+        <section class="hero">
+            <h1 data-reveal>{{TITLE}}</h1>
+            <p class="pitch" data-reveal>{{DESCRIPTION}}</p>
+            <div class="chips" data-reveal>
+                <span>Hot towels</span><span>Straight razor</span><span>Kids welcome Saturdays</span>
+            </div>
+        </section>
+
+        <h2 data-reveal>The menu</h2>
+        <section class="services">
+            <div data-reveal>
+                <div class="service"><span class="sname">Classic cut</span><span class="dots"></span><span class="sprice">€28</span></div>
+                <p class="sdesc">Scissor and clipper, finished with a hot towel.</p>
+            </div>
+            <div data-reveal>
+                <div class="service"><span class="sname">Cut &amp; beard</span><span class="dots"></span><span class="sprice">€42</span></div>
+                <p class="sdesc">Full service — line-up, razor edges, oil finish.</p>
+            </div>
+            <div data-reveal>
+                <div class="service"><span class="sname">Hot towel shave</span><span class="dots"></span><span class="sprice">€30</span></div>
+                <p class="sdesc">Straight razor, two lathers, no shortcuts.</p>
+            </div>
+            <div data-reveal>
+                <div class="service"><span class="sname">The 1962</span><span class="dots"></span><span class="sprice">€55</span></div>
+                <p class="sdesc">Cut, shave, head massage, and a coffee while it settles.</p>
+            </div>
+        </section>
+
+        <h2 data-reveal>On the floor</h2>
+        <section class="chairs">
+            <div class="chair" data-reveal>
+                <div><div class="name">Enzo Marchetti</div><div class="spec">Fades &amp; classic tapers · 22 years</div></div>
+                <span class="no">Chair 01</span><span class="status free"><i></i>Free now</span>
+            </div>
+            <div class="chair" data-reveal>
+                <div><div class="name">Sam Okafor</div><div class="spec">Beard sculpting &amp; razor work · 11 years</div></div>
+                <span class="no">Chair 02</span><span class="status busy"><i></i>Busy · 20 min</span>
+            </div>
+            <div class="chair" data-reveal>
+                <div><div class="name">Jonas Feld</div><div class="spec">Kids' cuts &amp; first shaves · 6 years</div></div>
+                <span class="no">Chair 03</span><span class="status free"><i></i>Free now</span>
+            </div>
+        </section>
+
+        <section class="hours" data-reveal>
+            <div><b>Mon — Fri</b><span>09:00 – 19:00</span></div>
+            <div><b>Saturday</b><span>08:00 – 17:00</span></div>
+            <div><b>Sunday</b><span>Closed · razor rests</span></div>
+        </section>
+    </main>
+
+    <footer class="site wrap">
+        <div class="f-copy">{{COPYRIGHT}}</div>
+        <address class="f-addr">{{ADDRESS}}</address>
+        <nav class="f-links" aria-label="Contact">{{SOCIALS}}{{EMAIL}}</nav>
+    </footer>
+
+    {{SCRIPTS}}
+</body>
+</html>

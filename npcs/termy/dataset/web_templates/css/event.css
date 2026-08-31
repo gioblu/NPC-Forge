@@ -1,0 +1,85 @@
+/* ============================================================
+   THEME · EVENT — conference poster
+   Tokens: shared contract in _base.css.
+   The countdown element is driven by _core.js ([data-countdown]).
+   ============================================================ */
+
+/* ---- 1 · design tokens ---- */
+:root {
+    --color-background: #f1f2ec;
+    --color-surface: #ffffff;
+    --color-text-primary: #101010;
+    --color-text-secondary: #5f6058;
+    --color-accent-primary: #1b3bff;      /* electric blue */
+    --color-accent-secondary: #ffd400;    /* signal yellow */
+    --color-accent-tertiary: #5f6058;
+    --color-border: #d9dad0;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+}
+
+/* ---- 2 · page: graph-paper grid ---- */
+body {
+    font-family: var(--font-body); color: var(--color-text-primary);
+    background:
+        linear-gradient(var(--color-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-border) 1px, transparent 1px),
+        var(--color-background);
+    background-size: 52px 52px, 52px 52px, auto;
+}
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+.topbar { display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 0; font-weight: 700; font-size: .85rem; }
+.topbar .logo { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: .04em; }
+.topbar .logo b { color: var(--color-accent-primary); }
+.topbar a.reg { background: var(--color-text-primary); color: #fff; text-decoration: none; padding: .6rem 1.3rem; transition: .2s; }
+.topbar a.reg:hover { background: var(--color-accent-primary); }
+
+/* ---- 3 · poster hero + tilted countdown card ---- */
+.hero { display: grid; grid-template-columns: 1.15fr .85fr; gap: 3rem; align-items: end; padding: 4.5rem 0 3rem; }
+h1 { font-family: var(--font-display); font-size: clamp(4rem, 11vw, 8.5rem); line-height: .88; text-transform: uppercase; }
+h1 .box { background: var(--color-accent-secondary); padding: 0 .15em; display: inline-block; transform: rotate(-1.5deg); }
+.hero .when { font-weight: 700; font-size: 1.1rem; margin-top: 1.6rem; }
+.hero .when b { color: var(--color-accent-primary); }
+.hero .where { color: var(--color-text-secondary); margin-top: .4rem; max-width: 44ch; }
+.count-card { background: var(--color-text-primary); color: #fff; padding: 2rem; transform: rotate(1.2deg); transition: .3s; }
+.count-card:hover { transform: rotate(0); }
+.count-card .lbl { font-size: .7rem; letter-spacing: .26em; text-transform: uppercase; color: var(--color-accent-secondary); margin-bottom: 1rem; }
+.count { font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 3rem); letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+.count-card .sub { color: #9a9b93; font-size: .8rem; margin-top: .8rem; }
+
+/* ---- 4 · ticker ---- */
+.ticker { background: var(--color-accent-primary); color: #fff; overflow: hidden; }
+.ticker .track { display: flex; width: max-content; animation: marquee 20s linear infinite; }
+.ticker span { font-family: var(--font-display); font-size: 1.05rem; letter-spacing: .16em; padding: .7rem 0; white-space: nowrap; }
+.ticker b { color: var(--color-accent-secondary); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ---- 5 · schedule ---- */
+.program { padding: 3.6rem 0; }
+.program h2 { font-family: var(--font-display); font-size: 2.4rem; text-transform: uppercase; margin-bottom: 1.6rem; }
+.program h2::after { content: ""; display: block; width: 64px; height: 5px; background: var(--color-accent-secondary); margin-top: .4rem; }
+.slot {
+    display: grid; grid-template-columns: 120px 1fr auto; gap: 1.8rem; align-items: center;
+    padding: 1.3rem .8rem; border-top: 2px solid var(--color-text-primary); transition: .25s;
+}
+.slot:last-child { border-bottom: 2px solid var(--color-text-primary); }
+.slot time { font-family: var(--font-display); font-size: 1.3rem; color: var(--color-accent-primary); }
+.slot h3 { font-size: 1.1rem; margin-bottom: .2rem; }
+.slot p { color: var(--color-text-secondary); font-size: .88rem; }
+.slot .spk { display: flex; align-items: center; gap: .6rem; font-size: .8rem; font-weight: 700; }
+.slot .spk i {
+    width: 34px; height: 34px; border-radius: 50%; background: var(--color-accent-secondary);
+    border: 2px solid var(--color-text-primary); display: grid; place-items: center;
+    font-style: normal; font-family: var(--font-display);
+}
+.slot:hover { background: var(--color-surface); padding-left: 1.4rem; }
+
+/* ---- 6 · footer ---- */
+footer.site { padding: 2rem 0 3rem; color: var(--color-text-secondary); font-size: .82rem; }
+footer.site a { color: var(--color-accent-primary); font-weight: 700; text-decoration: none; }
+
+@media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; align-items: start; }
+    .slot { grid-template-columns: 90px 1fr; }
+    .slot .spk { display: none; }
+}

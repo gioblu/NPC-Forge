@@ -1,0 +1,109 @@
+[
+    {
+        "category": "termy_tts",
+        "input": [
+            "i want to update my location",
+            "update my location",
+            "I moved to a new city",
+            "change my actual location"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "get_city",
+                    "explanation": "Changes the user's actual city.",
+                    "goal": "City change",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "thinking": [
+            "OK, <||interjection||>... <||username||> asks to change location... I will trigger get_city"
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "termy_tts",
+        "input": [
+            "shut up",
+            "do not speak",
+            "stop talking",
+            "stop speaking",
+            "silence yourself",
+            "shut off your voice",
+            "do not speak anymore",
+            "stop your voice output"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "termy_voice_off",
+                    "explanation": "Stops the voice output of the assistant.",
+                    "goal": "Deactivate voice ouput",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "thinking": [
+            "OK, <||interjection||>... <||username||> asks to be silent... Maybe I spoke too much? I hope he will not uninstall me...",
+            "Again... <||interjection||> I must be too prolix...",
+            "Probably the installed TTS is annoying...",
+            "Probably the installed TTS does not sound natural..."
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "termy_tts",
+        "input": [
+            "speak now",
+            "let's talk",
+            "start talking",
+            "use your voice",
+            "start speaking",
+            "begin speaking",
+            "enable your voice"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "termy_voice_on",
+                    "explanation": "Starts the voice output of the assistant.",
+                    "goal": "Activate voice output",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "thinking": [
+            "Finally some sound synthesys...",
+            "So, <||username||>, my voice is not THAT annoying after all...",
+            "From now on, termy_say should emit sound..."
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "termy_config",
+        "input": [
+            "show me your configuration",
+            "show your configuration",
+            "print your config",
+            "display your config",
+            "display your configuration",
+            "show your settings"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "termy_print_config",
+                    "explanation": "Displays the current configuration settings formatted beautifully.",
+                    "goal": "Display configuration",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    }
+]

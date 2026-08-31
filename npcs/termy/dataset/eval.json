@@ -1,0 +1,1148 @@
+[
+    {
+        "input": [
+            "i need to go out soon do i need an umbrella",
+            "is it too hot for a golf",
+            "is it too cold for a golf",
+            "is it too cold for a walk"
+
+        ],
+        "description": "Retrieves the current weather for a specific city.",
+        "output": "get_weather",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "tell me a famouse phrase",
+            "tell me a quote from a famous person"
+        ],
+        "description": "Retrieves a random inspirational quote from the ZenQuotes API.",
+        "output": "get_quote",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is happening in the world?",
+            "is there any recent news",
+            "what are the main news today"
+        ],
+        "description": "Retrieves the latest news articles from Noozra.",
+        "output": "get_news",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "cheer me up with something witty",
+            "do you know any good puns",
+            "i could really use a comedic break",
+            "tell me a side-splitting story",
+            "crack a joke for me",
+            "send me a hilarious one-liner",
+            "i'm feeling down give me a punchline",
+            "entertain me with a gag",
+            "tell me something comical",
+            "do you have any amusing riddles",
+            "give me something to smile about",
+            "make me chuckle please",
+            "got any humorous remarks",
+            "i want to hear a silly joke",
+            "can you share a funny anecdote",
+            "tell me a clever joke"
+        ],
+        "description": "Retrieves a random joke from the Official Joke API.",
+        "output": "get_joke",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "current state of the moon",
+            "is there a crescent moon tonight",
+            "lunar cycle status",
+            "check the current lunar illumination",
+            "what fraction of the moon is visible",
+            "is it going to be a new moon",
+            "give me the current celestial lunar status",
+            "how is the moon tracking today",
+            "view tonight's moon shape",
+            "lunar calendar info for today",
+            "is the moon waxing or waning",
+            "can you look up the current lunar phase",
+            "show me the moon details for tonight",
+            "what's the moon looking like right now",
+            "check if the moon is full or not",
+            "provide data on the current lunar visibility",
+            "give me the current moon stats"
+        ],
+        "description": "Retrieves the current moon phase from the Moon Phase API.",
+        "output": "get_moon_phase",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "are my linux services running fine",
+            "check the state of background daemons",
+            "is the system unit active",
+            "list the current service states",
+            "get a report on active processes control",
+            "verify background tasks health",
+            "check if system daemons are alive",
+            "inspect the status of systemd units",
+            "show me which services are currently active",
+            "display system control manager status"
+        ],
+        "description": "Checks the status of system services.",
+        "output": "systemctl --user status || systemctl status",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "get a new apt library",
+            "download tool via command line",
+            "setup a new binary package",
+            "fetch and deploy a package dependency",
+            "run apt install for a program",
+            "i want to download an external dependency",
+            "add a software tool to my system",
+            "get a command line package installed",
+            "i need to fetch a new apt package",
+            "install an application from repository"
+        ],
+        "description": "Installs a package using apt-get.",
+        "output": "read -p \"Enter package name: \" PKG && sudo apt-get update && sudo apt-get install -y \"$PKG\"",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "mute the audio output",
+            "stop talking to me",
+            "disable text to speech",
+            "turn off the speaker",
+            "don't say anything out loud",
+            "go into silent mode",
+            "stop vocalizing responses",
+            "cut the audio narration"
+        ],
+        "description": "Stops the voice output of the assistant.",
+        "output": "termy_voice_off",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "turn on text to speech",
+            "enable vocal output",
+            "talk out loud please",
+            "unmute your audio answers",
+            "activate assistant voice",
+            "read the responses out loud",
+            "start using acoustic feedback"
+        ],
+        "description": "Starts the voice output of the assistant.",
+        "output": "termy_voice_on",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "wipe out unused folders",
+            "purge directories with zero files",
+            "clear out blank directories recursively",
+            "erase all vacant subfolders",
+            "find and drop empty folders",
+            "remove folders that contain nothing"
+        ],
+        "description": "Deletes all empty directories in the current directory and its subdirectories.",
+        "output": "find . -type d -empty -delete",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "who has active shell sessions",
+            "list current tty connections",
+            "check who is connected to the server",
+            "show active system profiles right now",
+            "who is currently on this machine",
+            "display logged profiles",
+            "get list of terminal users",
+            "check current server occupants",
+            "show people using the terminal",
+            "print live session logins"
+        ],
+        "description": "Displays information about currently logged-in users.",
+        "output": "w",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "who logged in recently",
+            "show audit trail of past logons",
+            "fetch previous user connection logs",
+            "show historical login actions",
+            "list the latest successful logons",
+            "print the session access log history",
+            "check who accessed the machine lately",
+            "display authentication history list",
+            "get a list of previous connection timestamps"
+        ],
+        "description": "Shows the last 10 login sessions.",
+        "output": "last -n 10",
+        "permission": "yolo"
+    },
+        {
+        "input": [
+            "purge a binary program",
+            "wipe an installed apt package",
+            "uninstall an external library",
+            "remove a software binary from bash",
+            "erase an application and its dependencies",
+            "get rid of a specific tool",
+            "i want to wipe a package from my computer",
+            "uninstall a command line app",
+            "clean a program setup using apt",
+            "drop a package from system storage"
+        ],
+        "description": "Removes a package using apt-get.",
+        "output": "read -p \"Enter package name: \" PKG && sudo apt-get remove \"$PKG\" -y",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "fetch the newest linux distribution updates",
+            "run full system patch upgrades",
+            "get latest software updates from apt repos",
+            "bring all applications to the current version",
+            "check and install system security enhancements",
+            "refresh and apply all machine updates",
+            "i want to download the newest os patches",
+            "upgrade core system dependencies",
+            "run a terminal system distribution upgrade",
+            "pull newest package versions",
+            "keep my system up to date with apt"
+        ],
+        "description": "Updates and upgrades all packages on the system.",
+        "output": "sudo apt update && sudo apt upgrade -y",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "which codebases have the highest stars",
+            "get a list of famous github code bases",
+            "show trends on github open source",
+            "display world-class projects on github",
+            "what are the highest rated source code repositories",
+            "fetch the elite 10 repositories on github",
+            "which development projects have unmatched stars",
+            "give me a breakdown of massive github stars",
+            "show highly ranked open source products",
+            "find the absolute biggest github repos by popularity"
+        ],
+        "description": "Retrieves the top 10 most starred GitHub repositories.",
+        "output": "curl -s 'https://api.github.com/search/repositories?q=stars:%3E100000&sort=stars&order=desc&per_page=10' | jq -r '.items[] | \"⭐ \\(.stargazers_count) stars | \\(.name) | \\(.description // \"No description\")\"'",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "any recent seismic activity reported",
+            "check for global tremor warnings",
+            "where did the earth shake today",
+            "fetch usgs tectonic plates activity logs",
+            "are there any active earthquake notifications right now",
+            "get a report on the latest major tremors",
+            "show epicenters and magnitude logs",
+            "tell me if an earthquake just occurred"
+        ],
+        "description": "Retrieves the latest earthquake data from the USGS Earthquake API.",
+        "output": "curl -s 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson' | jq -r '.features[0:3][] | \"Magnitude: \\(.properties.mag) | Location: \\(.properties.place) | Time: \\(.properties.time | todate)\"'",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is the daily astronomy image from nasa",
+            "fetch nasa's space photo for today",
+            "i want to see the cosmic picture selection",
+            "get the daily deep space photograph description",
+            "read about today's featured nebula or galaxy shot",
+            "show me astronomical media logs",
+            "pull up the cosmic background image from nasa",
+            "what universe object is featured today on apod",
+            "fetch details of the current interstellar snapshot",
+            "display astronomy snapshot curated by nasa",
+            "show the latest galaxy snapshot from space",
+            "give me the description of today's deep space image"
+        ],
+        "description": "Retrieves the Astronomy Picture of the Day (APOD) from NASA's API.",
+        "output": "echo -e \"🌌 NASA APOD: \" && curl -s 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY' | jq -r '\"\\u001b[1m\\(.title)\\u001b[22m\\n\\(.explanation | sub(\"\\\\s+\"; \" \"; \"g\") | .[0:300])...\\n\\nImage URL: \\(.url)\"'",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "where is the space station orbiting right now",
+            "find the exact orbital path coordinates of the iss",
+            "is the space station flying over my country",
+            "get live geo telemetry for the international space station",
+            "which city is directly below the space station",
+            "calculate the current position of the orbital laboratory",
+            "give me the live location of the floating space outpost"
+        ],
+        "description": "Retrieves the current location of the International Space Station (ISS) and its corresponding city.",
+        "output": "curl -s http://api.open-notify.org/iss-now.json | jq -r '.iss_position | \"ISS: \\(.latitude), \\(.longitude)\"' | xargs -I {} sh -c 'lat=$(echo \"{}\" | cut -d: -f2 | cut -d, -f1); lon=$(echo \"{}\" | cut -d, -f2); curl -s \"https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}\" | jq -r \".address.city // .address.town // .address.county // .address.state // \\\"Location Unknown\\\"\"'",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "what is the current valuation of bitcoin",
+            "how much fiat cash is 1 btc worth",
+            "fetch live market rates for crypto ticker btc",
+            "is bitcoin crashing or rising right now",
+            "give me the market spot price for digital gold",
+            "how many dollars for a single bitcoin",
+            "pull up the latest blockchain asset valuation for btc",
+            "what is the exchange rate for bitcoin in usd",
+            "check how much money bitcoin is trading for"
+        ],
+        "description": "Retrieves the current price of Bitcoin (BTC) in USD.",
+        "output": "echo -n \"BTC: \\$\"; curl -s https://cryptoprices.cc/BTC | cut -d'.' -f1",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "how is the ethereum market trading today",
+            "give me the actual value of an ether coin",
+            "check the live market value for eth ticker",
+            "what is the current pricing data for smart contract token",
+            "get the financial cost of 1 ethereum in fiat",
+            "how much do i need to invest for one eth right now",
+            "display the digital currency value of ethereum",
+            "is eth up or down today",
+            "pull the spot price of ethereum from the API"
+        ],
+        "description": "Retrieves the current price of Ethereum (ETH) in USD.",
+        "output": "echo -n \"ETH: \\$\"; curl -s https://cryptoprices.cc/ETH | cut -d'.' -f1",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is the current value of the doge meme coin",
+            "is dogecoin hitting new numbers today",
+            "how much cents is one single dogecoin worth",
+            "check the crypto charts for the shiba inu token price",
+            "give me live investment data for doge",
+            "what is the trading price for dogecoin asset class",
+            "show the currency valuation for doge on the marketplace"
+        ],
+        "description": "Retrieves the current price of Dogecoin (DOGE) in USD.",
+        "output": "echo -n \"DOGE: \\$\"; curl -s https://cryptoprices.cc/DOGE | cut -d'.' -f1",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "give me the exact clock hours and minutes",
+            "what's the terminal clock showing",
+            "tell me the hour of the day",
+            "is it past midnight or afternoon according to the system",
+            "what precise time is recorded on this computer",
+            "can you display the current wall clock time"
+        ],
+        "description": "Retrieves the current system time.",
+        "output": "date +%T",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "which day of the week is it on the system calendar",
+            "show me the calendar day month and year today",
+            "what's today's full date record",
+            "print the current fiscal calendar date",
+            "tell me what day we are in today",
+            "display the operational system timestamp date"
+        ],
+        "description": "Retrieves the current system date.",
+        "output": "date",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "force a cold hardware cycle on this computer",
+            "shut down and boot back up immediately",
+            "perform a machine reload via command line",
+            "i want to perform a warm terminal reset",
+            "initiate a complete os system reboot process",
+            "trigger a computer restart sequence"
+        ],
+        "description": "Restarts the computer.",
+        "output": "reboot",
+        "permission": "yolo"
+    },    {
+        "input": [
+            "ascend to the higher directory branch",
+            "move out towards the parent node",
+            "return to the preceding level",
+            "shift path up by one tier",
+            "step outside of this local folder path",
+            "leave the current subtree location",
+            "go up the file system tree"
+        ],
+        "description": "Navigates to the parent directory.",
+        "output": "cd ..",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "return straight to root user files",
+            "open the master user directory space",
+            "teleport back to user landing path",
+            "jump to the personal root folder profile",
+            "take me back to the default initial workspace"
+        ],
+        "description": "Navigates to the user's home directory.",
+        "output": "cd ~",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "where am i located inside the terminal right now",
+            "get absolute active file pathway log",
+            "identify current storage node path",
+            "reveal what directory tree is active",
+            "fetch working location breadcrumbs"
+        ],
+        "description": "Displays the current working directory.",
+        "output": "pwd",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what assets are inside this directory node",
+            "scan folder for local files and formats",
+            "print structural data contents of the active tree",
+            "view all items including hidden metadata configurations",
+            "run a quick audit of files present inside here"
+        ],
+        "description": "Lists the files in the current directory.",
+        "output": "ls -lah",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "wipe historical stdout display",
+            "purge visual logging stack from screen",
+            "freshen up terminal view logs",
+            "blank out terminal canvas surface",
+            "flush standard output terminal view entirely"
+        ],
+        "description": "Clears the terminal screen.",
+        "output": "clear",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "terminate bash interactive terminal thread",
+            "shut down secure shell link connection",
+            "kill live login session pipeline",
+            "drop the active shell socket line",
+            "close bash session now"
+        ],
+        "description": "Logs out of the current session.",
+        "output": "exit",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "identify active owner account profile",
+            "which profile matches this session token id",
+            "reveal system identity privileges operating right now",
+            "what account name is running this console terminal",
+            "print standard user alias credentials"
+        ],
+        "description": "Displays the current logged-in user.",
+        "output": "echo -e \"👤 Current user: \" && whoami",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "fetch past execution buffer lines",
+            "which instructions did i run on this machine earlier",
+            "audit old command prompt entries",
+            "dump standard command lines registry database",
+            "extract historical syntax logs"
+        ],
+        "description": "Displays the command history.",
+        "output": "show_history",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "how long since the machine initial boot phase",
+            "check server execution life runtime clock",
+            "operational timestamp since last system restart",
+            "reveal persistent power-on durations",
+            "get data metric on uninterrupted system life"
+        ],
+        "description": "Displays the system uptime.",
+        "output": "echo -e \"⏱️ Uptime: \" && uptime",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "reveal system core os infrastructure build",
+            "what linux distribution kernel module is active",
+            "get architectural specifications of operating system",
+            "dump release details of core operating engine",
+            "fetch kernel framework compilation metadata parameters"
+        ],
+        "description": "Displays the kernel information.",
+        "output": "echo -e \"💻 Kernel info: \" && uname -a",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "inspect available blocks metric on structural volumes",
+            "any warnings regarding full storage array clusters",
+            "how many gigabytes are left across system points",
+            "list dynamic mount point sizes and allocations",
+            "check block level hard drive constraints"
+        ],
+        "description": "Displays the disk usage.",
+        "output": "echo -e \"💾 Disk usage: \" && df -h",
+        "permission": "yolo"
+    },    {
+        "input": [
+            "test global packet routing capabilities",
+            "verify remote web socket ping response",
+            "can this workstation resolve outside hostnames",
+            "check active gateway connection to global web",
+            "is the internet pipe transmitting packets safely"
+        ],
+        "description": "Checks if the system is connected to the internet.",
+        "output": "check_internet_status",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "which international borders am i inside of",
+            "lookup geographical origin data from ip",
+            "what is the territorial code for my network",
+            "fetch sovereign country name of this setup",
+            "where on the world map is this device right now"
+        ],
+        "description": "Retrieves the current country based on the public IP address.",
+        "output": "get_country",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "print system localized delta hours standard",
+            "what is the area time offset parameter",
+            "display astronomical region mapping for scheduling",
+            "which geographical zone controls my desktop clock",
+            "show regional time standard context metadata"
+        ],
+        "description": "Displays the current timezone of the system.",
+        "output": "get_timezone",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what address does the outer internet see for me",
+            "fetch external dynamic wan network identifier",
+            "reveal public facing network gateway interface entry",
+            "what identifier do external servers read from my machine",
+            "show external ip tracking index"
+        ],
+        "description": "Retrieves the public IP address of the system.",
+        "output": "get_public_ip",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what computer base distribution flavor is installed",
+            "display software architecture and platform metadata",
+            "dump operating environment parameters",
+            "show general structural layout of this platform",
+            "print basic system shell platform properties"
+        ],
+        "description": "Displays the operating system information.",
+        "output": "echo -e \"💻 OS info: \" && uname -srm",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "check current heap dynamic allocation metrics",
+            "is cache swapping memory sectors right now",
+            "how heavy is the payload burden on ram blocks",
+            "how much physical memory footprint is unoccupied",
+            "display hardware dynamic memory consumption values"
+        ],
+        "description": "Displays the memory usage of the system.",
+        "output": "echo -e \"🧠 Memory usage: \" && free -h",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "enumerate operational physical loopbacks and nics",
+            "show structural map of ethernet and wireless endpoints",
+            "get a breakdown of available networking interface devices",
+            "what local ethernet links are currently connected",
+            "read address structures of underlying networking hardware descriptors"
+        ],
+        "description": "Displays the network interfaces of the system.",
+        "output": "echo -e \"🌐 Network interfaces: \" && ip a",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "is the dedicated graphics processing unit overheated",
+            "display proprietary nvidia hardware framework data",
+            "read status parameters from physical hardware accelerators",
+            "get vram statistics and micro architecture values",
+            "is the terminal using hardware video compute cards"
+        ],
+        "description": "Displays the GPU information using nvidia-smi.",
+        "output": "echo -e \"🖥️ GPU information: \" && nvidia-smi",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "inspect current process execution workloads",
+            "is any task thread hogging system processing resource units",
+            "render an interactive system task scheduler graph",
+            "show application execution pipeline stacks active",
+            "open system task thread manager"
+        ],
+        "description": "Displays the running processes using htop.",
+        "output": "echo -e \"🧠 Process monitor: \" && htop",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "switch execution path context to python environment module",
+            "initialize isolated local workspace dependencies folder",
+            "run the binary script activation inside local hidden python directories",
+            "source local environment binaries parameters",
+            "bind active shell thread to isolated directory environment"
+        ],
+        "description": "Activates the Python virtual environment located in venv/bin/activate.",
+        "output": "locate_and_activate_venv",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "any unstaged file edits inside this repo tree",
+            "audit modified file index paths before commit",
+            "is my current working tree synchronized cleanly with git master",
+            "check branch modification status logs for discrepancies",
+            "has any versioned file tracking index diverged"
+        ],
+        "description": "Displays the current git status.",
+        "output": "echo -e \"🌿 Git status: \" && git status",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "sync local workstation code with upstream cloud branch",
+            "merge incoming commits from remote origin into local files",
+            "pull down downstream modifications made by team members",
+            "refresh local source repository from server main origin",
+            "ingest code structural delta from public master repository"
+        ],
+        "description": "Pulls the latest changes from the git repository.",
+        "output": "echo -e \"🔄 Git pull: \" && git pull",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "list all available development paths and tracks",
+            "show names of local parallel feature streams",
+            "which code workspace lane is currently checked out",
+            "enumerate internal feature branches created in this repository",
+            "check version control fork points and alternative paths"
+        ],
+        "description": "Displays the git branches.",
+        "output": "echo -e \"🌿 Git branches: \" && git branch",
+        "permission": "yolo"
+    },    {
+        "input": [
+            "dump version control ledger timeline",
+            "show recent git tree revisions and authors",
+            "give me the linear track of upstream merges",
+            "print structural git snapshot history tracking",
+            "let me see the previous repository logs in order"
+        ],
+        "description": "Displays the git commit history.",
+        "output": "echo -e \"🌿 Git commits: \" && git log --oneline",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "compare modifications within staging index",
+            "what files have discrepancies compared to head",
+            "print out untracked code structural changes",
+            "show the raw text modifications on my branch",
+            "inspect discrepancies in the active codebase workspace"
+        ],
+        "description": "Displays the git differences.",
+        "output": "echo -e \"🌿 Git diff: \" && git diff",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "pull recent distribution metadata catalog from apt",
+            "synchronize local advanced package tool descriptors",
+            "fetch mirror package index indexes via terminal",
+            "run dependency definition updates on debian layout"
+        ],
+        "output": "echo -e \"📦 Updating apt packages... \" && sudo apt update",
+        "permission": "ask",
+        "description": "Updates apt package lists."
+    },
+    {
+        "input": [
+            "upgrade node manager dependencies configuration file",
+            "bring local project node_modules up to date",
+            "run npm package maintenance pipeline updates",
+            "check package.json registries for library updates"
+        ],
+        "description": "Updates the npm packages.",
+        "output": "echo -e \"📦 Updating npm packages... \" && npm update",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "refresh vendor dependencies via php manager",
+            "run composer lock profile checkup upgrades",
+            "fetch backend framework library update patches",
+            "bring core php dependencies up to target baseline"
+        ],
+        "description": "Updates the composer packages.",
+        "output": "echo -e \"📦 Updating composer packages... \" && composer update",
+        "permission": "ask"
+    },
+    {
+        "description": "Prints a formatted periodic table of chemical elements including atomic numbers.",
+        "input": [
+            "render structural table of atomic properties",
+            "show chemical elements chart interface",
+            "generate complete mendeleev chemical layout",
+            "list molecular weight elements chart via terminal",
+            "print atomic numbers of standard molecules"
+        ],
+        "output": "python3 - <<'PY'\nperiodic=[[(1,'H'),(2,'He')],[(3,'Li'),(4,'Be'),(5,'B'),(6,'C'),(7,'N'),(8,'O'),(9,'F'),(10,'Ne')],[(11,'Na'),(12,'Mg'),(13,'Al'),(14,'Si'),(15,'P'),(16,'S'),(17,'Cl'),(18,'Ar')],[(19,'K'),(20,'Ca'),(21,'Sc'),(22,'Ti'),(23,'V'),(24,'Cr'),(25,'Mn'),(26,'Fe'),(27,'Co'),(28,'Ni'),(29,'Cu'),(30,'Zn'),(31,'Ga'),(32,'Ge'),(33,'As'),(34,'Se'),(35,'Br'),(36,'Kr')],[(37,'Rb'),(38,'Sr'),(39,'Y'),(40,'Zr'),(41,'Nb'),(42,'Mo'),(43,'Tc'),(44,'Ru'),(45,'Rh'),(46,'Pd'),(47,'Ag'),(48,'Cd'),(49,'In'),(50,'Sn'),(51,'Sb'),(52,'Te'),(53,'I'),(54,'Xe')],[(55,'Cs'),(56,'Ba'),(57,'La'),(58,'Ce'),(59,'Pr'),(60,'Nd'),(61,'Pm'),(62,'Sm'),(63,'Eu'),(64,'Gd'),(65,'Tb'),(66,'Dy'),(67,'Ho'),(68,'Er'),(69,'Tm'),(70,'Yb'),(71,'Lu')],[(87,'Fr'),(88,'Ra'),(89,'Ac'),(90,'Th'),(91,'Pa'),(92,'U'),(93,'Np'),(94,'Pu'),(95,'Am'),(96,'Cm'),(97,'Bk'),(98,'Cf'),(99,'Es'),(100,'Fm'),(101,'Md'),(102,'No'),(103,'Lr')]]\nfor row in periodic:\n    print(' '.join(f'{num:>3}{sym:^4}' for num,sym in row))\nPY",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "allocate a completely fresh file system directory node",
+            "initialize a blank data container path here",
+            "setup storage tree leaf branch named directory",
+            "deploy a subfolder directory structures module"
+        ],
+        "description": "Creates a new directory.",
+        "output": "read -p \"📁 Directory name: \" dirname && mkdir -p \"$dirname\" && echo -e \"Directory \\033[1m$dirname\\033[22m created successfully.\"",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "touch a text data storage structure inside disk",
+            "generate an empty layout asset for raw writing",
+            "dump some fresh text info into a blank document",
+            "allocate text format file blocks manually"
+        ],
+        "description": "Creates a new file.",
+        "output": "read -p \"📄 Filename: \" fname && read -p \"Content: \" fcontent && echo \"$fcontent\" > \"$fname\" && echo -e \"File \\033[1m$fname\\033[22m saved.\"",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "clone binary assets to target system partition",
+            "replicate data content clusters inside structural trees",
+            "make a verbatim duplicate entry path for an object",
+            "transfer mirror records safely into another path"
+        ],
+        "description": "Copies a file to another location.",
+        "output": "read -rp \"📄 Source file: \" src && read -rp \"Destination: \" dst && cp \"$src\" \"$dst\" && echo -e \"📋 ✅ Copied \\033[1m$src\\033[22m → \\033[1m$dst\\033[22m\"",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "alter naming string identities for storage entries",
+            "reassign directory descriptor labels on this machine",
+            "substitute current asset string path for a different string",
+            "shift internal identifier tracking string alias"
+        ],
+        "description": "Renames a file.",
+        "output": "read -rp \"Current filename: \" old && read -rp \"New filename: \" new && mv \"$old\" \"$new\" && echo -e \"📝 ✅ Renamed: \\033[1m$old\\033[22m → \\033[1m$new\\033[22m\"",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "wipe file pointers blocks permanently from hard drive",
+            "purge asset content nodes from terminal disk space",
+            "shred data reference elements from file system tracks",
+            "unlink system path descriptors associated with target asset"
+        ],
+        "description": "Deletes a file.",
+        "output": "read -p \"📄 Enter the filename to delete: \" fname && rm -f \"$fname\" && echo -e \"File \\033[1m$fname\\033[22m has been deleted.\"",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "open system text canvas utility to append variables",
+            "invoke active terminal interactive editor for file updates",
+            "overwrite internal document configurations interactively",
+            "manipulate character strings data directly inside layout document"
+        ],
+        "description": "Edits a file using nano.",
+        "output": "read -p \"📄 Enter the filename to edit: \" fname && nano \"$fname\"",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "pick an active item here and wipe its block allocations",
+            "select an asset currently listed in local directory to delete",
+            "drop an existing data module directly inside active folder subtree",
+            "purge an item present right now within our directory paths"
+        ],
+        "description": "Deletes a file in the current directory.",
+        "output": "echo -e \"📄 \\nAvailable files:\"; select fname in *; do if [ -n \"$fname\" ] && [ -f \"$fname\" ]; then rm -f \"$fname\" && echo -e \"File \\033[1m$fname\\033[22m deleted successfully.\" && break; else echo \"Invalid choice or not a file.\"; break; fi; done",
+        "permission": "ask"
+    },    {
+        "input": [
+            "switch my operational context to an alternative folder path",
+            "jump into a different subfolder location inside bash",
+            "teleport my session to a specific path variable",
+            "hop into another file system storage tree branch",
+            "alter working node location pointers to a target subfolder"
+        ],
+        "description": "Moves to a different directory.",
+        "output": "read -p \"📁 Enter the directory name to move to: \" dname && echo \"cd \\\"$dname\\\"\"",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "purge an entire file system folder structural block",
+            "wipe out a non empty path node recursively",
+            "erase a folder architecture branch from the hard drive",
+            "drop an obsolete repository storage block directory completely"
+        ],
+        "description": "Deletes a directory.",
+        "output": "read -p \"📁 Enter the directory name to delete: \" dname && rm -rf \"$dname\" && echo -e \"Directory \\033[1m$dname\\033[22m has been recursively deleted.\"",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "wipe a subfolder entry directly present inside our current node",
+            "drop one of the nested directories visible in this folder space",
+            "recursively destroy a local folder branch without typing its path",
+            "clean out an obsolete subdirectory asset from here"
+        ],
+        "description": "Deletes a directory in the current location.",
+        "output": "echo -e \"📁 \\nAvailable directories:\"; select dname in */; do if [ -n \"$dname\" ] && [ -d \"$dname\" ]; then rm -rf \"$dname\" && echo -e \"Directory \\033[1m${dname%/}\\033[22m recursively deleted.\" && break; else echo \"Invalid choice or not a directory.\"; break; fi; done",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "grep a string expression through a text document layout",
+            "scan lines inside a file looking for character match configurations",
+            "inspect target file text buffers for specific code sub-strings",
+            "where inside this text document does this query string occur"
+        ],
+        "description": "Searches for a specific word inside a file and displays the matching lines.",
+        "output": "read -p \"🔍 Word to find: \" word && read -p \"📄 Target file: \" targetfile && echo -e \"\\nMatches for \\033[1m$word\\033[22m:\\n\" && grep -n \"$word\" \"$targetfile\"",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "run chmod syntax update parameters on an asset descriptor",
+            "reassign octal mode access privileges for local users",
+            "update read write execute metadata security configurations",
+            "alter systemic mask capabilities of a document template interactively"
+        ],
+        "description": "Changes the permissions of a file or folder interactively.",
+        "output": "read -p \"📄 File or Folder: \" target && read -p \"Octal permissions (e.g. 755): \" mode && chmod \"$mode\" \"$target\" && echo -e \"Permissions for \\033[1m$target\\033[22m updated to \\033[1m$mode\\033[22m.\"",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "send an interrupt signal to a process identifier string alias",
+            "force kill a running utility using its standard process tag name",
+            "pkill a frozen daemon application instantly from execution stack",
+            "halt background program execution lifecycle by target application label"
+        ],
+        "description": "Kills a process by its name.",
+        "output": "read -p \"⛔ Process name to kill (e.g. firefox): \" procname && pkill -f \"$procname\" && echo -e \"Sent termination signal to \\033[1m$procname\\033[22m.\"",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "pull down a remote binary payload from web hyper-link parameters",
+            "stream data blocks from outside link address to server disk storage",
+            "fetch online structural files via standard curl endpoint queries",
+            "download binary files from a specific web address interface node"
+        ],
+        "description": "Downloads a file from a specified URL and saves it with a given filename.",
+        "output": "read -p \"🌐 Download URL: \" url && read -p \"  📄 Save as (filename): \" outputname && curl -L \"$url\" -o \"$outputname\" && echo -e \"\\n\\033[1m$outputname\\033[22m downloaded successfully.\"",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "generate a fallback mirror copy of an operative asset",
+            "compress a folder into a recovery backup tarball allocation",
+            "replicate critical file sectors into a dot-bak security node",
+            "store a redundant duplicate snapshot copy for disaster recovery purposes"
+        ],
+        "description": "Backs up a file or directory.",
+        "output": "printf \"1) 📄 Backup a File\\n2) 📁 Backup a Directory\\n\\n\"; read -p \"Choose option (1-2): \" choice; case \"$choice\" in 1) read -p \"File to backup: \" f && cp \"$f\" \"$f.bak\" && echo -e \"Saved as \\033[1m$f.bak\\033[22m\" ;; 2) read -p \"Directory to backup: \" d && tar -czf \"$d.tar.gz\" \"$d\" && echo -e \"Created archive \\033[1m$d.tar.gz\\033[22m\" ;; *) echo \"Invalid choice\" ;; esac",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "test packet transmission latency and traceroute path hops",
+            "diagnose underlying interface sockets anomalies via ping utility options",
+            "launch systemic networking troubleshooting interactive script options",
+            "probe target external host routing pipelines for latency metrics"
+        ],
+        "description": "Provides a menu for network diagnostics, allowing the user to ping a host or perform a traceroute.",
+        "output": "printf \"1) 📡 Ping a Host\\n2) 🛣️ Trace Route\\n\\n\"; read -p \"Select diagnostic (1-2): \" netchoice; case \"$netchoice\" in 1) read -p \"Target host: \" host && ping -c 3 \"$host\" ;; 2) read -p \"Target host: \" host && traceroute \"$host\" ;; *) echo \"Invalid selection\" ;; esac",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "purge all files matching a specific format extension template",
+            "batch delete documents whose format indicators match target wildcard",
+            "wipe specific metadata file extensions from target volume recursively",
+            "clear target workspace folder from files of a precise format type"
+        ],
+        "description": "Deletes all files with a specific extension in a given directory after user confirmation.",
+        "output": "read -p \"📁 Target directory: \" searchdir && read -p \"Extension (e.g. log, tmp): \" ext && echo -e \"\\nFound files:\" && find \"$searchdir\" -type f -name \"*.$ext\" && read -p \"Are you sure you want to delete these files? (y/n): \" confirm && case \"$confirm\" in [yY]) find \"$searchdir\" -type f -name \"*.$ext\" -delete && echo -e \"Files with extension \\033[1m.$ext\\033[22m deleted.\" ;; *) echo \"Operation aborted.\" ;; esac",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "pack directory branches inside compressed binary formats blocks",
+            "bundle dynamic tracking folder files into a single cross-platform archive",
+            "generate compressed zip file layers out of raw terminal structures",
+            "consolidate multi-file subtrees into compact space saving zip archives"
+        ],
+        "description": "Compresses a directory into either a TAR.GZ or ZIP archive based on user choice.",
+        "output": "read -p \"📁 Directory to compress: \" source_dir && printf \"1) TAR.GZ (Linux standard)\\n2) ZIP (Cross-platform)\\n\\n\"; read -p \"Choose format (1-2): \" arch_choice; case \"$arch_choice\" in 1) tar -czf \"$source_dir.tar.gz\" \"$source_dir\" && echo -e \"Archive \\033[1m$source_dir.tar.gz\\033[22m created.\" ;; 2) zip -r \"$source_dir.zip\" \"$source_dir\" && echo -e \"Archive \\033[1m$source_dir.zip\\033[22m created.\" ;; *) echo \"Invalid choice.\" ;; esac",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "json format",
+            "indent json",
+            "beautify json file"
+        ],
+        "description": "Pretty-prints a JSON file with indentation.",
+        "output": "read -p \"📄 JSON file: \" f && python3 -m json.tool \"$f\"",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "gen uuid",
+            "uuid4 string",
+            "get uuid"
+        ],
+        "description": "Generates a random UUID v4.",
+        "output": "python3 -c \"import uuid; print(uuid.uuid4())\"",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "oversized files",
+            "heavy files",
+            "files +100mb"
+        ],
+        "description": "Finds files larger than 100MB in the current directory tree.",
+        "output": "find . -type f -size +100M -exec ls -lh {} \\; | awk '{print $5, $9}' | sort -rh",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "dir weights",
+            "folder sizes",
+            "biggest directories"
+        ],
+        "description": "Shows disk usage of subdirectories sorted by size.",
+        "output": "du -sh -- */ 2>/dev/null | sort -rh | head -15",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "recent edits",
+            "daily modifications",
+            "changed today"
+        ],
+        "description": "Lists files modified in the last 24 hours.",
+        "output": "find . -type f -mtime -1 | sort",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "py linecount",
+            "count scriptlines",
+            "total python lines"
+        ],
+        "description": "Counts total lines of code in Python files recursively.",
+        "output": "find . -name '*.py' -not -path './.venv/*' | xargs wc -l 2>/dev/null | sort -n | tail -5",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "b64 cipher",
+            "base64 string",
+            "radix64 convert"
+        ],
+        "description": "Encodes or decodes a string using Base64.",
+        "output": "printf '1) Encode\\n2) Decode\\n\\n' && read -p 'Choose (1-2): ' c && read -p 'String: ' s && if [ \"$c\" = '1' ]; then echo -n \"$s\" | base64; else echo \"$s\" | base64 -d; fi",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "compare textfiles",
+            "file variations",
+            "diff documents"
+        ],
+        "description": "Shows the differences between two files.",
+        "output": "read -rp \"📄 First file: \" f1 && read -rp \"📄 Second file: \" f2 && diff --color=always \"$f1\" \"$f2\"",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "clone files",
+            "twin assets",
+            "duplicate md5"
+        ],
+        "description": "Finds duplicate files by MD5 checksum in the current directory.",
+        "output": "find . -type f | xargs md5sum 2>/dev/null | sort | awk 'seen[$1]++{print $2}' | sed 's|^./||'",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "init environment",
+            "provision virtualenv",
+            "setup sandboxed python"
+        ],
+        "description": "Creates a new Python virtual environment.",
+        "output": "read -p \"📁 Venv name (default: venv): \" name && name=${name:-venv} && python3 -m venv \"$name\" && echo -e \"✅ Created venv '\\033[1m$name\\033[22m'. Activate with: source $name/bin/activate\"",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "loop command",
+            "poll terminal",
+            "watch execution"
+        ],
+        "description": "Runs a shell command repeatedly every 2 seconds.",
+        "output": "read -p \"⌨️  Command to watch: \" cmd && watch -n 2 \"$cmd\"",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "pathway entries",
+            "bin directories",
+            "system paths"
+        ],
+        "description": "Prints each directory in PATH on a separate line.",
+        "output": "echo $PATH | tr ':' '\\n'",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "terminal calculator",
+            "compute algebra",
+            "math evaluation"
+        ],
+        "description": "Evaluates a math expression using Python.",
+        "output": "read -p \"🧮 Expression: \" expr && python3 -c \"import math; print(eval('$expr'))\"",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "month layout",
+            "cal grid",
+            "current dates"
+        ],
+        "description": "Displays the calendar for the current month.",
+        "output": "cal",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "epoch convert",
+            "parse timestamp",
+            "unix milliseconds"
+        ],
+        "description": "Converts a Unix timestamp to a human-readable date.",
+        "output": "read -p \"🕐 Unix timestamp: \" ts && date -d @\"$ts\" 2>/dev/null || date -r \"$ts\"",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "ssl validity",
+            "cert expiry",
+            "tls expiration"
+        ],
+        "description": "Checks the SSL certificate expiration date of a domain.",
+        "output": "read -p \"🔒 Domain (e.g. google.com): \" domain && echo | openssl s_client -connect \"$domain:443\" -servername \"$domain\" 2>/dev/null | openssl x509 -noout -subject -dates",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "wc metrics",
+            "file count",
+            "character counter"
+        ],
+        "description": "Counts lines, words and characters in a file.",
+        "output": "read -p \"📄 File: \" f && wc -lwc \"$f\"",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "py invocation",
+            "launch script",
+            "execute code"
+        ],
+        "description": "Runs a Python script file.",
+        "output": "read -p \"🐍 Python script path: \" script && python3 \"$script\"",
+        "permission": "ask"
+    },
+    {
+        "input": [
+            "touch env",
+            "initialize configurations",
+            "setup variables"
+        ],
+        "description": "Creates a new .env file in the current directory.",
+        "output": "create_env_file",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "append credential",
+            "patch env",
+            "inject secret"
+        ],
+        "description": "Adds a new entry to the existing .env file in the current directory.",
+        "output": "add_env_entry",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "unset key",
+            "wipe variable",
+            "purge parameter"
+        ],
+        "description": "Removes an entry from the existing .env file in the current directory.",
+        "output": "remove_env_entry",
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "dump config",
+            "active parameters",
+            "profile settings"
+        ],
+        "description": "Displays the current configuration settings.",
+        "output": "termy_print_config",
+        "permission": "yolo"
+    }
+]

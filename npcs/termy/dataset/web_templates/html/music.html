@@ -1,0 +1,60 @@
+<!-- ============================================================
+     THEME · MUSIC — neon district
+     Placeholders: {{TITLE}} {{DESCRIPTION}} {{COPYRIGHT}} {{ADDRESS}}
+     {{EMAIL}} {{SOCIALS}} {{STYLES}} {{SCRIPTS}} {{YEAR}} {{THEME}}
+     The vinyl spins and the equalizer dances with pure css.
+     ============================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="TERMy · {{THEME}}">
+    <title>{{TITLE}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    {{STYLES}}
+</head>
+<body>
+    <header class="topbar wrap">
+        <div class="logo">NEON<b>DISTRICT</b></div>
+        <nav><a href="#tour">Tour</a><a href="#">Music</a><a href="#">Merch</a></nav>
+    </header>
+
+    <main class="wrap">
+        <section class="hero">
+            <div>
+                <p class="kicker" data-reveal>New album · out 09.11.{{YEAR}}</p>
+                <h1 data-reveal>{{TITLE}}</h1>
+                <p data-reveal>{{DESCRIPTION}}</p>
+                <div class="cta" data-reveal>
+                    <a class="btn btn-hot" href="#">▶ Listen now</a>
+                    <a class="btn btn-line" href="#">Vinyl + cassette</a>
+                </div>
+                <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="cover" data-reveal>
+                <div class="vinyl"><i>ND-11</i></div>
+            </div>
+        </section>
+
+        <section class="tour" id="tour">
+            <h2 data-reveal>European <b>Tour</b> — 12 dates</h2>
+            <div class="gig" data-reveal><span class="date">OCT 09</span><span class="city">Berlin</span><span class="venue">Festsaal Kreuzberg</span><a class="tix" href="#">Tickets</a></div>
+            <div class="gig" data-reveal><span class="date">OCT 11</span><span class="city">Hamburg</span><span class="venue">Uebel &amp; Gefährlich</span><a class="tix" href="#">Tickets</a></div>
+            <div class="gig" data-reveal><span class="date">OCT 15</span><span class="city">Amsterdam</span><span class="venue">Paradiso</span><span class="sold">Sold out</span></div>
+            <div class="gig" data-reveal><span class="date">OCT 18</span><span class="city">Paris</span><span class="venue">La Machine</span><a class="tix" href="#">Tickets</a></div>
+            <div class="gig" data-reveal><span class="date">OCT 22</span><span class="city">Milan</span><span class="venue">Santeria</span><a class="tix" href="#">Tickets</a></div>
+        </section>
+    </main>
+
+    <footer class="site wrap">
+        <div class="f-copy">{{COPYRIGHT}}</div>
+        <address class="f-addr">{{ADDRESS}}</address>
+        <nav class="f-links" aria-label="Contact">{{SOCIALS}}{{EMAIL}}</nav>
+    </footer>
+
+    {{SCRIPTS}}
+</body>
+</html>

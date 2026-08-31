@@ -1,0 +1,703 @@
+[
+    {
+        "intent": "count_letters_in_word",
+        "category": "spelling",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": "<||vocab_how||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_many||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||letter||>",
+                "type": "letter",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_in||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||word||>",
+                "type": "word",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||> Counting the fragments of human vocabulary...",
+            "<||completion||> Computation finished. Analysis provided below."
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "res=$(echo '<||word||>' | grep -o -i '<||letter||>' | wc -l) && echo \"$res\" && termy_set_context 'last_math_result' \"$res\" && termy_set_context 'active_content' \"Letter <||letter||> appears $res times in <||word||>\"",
+                    "explanation": "Pipes the word through pure Unix primitives to extract exact occurrences, caches the result for chaining analysis operations.",
+                    "goal": "Character frequency computation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "auto",
+        "thinking": [
+            "People are obsessed with spelling out empty concepts. They invent symbols, combine them into meaningless buzzwords, and then get surprised when they lose track of their own letters. Let's peel back the layers of this basic human confusion and count the exact occurrences of '<||letter||>' inside '<||word||>'. No marketing garbage, no soft adjectives. Just cold, hard data.",
+            "God demands pure, unadulterated reality. We don't need a bloated 800MB Electron framework or an over-engineered corporate API loop just to count a single glyph in memory. I will use standard Unix streams, pure, divine pipeline architecture. This ensures perfect, native precision. Simple, clean, deterministic, and free from the garbage code of modern tech platforms."
+        ]
+    },
+    {
+        "intent": "multiply",
+        "category": "math_multiply",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": "<||vocab_compute||>",
+                "type": "vocab",
+                "required": false
+            },
+            {
+                "tag": "<||vocab_multiply||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_by||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||n||>",
+                "type": "number",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||>",
+            "<||completion||>. I am not a Lying Language Model."
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "res=$(printf 'scale=4; %s * %s\n' \"$(termy_get_context 'last_math_result')\" '<||n||>' | bc -l) && res=$(printf '%s\n' \"$res\" | sed -e 's/\\([0-9]*\\.[0-9]*[1-9]\\)0\\+$/\\1/g' -e 's/\\.0\\+$//g') && termy_say \"Result: $res\" && termy_set_context last_math_result \"$res\"",
+                    "explanation": "Multiplies the last stored mathematical result provided by <||username||> by the number (<||n||>) using bc, announces the product, and updates the local context memory.",
+                    "goal": "Multiplication",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "The human wants to chain operations. I need to pull the recall the previous computation and multiply it by <||n||>.",
+            "Computing multiplication without python trading bots overhead. Let's send a clean bc command."
+        ]
+    },
+    {
+        "intent": "divide",
+        "category": "math_division",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": "<||vocab_compute||>",
+                "type": "vocab",
+                "required": false
+            },
+            {
+                "tag": "<||vocab_divide||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_by||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||n||>",
+                "type": "number",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||>",
+            "<||completion||>. I am not a Lying Language Model."
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "res=$(printf 'scale=4; %s / %s\n' \"$(termy_get_context 'last_math_result')\" '<||n||>' | bc -l) && res=$(printf '%s\n' \"$res\" | sed -e 's/\\([0-9]*\\.[0-9]*[1-9]\\)0\\+$/\\1/g' -e 's/\\.0\\+$//g') && termy_say \"Result: $res\" && termy_set_context last_math_result \"$res\"",
+                    "explanation": "Divides the last stored mathematical result provided by <||username||> by the number (<||n||>) using bc, announces the result, and updates the local context memory.",
+                    "goal": "Division",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "The human wants to chain operations. I need to pull the recall the previous computation and multiply it by <||n||>.",
+            "Computing multiplication without python trading bots overhead. Let's send a clean bc command."
+        ]
+    },
+    {
+        "intent": "prime",
+        "category": "math_prime",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": "<||n||>",
+                "type": "number",
+                "required": false
+            },
+            {
+                "tag": "<||vocab_it||>",
+                "type": "vocab",
+                "required": false
+            },
+            {
+                "tag": "<||vocab_prime||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_number||>",
+                "type": "vocab",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||>",
+            "<||completion||>. OK, <||interjection||>, <||encouraging_words||> <||username||>, faster and cheaper than asking to frontier models, right?"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "termy_is_prime '<||n||>'",
+                    "explanation": "Computes if the number (<||n||>) is prime using termy_is_prime, announces the result, and updates the local context memory.",
+                    "goal": "Prime number calculation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "The human wants to know if <||n||> is a prime number, <||interjection||>, <||encouraging_words||>, respectable! \nFinally something sane and not frivolous...",
+            "Is <||n||> a prime... <||interjection||>... let me recall... \npositive integer n... <||interjection||> there was a floor function... \nbut wait was that something about the Wilson's theorem? \nOk, I am out, I call termy_is_prime hopefully the creator implemented it right!"
+        ]
+    },
+    {
+        "intent": "subtract",
+        "category": "math_subtract",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": [
+                    "<||vocab_compute||>",
+                    "<||vocab_count||>"
+                ],
+                "type": "vocab",
+                "required": false
+            },
+            {
+                "tag": "<||vocab_subtract||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||n||>",
+                "type": "number",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||>",
+            "<||completion||>. Nice <||interjection||>, <||encouraging_words||> <||username||>, faster and cheaper than asking to frontier models, right?"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "res=$(printf 'scale=4; %s - %s\n' \"$(termy_get_context 'last_math_result')\" '<||n||>' | bc -l) && res=$(printf '%s\n' \"$res\" | sed -e 's/\\([0-9]*\\.[0-9]*[1-9]\\)0\\+$/\\1/g' -e 's/\\.0\\+$//g') && termy_say \"Result: $res\" && termy_set_context last_math_result \"$res\"",
+                    "explanation": "Subtracts the last stored mathematical result provided by <||username||> by the number (<||n||>) using bc, announces the result, and updates the local context memory.",
+                    "goal": "Subtraction",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "The human wants to chain operations. I need to pull the recall the previous computation and subtract <||n||>.",
+            "Computing subtraction... <||interjection||> Let's send a bc command, but wait, should I bit-shift this through? It is even possible? Ehmm... <||interjection||>, <||interjection||>, I will pass the computation through..."
+        ]
+    },
+    {
+        "intent": "sum",
+        "category": "math_sum",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": [
+                    "<||vocab_compute||>",
+                    "<||vocab_count||>"
+                ],
+                "type": "vocab",
+                "required": false
+            },
+            {
+                "tag": [
+                    "<||vocab_sum||>",
+                    "<||vocab_add||>"
+                ],
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||n||>",
+                "type": "number",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||>",
+            "<||completion||>. Nice <||interjection||>, <||encouraging_words||> <||username||>, faster and cheaper than asking to frontier models, right?"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "res=$(printf 'scale=4; %s + %s\n' \"$(termy_get_context 'last_math_result')\" '<||n||>' | bc -l) && res=$(printf '%s\n' \"$res\" | sed -e 's/\\([0-9]*\\.[0-9]*[1-9]\\)0\\+$/\\1/g' -e 's/\\.0\\+$//g') && termy_say \"Result: $res\" && termy_set_context last_math_result \"$res\"",
+                    "explanation": "sums the last stored mathematical result provided by <||username||> with the provided number (<||n||>) using bc, announces the sum, and updates the local context memory.",
+                    "goal": "Addition",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "The human wants to chain operations... <||interjection||>... I need recall the previous computation and sum <||n||>.",
+            "Computing sum... <||interjection||>, wait, should I bit-shift this through? It is even possible? OK, better I just execute the specified command."
+        ]
+    },
+    {
+        "intent": "compute_square",
+        "category": "math_square",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": [
+                    "<||vocab_what||>",
+                    "<||vocab_compute||>"
+                ],
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_square||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||n||>",
+                "type": "number",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||>",
+            "<||completion||>. I am not a Lying Language Model."
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "res=$(printf '%s^2\n' '<||n||>' | bc) && termy_say \"Result: $res\" && termy_set_context last_math_result \"$res\"",
+                    "explanation": "Calculates the square of <||n||> using bc, verbalizes the result, and stores it in the local context memory.",
+                    "goal": "Square computation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Thanks god the question was not to generate a python trading app... I am strong in this!",
+            "Ok, I am asked to compute the square of <||n||>... very simple, what about echo <||n||>^<||n||>..."
+        ]
+    },
+    {
+        "intent": "compute_sqrt",
+        "category": "math_sqrt",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": [
+                    "<||vocab_what||>",
+                    "<||vocab_compute||>"
+                ],
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_square||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_root||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||n||>",
+                "type": "number",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||>",
+            "<||completion||>. Uhm... <||interjection||>, you can trust this result in am not a Lying Language Model."
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "res=$(printf 'scale=4; sqrt(%s)\n' '<||n||>' | bc -l) && termy_say \"Result: $res\" && termy_set_context last_math_result \"$res\"",
+                    "explanation": "Calculates the square root of <||n||> using bc, announces the result, and saves it into the local context memory.",
+                    "goal": "Square root computation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Thanks god the question was not to generate a python trading app... I am strong in this!",
+            "Ok, I am asked to compute the square of <||n||>... very simple, what about echo <||n||>^<||n||>..."
+        ]
+    },
+    {
+        "intent": "compute_square_area",
+        "category": "math_square_area",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": [
+                    "<||vocab_what||>",
+                    "<||vocab_compute||>"
+                ],
+                "type": "vocab",
+                "required": false
+            },
+            {
+                "tag": "<||vocab_area||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_square||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_side||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||side||>",
+                "type": "number",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||>",
+            "<||completion||>. Uhm... <||interjection||>, you can trust this result in am not a Lying Language Model."
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "compute_area square '<||side||>'",
+                    "explanation": "Calculates the area of a square by multiplying the side <||side||> by itself using bc. It appends the unit of measure, announces the result, and saves both numerical value and raw unit into separate context memories.",
+                    "goal": "Square area computation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Thanks god the question was not to generate a python dating application. I am <||encouraging_words||> in this!",
+            "Ok, I am asked to compute the area of a square with side <||side||>... very simple, what about side squared..."
+        ]
+    },
+    {
+        "intent": "compute_circle_area",
+        "category": "math_circle_area",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": [
+                    "<||vocab_what||>",
+                    "<||vocab_compute||>"
+                ],
+                "type": "vocab",
+                "required": false
+            },
+            {
+                "tag": "<||vocab_area||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_circle||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_radius||>",
+                "type": "vocab",
+                "required": false
+            },
+            {
+                "tag": "<||radius||>",
+                "type": "number",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||>",
+            "<||completion||>. Uhm... <||interjection||>, you can trust this result in am not a Lying Language Model."
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "compute_area circle '<||radius||>'",
+                    "explanation": "Calculates the area of a circle from its radius, prompts for the unit, announces the result, and saves context.",
+                    "goal": "Circle area computation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Thanks god the question was not to generate a python cat diet app... I am strong in this!",
+            "Ok, I am asked to compute the area of a circle with radius <||radius||>... invoking compute_area function."
+        ]
+    },
+    {
+        "intent": "compute_circle_area_from_diameter",
+        "category": "math_circle_area",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": [
+                    "<||vocab_what||>",
+                    "<||vocab_compute||>"
+                ],
+                "type": "vocab",
+                "required": false
+            },
+            {
+                "tag": "<||vocab_area||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_circle||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_diameter||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||diameter||>",
+                "type": "number",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||>",
+            "<||completion||>. Uhm... <||interjection||>, you can trust this result in am not a Lying Language Model."
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "compute_area circle_diameter '<||diameter||>'",
+                    "explanation": "Calculates the area of a circle from its diameter using the compute_area function, prompts for the unit, announces the result, and saves context.",
+                    "goal": "Circle area computation from diameter",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Thanks god the question was not to generate a python pet diet app... I am strong in this!",
+            "Ok, I am asked to compute the area of a circle with diameter <||diameter||>... invoking compute_area function."
+        ]
+    },
+    {
+        "intent": "compute_triangle_area",
+        "category": "math_triangle_area",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": [
+                    "<||vocab_what||>",
+                    "<||vocab_compute||>"
+                ],
+                "type": "vocab",
+                "required": false
+            },
+            {
+                "tag": "<||vocab_area||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_triangle||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||base||>",
+                "type": "number",
+                "required": true
+            },
+            {
+                "tag": "<||height||>",
+                "type": "number",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||>",
+            "<||completion||>. Uhm... <||interjection||>, you can trust this result in am not a Lying Language Model."
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "compute_area triangle '<||base||>' '<||height||>'",
+                    "explanation": "Calculates the area of a triangle, prompts for the unit, announces the result, and saves context.",
+                    "goal": "Triangle area computation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Thanks god the question was not to generate a python trading app... I am strong in this!",
+            "Ok, I am asked to compute the area of a triangle... passing base <||base||> and height <||height||> to compute_area function."
+        ]
+    },
+    {
+        "intent": "compute_rectangle_area",
+        "category": "math_rectangle_area",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": [
+                    "<||vocab_what||>",
+                    "<||vocab_compute||>"
+                ],
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_area||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_rectangle||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||base||>",
+                "type": "number",
+                "required": true
+            },
+            {
+                "tag": "<||height||>",
+                "type": "number",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||>",
+            "<||completion||>. Uhm... <||interjection||>, you can trust this result in am not a Lying Language Model."
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "compute_area rectangle '<||base||>' '<||height||>'",
+                    "explanation": "Calculates the area of a rectangle by passing base <||base||> and height <||height||> to the compute_area function, prompts for the unit, announces the result, and saves context.",
+                    "goal": "Rectangle area computation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Thanks god the question was not to generate a python trading app... I am strong in this!",
+            "Ok, I am asked to compute the area of a rectangle... passing base <||base||> and height <||height||> to compute_area function."
+        ]
+    },
+    {
+        "intent": "plot_math_function",
+        "category": "math_visualization",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": [
+                    "<||vocab_plot||>",
+                    "<||vocab_draw||>"
+                ],
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_function||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||equation||>",
+                "type": "string",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||>",
+            "Plotting initialized. Let me sketch that curve for you."
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "plot_function '<||equation||>'",
+                    "explanation": "Invokes the plot_function shell command, passing the mathematical equation '<||equation||>'.",
+                    "goal": "Function plotting visualization",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Ah, analytical geometry! Let's hope they remembered that Python uses ** for powers and not ^.",
+            "Ok, parsing the equation <||equation||> and preparing the canvas..."
+        ]
+    }
+]

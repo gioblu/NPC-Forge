@@ -1,0 +1,27 @@
+echo -e "${BLUE} 4. Configuring Systemd User Service...${NC}"
+
+SERVICE_DIR="$HOME/.config/systemd/user"
+mkdir -p "$SERVICE_DIR"
+
+cat << EOF > "$SERVICE_DIR/npc-forge.service"
+[Unit]
+Description=NPC-Forge System Registry Server Gateway
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=$FORGE_DIR
+ExecStart=$FORGE_DIR/venv/bin/python3 $FORGE_DIR/server.py
+StandardOutput=append:$FORGE_DIR/npc_forge.log
+StandardError=append:$FORGE_DIR/npc_forge.log
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target
+EOF
+
+systemctl --user daemon-reload
+
+systemctl --user enable npc-forge.service 2>/dev/null || true
+systemctl --user restart npc-forge.service

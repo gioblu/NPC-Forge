@@ -1,0 +1,27 @@
+[
+    {
+        "category": "docker_manage",
+        "input": [
+            "manage docker containers",
+            "show docker containers",
+            "give me docker containers",
+            "stop a docker container",
+            "view docker logs",
+            "i want to manage docker containers",
+            "i want to see docker containers",
+            "i want to stop a docker container"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please choose a docker management option\" > /dev/null 2>&1 && printf \"\\r\\n1) 🐳 List Running Containers\\n2) 🛑 Stop a Container\\n3) 📜 View Container Logs\\n\\nSelect option 1-3: \" && read -r dock_choice && case \"$dock_choice\" in 1) docker ps && printf \"\\n\" && termy_say \"Containers listed\" > /dev/null 2>&1 ;; 2) termy_say \"Please enter the container name or I D\" > /dev/null 2>&1 && printf \"Container ID or Name: \" && read -r c_name && if [ -n \"$c_name\" ]; then docker stop \"$c_name\" && printf \"\\nStopped container \\033[1m%s\\033[22m.\\n\" \"$c_name\" && termy_say \"Container stopped successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Selection cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi ;; 3) termy_say \"Please enter the container name or I D\" > /dev/null 2>&1 && printf \"Container ID or Name: \" && read -r c_log && if [ -n \"$c_log\" ]; then docker logs --tail 20 \"$c_log\" && printf \"\\n\" && termy_say \"Logs displayed\" > /dev/null 2>&1; else printf \"\\n⛔ Selection cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi ;; *) printf \"\\n⛔ Invalid choice.\\n\" && termy_say \"Invalid selection\" > /dev/null 2>&1 ;; esac",
+                    "explanation": "Provides a menu for managing Docker containers, allowing the user to list, stop, or view logs of containers.",
+                    "goal": "Manage docker containers",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    }
+]

@@ -1,0 +1,109 @@
+/* ============================================================
+   THEME · PODCAST — the long wave
+   Tokens: shared contract in _base.css.
+   The waveform is decorative; the playhead sweep is pure css.
+   [data-elapsed] is ticked by podcast.js.
+   ============================================================ */
+
+/* ---- 1 · design tokens ---- */
+:root {
+    --color-background: #191412;                    /* warm studio dark */
+    --color-surface: #221b17;
+    --color-text-primary: #f4ece2;
+    --color-text-secondary: #a3937f;
+    --color-accent-primary: #f2a33c;                /* VU-meter amber */
+    --color-accent-secondary: #4ecdc4;              /* on-air teal */
+    --color-accent-tertiary: #a3937f;
+    --color-border: rgba(244, 236, 226, .12);
+    --font-display: 'Epilogue', sans-serif;
+    --font-body: 'Albert Sans', sans-serif;
+    --font-monospace: 'IBM Plex Mono', monospace;
+}
+
+/* ---- 2 · page + top bar ---- */
+body { font-family: var(--font-body); background: var(--color-background); color: var(--color-text-primary); }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 2rem; }
+.topbar { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 0; border-bottom: 1px solid var(--color-border); }
+.topbar .logo { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; }
+.topbar .logo b { color: var(--color-accent-primary); }
+.onair {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-family: var(--font-monospace); font-size: .7rem; letter-spacing: .16em;
+    color: var(--color-accent-secondary); border: 1px solid var(--color-accent-secondary);
+    padding: .4rem .9rem; border-radius: 99px;
+}
+.onair i { width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent-secondary); animation: pulse 1.6s infinite; }
+@keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(78, 205, 196, .5); }
+    70%  { box-shadow: 0 0 0 8px rgba(78, 205, 196, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(78, 205, 196, 0); }
+}
+
+/* ---- 3 · masthead: show name + running stats ---- */
+.masthead { padding: 3.5rem 0 2.5rem; }
+.kicker { font-family: var(--font-monospace); font-size: .74rem; letter-spacing: .22em; text-transform: uppercase; color: var(--color-accent-primary); margin-bottom: 1.1rem; }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.6rem, 7vw, 4.6rem); letter-spacing: -.03em; line-height: 1; }
+.masthead .about { color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.7; max-width: 52ch; margin-top: 1.2rem; }
+.masthead .stats { font-family: var(--font-monospace); font-size: .78rem; color: var(--color-text-secondary); margin-top: 1.4rem; }
+.masthead .stats b { color: var(--color-text-primary); font-weight: 500; }
+
+/* ---- 4 · now-playing deck ---- */
+.deck { border: 1px solid var(--color-border); background: var(--color-surface); padding: 1.8rem 2rem; margin-bottom: 3rem; }
+.deck .lbl { font-family: var(--font-monospace); font-size: .7rem; letter-spacing: .2em; color: var(--color-accent-primary); margin-bottom: .8rem; }
+.deck h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.5rem, 4vw, 2.2rem); letter-spacing: -.02em; }
+.deck .guest { color: var(--color-text-secondary); margin: .4rem 0 1.4rem; }
+.wave { display: flex; align-items: center; gap: 3px; height: 52px; position: relative; }
+.wave i { flex: 1; background: var(--color-accent-primary); opacity: .85; transform-origin: center; }
+/* bar heights = a fixed pseudo-random rhythm (kept out of the markup) */
+.wave i:nth-child(1)  { height: 28%; } .wave i:nth-child(2)  { height: 52%; }
+.wave i:nth-child(3)  { height: 38%; } .wave i:nth-child(4)  { height: 68%; }
+.wave i:nth-child(5)  { height: 44%; } .wave i:nth-child(6)  { height: 84%; }
+.wave i:nth-child(7)  { height: 58%; } .wave i:nth-child(8)  { height: 96%; }
+.wave i:nth-child(9)  { height: 48%; } .wave i:nth-child(10) { height: 78%; }
+.wave i:nth-child(11) { height: 34%; } .wave i:nth-child(12) { height: 64%; }
+.wave i:nth-child(13) { height: 42%; } .wave i:nth-child(14) { height: 72%; }
+/* the playhead sweeps left→right on a loop (58 s ≈ episode length) */
+.wave::after {
+    content: ""; position: absolute; top: -6px; bottom: -6px; left: 0; width: 2px;
+    background: var(--color-accent-secondary); box-shadow: 0 0 10px var(--color-accent-secondary);
+    animation: sweep 58s linear infinite;
+}
+@keyframes sweep { to { left: 100%; } }
+.deck .time { display: flex; justify-content: space-between; font-family: var(--font-monospace); font-size: .78rem; color: var(--color-text-secondary); margin-top: .9rem; }
+.deck .time b { color: var(--color-accent-secondary); font-weight: 500; }
+
+/* ---- 5 · episode ledger ---- */
+h3.section { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; margin-bottom: 1rem; }
+.ep {
+    display: grid; grid-template-columns: auto 1fr auto auto; gap: 1.6rem; align-items: center;
+    padding: 1.2rem .8rem; border-top: 1px solid var(--color-border); transition: .25s;
+}
+.ep:last-of-type { border-bottom: 1px solid var(--color-border); }
+.ep:hover { background: var(--color-surface); padding-left: 1.3rem; }
+.ep .play {
+    width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--color-border);
+    display: grid; place-items: center; font-size: .8rem; color: var(--color-accent-primary); transition: .2s;
+}
+.ep:hover .play { background: var(--color-accent-primary); border-color: var(--color-accent-primary); color: #191412; }
+.ep .title { font-weight: 600; }
+.ep .title small { display: block; color: var(--color-text-secondary); font-weight: 400; font-size: .82rem; margin-top: .15rem; }
+.ep time { font-family: var(--font-monospace); font-size: .76rem; color: var(--color-text-secondary); }
+.ep .dur { font-family: var(--font-monospace); font-size: .76rem; color: var(--color-accent-secondary); }
+
+/* ---- 6 · subscribe strip + footer ---- */
+.subscribe {
+    display: flex; flex-wrap: wrap; gap: .8rem; align-items: center;
+    padding: 2rem 0 3rem; color: var(--color-text-secondary); font-size: .9rem;
+}
+.subscribe a {
+    font-family: var(--font-monospace); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--color-text-primary); text-decoration: none; border: 1px solid var(--color-border);
+    padding: .55rem 1.1rem; transition: .2s;
+}
+.subscribe a:hover { border-color: var(--color-accent-primary); color: var(--color-accent-primary); }
+footer.site { padding: 0 0 3rem; color: var(--color-text-secondary); font-size: .78rem; }
+
+@media (max-width: 700px) {
+    .ep { grid-template-columns: auto 1fr auto; }
+    .ep time { display: none; }
+}

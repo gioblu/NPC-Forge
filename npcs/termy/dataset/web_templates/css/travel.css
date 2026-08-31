@@ -1,0 +1,94 @@
+/* ============================================================
+   THEME · TRAVEL — departures board
+   Tokens: shared contract in _base.css.
+   ============================================================ */
+
+/* ---- 1 · design tokens ---- */
+:root {
+    --color-background: #f4f6f5;
+    --color-surface: #ffffff;
+    --color-text-primary: #1d2a2c;
+    --color-text-secondary: #5f7173;
+    --color-accent-primary: #0e6f63;      /* deep teal */
+    --color-accent-secondary: #e8a020;    /* route-marker amber */
+    --color-accent-tertiary: #5f7173;
+    --color-border: #dfe6e2;
+    --font-display: 'DM Serif Display', serif;
+    --font-body: 'Sora', sans-serif;
+    --font-monospace: 'IBM Plex Mono', monospace;
+}
+
+/* ---- 2 · page + top bar ---- */
+body { font-family: var(--font-body); background: var(--color-background); color: var(--color-text-primary); }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+.topbar { display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 0; }
+.topbar .logo { font-family: var(--font-display); font-size: 1.5rem; }
+.topbar .logo b { color: var(--color-accent-primary); font-weight: 400; }
+.topbar a.plan {
+    border: 1px solid var(--color-text-primary); color: var(--color-text-primary); text-decoration: none;
+    font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    padding: .6rem 1.3rem; transition: .2s;
+}
+.topbar a.plan:hover { background: var(--color-accent-primary); border-color: var(--color-accent-primary); color: #fff; }
+
+/* ---- 3 · departures board (the opening shot) ---- */
+.board { background: #12332f; margin: 0 -2rem 3.5rem; padding: 1.2rem 2rem; }
+.brow {
+    display: grid; grid-template-columns: 1.4fr .7fr .5fr .8fr auto; gap: 1.5rem; align-items: center;
+    padding: .7rem 0; border-top: 1px dashed rgba(233, 217, 172, .22);
+    font-family: var(--font-monospace); font-size: .8rem; letter-spacing: .1em; color: #cfe3d6;
+}
+.brow:first-child { border-top: none; }
+.brow .route { color: #ffd98a; }
+.brow .st { text-transform: uppercase; }
+.brow .st.hot { color: #ff9d6b; }
+.brow .st.ok { color: #8fd6b4; }
+
+/* ---- 4 · hero ---- */
+.kicker { font-family: var(--font-monospace); font-size: .76rem; letter-spacing: .24em; text-transform: uppercase; color: var(--color-accent-primary); margin-bottom: 1.2rem; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(2.8rem, 7vw, 4.8rem); line-height: 1.02; max-width: 18ch; }
+h1 em { font-style: italic; color: var(--color-accent-primary); }
+.hero p.lede { color: var(--color-text-secondary); font-size: 1.1rem; line-height: 1.75; max-width: 52ch; margin-top: 1.4rem; }
+
+/* ---- 5 · featured expedition with a rotated stamp ---- */
+.featured-exp {
+    display: grid; grid-template-columns: 1fr auto; gap: 2.5rem; align-items: center;
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    padding: 2.2rem; margin: 3rem 0 3.5rem;
+}
+.featured-exp h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.8rem; margin-bottom: .5rem; }
+.featured-exp p { color: var(--color-text-secondary); line-height: 1.7; max-width: 56ch; }
+.stamp {
+    font-family: var(--font-monospace); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--color-accent-primary); border: 2px solid var(--color-accent-primary); padding: .9rem 1.3rem;
+    transform: rotate(-3deg); white-space: nowrap;
+}
+
+/* ---- 6 · destination ledger ---- */
+h2 { font-family: var(--font-display); font-weight: 400; font-size: 2rem; margin-bottom: 1rem; }
+.dest {
+    display: grid; grid-template-columns: 70px 1.4fr 1fr auto auto; gap: 1.8rem; align-items: baseline;
+    padding: 1.7rem .8rem; border-top: 1px solid var(--color-border);
+    text-decoration: none; color: inherit; transition: .25s;
+}
+.dest:last-of-type { border-bottom: 1px solid var(--color-border); }
+.dest:hover { background: var(--color-surface); padding-left: 1.4rem; }
+.dest .n { font-family: var(--font-display); font-style: italic; color: var(--color-accent-secondary); font-size: 1.3rem; }
+.dest h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; }
+.dest .region { color: var(--color-text-secondary); font-size: .9rem; }
+.dest .days { font-family: var(--font-monospace); font-size: .78rem; color: var(--color-text-secondary); }
+.dest .price { font-family: var(--font-display); color: var(--color-accent-primary); font-size: 1.25rem; }
+.dest .go { color: var(--color-accent-primary); opacity: 0; transform: translateX(-6px); transition: .25s; }
+.dest:hover .go { opacity: 1; transform: none; }
+
+/* ---- 7 · footer ---- */
+footer.site { padding: 3rem 0 3.5rem; color: var(--color-text-secondary); font-size: .82rem; }
+
+@media (max-width: 860px) {
+    .featured-exp { grid-template-columns: 1fr; }
+    .stamp { justify-self: start; }
+    .dest { grid-template-columns: 50px 1fr auto; }
+    .dest .region, .dest .days { display: none; }
+    .brow { grid-template-columns: 1fr auto; }
+    .brow .days, .brow .seats, .brow .st { display: none; }
+}

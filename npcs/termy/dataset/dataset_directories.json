@@ -1,0 +1,258 @@
+[
+    {
+        "category": "linux_directories_folders",
+        "input": [
+            "i need to create a directory",
+            "create a new directory",
+            "make a new folder",
+            "create a folder",
+            "make a directory"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the directory name\" > /dev/null 2>&1 && printf \"\\r\n📁 Directory name: \" && read -r dirname && if [ -n \"$dirname\" ]; then mkdir -p \"$dirname\" && printf \"\\nFolder \\033[1m%s\\033[22m created successfully.\\n\" \"$dirname\" && termy_say \"Folder $dirname created successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Operation cancelled.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi",
+                    "explanation": "Creates a new directory after prompting for the folder name.",
+                    "goal": "Create a new folder",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_directories_folders",
+        "input": [
+            "i want to delete a directory",
+            "i want to remove a directory",
+            "i want to remove a folder",
+            "i want to delete a folder",
+            "delete a folder",
+            "remove a folder"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the directory name to delete\" > /dev/null 2>&1 && printf \"\\r\\n📁 Enter the directory name to delete: \" && read -r dname && if [ -d \"$dname\" ]; then rm -rf \"$dname\" && printf \"\\nDirectory \\033[1m%s\\033[22m has been recursively deleted.\\n\" \"$dname\" && termy_say \"Directory deleted successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Directory does not exist.\\n\" && termy_say \"Directory not found\" > /dev/null 2>&1; fi",
+                    "explanation": "Deletes a directory after prompting for the folder name and verifying its existence.",
+                    "goal": "Delete a folder",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_directories_folders",
+        "input": [
+            "i want to delete a directory in this location",
+            "i want to remove a directory in this dir",
+            "i want to delete a folder in this dir",
+            "i want to remove a folder in this location",
+            "delete a directory from here",
+            "remove a directory from here",
+            "delete a folder from here",
+            "remove a folder from here"
+        ],
+        "description": "Deletes a directory in the current location.",
+        "output": "echo -e \"📁 \\nAvailable directories:\"; select dname in */; do if [ -n \"$dname\" ] && [ -d \"$dname\" ]; then rm -rf \"$dname\" && echo -e \"Directory \\033[1m${dname%/}\\033[22m recursively deleted.\" && break; else echo \"Invalid choice or not a directory.\"; break; fi; done",
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_directories_folders",
+        "input": [
+            "show dir",
+            "show dir contents",
+            "show folder contents",
+            "show current directory",
+            "show working directory",
+            "print working directory",
+            "print current directory",
+            "display current directory"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "pwd",
+                    "explanation": "Displays the current working directory.",
+                    "goal": "Display current directory",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_directories_folders",
+        "input": [
+            "list files",
+            "show files",
+            "display files",
+            "list directory contents",
+            "show directory contents",
+            "show me the files in this directory",
+            "show me the contents of this folder",
+            "show me the contents of this directory"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "ls -lah",
+                    "explanation": "Lists the files in the current directory.",
+                    "goal": "Display current directory contents",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_directories_folders",
+        "input": [
+            "remove empty dirs",
+            "clean up empty dirs",
+            "clean up empty folders",
+            "delete void directories",
+            "delete empty directories",
+            "remove empty directories"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "find . -type d -empty -delete",
+                    "explanation": "Deletes all empty directories in the current directory and its subdirectories.",
+                    "goal": "Delete empty directories",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "thinking": [
+            "OK, this is rather dangerous... it must be done right... I don't want to dump anything important...",
+            "Let's tidy up this wasteland..."
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_directories_folders",
+        "input": [
+            "i want to move in a different directory",
+            "i want to change directory",
+            "move to another folder",
+            "move in another directory",
+            "change directory",
+            "go to a folder",
+            "navigate to directory",
+            "cd to folder",
+            "move to another directory"
+        ],
+        "description": "Moves to a different directory.",
+        "output": "read -p \"📁 Enter the directory name to move to: \" dname && echo \"cd \\\"$dname\\\"\"",
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_files",
+        "input": [
+            "search for a specific word inside a file",
+            "find a word in a file",
+            "look for a word in a file",
+            "find word inside a file",
+            "find something in a file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the word to find\" > /dev/null 2>&1 && printf \"\\r\\n🔍 Word to find: \" && read -r word && if [ -n \"$word\" ]; then termy_say \"Please enter the target file path\" > /dev/null 2>&1 && printf \"📄 Target file: \" && read -r targetfile && if [ -f \"$targetfile\" ]; then printf \"\\nMatches for \\033[1m%s\\033[22m:\\n\" \"$word\" && grep -n \"$word\" \"$targetfile\" && printf \"\\n\" && termy_say \"Search completed\" > /dev/null 2>&1; else printf \"\\n⛔ Target file does not exist.\\n\" && termy_say \"File not found\" > /dev/null 2>&1; fi; else printf \"\\n⛔ Search word cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi",
+                    "explanation": "Searches for a specific word inside a file and displays the matching lines with line numbers.",
+                    "goal": "Search word in a file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_directories_folders",
+        "input": [
+            "compress a directory",
+            "zip a directory",
+            "compress a directory into an archive",
+            "create an archive from a directory",
+            "create zip or tar from a directory",
+            "archive a folder",
+            "zip a directory",
+            "tar a folder",
+            "compress folder to archive",
+            "pack directory",
+            "create archive from folder"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the directory to compress\" > /dev/null 2>&1 && printf \"\\r\\n📁 Directory to compress: \" && read -r source_dir && if [ -d \"$source_dir\" ]; then termy_say \"Please choose an archive format\" > /dev/null 2>&1 && printf \"\\n1) TAR.GZ - Linux standard\\n2) ZIP - Cross platform\\n\\nChoose format 1-2: \" && read -r arch_choice; case \"$arch_choice\" in 1) tar -czf \"$source_dir.tar.gz\" \"$source_dir\" && printf \"\\nArchive \\033[1m%s.tar.gz\\033[22m created.\\n\" \"$source_dir\" && termy_say \"Archive created successfully\" > /dev/null 2>&1 ;; 2) zip -r \"$source_dir.zip\" \"$source_dir\" && printf \"\\nArchive \\033[1m%s.zip\\033[22m created.\\n\" \"$source_dir\" && termy_say \"Archive created successfully\" > /dev/null 2>&1 ;; *) printf \"\\n⛔ Invalid choice.\\n\" && termy_say \"Invalid selection\" > /dev/null 2>&1 ;; esac; else printf \"\\n⛔ Directory does not exist.\\n\" && termy_say \"Directory not found\" > /dev/null 2>&1; fi",
+                    "explanation": "Compresses a directory into either a TAR.GZ or ZIP archive based on user choice.",
+                    "goal": "Compress a directory",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_directories_folders",
+        "input": [
+            "count files in this folder",
+            "count files beneath current directory including subfolders",
+            "how many files are in this folder and subfolders",
+            "recursively count all files in current directory",
+            "get total number of files in this directory tree",
+            "count every file inside this path",
+            "find total file count recursively",
+            "show number of files in current folder",
+            "count files in all subdirectories",
+            "get a count of all files here",
+            "list total count of files recursively"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Counting all files recursively\" > /dev/null 2>&1 && printf \"\\r\\nResult: \" && find . -type f 2>/dev/null | wc -l && printf \"\"",
+                    "explanation": "Recursively finds all files in the current directory tree and counts them using the wc utility.",
+                    "goal": "Count all files in the current directory and its subfolders",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "linux_system_folders_directories_directory_folder",
+        "input": [
+            "show disk usage by folder",
+            "folder sizes",
+            "which folders are biggest",
+            "top directories by size",
+            "show directory sizes",
+            "largest folders here"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Analyzing folder sizes\" > /dev/null 2>&1 && printf \"\\r\\n\" && du -sh -- */ 2>/dev/null | sort -rh | head -15 && printf \"\"",
+                    "explanation": "Calculates the disk usage of all top-level subdirectories, sorts them from largest to smallest, and displays the top 15.",
+                    "goal": "Show largest subdirectories by size",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    }
+]

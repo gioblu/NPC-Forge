@@ -1,0 +1,79 @@
+/* ============================================================
+   THEME · BLOG — chronicle masthead
+   Tokens: shared contract in _base.css.
+   The .progress bar at the top is driven by _core.js.
+   ============================================================ */
+
+/* ---- 1 · design tokens ---- */
+:root {
+    --color-background: #ffffff;
+    --color-surface: #f6f6f4;
+    --color-text-primary: #191919;
+    --color-text-secondary: #6b6b6b;
+    --color-accent-primary: #c8102e;      /* editorial crimson */
+    --color-accent-secondary: #191919;    /* aliases ink — used for the avatar */
+    --color-accent-tertiary: #6b6b6b;
+    --color-border: #e7e7e2;
+    --font-display: 'Newsreader', serif;
+    --font-body: 'Libre Franklin', sans-serif;
+}
+
+/* ---- 2 · page + reading progress bar ---- */
+body { font-family: var(--font-body); background: var(--color-background); color: var(--color-text-primary); }
+.progress {
+    position: fixed; inset: 0 0 auto 0; height: 3px;
+    background: var(--color-accent-primary); transform-origin: left; transform: scaleX(0);
+    z-index: 50;
+}
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 1.6rem; }
+
+/* ---- 3 · masthead ---- */
+.masthead { text-align: center; padding: 3.6rem 0 2.4rem; border-bottom: 3px double var(--color-border); }
+.masthead .issue { font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: .9rem; }
+.masthead h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.4rem, 6vw, 3.6rem); }
+.masthead .deck { color: var(--color-text-secondary); margin-top: .7rem; }
+
+/* ---- 4 · articles ---- */
+.kicker { font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--color-accent-primary); margin-bottom: .8rem; }
+.featured { padding: 3rem 0; border-bottom: 1px solid var(--color-border); }
+.featured h2, .post h2 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; }
+.featured h2 { font-size: clamp(1.9rem, 4.5vw, 2.7rem); margin-bottom: 1.1rem; }
+/* animated underline: background grows left→right on hover */
+.featured h2 a, .post h2 a {
+    text-decoration: none; color: inherit;
+    background: linear-gradient(var(--color-accent-primary), var(--color-accent-primary)) no-repeat 0 100% / 0 2px;
+    transition: background-size .35s, color .2s;
+}
+.featured h2 a:hover, .post h2 a:hover { background-size: 100% 2px; color: var(--color-accent-primary); }
+.featured .lead { font-size: 1.12rem; color: #3d3d3d; line-height: 1.75; }
+/* drop cap on the cover story */
+.featured .lead::first-letter {
+    font-family: var(--font-display); font-weight: 700; font-size: 3.6em;
+    float: left; line-height: .78; padding: .04em .12em 0 0; color: var(--color-accent-primary);
+}
+.byline { display: flex; gap: 1rem; align-items: center; margin-top: 1.4rem; font-size: .82rem; color: var(--color-text-secondary); flex-wrap: wrap; }
+.byline b { color: var(--color-text-primary); }
+.byline .avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--color-accent-secondary); color: #fff;
+    display: grid; place-items: center; font-family: var(--font-display); font-style: italic;
+}
+.post {
+    display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: start;
+    padding: 2rem 1rem; margin: 0 -1rem; border-bottom: 1px solid var(--color-border);
+    transition: background .25s;
+}
+.post:hover { background: var(--color-surface); }
+.post h2 { font-size: 1.55rem; margin: .5rem 0 .6rem; }
+.post .excerpt { color: var(--color-text-secondary); line-height: 1.7; max-width: 56ch; }
+.post .read { font-family: var(--font-display); font-style: italic; font-size: 1.6rem; color: var(--color-border); transition: .25s; align-self: center; }
+.post:hover .read { color: var(--color-accent-primary); transform: translateX(5px); }
+
+/* ---- 5 · footer ---- */
+footer.site { padding: 2.4rem 0 3.4rem; font-size: .82rem; color: var(--color-text-secondary); }
+footer.site a { color: var(--color-accent-primary); text-decoration: none; font-weight: 600; }
+
+@media (max-width: 640px) {
+    .post { grid-template-columns: 1fr; }
+    .post .read { display: none; }
+}

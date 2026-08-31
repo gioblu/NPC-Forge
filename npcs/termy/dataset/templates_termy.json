@@ -1,0 +1,71 @@
+[
+    {
+        "category": "control_repeat",
+        "structure": [[
+            {
+                "tag": "<||vocab_execute||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||n||>",
+                "type": "number",
+                "required": false
+            },
+            {
+                "tag": "<||vocab_times||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||string||>",
+                "type": "string",
+                "required": true
+            }
+        ]],
+        "description": "Executes any command N times in a loop, each iteration processes independently through termy. Use commas (,) to separate subcommands inside the loop.",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "n='<||n||>' && cmd='<||string||>' && cmd=\"${cmd//,/;}\" && for i in $(seq 1 \"$n\"); do echo \"\\n━━━ [$i/$n] executing: $cmd ━━━\" && termy \"$cmd\" || break; done",
+                    "explanation": "Loops N times, invoking termy with the specified command each iteration. Converts commas to semicolons for proper message splitting within each iteration.",
+                    "goal": "Execute command N times with independent processing",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "control_delay",
+        "structure": [[
+            {
+                "tag": [
+                    "<||vocab_delay||>",
+                    "<||vocab_wait||>"
+                ],
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||d||>",
+                "type": "string",
+                "required": true
+            }
+        ]],
+        "description": "Pauses execution for specified milliseconds. Use 'random' keyword to generate random delay up to max.",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "d='<||d||>' && if [[ \"$d\" == *\"random\"* ]]; then max_ms=$(echo \"$d\" | sed 's/[^0-9]//g') && random_ms=$((RANDOM * RANDOM % (max_ms + 1))) && sleep \"$(echo \"scale=3; $random_ms / 1000\" | bc)\"; else sleep \"$(echo \"scale=3; $d / 1000\" | bc)\"; fi",
+                    "explanation": "Pauses for specified milliseconds. If 'random' is in the string, generates random delay up to the specified maximum.",
+                    "goal": "Introduce delay between loop iterations",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    }
+]

@@ -1,0 +1,143 @@
+[
+    {
+        "intent": "web_page_generation",
+        "category": "linux_files",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": "<||vocab_create||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_webpage||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||string||>",
+                "type": "string",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||> Crafting the web application!",
+            "<||completion||>! Web page done."
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "termy_generate_web_page '<||string||>'",
+                    "explanation": "Generates a fully styled responsive HTML5/CSS3 webpage scaffold based on semantic theme detection and maps it into the active file context.",
+                    "goal": "Web page generation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask",
+        "thinking": [
+            "The user wants a dynamic graphical asset layout. Evaluating <||string||> to detect if they need a portfolio, a landing page, or a dark-mode app style.",
+            "Using native bash parameter expansion and multi-line heredocs to assemble a fully operational responsive template instantly."
+        ]
+    },
+    {
+        "intent": "shell_script_creation",
+        "category": "linux_files",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": "<||vocab_create||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_shell||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_script||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_print||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||string||>",
+                "type": "string",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||> The shell script is ready.",
+            "<||completion||> I will make it executable."
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "out_file='<||filename||>'; if [ -z \"$out_file\" ] || [ \"$out_file\" = 'null' ] || [ \"$out_file\" = '<||filename||>' ]; then printf '📄 Enter script name (e.g. script.sh): '; read -r out_file </dev/tty; out_file=$(echo \"$out_file\" | xargs); fi; [ -z \"$out_file\" ] && out_file='script.sh'; printf '#!/bin/bash\n\necho %s\n' \"$(printf '%q' '<||string||>')\" > \"$out_file\" && chmod +x -- \"$out_file\" && termy_set_context active_file \"$out_file\"",
+                    "explanation": "Generates Bash script with permissions natively applied, then asks to <||username||> how to name the script and persists it into the local state.",
+                    "goal": "Shell script creation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask",
+        "thinking": [
+            "The user wants an automated executable asset. Let's wrap their string inside a proper boilerplate.",
+            "That is something I can do faster than LLMs..."
+        ]
+    },
+    {
+        "intent": "shell_script_algorithm",
+        "category": "linux_files",
+        "type": "template",
+        "structure": [[
+            {
+                "tag": "<||vocab_create||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_script||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_implement||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||string||>",
+                "type": "string",
+                "required": true
+            }
+        ]],
+        "message": [
+            "<||completion||> The shell script is ready.",
+            "<||completion||> I will make it executable."
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "termy_shell_algorithm <||string||>",
+                    "explanation": "Generates Bash script with permissions natively applied, then asks to <||username||> how to name the script and persists it into the local state.",
+                    "goal": "Shell script and algorithm implementation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask",
+        "thinking": [
+            "The user wants a working shell script with the <||string||> algorithm in it... <||interjection||> the user probably thinks I am a generative language model...",
+            "That is something I can do faster than LLMs..."
+        ]
+    }
+]

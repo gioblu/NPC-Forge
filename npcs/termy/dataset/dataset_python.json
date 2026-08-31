@@ -1,0 +1,167 @@
+[
+    {
+        "category": "python_node_project",
+        "input": [
+            "initialize a new project",
+            "create a new project",
+            "set up a new project",
+            "project template setup",
+            "create new project",
+            "start a project",
+            "scaffold new project",
+            "set up project",
+            "new project setup"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf \"1) 🐍 Python project\\n2) 🐑 Node.js project\\n3) 🐏 Bash script\\n\\n\" && read -rp \"Choose (1-3): \" choice && read -rp \"Project name: \" name && tput cuu 1 && mkdir -p \"$name\" && if [ \"$choice\" = \"1\" ]; then termy_say \"Creating Python project\" > /dev/null 2>&1 && printf \"\\r\\n\" && touch \"$name/main.py\" \"$name/requirements.txt\" && echo \"# $name\" > \"$name/README.md\" && echo \"🚀 ✅ Python project created\"; elif [ \"$choice\" = \"2\" ]; then termy_say \"Creating Node project\" > /dev/null 2>&1 && printf \"\\r\\n\" && cd \"$name\" && npm init -y > /dev/null && touch \"index.js\" && cd .. && echo \"🚀 ✅ Node.js project created\"; elif [ \"$choice\" = \"3\" ]; then termy_say \"Creating Bash script\" > /dev/null 2>&1 && printf \"\\r\\n\" && cat > \"$name/script.sh\" << 'EOF'\n#!/usr/bin/env bash\nset -euo pipefail\necho \"Script initialized\"\nEOF\n chmod +x \"$name/script.sh\" && echo \"🚀 ✅ Bash script created\"; else printf \"\\r\\nInvalid option\\n\"; fi && printf \"\"",
+                    "explanation": "Provides a POSIX-compliant interactive menu to scaffold a basic template structure for Python, Node.js, or Bash projects while issuing specific audio announcements.",
+                    "goal": "Scaffold a new project structure based on template selection",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask"
+    },
+    {
+        "category": "python_server",
+        "input": [
+            "serve this directory",
+            "serve this folder",
+            "serve the contents of this folder",
+            "start a web server",
+            "start a webserver",
+            "start a server",
+            "start the server",
+            "start a python http server",
+            "quick http server",
+            "serve files over http",
+            "python web server",
+            "local http server",
+            "share files locally"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"🌐 Port (default 8000): \" port && port=${port:-8000} && tput cuu 1 && termy_say \"Starting Python HTTP server on port $port\" > /dev/null 2>&1 && printf \"\\r\\n\" && echo \"Serving at http://localhost:$port (Ctrl+C to stop)\" && python3 -m http.server \"$port\" && printf \"\"",
+                    "explanation": "Prompts for a port number and starts a basic Python HTTP server in the current directory to share files.",
+                    "goal": "Start a local Python HTTP server",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "python_venv",
+        "input": [
+            "create python virtual environment",
+            "make a venv",
+            "setup python venv",
+            "new python virtual environment",
+            "create venv",
+            "init python venv"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"📁 Venv name (default: venv): \" name && name=${name:-venv} && tput cuu 1 && termy_say \"Creating Python virtual environment\" > /dev/null 2>&1 && printf \"\\r\\n\" && python3 -m venv \"$name\" && echo -e \"✅ Created venv '\\033[1m$name\\033[22m'. Activate with: source $name/bin/activate\" && printf \"\"",
+                    "explanation": "Prompts for a virtual environment name, creates it using python3 -m venv, and provides the activation command.",
+                    "goal": "Create a Python virtual environment",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "python_run",
+        "input": [
+            "run python script",
+            "execute python file",
+            "run a python file",
+            "launch python script",
+            "python run file",
+            "execute a python script"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the python script path\" > /dev/null 2>&1 && printf \"\\r\\n🐍 Python script path: \" && read -r script && if [ -f \"$script\" ]; then if command -v python3 > /dev/null 2>&1; then python3 \"$script\" && printf \"\\n\" && termy_say \"Script executed successfully\" > /dev/null 2>&1; elif command -v python > /dev/null 2>&1; then python \"$script\" && printf \"\\n\" && termy_say \"Script executed successfully\" > /dev/null 2>&1; else termy_say \"Python not found, do you want to activate the virtual environment\" > /dev/null 2>&1 && printf \"\\n⛔ Python not found. Activate venv? y/n: \" && read -r ans && case \"$ans\" in [yY]*) printf \"\\n\" && if command -v locate_and_activate_venv > /dev/null 2>&1; then locate_and_activate_venv; else activate_venv; fi ;; *) printf \"\\n⛔ Operation cancelled.\\n\" ;; esac; fi; else printf \"\\n⛔ Script file does not exist.\\n\" && termy_say \"File not found\" > /dev/null 2>&1; fi",
+                    "explanation": "Runs a Python script using python3 or python, or prompts to activate the virtual environment if missing.",
+                    "goal": "Execute a Python script",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask"
+    },
+    {
+        "category": "python_venv",
+        "input": [
+            "create .env file",
+            "create a new .env file",
+            "make a new .env file",
+            "make .env file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Creating a new environment file\" > /dev/null 2>&1 && printf \"\\r\\n\" && create_env_file && printf \"\\n\" && termy_say \"Environment file created successfully\" > /dev/null 2>&1",
+                    "explanation": "Creates a new .env file in the current directory.",
+                    "goal": "Create a new env file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "python_venv",
+        "input": [
+            "add entry to .env file",
+            "edit .env file",
+            "modify .env file",
+            "update .env file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "add_env_entry",
+                    "explanation": "Adds or updates an entry in the existing .env file in the current directory.",
+                    "goal": "Update env entry",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "python_venv",
+        "input": [
+            "remove entry from .env file",
+            "delete line from .env file",
+            "remove entry from .env file",
+            "delete value from .env file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "remove_env_entry",
+                    "explanation": "Displays a list of keys from the .env file and removes the selected one.",
+                    "goal": "Remove env entry by selection",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    }
+]

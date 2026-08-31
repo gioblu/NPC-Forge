@@ -1,0 +1,67 @@
+/* ================================================================
+   _base.css — shared foundation, prepended to every theme.
+   Concatenation order: _base.css → <theme>.css → scheme override.
+   (A later :root block wins the cascade, which is exactly how the
+   generator's color schemes restyle a theme without touching it.)
+
+   DESIGN TOKEN CONTRACT — every theme declares these names in :root,
+   and schemes only ever rewrite these values. This naming convention
+   ensures clarity and professional maintainability across all themes.
+
+   COLOR TOKENS (--color-*):
+     --color-background         page background
+     --color-surface            cards/panels floating on background
+     --color-text-primary       primary text (headings, body)
+     --color-text-secondary     secondary text (muted, hints, captions)
+     --color-accent-primary     primary accent (buttons, highlights)
+     --color-accent-secondary   secondary accent (links, borders)
+     --color-accent-tertiary    tertiary accent (optional — may alias)
+     --color-border             hairlines and borders
+
+   TYPOGRAPHY TOKENS (--font-*):
+     --font-display             display typeface (headings, titles)
+     --font-body                body typeface (paragraphs, default)
+     --font-monospace           monospace typeface (code, terminals)
+   ================================================================ */
+
+/* ---- reset ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+img { max-width: 100%; display: block; }
+button { font: inherit; }
+address { font-style: normal; }   /* <address> is italic by default — we don't want that */
+
+/* ---- scroll reveals ------------------------------------------------
+   Markup side: add data-reveal to any element you want to fade up.
+   Needs app.js — the observer lives in _core.js. */
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity .7s cubic-bezier(.2,.7,.2,1),
+                transform .7s cubic-bezier(.2,.7,.2,1);
+}
+[data-reveal].is-in { opacity: 1; transform: none; }
+
+/* Respect users who ask their OS for less motion. */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+    [data-reveal] { opacity: 1; transform: none; }
+}
+
+/* ---- shared footer -------------------------------------------------
+   Layout only — colors & spacing come from each theme's footer rule.
+   {{ADDRESS}} / {{EMAIL}} / {{SOCIALS}} may render empty; the
+   gap-based layout absorbs empty children gracefully. */
+.site {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+.site .f-links { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; }
+.site .f-links a { text-decoration: none; transition: opacity .2s; }
+.site .f-links a:hover { opacity: .65; text-decoration: underline; }

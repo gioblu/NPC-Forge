@@ -1,0 +1,136 @@
+[
+    {
+        "category": "htaccess_redirect",
+        "input": [
+            "add https redirect to htaccess",
+            "add https redirect to .htaccess",
+            "add force https redirect to htaccess",
+            "htaccess force https redirect",
+            "how to redirect http to https in htaccess",
+            "apache rule to force secure ssl connection",
+            "redirect to https rewrite rule"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"📄 .htaccess path (default: ./.htaccess): \" path && path=${path:-.htaccess} && tput cuu 1 && termy_say \"Adding HTTPS redirect rule\" > /dev/null 2>&1 && printf \"\\r\\n\" && cat << 'EOF' >> \"$path\"\n\n# Force HTTPS redirect\nRewriteEngine On\nRewriteCond %{HTTPS} off\nRewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\nEOF\n echo \"✅ HTTPS redirect rules successfully appended to $path\" && printf \"\"",
+                    "explanation": "Prompts for the .htaccess file location and appends Apache rules to force redirect all unencrypted traffic to HTTPS.",
+                    "goal": "Append HTTPS enforcement rewrite rules to an .htaccess file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "htaccess_redirect_www",
+        "input": [
+            "htaccess redirect non-www to www",
+            "force www prefix in apache htaccess",
+            "redirect domain.com to ://domain.com htaccess"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"📄 .htaccess path (default: ./.htaccess): \" path && path=${path:-.htaccess} && tput cuu 1 && termy_say \"Adding WWW prefix rule\" > /dev/null 2>&1 && printf \"\\r\\n\" && cat << 'EOF' >> \"$path\"\n\n# Force www prefix\nRewriteEngine On\nRewriteCond %{HTTP_HOST} !^www\\. [NC]\nRewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]\nEOF\n echo \"✅ WWW prefix rules successfully appended to $path\" && printf \"\"",
+                    "explanation": "Prompts for the .htaccess file location and appends configuration steps to force rewrite URLs to include the www subdomain.",
+                    "goal": "Append WWW prefix enforcement rewrite rules to an .htaccess file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "htaccess_spa",
+        "input": [
+            "htaccess client-side routing fallback",
+            "htaccess config for spa react vue routing",
+            "htaccess single page application react vue routing",
+            "fallback all routes to index.html htaccess",
+            "fix 404 on page refresh react router apache"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"📄 .htaccess path (default: ./.htaccess): \" path && path=${path:-.htaccess} && tput cuu 1 && termy_say \"Adding single page application routing fallback\" > /dev/null 2>&1 && printf \"\\r\\n\" && cat << 'EOF' >> \"$path\"\n\n# SPA client side routing fallback\nRewriteEngine On\nRewriteBase /\nRewriteRule ^index\\.html$ - [L]\nRewriteCond %{REQUEST_FILENAME} !-f\nRewriteCond %{REQUEST_FILENAME} !-d\nRewriteRule . /index.html [L]\nEOF\n echo \"✅ SPA client-side routing rules successfully appended to $path\" && printf \"\"",
+                    "explanation": "Prompts for the .htaccess file location and appends the necessary fallback configurations to prevent 404 errors on Single Page Applications.",
+                    "goal": "Append client-side routing fallback rules for SPAs to an .htaccess file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "htaccess_gzip",
+        "input": [
+            "add gzip compression to htaccess",
+            "add gzip to htaccess",
+            "enable gzip compression htaccess snippet",
+            "speed up website with mod_deflate htaccess",
+            "compress text html javascript assets apache"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"📄 .htaccess path (default: ./.htaccess): \" path && path=${path:-.htaccess} && tput cuu 1 && termy_say \"Enabling gzip compression\" > /dev/null 2>&1 && printf \"\\r\\n\" && cat << 'EOF' >> \"$path\"\n\n# Enable gzip compression\n<IfModule mod_deflate.c>\n    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json\n</IfModule>\nEOF\n echo \"✅ Gzip compression filters successfully appended to $path\" && printf \"\"",
+                    "explanation": "Prompts for the .htaccess file location and appends mod_deflate rules to compress code assets for faster network loading speeds.",
+                    "goal": "Append asset Gzip compression configurations to an .htaccess file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "htaccess_block_ip",
+        "input": [
+            "block ip in .htaccess",
+            "block ip in htaccess",
+            "add block to specific ip in htaccess",
+            "block specific ip address htaccess",
+            "ban ip apache configuration rule",
+            "deny access from ip string htaccess"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"📄 .htaccess path (default: ./.htaccess): \" path && path=${path:-.htaccess} && read -p \"🚫 IP address to block: \" ip && tput cuu 1 && termy_say \"Blocking target IP address\" > /dev/null 2>&1 && printf \"\\r\\n\" && cat << EOF >> \"$path\"\n\n# Block access from specific IP\n<RequireAll>\n    Require all granted\n    Require not ip $ip\n</RequireAll>\nEOF\n echo \"✅ IP restriction block successfully appended to $path\" && printf \"\"",
+                    "explanation": "Prompts for the .htaccess file location and the target IP, appending specific Apache 2.4 server restriction tags to block its requests.",
+                    "goal": "Append IP address access blocking rules to an .htaccess file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "htaccess_init",
+        "input": [
+            "initialize .htaccess",
+            "initialize htaccess file",
+            "create boilerplate .htaccess",
+            "initialize standard htaccess file",
+            "generate default htaccess web server",
+            "make standard apache configuration file"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Generating boilerplate htaccess\" > /dev/null 2>&1 && printf \"\\r\\n\" && cat << 'EOF' > .htaccess\n# Apache Configuration File\n\n# 1. Protect htaccess itself\n<Files .htaccess>\n    Require all denied\n</Files>\n\n# 2. Disable directory browsing\nOptions -Indexes\n\n# 3. UTF-8 Encoding\nAddDefaultCharset UTF-8\nEOF\n echo \"📄 Created .htaccess boilerplate with security basics\" && printf \"\"",
+                    "explanation": "Generates a clean .htaccess file in the current directory with baseline security rules (disables directory browsing and blocks direct access to itself).",
+                    "goal": "Create a standard boilerplate .htaccess file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    }
+]

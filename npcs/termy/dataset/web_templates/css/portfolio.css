@@ -1,0 +1,100 @@
+/* ============================================================
+   THEME · PORTFOLIO — editorial engineer
+   Tokens: shared contract in _base.css.
+   ============================================================ */
+
+/* ---- 1 · design tokens ---- */
+:root {
+    --color-background: #f1f3ee;
+    --color-surface: #ffffff;
+    --color-text-primary: #171b18;
+    --color-text-secondary: #5d675f;
+    --color-accent-primary: #1d6f4c;      /* forest green */
+    --color-accent-secondary: #e9c84c;    /* amber highlighter swipe */
+    --color-accent-tertiary: #5d675f;
+    --color-border: #d9ded4;
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Archivo', sans-serif;
+}
+
+/* ---- 2 · page ---- */
+body { font-family: var(--font-body); background: var(--color-background); color: var(--color-text-primary); }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 2rem; }
+
+/* ---- 3 · top bar with pulsing availability badge ---- */
+.topbar { display: flex; justify-content: space-between; align-items: center; padding: 1.6rem 0; }
+.monogram { font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; }
+.status {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--color-accent-primary); border: 1px solid var(--color-accent-primary);
+    padding: .45rem .95rem; border-radius: 99px;
+}
+.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent-primary); animation: pulse 1.8s infinite; }
+@keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(29, 111, 76, .5); }
+    70%  { box-shadow: 0 0 0 9px rgba(29, 111, 76, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(29, 111, 76, 0); }
+}
+
+/* ---- 4 · hero: the title gets the highlighter swipe via <em> ---- */
+.hero { padding: 5rem 0 3.5rem; }
+.role { font-size: .82rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: 1.2rem; }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(3rem, 8vw, 5.6rem); line-height: 1.02; letter-spacing: -.02em; max-width: 18ch; }
+h1 em { font-style: italic; font-weight: 600; background: linear-gradient(transparent 62%, var(--color-accent-secondary) 62%); }
+
+/* ---- 5 · intro + animated skill bars ---- */
+.intro { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; padding: 2.5rem 0 3.5rem; border-bottom: 1px solid var(--color-border); }
+.intro p { color: var(--color-text-secondary); line-height: 1.75; }
+.intro p + p { margin-top: 1rem; }
+.intro p b { color: var(--color-text-primary); }
+.skills { display: grid; gap: .9rem; align-content: start; }
+.skill { display: grid; grid-template-columns: 110px 1fr 44px; gap: 1rem; align-items: center; font-size: .85rem; font-weight: 600; }
+.skill .bar { height: 8px; background: var(--color-border); border-radius: 99px; overflow: hidden; }
+.skill .bar i {
+    display: block; height: 100%; background: var(--color-accent-primary); border-radius: 99px;
+    transform-origin: left; animation: fill 1.2s cubic-bezier(.2,.8,.2,1) backwards;
+}
+@keyframes fill { from { transform: scaleX(0); } }
+/* per-skill widths + stagger (kept out of the markup on purpose) */
+.skill:nth-child(1) .bar i { width: 92%; }
+.skill:nth-child(2) .bar i { width: 84%; animation-delay: .1s; }
+.skill:nth-child(3) .bar i { width: 88%; animation-delay: .2s; }
+.skill:nth-child(4) .bar i { width: 90%; animation-delay: .3s; }
+
+/* ---- 6 · selected work: full-width rows that invert on hover ---- */
+h2.section { font-family: var(--font-display); font-size: 2rem; padding: 3.5rem 0 1.5rem; }
+.work a {
+    display: grid; grid-template-columns: 70px 1fr auto; gap: 2rem; align-items: baseline;
+    padding: 1.9rem 1rem; border-top: 1px solid var(--color-border);
+    text-decoration: none; color: inherit; transition: .3s;
+}
+.work a:last-child { border-bottom: 1px solid var(--color-border); }
+.work .n { font-family: var(--font-display); font-style: italic; color: var(--color-text-secondary); transition: .3s; }
+.work h3 { font-family: var(--font-display); font-size: 1.7rem; font-weight: 600; margin-bottom: .3rem; transition: .3s; }
+.work p { color: var(--color-text-secondary); font-size: .95rem; transition: .3s; }
+.work .go { font-size: 1.4rem; opacity: 0; transform: translateX(-8px); transition: .3s; }
+.work a:hover { background: var(--color-text-primary); }
+.work a:hover h3, .work a:hover .n, .work a:hover .go { color: var(--color-accent-secondary); }
+.work a:hover p { color: #c9d2c9; }
+.work a:hover .go { opacity: 1; transform: none; }
+
+/* ---- 7 · contact: the {{EMAIL}} anchor inherits this ---- */
+.contact { padding: 5rem 0 2rem; }
+.contact p { color: var(--color-text-secondary); margin-bottom: 1rem; }
+.contact a {
+    font-family: var(--font-display); font-size: clamp(1.8rem, 5vw, 3.2rem);
+    color: var(--color-accent-primary); text-decoration: none;
+    background: linear-gradient(var(--color-accent-primary), var(--color-accent-primary)) no-repeat 0 100% / 0 3px;
+    transition: background-size .4s;
+}
+.contact a:hover { background-size: 100% 3px; }
+
+/* ---- 8 · footer ---- */
+footer.site { padding: 0 0 3rem; color: var(--color-text-secondary); font-size: .8rem; }
+
+@media (max-width: 760px) {
+    .intro { grid-template-columns: 1fr; }
+    .work a { grid-template-columns: 44px 1fr; }
+    .work .go { display: none; }
+}

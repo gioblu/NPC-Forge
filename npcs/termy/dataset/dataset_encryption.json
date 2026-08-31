@@ -1,0 +1,222 @@
+[
+    {
+        "category": "encryption_ssh",
+        "input": [
+            "generate an ssh key pair",
+            "create an ssh key",
+            "make me a ssh key",
+            "generate ssh keys",
+            "create ssh key",
+            "make ssh keypair",
+            "new ssh key pair",
+            "ssh keygen"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter your email for the key comment\" > /dev/null 2>&1 && printf \"\\r\\n✉️ Enter your email for the key comment: \" && read -r ssh_email && if [ -n \"$ssh_email\" ]; then termy_say \"Please enter the key filename\" > /dev/null 2>&1 && printf \"Key filename id_rsa_project: \" && read -r key_name && if [ -n \"$key_name\" ]; then ssh-keygen -t ed25519 -C \"$ssh_email\" -f \"$HOME/.ssh/$key_name\" && printf \"\\nSSH key pair \\033[1m%s\\033[22m generated in ~/.ssh/\\n\" \"$key_name\" && termy_say \"SSH key pair generated successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Key filename cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi; else printf \"\\n⛔ Email cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi",
+                    "explanation": "Generates an SSH key pair with a user-provided email comment and filename.",
+                    "goal": "Generate an SSH key pair",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "encryption_password",
+        "input": [
+            "generate a strong random password immediately",
+            "create a secure password",
+            "print a random password",
+            "show a strong password",
+            "make a password",
+            "create random password",
+            "generate password",
+            "random password generator",
+            "strong password now"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the password length\" > /dev/null 2>&1 && printf \"\\r\\n🔑 Enter password length default 16: \" && read -r plen && plen=${plen:-16} && pass=$(tr -dc 'A-Za-z0-9!@#$%^&*_+=' < /dev/urandom | head -c \"$plen\") && printf \"\\nGenerated Password: \\033[1m%s\\033[22m\\n\" \"$pass\" && termy_say \"Password generated successfully\" > /dev/null 2>&1",
+                    "explanation": "Generates a strong random password of a specified length using /dev/urandom.",
+                    "goal": "Generate a random password",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "encryption_random",
+        "input": [
+            "generate secure random runmber",
+            "random number generator function zsh",
+            "generate cryptographically secure random bits with zsh",
+            "trng function based on epoch real time flips",
+            "create a true random number generator algorithm in shell",
+            "sha256sum random string generator using epoch microtime",
+            "zsh function to generate random bits via timing",
+            "build a custom random number function in shell",
+            "generate entropy using epochrealtime loop flips",
+            "random sha256 generation function via time drift",
+            "create coin flip random number generator in zsh"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Generating timing entropy\" > /dev/null 2>&1 && printf \"\\r\\nResult: \" && flips=\"\"; while [ ${#flips} -lt 256 ]; do coin=0; t=$(date +%s%N); t=$((t + 1000000)); while [ $(date +%s%N) -lt $t ]; do coin=$((coin ^ 1)); done; flips=\"${flips}${coin}\"; done; echo \"$flips\" | sha256sum | awk '{print $1}' && printf \"\"",
+                    "explanation": "Generates a 256-bit entropy string using nanosecond clock drift loops compatible with Bash and Zsh, hashes it with sha256sum, and outputs the random string.",
+                    "goal": "Generate a secure random hash using timing drift entropy",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "encryption_uuid",
+        "input": [
+            "generate a uuid",
+            "create a uuid",
+            "random uuid",
+            "new uuid",
+            "make a uuid",
+            "print uuid"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Generating UUID\" > /dev/null 2>&1 && printf \"\\r\\nResult: \" && python3 -c \"import uuid; print(uuid.uuid4())\" && printf \"\"",
+                    "explanation": "Generates a random UUID version 4 using Python's uuid module.",
+                    "goal": "Generate a random UUID v4",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "format_base64",
+        "input": [
+            "base64 encode decode",
+            "encode to base64",
+            "decode from base64",
+            "base64 convert",
+            "base64 encode a string",
+            "base64 decode a string"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf '1) Encode\\n2) Decode\\n\\n' && read -p 'Choose (1-2): ' c && read -p 'String: ' s && tput cuu 1 && if [ \"$c\" = '1' ]; then termy_say \"Encoding string\" > /dev/null 2>&1 && printf \"\\r\\nResult: \" && echo -n \"$s\" | base64; else termy_say \"Decoding string\" > /dev/null 2>&1 && printf \"\\r\\nResult: \" && echo \"$s\" | base64 -d; fi && printf \"\"",
+                    "explanation": "Prompts the user to choose between encoding or decoding, takes the input string, and processes it using the base64 utility.",
+                    "goal": "Encode or decode strings using Base64",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "encryption_ssl",
+        "input": [
+            "check ssl certificate",
+            "ssl cert expiry",
+            "when does ssl expire",
+            "show ssl certificate info",
+            "check certificate validity",
+            "ssl expiration date"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Please enter the domain name\" > /dev/null 2>&1 && printf \"\\r\\n🔒 Domain name: \" && read -r domain && if [ -n \"$domain\" ]; then CERT_DATA=$(echo | openssl s_client -connect \"$domain:443\" -servername \"$domain\" 2>/dev/null | openssl x509 -noout -enddate 2>/dev/null | cut -d= -f2); if [ -n \"$CERT_DATA\" ]; then printf \"\\n📜 SSL Expiration Date: \\033[1m%s\\033[22m\\n\" \"$CERT_DATA\" && termy_say \"The S S L certificate expires on $CERT_DATA\" > /dev/null 2>&1; else printf \"\\n⛔ Could not retrieve SSL certificate for that domain.\\n\" && termy_say \"Connection failed\" > /dev/null 2>&1; fi; else printf \"\\n⛔ Domain cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi",
+                    "explanation": "Checks the SSL certificate expiration date of a domain and speaks the result.",
+                    "goal": "Check SSL certificate expiration",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "format_qr",
+        "input": [
+            "generate qr code",
+            "convert link to qr code",
+            "create qr code",
+            "make qr code"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"🔗 Text or Link for QR: \" qrtext && tput cuu 1 && if ! command -v qrencode >/dev/null 2>&1; then termy_say \"Installing QR generator\" > /dev/null 2>&1 && printf \"\\r\\n📦 Installing qrencode...\\n\" && sudo apt update -y >/dev/null 2>&1 && sudo apt install -y qrencode >/dev/null 2>&1; fi && termy_say \"Generating QR code\" > /dev/null 2>&1 && printf \"\\r\\n\" && qrencode -t UTF8 \"$qrtext\" && printf \"\"",
+                    "explanation": "Prompts for text input, guarantees the qrencode utility is present on the OS, and renders an ASCII-art style QR code directly on the console.",
+                    "goal": "Render an interactive QR code inside the terminal window",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "encryption_chat",
+        "input": [
+            "start encrypted terminal chat",
+            "connect netcat peer communication",
+            "open encrypted chat",
+            "start encrypted chat",
+            "start secure chat",
+            "start p2p chat",
+            "secure p2p text sharing shell"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf \"1) 🎧 Listen for connection (Server)\\n2) 🔌 Connect to a colleague (Client)\\n\\n\" && read -rp \"Choose (1-2): \" choice && tput cuu 1 && if [ \"$choice\" = \"1\" ]; then read -rp \"🔌 Port to open (default 4444): \" port && port=${port:-4444} && tput cuu 1 && termy_say \"Waiting for colleague connection\" > /dev/null 2>&1 && printf \"\\r\\n🎧 Server active on port $port. Waiting...\\n\" && nc -lvp \"$port\"; elif [ \"$choice\" = \"2\" ]; then read -rp \"🌐 Colleague IP: \" ip && read -rp \"🔌 Port (default 4444): \" port && port=${port:-4444} && tput cuu 1 && termy_say \"Connecting to peer\" > /dev/null 2>&1 && printf \"\\r\\n🔌 Connecting to $ip:$port...\\n\" && nc \"$ip\" \"$port\"; else printf \"\\r\\nInvalid option\\n\"; fi && printf \"\"",
+                    "explanation": "Uses the native netcat (nc) utility to establish a lightweight bi-directional chat socket between two machines on a network.",
+                    "goal": "Open a zero-dependency instant local chat session via netcat",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "encryption_ssl",
+        "input": [
+            "read ssl certificate",
+            "browse ssl certificate",
+            "inspect ssl certificate",
+            "inspect site ssl certificate",
+            "inspect website ssl certificate",
+            "inspect website ssl certificate details",
+            "check domain certificate",
+            "check domain certificate expiration date",
+            "openssl ssl info",
+            "debug https certificate"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "read -p \"🌐 Domain (e.g. google.com): \" domain && tput cuu 1 && termy_say \"Analyzing SSL certificate\" > /dev/null 2>&1 && printf \"\\r\\n\" && true | openssl s_client -connect \"$domain\":443 2>/dev/null | openssl x509 -noout -text 2>/dev/null | grep -E \"Issuer:|Not Before:|Not After |Subject:\" && printf \"\"",
+                    "explanation": "Establishes a silent secure connection to a remote host and pipes its dynamic x509 metadata structure into openssl filtering for validation dates.",
+                    "goal": "Verify and inspect remote SSL certificate parameters instantly",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    }
+]

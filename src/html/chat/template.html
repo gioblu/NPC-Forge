@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#04090b">
+    <title>{{NPC_NAME}} - Standalone Chat</title>
+    <style>
+        /*{{STYLE_SOURCE}}*/
+    </style>
+</head>
+
+<body>
+    <meta id="theme-color-meta" name="theme-color" content="#04090b">
+    <div class="top-bar">
+        <h3>NPC-Forge Chat</h3>
+        <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">Light</button>
+    </div>
+    <div id="chat-window"></div>
+    <div class="input-bar">
+        <input type="text" id="input-box" placeholder="Write a message..."
+            onkeydown="if(event.key==='Enter')sendMessage()">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</body>
+<script>
+    const CHAT_THEME = {
+        dark: { class: '', btnText: 'Light', metaColor: '#04090b' },
+        light: { class: 'light-mode', btnText: 'Dark', metaColor: '#f4f7f5' }
+    };
+
+    // {{CAPTAIN_SOURCE}}
+
+    // {{FLINT_PARSER_SOURCE}}
+
+    // {{FLINT_NPC_SOURCE}}
+
+    // {{NPC_BUNDLE_DATA}}
+
+    let captain = new Captain();
+    const npcName = "{{NPC_NAME}}";
+    const bot = new FlintNPC(npcName);
+    bot.set_bundle_data(npcBundleData);
+
+    bot.metadata.username = "LocalWebUser";
+    bot.metadata.computer_name = "StandaloneBrowserEnv";
+    console.log("config: ", bot.config);
+    const isTtsEnabled = bot.config && bot.config.tts === true;
+    const win = document.getElementById("chat-window");
+    const box = document.getElementById("input-box");
+
+    // Cache variable to save welcome text for an execution fallback delay
+    let welcomeText = "";
+    
+    // Username state for chat
+    let currentUsername = localStorage.getItem('npc_context_username') || 'You';
+
+    // Display system startup message with sci-fi flair
+    function showSystemMessage() {
+        const systemMsg = `Chat with <strong>${npcName.toUpperCase()}</strong> is now <strong>READY</strong>.`;
+        const div = document.createElement("div");
+        div.className = "msg intro";
+        div.innerHTML = systemMsg;
+        win.appendChild(div);
+        win.scrollTop = win.scrollHeight;
+    }
+
+    // Show system message when page loads
+    showSystemMessage();
+    sendMessage("welcome");
+
+    document.body.addEventListener("click", () => {
+        if (isTtsEnabled && window.speechSynthesis &&
+            !window.speechSynthesis.speaking) {
+            // Recover the missed welcome message on user interaction
+            speak(welcomeText);
+        }
+    }, { once: true });
+
+    // Resolve context variable placeholders: $(npc_context_key) -> localStorage value
+    function resolveContextVars(jsonStr) {
+        return jsonStr.replace(/\$\(npc_context_(\w+)\)/g, (match, key) => {
+            const val = localStorage.getItem(`npc_context_${key}`) || '';
+            return val.replace(/"/g, '\\"'); // Escape quotes for JSON
+        });
+    }
+
+    async function executeToolChain(tools) {
+        let accumulatedHtml = "";
+        tools = tools[0];
+        console.log("tools: ", tools);
+
+        if(!tools) return;
+        for (let i = 0; i < tools.length; i++) {
+            const toolCall = tools[i];
+            let toolFn = null;
+            let parsedArgs = null;
+            console.log(toolCall);
+            // Copilot format: { "name": "tool_name", "arguments": {...} }
+            if (toolCall.name && toolCall.arguments) {
+                toolFn = captain.tools[toolCall.name];
+                parsedArgs = typeof toolCall.arguments === 'string' 
+                    ? JSON.parse(resolveContextVars(toolCall.arguments))
+                    : toolCall.arguments;
+            }
+            // OpenAI format: { "function": { "name": "...", "arguments": "JSON string" } }
+            else if (toolCall.function && toolCall.function.name && toolCall.function.arguments) {
+                console.log("OPENAI PARSING", toolCall.function.name, captain.tools);
+                toolFn = captain.tools[toolCall.function.name];
+                parsedArgs = JSON.parse(resolveContextVars(toolCall.function.arguments));
+            }
+
+            if (!toolFn) {
+                console.warn("[Captain] Tool not found:", toolCall.name || (toolCall.function && toolCall.function.name));
+                continue;
+            }
+
+            const output = await toolFn([parsedArgs]);
+
+            // Accumulate output
+            if (output && output.type === "text") {
+                accumulatedHtml += `<div>${output.content}</div>`;
+            } else if (output && output.type === "html") {
+                accumulatedHtml += `<div style="margin-top: 10px;">${output.content}</div>`;
+            }
+        }
+        
+        return accumulatedHtml;
+    }
+
+    async function sendMessage(msg) {
+        const text = (msg) ? msg : box.value.trim();
+        if (!text) return;
+        appendMessage(currentUsername, text, "user");
+        box.value = "";
+
+        try {
+            if (isTtsEnabled && window.speechSynthesis) {
+                window.speechSynthesis.cancel();
+            }
+        } catch (e) {
+            console.warn("[TTS] Synthesis block intercepted", e);
+        }
+
+
+        // Normal flow: process user input
+        const payload = bot.process_messages(text);
+        
+        // Check if first tool is Question
+        const firstTool = payload.tools && payload.tools.length > 0 ? payload.tools[0] : null;
+        const firstToolName = firstTool ? (firstTool.name || (firstTool.function && firstTool.function.name)) : null;
+        console.log(payload);
+        // Execute tool chain and collect output
+        const toolsHtml = await executeToolChain(payload.tools || []);
+        speak(payload.response);
+        const combinedHtml = toolsHtml ? toolsHtml : "";
+        appendMessage(npcName, payload.response, "npc", payload.emoji, payload.thinking, combinedHtml);
+    
+    }
+
+    function speak(text) {
+        if (!isTtsEnabled || !text || !window.speechSynthesis) return;
+
+        try {
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = bot.config.lang || "en-US";
+            utterance.volume = 0.5;
+            utterance.pitch = 0.5;
+
+            const voices = window.speechSynthesis.getVoices();
+            if (voices.length > 0) {
+                utterance.voice = voices[0];
+            } else console.error("TTS failed: no voices available");
+
+            window.speechSynthesis.speak(utterance);
+        } catch (e) {
+            console.error("TTS failed:", e);
+        }
+    }
+
+    function appendMessage(sender, text, className, emoji = "😑", thinking = null, html = "") {
+        const div = document.createElement("div");
+        div.className = `msg ${className}`;
+        let prefix = `${sender}: `;
+        prefix = prefix.charAt(0).toUpperCase() + prefix.slice(1);
+        
+        let messageHTML = "";
+        
+        if (thinking && className === "npc") {
+            messageHTML += `<div class="thinking">Thinking: ${thinking}</div>`;
+        }
+
+        messageHTML += `<span>${prefix}${text}${(emoji != "😑") ? " " + emoji : ""}</span>`;
+        
+        if (html) {
+            messageHTML += `<div style="margin-top: 10px;">${html}</div>`;
+        }
+        
+        div.innerHTML = messageHTML;
+        win.appendChild(div);
+        win.scrollTop = win.scrollHeight;
+    }
+
+    function applyTheme(theme) {
+        const config = CHAT_THEME[theme];
+        const root = document.documentElement;
+        root.className = config.class;
+        document.getElementById('theme-btn').textContent = config.btnText;
+        document.getElementById('theme-color-meta').setAttribute('content', config.metaColor);
+        localStorage.setItem('chat-theme', theme);
+    }
+
+    function toggleTheme() {
+        const currentTheme = localStorage.getItem('chat-theme') || 'dark';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(newTheme);
+    }
+
+    // Apply saved theme on page load
+    const savedTheme = localStorage.getItem('chat-theme') || 'dark';
+    applyTheme(savedTheme);
+</script>
+
+</html>

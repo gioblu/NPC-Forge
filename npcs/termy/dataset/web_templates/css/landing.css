@@ -1,0 +1,126 @@
+/* ============================================================
+   THEME · LANDING — blueprint engineering
+   Tokens: the shared contract lives in _base.css (--color-*, --font-*).
+   A color scheme chosen in the generator overrides :root below.
+   ============================================================ */
+
+/* ---- 1 · design tokens ---- */
+:root {
+    --color-background: #0d2137;                    /* deep blueprint blue */
+    --color-surface: #122c46;               /* terminal panel, hovered rows */
+    --color-text-primary: #e9f2f8;
+    --color-text-secondary: #93adc0;
+    --color-accent-primary: #ff6a2b;                /* safety orange */
+    --color-accent-secondary: #53c8ff;              /* cyan lines & links */
+    --color-accent-tertiary: #93adc0;
+    --color-border: rgba(140, 190, 230, .14); /* blueprint grid + rules */
+    --font-display: 'Archivo Black', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --font-monospace: 'IBM Plex Mono', monospace;
+}
+
+/* ---- 2 · page: blueprint grid + corner glow ---- */
+body {
+    font-family: var(--font-body);
+    color: var(--color-text-primary);
+    background:
+        radial-gradient(900px 500px at 85% -10%, rgba(83, 200, 255, .12), transparent 60%),
+        linear-gradient(var(--color-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-border) 1px, transparent 1px),
+        var(--color-background);
+    background-size: auto, 44px 44px, 44px 44px, auto;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+
+/* ---- 3 · top bar ---- */
+.topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 0; border-bottom: 1px solid var(--color-border);
+    font-family: var(--font-monospace); font-size: .85rem;
+}
+.topbar .logo { font-family: var(--font-display); letter-spacing: .04em; }
+.topbar .logo b { color: var(--color-accent-primary); }
+.topbar nav a { color: var(--color-text-secondary); text-decoration: none; margin-left: 1.6rem; transition: color .2s; }
+.topbar nav a:hover { color: var(--color-accent-secondary); }
+
+/* ---- 4 · hero: copy left, live terminal right ---- */
+.hero {
+    display: grid; grid-template-columns: 1.05fr .95fr;
+    gap: 4rem; align-items: center; padding: 5.5rem 0 4.5rem;
+}
+.kicker {
+    font-family: var(--font-monospace); color: var(--color-accent-secondary);
+    font-size: .78rem; letter-spacing: .2em; text-transform: uppercase;
+    margin-bottom: 1.4rem;
+}
+h1 {
+    font-family: var(--font-display); text-transform: uppercase;
+    font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: 1.05;
+    margin-bottom: 1.4rem;
+}
+h1::after { content: ""; display: block; width: 88px; height: 6px; background: var(--color-accent-primary); margin-top: 1.2rem; }
+.lede { color: var(--color-text-secondary); font-size: 1.15rem; max-width: 46ch; margin-bottom: 2.2rem; }
+.cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn {
+    font-family: var(--font-monospace); font-size: .88rem; text-decoration: none;
+    padding: .85rem 1.4rem; border: 1px solid transparent; transition: .25s;
+}
+.btn-solid { background: var(--color-accent-primary); color: #14100c; font-weight: 600; box-shadow: 0 6px 24px rgba(255, 106, 43, .35); }
+.btn-solid:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 106, 43, .5); }
+.btn-ghost { color: var(--color-text-primary); border-color: var(--color-border); }
+.btn-ghost:hover { border-color: var(--color-accent-secondary); color: var(--color-accent-secondary); }
+.meta-line { margin-top: 1.6rem; font-family: var(--font-monospace); font-size: .78rem; color: var(--color-text-secondary); }
+
+/* fake terminal — the span[data-type] inside is filled by _core.js */
+.term { background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: 0 30px 60px rgba(0, 0, 0, .45); }
+.term-bar { display: flex; align-items: center; gap: .45rem; padding: .7rem 1rem; border-bottom: 1px solid var(--color-border); }
+.term-bar span { width: 11px; height: 11px; border-radius: 50%; background: var(--color-border); }
+.term-bar span:first-child { background: var(--color-accent-primary); }
+.term-bar em { font-style: normal; font-family: var(--font-monospace); font-size: .72rem; color: var(--color-text-secondary); margin-left: .6rem; }
+.term-body { font-family: var(--font-monospace); font-size: .85rem; line-height: 1.9; padding: 1.3rem 1.4rem; min-height: 220px; }
+.term-body .p { color: var(--color-accent-primary); }
+.term-body .out { color: var(--color-accent-secondary); display: block; }
+.caret {
+    display: inline-block; width: .55em; height: 1.05em;
+    background: var(--color-accent-primary); vertical-align: text-bottom;
+    animation: blink 1.1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---- 5 · marquee ticker ---- */
+.ticker { border-block: 1px solid var(--color-border); overflow: hidden; background: rgba(10, 26, 43, .6); }
+.ticker .track { display: flex; width: max-content; animation: marquee 26s linear infinite; }
+.ticker span { font-family: var(--font-monospace); font-size: .78rem; letter-spacing: .24em; color: var(--color-text-secondary); padding: .85rem 0; white-space: nowrap; }
+.ticker b { color: var(--color-accent-primary); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ---- 6 · ledger rows (numbered feature list) ---- */
+.ledger { padding: 4.5rem 0; }
+.section-title { font-family: var(--font-display); text-transform: uppercase; font-size: 1.6rem; margin-bottom: 2rem; }
+.section-title::after { content: ""; display: block; width: 56px; height: 4px; background: var(--color-accent-primary); margin-top: .6rem; }
+.row {
+    display: grid; grid-template-columns: 90px 1fr auto; gap: 2rem; align-items: center;
+    padding: 1.8rem 1rem; border-top: 1px solid var(--color-border);
+    text-decoration: none; color: inherit; transition: .3s;
+}
+.row:last-of-type { border-bottom: 1px solid var(--color-border); }
+.row .idx { font-family: var(--font-monospace); color: var(--color-accent-primary); }
+.row h3 { font-size: 1.35rem; margin-bottom: .35rem; transition: .3s; }
+.row p { color: var(--color-text-secondary); max-width: 60ch; }
+.row .arrow { font-size: 1.6rem; color: var(--color-text-secondary); transition: .3s; }
+.row:hover { background: var(--color-surface); padding-left: 1.8rem; }
+.row:hover h3 { color: var(--color-accent-secondary); }
+.row:hover .arrow { color: var(--color-accent-primary); transform: translateX(6px); }
+
+/* ---- 7 · footer (layout comes from _base.css) ---- */
+footer.site {
+    padding: 2.5rem 0 3rem; border-top: 1px solid var(--color-border);
+    font-family: var(--font-monospace); font-size: .78rem; color: var(--color-text-secondary);
+}
+
+/* ---- 8 · small screens ---- */
+@media (max-width: 880px) {
+    .hero { grid-template-columns: 1fr; gap: 2.5rem; }
+    .row { grid-template-columns: 56px 1fr; }
+    .row .arrow { display: none; }
+}
