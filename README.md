@@ -37,13 +37,6 @@ npc-forge install <path> # Installs a new NPC
 > [!TIP]
 > If you are interested to explore or expand the dataset of TERMy check out the [dataset](npcs/termy/dataset) directory!
 
-### Documentation
-- [TERMy](npcs/termy/README.md)
-- [FlintParser](docs/FlintParser.md)
-- [FlintNPC](docs/FlintParser.md)
-- [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md)
-- [TCSS (Terminal Commands Security Standard)](docs/command-security.md)
-
 ### Quick start to redemption
 Reclaim control on your workflow in less than sixty seconds:
 
@@ -64,6 +57,13 @@ Consider that this experimental release of `npc-forge` works only on Linux and W
 
 > [!WARNING]
 > [NPC-Forge](https://github.com/gioblu/NPC-Forge) is experimental and it is distributed "AS IS" without any warranty, use it at your own risk.
+
+### Documentation
+- [TERMy](npcs/termy/README.md)
+- [FlintParser](docs/FlintParser.md)
+- [FlintNPC](docs/FlintParser.md)
+- [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md)
+- [TCSS (Terminal Commands Security Standard)](docs/command-security.md)
 
 ### Contributing to the forge
 I am developing NPC-Forge with the conviction that democratic and sustainable use of Artificial Intelligence can be achieved with **deterministic designs** driven by curated and tested datasets crafted by the community; if you can, help me out. NPC-Forge thrives on your contributions, the community grows stronger when you:
