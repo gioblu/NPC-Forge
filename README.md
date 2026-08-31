@@ -71,7 +71,7 @@ I am developing NPC-Forge with the conviction that democratic and sustainable us
 - Craft new NPCs
 - Optimize or extend the framework
 
-This is a battleground where to prove what is possible, or are you just going to sit there watching massive data centers drain entire rivers just to generate corporate emails?
+Or are you just going to sit there waiting for the water to reach the boiling point?
 
 ### License
 
