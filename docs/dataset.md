@@ -1,8 +1,8 @@
 # NDF 0.0 (NPC-Forge Dataset Format)
 ```
 Invented by Giovanni Blu Mitolo
-Originally published: 15/11/2026
-Latest revision: 15/11/2026
+Originally published: 31/08/2026
+Latest revision: 31/08/2026
 Related work: https://github.com/gioblu/NPC-Forge/
 Compliant implementations: NPC-Forge 0.0 and following
 Released into the public domain
