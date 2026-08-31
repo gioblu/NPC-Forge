@@ -1,6 +1,6 @@
 ## NPC-Forge
 
-NPC-Forge is a framework for building conversational agents with distinct personalities, multi-turn context, sentiment analysis, and tool-call support. NPCs run on the CPU (web browser or OS) without relying on machine learning or LLMs even on embedded systemts and obsolete hardware.
+NPC-Forge is a framework for building conversational agents with distinct personalities, multi-turn context, sentiment analysis, and tool-call support. NPCs run on the CPU (web browser or OS) without relying on machine learning or LLMs even on embedded systems and obsolete hardware.
 
 Instead of praying for a model to do the right thing, you can now use NPC-Forge to quickly build a deterministic agent and hook it up to your favourite workflow, API or harness.
 
@@ -10,7 +10,7 @@ Many problems you encounter can be solved without machine-learning or LLMs. NPC-
 
 * **Deterministic**:  can't hallucinate; no slop, no safety alignment filters.
 * **No training**: just update the dataset, execute `npc-forge reboot`, and you are done.
-* **Very fast**: runs on the CPU, responds in milliseconds even on embedded systems and obsolete machines.
+* **Very fast**: runs on the CPU, responds in milliseconds even on embedded systems and obsolete hardware.
 * **Dataset management**: craft datasets with ease thanks to the [NDF (NPC-Forge Dataset Format)](docs/dataset.md) specification.
 * **Plug-and-play**: implements an OpenAI-compatible API that connects your NPCs to your preferred LLM harness in seconds. Connect the NPC-Forge API endpoint to tools like Open WebUI or Copilot, and see your NPCs responding and executing tool calls at lightspeed.
 
