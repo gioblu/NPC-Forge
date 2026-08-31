@@ -1,8 +1,6 @@
 ## NPC-Forge
 
-NPC-Forge is a framework for building conversational agents with distinct personalities, multi-turn context, sentiment analysis, and tool-call support. NPCs run on the CPU (web browser or OS) without relying on machine learning or LLMs.
-
-I am developing NPC-Forge with the conviction that democratic and sustainable use of Artificial Intelligence can be achieved with **deterministic designs**, driven by a set of curated and tested open-source [datasets](npcs/termy/dataset) crafted by the community. 
+NPC-Forge is a framework for building conversational agents with distinct personalities, multi-turn context, sentiment analysis, and tool-call support. NPCs run on the CPU (web browser or OS) without relying on machine learning or LLMs even on obsolete hardware.
 
 Instead of praying for a model to do the right thing, you can now use NPC-Forge to quickly build a deterministic agent and hook it up to your favourite workflow, API or harness.
 
@@ -10,11 +8,11 @@ Instead of praying for a model to do the right thing, you can now use NPC-Forge 
 
 Many problems you encounter can be solved without machine-learning or LLMs. NPC-Forge gives you a way to solve those problems more efficiently:
 
-* **Deterministic**:  What you write in the dataset is what the agent executes. No slop, no corporate safety alignment filters.
-* **No training**: no time wasted, update the dataset, reboot the server, done
+* **Deterministic**:  can't hallucinate; no slop, no safety alignment filters.
+* **No training**: no time wasted, update the dataset, execute `npc-forge reboot`, done
 * **Very fast**: runs on the CPU, responds in milliseconds even on embedded systems and obsolete machines.
 * **Plug-and-play**: implements an OpenAI-compatible API that connects your NPCs to your preferred LLM harness in seconds. Connect the NPC-Forge API endpoint to tools like Open WebUI or Copilot, and see your NPCs responding and executing tool calls at lightspeed.
-* **Easily manage datasets**: specifies [conventions](docs/dataset.md) designed to help you organize and expand the capabilities of your NPCs  
+* **Easily manage datasets**: specifies [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md) designed to help you organize and expand the capabilities of your NPCs  
 
 #### NPC-Forge CLI
 
@@ -69,8 +67,7 @@ Consider that this experimental release of `npc-forge` works only on Linux and W
 - [TCSS (Terminal Commands Security Standard)](docs/command-security.md)
 
 ### Contributing to the forge
-
-NPC-Forge thrives on your contributions, the community grows stronger when you:
+I am developing NPC-Forge with the conviction that democratic and sustainable use of Artificial Intelligence can be achieved with **deterministic designs**, driven by a set of curated and tested open-source datasets crafted by the community; if you can, help me out. NPC-Forge thrives on your contributions, the community grows stronger when you:
 - Extend the dataset of existing NPCs
 - Craft new NPCs
 - Optimize or extend the framework
