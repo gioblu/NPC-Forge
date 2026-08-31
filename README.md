@@ -1,6 +1,6 @@
 ## NPC-Forge
 
-NPC-Forge is a framework for building conversational agents with distinct personalities, multi-turn context, sentiment analysis, and tool-call support. NPCs run on the CPU (web browser or OS) without relying on machine learning or LLMs even on obsolete hardware.
+NPC-Forge is a framework for building conversational agents with distinct personalities, multi-turn context, sentiment analysis, and tool-call support. NPCs run on the CPU (web browser or OS) without relying on machine learning or LLMs even on embedded systemts and obsolete hardware.
 
 Instead of praying for a model to do the right thing, you can now use NPC-Forge to quickly build a deterministic agent and hook it up to your favourite workflow, API or harness.
 
