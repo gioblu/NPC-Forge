@@ -56,7 +56,7 @@ termy how are you
 Consider that this experimental release of `npc-forge` works only on Linux and WSL.
 
 > [!WARNING]
-> [NPC-Forge 0.0](https://github.com/gioblu/NPC-Forge) is experimental and it is distributed "AS IS" without any warranty, use it at your own risk.
+> [NPC-Forge](https://github.com/gioblu/NPC-Forge) is experimental and it is distributed "AS IS" without any warranty, use it at your own risk.
 
 ### Documentation
 
