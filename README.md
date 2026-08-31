@@ -1,6 +1,6 @@
 ## NPC-Forge
 
-NPC-Forge is a deterministic NLU (Natural Language Understanding) framework for building conversational agents with a distinct personality, multi-turn context memory, sentiment analysis, and tool-call support. NPCs run in a web browser or in your OS on the CPU without relying on machine-learning or LLMs.
+NPC-Forge is a framework for building conversational agents with distinct personalities, multi-turn context, sentiment analysis, and tool-call support. NPCs run directly on the CPU (web browser or OS) without relying on machine learning or LLMs.
 
 I am developing NPC-Forge with the conviction that democratic and sustainable use of Artificial Intelligence can be achieved with **deterministic designs**, driven by a set of curated and tested open-source [datasets](npcs/termy/dataset) crafted by the community. 
 
