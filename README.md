@@ -11,8 +11,8 @@ Many problems you encounter can be solved without machine-learning or LLMs. NPC-
 * **Deterministic**:  can't hallucinate; no slop, no safety alignment filters.
 * **No training**: no time wasted, update the dataset, execute `npc-forge reboot`, done
 * **Very fast**: runs on the CPU, responds in milliseconds even on embedded systems and obsolete machines.
+* **Easily manage datasets**: organize and expand the capabilities of your NPCs following the [NDF](docs/dataset.md) specification
 * **Plug-and-play**: implements an OpenAI-compatible API that connects your NPCs to your preferred LLM harness in seconds. Connect the NPC-Forge API endpoint to tools like Open WebUI or Copilot, and see your NPCs responding and executing tool calls at lightspeed.
-* **Easily manage datasets**: organize and expand the capabilities of your NPCs following the [NDF](docs/dataset.md) specification  
 
 #### NPC-Forge CLI
 
