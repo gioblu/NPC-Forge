@@ -2,7 +2,7 @@
 
 NPC-Forge is a framework for building conversational agents with distinct personalities, multi-turn context, sentiment analysis, and tool-call support. NPCs run on the CPU (web browser or OS) without relying on machine learning or LLMs even on embedded systems and obsolete hardware.
 
-Instead of praying for a model to do the right thing, you can now use NPC-Forge to quickly build a deterministic agent and hook it up to your favourite workflow, API or harness.
+[FlintNPC](docs/FlintNPC.md) and [FlintParser](docs/FlintParser.md) classes implement a novel approach to NLU (Natural Language Understanding) in less than 1000 lines of code that performs surprisingly well (see [comparison](https://github.com/gioblu/NPC-Forge/blob/main/docs/FlintNPC.md#performance-comparison)). Instead of praying for a model to do the right thing, you can now use NPC-Forge to quickly build a deterministic agent and hook it up to your favourite workflow, API or harness.
 
 #### Why NPC-Forge? 
 
@@ -11,7 +11,7 @@ Many problems you encounter can be solved without machine-learning or LLMs. NPC-
 * **Deterministic**:  can't hallucinate; no slop, no safety alignment filters.
 * **No training**: just update the dataset, execute `npc-forge reboot`, and you are done.
 * **Very fast**: runs on the CPU, responds in milliseconds even on embedded systems and obsolete hardware.
-* **Dataset management**: craft datasets with ease thanks to the [NDF (NPC-Forge Dataset Format)](docs/dataset.md) specification.
+* **Dataset management**: craft datasets with ease thanks to the [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md) specification.
 * **Plug-and-play**: implements an OpenAI-compatible API that connects your NPCs to your preferred LLM harness in seconds. Connect the NPC-Forge API endpoint to tools like Open WebUI or Copilot, and see your NPCs responding and executing tool calls at lightspeed.
 
 #### NPC-Forge CLI
@@ -61,9 +61,9 @@ Consider that this experimental release of `npc-forge` works only on Linux and W
 ### Documentation
 - [TERMy](npcs/termy/README.md)
 - [FlintParser](docs/FlintParser.md)
-- [FlintNPC](docs/FlintParser.md)
+- [FlintNPC](docs/FlintNPC.md)
 - [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md)
-- [TCSS (Terminal Commands Security Standard)](docs/command-security.md)
+- [TCS 0.0 (Terminal Commands Security)](docs/commands-security.md)
 
 ### Contributing to the forge
 I am developing NPC-Forge with the conviction that democratic and sustainable use of Artificial Intelligence can be achieved with **deterministic designs** driven by curated and tested datasets crafted by the community; if you can, help me out. NPC-Forge thrives on your contributions, the community grows stronger when you:
