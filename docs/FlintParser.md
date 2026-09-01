@@ -1,4 +1,4 @@
-# FlintParser
+## FlintParser
 
 FlintParser is a lightweight, zero-dependency, deterministic Natural Language Understanding (NLU) semantic parser. Converts user's questions into semantic structures while implementing Named Entity Recognition (NER).
 
