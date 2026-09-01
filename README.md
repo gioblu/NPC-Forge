@@ -4,6 +4,8 @@ NPC-Forge is a framework for building conversational agents with distinct person
 
 Instead of praying for a model to do the right thing, you can now use NPC-Forge to quickly build a deterministic agent and hook it up to your favourite workflow, API or harness.
 
+[FlintNPC](docs/FlintParser.md) and [FlintParser](docs/FlintParser.md) classes implement a novel approach to NLU (Natural Language Understanding) in less than a 1000 lines of code that perform better than most alternatives.
+
 #### Why NPC-Forge? 
 
 Many problems you encounter can be solved without machine-learning or LLMs. NPC-Forge gives you a way to solve those problems more efficiently:
