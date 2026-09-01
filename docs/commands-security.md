@@ -1,7 +1,7 @@
 
-## NPC-Forge TCSS (Terminal Commands Security Standard)
+## NPC-Forge TCS 0.0 (Terminal Commands Security)
 
-TCSS (Terminal Commands Security Standard) defines the requirements for parsing, matching, and executing system commands securely within `npc-forge`. 
+TCS 0.0 (Terminal Commands Security) defines the requirements for parsing, matching, and executing system commands securely within `npc-forge`. 
 
 To eliminate **Command Injection** vulnerabilities and nasty bugs the framework enforces the following sacred requirements that must never be violated:
 
