@@ -65,7 +65,7 @@ FlintNPC processes input through a four-stage pipeline, each stage more permissi
 
 ```python
 stripped, sentiment = parser.strip_and_sentiment(
-    "fuck, can you show me the red tie?",
+    "darn, can you show me the red tie?",
     vocabulary,
     current_sentiment
 )
