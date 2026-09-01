@@ -2,7 +2,7 @@
 
 NPC-Forge is a framework for building conversational agents with distinct personalities, multi-turn context, sentiment analysis, and tool-call support. NPCs run on the CPU (web browser or OS) without relying on machine learning or LLMs even on embedded systems and obsolete hardware.
 
-[FlintNPC](docs/FlintParser.md) and [FlintParser](docs/FlintParser.md) classes implement a novel approach to NLU (Natural Language Understanding) in less than a 1000 lines of code that perform better than most alternatives.
+[FlintNPC](docs/FlintNPC.md) and [FlintParser](docs/FlintParser.md) classes implement a novel approach to NLU (Natural Language Understanding) in less than a 1000 lines of code that perform better than most alternatives.
 
 Instead of praying for a model to do the right thing, you can now use NPC-Forge to quickly build a deterministic agent and hook it up to your favourite workflow, API or harness.
 
@@ -63,7 +63,7 @@ Consider that this experimental release of `npc-forge` works only on Linux and W
 ### Documentation
 - [TERMy](npcs/termy/README.md)
 - [FlintParser](docs/FlintParser.md)
-- [FlintNPC](docs/FlintParser.md)
+- [FlintNPC](docs/FlintNPC.md)
 - [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md)
 - [TCS 0.0 (Terminal Commands Security)](docs/commands-security.md)
 
