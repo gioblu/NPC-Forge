@@ -4,7 +4,7 @@ FlintNPC is the conversational agent framework built on top of FlintParser. It o
 
 FlintNPC is available in identical, cross-compliant implementations for both [Python](src/flint_npc.py), for local OS environments, and [JavaScript](src/flint_npc.js), running client-side inside any browser tab or Node.js instance.
 
-#### The Engineering Philosophy
+### The Engineering Philosophy
 
 FlintNPC relies on **subtraction engineering**: instead of adding probabilistic models, it subtracts noise until only deterministic, auditable behavior remains. The framework implements a four-stage intent resolution pipeline that degrades gracefully from fast exact matching to fuzzy probabilistic fallback:
 
@@ -18,7 +18,7 @@ User Prompt
 5. Response or rejection (with related intent suggestions)
 ```
 
-#### Features
+### Features
 
 - **Four-Stage Intent Resolution** Exact match, template match, probabilitstic match, rejection
 - **Multi-Turn Context Memory** Persistent conversational state with overwrite semantics
@@ -31,7 +31,7 @@ User Prompt
 - **Threshold Tuning** Adaptive error tolerance based on prompt length
 - **Permission Gating** Controls which actions require user confirmation
 
-#### Performance comparison
+### Performance comparison
 
 This table compares FlintNPC with [ChatScript](https://github.com/ChatScript/ChatScript), [NLP.js](https://github.com/axa-group/nlp.js/), and [Rasa](https://github.com/rasahq/rasa) across performance, resource usage, linguistic robustness and conversational features:
 
@@ -57,11 +57,11 @@ This table compares FlintNPC with [ChatScript](https://github.com/ChatScript/Cha
 
 [FlintNPC](docs/FlintNPC.md) stands out as the fastest, lightest, and feature-rich option, with built-in sentiment, context, permissions, and composite-prompt handling, [ChatScript](https://github.com/ChatScript/ChatScript) is a strong rule-based alternative while [NLP.js](https://github.com/axa-group/nlp.js/) and [Rasa](https://github.com/rasahq/rasa) trade determinism and low resource usage for greater statistical flexibility.
 
-#### How It Works
+### How It Works
 
 FlintNPC processes input through a four-stage pipeline, each stage more permissive than the last:
 
-##### Stage 1: Sanitization & Sentiment Extraction
+#### Stage 1: Sanitization & Sentiment Extraction
 
 ```python
 stripped, sentiment = parser.strip_and_sentiment(
@@ -74,7 +74,7 @@ stripped, sentiment = parser.strip_and_sentiment(
 
 The parser strips noise (insults, interjections, emojis) while counting occurrences. This feeds the sentiment system and cleans the prompt for matching.
 
-##### Stage 2: Exact Match (O(1) Hash Lookup)
+#### Stage 2: Exact Match (O(1) Hash Lookup)
 
 ```python
 if stripped in exact_match_map:
@@ -86,7 +86,7 @@ Every intent variant in the dataset is indexed in a hash map. If the sanitized p
 
 **Context Override**: Active context entries (from multi-turn conversations) override the global dataset on key collision. This allows follow-up intents like "move it" to take priority over unrelated global intents.
 
-##### Stage 3: Template Match (Semantic Structure Parsing)
+#### Stage 3: Template Match (Semantic Structure Parsing)
 
 ```python
 structure, slots = parser.parse_structure("show red tie", threshold=0.8)
@@ -99,7 +99,7 @@ match = parser.match_structure(templates, structure)
 
 The parser converts the prompt into an ordered sequence of semantic tags, then walks each template's structure paths to find a match. Variables (like `<||color||>`) are extracted via regex and stored in slots.
 
-##### Stage 4: Probabilistic Match (IDF-Weighted Levenshtein)
+#### Stage 4: Probabilistic Match (IDF-Weighted Levenshtein)
 
 ```python
 score = parser.sentence_similarity("show me a red tie", "show red tie", threshold=0.66)
@@ -113,7 +113,7 @@ If no exact or template match is found, the parser computes an asymmetric, order
 
 The highest-scoring intent above the threshold is returned.
 
-##### Stage 5: Rejection (With Suggestions)
+#### Stage 5: Rejection (With Suggestions)
 
 ```python
 if best_score < threshold:
@@ -123,9 +123,9 @@ if best_score < threshold:
 
 If no match clears the threshold, the agent returns a rejection with up to 5 related intent suggestions based on the rarest (most specific) word in the prompt.
 
-#### Code Examples
+### Code Examples
 
-##### Basic Usage
+#### Basic Usage
 
 ```python
 from flint_npc import FlintNPC
@@ -143,7 +143,7 @@ print(response["slots"])         # {"color": "red"}
 print(response["tools"])         # [{"name": "ShowProducts", "arguments": {...}}]
 ```
 
-##### Multi-Turn Context Memory
+#### Multi-Turn Context Memory
 
 FlintNPC maintains conversational state across multiple turns. Context entries persist until explicitly overwritten:
 
@@ -166,7 +166,7 @@ Context semantics:
 - `"context": []` → explicitly clears the context
 - No `"context"` key → context persists unchanged
 
-##### Composite Prompt Splitting
+#### Composite Prompt Splitting
 
 FlintNPC can handle multi-command inputs by splitting on separators:
 
@@ -178,7 +178,7 @@ response = npc.process_messages("list files; show cpu temperature; goodbye")
 
 Separators: newlines, numbered lists (`1)`), semicolons, exclamation marks, question marks.
 
-##### Tool-Call Execution
+#### Tool-Call Execution
 
 FlintNPC extracts tool calls from matched intents:
 
@@ -198,7 +198,7 @@ for tool in response["tools"]:
     # result: HTML cards with red ties
 ```
 
-##### Thinking Mode
+#### Thinking Mode
 
 FlintNPC can emit an inner monologue that explains its reasoning:
 
@@ -210,7 +210,7 @@ print(response["thinking"])
 
 Thinking is defined in the dataset and can include slot substitution (`<||color||>`).
 
-##### Metadata Rendering
+#### Metadata Rendering
 
 FlintNPC substitutes macros in responses with runtime values:
 
@@ -230,7 +230,7 @@ Available metadata:
 - `<||unknown||>` random "unknown" response
 - `<||related||>` related intent suggestions
 
-##### Sentiment Tracking
+#### Sentiment Tracking
 
 FlintNPC tracks sentiment across the conversation:
 
@@ -245,7 +245,7 @@ print(response["emoji"])
 
 Sentiment is aggregated across composite prompts and persists across turns.
 
-#### Configuration
+### Configuration
 
 FlintNPC reads configuration from `npcs/<name>/config.json`:
 
@@ -264,7 +264,7 @@ FlintNPC reads configuration from `npcs/<name>/config.json`:
 - **word_threshold** stricter threshold for short prompts (1-3 words)
 - **suggestions** max number of related intent suggestions on rejection
 
-#### Dataset Structure
+### Dataset Structure
 
 FlintNPC uses the NDF (NPC-Forge Dataset Format). A dataset directory contains:
 
@@ -283,7 +283,7 @@ npcs/<name>/
 
 See the [NDF specification](docs/dataset.md) for full details.
 
-#### Performance Characteristics
+### Performance Characteristics
 
 - **Zero Dependencies** Only Python standard library + FlintParser
 - **CPU-Only** No GPU, no CUDA, no PyTorch. Runs on a Raspberry Pi Zero.
@@ -291,7 +291,7 @@ See the [NDF specification](docs/dataset.md) for full details.
 - **Microsecond Latency** Exact match: <10μs. Template match: <1ms. Probabilistic: <10ms.
 - **Memory Efficient** The entire agent + dataset fits in <10MB RAM.
 
-#### Integration with NPC-Forge
+### Integration with NPC-Forge
 
 FlintNPC is the conversational layer that powers NPC-Forge agents. It wraps FlintParser and provides:
 - Multi-turn context management
@@ -308,9 +308,9 @@ npc-forge install npcs/termy # Install TERMy
 termy show me a red tie      # Chat with TERMy via CLI
 ```
 
-#### Algorithmic Choices
+### Algorithmic Choices
 
-##### Why Four Stages?
+#### Why Four Stages?
 
 Most NLU frameworks use a single neural classifier. FlintNPC uses a cascade:
 1. **Exact match** is O(1) and covers 60-80% of queries (people repeat common phrases)
@@ -320,7 +320,7 @@ Most NLU frameworks use a single neural classifier. FlintNPC uses a cascade:
 
 Each stage is 10-100x slower than the previous, so we short-circuit as early as possible.
 
-##### Why Context Override?
+#### Why Context Override?
 
 Multi-turn conversations require state. Instead of a complex dialogue manager, FlintNPC uses a simple hash map:
 - Active context entries override the global dataset on key collision
@@ -329,11 +329,11 @@ Multi-turn conversations require state. Instead of a complex dialogue manager, F
 
 This allows flows like "create dir" → "move it" → "delete it" without re-specifying the directory each time.
 
-##### Why Composite Prompt Splitting?
+#### Why Composite Prompt Splitting?
 
 Users often issue multiple commands at once (`list files; show red tie`). Instead of rejecting the input, FlintNPC splits on separators and processes each sub-prompt sequentially. Responses are concatenated.
 
-##### Why Adaptive Thresholds?
+#### Why Adaptive Thresholds?
 
 Short prompts (1-3 words) are highly sensitive to typos. A single character change can flip the meaning (`who` vs `how`). Long prompts are more tolerant of errors because the rarest word still anchors the match.
 
@@ -341,7 +341,7 @@ FlintNPC uses:
 - **word_threshold** (default 0.75) for prompts ≤3 words
 - **sentence_threshold** (default 0.75) for prompts >3 words
 
-#### Limitations
+### Limitations
 
 FlintNPC is not a replacement for LLMs. It's a **deterministic conversational framework** for structured, predictable interactions. It cannot:
 - Understand open-ended, creative language
