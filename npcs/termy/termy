@@ -210,9 +210,7 @@ def run_cli() -> int:
     
     if tools_list:
         for tool in tools_list:
-            if not tool or not tool[0]: 
-                break
-                
+            if not tool or not tool[0]: continue
             tool_data = tool[0]
             tool_args = tool_data.get("arguments", {})
             
