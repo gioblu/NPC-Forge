@@ -36,7 +36,7 @@ Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md
 [![Terminal demonstration](/npcs/termy/showcase.gif)](https://www.youtube.com/watch?v=qeIp0xePLBg)
 
 > [!TIP]
-> If you are interested to expand the capabilities of TERMy check out the [dataset](npcs/termy/dataset) directory and the [TERMy](npcs/termy/README.md) documentation
+> If you want to expand the capabilities of TERMy check out the [dataset](npcs/termy/dataset) directory and the [TERMy](npcs/termy/README.md) documentation
 
 ### Quick start to redemption
 Reclaim control on your workflow in less than sixty seconds:
