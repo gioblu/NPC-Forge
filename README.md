@@ -27,6 +27,7 @@ npc-forge reboot         # Reboots server
 npc-forge watch          # Starts server and watch logs in real-time
 npc-forge install <path> # Installs a new NPC
 ```
+Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md) documentation.
 
 ### TERMy terminal assistant
 
@@ -62,6 +63,7 @@ Consider that this experimental release of `npc-forge` works only on Linux and W
 - [TERMy](npcs/termy/README.md)
 - [FlintParser](docs/FlintParser.md)
 - [FlintNPC](docs/FlintNPC.md)
+- [NPC-Forge CLI](docs/NPC-Forge-cli.md)
 - [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md)
 - [TCS 0.0 (Terminal Commands Security)](docs/commands-security.md)
 
