@@ -1,6 +1,6 @@
 ## `npc-forge` CLI
 
-`npc-forge` is the management CLI of NPC-Forge. It provides an interface to administer, install, and run your NPCs. This tool serves NPCs, streams logs and executes framework tests. Run it using the `npc-forge` command. 
+The NPC-Forge CLI provides an interface to administer, install, and run your NPCs. This tool serves NPCs, streams logs and executes framework tests. Run it using the `npc-forge` command. 
 
 ```bash
 npc-forge <command> [options]
