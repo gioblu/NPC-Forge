@@ -34,10 +34,9 @@ Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md
 [TERMy](npcs/termy/README.md) is the first NPC baked into the NPC-Forge framework. It is a cynical but very knowledgeable Linux terminal assistant that translates your natural language into shell commands without a single artificial neuron. Just type `termy` followed by your prompt:
 
 [![Terminal demonstration](/npcs/termy/showcase.gif)](https://www.youtube.com/watch?v=qeIp0xePLBg)
-The [dataset](npcs/termy/dataset) was developed as a proof of concept to showcase what this type of technology can do. In the next releases work will be done to enhance the dataset and verify its safety against command injection.
 
 > [!TIP]
-> Imagine what TERMy could do if the shared effort of a small community is focused on its dataset!
+> If you are interested to expand the capabilities of TERMy check out the [dataset](npcs/termy/dataset) directory and the [TERMy](npcs/termy/README.md) documentation
 
 ### Quick start to redemption
 Reclaim control on your workflow in less than sixty seconds:
