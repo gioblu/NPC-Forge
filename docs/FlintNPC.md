@@ -293,11 +293,10 @@ termy show me a red tie      # Chat with TERMy via CLI
 
 #### Why Four Stages?
 
-Most NLU frameworks use a single neural classifier. FlintNPC uses a cascade:
-1. **Exact match** is O(1) and covers 60-80% of queries (people repeat common phrases)
+Most NLU frameworks use a neural classifier. FlintNPC uses a pipeline:
+1. **Exact match** is O(1) and covers most queries
 2. **Template match** is O(n) and covers structured queries with variables
 3. **Probabilistic match** is O(n*m) and covers typos and paraphrases
-4. **Rejection** is the fallback when nothing matches
 
 Each stage is 10-100x slower than the previous, so we short-circuit as early as possible.
 
