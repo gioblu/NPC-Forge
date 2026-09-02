@@ -64,6 +64,7 @@ Consider that this experimental release of `npc-forge` works only on Linux and W
 - [FlintParser](docs/FlintParser.md)
 - [FlintNPC](docs/FlintNPC.md)
 - [NPC-Forge CLI](docs/NPC-Forge-cli.md)
+- [NPC-Forge API](docs/NPC-Forge-API.md)
 - [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md)
 - [TCS 0.0 (Terminal Commands Security)](docs/commands-security.md)
 
