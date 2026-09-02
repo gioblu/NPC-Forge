@@ -37,7 +37,7 @@ The semantic path above represents the prompt `Do you prefer <||a||> or <||b||>`
 
 #### Why Subtraction?
 
-Most NLU frameworks **add** complexity: they train neural networks, they build embedding spaces, they maintain massive vocabularies. FlintParser does the opposite. It **subtracts** noise until only the semantic skeleton remains:
+Most NLU frameworks **add** complexity: they train neural networks, they build embedding spaces, they maintain massive vocabularies. FlintParser does the opposite. It **subtracts** noise until only the meaning remains:
 
 1. **Strips the noise** removing insults, interjections, emojis, filler words
 2. **Extracts the structure** converting words to semantic tags (`<||vocab_show||>`, `<||color||>`)
