@@ -8,8 +8,6 @@ npc-forge <command> [options]
 
 ### Service Management
 
-Manage the background NPC registry gateway via `systemd --user`.
-
 | Command | Aliases | Description |
 | :--- | :--- | :--- |
 | `serve` | `start` | Starts the background `npc-forge.service` systemd user daemon. |
