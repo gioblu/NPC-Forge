@@ -24,7 +24,7 @@ User Prompt
 - **Multi-Turn Context Memory** Persistent conversational state with overwrite semantics
 - **Sentiment Analysis** Tracks expletives, thanking words, encouraging or discouraging words
 - **Tool-Call Support** Extracts slots and triggers tool execution with permission gating
-- **Thinking Mode** Inner monologue that explains the agent's reasoning
+- **Thinking Mode** Inner monologue that explains the agent's response
 - **Composite Prompt Splitting** Handles multi-command inputs (`cmd1; cmd2`)
 - **Metadata Rendering** Macro substitution for dynamic responses (`<||username||>`, `<||npc_name||>`)
 - **Related Intent Suggestions** Generates suggestions based on rarest word matching
