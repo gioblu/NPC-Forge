@@ -6,7 +6,7 @@ FlintNPC is available in identical, cross-compliant implementations for both [Py
 
 ### The Engineering Philosophy
 
-FlintNPC relies on **subtraction engineering**: instead of adding probabilistic models, it subtracts noise until only deterministic, auditable behavior remains. The framework implements a four-stage intent resolution pipeline that degrades gracefully from fast exact matching to fuzzy probabilistic fallback:
+FlintNPC relies on **subtraction engineering**: instead of adding probabilistic models, it subtracts noise until only deterministic, auditable behavior remains. The framework implements the following pipeline:
 
 ```
 User Prompt
@@ -263,25 +263,6 @@ FlintNPC reads configuration from `npcs/<name>/config.json`:
 - **sentence_threshold** minimum similarity score for probabilistic match on prompts >3 words
 - **word_threshold** stricter threshold for short prompts (1-3 words)
 - **suggestions** max number of related intent suggestions on rejection
-
-### Dataset Structure
-
-FlintNPC uses the NDF (NPC-Forge Dataset Format). A dataset directory contains:
-
-```
-npcs/<name>/
-├── config.json
-├── dataset/
-│   ├── types.json              # Variable type regex definitions
-│   ├── vocabulary/
-│   │   ├── vocabulary.json     # Sentiment word lists
-│   │   └── templates.json      # Vocabulary tag synonyms
-│   ├── personality.json        # Static intents (greetings, etc.)
-│   ├── dataset_*.json          # Dynamic intents (split across files)
-│   └── templates_*.json        # Template-based intents
-```
-
-See the [NDF specification](docs/dataset.md) for full details.
 
 ### Performance Characteristics
 
