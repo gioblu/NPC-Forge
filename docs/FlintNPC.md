@@ -31,32 +31,6 @@ User Prompt
 - **Threshold Tuning** Adaptive error tolerance based on prompt length
 - **Permission Gating** Controls which actions require user confirmation
 
-### Performance comparison
-
-This table compares FlintNPC with [ChatScript](https://github.com/ChatScript/ChatScript), [NLP.js](https://github.com/axa-group/nlp.js/), and [Rasa](https://github.com/rasahq/rasa) across performance, resource usage, linguistic robustness and conversational features:
-
-| Feature | FlintNPC | ChatScript | NLP.js | Rasa |
-|---|---|---|---|---|
-| **Hardware required** | 🟢 Pi Zero, ESP32 | 🟢 Pi 1 | 🟢 Browser | 🔴 Server |
-| **Memory required** | 🟢 < 10 MB | 🟢 < 50 MB | 🟡 30–80 MB | 🔴 500MB–2GB+ |
-| **GPU required** | 🟢 No | 🟢 No | 🟢 No | 🟡 Optional |
-| **Training required** | 🟢 No | 🟢 No | 🔴 Yes | 🔴 Yes |
-| **Speed** | 🟢 Microseconds | 🟢 Microseconds | 🟡 Milliseconds | 🔴 100ms+ |
-| **Dependencies** | 🟢 Minimal | 🟢 Minimal | 🟡 npm packages | 🔴 Heavy (TensorFlow, NumPy) |
-| **Typo tolerance** | 🟢 Strong | 🟢 Strong | 🟡 Weak | 🟢 Strong |
-| **Filler words tolerance** | 🟢 Built-in | 🟡 Wildcards | 🔴 None | 🟡 Via training data |
-| **Word inversions** | 🟢 Handled | 🟡 Partial | 🟡 Partial | 🟢 Handled |
-| **Synonyms** | 🟢 Templates | 🟢 Concepts | 🟡 Basic | 🟢 Synonyms + lookup |
-| **Templates** | 🟢 Semantic structure | 🟢 Pattern language | 🔴 None | 🟡 Forms only |
-| **Sentiment** | 🟢 Built-in | 🟡 Manual | 🔴 None | 🟡 Custom |
-| **Memory/context** | 🟢 Built-in | 🟢 Facts system | 🔴 Stateless | 🟢 Tracker |
-| **Tool calls** | 🟢 Built-in | 🟢 Actions | 🟡 Handlers | 🟢 Actions |
-| **Permission gating** | 🟢 Built-in | 🟡 Manual rule logic | 🔴 None | 🟡 Custom code |
-| **Composite prompts** | 🟢 Built-in | 🟡 Manual | 🔴 None | 🔴 None |
-| **Determinism** | 🟢 Guaranteed | 🟢 Guaranteed | 🟡 Varies | 🔴 Probabilistic |
-
-[FlintNPC](docs/FlintNPC.md) stands out as the fastest, lightest, and feature-rich option, with built-in sentiment, context, permissions, and composite-prompt handling, [ChatScript](https://github.com/ChatScript/ChatScript) is a strong rule-based alternative while [NLP.js](https://github.com/axa-group/nlp.js/) and [Rasa](https://github.com/rasahq/rasa) trade determinism and low resource usage for greater statistical flexibility.
-
 ### How It Works
 
 FlintNPC processes input through a four-stage pipeline, each stage more permissive than the last:
