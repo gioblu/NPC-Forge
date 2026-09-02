@@ -51,7 +51,7 @@ Most NLU frameworks **add** complexity: they train neural networks, they build e
 - **Sentence Similarity** Asymmetric, order-independent BOW IDF + Levenshtein scoring
 - **Subject Identification** Extracts the rarest (most specific) word via IDF
 - **Sentiment Analysis** Counts expletives, thanking words, encouraging/discouraging tokens
-- **Emoji Generation** Generates a cynical emoji based on sentiment density
+- **Emoji Generation** Generates an emoji based on sentiment density
 - **Typo Tolerance** Fuzzy-matches vocabulary tags with configurable threshold
 - **Variable Extraction** Regex-based slot extraction with string literal support
 - **Candidate Prediction** Predicts next expected tags for autocomplete/debugging
