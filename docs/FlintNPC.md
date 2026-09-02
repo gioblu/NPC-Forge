@@ -298,7 +298,7 @@ Most NLU frameworks use a neural classifier. FlintNPC uses a pipeline:
 2. **Template match** is O(n) and covers structured queries with variables
 3. **Probabilistic match** is O(n*m) and covers typos and paraphrases
 
-Each stage is 10-100x slower than the previous, so we short-circuit as early as possible.
+Each stage is computationally heavier than the previous.
 
 #### Why Context Override?
 
