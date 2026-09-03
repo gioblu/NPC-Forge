@@ -4,9 +4,9 @@ The scope of this document is to describe what led me to develop NPC-Forge and T
 ### Backstory
 I love research and development, you may have heard of me because of [PJON (Padded Jittering Operative Network)](https://github.com/gioblu/PJON). It is a network protocol I started developing in 2010, which was recently [implemented in silicon](http://asic.ethz.ch/2025/Pjononcroc.html) by the ETH Zurich university thanks to the research of [Pius Sieber](https://github.com/piussieber/).
 
-I had a chance to focus for 2 months on my personal projects since early July, during the strange times of AI price hikes and the end of subsidized tokenmaxing. I was curious to see if I could develop from scratch at home a terminal assistant that could have handled simple terminal commands. I have a bad memory and got used to ask to copilot "activate the virtual environment" or similar trivial operations spending a non negligible sum every month. I started thinking, maybe I can do something to make my workflow more efficient? Do I really need a trillions of parameters for those tasks?
+I had a chance to focus for 2 months on my personal projects since early July, during the strange times of AI price hikes and the end of subsidized tokenmaxing. I was curious to see if I could develop from scratch a terminal assistant capable of handling simple natural language requests. I have a bad memory and got used to ask to copilot "activate the virtual environment" or similar trivial operations spending a non negligible sum every month. I started thinking, maybe I can do something to make my workflow more efficient? Do I really need trillions of parameters to accomplish those tasks?
 
-I started an open-ended research on the feasibility of implementing a generative model at home and training it from scratch on the computer I used to play Kerbal Space Program in the early 2010s "upgraded" with 16GB of RAM, NVIDIA GTX 1050 Ti (4GB VRAM) and a i7-4790K (4.0GHz 8 cores) CPU. In my experiments I tend to look for minimalism, so I imposed myself a constrained set environment to be forced to work towards an elegant and efficient solution. 
+I started an open-ended research on the feasibility of implementing a generative model at home and training it from scratch on the computer I used to play Kerbal Space Program in the early 2010s "upgraded" with 16GB of RAM, NVIDIA GTX 1050 Ti (4GB VRAM) and a i7-4790K (4.0GHz 8 cores) CPU. In my experiments I tend to look for minimalism, so I imposed myself a constrained environment to be forced to work towards an elegant and efficient solution. 
 
 I first developed a framework to train and evaluate transformers, which I implemented from scratch in Python. I have started with something very similar to [NanoGPT](https://github.com/karpathy/nanogpt) with 100-200M parameters, then I added flash attention, and all the expected optimizations, I even tried novel architectures like Mamba. The results were generally unsatisfactory, creepy if not outright scary, like the following:
 
@@ -39,7 +39,7 @@ I quickly understood that this approach was not feasible; a proper run would hav
 
 ### Local models
 
-I pivoted to ollama and open-weight models and developed [howto](https://github.com/gioblu/howto), yet another terminal harness that uses a pre-prompt to force the model to answer only with terminal commands. Results were generally unsatisfactory because of the time required to get a response. Models like [ornith:9b](https://ollama.com/library/ornith:9b), [mistral:7b](https://ollama.com/library/mistral:7b) or [cogito:14b](https://ollama.com/library/cogito:14b) can get the job done sometimes, but they are not fast and reliable enough for general use. 
+I pivoted to ollama and open-weight models and developed [howto](https://github.com/gioblu/howto), yet another terminal harness that uses a pre-prompt to force the model to answer only with terminal commands. Results were generally unsatisfactory because of the time required to get a response. Models like [ornith:9b](https://ollama.com/library/ornith:9b), [mistral:7b](https://ollama.com/library/mistral:7b) or [cogito:14b](https://ollama.com/library/cogito:14b) can get the job done sometimes, but they are not fast and reliable enough for general use, specially if you have only 4GB of VRAM. 
 
 ### Going deterministic
 
@@ -48,9 +48,9 @@ Then I remembered about the blockchain craze, when everyone wanted to fit a bloc
 2. No machine-learning
 3. No LLMs
 
-### A terminal assistant
+### NPC-Forge and TERMy
 
-My intention was to implement NLU (Natural Language Understanding) from scratch without focusing too much on how others did it before me. The first things I needed was a set of conventions to rely on and a dataset format, so I drafted the [NDF 0.0 (NPC-Forge Dataset Format](https://github.com/gioblu/NPC-Forge/blob/main/docs/dataset.md) which specifies the dataset format of NPC-Forge. The following object contains category, input sentences, textual response, thinking traces, permission gating and tool calls to be executed in a format compatible with VS code. 
+My intention was to implement NLU (Natural Language Understanding) from scratch without focusing too much on how others did it before me. The first things I needed was a set of conventions to rely on, so I drafted the [NDF 0.0 (NPC-Forge Dataset Format](https://github.com/gioblu/NPC-Forge/blob/main/docs/dataset.md) which specifies the dataset format of NPC-Forge. The following object contains category, input sentences, textual response, thinking traces, permission gating and tool calls to be executed in a format compatible with VS code. 
   
 ```json
 {
