@@ -145,7 +145,25 @@ I must thank my great friend [Kevin](https://github.com/KMathisGit) to help me t
 
 Looking at the `permission` key I concluded that, enforcing the use of `"permission": "ask"` for all potentially destructive commands, the tool became inherently safe to use, obviously, potential for human error remained (bug in the implementation or in the dataset), but risks were strongly mitigated.
 
-### The Implementation
+### The implementation
 
-I wrote [FlintParser]() and [FlintNPC]() classes to make use of the dataset described above, implement a NLU (Natural Language Understanding) pipeline, and all the required features for the terminal assistant to work. I wrote those classes in identical, cross-compliant implementations for both Python, for local OS environments, and JavaScript, running client-side inside any browser tab or Node.js instance.
+I wrote [FlintParser](https://github.com/gioblu/NPC-Forge/blob/main/docs/FlintNPC.md) and [FlintNPC](https://github.com/gioblu/NPC-Forge/blob/main/docs/FlintParser.md) classes to make use of the dataset described above, implement a NLU (Natural Language Understanding) pipeline, and all the required features for the terminal assistant to work. I wrote those classes in identical, cross-compliant implementations for both Python, for local OS environments, and JavaScript, running client-side inside any browser tab or Node.js instance.
+
+The most difficult part was to determine what to do and in which order. I have worked a lot on a compiler for my own programming language [BIPLAN](https://github.com/gioblu/BIPLAN) and while developing that I had the honour to learn that the first thing you need to do when trying to translate "code" is to remove noise and then work your way out trying the least expensive paths first.
+
+So that's the pipeline I implemented:
+1. Strip expletives, interjections, encouraging, discouraging and thanking words (remove noise)
+2. Sentiment analysis
+3. Exact Match (O(1))
+4. Template Match (semantic structure parsing)
+5. Probabilistic Match (IDF-weighted Levenshtein)
+6. Response or rejection (with related intent suggestions)
+
+While implementing step 1 I had the revelation that while stripping those words I could have stored their frequency and generate a sentiment analysis and so I implemented step 2 killing 2 birds with one stone.
+
+Finally I could run some tests:
+
+
+
+
 
