@@ -137,6 +137,15 @@ One or more tags can be expected at the same position and each tag can be requir
 }
 ```
 
+
+
 I must thank my great friend [Kevin](https://github.com/KMathisGit) to help me thinking this out.
 
-TBC...
+### Meditations on safety
+
+Looking at the `permission` key I concluded that, if I enforce the use of `"permission": "ask"` for all potentially destructive commands, the tool becomes inherently safe to use, obviously, potential for human error remains (bug in the implementation or in the dataset), but risks are strongly mitigated.
+
+### The Implementation
+
+I wrote [FlintParser]() and [FlintNPC]() classes to make use of the dataset described above, implement a NLU (Natural Language Understanding) pipeline, and all the required features for the terminal assistant to work. I wrote those classes in identical, cross-compliant implementations for both Python, for local OS environments, and JavaScript, running client-side inside any browser tab or Node.js instance.
+
