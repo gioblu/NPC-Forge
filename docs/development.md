@@ -6,6 +6,8 @@ I love research and development, you may have heard of me because of [PJON (Padd
 
 I had a chance to focus for 2 months on my personal projects since early July, during the strange times of AI price hikes and the end of subsidized tokenmaxing. I was curious to see if I could develop from scratch a terminal assistant capable of handling simple natural language requests. I have a bad memory and got used to ask to copilot "activate the virtual environment" or similar trivial operations spending a non negligible sum every month. I started thinking, maybe I can do something to make my workflow more efficient? Do I really need trillions of parameters to accomplish those tasks?
 
+### Transformers at home
+
 I started an open-ended research on the feasibility of implementing a generative model at home and training it from scratch on the computer I used to play Kerbal Space Program in the early 2010s "upgraded" with 16GB of RAM, NVIDIA GTX 1050 Ti (4GB VRAM) and a i7-4790K (4.0GHz 8 cores) CPU. In my experiments I tend to look for minimalism, so I imposed myself a constrained environment to be forced to work towards an elegant and efficient solution. 
 
 I first developed a framework to train and evaluate transformers, which I implemented from scratch in Python. I have started with something very similar to [NanoGPT](https://github.com/karpathy/nanogpt) with 100-200M parameters, then I added flash attention, and all the expected optimizations, I even tried novel architectures like Mamba. The results were generally unsatisfactory, creepy if not outright scary, like the following:
@@ -80,7 +82,7 @@ My intention was to implement NLU (Natural Language Understanding) from scratch 
 ```
 I am really in love with this, it is a self-contained atom of knowledge that can be easily edited and shared. It is very simple to expand the knowledge of conversational agents if you adhere to this convention; let's say I want my terminal assistant to learn about docker commands, I can just write down a list of objects, reload the dataset, and the NPC will instantly learn them as Neo learnt Jujitsu in The Matrix. 
 
-The next problem to solve was, how to handle questions like "create file .gitignore"? The "variable" in there needed to be parsed, but more importantly I needed a dataset format where to specify the prompt meaning, so I came up with this:
+The next problem to solve was, how to handle questions like "create file .gitignore"? I needed to parse the "variable" in there and understand the true meaning of the request, so I came up with this:
 ```json
 {
     "intent": "file_creation",
