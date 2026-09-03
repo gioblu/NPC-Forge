@@ -48,7 +48,7 @@ Then I remembered about the blockchain craze, when everyone wanted to fit a bloc
 2. No machine-learning
 3. No LLMs
 
-### NPC-Forge and TERMy
+### Dataset format
 
 My intention was to implement NLU (Natural Language Understanding) from scratch without focusing too much on how others did it before me. The first things I needed was a set of conventions to rely on, so I drafted the [NDF 0.0 (NPC-Forge Dataset Format](https://github.com/gioblu/NPC-Forge/blob/main/docs/dataset.md) which specifies the dataset format of NPC-Forge. The following object contains category, input sentences, textual response, thinking traces, permission gating and tool calls to be executed in a format compatible with VS code. 
   
@@ -78,9 +78,64 @@ My intention was to implement NLU (Natural Language Understanding) from scratch 
     "permission": "yolo"
 }
 ```
-I am really in love with this, it is a self-contained atom of knowledge that can be easily edited and shared. It is very simple to expand the knowledge of NPCs if you adhere to this convention; let's say I want my NPC to learn JuJitsu, I can just write down a list of objects, reload the dataset, and the NPC will instantly know Jujitsu as happened to Neo in The Matrix. 
+I am really in love with this, it is a self-contained atom of knowledge that can be easily edited and shared. It is very simple to expand the knowledge of conversational agents if you adhere to this convention; let's say I want my terminal assistant to learn about docker commands, I can just write down a list of objects, reload the dataset, and the NPC will instantly learn them as Neo learnt Jujitsu in The Matrix. 
 
+The next problem to solve was, how to handle questions like "create file .gitignore"? The "variable" in there needed to be parsed, but more importantly I needed a dataset format where to specify the prompt meaning, so I came up with this:
+```json
+{
+    "intent": "file_creation",
+    "category": "linux_files",
+    "type": "template",
+    "structure": [
+        [
+            {
+                "tag": "<||vocab_create||>",
+                "type": "vocab",
+                "required": true
+            },
+            {
+                "tag": "<||vocab_file||>",
+                "type": "vocab",
+                "required": false
+            },
+            {
+                "tag": "<||file||>",
+                "type": "filename",
+                "required": true
+            }
+        ]
+    ],
+    "message": "<||completion||>",
+    "tools": [
+        {
+            "name": "run_in_terminal",
+            "arguments": {
+                "command": "echo '' > '<||file||>' && termy_set_context 'active_file' '<||file||>'",
+                "explanation": "Writes <||string||> in file <||file||>.",
+                "goal": "Directory Allocation",
+                "mode": "sync"
+            }
+        }
+    ],
+    "permission": "ask",
+    "thinking": [
+        "Ok, I am asked to create the file <||file||>."
+    ]
+},
+```
+Each tag like `<||vocab_create||>` represents a concept, in this case the action of creation, which is represented by multiple sinonyms:
+```json
+{
+  "<||vocab_create||>": ["create", "make", "generate", "craft", "forge"]
+}
+```
+One or more tags can be expected at the same position and each tag can be required or optional. The "variables" or named entities are extracted according to their `type` and a related regular expression:
 
+```json
+{
+  "<||filename||>": "[\\w\\-]+\\.[a-zA-Z0-9]{2,4}",
+}
+```
 
 I must thank my great friend [Kevin](https://github.com/KMathisGit) to help me thinking this out.
 
