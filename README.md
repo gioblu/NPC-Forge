@@ -9,7 +9,7 @@ Instead of praying for a model to do the right thing, you can now use NPC-Forge 
 Many problems you encounter can be solved without machine-learning or LLMs. NPC-Forge gives you a way to solve those problems more efficiently:
 
 * **Deterministic**:  can't hallucinate or generate slop; has no safety alignment filters.
-* **Fast**: runs on the CPU responding in milliseconds.
+* **Fast**: runs on the CPU and responds in milliseconds.
 * **Reliable**: tolerates typos, expletives, interjections and word inversions much better than NLP.js
 * **Extensible**: datasets can be developed with ease thanks to [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md).
 * **No training**: update the dataset, execute `npc-forge reboot`, and you are done.
