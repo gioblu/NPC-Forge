@@ -143,7 +143,7 @@ I must thank my great friend [Kevin](https://github.com/KMathisGit) to help me t
 
 ### Meditations on safety
 
-Looking at the `permission` key I concluded that, if I enforce the use of `"permission": "ask"` for all potentially destructive commands, the tool becomes inherently safe to use, obviously, potential for human error remains (bug in the implementation or in the dataset), but risks are strongly mitigated.
+Looking at the `permission` key I concluded that, enforcing the use of `"permission": "ask"` for all potentially destructive commands, the tool became inherently safe to use, obviously, potential for human error remained (bug in the implementation or in the dataset), but risks were strongly mitigated.
 
 ### The Implementation
 
