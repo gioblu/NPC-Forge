@@ -12,8 +12,8 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "cat << 'EOF' > /tmp/bconv.sh\n#!/bin/bash\necho -e \"══ QUICK UNIT CONVERTER ══\\r\\n1) Celsius to Fahrenheit\\r\\n2) Kilometers to Miles\\r\\n3) Kilograms to Pounds\\r\"\nread -p \"Choose option (1-3): \" opt\nread -p \"Enter value to convert: \" val\nif ! [[ \"$val\" =~ ^[0-9.]+$ ]]; then echo -e \"Invalid number!\\r\"; exit 1; fi\ncase \"$opt\" in\n  1) res=$(echo \"scale=2; ($val * 9/5) + 32\" | bc); echo -e \"$val °C = $res °F\\r\" ;;\n  2) res=$(echo \"scale=2; $val * 0.621371\" | bc); echo -e \"$val Km = $res Miles\\r\" ;;\n  3) res=$(echo \"scale=2; $val * 2.20462\" | bc); echo -e \"$val Kg = $res Lbs\\r\" ;;\n  *) echo -e \"Invalid option\\r\" ;;\nesac\nEOF\ntput cuu 1 && termy_say \"Opening unit converter\" > /dev/null 2>&1 && printf \"\\r\\n\" && bash /tmp/bconv.sh; rm -f /tmp/bconv.sh && printf \"\"",
-                    "explanation": "Generates and runs an interactive bash script to convert metrics like temperature, distance, and weight using bc.",
+                    "command": "printf 'print(\"\\u2550\\u2550 QUICK UNIT CONVERTER \\u2550\\u2550\")\\nprint(\"1) Celsius to Fahrenheit\")\\nprint(\"2) Kilometers to Miles\")\\nprint(\"3) Kilograms to Pounds\")\\nopt=input(\"Choose option (1-3): \")\\nv=input(\"Enter value to convert: \")\\ntry:\\n    x=float(v)\\nexcept ValueError:\\n    print(\"Invalid number!\")\\n    raise SystemExit\\nif opt==\"1\":\\n    print(v + \" \\u00b0C = \" + str(round(x*9/5+32,2)) + \" \\u00b0F\")\\nelif opt==\"2\":\\n    print(v + \" Km = \" + str(round(x*0.621371,2)) + \" Miles\")\\nelif opt==\"3\":\\n    print(v + \" Kg = \" + str(round(x*2.20462,2)) + \" Lbs\")\\nelse:\\n    print(\"Invalid option\")\\n' > /tmp/uconv.py && python3 /tmp/uconv.py; rm -f -- /tmp/uconv.py && termy_say \"Closing unit converter\" > /dev/null 2>&1",
+                    "explanation": "Interactive unit converter (Celsius/Km/Kg) as a Python script generated via printf with single-quote isolation. TCSS-compliant and shell-variable-free: no dollar signs, no command substitution, nothing for variable-expanding layers to corrupt.",
                     "goal": "Launch interactive unit converter tool",
                     "mode": "sync"
                 }
@@ -35,8 +35,8 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "cat << 'EOF' > /tmp/bcalc.sh\n#!/bin/bash\necho -e \"══ TERMINAL CALCULATOR ══\\r\\nEnter math expression (e.g. 12*4.5 or sqrt(16)). Type 'q' to exit.\\r\"\nwhile :; do\n  read -p \"calc> \" expr\n  [ \"$expr\" = \"q\" ] && break\n  [ -z \"$expr\" ] && continue\n  res=$(echo \"scale=4; $expr\" | bc -l 2>/dev/null)\n  if [ -z \"$res\" ]; then echo -e \"Invalid expression\\r\"; else echo -e \"= $res\\r\"; fi\ndone\nEOF\ntput cuu 1 && termy_say \"Opening calculator\" > /dev/null 2>&1 && printf \"\\r\\n\" && bash /tmp/bcalc.sh && rm -f /tmp/bcalc.sh && printf \"\"",
-                    "explanation": "Generates and runs an interactive bash script that calculates math expressions with decimal precision using bc.",
+                    "command": "printf 'import math\\nprint(\"\\u2550\\u2550 TERMINAL CALCULATOR \\u2550\\u2550\")\\nprint(\"Enter math expression (e.g. 12*4.5 or sqrt(16)). Type q to exit.\")\\nwhile True:\\n    e=input(\"calc> \").strip()\\n    if e==\"q\":\\n        break\\n    if not e:\\n        continue\\n    try:\\n        print(\"= \" + str(eval(e, {\"__builtins__\": None}, {\"sqrt\": math.sqrt, \"pi\": math.pi, \"abs\": abs, \"pow\": pow, \"round\": round})))\\n    except Exception:\\n        print(\"Invalid expression\")\\n' > /tmp/calc.py && python3 /tmp/calc.py; rm -f -- /tmp/calc.py && termy_say \"Closing calculator\" > /dev/null 2>&1",
+                    "explanation": "Interactive calculator via Python script generated with printf and single-quote isolation. TCSS-compliant and shell-variable-free: no dollar signs, eval sandboxed with restricted globals, invalid expressions caught with try/except.",
                     "goal": "Launch interactive terminal calculator with decimal support",
                     "mode": "sync"
                 }
@@ -58,8 +58,8 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "read -p \"🧮 Expression: \" expr && printf \"\\n\" && res=$(python3 -c \"import math; print(eval('$expr'))\") && printf \"Result: %s\\n\" \"$res\" && termy_say \"Result is $res\" > /dev/null 2>&1",
-                    "explanation": "Evaluates a math expression using Python, prints the result, and speaks it aloud using termy_say.",
+                    "command": "printf 'import math\\ne=input(\"\\U0001F9EE Expression: \")\\nprint(\"= \" + str(eval(e, {\"__builtins__\": None}, {\"sqrt\": math.sqrt, \"pi\": math.pi, \"abs\": abs, \"pow\": pow, \"round\": round})))\\n' > /tmp/qcalc.py && python3 /tmp/qcalc.py; rm -f -- /tmp/qcalc.py && termy_say \"Calculation done\" > /dev/null 2>&1",
+                    "explanation": "Writes a Python script to /tmp via printf with single-quote isolation, then runs it interactively. Sandboxed eval (no builtins, whitelisted math functions only). TCSS-compliant and shell-variable-free: zero dollar signs, no command substitution, double-dash on rm.",
                     "goal": "Evaluate an expression and speak the result",
                     "mode": "sync"
                 }
@@ -67,117 +67,111 @@
         ],
         "permission": "yolo"
     },
-    
     {
-    "category": "math_prime_checker",
-    "input": [
-        "check if number is prime",
-        "prime number checker",
-        "is this number prime",
-        "primality test tool"
-    ],
-    "tools": [
-        {
-            "name": "run_in_terminal",
-            "arguments": {
-                "command": "printf 'print(\"══ PRIME NUMBER CHECKER ══\")\\nwhile True:\\n    n=input(\"Number (q to quit): \")\\n    if n==\"q\":\\n        break\\n    if not n.isdigit():\\n        print(\"Enter a positive integer!\")\\n        continue\\n    v=int(n)\\n    if v<2:\\n        ok=False\\n    elif v==2:\\n        ok=True\\n    elif v & 1 == 0:\\n        ok=False\\n    else:\\n        i=3\\n        ok=True\\n        while i*i<=v:\\n            if (v//i)*i==v:\\n                ok=False\\n                break\\n            i+=2\\n    print(n + (\" IS prime ✓\" if ok else \" is NOT prime ✗\"))\\n' > /tmp/prime.py && python3 /tmp/prime.py; rm -f /tmp/prime.py && termy_say \"Closing prime checker\" > /dev/null 2>&1",
-                "explanation": "Saves a Python script to /tmp and runs it interactively: reads numbers in a loop and tests primality by trial division.",
-                "goal": "Check primality of numbers interactively",
-                "mode": "sync"
+        "category": "math_prime_checker",
+        "input": [
+            "check if number is prime",
+            "prime number checker",
+            "is this number prime",
+            "primality test tool"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf 'print(\"══ PRIME NUMBER CHECKER ══\")\\nwhile True:\\n    n=input(\"Number (q to quit): \")\\n    if n==\"q\":\\n        break\\n    if not n.isdigit():\\n        print(\"Enter a positive integer!\")\\n        continue\\n    v=int(n)\\n    if v<2:\\n        ok=False\\n    elif v==2:\\n        ok=True\\n    elif v & 1 == 0:\\n        ok=False\\n    else:\\n        i=3\\n        ok=True\\n        while i*i<=v:\\n            if (v//i)*i==v:\\n                ok=False\\n                break\\n            i+=2\\n    print(n + (\" IS prime ✓\" if ok else \" is NOT prime ✗\"))\\n' > /tmp/prime.py && python3 /tmp/prime.py; rm -f -- /tmp/prime.py && termy_say \"Closing prime checker\" > /dev/null 2>&1",
+                    "explanation": "Saves a Python script to /tmp and runs it interactively: reads numbers in a loop and tests primality by trial division. TCSS-compliant: script body written via printf with single-quote isolation (static content), double-dash on rm.",
+                    "goal": "Check primality of numbers interactively",
+                    "mode": "sync"
+                }
             }
-        }
-    ],
-    "permission": "yolo"
-}
-,
+        ],
+        "permission": "yolo"
+    },
     {
-    "category": "math_gcd_lcm",
-    "input": [
-        "calculate gcd and lcm",
-        "greatest common divisor tool",
-        "least common multiple calculator",
-        "mcd mcm interactive"
-    ],
-    "tools": [
-        {
-            "name": "run_in_terminal",
-            "arguments": {
-                "command": "printf 'print(\"══ GCD & LCM CALCULATOR ══\")\\nwhile True:\\n    line=input(\"Two numbers (q to quit): \")\\n    if line==\"q\":\\n        break\\n    parts=line.split()\\n    if len(parts)!=2 or not all(p.isdigit() for p in parts):\\n        print(\"Enter two positive integers!\")\\n        continue\\n    a,b=int(parts[0]),int(parts[1])\\n    x,y=a,b\\n    while y:\\n        x,y=y,x-(x//y)*y\\n    g=x\\n    print(\"GCD: \" + str(g) + \"   LCM: \" + str((a*b)//g if g else 0))\\n' > /tmp/gcd.py && python3 /tmp/gcd.py; rm -f /tmp/gcd.py && termy_say \"Closing gcd lcm calculator\" > /dev/null 2>&1",
-                "explanation": "Interactive GCD and LCM calculator using the Euclidean algorithm (modulo-free), in a loop until quit.",
-                "goal": "Calculate GCD and LCM interactively",
-                "mode": "sync"
+        "category": "math_gcd_lcm",
+        "input": [
+            "calculate gcd and lcm",
+            "greatest common divisor tool",
+            "least common multiple calculator",
+            "mcd mcm interactive"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf 'print(\"\\u2550 GCD & LCM CALCULATOR \\u2550\")\\nwhile True:\\n    line=input(\"Two numbers (q to quit): \")\\n    if line==\"q\":\\n        break\\n    parts=line.split()\\n    if len(parts)!=2 or not all(p.isdigit() for p in parts):\\n        print(\"Enter two positive integers!\")\\n        continue\\n    a,b=int(parts[0]),int(parts[1])\\n    if a==0 or b==0:\\n        print(\"GCD: \" + str(max(a,b)) + \"   LCM: 0\")\\n        continue\\n    x,y=a,b\\n    while y:\\n        x,y=y,x-(x//y)*y\\n    g=x\\n    print(\"GCD: \" + str(g) + \"   LCM: \" + str((a*b)//g))\\n' > /tmp/gcd.py; python3 /tmp/gcd.py; rm -f -- /tmp/gcd.py; termy_say \"Closing gcd lcm calculator\" > /dev/null 2>&1",
+                    "explanation": "Interactive GCD and LCM calculator using the Euclidean algorithm (modulo-free subtraction form), in a loop until quit, with explicit zero handling to avoid division by zero. TCSS-compliant: script written via printf with single-quote isolation (static content), double-dash on rm, cleanup and closing message regardless of script exit status.",
+                    "goal": "Calculate GCD and LCM interactively",
+                    "mode": "sync"
+                }
             }
-        }
-    ],
-    "permission": "yolo"
-}
-,
-   {
-    "category": "math_factorial",
-    "input": [
-        "calculate factorial",
-        "factorial calculator",
-        "combinations and permutations",
-        "n choose k calculator"
-    ],
-    "tools": [
-        {
-            "name": "run_in_terminal",
-            "arguments": {
-                "command": "printf 'import math\\nprint(\"══ FACTORIAL / PERMUTATIONS / COMBINATIONS ══\")\\nprint(\"1) n!  2) nPk permutations  3) nCk combinations\")\\nopt=input(\"Choose (1-3): \")\\ntry:\\n    n=int(input(\"n = \"))\\n    k=0\\n    if opt!=\"1\":\\n        k=int(input(\"k = \"))\\nexcept ValueError:\\n    print(\"Integers only!\")\\n    raise SystemExit\\nif n<0 or k<0:\\n    print(\"Negative values not allowed\")\\nelif opt==\"1\":\\n    print(str(n) + \"! = \" + str(math.factorial(n)))\\nelif opt not in (\"2\",\"3\"):\\n    print(\"Invalid option\")\\nelif k>n:\\n    print(\"k must be <= n (cannot choose \" + str(k) + \" items from \" + str(n) + \")\")\\nelif opt==\"2\":\\n    print(\"P(\" + str(n) + \",\" + str(k) + \") = \" + str(math.factorial(n)//math.factorial(n-k)))\\nelse:\\n    print(\"C(\" + str(n) + \",\" + str(k) + \") = \" + str(math.factorial(n)//(math.factorial(k)*math.factorial(n-k))))\\n' > /tmp/fact.py && python3 /tmp/fact.py; rm -f /tmp/fact.py && termy_say \"Closing factorial calculator\" > /dev/null 2>&1",
-                "explanation": "Interactive factorial, permutations and combinations calculator with validation: rejects negative values and k greater than n.",
-                "goal": "Calculate factorial, permutations and combinations",
-                "mode": "sync"
-            }
-        }
-    ],
-    "permission": "yolo"
-}
-,
+        ],
+        "permission": "yolo"
+    },
     {
-    "category": "math_percentage",
-    "input": [
-        "percentage calculator",
-        "calculate percent",
-        "discount calculator",
-        "percent change tool"
-    ],
-    "tools": [
-        {
-            "name": "run_in_terminal",
-            "arguments": {
-                "command": "printf 'print(\"══ PERCENTAGE CALCULATOR ══\")\\nprint(\"1) X percent of N\")\\nprint(\"2) X is what percent of N\")\\nprint(\"3) Percent change from A to B\")\\nprint(\"4) Apply X percent discount to N\")\\nopt=input(\"Choose (1-4): \")\\ntry:\\n    a=float(input(\"First value: \"))\\n    b=float(input(\"Second value: \"))\\nexcept ValueError:\\n    print(\"Numbers only!\")\\n    raise SystemExit\\nif opt==\"1\":\\n    print(str(a) + \" percent of \" + str(b) + \" = \" + str(round(a*b/100,4)))\\nelif opt==\"2\":\\n    if b==0:\\n        print(\"Cannot divide by zero\")\\n    else:\\n        print(str(a) + \" is \" + str(round(a/b*100,4)) + \" percent of \" + str(b))\\nelif opt==\"3\":\\n    if a==0:\\n        print(\"Cannot divide by zero\")\\n    else:\\n        print(\"Change from \" + str(a) + \" to \" + str(b) + \" = \" + str(round((b-a)/a*100,4)) + \" percent\")\\nelif opt==\"4\":\\n    print(str(b) + \" with \" + str(a) + \" percent discount = \" + str(round(b*(1-a/100),4)))\\nelse:\\n    print(\"Invalid option\")\\n' > /tmp/pct.py && python3 /tmp/pct.py; rm -f /tmp/pct.py && termy_say \"Closing percentage calculator\" > /dev/null 2>&1",
-                "explanation": "Interactive percentage tool with validation: percent of value, percent of total, percent change and discounts, protected against division by zero and bad input.",
-                "goal": "Calculate percentages interactively",
-                "mode": "sync"
+        "category": "math_factorial",
+        "input": [
+            "calculate factorial",
+            "factorial calculator",
+            "combinations and permutations",
+            "n choose k calculator"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf 'import math\\nprint(\"══ FACTORIAL / PERMUTATIONS / COMBINATIONS ══\")\\nprint(\"1) n!  2) nPk permutations  3) nCk combinations\")\\nwhile True:\\n    opt=input(\"Choose 1-3 (q to quit): \")\\n    if opt==\"q\":\\n        break\\n    if opt not in (\"1\",\"2\",\"3\"):\\n        print(\"Invalid option!\")\\n        continue\\n    try:\\n        n=int(input(\"n = \"))\\n        k=0\\n        if opt!=\"1\":\\n            k=int(input(\"k = \"))\\n    except ValueError:\\n        print(\"Integers only!\")\\n        continue\\n    if n<0 or k<0:\\n        print(\"Negative values not allowed\")\\n    elif opt==\"1\":\\n        print(str(n) + \"! = \" + str(math.factorial(n)))\\n    elif k>n:\\n        print(\"k must be <= n (cannot choose \" + str(k) + \" items from \" + str(n) + \")\")\\n    elif opt==\"2\":\\n        print(\"P(\" + str(n) + \",\" + str(k) + \") = \" + str(math.factorial(n)//math.factorial(n-k)))\\n    else:\\n        print(\"C(\" + str(n) + \",\" + str(k) + \") = \" + str(math.factorial(n)//(math.factorial(k)*math.factorial(n-k))))\\n' > /tmp/fact.py && python3 /tmp/fact.py; rm -f -- /tmp/fact.py && termy_say \"Closing factorial calculator\" > /dev/null 2>&1",
+                    "explanation": "Interactive factorial, permutations and combinations calculator in a loop with 'q' to quit, validation: rejects invalid options, non-integer input, negative values and k greater than n. TCSS-compliant: printf with single-quote isolation (static content), double-dash on rm.",
+                    "goal": "Calculate factorial, permutations and combinations interactively",
+                    "mode": "sync"
+                }
             }
-        }
-    ],
-    "permission": "yolo"
-}
-,
+        ],
+        "permission": "yolo"
+    },
     {
-    "category": "math_base_converter",
-    "input": [
-        "number base converter",
-        "binary hex decimal converter",
-        "convert between bases",
-        "base conversion tool"
-    ],
-    "tools": [
-        {
-            "name": "run_in_terminal",
-            "arguments": {
-                "command": "printf 'print(\"══ NUMBER BASE CONVERTER ══\")\\nprint(\"Accepts 0x hex, 0b binary, 0o octal, plain decimal\")\\nprint(\"Tip: 0/1-only strings are also read as binary\")\\nwhile True:\\n    n=input(\"Number (q to quit): \").strip()\\n    if n==\"q\":\\n        break\\n    v=None\\n    try:\\n        v=int(n,0)\\n    except ValueError:\\n        pass\\n    if v is None and n and all(c in \"01\" for c in n):\\n        v=int(n,2)\\n    if v is None:\\n        print(\"Invalid number format!\")\\n    else:\\n        print(\"DEC: \" + str(v) + \"   HEX: \" + hex(v)[2:].upper() + \"   OCT: \" + oct(v)[2:] + \"   BIN: \" + bin(v)[2:])\\n' > /tmp/base.py && python3 /tmp/base.py; rm -f /tmp/base.py && termy_say \"Closing base converter\" > /dev/null 2>&1",
-                "explanation": "Interactive base converter that also auto-detects binary strings of only 0s and 1s, showing all four representations at once.",
-                "goal": "Convert numbers between bases interactively",
-                "mode": "sync"
+        "category": "math_percentage",
+        "input": [
+            "percentage calculator",
+            "calculate percent",
+            "discount calculator",
+            "percent change tool"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf 'print(\"══ PERCENTAGE CALCULATOR ══\")\\nprint(\"1) X percent of N\")\\nprint(\"2) X is what percent of N\")\\nprint(\"3) Percent change from A to B\")\\nprint(\"4) Apply X percent discount to N\")\\nopt=input(\"Choose (1-4): \")\\ntry:\\n    a=float(input(\"First value: \"))\\n    b=float(input(\"Second value: \"))\\nexcept ValueError:\\n    print(\"Numbers only!\")\\n    raise SystemExit\\nif opt==\"1\":\\n    print(str(a) + \" percent of \" + str(b) + \" = \" + str(round(a*b/100,4)))\\nelif opt==\"2\":\\n    if b==0:\\n        print(\"Cannot divide by zero\")\\n    else:\\n        print(str(a) + \" is \" + str(round(a/b*100,4)) + \" percent of \" + str(b))\\nelif opt==\"3\":\\n    if a==0:\\n        print(\"Cannot divide by zero\")\\n    else:\\n        print(\"Change from \" + str(a) + \" to \" + str(b) + \" = \" + str(round((b-a)/a*100,4)) + \" percent\")\\nelif opt==\"4\":\\n    print(str(b) + \" with \" + str(a) + \" percent discount = \" + str(round(b*(1-a/100),4)))\\nelse:\\n    print(\"Invalid option\")\\n' > /tmp/pct.py && python3 /tmp/pct.py; rm -f -- /tmp/pct.py && termy_say \"Closing percentage calculator\" > /dev/null 2>&1",
+                    "explanation": "Interactive percentage tool with validation: percent of value, percent of total, percent change and discounts, protected against division by zero and bad input. TCSS-compliant: printf with single-quote isolation, double-dash on rm.",
+                    "goal": "Calculate percentages interactively",
+                    "mode": "sync"
+                }
             }
-        }
-    ],
-    "permission": "yolo"
-}
-,
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "math_base_converter",
+        "input": [
+            "number base converter",
+            "binary hex decimal converter",
+            "convert between bases",
+            "base conversion tool"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf 'print(\"══ NUMBER BASE CONVERTER ══\")\\nprint(\"Accepts 0x hex, 0b binary, 0o octal, plain decimal\")\\nprint(\"Tip: 0/1-only strings are also read as binary\")\\nwhile True:\\n    n=input(\"Number (q to quit): \").strip()\\n    if n==\"q\":\\n        break\\n    v=None\\n    try:\\n        v=int(n,0)\\n    except ValueError:\\n        pass\\n    if v is None and n and all(c in \"01\" for c in n):\\n        v=int(n,2)\\n    if v is None:\\n        print(\"Invalid number format!\")\\n    else:\\n        print(\"DEC: \" + str(v) + \"   HEX: \" + hex(v)[2:].upper() + \"   OCT: \" + oct(v)[2:] + \"   BIN: \" + bin(v)[2:])\\n' > /tmp/base.py && python3 /tmp/base.py; rm -f -- /tmp/base.py && termy_say \"Closing base converter\" > /dev/null 2>&1",
+                    "explanation": "Interactive base converter that also auto-detects binary strings of only 0s and 1s, showing all four representations at once. TCSS-compliant: printf with single-quote isolation, double-dash on rm.",
+                    "goal": "Convert numbers between bases interactively",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
     {
         "category": "math_statistics_cli",
         "input": [
@@ -190,8 +184,8 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "printf 'import statistics as st\\nprint(\"══ STATISTICS CALCULATOR ══\")\\nline=input(\"Enter numbers separated by spaces: \")\\ntry:\\n    data=[float(x) for x in line.split()]\\nexcept ValueError:\\n    print(\"Numbers only!\")\\n    raise SystemExit\\nif not data:\\n    print(\"No numbers given\")\\nelse:\\n    print(\"Count:   \" + str(len(data)))\\n    print(\"Sum:     \" + str(round(sum(data),4)))\\n    print(\"Mean:    \" + str(round(st.mean(data),4)))\\n    print(\"Median:  \" + str(round(st.median(data),4)))\\n    if len(data)>1:\\n        print(\"Std dev: \" + str(round(st.stdev(data),4)))\\n    print(\"Min:     \" + str(min(data)))\\n    print(\"Max:     \" + str(max(data)))\\n' > /tmp/stats.py && python3 /tmp/stats.py; rm -f /tmp/stats.py && termy_say \"Closing statistics calculator\" > /dev/null 2>&1",
-                    "explanation": "Enter numbers separated by spaces and get count, sum, mean, median, standard deviation, min and max. Protected against bad input.",
+                    "command": "printf 'import statistics as st\\nprint(\"══ STATISTICS CALCULATOR ══\")\\nline=input(\"Enter numbers separated by spaces: \")\\ntry:\\n    data=[float(x) for x in line.split()]\\nexcept ValueError:\\n    print(\"Numbers only!\")\\n    raise SystemExit\\nif not data:\\n    print(\"No numbers given\")\\nelse:\\n    print(\"Count:   \" + str(len(data)))\\n    print(\"Sum:     \" + str(round(sum(data),4)))\\n    print(\"Mean:    \" + str(round(st.mean(data),4)))\\n    print(\"Median:  \" + str(round(st.median(data),4)))\\n    if len(data)>1:\\n        print(\"Std dev: \" + str(round(st.stdev(data),4)))\\n    print(\"Min:     \" + str(min(data)))\\n    print(\"Max:     \" + str(max(data)))\\n' > /tmp/stats.py && python3 /tmp/stats.py; rm -f -- /tmp/stats.py && termy_say \"Closing statistics calculator\" > /dev/null 2>&1",
+                    "explanation": "Enter numbers separated by spaces and get count, sum, mean, median, standard deviation, min and max. Protected against bad input. TCSS-compliant: printf with single-quote isolation, double-dash on rm.",
                     "goal": "Compute statistics of a data set",
                     "mode": "sync"
                 }
@@ -211,8 +205,8 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "printf 'import math\\nprint(\"══ GEOMETRY CALCULATOR ══\")\\nprint(\"1) Circle   2) Rectangle   3) Triangle   4) Sphere volume\")\\nopt=input(\"Choose (1-4): \")\\ntry:\\n    if opt==\"1\":\\n        r=float(input(\"radius: \"))\\n        if r<0:\\n            print(\"Radius must be positive\")\\n            raise SystemExit\\n        print(\"Area = \" + str(round(math.pi*r*r,4)) + \"   Perimeter = \" + str(round(2*math.pi*r,4)))\\n    elif opt==\"2\":\\n        a=float(input(\"width: \"))\\n        b=float(input(\"height: \"))\\n        print(\"Area = \" + str(round(a*b,4)) + \"   Perimeter = \" + str(round(2*(a+b),4)))\\n    elif opt==\"3\":\\n        a=float(input(\"base: \"))\\n        h=float(input(\"height: \"))\\n        print(\"Area = \" + str(round(a*h/2,4)))\\n    elif opt==\"4\":\\n        r=float(input(\"radius: \"))\\n        print(\"Volume = \" + str(round(4/3*math.pi*r**3,4)))\\n    else:\\n        print(\"Invalid option\")\\nexcept ValueError:\\n    print(\"Numbers only!\")\\n' > /tmp/geo.py && python3 /tmp/geo.py; rm -f /tmp/geo.py && termy_say \"Closing geometry calculator\" > /dev/null 2>&1",
-                    "explanation": "Interactive geometry tool: circle area/perimeter, rectangle, triangle area and sphere volume, with input validation.",
+                    "command": "printf 'import math\\nprint(\"══ GEOMETRY CALCULATOR ══\")\\nprint(\"1) Circle   2) Rectangle   3) Triangle   4) Sphere volume\")\\nopt=input(\"Choose (1-4): \")\\ntry:\\n    if opt==\"1\":\\n        r=float(input(\"radius: \"))\\n        if r<0:\\n            print(\"Radius must be positive\")\\n            raise SystemExit\\n        print(\"Area = \" + str(round(math.pi*r*r,4)) + \"   Perimeter = \" + str(round(2*math.pi*r,4)))\\n    elif opt==\"2\":\\n        a=float(input(\"width: \"))\\n        b=float(input(\"height: \"))\\n        print(\"Area = \" + str(round(a*b,4)) + \"   Perimeter = \" + str(round(2*(a+b),4)))\\n    elif opt==\"3\":\\n        a=float(input(\"base: \"))\\n        h=float(input(\"height: \"))\\n        print(\"Area = \" + str(round(a*h/2,4)))\\n    elif opt==\"4\":\\n        r=float(input(\"radius: \"))\\n        print(\"Volume = \" + str(round(4/3*math.pi*r**3,4)))\\n    else:\\n        print(\"Invalid option\")\\nexcept ValueError:\\n    print(\"Numbers only!\")\\n' > /tmp/geo.py && python3 /tmp/geo.py; rm -f -- /tmp/geo.py && termy_say \"Closing geometry calculator\" > /dev/null 2>&1",
+                    "explanation": "Interactive geometry tool: circle area/perimeter, rectangle, triangle area and sphere volume, with input validation. TCSS-compliant: printf with single-quote isolation, double-dash on rm.",
                     "goal": "Calculate geometric properties interactively",
                     "mode": "sync"
                 }
@@ -232,8 +226,8 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "printf 'print(\"══ POWERS & ROOTS ══\")\\nwhile True:\\n    line=input(\"base exponent (q to quit): \")\\n    if line==\"q\":\\n        break\\n    parts=line.split()\\n    if len(parts)!=2:\\n        print(\"Enter base and exponent separated by space!\")\\n        continue\\n    try:\\n        b=float(parts[0])\\n        e=float(parts[1])\\n    except ValueError:\\n        print(\"Numbers only!\")\\n        continue\\n    p=b**e\\n    print(str(b) + \" ^ \" + str(e) + \" = \" + str(round(p,6)))\\n    if e!=0 and p>0:\\n        print(\"   \" + str(e) + \"-th root of \" + str(round(p,6)) + \" = \" + str(round(p**(1/e),6)))\\n' > /tmp/pow.py && python3 /tmp/pow.py; rm -f /tmp/pow.py && termy_say \"Closing powers and roots calculator\" > /dev/null 2>&1",
-                    "explanation": "Interactive powers and roots calculator with validation: handles fractional exponents and shows the root check.",
+                    "command": "printf 'print(\"══ POWERS & ROOTS ══\")\\nwhile True:\\n    line=input(\"base exponent (q to quit): \")\\n    if line==\"q\":\\n        break\\n    parts=line.split()\\n    if len(parts)!=2:\\n        print(\"Enter base and exponent separated by space!\")\\n        continue\\n    try:\\n        b=float(parts[0])\\n        e=float(parts[1])\\n    except ValueError:\\n        print(\"Numbers only!\")\\n        continue\\n    p=b**e\\n    print(str(b) + \" ^ \" + str(e) + \" = \" + str(round(p,6)))\\n    if e!=0 and p>0:\\n        print(\"   \" + str(e) + \"-th root of \" + str(round(p,6)) + \" = \" + str(round(p**(1/e),6)))\\n' > /tmp/pow.py && python3 /tmp/pow.py; rm -f -- /tmp/pow.py && termy_say \"Closing powers and roots calculator\" > /dev/null 2>&1",
+                    "explanation": "Interactive powers and roots calculator with validation: handles fractional exponents and shows the root check. TCSS-compliant: printf with single-quote isolation, double-dash on rm.",
                     "goal": "Calculate powers and roots interactively",
                     "mode": "sync"
                 }
@@ -241,6 +235,4 @@
         ],
         "permission": "yolo"
     }
-
-
 ]
