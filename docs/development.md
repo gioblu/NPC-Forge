@@ -163,7 +163,7 @@ Step `5` relies on:
 2. BOW (Bag Of Words) to accommodate word inversions.
 3. IDF weighted Levenshtein to handle typos.
 
-For the first time after almost 2 months throwing spaghetti at the wall and hope they stuck, I felt again the joy of working on something comprehensible and predictable:
+For the first time after almost 2 months throwing spaghetti at the wall and hope they stuck, I felt again the joy of working on something comprehensible and predictable. I decided to call it [TERMy](https://github.com/gioblu/NPC-Forge/tree/main/npcs/termy):
 
 [![Terminal demonstration](/npcs/termy/showcase.gif)](https://www.youtube.com/watch?v=qeIp0xePLBg)
 
