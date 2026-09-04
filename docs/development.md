@@ -80,7 +80,7 @@ The first things I needed was a set of conventions to rely on, so I drafted the 
     "permission": "yolo"
 }
 ```
-I am really in love with this, it is a self-contained atom of knowledge that can be easily edited and shared. It is very simple to expand the capabilities of conversational agents if you adhere to this convention; let's say I want my terminal assistant to learn about docker commands, I can just write down a list of objects in `dataset_docker.json`, reload the dataset, and the NPC will instantly learn them as Neo learnt Jujitsu in The Matrix. 
+I am really in love with this, it is a self-contained atom of knowledge that can be easily edited and shared. It is very simple to expand the capabilities of conversational agents if you adhere to this convention; let's say I want my terminal assistant to learn about docker commands, I can just write down a list of objects in `dataset_docker.json`, drop the file in the dataset  directory, and the NPC will instantly learn them as Neo learnt Jujitsu in The Matrix. 
 
 The next problem to solve was, how to handle questions like "create file .gitignore"? I needed to parse the "variable" in there and understand the true meaning of the request, so I came up with this:
 ```json
