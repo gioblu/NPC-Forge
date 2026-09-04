@@ -180,13 +180,14 @@ Execute:  ▶ Yes     No
 ```
 
 ### Let's connect it to VS Code
-I have developed my own NPC and connected it to VS Code Copilot to let it take care of a subset of the prompts I was before sending to Claude, it is not an LLM, and it is instantaneous! I suspect this is the first time anyone see a deterministic agent using a LLM harness, although, I believe, this will be the prevalent topic in the near future.
+I have developed my own NPC and connected it to VS Code Copilot to let it take care of a subset of the prompts I was before sending to Claude, it is not an LLM, and it is instantaneous! I suspect this is the first time anyone see a deterministic agent using a LLM harness, although, I believe, this will be the prevalent topic in the near future:
 
+It is ironic to think that Copilot's recent price hikes are what finally pushed me to dedicate time to this software. Maybe it's just the lifecycle of corporate SaaS? In any case, I believe the architecture for the near future should be deterministic NPCs like TERMy, routing to a heavy LLM only as a last resort. Continuing to waste compute and electricity on trivial tasks is stupidly expensive and irresponsible.
 
 ### NPC-Forge
-I was not willing to waste money, deskill and be influenced by those models. I felt the need to build a sustainable alternative for the community, so I built [NPC-Forge](). Now everyone can quickly build a NPC and share it with the community. Those NPCs can run on the CPU in any Linux machine, like RPI Zero, responding in milliseconds. Imagine, now even your AC meter or your router can serve a conversational agent for free.
+I was not willing to waste money, deskill and be influenced by those models. I felt the need to build a sustainable alternative for the community, so I built [NPC-Forge](). Now everyone can quickly build a NPC and share it with the community, those NPCs run on the CPU in any Linux machine, like the RPI Zero, responding in milliseconds. Imagine, now even your AC meter or your router can serve a conversational agent for free.
 
-Please, be lenient on me, this is the first software I release using Python and consider that NPC-Forge was done in 2 months of passionate development, it is experimental. I am not proud of the actual code quality. I bet many Linux gray beards will curse me until the end of time for the chain of commands TERMy sometimes outputs, a lot of work must be done on the dataset and the source code to achieve safety and production readiness. 
+Please, be lenient on me, this is the first software I release using Python and consider that NPC-Forge was done in 2 months of passionate development, it is experimental. I am not proud of the actual code quality. I bet many Linux gray beards will curse me until the end of time because of the chain of commands TERMy sometimes emits; a lot of work must be done on the dataset and the source code to achieve safety and production readiness. 
 
 Consider this an early release to showcase what can be done. I think with some help from the community NPC-Forge and TERMy may save us a lot of money, electricity and time. If you liked this read and you agree with me, consider contributing to the project. 
 
