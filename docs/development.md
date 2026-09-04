@@ -163,7 +163,7 @@ Step `5` relies on:
 2. BOW (Bag Of Words) to accommodate word inversions.
 3. IDF weighted Levenshtein to handle typos.
 
-For the first time after almost 2 months throwing spaghetti at the wall and hope they stuck, I felt again the joy of working on something sane, predictable, almost something a serious engineer would work on:
+For the first time after almost 2 months throwing spaghetti at the wall and hope they stuck, I felt again the joy of working on something comprehensible and predictable:
 ```
 $ termy create file test.txt and write Hello I am TERMy
 
