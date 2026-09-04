@@ -185,7 +185,7 @@ I have developed my own NPC and connected it to VS Code Copilot to let it take c
 
 
 ### NPC-Forge
-I was not willing to waste money, deskill and be influenced by those models and needed to build a sustainable alternative for the community, so I built [NPC-Forge](). Now everyone can quickly build a NPC and share it with the community. Those NPCs can run in any Linux machine without a GPU, like RPI Zero. 
+I was not willing to waste money, deskill and be influenced by those models. I felt the need to build a sustainable alternative for the community, so I built [NPC-Forge](). Now everyone can quickly build a NPC and share it with the community. Those NPCs can run on the CPU in any Linux machine, like RPI Zero, responding in milliseconds. Imagine, now even your AC meter or your router can serve a conversational agent for free.
 
 I think with some help from you NPC-Forge and TERMy may save us a lot of electricity and time, if you liked this read and you agree with me, consider contributing to the project. 
 
