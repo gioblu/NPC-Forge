@@ -170,7 +170,7 @@ For the first time after almost 2 months throwing spaghetti at the wall and hope
 How this compares to established NLU frameworks? [Rasa](https://github.com/rasahq/rasa) and [NLP.js](https://github.com/axa-group/nlp.js/) are heavy and rely on machine learning classifiers and training pipelines, [ChatScript](https://github.com/ChatScript/ChatScript) is massive with a notoriously steep learning curve. NPC-Forge strips all that away, requiring zero training, specifying a powerful and flexible data format, and featuring a surprisingly capable parser small enough to run on a micro-controller.
 
 ### Let's connect it to Copilot
-I have developed my own NPC and connected it to Copilot to handle a subset of the prompts I was before sending to Claude, it is not an LLM, and it is instantaneous! I suspect this is the first time most of us see a deterministic agent using a harness, although, I believe, this will be the prevalent topic in the near future:
+I have developed my own NPC called [TERMy](https://github.com/gioblu/NPC-Forge/tree/main/npcs/termy) and connected it to Copilot to handle a subset of the prompts I was before sending to Claude, it is not an LLM, and it is instantaneous! I suspect this is the first time most of us see a deterministic agent using a harness, although, I believe, this will be the prevalent topic in the near future:
 
 [![Copilot integration](/npcs/termy/vscode.gif)](https://www.youtube.com/watch?v=Wzzouhq2a8A)
 
@@ -179,8 +179,8 @@ It is ironic to think that Copilot's recent price hikes are what finally pushed 
 ### NPC-Forge
 With [NPC-Forge](https://github.com/gioblu/NPC-Forge) now everyone can quickly build an NPC and share it with the community, those NPCs run on the CPU in any Linux machine, like the RPI Zero, responding in milliseconds. Imagine, now even your AC meter or your router can serve a conversational agent for free. This approach is also more democratic, your NPC will happily say something uncomfortable if you program it to do so, much better than corporate alignment filters and guardrails shaping public opinion, culture and language.  
 
-I ask for a bit of leniency: this is my first Python project, made in two months of passionate development. I am fully aware the code is not yet production-ready. I bet many Linux graybeards will curse me until the end of time because of the chain of commands TERMy sometimes emits; a lot of work must be done on the dataset and the source code to achieve safety and production readiness. 
+I ask for a bit of leniency: this is my first Python project, made in two months of passionate development. I am fully aware the code is not yet production-ready. I bet many Linux graybeards will curse me until the end of time because of the chain of commands [TERMy](https://github.com/gioblu/NPC-Forge/tree/main/npcs/termy) sometimes emits; a lot of work must be done on the dataset and the source code to achieve safety and production readiness. 
 
-Consider that this is an early release to showcase what we may use in a not very distant future. If the shared effort of the community is focused on NPC-Forge and TERMy, I think they may provide us with more freedom and help us save money, electricity and time. If you liked this read and you agree with me, consider contributing to the project. Happy tinkering!
+Consider that this is an early release to showcase what we may use in a not very distant future. If the shared effort of the community is focused on [NPC-Forge](https://github.com/gioblu/NPC-Forge) and [TERMy](https://github.com/gioblu/NPC-Forge/tree/main/npcs/termy), I think they may provide us with more freedom and help us save money, electricity and time. If you liked this read and you agree with me, consider contributing to the project. Happy tinkering!
 
 
