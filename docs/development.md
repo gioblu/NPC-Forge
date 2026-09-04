@@ -52,7 +52,7 @@ Then I remembered about the blockchain craze, when everyone wanted to fit a bloc
 
 ### Dataset format
 
-My intention was to implement NLU (Natural Language Understanding) from scratch without focusing too much on how others did it before me. The first things I needed was a set of conventions to rely on, so I drafted the [NDF 0.0 (NPC-Forge Dataset Format](https://github.com/gioblu/NPC-Forge/blob/main/docs/dataset.md) which specifies the dataset format of NPC-Forge. The following object contains category, input sentences, textual response, thinking traces, permission gating and tool calls to be executed in a format compatible with VS code. 
+The first things I needed was a set of conventions to rely on, so I drafted the [NDF 0.0 (NPC-Forge Dataset Format](https://github.com/gioblu/NPC-Forge/blob/main/docs/dataset.md) which specifies the dataset format of NPC-Forge. The following object contains category, input sentences, textual response, thinking traces, permission gating and tool calls to be executed in a format compatible with VS code. 
   
 ```json
 {
@@ -80,7 +80,7 @@ My intention was to implement NLU (Natural Language Understanding) from scratch 
     "permission": "yolo"
 }
 ```
-I am really in love with this, it is a self-contained atom of knowledge that can be easily edited and shared. It is very simple to expand the knowledge of conversational agents if you adhere to this convention; let's say I want my terminal assistant to learn about docker commands, I can just write down a list of objects, reload the dataset, and the NPC will instantly learn them as Neo learnt Jujitsu in The Matrix. 
+I am really in love with this, it is a self-contained atom of knowledge that can be easily edited and shared. It is very simple to expand the capabilities of conversational agents if you adhere to this convention; let's say I want my terminal assistant to learn about docker commands, I can just write down a list of objects in `dataset_docker.json`, reload the dataset, and the NPC will instantly learn them as Neo learnt Jujitsu in The Matrix. 
 
 The next problem to solve was, how to handle questions like "create file .gitignore"? I needed to parse the "variable" in there and understand the true meaning of the request, so I came up with this:
 ```json
