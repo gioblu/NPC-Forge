@@ -185,6 +185,12 @@ I have developed [TERMy](https://github.com/gioblu/NPC-Forge/tree/main/npcs/term
 It is ironic to think that Copilot's recent price hikes are what finally pushed me to dedicate time to this software. Maybe it's just the lifecycle of corporate SaaS? In any case, I believe that harnesses like Copilot and Pi should rely on deterministic NPCs like TERMy and route to a heavy LLM only as a last resort. Continuing to waste compute and electricity on trivial tasks is expensive and irresponsible.
 
 ### NPC-Forge
+[NPC-Forge](https://github.com/gioblu/NPC-Forge) is a framework, a server and a CLI that provides the following functionalities:
+
+1. OpenAI API server management
+2. NPC management
+3. Diagnostics and testing
+
 With [NPC-Forge](https://github.com/gioblu/NPC-Forge) now everyone can quickly build an NPC and share it with the community, those NPCs run on the CPU in any Linux machine, like the RPI Zero, responding in milliseconds. Imagine, now even your AC meter or your router can serve a conversational agent for free. This approach is also more democratic, your NPC will happily say something uncomfortable if you program it to do so, much better than corporate alignment filters and guardrails shaping public opinion, culture and language.  
 
 I ask for a bit of leniency: this is my first Python project, made in two months of passionate development. I am fully aware the code is not yet production-ready. I bet many Linux graybeards will curse me until the end of time because of the chain of commands [TERMy](https://github.com/gioblu/NPC-Forge/tree/main/npcs/termy) sometimes emits; a lot of work must be done on the dataset and the source code to achieve safety and production readiness. 
