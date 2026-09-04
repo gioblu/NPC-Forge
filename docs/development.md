@@ -147,7 +147,7 @@ Looking at the `permission` key I concluded that, enforcing the use of `"permiss
 
 ### The implementation
 
-I wrote [FlintParser](https://github.com/gioblu/NPC-Forge/blob/main/docs/FlintNPC.md) and [FlintNPC](https://github.com/gioblu/NPC-Forge/blob/main/docs/FlintParser.md) classes to make use of the data format described above, implement a NLU (Natural Language Understanding) pipeline, and all the required features for the terminal assistant to work. I wrote those classes in identical, cross-compliant implementations for both Python, for local OS environments, and JavaScript, running client-side inside any browser tab or Node.js instance.
+I wrote [FlintParser](https://github.com/gioblu/NPC-Forge/blob/main/docs/FlintNPC.md) and [FlintNPC](https://github.com/gioblu/NPC-Forge/blob/main/docs/FlintParser.md) classes to make use of the data format described above, implement a NLU (Natural Language Understanding) pipeline, and all the required features for the terminal assistant to work in around 1000 lines of code. I wrote those classes in identical, cross-compliant implementations for both Python, for local OS environments, and JavaScript, running client-side inside any browser tab or Node.js instance.
 
 The most difficult part was to determine what to do and in which order. I have worked a lot on a compiler for my own programming language [BIPLAN](https://github.com/gioblu/BIPLAN) and while developing that I had the honour to learn that the first thing you need to do when translating code is to remove noise and then work your way out trying the least expensive paths first.
 
