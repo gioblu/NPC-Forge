@@ -1,4 +1,4 @@
-# NPC-Forge development
+# NPC-Forge and TERMy
 
 I love research and development, you may have heard of me because of [PJON (Padded Jittering Operative Network)](https://github.com/gioblu/PJON). It is a network protocol I started developing in 2010, which was recently [implemented in silicon](http://asic.ethz.ch/2025/Pjononcroc.html) by the ETH Zurich university thanks to the research of [Pius Sieber](https://github.com/piussieber/).
 
