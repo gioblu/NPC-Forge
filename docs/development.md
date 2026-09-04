@@ -24,7 +24,7 @@ Using tokenizer: /ollm/checkpoints/gpt/tinyostrich/tokenizer.model
 === Generated Text ===
 
 He's not a member of the world. He can't believe anything anymore.
-All of those animals are looking like dung, but every mouth is not a bad one.
+All of those animals are looking like excrements, but every mouth is not a bad one.
 They look alike, all of which are really terrible.
 They get their own life, and each is a sign that they're not.
 They're all right, they say.
@@ -35,6 +35,8 @@ Some of them have to go.
 But we're not looking for the future on how many.
 The last two of them are all in the universe.
 ```
+(the word `excrements` was used instead of an expletive composed of 4 letters that I am not willing to publish in here)
+
 All my tests produced models that were prone to enter in loops repeating the same sentence, and even if trained on QA they were rarely able to consistently answer questions, specially if technical. I trained models on a collection of royalty free books from the [Project Gutemberg](https://www.gutenberg.org/), a lot of open-source software, and various datasets available on [Huggingface](https://huggingface.co/).
 
 I quickly understood that this approach was not feasible; a proper run would have required at least a month of training non-stop. I was amazed by how my models looked alive and magical, but I was also ashamed because they were incredibly wasteful and effectively useless. 
