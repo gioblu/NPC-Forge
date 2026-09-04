@@ -2,7 +2,9 @@
 
 I love research and development, you may have heard of me because of [PJON (Padded Jittering Operative Network)](https://github.com/gioblu/PJON). It is a network protocol I started developing in 2010, which was recently [implemented in silicon](http://asic.ethz.ch/2025/Pjononcroc.html) by the ETH Zurich university thanks to the research of [Pius Sieber](https://github.com/piussieber/).
 
-I had a chance to focus for 2 months on my personal projects since early July, during the strange times of AI price hikes and the end of subsidized tokenmaxing. I was curious to see if I could develop from scratch a terminal assistant capable of handling simple natural language requests. I have a bad memory and got used to ask to copilot "activate the virtual environment" or similar trivial operations spending a non negligible sum every month. I started thinking, maybe I can do something to make my workflow more efficient? Do I really need trillions of parameters to accomplish those tasks?
+I had a chance to focus for 2 months on my personal projects since early July, during the strange times of AI price hikes and the end of subsidized tokenmaxing. I was curious to see if I could develop from scratch a terminal assistant capable of handling simple natural language requests. I have a bad memory and got used to ask to copilot "activate the virtual environment" or similar trivial operations spending a non negligible sum every month. 
+
+I started thinking, maybe I can do something to make my workflow more efficient? Do I really need trillions of parameters to accomplish those tasks?
 
 ### Transformers at home
 
