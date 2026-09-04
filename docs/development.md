@@ -163,7 +163,7 @@ So that's the pipeline I implemented:
 5. Probabilistic Match (even slower)
 6. Response or rejection (with related intent suggestions)
 
-While implementing step 1 I had the revelation that while stripping those words I could have stored their frequency and generate a sentiment analysis and so I implemented step 2 killing 2 birds with one stone. Once I had step 4 working I could start testing it. 
+While implementing step `1` I had the revelation that while stripping those words I could have stored their frequency and generate a sentiment analysis and so I implemented step `2` killing 2 birds with one stone. Once I had step `4` working I could start testing it. 
 
 For the first time after almost 2 months throwing spaghetti at the wall and hope they stuck, I felt again the joy of working on something sane, predictable, almost something a serious engineer would work on:
 
@@ -181,8 +181,11 @@ Response: No problemo
 
 Execute:  ▶ Yes     No
 ```
+The last step was to implement step `5`, This part is very tricky because if implemented poorly can ruin the performance of the assistant because of false positives and false negatives. This step is there to handle typos and inverted or missing words. It makes the parser less brittle and capable of operating successfully in presence of these variations. But how to do that? 
 
+I had some success implementing Levenshtein but alone was not very reliable; when using it alone is nearly impossible to exclude errors in short words like `I saw a rat` (original) `I saw a tar` (mispelled). For this reason I had to add IDF (Inverse Document Frequency) scoring to words to identify words that are rare, and so important, like "zombie" or "permission" and so weight them accordingly. 
 
+After adding this algorithm the parser could accommodate many typos in common words (it, where, should) while not accepting many typos in rare words (ombiez is not zombie).  
 
 
 
