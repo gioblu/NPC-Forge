@@ -139,8 +139,6 @@ One or more tags can be expected at the same position and each tag can be requir
 }
 ```
 
-
-
 I must thank my great friend [Kevin](https://github.com/KMathisGit) to help me thinking this out.
 
 ### Meditations on safety
@@ -163,8 +161,9 @@ So that's the pipeline I implemented:
 Step `5` relies on:
 1. Inverse Document Frequency (IDF) to identify rare words.
 2. BOW (Bag Of Words) to accommodate word inversions.
-3. IDF weighted Levenshtein to handle typos. 
+3. IDF weighted Levenshtein to handle typos.
 
+For the first time after almost 2 months throwing spaghetti at the wall and hope they stuck, I felt again the joy of working on something sane, predictable, almost something a serious engineer would work on:
 ```
 $ termy create file test.txt and write Hello I am TERMy
 
