@@ -159,9 +159,11 @@ So that's the pipeline I implemented:
 3. Exact Match (very fast)
 4. Template Match (slower)
 5. Probabilistic Match (even slower)
-6. Response or rejection (with related intent suggestions)
    
-The step `6` relies on Inverse Document Frequency (IDF), weighted BOW (Bag Of Words) comparison, pruned and weighted Levenshtein distance. IDF identifies rare words, BOW comparison accommodates word inversions and Levenshtein takes care of typos. 
+Step `5` relies on:
+1. Inverse Document Frequency (IDF) to identify rare words.
+2. BOW (Bag Of Words) to accommodate word inversions.
+3. IDF weighted Levenshtein to handle typos. 
 
 ```
 $ termy create file test.txt and write Hello I am TERMy
