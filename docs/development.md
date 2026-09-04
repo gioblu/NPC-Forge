@@ -179,7 +179,7 @@ Response: No problemo
 Execute:  ▶ Yes     No
 ```
 
-How this compares to established NLU frameworks? [Rasa](https://github.com/rasahq/rasa) and [NLP.js](https://github.com/axa-group/nlp.js/) are heavy and rely on machine learning classifiers and training pipelines, [ChatScript](https://github.com/ChatScript/ChatScript) is massive with a notoriously steep learning curve. NPC-Forge strips all that away, requiring zero training, relying on standard JSON datasets, and featuring a surprisingly capable parser small enough to run on a micro-controller.
+How this compares to established NLU frameworks? [Rasa](https://github.com/rasahq/rasa) and [NLP.js](https://github.com/axa-group/nlp.js/) are heavy and rely on machine learning classifiers and training pipelines, [ChatScript](https://github.com/ChatScript/ChatScript) is massive with a notoriously steep learning curve. NPC-Forge strips all that away, requiring zero training, specifying a powerful and flexible data format, and featuring a surprisingly capable parser small enough to run on a micro-controller.
 
 ### Let's connect it to VS Code
 I have developed my own NPC and connected it to VS Code Copilot to let it take care of a subset of the prompts I was before sending to Claude, it is not an LLM, and it is instantaneous! I suspect this is the first time anyone see a deterministic agent using a LLM harness, although, I believe, this will be the prevalent topic in the near future:
