@@ -15,9 +15,9 @@ I first developed a framework to train and evaluate transformers, which I implem
 ```
 Enter your prompt (or leave blank for empty start):
 
-  ▸ What is an alien?
+What is an alien?
 
-◈ Generating…
+Generating...
 
 Using tokenizer: /ollm/checkpoints/gpt/tinyostrich/tokenizer.model
 
@@ -158,14 +158,30 @@ The most difficult part was to determine what to do and in which order. I have w
 So that's the pipeline I implemented:
 1. Strip expletives, interjections, encouraging, discouraging and thanking words (remove noise)
 2. Sentiment analysis
-3. Exact Match (O(1))
-4. Template Match (semantic structure parsing)
-5. Probabilistic Match (IDF-weighted Levenshtein)
+3. Exact Match (very fast)
+4. Template Match (slower)
+5. Probabilistic Match (even slower)
 6. Response or rejection (with related intent suggestions)
 
-While implementing step 1 I had the revelation that while stripping those words I could have stored their frequency and generate a sentiment analysis and so I implemented step 2 killing 2 birds with one stone.
+While implementing step 1 I had the revelation that while stripping those words I could have stored their frequency and generate a sentiment analysis and so I implemented step 2 killing 2 birds with one stone. Once I had step 4 working I could start testing it. 
 
-Finally I could run some tests:
+For the first time after almost 2 months throwing spaghetti at the wall and hope they stuck, I felt again the joy of working on something sane, predictable, almost something a serious engineer would work on:
+
+```
+$ termy create file test.txt and write Hello I am TERMy
+
+TERMy | template match | Confidence: 100.00%
+Thinking: WTF... when the human will learn this very simple command?
+
+echo 'Hello I am TERMy' > 'test.txt' && termy_set_context 'active_file' 'test.txt'
+
+Description: Writes Hello I am TERMy in file test.txt.
+
+Response: No problemo
+
+Execute:  ▶ Yes     No
+```
+
 
 
 
