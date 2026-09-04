@@ -181,6 +181,6 @@ With [NPC-Forge](https://github.com/gioblu/NPC-Forge) now everyone can quickly b
 
 I ask for a bit of leniency: this is my first Python project, made in two months of passionate development. I am fully aware the code is not yet production-ready. I bet many Linux graybeards will curse me until the end of time because of the chain of commands TERMy sometimes emits; a lot of work must be done on the dataset and the source code to achieve safety and production readiness. 
 
-Consider this an early release to showcase what we may use in a not very distant future. I think with some help from the community NPC-Forge and TERMy may save us a lot of money, electricity and time. If you liked this read and you agree with me, consider contributing to the project. 
+Consider that this an early release to showcase what we may use in a not very distant future. I think with some help from the community NPC-Forge and TERMy may provide us with a small bit of freedom and may save us a lot of money, electricity and time. If you liked this read and you agree with me, consider contributing to the project. Happy tinkering!
 
 
