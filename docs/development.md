@@ -172,7 +172,7 @@ How this compares to established NLU frameworks? [Rasa](https://github.com/rasah
 ### Let's connect it to Copilot
 I have developed my own NPC and connected it to Copilot to handle a subset of the prompts I was before sending to Claude, it is not an LLM, and it is instantaneous! I suspect this is the first time anyone see a deterministic agent using a LLM harness, although, I believe, this will be the prevalent topic in the near future:
 
-[![Copilot integration](/npcs/termy/vscode.gif)](https://www.youtube.com/watch?v=qeIp0xePLBg)
+[![Copilot integration](/npcs/termy/vscode.gif)](https://www.youtube.com/watch?v=Wzzouhq2a8A)
 
 It is ironic to think that Copilot's recent price hikes are what finally pushed me to dedicate time to this software. Maybe it's just the lifecycle of corporate SaaS? In any case, I believe that harnesses like Copilot and Pi should rely on deterministic NPCs like TERMy and route to a heavy LLM only as a last resort. Continuing to waste compute and electricity on trivial tasks is expensive and irresponsible.
 
