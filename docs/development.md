@@ -182,7 +182,7 @@ Execute:  ▶ Yes     No
 ### Let's connect it to VS Code
 I have developed my own NPC and connected it to VS Code Copilot to let it take care of a subset of the prompts I was before sending to Claude, it is not an LLM, and it is instantaneous! I suspect this is the first time anyone see a deterministic agent using a LLM harness, although, I believe, this will be the prevalent topic in the near future:
 
-It is ironic to think that Copilot's recent price hikes are what finally pushed me to dedicate time to this software. Maybe it's just the lifecycle of corporate SaaS? In any case, I believe that harnesses like Copilot and Pi should rely on deterministic NPCs like TERMy and route to a heavy LLM only as a last resort. Continuing to waste compute and electricity on trivial tasks is stupidly expensive and irresponsible, specially while living in the [Anthropocene](https://en.wikipedia.org/wiki/Anthropocene).
+It is ironic to think that Copilot's recent price hikes are what finally pushed me to dedicate time to this software. Maybe it's just the lifecycle of corporate SaaS? In any case, I believe that harnesses like Copilot and Pi should rely on deterministic NPCs like TERMy and route to a heavy LLM only as a last resort. Continuing to waste compute and electricity on trivial tasks is expensive and irresponsible.
 
 ### NPC-Forge
 I was not willing to waste money, deskill and be influenced by those models. I felt the need to build a sustainable alternative for the community, so I built [NPC-Forge](). Now everyone can quickly build a NPC and share it with the community, those NPCs run on the CPU in any Linux machine, like the RPI Zero, responding in milliseconds. Imagine, now even your AC meter or your router can serve a conversational agent for free.
