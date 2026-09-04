@@ -159,9 +159,9 @@ So that's the pipeline I implemented:
 5. Probabilistic Match (even slower)
    
 Step `5` relies on:
-1. Inverse Document Frequency (IDF) to identify rare words.
+1. IDF (Inverse Document Frequency) to identify rare words.
 2. BOW (Bag Of Words) to accommodate word inversions.
-3. IDF weighted Levenshtein to handle typos.
+3. IDF weighted Levenshtein to safely handle typos.
 
 For the first time after almost 2 months throwing spaghetti at the wall and hope they stuck, I felt again the joy of working on something comprehensible and predictable. I finally had a reliable terminal assistant working on my computer! 
 
