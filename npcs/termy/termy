@@ -196,7 +196,7 @@ def run_cli() -> int:
     conf_pct = f"{confidence * 100:.2f}%"
     
     meta = (
-        f"\n{GREEN}{BOLD}{config.get("npc_name", "")}{RESET} | "
+        f"\n{GREEN}{BOLD}{config.get('npc_name', '')}{RESET} | "
         f"{status} | "
         f"Confidence: {conf_color}{conf_pct}{RESET}\n"
     )
