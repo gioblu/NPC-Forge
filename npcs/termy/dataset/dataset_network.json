@@ -1,5 +1,4 @@
 [
-   
     {
         "category": "network_connection",
         "input": [
@@ -91,7 +90,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && termy_say \"Please choose a network diagnostic option\" > /dev/null 2>&1 && printf \"\\r\\n1) 📡 Ping a Host\\n2) 🛣️ Trace Route\\n\\nSelect diagnostic 1-2: \" && read -r netchoice && case \"$netchoice\" in 1) termy_say \"Please enter the target host\" > /dev/null 2>&1 && printf \"Target host: \" && read -r host && if [ -n \"$host\" ]; then ping -c 3 \"$host\" && printf \"\\n\" && termy_say \"Ping completed\" > /dev/null 2>&1; else printf \"\\n⛔ Host cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi ;; 2) termy_say \"Please enter the target host\" > /dev/null 2>&1 && printf \"Target host: \" && read -r host && if [ -n \"$host\" ]; then traceroute \"$host\" && printf \"\\n\" && termy_say \"Traceroute completed\" > /dev/null 2>&1; else printf \"\\n⛔ Host cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi ;; *) printf \"\\n⛔ Invalid selection.\\n\" && termy_say \"Invalid selection\" > /dev/null 2>&1 ;; esac",
+                    "command": "tput cuu 1 && termy_say 'Please choose a network diagnostic option' > /dev/null 2>&1 && printf \"\\r\\n1) 📡 Ping a Host\\n2) 🛣️ Trace Route\\n\\nSelect diagnostic 1-2: \" && head -n1 | tr -d '[:space:]' > /tmp/.termy_choice && if grep -qx '1' /tmp/.termy_choice; then printf 'Target host: ' && head -n1 | tr -d '[:space:]' > /tmp/.termy_host && if grep -qE '^[a-zA-Z0-9._-]+' /tmp/.termy_host; then xargs -a /tmp/.termy_host -I H ping -c 3 H && printf '\\n' && termy_say 'Ping completed' > /dev/null 2>&1; else printf '\\n⛔ Invalid host.\\n' && termy_say 'Operation cancelled' > /dev/null 2>&1; fi; elif grep -qx '2' /tmp/.termy_choice; then printf 'Target host: ' && head -n1 | tr -d '[:space:]' > /tmp/.termy_host && if grep -qE '^[a-zA-Z0-9._-]+' /tmp/.termy_host; then if command -v traceroute > /dev/null 2>&1; then xargs -a /tmp/.termy_host -I H traceroute H; else xargs -a /tmp/.termy_host -I H tracepath H; fi && printf '\\n' && termy_say 'Trace completed' > /dev/null 2>&1; else printf '\\n⛔ Invalid host.\\n' && termy_say 'Operation cancelled' > /dev/null 2>&1; fi; else printf '\\n⛔ Invalid selection.\\n' && termy_say 'Invalid selection' > /dev/null 2>&1; fi; rm -f /tmp/.termy_choice /tmp/.termy_host",
                     "explanation": "Provides a menu for network diagnostics, allowing the user to ping a host or perform a traceroute.",
                     "goal": "Run network diagnostics",
                     "mode": "sync"
@@ -117,7 +116,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && termy_say \"Please enter the port number\" > /dev/null 2>&1 && printf \"\\r\\n🌐 Enter port number: \" && read -r target_port && if [ -n \"$target_port\" ]; then printf \"\\nChecking port %s...\\n\" \"$target_port\" && if command -v ss > /dev/null 2>&1; then ss -lntp \"sport = :$target_port\"; else lsof -i :\"$target_port\"; fi && printf \"\\nAnalysis for port \\033[1m%s\\033[22m completed.\\n\" \"$target_port\" && termy_say \"Port analysis completed\" > /dev/null 2>&1; else printf \"\\n⛔ Port number cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi",
+                    "command": "tput cuu 1 && termy_say 'Please enter the port number' > /dev/null 2>&1 && printf '\\r\\n🌐 Enter port number: ' && head -n1 | tr -d '[:space:]' > /tmp/.termy_port && if grep -qE '^[0-9]+$' /tmp/.termy_port; then printf '\\nChecking port...\\n' && if command -v ss > /dev/null 2>&1; then xargs -a /tmp/.termy_port -I P ss -lntp 'sport = :P'; else xargs -a /tmp/.termy_port -I P lsof -i :P; fi && printf '\\nAnalysis completed.\\n' && termy_say 'Port analysis completed' > /dev/null 2>&1; else printf '\\n⛔ Invalid port number.\\n' && termy_say 'Operation cancelled' > /dev/null 2>&1; fi; rm -f /tmp/.termy_port",
                     "explanation": "Checks if a specified port is open and displays the process using it.",
                     "goal": "Check port status",
                     "mode": "sync"
@@ -142,6 +141,610 @@
                     "command": "OUTPUT_TXT=$(ss -tuln | awk 'NR>1 {split($4, a, \":\"); print a[length(a)]}' | sort -nu | awk '{print \"- Port: \\033[1m\" $1 \"\\033[22m\"}') && COUNT=$(echo \"$OUTPUT_TXT\" | grep -c 'Port:') && tput cuu 1 && printf \"\\r\\n🌐 \\033[1mActive Listening Ports:\\033[22m\\n%s\\n\" \"$OUTPUT_TXT\" && termy_say \"Found $COUNT active listening ports\" > /dev/null 2>&1",
                     "explanation": "Displays a list of active listening network ports.",
                     "goal": "List active listening ports",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_install",
+        "input": [
+            "install nmap",
+            "install nmap scanner",
+            "install network scanner",
+            "install nmap on this system",
+            "add nmap to this machine",
+            "setup nmap",
+            "install port scanner"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && if command -v nmap > /dev/null 2>&1; then printf \"\\r\\n✅ nmap is already installed. Version info:\\n\\n\" && nmap --version | head -n 2 && termy_say \"nmap is already installed\" > /dev/null 2>&1 && termy_set_context 'nmap_installed' 'true'; else printf \"\\r\\n📦 Installing nmap...\\n\\n\" && termy_say \"Installing nmap, please wait\" > /dev/null 2>&1 && if sudo apt update && sudo apt install -y nmap; then printf \"\\n\\033[1m✅ nmap installed successfully. Version info:\\033[22m\\n\\n\" && nmap --version | head -n 2 && termy_say \"nmap has been installed successfully\" > /dev/null 2>&1 && termy_set_context 'nmap_installed' 'true'; else printf \"\\n⛔ nmap installation failed. Check your internet connection and sudo permissions.\\n\" && termy_say \"nmap installation failed\" > /dev/null 2>&1 && termy_set_context 'nmap_installed' 'false'; fi; fi",
+                    "explanation": "Installs nmap via apt if not already present. Checks if nmap is installed first, runs apt update and install, then verifies the installation. Written without shell variables to be safe against variable stripping.",
+                    "goal": "Install nmap",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_uninstall",
+        "input": [
+            "uninstall nmap",
+            "remove nmap",
+            "apt remove nmap",
+            "uninstall nmap on ubuntu",
+            "delete nmap package",
+            "remove the nmap package",
+            "nmap uninstall"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && if ! command -v nmap > /dev/null 2>&1; then printf \"\\n⚠️  \\033[1mnmap is not installed on this system.\\033[22m\\n\" && termy_say \"nmap is not installed\" > /dev/null 2>&1; else printf \"\\n🗑️  Uninstalling nmap...\\n\\n\" && termy_say \"Uninstalling nmap, please wait\" > /dev/null 2>&1 && sudo apt remove -y nmap && if ! command -v nmap > /dev/null 2>&1; then printf \"\\n\\033[1m✅ nmap uninstalled successfully!\\033[22m\\n\" && termy_say \"nmap has been uninstalled successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Uninstall failed. Please check the error messages above.\\n\" && termy_say \"Uninstall failed\" > /dev/null 2>&1; fi; fi",
+                    "explanation": "Checks if nmap is installed; if so, removes it via apt while keeping configuration files. Requires sudo privileges.",
+                    "goal": "Uninstall nmap package",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_scanning",
+        "input": [
+            "scan a host with nmap",
+            "run nmap scan",
+            "scan ports with nmap",
+            "nmap port scan",
+            "check open ports on a remote host",
+            "scan a target with nmap",
+            "perform a network scan",
+            "run a port scan on a host"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && if ! command -v nmap > /dev/null 2>&1; then printf '\\n⛔ nmap is not installed. Install it with: sudo apt install nmap\\n' && termy_say 'nmap is not installed' > /dev/null 2>&1; else termy_say 'Please enter the target host or network' > /dev/null 2>&1 && printf '\\r\\n🔍 Enter target host (e.g. 192.168.1.0/24): ' && head -n1 | tr -d '[:space:]' > /tmp/.termy_target && if grep -qE '^[a-zA-Z0-9./_-]+$' /tmp/.termy_target; then printf '\\nScanning target...\\n\\n' && xargs -a /tmp/.termy_target -I T nmap -sV T && printf '\\n\\033[1mScan completed.\\033[22m\\n' && termy_say 'Nmap scan completed' > /dev/null 2>&1; else printf '\\n⛔ Invalid target.\\n' && termy_say 'Operation cancelled' > /dev/null 2>&1; fi; fi; rm -f /tmp/.termy_target",
+                    "explanation": "Runs an nmap scan with service version detection on a user-provided target. Requires nmap to be installed.",
+                    "goal": "Run nmap port scan",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_monitoring",
+        "input": [
+            "show network connections",
+            "list active connections",
+            "show all connections with netstat",
+            "display active network connections",
+            "show tcp and udp connections",
+            "netstat connections",
+            "show sockets"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "{ netstat -tulnp 2>/dev/null || ss -tulnp; } > /tmp/termy_netstat.txt; tput cuu 1; printf \"\\r\\n🌐 \\033[1mActive Network Connections:\\033[22m\\n\\n\"; cat /tmp/termy_netstat.txt; printf \"\\n\"; termy_say \"Here are your active network connections\" > /dev/null 2>&1",
+                    "explanation": "Displays all active TCP/UDP connections with processes attached, using netstat or ss as fallback.",
+                    "goal": "Show active network connections",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_monitoring",
+        "input": [
+            "capture network traffic",
+            "start tcpdump capture",
+            "sniff network packets",
+            "capture packets on interface",
+            "monitor network traffic",
+            "show live network packets"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && if ! command -v tcpdump > /dev/null 2>&1; then printf \"\\n⛔ tcpdump is not installed. Install it with: sudo apt install tcpdump\\n\" && termy_say \"dump is not installed\" > /dev/null 2>&1; else printf \"\\n📡 Capturing 20 packets from ALL interfaces for 10 seconds...\\n\\n\" && termy_say \"Capturing network packets\" > /dev/null 2>&1 && sudo timeout 10 tcpdump -i any -c 20 && printf \"\\n\\033[1mCapture completed.\\033[22m\\n\" && termy_say \"Packet capture completed\" > /dev/null 2>&1; fi",
+                    "explanation": "Captures up to 20 packets from all network interfaces for 10 seconds using tcpdump. Requires sudo privileges. No user input needed.",
+                    "goal": "Capture network traffic",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_monitoring",
+        "input": [
+            "capture ethernet traffic",
+            "capture packets on ethernet",
+            "sniff ethernet packets",
+            "monitor eth traffic",
+            "capture wired traffic"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && if ip -o -4 route show default 2>/dev/null | cut -d' ' -f5 | grep -qE '^(en|eth)'; then printf \"\\n🔌 Connected via Ethernet\\n\\n📡 Capturing 20 packets for 10 seconds...\\n\\n\" && termy_say \"Connected via ethernet, capturing packets\" > /dev/null 2>&1 && ip -o -4 route show default | cut -d' ' -f5 | xargs -I IFACE sudo timeout 10 tcpdump -i IFACE -c 20 && printf \"\\n\\033[1mCapture completed.\\033[22m\\n\" && termy_say \"Packet capture completed\" > /dev/null 2>&1; else printf \"\\n⛔ Not connected via Ethernet. You are probably on WiFi or offline.\\n\" && termy_say \"You are not connected via ethernet\" > /dev/null 2>&1; fi",
+                    "explanation": "Checks if the active default-route interface is Ethernet (name starting with en or eth); if yes captures 20 packets on it via xargs, otherwise warns the user. No dollar variables used. Requires sudo.",
+                    "goal": "Capture ethernet traffic",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_monitoring",
+        "input": [
+            "capture wifi traffic",
+            "capture packets on wifi",
+            "sniff wifi traffic",
+            "monitor wlan traffic"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && if ip -o -4 route show default 2>/dev/null | cut -d' ' -f5 | grep -q '^wl'; then printf \"\\n📶 Connected via WiFi\\n\\n📡 Capturing 20 packets for 10 seconds...\\n\\n\" && termy_say \"Connected via wifi, capturing packets\" > /dev/null 2>&1 && ip -o -4 route show default | cut -d' ' -f5 | xargs -I IFACE sudo timeout 10 tcpdump -i IFACE -c 20 && printf \"\\n\\033[1mCapture completed.\\033[22m\\n\" && termy_say \"Packet capture completed\" > /dev/null 2>&1; else printf \"\\n⛔ Not connected via WiFi. You are probably on a wired connection or offline.\\n\" && termy_say \"You are not connected via wifi\" > /dev/null 2>&1; fi",
+                    "explanation": "Checks if the active default-route interface is WiFi (name starting with wl); if yes captures 20 packets on it via xargs, otherwise warns the user. No dollar variables used. Requires sudo.",
+                    "goal": "Capture wifi traffic",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_install",
+        "input": [
+            "install whois",
+            "install whois on ubuntu",
+            "apt install whois",
+            "install whois command",
+            "whois is not installed",
+            "install the whois package",
+            "install whois tool"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && if command -v whois > /dev/null 2>&1; then printf \"\\n✅ \\033[1mwhois is already installed\\033[22m at: %s\\n\" \"$(command -v whois)\" && termy_say \"whois is already installed\" > /dev/null 2>&1; else printf \"\\n📦 Installing whois...\\n\\n\" && termy_say \"Installing whois, please wait\" > /dev/null 2>&1 && sudo apt update && sudo apt install -y whois && if command -v whois > /dev/null 2>&1; then printf \"\\n\\033[1m✅ whois installed successfully!\\033[22m\\n\" && termy_say \"whois has been installed successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Installation failed. Check your internet connection and try again.\\n\" && termy_say \"Installation failed\" > /dev/null 2>&1; fi; fi",
+                    "explanation": "Checks if whois is already installed; if not, updates the package list and installs it via apt. Requires sudo privileges.",
+                    "goal": "Install whois package",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_uninstall",
+        "input": [
+            "uninstall whois",
+            "remove whois",
+            "apt remove whois",
+            "uninstall whois on ubuntu",
+            "delete whois package",
+            "remove the whois package",
+            "whois uninstall"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && if ! command -v whois > /dev/null 2>&1; then printf \"\\n⚠️  \\033[1mwhois is not installed on this system.\\033[22m\\n\" && termy_say \"whois is not installed\" > /dev/null 2>&1; else printf \"\\n🗑️  Uninstalling whois...\\n\\n\" && termy_say \"Uninstalling whois, please wait\" > /dev/null 2>&1 && sudo apt remove -y whois && if ! command -v whois > /dev/null 2>&1; then printf \"\\n\\033[1m✅ whois uninstalled successfully!\\033[22m\\n\" && termy_say \"whois has been uninstalled successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Uninstall failed. Please check the error messages above.\\n\" && termy_say \"Uninstall failed\" > /dev/null 2>&1; fi; fi",
+                    "explanation": "Checks if whois is installed; if so, removes it via apt while keeping configuration files. Requires sudo privileges.",
+                    "goal": "Uninstall whois package",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_info",
+        "input": [
+            "whois lookup",
+            "show domain info with whois",
+            "whois a domain",
+            "get domain registration info",
+            "domain ownership info",
+            "check who owns a domain"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && if ! command -v whois > /dev/null 2>&1; then printf '\\n⛔ whois is not installed. Install it with: sudo apt install whois\\n' && termy_say 'whois is not installed' > /dev/null 2>&1; else termy_say 'Please enter the domain name or IP' > /dev/null 2>&1 && printf '\\r\\n🔍 Enter domain or IP: ' && head -n1 | sed 's|^www\\.||' | tr -d '[:space:]' > /tmp/.termy_whois && if grep -qE '^[a-zA-Z0-9._-]+' /tmp/.termy_whois; then printf '\\nLooking up target...\\n\\n' && if grep -qE '^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' /tmp/.termy_whois; then xargs -a /tmp/.termy_whois -I T whois -h whois.arin.net T || xargs -a /tmp/.termy_whois -I T whois T; else xargs -a /tmp/.termy_whois -I T whois T; fi && printf '\\n\\033[1mWhois lookup completed.\\033[22m\\n' && termy_say 'Whois lookup completed' > /dev/null 2>&1; else printf '\\n⛔ Invalid domain.\\n' && termy_say 'Operation cancelled' > /dev/null 2>&1; fi; fi; rm -f /tmp/.termy_whois",
+                    "explanation": "Performs a whois lookup on a user-provided domain or IP. Strips 'www.' prefix, handles IP addresses via ARIN. Uses no shell variables to avoid sanitization issues.",
+                    "goal": "Perform whois lookup",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_info",
+        "input": [
+            "dig dns lookup",
+            "check dns records",
+            "query dns with dig",
+            "dns lookup for domain",
+            "show dns info",
+            "resolve domain with dig"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && if ! command -v dig > /dev/null 2>&1; then printf '\\n⛔ dig is not installed. Install it with: sudo apt install dnsutils\\n' && termy_say 'dig is not installed' > /dev/null 2>&1; else termy_say 'Please enter the domain name' > /dev/null 2>&1 && printf '\\r\\n🔍 Enter domain: ' && head -n1 | tr -d '[:space:]' > /tmp/.termy_dig && if grep -qE '^[a-zA-Z0-9._-]+$' /tmp/.termy_dig; then printf '\\n🌐 DNS records:\\n\\n' && xargs -a /tmp/.termy_dig -I T dig +noall +answer T A T MX T NS && printf '\\n' && termy_say 'DNS lookup completed' > /dev/null 2>&1; else printf '\\n⛔ Invalid domain.\\n' && termy_say 'Operation cancelled' > /dev/null 2>&1; fi; fi; rm -f /tmp/.termy_dig",
+                    "explanation": "Performs a DNS lookup with dig showing A, MX and NS records for the given domain. Dollar signs are generated at runtime via printf octal escape to survive variable-stripping pipelines.",
+                    "goal": "Perform DNS lookup",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_firewall",
+        "input": [
+            "check firewall status",
+            "show ufw status",
+            "is the firewall active",
+            "firewall rules",
+            "show firewall configuration",
+            "ufw rules",
+            "is ufw enabled"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "sudo ufw status verbose > /tmp/ufw_status.txt 2>&1; tput cuu 1 && printf \"\\r\\n🛡️ \\033[1mFirewall Status (UFW):\\033[22m\\n\" && cat /tmp/ufw_status.txt && printf \"\\n\" && if grep -q \"Status: active\" /tmp/ufw_status.txt; then termy_say \"Firewall is active\" > /dev/null 2>&1; else termy_say \"Firewall is inactive\" > /dev/null 2>&1; fi; rm -f /tmp/ufw_status.txt",
+                    "explanation": "Displays the UFW firewall status and rules. Requires sudo privileges.",
+                    "goal": "Show firewall status",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_logs",
+        "input": [
+            "show failed login attempts",
+            "show failed logins",
+            "who tried to log in",
+            "show bad logins",
+            "list brute force attempts",
+            "failed ssh attempts",
+            "show login failures"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && printf \"\\r\\n🛡️ \\033[1mFailed login attempts (auth.log):\\033[22m\\n\\n\" && sudo grep \"[F]ailed password\" /var/log/auth.log 2>/dev/null | tail -n 15 && printf \"\\nTotal failed attempts: \" && sudo grep -c \"[F]ailed password\" /var/log/auth.log 2>/dev/null && printf \"\\n\" && termy_say \"Showing failed login attempts\" > /dev/null 2>&1",
+                    "explanation": "Shows the last 15 failed login attempts and the total count using lastb. Requires sudo privileges.",
+                    "goal": "Show failed login attempts",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_logs",
+        "input": [
+            "show last logins",
+            "who logged in recently",
+            "show recent login history",
+            "last logins",
+            "login history",
+            "show who was logged in"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && printf \"\\r\\n👥 \\033[1mUsers currently logged in:\\033[22m\\n\\n\" && w && printf \"\\r\\n🛡️ \\033[1mRecent login sessions (journal):\\033[22m\\n\\n\" && (sudo journalctl -u ssh -u gdm --since \"-7 days\" 2>/dev/null | grep -i \"session opened\" | tail -n 10 || journalctl --since \"-7 days\" 2>/dev/null | grep -i \"session opened\" | tail -n 10 || printf \"No session history available\\n\") && printf \"\\n\" && termy_say \"Showing recent logins\" > /dev/null 2>&1; exit 0",
+                    "explanation": "Shows current users with w and recent login sessions from systemd journal, never fails.",
+                    "goal": "Show recent logins",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_logs",
+        "input": [
+            "who is logged in now",
+            "current logged in users",
+            "show current sessions",
+            "active user sessions"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf \"\\r\\n👥 \\033[1mCurrent logged in users:\\033[22m\\n\\n\" && (w || who -u) && printf \"\\n\" && termy_say \"Showing current logged in users\" > /dev/null 2>&1; exit 0",
+                    "explanation": "Shows users currently logged in with their terminal, idle time and running command.",
+                    "goal": "Show current sessions",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_info",
+        "input": [
+            "test read variable"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf \"Enter a word: \" && read -r word && printf \"You typed: %s\\n\" \"$word\"; exit 0",
+                    "explanation": "Test if read and variables survive.",
+                    "goal": "Test variables",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_logs",
+        "input": [
+            "show authentication log",
+            "show ssh log",
+            "monitor auth log",
+            "show login events",
+            "check auth log",
+            "live authentication log"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && printf '\\r\\n🛡️ \\033[1mLive authentication log (press Ctrl+C to stop):\\033[22m\\n\\n' && termy_say 'Showing live authentication log' > /dev/null 2>&1 && if [ -f /var/log/auth.log ]; then sudo tail -f /var/log/auth.log; else sudo journalctl -f -u ssh; fi || exit 0",
+                    "explanation": "Streams the authentication log in real time using tail, with journalctl fallback. Press Ctrl+C to stop (exits cleanly without error).",
+                    "goal": "Monitor authentication log",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_audit",
+        "input": [
+            "find suid files",
+            "check suid binaries",
+            "find files with suid permission",
+            "list suid files",
+            "find privileged files",
+            "check for privilege escalation files",
+            "find setuid files"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && printf \"\\r\\n\\U0001F6E1\\uFE0F \\033[1mFiles with SUID permission:\\033[22m\\n\" && find / -xdev -perm -4000 -type f 2>/dev/null; termy_say \"SUID file search completed\" > /dev/null 2>&1 || true",
+                    "explanation": "Searches the filesystem for files with the SUID bit set, which can be used for privilege escalation.",
+                    "goal": "Find SUID files",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_audit",
+        "input": [
+            "find files with 777 permissions",
+            "find world writable files",
+            "check insecure file permissions",
+            "find files open to everyone",
+            "list 777 files",
+            "find files with open permissions"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && printf \"\\r\\n🛡️ \\033[1mFiles with 777 permissions (first 20):\\033[22m\\n\\n\" && find / -perm 777 -type f 2>/dev/null | head -n 20 && printf \"\\n\\033[1mTotal count:\\033[22m \" && find / -perm 777 -type f 2>/dev/null | wc -l && printf \"\\n\" && termy_say \"Scan for open permissions completed\" > /dev/null 2>&1",
+                    "explanation": "Searches for files with 777 permissions (readable, writable and executable by everyone), showing the first 20 results.",
+                    "goal": "Find files with 777 permissions",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_info",
+        "input": [
+            "show system users",
+            "list all users",
+            "who is on this system",
+            "show user accounts",
+            "list accounts on this machine",
+            "show users in etc passwd"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && printf \"\\r\\n👥 \\033[1mUser accounts (real users):\\033[22m\\n\\n\" && grep \"/home/\" /etc/passwd | cut -d: -f1,3 | tr \":\" \" \" | sed \"s/^/- uid /\" && printf \"\\n\" && termy_say \"User accounts listed\" > /dev/null 2>&1",
+                    "explanation": "Lists all real user accounts (those with a home directory under /home) from /etc/passwd.",
+                    "goal": "Show system users",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_info",
+        "input": [
+            "show all system users",
+            "list all accounts",
+            "show every user on this system",
+            "show full user list",
+            "list all users including system",
+            "show complete passwd"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && printf \"\\r\\n👥 \\033[1mAll user accounts (system + real):\\033[22m\\n\\n\" && cut -d: -f1,3,7 /etc/passwd | sed \"s/^/- /\" && printf \"\\n\" && termy_say \"Full user accounts listed\" > /dev/null 2>&1",
+                    "explanation": "Lists ALL user accounts (system and real) from /etc/passwd, showing name, uid and shell.",
+                    "goal": "Show all system users",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_info",
+        "input": [
+            "which groups am i in",
+            "show my groups",
+            "what groups is my user in",
+            "show current user groups",
+            "my group memberships",
+            "check my groups"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && printf \"\\r\\n👤 \\033[1mCurrent user and group memberships:\\033[22m\\n\\n\" && id && printf \"\\nGroups: \" && groups && printf \"\\n\\n\" && termy_say \"Current user groups listed\" > /dev/null 2>&1",
+                    "explanation": "Shows the current user, its uid/gid and all the groups it belongs to.",
+                    "goal": "Show current user groups",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_info",
+        "input": [
+            "show all users and groups",
+            "list all groups",
+            "show group memberships",
+            "which users are in which groups",
+            " all groups on this system",
+            "list groups and their members",
+            "show users in groups"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && printf \"\\r\\n👥 \\033[1mAll groups and their members:\\033[22m\\n\\n\" && cut -d: -f1,4 /etc/group | sed -n \"s/\\([^:]*\\):\\(.\\+\\)/- \\1 -> members: \\2/p\" && printf \"\\n\" && termy_say \"All groups and members listed\" > /dev/null 2>&1",
+                    "explanation": "Lists all system groups from /etc/group that have at least one member, showing the users in each group.",
+                    "goal": "Show all users and groups",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_audit",
+        "input": [
+            "check privileged groups",
+            "who has sudo access",
+            "show privileged group members",
+            "audit privileged groups",
+            "who can become root",
+            "show sudo users",
+            "check admin group members",
+            "list dangerous group memberships"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && printf \"\\r\\n🛡️ \\033[1mPrivileged group members (privilege escalation risk):\\033[22m\\n\\n\" && grep -E \"^(sudo|root|docker|lxd|adm|disk|shadow|wheel):\" /etc/group | sed -n \"s/\\([^:]*\\):x:[0-9]*:\\(.*\\)/- \\1 -> \\2/p\" && printf \"\\n\\033[1mNote:\\033[22m empty = no secondary members (primary owner only)\\n\\n\" && termy_say \"Privileged group audit completed\" > /dev/null 2>&1",
+                    "explanation": "Audits membership of dangerous groups (sudo, root, docker, lxd, adm, disk, shadow, wheel). Members of these groups can escalate privileges to root.",
+                    "goal": "Audit privileged groups",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_install",
+        "input": [
+            "install traceroute",
+            "install traceroute on ubuntu",
+            "apt install traceroute",
+            "install traceroute command",
+            "traceroute is not installed",
+            "install the traceroute package",
+            "install traceroute tool",
+            "setup traceroute"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && if command -v traceroute > /dev/null 2>&1; then printf \"\\n✅ \\033[1mtraceroute is already installed\\033[22m at: %s\\n\" \"$(command -v traceroute)\" && termy_say \"traceroute is already installed\" > /dev/null 2>&1; else printf \"\\n📦 Installing traceroute...\\\\n\" && termy_say \"Installing traceroute, please wait\" > /dev/null 2>&1 && sudo apt update && sudo apt install -y traceroute && if command -v traceroute > /dev/null 2>&1; then printf \"\\n\\033[1m✅ traceroute installed successfully!\\033[22m\\n\" && traceroute --version 2>&1 | head -n 1 && termy_say \"traceroute has been installed successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Installation failed. Check your internet connection and try again.\\n\" && termy_say \"Installation failed\" > /dev/null 2>&1; fi; fi",
+                    "explanation": "Checks if traceroute is already installed; if not, updates the package list and installs it via apt. Requires sudo privileges.",
+                    "goal": "Install traceroute package",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "security_uninstall",
+        "input": [
+            "uninstall traceroute",
+            "remove traceroute",
+            "apt remove traceroute",
+            "uninstall traceroute on ubuntu",
+            "delete traceroute package",
+            "remove the traceroute package",
+            "traceroute uninstall"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && if ! command -v traceroute > /dev/null 2>&1; then printf \"\\n⚠️  \\033[1mtraceroute is not installed on this system.\\033[22m\\n\" && termy_say \"traceroute is not installed\" > /dev/null 2>&1; else printf \"\\n🗑️  Uninstalling traceroute...\\n\\n\" && termy_say \"Uninstalling traceroute, please wait\" > /dev/null 2>&1 && sudo apt remove -y traceroute && if ! command -v traceroute > /dev/null 2>&1; then printf \"\\n\\033[1m✅ traceroute uninstalled successfully!\\033[22m\\n\" && termy_say \"traceroute has been uninstalled successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Uninstall failed. Please check the error messages above.\\n\" && termy_say \"Uninstall failed\" > /dev/null 2>&1; fi; fi",
+                    "explanation": "Checks if traceroute is installed; if so, removes it via apt while keeping configuration files. Requires sudo privileges.",
+                    "goal": "Uninstall traceroute package",
                     "mode": "sync"
                 }
             }
