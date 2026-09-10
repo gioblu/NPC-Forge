@@ -69,6 +69,7 @@ Consider that this experimental release of `npc-forge` works only on Linux and W
 - [NPC-Forge API](docs/NPC-Forge-API.md)
 - [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md)
 - [TCS 0.0 (Terminal Commands Security)](docs/commands-security.md)
+- [NPC creation guide](docs/create-npc.md)
 
 ### Contributing to the forge
 I am developing NPC-Forge with the conviction that democratic and sustainable use of Artificial Intelligence can be achieved with **deterministic designs** driven by curated and tested datasets crafted by the community; if you can, help me out. NPC-Forge thrives on your contributions, the community grows stronger when you:
