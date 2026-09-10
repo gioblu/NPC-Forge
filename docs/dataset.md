@@ -182,7 +182,7 @@ This maps the vocabulary tags used inside `templates_*.json` to lists of synonim
 ```json
 {
     "<||vocab_check||>": ["check", "verify"],
-    "<||vocab_create||>": ["create", "make", "generate", "craft", "forge"],
+    "<||vocab_create||>": ["create", "generate", "craft", "forge"],
     "<||vocab_search||>": ["search", "find", "locate", "query"]
 }
 ```

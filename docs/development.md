@@ -130,7 +130,6 @@ Each tag like `<||vocab_create||>` represents a concept, in this case the action
 {
   "<||vocab_create||>": [
     "create",
-    "make",
     "generate",
     "craft",
     "forge"

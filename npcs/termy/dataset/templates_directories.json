@@ -67,7 +67,10 @@
         "structure": [
             [
                 {
-                    "tag": "<||vocab_create||>",
+                    "tag": [
+                        "<||vocab_create||>",
+                        "<||vocab_make||>"
+                    ],
                     "type": "vocab",
                     "required": true
                 },
@@ -89,7 +92,10 @@
                     "required": true
                 },
                 {
-                    "tag": "<||vocab_create||>",
+                    "tag": [
+                        "<||vocab_create||>",
+                        "<||vocab_make||>"
+                    ],
                     "type": "vocab",
                     "required": true
                 },

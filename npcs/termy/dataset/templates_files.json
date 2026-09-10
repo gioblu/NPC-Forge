@@ -60,7 +60,10 @@
         "structure": [
             [
                 {
-                    "tag": "<||vocab_create||>",
+                    "tag": [
+                        "<||vocab_create||>",
+                        "<||vocab_make||>"
+                    ],
                     "type": "vocab",
                     "required": true
                 },
@@ -168,6 +171,53 @@
         "thinking": [
             "The user wants me to execute a script, thankfully the termy_execute script will do the work for me...",
             "That is something I can do faster than LLMs..."
+        ]
+    },
+    {
+        "intent": "file_executable",
+        "category": "linux_files",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_make||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": [
+                        "<||vocab_script||>",
+                        "<||vocab_file||>",
+                        "<||vocab_it||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_executable||>",
+                    "type": "vocab",
+                    "required": true
+                }
+            ]
+        ],
+        "message": [
+            "<||completion||> I am ready to execute the script."
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "chmod +x -- \"$(termy_get_context 'active_file')\"",
+                    "explanation": "Makes the last target file executable.",
+                    "goal": "File permissions update",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask",
+        "thinking": [
+            "The user wants me to make the file executable, I should dig into the context...",
+            "That is something I can do better than LLMs..."
         ]
     },
     {
