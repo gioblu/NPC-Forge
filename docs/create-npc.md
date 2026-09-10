@@ -1,5 +1,5 @@
 ## NPC creation guide
-The NPC-Forge framework can scaffold a new NPC in seconds and it is then very easy to customize it for any need. 
+This document described how to use the NPC-Forge framework to scaffold a new NPC in seconds. 
 
 ### How to create NPCs
 1. Be sure you installed `npc-forge` in development mode (`./setup.sh --dev`)
