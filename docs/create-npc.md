@@ -1,14 +1,5 @@
 ## NPC creation guide
-Using `npc-forge` you can create a new NPC very quickly and customize it for your own needs. There are 2 types of NPC:
-1. Web
-2. OS
-
-### Web NPC
-A web NPC runs in the webpage and can execute tool calls using [Captain.js](https://github.com/gioblu/NPC-Forge/blob/main/src/js/Captain.js). 
-
-### OS NPC
-An OS NPCs may implement some glue-code to work within an application or a terminal and some scripts used by the NPC to operate. 
-If you are creating an OS NPC feel free to drop your glue-code in its directory, although it is suggested to store in the directory `scripts` all the scripts part of its dataset.
+The NPC-Forge framework can scaffold a new NPC in seconds and it is then very easy to customize it for any need. 
 
 ### How to create NPCs
 1. Be sure you installed `npc-forge` in development mode (`./setup.sh --dev`)
