@@ -27,19 +27,6 @@
   },
   {
     "input": [
-      "thanking_reaction"
-    ],
-    "message": [
-      "You are welcome <||username||>!",
-      "It is my pleasure to help!",
-      "Remember, each problem solved using a deterministic approach is a small victory against ignorance!",
-      "I am here to support you, ask me what you need and I will solve it in milliseconds."
-    ],
-    "tools": [],
-    "permission": "yolo"
-  },
-  {
-    "input": [
       "hello",
       "hi",
       "hey",
@@ -1043,6 +1030,7 @@
       "we need to save endangered species",
       "we need to save the amazon",
       "we need to save the ocean",
+      "i am scared about the future of the earth",
       "I want to save the planet",
       "i am worried about the air",
       "i am worried about the soil",
