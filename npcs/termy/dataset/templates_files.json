@@ -167,6 +167,204 @@
         ]
     },
     {
+        "intent": "copy_file",
+        "category": "linux_files",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_copy||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": [
+                        "<||vocab_file||>",
+                        "<||vocab_it||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": [
+                        "<||vocab_to||>",
+                        "<||vocab_in||>"
+                    ],
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||path||>",
+                    "type": "filename",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||> I am ready to copy the file.",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "cp -i -- \"$(termy_get_context 'active_file')\" '<||path||>'",
+                    "explanation": "Copies the active file to the specified destination path.",
+                    "goal": "File duplication",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask",
+        "thinking": [
+            "The user wants to duplicate the active file, I will try not to mess it up this time...",
+            "I will use the cp command with the interactive flag to prevent accidental overwrites."
+        ]
+    },
+    {
+        "intent": "search_file_content",
+        "category": "developer_tools",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_search||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_in||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||file||>",
+                    "type": "filename",
+                    "required": true
+                },
+                {
+                    "tag": "<||word||>",
+                    "type": "word",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||> I am ready to search for '<||word||>' in the file.",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "grep -n -- '<||word||>' '<||file||>'",
+                    "explanation": "Searches for '<||word||>' in the file and returns line numbers.",
+                    "goal": "Find text in file",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "I need to find a specific text pattern in the requested file, this is a very easy task to accomplish...",
+            "Using grep with -n will give the user the exact line numbers for easy navigation."
+        ]
+    },
+    {
+        "intent": "file_checksum",
+        "category": "linux_files",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": [
+                        "<||vocab_compute||>",
+                        "<||vocab_get||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_checksum||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||file||>",
+                    "type": "filename",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||> I am ready to compute the checksum of '<||file||>'.",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "sha256sum '<||file||>'",
+                    "explanation": "Calculates the SHA-256 checksum of '<||file||>'.",
+                    "goal": "Verify file integrity",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "The user wants to verify the integrity of a file, I must not change the data or this will backfire...",
+            "I will generate the SHA-256 hash for them to compare against expected values."
+        ]
+    },
+    {
+        "intent": "compare_files",
+        "category": "developer_tools",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_compare||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||file||>",
+                    "type": "filename",
+                    "required": true
+                },
+                {
+                    "tag": "<||target_file||>",
+                    "type": "filename",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||> I am ready to compare the two files.",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "diff -u -- \"$(termy_get_context 'active_file')\" '<||target_file||>'",
+                    "explanation": "Shows the diff between the active file and the target file.",
+                    "goal": "File comparison",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "The user wants to see the differences between two files, that is interesting...",
+            "I will use diff with the unified format (-u) to make the output clean and readable."
+        ]
+    },
+    {
         "intent": "move_file",
         "category": "linux_files",
         "type": "template",
