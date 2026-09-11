@@ -53,6 +53,60 @@
             "I am asked to rename the file <||file||>. I can excell at this..."
         ]
     },
+    { 
+        "intent": "symlink_create",
+        "category": "linux_files",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": [
+                        "<||vocab_create||>",
+                        "<||vocab_make||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_symlink||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_in||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||file||>",
+                    "type": "filename",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "ln -s -- \"$(realpath -- \"$(termy_get_context 'active_file')\")\" '<||file||>'",
+                    "explanation": "Creates a symbolic link of file <||file||>.",
+                    "goal": "Creates file symbolic link",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask",
+        "thinking": [
+            "OK, a symbolic link, I am not still sure to understand the real purpose of this construct...",
+            "I am asked to create a symbolink link for <||file||>. I can excell at this..."
+        ]
+    },
     {
         "intent": "file_creation",
         "category": "linux_files",

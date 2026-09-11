@@ -78,6 +78,7 @@
     "<||vocab_send||>": ["send", "transmit"],
     "<||vocab_shell||>": ["shell"],
     "<||vocab_side||>": ["side"],
+    "<||vocab_symlink||>": ["symlink"],
     "<||vocab_slang||>": ["slang"],
     "<||vocab_square||>": ["square"],
     "<||vocab_stock||>": ["stock"],
