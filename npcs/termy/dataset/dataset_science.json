@@ -22,5 +22,812 @@
             }
         ],
         "permission": "yolo"
-    }
+    },
+    
+
+    {
+        "category": "science_dna",
+        "input": [
+            "generate dna sequence",
+            "show dna strand",
+            "print dna helix",
+            "display dna sequence",
+            "generate random dna",
+            "show me dna"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"import random; bases='ATGC'; seq=''.join(random.choice(bases) for _ in range(60)); comp=seq.translate(str.maketrans('ATGC','TACG')); print(); print('🧬 Generated DNA sequence (60 bases):'); [print(seq[i:i+10], end='  ') for i in range(0,60,10)]; print(); print('Complementary strand:'); [print(comp[i:i+10], end='  ') for i in range(0,60,10)]; print(); print('Base count: A=%d T=%d G=%d C=%d' % (seq.count('A'), seq.count('T'), seq.count('G'), seq.count('C'))); print()\" && termy_say \"Generated a random DNA sequence\" > /dev/null 2>&1",
+                    "explanation": "Generates and displays a random DNA sequence with the complementary strand and base count.",
+                    "goal": "Display DNA sequence",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_solar_system",
+        "input": [
+            "show solar system",
+            "display planets",
+            "print solar system info",
+            "show planets of solar system",
+            "solar system data",
+            "planets information"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"planets=[('Mercury',57.9,4878,88),('Venus',108.2,12104,225),('Earth',149.6,12756,365),('Mars',227.9,6792,687),('Jupiter',778.3,142984,4331),('Saturn',1427.0,120536,10747),('Uranus',2871.0,51118,30589),('Neptune',4497.1,49528,59800)]; print(); print('🪐 Solar System:'); print(); print('%-10s%-16s%-16s%s' % ('Planet','Dist. (mln km)','Diameter (km)','Year (days)')); print('-'*55); [print('%-10s%-16s%-16s%s' % (n,d,di,y)) for n,d,di,y in planets]; print()\" && termy_say \"Here is the data of the planets of the solar system\" > /dev/null 2>&1",
+                    "explanation": "Shows a table with distance from the Sun, diameter and length of year for each planet.",
+                    "goal": "Display solar system data",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_ph_scale",
+        "input": [
+            "show ph scale",
+            "display ph scale",
+            "ph scale",
+            "acidity scale"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"items=[(0,'Hydrochloric acid (HCl)'),(2,'Lemon juice'),(4,'Tomato'),(6,'Milk'),(7,'Pure water (neutral)'),(8,'Sea water'),(10,'Milk of magnesia'),(12,'Ammonia'),(14,'Sodium hydroxide (NaOH)')]; print(); print('🧪 pH Scale:'); print(); [print('%2d  %s' % (v,n)) for v,n in items]; print()\" && termy_say \"Here is the pH scale\" > /dev/null 2>&1",
+                    "explanation": "Shows the pH scale with examples of common substances from 0 to 14.",
+                    "goal": "Display the pH scale",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_fibonacci",
+        "input": [
+            "show fibonacci sequence",
+            "generate fibonacci",
+            "print fibonacci numbers",
+            "fibonacci in nature",
+            "golden ratio"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"a,b=0,1; fib=[]; exec('for _ in range(20):\\n    fib.append(a)\\n    a,b=b,a+b'); print(); print('🌻 Fibonacci sequence (first 20 numbers):'); print(); print(' '.join(map(str,fib))); print(); print('Golden ratio ~ %.10f' % (fib[-1]/fib[-2])); print('(phi = 1.6180339887 - the golden ratio found in nature)'); print()\" && termy_say \"Here is the Fibonacci sequence and the golden ratio\" > /dev/null 2>&1",
+                    "explanation": "Generates the Fibonacci sequence and shows the golden ratio.",
+                    "goal": "Display Fibonacci sequence",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_space_facts",
+        "input": [
+            "speed of light",
+            "show physics constants",
+            "physics constants",
+            "universal constants"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"consts=[('c  Speed of light','299,792,458 m/s'),('g  Gravitational acceleration','9.80665 m/s²'),('h  Planck constant','6.62607015e-34 J·s'),('G  Gravitational constant','6.67430e-11 N·m²/kg²'),('N_A Avogadro constant','6.02214076e23 mol⁻¹'),('e  Elementary charge','1.602176634e-19 C'),('k  Boltzmann constant','1.380649e-23 J/K'),('R  Gas constant','8.314462618 J/(mol·K)')]; print(); print('⚛️  Fundamental physical constants:'); print(); [print('%-30s %s' % (n,v)) for n,v in consts]; print()\" && termy_say \"Here are the fundamental physical constants\" > /dev/null 2>&1",
+                    "explanation": "Shows the fundamental physical constants with their values.",
+                    "goal": "Display physical constants",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_prime_numbers",
+        "input": [
+            "show prime numbers",
+            "generate primes",
+            "print prime numbers",
+            "first primes"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"exec('primes=[]\\nn=2\\nwhile len(primes)<50:\\n    if all(n%p for p in primes if p*p<=n):\\n        primes.append(n)\\n    n+=1'); print(); print('🔢 First 50 prime numbers:'); print(); print(' '.join(map(str,primes))); print()\" && termy_say \"Here are the first 50 prime numbers\" > /dev/null 2>&1",
+                    "explanation": "Generates and displays the first 50 prime numbers.",
+                    "goal": "Display prime numbers",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_trig_table",
+        "input": [
+            "show trigonometric table",
+            "sin cos table",
+            "trig table",
+            "show trig values"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"import math; print(); print('📐 Trigonometric table:'); print(); print('%-10s%-10s%-10s%-10s' % ('Degrees','sin','cos','tan')); print('-'*40); [print('%-10s%-10.4f%-10.4f%-10.4f' % (str(a)+'°', math.sin(math.radians(a)), math.cos(math.radians(a)), math.tan(math.radians(a)) if a%180!=90 else float('inf'))) for a in [0,30,45,60,90,120,135,150,180]]; print()\" && termy_say \"Here is the trigonometric table\" > /dev/null 2>&1",
+                    "explanation": "Shows a table of sin, cos, tan values for the main angles.",
+                    "goal": "Display trigonometric table",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_mole_calculator",
+        "input": [
+            "calculate moles",
+            "mole calculator",
+            "convert grams to moles",
+            "moles from mass"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"molar={'H2O':18.015,'CO2':44.01,'NaCl':58.44,'C6H12O6':180.156,'O2':31.998,'N2':28.014,'CH4':16.043,'NH3':17.031,'H2SO4':98.079,'CaCO3':100.087}; print(); print('⚗️  Mole calculator'); print(); [print('%-10s molar mass = %10.3f g/mol' % (k,v)) for k,v in molar.items()]; print(); g=10; print('Example: 10 g of H2O = %.4f mol' % (g/molar['H2O'])); print()\" && termy_say \"Mole calculator ready\" > /dev/null 2>&1",
+                    "explanation": "Shows the molar masses of common compounds and an example of mole calculation.",
+                    "goal": "Calculate moles",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_element_search",
+        "input": [
+            "search element",
+            "find element info",
+            "element info hydrogen",
+            "info about element",
+            "what is element"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"elements={'H':('Hydrogen',1,1.008),'He':('Helium',2,4.003),'Li':('Lithium',3,6.941),'C':('Carbon',6,12.011),'N':('Nitrogen',7,14.007),'O':('Oxygen',8,15.999),'Na':('Sodium',11,22.990),'Fe':('Iron',26,55.845),'Cu':('Copper',29,63.546),'Au':('Gold',79,196.967),'Ag':('Silver',47,107.868),'U':('Uranium',92,238.029)}; print(); print('🔬 Search an element - available symbols:'); print(' '.join(sorted(elements.keys()))); print(); [print('%-3s %-10s Z=%-3d mass=%10.3f u' % (s,n,z,m)) for s,(n,z,m) in sorted(elements.items(), key=lambda x: x[1][1])]; print()\" && termy_say \"Here is the information about the chemical elements\" > /dev/null 2>&1",
+                    "explanation": "Shows name, atomic number and atomic mass of common chemical elements.",
+                    "goal": "Display information about elements",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_temperature_converter",
+        "input": [
+            "temperature table",
+            "celsius fahrenheit kelvin table",
+            "temperature conversion table",
+            "show temperature scale"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"print(); print('🌡️  Temperature conversion table:'); print(); print('%-10s%-14s%-12s' % ('Celsius','Fahrenheit','Kelvin')); print('-'*36); [print('%-10d%-14.1f%-12.2f' % (c, c*9/5+32, c+273.15)) for c in [-40,-20,0,10,20,30,37,50,100]]; print()\" && termy_say \"Here is the temperature conversion table\" > /dev/null 2>&1",
+                    "explanation": "Shows a conversion table between Celsius, Fahrenheit and Kelvin for significant temperatures.",
+                    "goal": "Display temperature conversions",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_gravity_planets",
+        "input": [
+            "gravity on planets",
+            "planetary gravity",
+            "my weight on other planets",
+            "weight on mars",
+            "gravity comparison"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"g={'Mercury':3.7,'Venus':8.87,'Earth':9.81,'Moon':1.62,'Mars':3.71,'Jupiter':24.79,'Saturn':10.44,'Uranus':8.87,'Neptune':11.15}; w=70; print(); print('🌙 Weight of 70 kg on Earth, on other celestial bodies:'); print(); [print('%-10s g=%6.2f m/s2   weight=%7.1f kg' % (k,v,w*v/9.81)) for k,v in g.items()]; print()\" && termy_say \"Here is how weight changes on different planets\" > /dev/null 2>&1",
+                    "explanation": "Shows the gravity of each planet and the equivalent weight of 70 kg on Earth.",
+                    "goal": "Display gravity on planets",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_emc2",
+        "input": [
+            "einstein formula",
+            "emc2 calculator",
+            "mass energy equivalence",
+            "energy from mass",
+            "e equals mc squared"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"c=299792458; print(); print('⚛️  E = mc2 - Mass-energy equivalence'); print(); [print('1 %-8s of matter = %15.3e joules' % (u, m*c*c)) for u,m in [('gram',0.001),('kilogram',1.0),('ton',1000.0)]]; print(); print('1 kg of mass equals about 21.5 megatons of TNT'); print()\" && termy_say \"Here is Einstein's mass energy equivalence\" > /dev/null 2>&1",
+                    "explanation": "Calculates the energy contained in different masses using E=mc².",
+                    "goal": "Calculate energy from mass",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_binary_converter",
+        "input": [
+            "binary table",
+            "decimal to binary table",
+            "binary hexadecimal table",
+            "number systems table",
+            "show binary numbers"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"print(); print('💾 Number systems table:'); print(); print('%-10s%-10s%-14s%-8s' % ('Decimal','Binary','Hexadecimal','Octal')); print('-'*42); [print('%-10d%-10s%-14s%-8s' % (n, bin(n)[2:], hex(n)[2:].upper(), oct(n)[2:])) for n in [0,1,2,5,10,15,16,32,64,100,128,255]]; print()\" && termy_say \"Here is the number systems table\" > /dev/null 2>&1",
+                    "explanation": "Shows the conversion of numbers between decimal, binary, hexadecimal and octal.",
+                    "goal": "Display number systems",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_light_travel",
+        "input": [
+            "light travel time",
+            "how far is the sun",
+            "distance light travels",
+            "light speed distances",
+            "light minutes"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"c=299792458; print(); print('💡 Time it takes for light to reach:'); print(); targets=[('Moon',384400000),('Sun',149600000000),('Mars (average)',225000000000),('Jupiter (average)',778500000000),('Pluto (average)',5906000000000),('Proxima Centauri',40170000000000000)]; results=[]; exec('for n,d in targets:\\n    s=d/c\\n    if s<120: results.append((n,s,\\'seconds\\'))\\n    elif s<7200: results.append((n,s/60,\\'minutes\\'))\\n    elif s<172800: results.append((n,s/3600,\\'hours\\'))\\n    elif s<31557600: results.append((n,s/86400,\\'days\\'))\\n    else: results.append((n,s/31557600,\\'light years\\'))'); [print('%-20s %10.2f %s' % r) for r in results]; print(); print('Light travels 299,792 km every second!'); print()\" && termy_say \"Here are the light travel times in space\" > /dev/null 2>&1",
+                    "explanation": "Shows how long light takes to travel from Earth to various celestial bodies, with the correct unit (seconds, minutes, hours, days, light years).",
+                    "goal": "Display light travel times",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_powers_of_ten",
+        "input": [
+            "powers of ten",
+            "scale of the universe",
+            "order of magnitude",
+            "metric prefixes",
+            "si prefixes"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"prefixes=[('tera','T',10**12,'a billion billions'),('giga','G',10**9,'one billion'),('mega','M',10**6,'one million'),('kilo','k',10**3,'one thousand'),('milli','m',10**-3,'one thousandth'),('micro','μ',10**-6,'one millionth'),('nano','n',10**-9,'one billionth'),('pico','p',10**-12,'one trillionth')]; print(); print('📏 International System prefixes:'); print(); [print('%-8s (%s)  %12.0e   %s' % (n,s,v,d)) for n,s,v,d in prefixes]; print()\" && termy_say \"Here are the prefixes of the international system of units\" > /dev/null 2>&1",
+                    "explanation": "Shows SI prefixes (tera, giga, mega, nano, pico...) with their values.",
+                    "goal": "Display metric prefixes",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_human_body",
+        "input": [
+            "human body facts",
+            "body statistics",
+            "facts about human body",
+            "human body numbers"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"import random; facts=[('The human body contains','about 37 trillion cells'),('The heart beats','about 100,000 times a day'),('Blood carries','about 25 trillion red blood cells'),('The brain contains','about 86 billion neurons'),('The DNA of a cell','is about 2 meters long'),('The eyes distinguish','about 10 million colors'),('The nervous system','conducts impulses up to 120 m/s'),('One breath','exchanges about 500 ml of air'),('The skin','about 2 square meters, the largest organ'),('Adult bones','206 bones in the adult body')]; print(); print('🫀 Facts about the human body:'); print(); f=random.sample(facts,5); [print('• %s: %s' % (a,b)) for a,b in f]; print()\" && termy_say \"Here are some facts about the human body\" > /dev/null 2>&1",
+                    "explanation": "Shows 5 random scientific facts about the human body with numerical data.",
+                    "goal": "Display facts about the human body",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_geo_distance",
+        "input": [
+            "earth facts",
+            "planet earth data",
+            "earth statistics",
+            "earth numbers",
+            "dimensions of earth"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"import math; R=6371; print(); print('🌍 Data of planet Earth:'); print(); print('Mean radius:               %d km' % R); print('Equatorial circumference:  %.0f km' % (2*math.pi*6378)); print('Total surface:             %.0f km2' % (4*math.pi*R*R)); print('Land surface:              148,940,000 km2 (29%)'); print('Ocean surface:             361,132,000 km2 (71%)'); print('Mass:                      5.972e24 kg'); print('Orbital speed:             29.78 km/s'); print('Axial tilt:                23.44 degrees'); print('Estimated age:             4.54 billion years'); print()\" && termy_say \"Here is the data of planet Earth\" > /dev/null 2>&1",
+                    "explanation": "Shows the main data of planet Earth (radius, surface, mass, orbit).",
+                    "goal": "Display Earth data",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_random_experiment",
+        "input": [
+            "coin flip experiment",
+            "probability experiment",
+            "monte carlo pi",
+            "calculate pi random",
+            "pi simulation"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"import random; n=1000000; inside=sum(1 for _ in range(n) if (random.random()**2+random.random()**2)<1); pi=4*inside/n; print(); print('🎲 Monte Carlo simulation for pi'); print(); print('Generated points:  %d' % n); print('Points in quarter circle: %d' % inside); print('Estimated pi:      %.6f' % pi); print('Actual pi:         3.141593'); print('Error:             %.6f' % abs(pi-3.141593)); print()\" && termy_say \"Monte Carlo simulation completed to calculate pi\" > /dev/null 2>&1",
+                    "explanation": "Estimates the value of π using the Monte Carlo method (random points in a quarter circle).",
+                    "goal": "Calculate π with random simulation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+
+
+
+    {
+        "category": "science_moon_phases",
+        "input": [
+            "moon phases",
+            "show lunar phases",
+            "lunar cycle",
+            "phases of the moon"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"phases=[('New Moon','🌑',0),('Waxing Crescent','🌒',3),('First Quarter','🌓',7),('Waxing Gibbous','🌔',10),('Full Moon','🌕',15),('Waning Gibbous','🌖',18),('Last Quarter','🌗',22),('Waning Crescent','🌘',26)]; print(); print('🌕 Lunar cycle (29.5 days):'); print(); [print('%s %-18s around day %d' % (e,n,d)) for n,e,d in phases]; print()\" && termy_say \"Here are the phases of the moon\" > /dev/null 2>&1",
+                    "explanation": "Shows the 8 phases of the lunar cycle with corresponding days.",
+                    "goal": "Display moon phases",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_speed_of_sound",
+        "input": [
+            "speed of sound",
+            "sound speed in materials",
+            "how fast is sound",
+            "sound in water"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"media=[('Air (20C)',343),('Water (20C)',1482),('Wood',3500),('Steel',5960),('Aluminum',6320),('Diamond',12000)]; d=1000; print(); print('🔊 Speed of sound and time to travel 1 km:'); print(); [print('%-12s %6d m/s   1 km in %6.3f s' % (n,v,d/v)) for n,v in media]; print()\" && termy_say \"Here is the speed of sound in different materials\" > /dev/null 2>&1",
+                    "explanation": "Shows the speed of sound in various materials and the time to travel 1 km.",
+                    "goal": "Display speed of sound",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_ohms_law",
+        "input": [
+            "ohms law table",
+            "voltage current resistance",
+            "ohm calculator",
+            "electrical formulas"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"v=12; resist=[1,2,5,10,20,50,100,220,470,1000]; print(); print('⚡ Ohm\\'s Law with V = 12 volts:'); print(); print('%-12s%-12s%-12s' % ('R (ohm)','I (ampere)','P (watt)')); print('-'*36); [print('%-12d%-12.3f%-12.3f' % (r, v/r, v*v/r)) for r in resist]; print(); print('V = I*R   |   I = V/R   |   P = V*I'); print()\" && termy_say \"Here is the Ohm's law table\" > /dev/null 2>&1",
+                    "explanation": "Shows current and power for various resistances at 12V, plus Ohm's law formulas.",
+                    "goal": "Display Ohm's law",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_decay_half_life",
+        "input": [
+            "half life",
+            "radioactive decay",
+            "half life table",
+            "decay simulation"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"elements=[('Uranium-238',4500000000),('Carbon-14',5730),('Cesium-137',30),('Iodine-131',8),('Radon-222',4)]; print(); print('☢️  Famous radioactive half-lives:'); print(); [print('%-14s %12d years' % (n,h)) for n,h in elements]; print(); print('Decay simulation (100g of C-14):'); [print('after %4d years: %6.2f g remaining' % (t*5730, 100/(2**t))) for t in range(6)]; print()\" && termy_say \"Here are radioactive half-lives and a decay simulation\" > /dev/null 2>&1",
+                    "explanation": "Shows half-lives of famous isotopes and simulates Carbon-14 decay.",
+                    "goal": "Display radioactive decay",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+    "category": "science_bubble_sort",
+    "input": [
+        "sorting algorithm demo",
+        "bubble sort demo",
+        "show sorting",
+        "algorithm visualization"
+    ],
+    "tools": [
+        {
+            "name": "run_in_terminal",
+            "arguments": {
+                "command": "printf 'import random\\ndata=[random.randint(1,9) for _ in range(12)]\\nprint()\\nprint(\"📊 Bubble sort step-by-step:\")\\nprint(\"START:  \" + \" \".join(map(str,data)))\\nrounds=0\\nswaps=0\\ns=True\\nwhile s:\\n    s=False\\n    rounds+=1\\n    for i in range(len(data)-1):\\n        if data[i]>data[i+1]:\\n            data[i],data[i+1]=data[i+1],data[i]\\n            s=True\\n            swaps+=1\\n    print(\"step \" + str(rounds) + \": \" + \" \".join(map(str,data)))\\nprint()\\nprint(\"FINAL:  \" + \" \".join(map(str,data)))\\nprint(\"Total swaps: \" + str(swaps))\\nprint()' | python3 && termy_say \"Here is a bubble sort demonstration\" > /dev/null 2>&1",
+                "explanation": "Shows bubble sort step-by-step on a random list of numbers.",
+                "goal": "Display sorting algorithm",
+                "mode": "sync"
+            }
+        }
+    ],
+    "permission": "yolo"
+}
+
+,
+    {
+    "category": "science_dna_translation",
+    "input": [
+        "dna to protein",
+        "codon table",
+        "translate dna",
+        "genetic code"
+    ],
+    "tools": [
+        {
+            "name": "run_in_terminal",
+            "arguments": {
+                "command": "printf 'import random\\nB={\"TTT\":\"Phe\",\"TTC\":\"Phe\",\"TTA\":\"Leu\",\"TTG\":\"Leu\",\"CTT\":\"Leu\",\"CTC\":\"Leu\",\"CTA\":\"Leu\",\"CTG\":\"Leu\",\"ATT\":\"Ile\",\"ATC\":\"Ile\",\"ATA\":\"Ile\",\"ATG\":\"Met(START)\",\"GTT\":\"Val\",\"GTC\":\"Val\",\"GTA\":\"Val\",\"GTG\":\"Val\",\"TCT\":\"Ser\",\"TCC\":\"Ser\",\"TCA\":\"Ser\",\"TCG\":\"Ser\",\"CCT\":\"Pro\",\"CCC\":\"Pro\",\"CCA\":\"Pro\",\"CCG\":\"Pro\",\"ACT\":\"Thr\",\"ACC\":\"Thr\",\"ACA\":\"Thr\",\"ACG\":\"Thr\",\"GCT\":\"Ala\",\"GCC\":\"Ala\",\"GCA\":\"Ala\",\"GCG\":\"Ala\",\"TAT\":\"Tyr\",\"TAC\":\"Tyr\",\"TAA\":\"STOP\",\"TAG\":\"STOP\",\"CAT\":\"His\",\"CAC\":\"His\",\"CAA\":\"Gln\",\"CAG\":\"Gln\",\"AAT\":\"Asn\",\"AAC\":\"Asn\",\"AAA\":\"Lys\",\"AAG\":\"Lys\",\"GAT\":\"Asp\",\"GAC\":\"Asp\",\"GAA\":\"Glu\",\"GAG\":\"Glu\",\"TGT\":\"Cys\",\"TGC\":\"Cys\",\"TGA\":\"STOP\",\"TGG\":\"Trp\",\"CGT\":\"Arg\",\"CGC\":\"Arg\",\"CGA\":\"Arg\",\"CGG\":\"Arg\",\"AGT\":\"Ser\",\"AGC\":\"Ser\",\"AGA\":\"Arg\",\"AGG\":\"Arg\",\"GGT\":\"Gly\",\"GGC\":\"Gly\",\"GGA\":\"Gly\",\"GGG\":\"Gly\"}\\nseq=\"\".join(random.choice(\"ATGC\") for _ in range(30))\\nprint()\\nprint(\"🧬 DNA -> protein translation:\")\\nprint()\\nprint(\"mRNA: \" + \" \".join(seq[i:i+3] for i in range(0,30,3)))\\nprint(\"AA:   \" + \" \".join(B.get(seq[i:i+3],\"?\") for i in range(0,30,3)))\\nprint()\\nprint(\"Random sequence - ATG = start, STOP = end\")\\nprint()' | python3 && termy_say \"Here is the translation of a DNA sequence into protein\" > /dev/null 2>&1",
+                "explanation": "Generates a random DNA sequence and shows its translation into amino acids using the complete genetic code (64 codons).",
+                "goal": "Display genetic code translation",
+                "mode": "sync"
+            }
+        }
+    ],
+    "permission": "yolo"
+},
+{
+    "category": "science_gene_expression",
+    "input": [
+        "gene expression",
+        "translate real gene",
+        "protein synthesis",
+        "from gene to protein"
+    ],
+    "tools": [
+        {
+            "name": "run_in_terminal",
+            "arguments": {
+                "command": "printf 'import random\\nB={\"TTT\":\"Phe\",\"TTC\":\"Phe\",\"TTA\":\"Leu\",\"TTG\":\"Leu\",\"CTT\":\"Leu\",\"CTC\":\"Leu\",\"CTA\":\"Leu\",\"CTG\":\"Leu\",\"ATT\":\"Ile\",\"ATC\":\"Ile\",\"ATA\":\"Ile\",\"ATG\":\"Met\",\"GTT\":\"Val\",\"GTC\":\"Val\",\"GTA\":\"Val\",\"GTG\":\"Val\",\"TCT\":\"Ser\",\"TCC\":\"Ser\",\"TCA\":\"Ser\",\"TCG\":\"Ser\",\"CCT\":\"Pro\",\"CCC\":\"Pro\",\"CCA\":\"Pro\",\"CCG\":\"Pro\",\"ACT\":\"Thr\",\"ACC\":\"Thr\",\"ACA\":\"Thr\",\"ACG\":\"Thr\",\"GCT\":\"Ala\",\"GCC\":\"Ala\",\"GCA\":\"Ala\",\"GCG\":\"Ala\",\"TAT\":\"Tyr\",\"TAC\":\"Tyr\",\"TAA\":\"STOP\",\"TAG\":\"STOP\",\"CAT\":\"His\",\"CAC\":\"His\",\"CAA\":\"Gln\",\"CAG\":\"Gln\",\"AAT\":\"Asn\",\"AAC\":\"Asn\",\"AAA\":\"Lys\",\"AAG\":\"Lys\",\"GAT\":\"Asp\",\"GAC\":\"Asp\",\"GAA\":\"Glu\",\"GAG\":\"Glu\",\"TGT\":\"Cys\",\"TGC\":\"Cys\",\"TGA\":\"STOP\",\"TGG\":\"Trp\",\"CGT\":\"Arg\",\"CGC\":\"Arg\",\"CGA\":\"Arg\",\"CGG\":\"Arg\",\"AGT\":\"Ser\",\"AGC\":\"Ser\",\"AGA\":\"Arg\",\"AGG\":\"Arg\",\"GGT\":\"Gly\",\"GGC\":\"Gly\",\"GGA\":\"Gly\",\"GGG\":\"Gly\"}\\nseq=\"\".join(random.choice(\"ATGC\") for _ in range(300))\\nstart=seq.find(\"ATG\")\\nprint()\\nprint(\"🧬 Gene expression simulation:\")\\nprint()\\nprint(\"DNA length: 300 bases\")\\nprint(\"Sequence:   \" + seq[:40] + \"...\")\\nprint()\\nif start==-1:\\n    print(\"No start codon ATG found - no protein produced\")\\nelse:\\n    print(\"ATG found at position \" + str(start))\\n    protein=[]\\n    i=start\\n    while i+3<=len(seq):\\n        aa=B.get(seq[i:i+3],\"?\")\\n        if aa==\"STOP\":\\n            break\\n        protein.append(aa)\\n        i+=3\\n    print(\"ORF length: \" + str(i+3-start) + \" bases -> \" + str(len(protein)) + \" amino acids\")\\n    print()\\n    print(\"mRNA:     \" + seq[start:start+30] + \"...\")\\n    print(\"Protein:  \" + \" - \".join(protein))\\nprint()' | python3 && termy_say \"Here is a gene expression simulation\" > /dev/null 2>&1",
+                "explanation": "Simulates gene expression: finds the ATG start codon in random DNA, translates until STOP and shows the resulting protein.",
+                "goal": "Display gene expression",
+                "mode": "sync"
+            }
+        }
+    ],
+    "permission": "yolo"
+},
+    {
+        "category": "science_time_dilation",
+        "input": [
+            "time dilation",
+            "relativity calculator",
+            "time at light speed",
+            "einstein relativity"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"import math; speeds=[(0.1,'10% of light speed'),(0.5,'50% of light speed'),(0.9,'90% of light speed'),(0.99,'99% of light speed'),(0.999,'99.9% of light speed')]; print(); print('🚀 Time dilation (special relativity):'); print(); print('1 year on board -> years passed on Earth:'); print(); [print('%-20s ship time=%5.3f y   earth time=%8.3f y' % (lbl, 1.0, 1/math.sqrt(1-v*v))) for v,lbl in speeds]; print(); print('Formula: t = t0 / sqrt(1 - v2/c2)'); print()\" && termy_say \"Here is time dilation according to relativity\" > /dev/null 2>&1",
+                    "explanation": "Shows how much time passes on Earth when traveling at relativistic speeds.",
+                    "goal": "Display time dilation",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+{
+    "category": "science_longest_orf",
+    "input": [
+        "find longest orf",
+        "gene finder",
+        "longest protein",
+        "find genes in dna"
+    ],
+    "tools": [
+        {
+            "name": "run_in_terminal",
+            "arguments": {
+                "command": "printf 'import random\\nB={\"TTT\":\"Phe\",\"TTC\":\"Phe\",\"TTA\":\"Leu\",\"TTG\":\"Leu\",\"CTT\":\"Leu\",\"CTC\":\"Leu\",\"CTA\":\"Leu\",\"CTG\":\"Leu\",\"ATT\":\"Ile\",\"ATC\":\"Ile\",\"ATA\":\"Ile\",\"ATG\":\"Met\",\"GTT\":\"Val\",\"GTC\":\"Val\",\"GTA\":\"Val\",\"GTG\":\"Val\",\"TCT\":\"Ser\",\"TCC\":\"Ser\",\"TCA\":\"Ser\",\"TCG\":\"Ser\",\"CCT\":\"Pro\",\"CCC\":\"Pro\",\"CCA\":\"Pro\",\"CCG\":\"Pro\",\"ACT\":\"Thr\",\"ACC\":\"Thr\",\"ACA\":\"Thr\",\"ACG\":\"Thr\",\"GCT\":\"Ala\",\"GCC\":\"Ala\",\"GCA\":\"Ala\",\"GCG\":\"Ala\",\"TAT\":\"Tyr\",\"TAC\":\"Tyr\",\"TAA\":\"STOP\",\"TAG\":\"STOP\",\"CAT\":\"His\",\"CAC\":\"His\",\"CAA\":\"Gln\",\"CAG\":\"Gln\",\"AAT\":\"Asn\",\"AAC\":\"Asn\",\"AAA\":\"Lys\",\"AAG\":\"Lys\",\"GAT\":\"Asp\",\"GAC\":\"Asp\",\"GAA\":\"Glu\",\"GAG\":\"Glu\",\"TGT\":\"Cys\",\"TGC\":\"Cys\",\"TGA\":\"STOP\",\"TGG\":\"Trp\",\"CGT\":\"Arg\",\"CGC\":\"Arg\",\"CGA\":\"Arg\",\"CGG\":\"Arg\",\"AGT\":\"Ser\",\"AGC\":\"Ser\",\"AGA\":\"Arg\",\"AGG\":\"Arg\",\"GGT\":\"Gly\",\"GGC\":\"Gly\",\"GGA\":\"Gly\",\"GGG\":\"Gly\"}\\nseq=\"\".join(random.choice(\"ATGC\") for _ in range(300))\\nbp=[]\\nbs=-1\\nbe=0\\ni=0\\nfound=0\\nwhile True:\\n    p=seq.find(\"ATG\",i)\\n    if p==-1:\\n        break\\n    found+=1\\n    j=p\\n    prot=[]\\n    while j+3<=len(seq):\\n        aa=B.get(seq[j:j+3],\"?\")\\n        if aa==\"STOP\":\\n            break\\n        prot.append(aa)\\n        j+=3\\n    if len(prot)>len(bp):\\n        bp=prot\\n        bs=p\\n        be=j+3\\n    i=p+1\\nprint()\\nprint(\"🧬 Gene finder - longest ORF in 300 random bases:\")\\nprint()\\nprint(\"Sequence:   \" + seq[:40] + \"...\")\\nprint(\"ATG found:  \" + str(found) + \" start codons scanned\")\\nprint()\\nif bs==-1 or len(bp)==0:\\n    print(\"No ORF with amino acids found\")\\nelse:\\n    print(\"Best ORF:   position \" + str(bs) + \" to \" + str(be))\\n    print(\"Length:     \" + str(be-bs) + \" bases -> \" + str(len(bp)) + \" amino acids\")\\n    print()\\n    print(\"mRNA:     \" + seq[bs:bs+30] + \"...\")\\n    print(\"Protein:  \" + \" - \".join(bp))\\nprint()' | python3 && termy_say \"Here is the gene finder simulation\" > /dev/null 2>&1",
+                "explanation": "Scans all ATG start codons in random DNA and reports the longest open reading frame, like real gene-finding algorithms.",
+                "goal": "Find longest ORF in DNA",
+                "mode": "sync"
+            }
+        }
+    ],
+    "permission": "yolo"
+}
+
+    ,
+    {
+    "category": "science_twin_paradox",
+    "input": [
+        "twin paradox",
+        "relativity travel",
+        "interstellar trip",
+        "travel to proxima centauri",
+        "relativity of time"
+    ],
+    "tools": [
+        {
+            "name": "run_in_terminal",
+            "arguments": {
+                "command": "printf 'import math\\nd=4.24\\nspeeds=[(0.5,\"0.50c\"),(0.9,\"0.90c\"),(0.99,\"0.99c\"),(0.999,\"0.999c\"),(0.9999,\"0.9999c\")]\\nprint()\\nprint(\"🚀 Twin paradox - round trip to Proxima Centauri (4.24 light years):\")\\nprint()\\nprint(\"Speed\".ljust(10) + \" \" + \"Earth\".rjust(8) + \" y\" + \"Ship\".rjust(10) + \" y\" + \"Age diff\".rjust(12) + \" y\")\\nprint(\"-\" * 56)\\nfor v,lbl in speeds:\\n    earth=2*d/v\\n    ship=earth*math.sqrt(1-v*v)\\n    print(lbl.ljust(10) + \" \" + str(round(earth,2)).rjust(8) + \" y\" + str(round(ship,2)).rjust(10) + \" y\" + str(round(earth-ship,2)).rjust(12) + \" y\")\\nprint()\\nprint(\"At 0.9999c the traveler ages only about 44 days\")\\nprint(\"while more than 8 years pass on Earth!\")\\nprint()' | python3 && termy_say \"Here is the twin paradox simulation\" > /dev/null 2>&1",
+                "explanation": "Simulates the twin paradox: a round trip to Proxima Centauri at various speeds, showing time passed on Earth vs on the ship.",
+                "goal": "Display twin paradox simulation",
+                "mode": "sync"
+            }
+        }
+    ],
+    "permission": "yolo"
+}
+
+    ,
+    {
+        "category": "science_element_abundance",
+        "input": [
+            "most common elements",
+            "element abundance",
+            "elements in universe",
+            "elements in body"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"universe=[('Hydrogen H',74),('Helium He',24),('Oxygen O',1),('Carbon C',0.5),('Other',0.5)]; body=[('Oxygen O',65),('Carbon C',18),('Hydrogen H',10),('Nitrogen N',3),('Other',4)]; print(); print('🌌 Universe composition (% by mass):'); [print('  %-12s %5.1f%%' % (n,p)) for n,p in universe]; print(); print('🫀 Human body composition (% by mass):'); [print('  %-12s %5.1f%%' % (n,p)) for n,p in body]; print()\" && termy_say \"Here is the composition of the universe and the human body\" > /dev/null 2>&1",
+                    "explanation": "Compares the abundance of elements in the universe and the human body.",
+                    "goal": "Display element abundance",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "science_quiz",
+        "input": [
+            "science quiz",
+            "science trivia",
+            "ask me science questions",
+            "random science fact"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "python3 -c \"import random; facts=[('Sunlight takes 8 minutes and 20 seconds to reach Earth','astronomy'),('Human DNA is about 2 meters long if stretched, in every cell','biology'),('The speed of sound in air is about 343 m/s','physics'),('Water covers 71% of the Earth\\'s surface','geology'),('The human body contains about 37 trillion cells','biology'),('The core temperature of the Sun is about 15 million degrees','astronomy'),('Diamond and graphite are both made of carbon','chemistry'),('A day on Venus lasts longer than its year','astronomy'),('Pure water has a pH of exactly 7 at 25 degrees','chemistry'),('Photons always travel at the speed of light','physics')]; print(); print('🎓 Science fact:'); print(); f=random.choice(facts); print('• ' + f[0]); print(); print('Topic: ' + f[1].upper()); print()\" && termy_say \"Here is a science fact\" > /dev/null 2>&1",
+                    "explanation": "Shows a random science fact from astronomy, biology, physics and chemistry.",
+                    "goal": "Display science facts",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+
+    {
+    "category": "science_black_holes",
+    "input": [
+        "black hole radius",
+        "schwarzschild radius",
+        "event horizon",
+        "black holes"
+    ],
+    "tools": [
+        {
+            "name": "run_in_terminal",
+            "arguments": {
+                "command": "printf 'objects=[(\"Earth\",5.97e24),(\"Moon\",7.35e22),(\"Sun\",1.99e30),(\"Jupiter\",1.90e27),(\"Sirius B\",2.02e30),(\"Sagittarius A*\",7.94e36),(\"M87*\",1.30e40)]\\nG=6.674e-11\\nc=299792458\\nprint()\\nprint(\"🕳️  Schwarzschild radius - if each object became a black hole:\")\\nprint()\\nprint(\"Object\".ljust(16) + \"Mass (kg)\".rjust(14) + \"   Event horizon\")\\nprint(\"-\" * 58)\\nfor n,m in objects:\\n    r=2*G*m/(c*c)\\n    if r>=1000:\\n        size=str(round(r/1000,1)) + \" km\"\\n    else:\\n        size=str(round(r*1000,1)) + \" mm\"\\n    print(n.ljust(16) + \"{:.2e}\".format(m).rjust(14) + \"   \" + size)\\nprint()\\nprint(\"The whole Earth would fit in a marble 9 mm wide!\")\\nprint()' | python3 && termy_say \"Here are the Schwarzschild radii of black holes\" > /dev/null 2>&1",
+                "explanation": "Computes the Schwarzschild radius (event horizon) of various objects if they became black holes.",
+                "goal": "Display black hole radii",
+                "mode": "sync"
+            }
+        }
+    ],
+    "permission": "yolo"
+}
+,
+{
+        "category": "science_kepler_law",
+        "input": [
+            "kepler third law",
+            "orbital periods",
+            "kepler law verification",
+            "planetary orbits"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf 'planets=[(\"Mercury\",57.9,88),(\"Venus\",108.2,225),(\"Earth\",149.6,365),(\"Mars\",227.9,687),(\"Jupiter\",778.3,4331),(\"Saturn\",1427.0,10747),(\"Uranus\",2871.0,30589),(\"Neptune\",4497.1,59800)]\\nprint()\\nprint(\"🪐 Kepler third law check: T2 / a3 should be constant!\")\\nprint()\\nprint(\"Planet\".ljust(10) + \"a (mln km)\".rjust(12) + \"T (days)\".rjust(10) + \"T2/a3\".rjust(12))\\nprint(\"-\" * 44)\\nfor n,a,t in planets:\\n    ratio=(t*t)/(a*a*a)\\n    print(n.ljust(10) + str(a).rjust(12) + str(t).rjust(10) + \"{:.5f}\".format(ratio).rjust(12))\\nprint()\\nprint(\"The ratio is nearly constant - Kepler was right!\")\\nprint()' | python3 && termy_say \"Here is the verification of Kepler third law\" > /dev/null 2>&1",
+                    "explanation": "Verifies Kepler's third law: the ratio T squared over a cubed is constant for all planets.",
+                    "goal": "Display Kepler law verification",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+{
+    "category": "science_collatz",
+    "input": [
+        "collatz conjecture",
+        "3n plus 1",
+        "hailstone sequence",
+        "collatz sequence"
+    ],
+    "tools": [
+        {
+            "name": "run_in_terminal",
+            "arguments": {
+                "command": "printf 'import random\\nn=random.randint(7,50)\\nseq=[n]\\ncur=n\\nwhile cur!=1:\\n    if cur & 1 == 0:\\n        cur=cur//2\\n    else:\\n        cur=3*cur+1\\n    seq.append(cur)\\nprint()\\nprint(\"📉 Collatz conjecture (3n+1 problem):\")\\nprint()\\nprint(\"Starting number: \" + str(n))\\nprint(\"Steps to reach 1: \" + str(len(seq)-1))\\nprint(\"Peak value: \" + str(max(seq)))\\nprint()\\nprint(\" -> \".join(map(str,seq)))\\nprint()\\nprint(\"No matter the start, it always reaches 1 (unproven!)\")\\nprint()' | python3 && termy_say \"Here is a Collatz sequence\" > /dev/null 2>&1",
+                "explanation": "Generates a Collatz sequence from a random number, showing every step until it reaches 1.",
+                "goal": "Display Collatz sequence",
+                "mode": "sync"
+            }
+        }
+    ],
+    "permission": "yolo"
+}
+,
+{
+    "category": "science_caesar_cipher",
+    "input": [
+        "caesar cipher",
+        "encrypt message",
+        "caesar shift",
+        "encode text"
+    ],
+    "tools": [
+        {
+            "name": "run_in_terminal",
+            "arguments": {
+                "command": "printf 'msg=\"the quick brown fox jumps over the lazy dog\"\\nshift=3\\nenc=\"\"\\nfor ch in msg:\\n    if ch.isalpha():\\n        base=65 if ch.isupper() else 97\\n        t=ord(ch)-base+shift\\n        while t>=26:\\n            t=t-26\\n        enc+=chr(t+base)\\n    else:\\n        enc+=ch\\ndec=\"\"\\nfor ch in enc:\\n    if ch.isalpha():\\n        base=65 if ch.isupper() else 97\\n        t=ord(ch)-base-shift\\n        while t<0:\\n            t=t+26\\n        dec+=chr(t+base)\\n    else:\\n        dec+=ch\\nprint()\\nprint(\"🔐 Caesar cipher (shift = \" + str(shift) + \"):\")\\nprint()\\nprint(\"Original:  \" + msg)\\nprint(\"Encrypted: \" + enc)\\nprint(\"Decrypted: \" + dec)\\nprint()\\nprint(\"Used by Julius Caesar over 2000 years ago\")\\nprint()' | python3 && termy_say \"Here is the caesar cipher demonstration\" > /dev/null 2>&1",
+                "explanation": "Encrypts and decrypts a message with the Caesar cipher using a shift of 3.",
+                "goal": "Display Caesar cipher",
+                "mode": "sync"
+            }
+        }
+    ],
+    "permission": "yolo"
+}
+,
+{
+        "category": "science_music_frequencies",
+        "input": [
+            "music note frequencies",
+            "piano frequencies",
+            "note frequencies",
+            "equal temperament"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "printf 'notes=[(\"C\",-9),(\"C#\",-8),(\"D\",-7),(\"D#\",-6),(\"E\",-5),(\"F\",-4),(\"F#\",-3),(\"G\",-2),(\"G#\",-1),(\"A\",0),(\"A#\",1),(\"B\",2)]\\nspeed=343\\nprint()\\nprint(\"🎵 Musical notes frequencies (4th octave, A4 = 440 Hz):\")\\nprint()\\nprint(\"Note\".ljust(6) + \"Frequency\".rjust(12) + \"   Wavelength\".rjust(14))\\nprint(\"-\" * 36)\\nfor n,s in notes:\\n    f=440*(2**(s/12))\\n    print(n.ljust(6) + (\"{:.2f}\".format(f) + \" Hz\").rjust(12) + (\"{:.2f}\".format(speed/f) + \" m\").rjust(14))\\nprint()\\nprint(\"Each half tone multiplies frequency by the 12th root of 2\")\\nprint()' | python3 && termy_say \"Here are the musical note frequencies\" > /dev/null 2>&1",
+                    "explanation": "Shows the frequency of each note in the equal temperament scale, calculated from A4 = 440 Hz.",
+                    "goal": "Display music note frequencies",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo"
+    },
+{
+    "category": "science_quadratic_solver",
+    "input": [
+        "quadratic equation",
+        "solve quadratic",
+        "ax2 plus bx plus c",
+        "quadratic formula"
+    ],
+    "tools": [
+        {
+            "name": "run_in_terminal",
+            "arguments": {
+                "command": "printf 'import math\\ncases=[(1,-5,6),(1,2,5),(1,-4,4),(2,3,-2)]\\nprint()\\nprint(\"🧮 Quadratic equation solver:  a*x2 + b*x + c = 0\")\\nprint()\\nprint(\"Formula:  x = (-b +/- sqrt(b2-4ac)) / 2a\")\\nprint()\\nfor a,b,c in cases:\\n    disc=b*b-4*a*c\\n    print(\"Equation: \" + str(a) + \"x2 + (\" + str(b) + \")x + (\" + str(c) + \") = 0\")\\n    print(\"Discriminant: \" + str(disc))\\n    if disc>0:\\n        x1=(-b+math.sqrt(disc))/(2*a)\\n        x2=(-b-math.sqrt(disc))/(2*a)\\n        print(\"Two real roots: x1 = \" + str(round(x1,4)) + \", x2 = \" + str(round(x2,4)))\\n    elif disc==0:\\n        x=-b/(2*a)\\n        print(\"One double root: x = \" + str(round(x,4)))\\n    else:\\n        re=-b/(2*a)\\n        im=math.sqrt(-disc)/(2*a)\\n        print(\"Complex roots: \" + str(round(re,4)) + \" +/- \" + str(round(im,4)) + \"i\")\\n    print()' | python3 && termy_say \"Here are the quadratic equation solutions\" > /dev/null 2>&1",
+                "explanation": "Solves quadratic equations step by step showing discriminant and roots (real or complex).",
+                "goal": "Solve quadratic equations",
+                "mode": "sync"
+            }
+        }
+    ],
+    "permission": "yolo"
+},
+{
+    "category": "science_gaussian_histogram",
+    "input": [
+        "gaussian distribution",
+        "random histogram",
+        "normal distribution demo",
+        "bell curve"
+    ],
+    "tools": [
+        {
+            "name": "run_in_terminal",
+            "arguments": {
+                "command": "printf 'import random\\nbins=[0]*15\\nfor _ in range(2000):\\n    val=random.gauss(7,2)\\n    idx=int(val)\\n    if 0<=idx<15:\\n        bins[idx]+=1\\nmx=max(bins)\\nprint()\\nprint(\"📊 Gaussian distribution (2000 random samples, mean 7, std 2):\")\\nprint()\\nfor i,c in enumerate(bins):\\n    bar=chr(9608)*int(c/mx*40)\\n    print(\"[\" + str(i) + \"] \" + str(c).rjust(4) + \"  \" + bar)\\nprint()\\nprint(\"The classic bell curve emerges from pure randomness!\")\\nprint()' | python3 && termy_say \"Here is a gaussian distribution histogram\" > /dev/null 2>&1",
+                "explanation": "Generates 2000 gaussian random samples and draws an ASCII histogram showing the bell curve.",
+                "goal": "Display gaussian histogram",
+                "mode": "sync"
+            }
+        }
+    ],
+    "permission": "yolo"
+}
+
 ]
