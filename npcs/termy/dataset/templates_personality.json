@@ -196,8 +196,7 @@
             {
                 "tag": [
                     "<||vocab_write||>",
-                    "<||vocab_create||>",
-                    "<||vocab_make||>"
+                    "<||vocab_create||>"
                 ],
                 "type": "vocab",
                 "required": true

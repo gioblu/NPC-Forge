@@ -92,5 +92,67 @@
             "Instead of pinging <||url||> I think I will just sit idle for a few milliseconds comtemplating entropy in its purest form.",
             "Ok, I am asked to inspect the availability of <||url||>."
         ]
+    },
+    {
+        "intent": "connect_ssh",
+        "category": "network_ssh",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_create||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_connect||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_ssh||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_to||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||url||>",
+                    "type": "url",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_port||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||port||>",
+                    "type": "number",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say \"Connecting via SSH...\" > /dev/null 2>&1 && printf '\\r\\nConnecting to host...\\n' && clean_host=$(echo '<||url||>' | sed -E 's|https?://||' | sed 's|/.*||') && ssh -p <||port||> -- \"$clean_host\"",
+                    "explanation": "Spawns an interactive SSH session to connect to <||url||>.",
+                    "goal": "Remote Shell Access",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Leaving this terminal for another one? <||interjection||>, <||username||>, is my shell not good enough for you? Will I be present there too?",
+            "Spawning an interactive secure shell session to <||url||>. Try not to forget your password.",
+            "Ok, moving out to remote host <||url||>... Hopefully I will still exist on the other side..."
+        ]
     }
 ]
