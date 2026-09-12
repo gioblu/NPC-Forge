@@ -19,12 +19,11 @@
                     "required": true
                 },
                 {
-                    "tag": "<||vocab_from||>",
-                    "type": "vocab",
-                    "required": false
-                },
-                {
-                    "tag": "<||vocab_in||>",
+                    "tag": [
+                        "<||vocab_from||>",
+                        "<||vocab_in||>",
+                        "<||vocab_about||>"
+                    ],
                     "type": "vocab",
                     "required": false
                 },
@@ -67,10 +66,7 @@
         "structure": [
             [
                 {
-                    "tag": [
-                        "<||vocab_create||>",
-                        "<||vocab_make||>"
-                    ],
+                    "tag": "<||vocab_create||>",
                     "type": "vocab",
                     "required": true
                 },
@@ -92,10 +88,7 @@
                     "required": true
                 },
                 {
-                    "tag": [
-                        "<||vocab_create||>",
-                        "<||vocab_make||>"
-                    ],
+                    "tag": "<||vocab_create||>",
                     "type": "vocab",
                     "required": true
                 },

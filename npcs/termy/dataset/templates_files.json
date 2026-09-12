@@ -53,17 +53,14 @@
             "I am asked to rename the file <||file||>. I can excell at this..."
         ]
     },
-    { 
+    {
         "intent": "symlink_create",
         "category": "linux_files",
         "type": "template",
         "structure": [
             [
                 {
-                    "tag": [
-                        "<||vocab_create||>",
-                        "<||vocab_make||>"
-                    ],
+                    "tag": "<||vocab_create||>",
                     "type": "vocab",
                     "required": true
                 },
@@ -114,10 +111,7 @@
         "structure": [
             [
                 {
-                    "tag": [
-                        "<||vocab_create||>",
-                        "<||vocab_make||>"
-                    ],
+                    "tag": "<||vocab_create||>",
                     "type": "vocab",
                     "required": true
                 },
@@ -173,9 +167,19 @@
         "structure": [
             [
                 {
+                    "tag": "<||vocab_create||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
                     "tag": "<||vocab_copy||>",
                     "type": "vocab",
                     "required": true
+                },
+                {
+                    "tag": "<||vocab_about||>",
+                    "type": "vocab",
+                    "required": false
                 },
                 {
                     "tag": [
@@ -287,6 +291,11 @@
                     "tag": "<||vocab_checksum||>",
                     "type": "vocab",
                     "required": true
+                },
+                {
+                    "tag": "<||vocab_about||>",
+                    "type": "vocab",
+                    "required": false
                 },
                 {
                     "tag": "<||vocab_file||>",
@@ -432,7 +441,7 @@
         "structure": [
             [
                 {
-                    "tag": "<||vocab_make||>",
+                    "tag": "<||vocab_create||>",
                     "type": "vocab",
                     "required": true
                 },

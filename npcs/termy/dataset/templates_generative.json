@@ -6,10 +6,7 @@
         "structure": [
             [
                 {
-                    "tag": [
-                        "<||vocab_create||>",
-                        "<||vocab_make||>"
-                    ],
+                    "tag": "<||vocab_create||>",
                     "type": "vocab",
                     "required": true
                 },
