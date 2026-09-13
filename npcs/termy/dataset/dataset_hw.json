@@ -1,6 +1,686 @@
 [
     {
         "input": [
+            "what is electricity",
+            "How does electricity work",
+            "Explain electricity principles",
+            "Describe electrical energy phenomena",
+            "define electricity",
+            "electricity function",
+            "what is the nature of electricity"
+        ],
+        "output": [
+            "Electricity is the set of physical phenomena associated with the presence and motion of matter that has a property of electric charge, manifesting in lightning, static electricity, electromagnetic induction, and electrical current flow."
+        ],
+        "context": [
+            {
+                "input": [
+                    "who discovered electricity",
+                    "history of electricity",
+                    "who pioneered electrical science",
+                    "origin of electrical harnessing"
+                ],
+                "output": [
+                    "while ancient civilizations knew of electric fish, Benjamin Franklin famously investigated lightning in 1752. Michael Faraday and Nikola Tesla later formalized the mathematical and mechanical principles required to commercialize and distribute electricity globally in the 19th century."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is electric current",
+            "How does current flow",
+            "Explain electrical current physics",
+            "Describe the flow of electrons",
+            "define current",
+            "current function",
+            "what is the difference between dynamic current and static charge"
+        ],
+        "output": [
+            "Electric current is the rate of flow of electric charge past a point or region, typically carried by moving electrons in a conductive metal wire or by ions in an electrolyte, measured in Amperes (A)."
+        ],
+        "context": [
+            {
+                "input": [
+                    "what is the difference between AC and DC",
+                    "alternating current vs direct current",
+                    "explain ac and dc current loops"
+                ],
+                "output": [
+                    "Direct Current (DC) flows continuously in a single, unchanging direction, common in batteries. Alternating Current (AC) periodically reverses its direction and changes its magnitude continuously over time, used in power grids due to efficient long-distance transmission."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is static electricity",
+            "How does static electricity work",
+            "Explain static charge accumulation",
+            "Describe triboelectric effect",
+            "define static electricity",
+            "static shock function"
+        ],
+        "output": [
+            "Static electricity is an imbalance of electric charges within or on the surface of a material, remaining stationary until it can move away by means of an electric discharge or electrical spark."
+        ],
+        "context": [
+            {
+                "input": [
+                    "what causes a static shock",
+                    "how does electrostatic discharge happen",
+                    "explain rubbing balloons static phenomenon"
+                ],
+                "output": [
+                    "Static electricity is commonly caused by the triboelectric effect, where physical friction between two different materials transfers electrons from one surface to the other, building a charge that discharges rapidly when touching a conductor."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is plasma in physics",
+            "what is the fourth state of matter",
+            "How does plasma work",
+            "Explain ionized gas physics",
+            "define plasma",
+            "plasma function"
+        ],
+        "output": [
+            "Plasma is one of the four fundamental states of matter, consisting of a gas-like hot mixture of free electrons and highly ionized atoms, displaying an extremely high electrical conductivity and susceptibility to electromagnetic fields."
+        ],
+        "context": [
+            {
+                "input": [
+                    "where can you find plasma",
+                    "examples of plasma in nature",
+                    "is lightning made of plasma"
+                ],
+                "output": [
+                    "while rare on Earth outside of lightning bolts, neon signs, and plasma cutters, plasma is the most abundant form of ordinary matter in the universe, making up the stars, the Sun, and nebulae."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is electricity",
+            "How does electricity work",
+            "Explain electricity principles",
+            "Describe electrical energy phenomena",
+            "define electricity",
+            "electricity function",
+            "what is the nature of electricity"
+        ],
+        "output": [
+            "Electricity is the set of physical phenomena associated with the presence and motion of matter that has a property of electric charge, manifesting in lightning, static electricity, electromagnetic induction, and electrical current flow."
+        ],
+        "context": [
+            {
+                "input": [
+                    "who discovered electricity",
+                    "history of electricity",
+                    "who pioneered electrical science",
+                    "origin of electrical harnessing"
+                ],
+                "output": [
+                    "while ancient civilizations knew of electric fish, Benjamin Franklin famously investigated lightning in 1752. Michael Faraday and Nikola Tesla later formalized the mathematical and mechanical principles required to commercialize and distribute electricity globally in the 19th century."
+                ]
+            },
+            {
+                "input": [
+                    "what are the fundamental types of electric charge",
+                    "explain positive and negative charge",
+                    "how do electrical charges interact"
+                ],
+                "output": [
+                    "Electric charge is a fundamental property of subatomic particles. Protons carry a positive charge, while electrons carry a negative charge. According to Coulomb's Law, like charges repel each other, and opposite charges attract each other."
+                ]
+            },
+            {
+                "input": [
+                    "what is the difference between electricity and magnetism",
+                    "how are electricity and magnetism connected",
+                    "explain electromagnetism"
+                ],
+                "output": [
+                    "Electricity involves stationary or moving electric charges, while magnetism is caused by moving electric charges. James Clerk Maxwell proved in 1865 that they are two aspects of a single force called electromagnetism, governed by electromagnetic waves."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is electric current",
+            "How does current flow",
+            "Explain electrical current physics",
+            "Describe the flow of electrons",
+            "define current",
+            "current function",
+            "what is the difference between dynamic current and static charge"
+        ],
+        "output": [
+            "Electric current is the rate of flow of electric charge past a point or region, typically carried by moving electrons in a conductive metal wire or by ions in an electrolyte, measured in Amperes (A)."
+        ],
+        "context": [
+            {
+                "input": [
+                    "what is the difference between AC and DC",
+                    "alternating current vs direct current",
+                    "explain ac and dc current loops"
+                ],
+                "output": [
+                    "Direct Current (DC) flows continuously in a single, unchanging direction, common in batteries. Alternating Current (AC) periodically reverses its direction and changes its magnitude continuously over time, used in power grids due to efficient long-distance transmission."
+                ]
+            },
+            {
+                "input": [
+                    "what is drift velocity",
+                    "how fast do electrons move in a wire",
+                    "speed of electric current vs speed of electrons"
+                ],
+                "output": [
+                    "while the electrical signal propagation wave travels near the speed of light, the actual physical speed of individual electrons (drift velocity) inside a copper wire is remarkably slow, often averaging less than a millimeter per second."
+                ]
+            },
+            {
+                "input": [
+                    "what is conventional current direction",
+                    "why does current flow from positive to negative",
+                    "actual electron flow direction vs conventional current"
+                ],
+                "output": [
+                    "Conventional current is defined as flowing from positive to negative. Benjamin Franklin established this standard before electrons were discovered. In reality, negative electrons flow in the exact opposite direction, from the negative terminal to the positive terminal."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is static electricity",
+            "How does static electricity work",
+            "Explain static charge accumulation",
+            "Describe triboelectric effect",
+            "define static electricity",
+            "static shock function"
+        ],
+        "output": [
+            "Static electricity is an imbalance of electric charges within or on the surface of a material, remaining stationary until it can move away by means of an electric discharge or electrical spark."
+        ],
+        "context": [
+            {
+                "input": [
+                    "what causes a static shock",
+                    "how does electrostatic discharge happen",
+                    "explain rubbing balloons static phenomenon"
+                ],
+                "output": [
+                    "Static electricity is commonly caused by the triboelectric effect, where physical friction between two different materials transfers electrons from one surface to the other, building a charge that discharges rapidly when touching a conductor."
+                ]
+            },
+            {
+                "input": [
+                    "what is electrostatic induction",
+                    "how can static electricity attract uncharged objects",
+                    "charging by induction explanation"
+                ],
+                "output": [
+                    "Electrostatic induction occurs when a charged object is brought near a neutral conductive object, causing the internal mobile charges inside the neutral material to shift, separating positive and negative poles without physical contact."
+                ]
+            },
+            {
+                "input": [
+                    "How does static electricity damage computer hardware",
+                    "what is esd hazard in electronics",
+                    "why use an anti static wrist strap"
+                ],
+                "output": [
+                    "Electrostatic Discharge (ESD) acts as a microscopic lightning bolt. A human body can carry thousands of volts of static electricity invisibly; touching exposed motherboard circuits or CPU pins without grounding yourself can instantly blow out delicate nanoscale transistor gates."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is plasma in physics",
+            "what is the fourth state of matter",
+            "How does plasma work",
+            "Explain ionized gas physics",
+            "define plasma",
+            "plasma function"
+        ],
+        "output": [
+            "Plasma is one of the four fundamental states of matter, consisting of a gas-like hot mixture of free electrons and highly ionized atoms, displaying an extremely high electrical conductivity and susceptibility to electromagnetic fields."
+        ],
+        "context": [
+            {
+                "input": [
+                    "where can you find plasma",
+                    "examples of plasma in nature",
+                    "is lightning made of plasma"
+                ],
+                "output": [
+                    "while rare on Earth outside of lightning bolts, neon signs, and plasma cutters, plasma is the most abundant form of ordinary matter in the universe, making up the stars, the Sun, and nebulae."
+                ]
+            },
+            {
+                "input": [
+                    "How does plasma react to magnetic fields",
+                    "magnetic confinement of plasma",
+                    "plasma physics in nuclear fusion"
+                ],
+                "output": [
+                    "Because plasma consists of moving charged ions and free electrons, it reacts strongly to magnetic forces. This property is heavily exploited in tokamaks and experimental nuclear fusion reactors to confine scorching plasma using intense electromagnetic fields."
+                ]
+            },
+            {
+                "input": [
+                    "what is the difference between a gas and a plasma",
+                    "gas vs plasma properties",
+                    "why is plasma unique"
+                ],
+                "output": [
+                    "An ordinary gas consists of neutral atoms and behaves as an electrical insulator. A plasma is highly ionized, meaning electrons have been ripped away from the nuclei, allowing the medium to conduct electricity flawlessly and generate collective magnetic behaviors."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is DC",
+            "what is Direct Current",
+            "How does direct current work",
+            "Explain direct current principles",
+            "Describe DC circuits",
+            "define direct current",
+            "dc current function"
+        ],
+        "output": [
+            "Direct Current (DC) is the unidirectional flow of an electric charge, meaning the electrical current flows continuously in a single, constant direction with a constant voltage polarity over time."
+        ],
+        "context": [
+            {
+                "input": [
+                    "where is direct current used",
+                    "what devices use dc power",
+                    "practical applications of direct current"
+                ],
+                "output": [
+                    "DC is used in virtually all digital electronics, including computers, smartphones, microcontrollers, and LED lighting, as well as in solar panels, electric vehicle batteries, and portable energy storage systems."
+                ]
+            },
+            {
+                "input": [
+                    "who championed direct current",
+                    "history of direct current",
+                    "thomas edison dc system origin"
+                ],
+                "output": [
+                    "Thomas Edison was the primary pioneer and champion of Direct Current in the late 19th century, building the first commercial electrical power distribution system in New York to power his incandescent light bulbs."
+                ]
+            },
+            {
+                "input": [
+                    "what are the limitations of direct current",
+                    "why is dc bad for long distance transmission",
+                    "disadvantages of direct current distribution"
+                ],
+                "output": [
+                    "Historically, DC could not be easily stepped up or down to high voltages. Transmitting low-voltage DC over long distances causes massive power losses due to wire resistance, requiring power plants to be located within a mile of the consumer."
+                ]
+            },
+            {
+                "input": [
+                    "what is HVDC",
+                    "high voltage direct current transmission",
+                    "modern usage of dc in power grids"
+                ],
+                "output": [
+                    "Modern technology has enabled High-Voltage Direct Current (HVDC) systems. Using power electronics, HVDC can transmit massive amounts of power over extreme distances or underwater with fewer losses than AC, connecting separate power grids."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is AC",
+            "what is Alternating Current",
+            "How does alternating current work",
+            "Explain alternating current principles",
+            "Describe AC waveforms",
+            "define alternating current",
+            "ac current function"
+        ],
+        "output": [
+            "Alternating Current (AC) is an electric current that periodically reverses its direction and changes its magnitude continuously over time, typically oscillating as a sinusoidal wave."
+        ],
+        "context": [
+            {
+                "input": [
+                    "where is alternating current used",
+                    "what systems rely on ac power",
+                    "practical applications of alternating current"
+                ],
+                "output": [
+                    "AC is the standard form of electricity delivered to homes and businesses globally via the commercial electrical grid, powering household appliances, industrial motors, and transformers."
+                ]
+            },
+            {
+                "input": [
+                    "who invented alternating current systems",
+                    "nikola tesla ac system history",
+                    "george westinghouse alternating current pioneer"
+                ],
+                "output": [
+                    "Nikola Tesla developed the complete polyphase AC distribution system, including the induction motor and transformers. George Westinghouse bought Tesla's patents and commercialized the technology, winning the War of the Currents against Edison."
+                ]
+            },
+            {
+                "input": [
+                    "why is AC better for long distance transmission",
+                    "advantages of alternating current",
+                    "how transformers help ac grids"
+                ],
+                "output": [
+                    "AC voltage can be easily stepped up to extreme voltages (like 400kV) using transformers. High voltage reduces current, which dramatically minimizes power loss over long distances. The voltage is then safely stepped down before entering homes."
+                ]
+            },
+            {
+                "input": [
+                    "what is AC frequency",
+                    "explain 50Hz and 60Hz grid standards",
+                    "why does electricity oscillate"
+                ],
+                "output": [
+                    "AC frequency is the number of full cycles completed per second, measured in Hertz (Hz). North America standardizes on 60 Hz, while Europe and most of the world use 50 Hz, meaning the current changes direction 100 to 120 times every second."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is RMS voltage",
+            "what is Root Mean Square",
+            "How does RMS work in AC",
+            "Explain root mean square value",
+            "Describe AC effective voltage",
+            "define rms",
+            "rms function"
+        ],
+        "output": [
+            "RMS (Root Mean Square) is the effective value of an alternating voltage or current, representing the equivalent Direct Current (DC) value that would deliver the exact same amount of average power or heat dissipation to a purely resistive load."
+        ],
+        "context": [
+            {
+                "input": [
+                    "How do you calculate RMS from peak voltage",
+                    "rms formula for sine waves",
+                    "divide peak voltage by square root of two"
+                ],
+                "output": [
+                    "For a pure sinusoidal wave, the RMS value is calculated by dividing the peak voltage by the square root of 2, which matches multiplying the peak value by roughly 0.707 (Vrms = Vpeak * 0.707)."
+                ]
+            },
+            {
+                "input": [
+                    "what is the RMS voltage of household outlets",
+                    "mains grid voltage value standard",
+                    "is wall outlet voltage peak or rms"
+                ],
+                "output": [
+                    "The standard household voltage quoted globally (such as 230V in Europe or 120V in North America) is the RMS value. The actual physical peak voltage of a 230V outlet is much higher, reaching roughly 325V."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is peak voltage",
+            "what is peak-to-peak voltage",
+            "Explain Vpeak and Vpp",
+            "Describe AC maximum amplitude",
+            "define peak voltage",
+            "define peak to peak"
+        ],
+        "output": [
+            "Peak voltage (Vpeak) is the maximum voltage value that an AC waveform reaches from its zero baseline. Peak-to-Peak voltage (Vpp) is the total voltage drop measured from the absolute maximum positive peak to the absolute minimum negative peak of the wave."
+        ],
+        "context": [
+            {
+                "input": [
+                    "How does peak relate to peak to peak",
+                    "calculate vpp from vpeak",
+                    "difference between peak and peak to peak voltage"
+                ],
+                "output": [
+                    "For symmetrical waveforms like a standard sine wave, Peak-to-Peak voltage is exactly twice the value of the peak voltage (Vpp = 2 * Vpeak)."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is AC frequency",
+            "Explain frequency in alternating current",
+            "Describe cycles per second in AC",
+            "define ac frequency",
+            "what does hertz mean in electrical grids"
+        ],
+        "output": [
+            "AC frequency is the number of complete cycles or oscillations that an alternating current waveform completes in one second, measured in Hertz (Hz) and inversely proportional to the period of the wave (f = 1/T)."
+        ],
+        "context": [
+            {
+                "input": [
+                    "what are the global grid frequency standards",
+                    "explain 50Hz and 60Hz grids",
+                    "why do different countries use different frequencies"
+                ],
+                "output": [
+                    "The global power grid is divided into two primary frequency standards: 50 Hz (common in Europe, Asia, and Africa) and 60 Hz (standard in North America). This means the current reverses direction 100 or 120 times every second respectively."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is a phase angle",
+            "what is AC phase shift",
+            "Explain phase difference in electronics",
+            "Describe phase angle in circuits",
+            "define phase angle",
+            "ac phase displacement function"
+        ],
+        "output": [
+            "Phase angle is the angular displacement between two alternating quantities, typically measured in degrees or radians, representing the time delay or shifting alignment between a voltage wave and a current wave."
+        ],
+        "context": [
+            {
+                "input": [
+                    "what is out of phase in AC circuits",
+                    "explain voltage leading or lagging current",
+                    "phase shift in inductive and capacitive loads"
+                ],
+                "output": [
+                    "In purely resistive circuits, voltage and current are perfectly in phase. In inductive circuits, voltage leads current by 90 degrees due to counter-EMF. In capacitive circuits, current leads voltage by 90 degrees as the capacitor charges first."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is power factor",
+            "Explain AC power factor",
+            "How does power factor affect efficiency",
+            "Describe real active and reactive power",
+            "define power factor",
+            "power factor correction function"
+        ],
+        "output": [
+            "Power factor (PF) is the dimensionless ratio of the real power absorbed by a load to the apparent power flowing in the circuit, ranging from 0 to 1, and representing how effectively electrical current is converted into useful work."
+        ],
+        "context": [
+            {
+                "input": [
+                    "what is the difference between real apparent and reactive power",
+                    "explain watts volt amperes and vars",
+                    "ac power triangle definitions"
+                ],
+                "output": [
+                    "Real power (measured in Watts) is the actual energy performing work. Reactive power (measured in VARs) is the non-working energy bouncing back and forth to maintain magnetic fields. Apparent power (measured in VA) is the total vector combination of both."
+                ]
+            },
+            {
+                "input": [
+                    "what is a bad power factor",
+                    "why do industrial systems need power factor correction",
+                    "consequences of low power factor load"
+                ],
+                "output": [
+                    "A low power factor (e.g., 0.70) means inductive loads (like heavy factory motors) are drawing massive reactive currents that strain transmission wires without doing real work. Power companies charge penalties for this, forcing factories to use capacitor banks for Power Factor Correction (PFC)."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what are the primary hazards of electricity",
+            "Explain electrical risks and mitigation",
+            "what damages can a short circuit cause",
+            "Describe the danger of electrical systems",
+            "define electrical hazards",
+            "electrical safety risk management"
+        ],
+        "output": [
+            "The primary hazards of electricity include electrocution (lethal shock), electrical fires caused by overloading or arcing, and arc flash explosions, all of which require specific hardware-level mitigation strategies to protect human life and equipment layout."
+        ],
+        "context": [
+            {
+                "input": [
+                    "what is an arc flash",
+                    "explain arc flash explosion hazard",
+                    "high voltage electrical arcing dangers"
+                ],
+                "output": [
+                    "An arc flash is a dangerous electrical explosion that occurs during a short circuit fault when current flows through the air between conductors. It generates extreme radiant heat (up to 20,000°C), a blinding flash of light, and a massive pressure blast capable of vaporizing metal copper tracks instantly."
+                ]
+            },
+            {
+                "input": [
+                    "How to mitigate arc flash risks",
+                    "arc flash prevention hardware",
+                    "electrical engineering arc flash safety mitigation"
+                ],
+                "output": [
+                    "Mitigation includes using arc-resistant switchgear, implementing fast-acting current-limiting fuses, installing optical arc flash detection relays that cut power in milliseconds, and enforcing strict PPE (Personal Protective Equipment) safety distances."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what causes an electrical fire",
+            "How do short circuits cause fires",
+            "Explain overheating in electrical wiring",
+            "Describe electrical fire hazards",
+            "define electrical fire"
+        ],
+        "output": [
+            "Electrical fires are primarily caused by excessive current overloading a conductor, loose physical wiring connections creating high localized resistance, or arcing across degraded wire insulation, all converting electrical energy into destructive thermal heat."
+        ],
+        "context": [
+            {
+                "input": [
+                    "How to prevent electrical fires",
+                    "what hardware prevents electrical fires",
+                    "afci breaker electrical fire mitigation"
+                ],
+                "output": [
+                    "Prevention relies on proper wire gauge sizing to match load current, installing Circuit Breakers or Fuses to stop overcurrent, and deploying modern AFCI (Arc Fault Circuit Interrupters) that detect the specific electrical signature of dangerous sparking wires before a fire can ignite."
+                ]
+            },
+            {
+                "input": [
+                    "what class of fire extinguisher is used for electrical fires",
+                    "how to put out an electrical fire safely",
+                    "why water is hazardous for electrical fires"
+                ],
+                "output": [
+                    "Class C (US) or Class E (UK/International) dry chemical or Carbon Dioxide (CO2) extinguishers must be used. You must never use water on an active electrical fire, as water conducts electricity and will electrocute the operator or spread the short circuit further."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is electrical grounding",
+            "what is earthing in safety circuits",
+            "How does a ground wire protect you",
+            "Explain the purpose of grounding hardware",
+            "define grounding",
+            "define earthing"
+        ],
+        "output": [
+            "Grounding (or Earthing) is a safety mitigation strategy that connects the conductive metal chassis of an electrical appliance directly to the physical Earth via a dedicated low-resistance copper wire, creating a safe alternative path for fault currents."
+        ],
+        "context": [
+            {
+                "input": [
+                    "How does grounding prevent electrocution",
+                    "chassis fault grounding mechanism",
+                    "why metal appliances need a ground wire"
+                ],
+                "output": [
+                    "If a hot live wire touches the internal metal chassis of an appliance due to a fault, the grounding wire shunts the massive current safely to Earth instantly. This sudden massive current spike immediately trips the main circuit breaker, cutting the power before a human can touch the chassis and suffer an electrocution shock."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
+            "what is electrical overloading",
+            "what happens when you overload a circuit",
+            "Explain overcurrent risks",
+            "Describe overloaded electrical outlets danger",
+            "define overloading"
+        ],
+        "output": [
+            "Electrical overloading occurs when too many appliances draw current from a single circuit simultaneously, exceeding the safe amperage rating of the wires and causing thermal breakdown of the insulation structure."
+        ],
+        "context": [
+            {
+                "input": [
+                    "what hardware mitigates overloading",
+                    "overcurrent protection devices",
+                    "difference between overload and short circuit protection"
+                ],
+                "output": [
+                    "Thermal-magnetic circuit breakers mitigate overloading. The thermal component features a bimetallic strip that heats up and bends slowly during a prolonged overload state, tripping the mechanism safely before the house wiring can reach ignition temperatures."
+                ]
+            }
+        ],
+        "permission": "yolo"
+    },
+    {
+        "input": [
             "what is a logic gate",
             "what is logic gate",
             "explain what a logic gate is",
@@ -53,12 +733,12 @@
             },
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
                     "who theorized it",
-                    "Who invented the concept",
+                    "who invented the concept",
                     "when were logic gates invented",
                     "history of logic gates",
                     "who created them",
@@ -191,7 +871,7 @@
             },
             {
                 "input": [
-                    "When is this pattern useful",
+                    "when is this pattern useful",
                     "when do you need all conditions at once",
                     "what kind of checks use it",
                     "and gate practical example",
@@ -203,7 +883,7 @@
             },
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -213,7 +893,7 @@
                     "origin of the and gate"
                 ],
                 "output": [
-                    "While the logical concept dates to Boolean algebra (1847), the first physical AND gate implementations were built using electromechanical relays in early computers like Konrad Zuse's Z3 (1941) and the Harvard Mark I (1944)."
+                    "while the logical concept dates to Boolean algebra (1847), the first physical AND gate implementations were built using electromechanical relays in early computers like Konrad Zuse's Z3 (1941) and the Harvard Mark I (1944)."
                 ]
             },
             {
@@ -336,7 +1016,7 @@
             },
             {
                 "input": [
-                    "When is a single trigger enough",
+                    "when is a single trigger enough",
                     "when is one signal enough",
                     "what kind of decisions use it",
                     "or gate practical example",
@@ -348,7 +1028,7 @@
             },
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -628,7 +1308,7 @@
             },
             {
                 "input": [
-                    "Who proved it is universal",
+                    "who proved it is universal",
                     "history of NAND gate",
                     "who discovered the nand universality",
                     "what is the sheffer stroke"
@@ -639,7 +1319,7 @@
             },
             {
                 "input": [
-                    "Why is it important in manufacturing",
+                    "why is it important in manufacturing",
                     "why does it matter",
                     "what makes it useful",
                     "advantages of nand gates in cmos",
@@ -774,7 +1454,7 @@
             },
             {
                 "input": [
-                    "Who proved it is universal",
+                    "who proved it is universal",
                     "history of NOR gate",
                     "who discovered the nor universality",
                     "what is the ampheck"
@@ -785,7 +1465,7 @@
             },
             {
                 "input": [
-                    "Why is it important",
+                    "why is it important",
                     "why does it matter",
                     "what makes it useful",
                     "apollo guidance computer logic",
@@ -932,7 +1612,7 @@
             },
             {
                 "input": [
-                    "When is it useful",
+                    "when is it useful",
                     "when do you use it",
                     "what problem does it solve",
                     "advantages of xor logic",
@@ -1078,7 +1758,7 @@
             },
             {
                 "input": [
-                    "When is it useful",
+                    "when is it useful",
                     "when do you use it",
                     "what problem does it solve",
                     "advantages of xnor logic"
@@ -1198,7 +1878,7 @@
             },
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -1214,7 +1894,7 @@
             },
             {
                 "input": [
-                    "When is it useful",
+                    "when is it useful",
                     "when do you use it",
                     "what problem does it solve",
                     "why use truth tables"
@@ -1330,7 +2010,7 @@
             },
             {
                 "input": [
-                    "Who pioneered it",
+                    "who pioneered it",
                     "history of digital logic",
                     "who invented digital logic",
                     "origins of digital logic"
@@ -1442,7 +2122,7 @@
             },
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -1604,7 +2284,7 @@
             },
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -1765,7 +2445,7 @@
             },
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -1928,7 +2608,7 @@
             },
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -2093,7 +2773,7 @@
             },
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -2244,7 +2924,7 @@
             },
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -2391,7 +3071,7 @@
             },
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -2537,7 +3217,7 @@
             },
             {
                 "input": [
-                    "Who proved it is universal",
+                    "who proved it is universal",
                     "history of the NAND gate",
                     "when was the NAND gate invented",
                     "what is the sheffer stroke",
@@ -2680,7 +3360,7 @@
             },
             {
                 "input": [
-                    "Who formalized it",
+                    "who formalized it",
                     "history of the XOR gate",
                     "when was the XOR gate invented",
                     "who created the xor gate"
@@ -2822,7 +3502,7 @@
             },
             {
                 "input": [
-                    "Who formalized it",
+                    "who formalized it",
                     "history of the XNOR gate",
                     "when was the XNOR gate invented",
                     "who created the xnor gate"
@@ -2965,7 +3645,7 @@
             },
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -3097,7 +3777,7 @@
             },
             {
                 "input": [
-                    "Who pioneered it",
+                    "who pioneered it",
                     "history of digital logic",
                     "when was digital logic invented",
                     "who invented digital logic"
@@ -3110,7 +3790,7 @@
                 "input": [
                     "how is it different from analog logic",
                     "what makes it different from analog signals",
-                    "Why is it more precise",
+                    "why is it more precise",
                     "digital vs analog logic"
                 ],
                 "output": [
@@ -3215,7 +3895,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -3352,7 +4032,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -3370,7 +4050,7 @@
                 "input": [
                     "what does it do to current flow",
                     "how does it affect current",
-                    "Why does it limit current",
+                    "why does it limit current",
                     "resistor current control"
                 ],
                 "output": [
@@ -3490,7 +4170,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -3628,7 +4308,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -3646,7 +4326,7 @@
                 "input": [
                     "what does it do to changing current",
                     "how does it react to current changes",
-                    "Why does it resist variations",
+                    "why does it resist variations",
                     "inductor magnetic behavior"
                 ],
                 "output": [
@@ -3766,7 +4446,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -3905,7 +4585,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -3921,9 +4601,9 @@
             },
             {
                 "input": [
-                    "Why are they so efficient",
+                    "why are they so efficient",
                     "what makes them more efficient than bulbs",
-                    "Why do they save power",
+                    "why do they save power",
                     "led energy efficiency"
                 ],
                 "output": [
@@ -4043,7 +4723,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -4061,7 +4741,7 @@
                 "input": [
                     "what makes it different from a general computer",
                     "how is it different from a desktop computer",
-                    "Why is it smaller and simpler",
+                    "why is it smaller and simpler",
                     "mcu vs pc"
                 ],
                 "output": [
@@ -4179,7 +4859,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -4197,7 +4877,7 @@
                 "input": [
                     "what role does it play in a computer",
                     "what is its job inside the system",
-                    "Why is it called the brain",
+                    "why is it called the brain",
                     "cpu role inside computers"
                 ],
                 "output": [
@@ -4222,7 +4902,7 @@
                 "input": [
                     "how is it different from a GPU",
                     "what makes it different from a graphics processor",
-                    "When is one preferred over the other",
+                    "when is one preferred over the other",
                     "cpu vs gpu",
                     "difference between gpu and cpu"
                 ],
@@ -4316,7 +4996,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -4332,7 +5012,7 @@
             },
             {
                 "input": [
-                    "Why is it called printed",
+                    "why is it called printed",
                     "what does the printing part mean",
                     "how are the traces made",
                     "pcb manufacturing process"
@@ -4452,7 +5132,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -4468,7 +5148,7 @@
             },
             {
                 "input": [
-                    "Why does a device need a stable voltage",
+                    "why does a device need a stable voltage",
                     "what happens if power is unstable",
                     "how does it protect hardware",
                     "voltage regulation importance"
@@ -4587,7 +5267,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -4603,7 +5283,7 @@
             },
             {
                 "input": [
-                    "Why is memory needed in computing",
+                    "why is memory needed in computing",
                     "what problem does it solve",
                     "how does it help a processor",
                     "importance of memory chips"
@@ -4721,7 +5401,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -4737,7 +5417,7 @@
             },
             {
                 "input": [
-                    "Why is it called volatile",
+                    "why is it called volatile",
                     "what does it mean that it loses data",
                     "what happens when power is removed",
                     "meaning of volatile in computing"
@@ -4852,7 +5532,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -4868,9 +5548,9 @@
             },
             {
                 "input": [
-                    "Why is it important for storage",
+                    "why is it important for storage",
                     "what problem does it solve",
-                    "Why do we need persistent data",
+                    "why do we need persistent data",
                     "importance of persistence"
                 ],
                 "output": [
@@ -4892,7 +5572,7 @@
                 "input": [
                     "how is it different from volatile memory",
                     "what makes it different from RAM",
-                    "When would you choose one over the other",
+                    "when would you choose one over the other",
                     "non volatile vs volatile"
                 ],
                 "output": [
@@ -4983,7 +5663,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -4999,7 +5679,7 @@
             },
             {
                 "input": [
-                    "Why do computers need a bus",
+                    "why do computers need a bus",
                     "what problem does it solve",
                     "how do components talk to each other",
                     "importance of a system bus"
@@ -5115,7 +5795,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -5131,7 +5811,7 @@
             },
             {
                 "input": [
-                    "Why is timing so important in digital systems",
+                    "why is timing so important in digital systems",
                     "what problem does synchronization solve",
                     "how do signals stay aligned",
                     "importance of digital clock synchronization"
@@ -5155,7 +5835,7 @@
                 "input": [
                     "how is it different from a data signal",
                     "what is the difference from the actual payload",
-                    "When do you use one instead of the other",
+                    "when do you use one instead of the other",
                     "clock vs data signal"
                 ],
                 "output": [
@@ -5247,7 +5927,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -5279,7 +5959,7 @@
                 "input": [
                     "what types exist",
                     "what is the difference between linear and switching regulators",
-                    "When do you use each type",
+                    "when do you use each type",
                     "linear vs switching regulator"
                 ],
                 "output": [
@@ -5288,7 +5968,7 @@
             },
             {
                 "input": [
-                    "Why is voltage regulation important",
+                    "why is voltage regulation important",
                     "what happens without it",
                     "what problem does it solve",
                     "importance of voltage regulators"
@@ -5382,7 +6062,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -5412,9 +6092,9 @@
             },
             {
                 "input": [
-                    "Why are crystal oscillators so accurate",
+                    "why are crystal oscillators so accurate",
                     "what makes quartz special",
-                    "Why use crystals",
+                    "why use crystals",
                     "quartz crystal accuracy"
                 ],
                 "output": [
@@ -5518,7 +6198,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -5559,9 +6239,9 @@
             },
             {
                 "input": [
-                    "Why can't transformers work with DC",
+                    "why can't transformers work with DC",
                     "what happens with direct current",
-                    "Why only AC",
+                    "why only AC",
                     "transformer direct current behavior"
                 ],
                 "output": [
@@ -5653,7 +6333,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -5696,7 +6376,7 @@
                 "input": [
                     "what is feedback in op-amps",
                     "how does negative feedback work",
-                    "Why is feedback important",
+                    "why is feedback important",
                     "op-amp negative feedback loop"
                 ],
                 "output": [
@@ -5789,7 +6469,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -5819,9 +6499,9 @@
             },
             {
                 "input": [
-                    "Why use a relay instead of a transistor",
+                    "why use a relay instead of a transistor",
                     "what are the advantages",
-                    "When do you choose relays",
+                    "when do you choose relays",
                     "relay vs transistor"
                 ],
                 "output": [
@@ -5925,7 +6605,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -5961,14 +6641,14 @@
                     "fuse overcurrent protection"
                 ],
                 "output": [
-                    "When excessive current flows, the fuse element heats up and melts, creating an open circuit. This stops current flow before wires overheat, components burn out, or fires start."
+                    "when excessive current flows, the fuse element heats up and melts, creating an open circuit. This stops current flow before wires overheat, components burn out, or fires start."
                 ]
             },
             {
                 "input": [
                     "what is a circuit breaker",
                     "how is it different from a fuse",
-                    "When do you use each",
+                    "when do you use each",
                     "fuse vs circuit breaker"
                 ],
                 "output": [
@@ -6061,7 +6741,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -6090,7 +6770,7 @@
                 "input": [
                     "what is the chipset",
                     "what does the chipset do",
-                    "Why is it important",
+                    "why is it important",
                     "motherboard chipset role"
                 ],
                 "output": [
@@ -6194,7 +6874,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -6212,7 +6892,7 @@
                 "input": [
                     "what is the difference between DRAM and SRAM",
                     "how are they different",
-                    "When is each used",
+                    "when is each used",
                     "dram vs sram",
                     "sram vs dram"
                 ],
@@ -6233,7 +6913,7 @@
             },
             {
                 "input": [
-                    "Why is it called random access",
+                    "why is it called random access",
                     "what does random access mean",
                     "how is it different from sequential access",
                     "random vs sequential access memory"
@@ -6328,7 +7008,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -6360,7 +7040,7 @@
                 "input": [
                     "how is it different from a CPU",
                     "what makes GPUs faster for graphics",
-                    "Why use a GPU instead of CPU",
+                    "why use a GPU instead of CPU",
                     "gpu vs cpu",
                     "difference between cpu and gpu"
                 ],
@@ -6372,7 +7052,7 @@
                 "input": [
                     "what is VRAM",
                     "what is graphics memory",
-                    "Why do GPUs need their own memory",
+                    "why do GPUs need their own memory",
                     "vram role in graphics cards"
                 ],
                 "output": [
@@ -6450,273 +7130,6 @@
     },
     {
         "input": [
-            "what is an SSD",
-            "what is a Solid State Drive",
-            "how does an SSD work",
-            "Explain SSDs",
-            "Describe solid state drives",
-            "Tell me about SSDs",
-            "define ssd",
-            "solid state drive function"
-        ],
-        "output": [
-            "An SSD (Solid State Drive) is a storage device that uses flash memory to store data persistently, with no moving parts, providing faster access times and better durability than traditional hard drives."
-        ],
-        "context": [
-            {
-                "input": [
-                    "Who invented it",
-                    "when was invented",
-                    "in which period was invented",
-                    "who created it",
-                    "who theorized it",
-                    "who pioneered it",
-                    "history of SSDs",
-                    "when was the SSD invented",
-                    "origin of the ssd"
-                ],
-                "output": [
-                    "Early SSDs using RAM appeared in the 1970s. The first flash-based SSD was developed by M-Systems in 1995. Consumer SSDs became practical in the late 2000s as flash memory costs dropped, with widespread adoption after 2010."
-                ]
-            },
-            {
-                "input": [
-                    "how is it different from a hard drive",
-                    "what are the advantages over HDD",
-                    "Why choose SSD",
-                    "ssd vs hdd",
-                    "difference between hdd and ssd"
-                ],
-                "output": [
-                    "SSDs have no moving parts, making them faster, quieter, more shock-resistant, and more energy-efficient. HDDs are cheaper per gigabyte and offer larger capacities. SSDs excel in speed; HDDs in cost-effective bulk storage."
-                ]
-            },
-            {
-                "input": [
-                    "what is NAND flash",
-                    "what type of memory do SSDs use",
-                    "how does flash memory work",
-                    "ssd nand cell types"
-                ],
-                "output": [
-                    "SSDs use NAND flash memory, which stores data in cells using floating-gate transistors. Data persists without power. Modern SSDs use TLC (Triple-Level Cell) or QLC (Quad-Level Cell) for higher density at the cost of some speed and endurance."
-                ]
-            },
-            {
-                "input": [
-                    "what is NVMe",
-                    "how is NVMe different from SATA",
-                    "what interface do SSDs use",
-                    "nvme vs sata pcie protocol"
-                ],
-                "output": [
-                    "NVMe (Non-Volatile Memory Express) is a protocol designed for SSDs using PCIe, providing much higher speeds than SATA. SATA SSDs are limited to ~550 MB/s; NVMe SSDs can exceed 7,000 MB/s with PCIe 4.0."
-                ]
-            },
-            {
-                "input": [
-                    "Can you give me more details",
-                    "can you elaborate",
-                    "can you explain in more detail",
-                    "tell me more",
-                    "elaborate on this",
-                    "give me more details",
-                    "explain in more detail",
-                    "can you expand on this topic",
-                    "tell me more about this"
-                ],
-                "output": [
-                    "Connecting to Wikipedia to pull comprehensive documentation on ssds..."
-                ],
-                "tools": [
-                    {
-                        "name": "run_in_terminal",
-                        "arguments": {
-                            "command": [
-                                "termy_set_context 'last_search' 'ssd' && \nprintf '🔍 Searching Wikipedia for: %s...\\n' 'ssd' && \nescaped_string=$(\n printf '%s' 'ssd' | \n sed 's/ /+/g'\n) && \nres=$(\n curl -s --max-time 5 \"https://en.wikipedia.org/w/api.php?action=query&titles=$escaped_string&prop=extracts&exintro=true&explaintext=true&format=json&redirects=1\" 2>/dev/null | \n jq -r '.query.pages[] | .extract // empty' 2>/dev/null | \n head -n 5\n) && if [ -z \"$res\" ]; then \n printf '⛔ No Wikipedia article found for: %s\\n' 'ssd'; \nelse printf '\\n%s\\n' \"$res\" && termy_say \"$res\" >/dev/null 2>&1 && termy_set_context 'active_content' \"$res\"; fi"
-                            ],
-                            "explanation": "Fetches and prints a Wikipedia summary about ssds.",
-                            "goal": "Fetch Wikipedia summary about ssds",
-                            "mode": "sync"
-                        }
-                    }
-                ],
-                "permission": "yolo"
-            },
-            {
-                "input": [
-                    "Show me an image of it",
-                    "show me what it looks like",
-                    "how does it look",
-                    "how it looks",
-                    "i want to see how it looks",
-                    "can i see an image of this",
-                    "display an image of it",
-                    "show schematic image"
-                ],
-                "output": [
-                    "Fetching the official schematic image for ssd from Wikipedia channels..."
-                ],
-                "tools": [
-                    {
-                        "name": "run_in_terminal",
-                        "arguments": {
-                            "command": "kw='ssd' && enc_kw=$(echo -n \"$kw\" | sed 's/ /+/g') && search_res=$(curl -s -A 'Mozilla/5.0' \"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=$enc_kw&format=json&origin=*\") && title=$(echo \"$search_res\" | grep -o '\"title\":\"[^\"]*' | head -n 1 | cut -d'\"' -f4) && if [ -z \"$title\" ]; then echo \"⛔ No Wikipedia article found for $kw\"; else enc_title=$(echo -n \"$title\" | sed 's/ /+/g') && img_res=$(curl -s -A 'Mozilla/5.0' \"https://en.wikipedia.org/w/api.php?action=query&titles=$enc_title&prop=pageimages&piprop=original&format=json&origin=*\") && img_url=$(echo \"$img_res\" | grep -o '\"source\":\"[^\"]*' | head -n 1 | cut -d'\"' -f4) && if [ -z \"$img_url\" ]; then echo \"⚠️ Article '$title' found, but has no original image.\"; else clean_name=$(echo \"$title\" | tr ' /' '__' | tr -cd 'A-Za-z0-9__-').jpg && out_path=\"/tmp/$clean_name\" && echo \"📥 Downloading image for '$title' into current folder...\" && curl -s -A 'Mozilla/5.0' \"$img_url\" -o \"$out_path\" && echo \"🎯 Saved to: $out_path\" && termy_set_context active_file \"$(cd \"$(dirname \"$out_path\")\" && pwd)/$(basename \"$out_path\")\" > /dev/null 2>&1; fi; fi",
-                            "explanation": "Searches Wikipedia to pull and render the primary original snapshot of a ssd.",
-                            "goal": "Download visual representation of a ssd directly into /tmp",
-                            "mode": "sync"
-                        }
-                    },
-                    {
-                        "name": "run_in_terminal",
-                        "arguments": {
-                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
-                            "explanation": "Opens the active file from context in the default browser.",
-                            "goal": "Open webpage in browser",
-                            "mode": "sync"
-                        }
-                    }
-                ],
-                "permission": "yolo"
-            }
-        ],
-        "permission": "yolo"
-    },
-    {
-        "input": [
-            "what is a hard drive",
-            "what is an HDD",
-            "how does a hard drive work",
-            "Explain hard disk drives",
-            "Describe HDDs",
-            "Tell me about hard drives",
-            "define hdd",
-            "hard disk drive function"
-        ],
-        "output": [
-            "An HDD (Hard Disk Drive) is a data storage device that uses magnetic storage on rapidly rotating platters to store and retrieve digital information, with read/write heads that access data on the spinning disks."
-        ],
-        "context": [
-            {
-                "input": [
-                    "Who invented it",
-                    "when was invented",
-                    "in which period was invented",
-                    "who created it",
-                    "who theorized it",
-                    "who pioneered it",
-                    "history of hard drives",
-                    "when was the hard drive invented",
-                    "origin of the hdd"
-                ],
-                "output": [
-                    "The first hard drive, the IBM 305 RAMAC, was invented by an IBM team led by Rey Johnson in 1956. It stored 5 MB on fifty 24-inch platters. Modern HDDs evolved through decades of increasing density and decreasing size."
-                ]
-            },
-            {
-                "input": [
-                    "how does it store data",
-                    "what is magnetic storage",
-                    "how are bits written",
-                    "hdd platters magnetization"
-                ],
-                "output": [
-                    "Data is stored as magnetic orientations on coated platters. The read/write head flies nanometers above the spinning platter, magnetizing tiny regions to represent 1s and 0s. Modern drives use perpendicular recording for higher density."
-                ]
-            },
-            {
-                "input": [
-                    "what is RPM",
-                    "how fast do hard drives spin",
-                    "what does 7200 RPM mean",
-                    "hdd mechanical spin speed"
-                ],
-                "output": [
-                    "RPM (Revolutions Per Minute) is the platter spin speed. Common speeds are 5400 RPM (laptops, quiet operation) and 7200 RPM (desktops, better performance). Enterprise drives may use 10,000 or 15,000 RPM for maximum speed."
-                ]
-            },
-            {
-                "input": [
-                    "what are the disadvantages",
-                    "Why are SSDs replacing HDDs",
-                    "what are the limitations",
-                    "hdd mechanical failure risk"
-                ],
-                "output": [
-                    "HDDs are slower due to mechanical movement, more fragile due to moving parts, louder, and consume more power. However, they remain cost-effective for large-capacity storage where speed is less critical."
-                ]
-            },
-            {
-                "input": [
-                    "Can you give me more details",
-                    "can you elaborate",
-                    "can you explain in more detail",
-                    "tell me more",
-                    "elaborate on this",
-                    "give me more details",
-                    "explain in more detail",
-                    "can you expand on this topic",
-                    "tell me more about this"
-                ],
-                "output": [
-                    "Connecting to Wikipedia to pull comprehensive documentation on hard drives..."
-                ],
-                "tools": [
-                    {
-                        "name": "run_in_terminal",
-                        "arguments": {
-                            "command": [
-                                "termy_set_context 'last_search' 'hard drive' && \nprintf '🔍 Searching Wikipedia for: %s...\\n' 'hard drive' && \nescaped_string=$(\n printf '%s' 'hard drive' | \n sed 's/ /+/g'\n) && \nres=$(\n curl -s --max-time 5 \"https://en.wikipedia.org/w/api.php?action=query&titles=$escaped_string&prop=extracts&exintro=true&explaintext=true&format=json&redirects=1\" 2>/dev/null | \n jq -r '.query.pages[] | .extract // empty' 2>/dev/null | \n head -n 5\n) && if [ -z \"$res\" ]; then \n printf '⛔ No Wikipedia article found for: %s\\n' 'hard drive'; \nelse printf '\\n%s\\n' \"$res\" && termy_say \"$res\" >/dev/null 2>&1 && termy_set_context 'active_content' \"$res\"; fi"
-                            ],
-                            "explanation": "Fetches and prints a Wikipedia summary about hard drives.",
-                            "goal": "Fetch Wikipedia summary about hard drives",
-                            "mode": "sync"
-                        }
-                    }
-                ],
-                "permission": "yolo"
-            },
-            {
-                "input": [
-                    "Show me an image of it",
-                    "show me what it looks like",
-                    "how does it look",
-                    "how it looks",
-                    "i want to see how it looks",
-                    "can i see an image of this",
-                    "display an image of it",
-                    "show schematic image"
-                ],
-                "output": [
-                    "Fetching the official schematic image for hard drive from Wikipedia channels..."
-                ],
-                "tools": [
-                    {
-                        "name": "run_in_terminal",
-                        "arguments": {
-                            "command": "kw='hard drive' && enc_kw=$(echo -n \"$kw\" | sed 's/ /+/g') && search_res=$(curl -s -A 'Mozilla/5.0' \"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=$enc_kw&format=json&origin=*\") && title=$(echo \"$search_res\" | grep -o '\"title\":\"[^\"]*' | head -n 1 | cut -d'\"' -f4) && if [ -z \"$title\" ]; then echo \"⛔ No Wikipedia article found for $kw\"; else enc_title=$(echo -n \"$title\" | sed 's/ /+/g') && img_res=$(curl -s -A 'Mozilla/5.0' \"https://en.wikipedia.org/w/api.php?action=query&titles=$enc_title&prop=pageimages&piprop=original&format=json&origin=*\") && img_url=$(echo \"$img_res\" | grep -o '\"source\":\"[^\"]*' | head -n 1 | cut -d'\"' -f4) && if [ -z \"$img_url\" ]; then echo \"⚠️ Article '$title' found, but has no original image.\"; else clean_name=$(echo \"$title\" | tr ' /' '__' | tr -cd 'A-Za-z0-9__-').jpg && out_path=\"/tmp/$clean_name\" && echo \"📥 Downloading image for '$title' into current folder...\" && curl -s -A 'Mozilla/5.0' \"$img_url\" -o \"$out_path\" && echo \"🎯 Saved to: $out_path\" && termy_set_context active_file \"$(cd \"$(dirname \"$out_path\")\" && pwd)/$(basename \"$out_path\")\" > /dev/null 2>&1; fi; fi",
-                            "explanation": "Searches Wikipedia to pull and render the primary original snapshot of a hard drive.",
-                            "goal": "Download visual representation of a hard drive directly into /tmp",
-                            "mode": "sync"
-                        }
-                    },
-                    {
-                        "name": "run_in_terminal",
-                        "arguments": {
-                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
-                            "explanation": "Opens the active file from context in the default browser.",
-                            "goal": "Open webpage in browser",
-                            "mode": "sync"
-                        }
-                    }
-                ],
-                "permission": "yolo"
-            }
-        ],
-        "permission": "yolo"
-    },
-    {
-        "input": [
             "what is BIOS",
             "what is UEFI",
             "how does BIOS work",
@@ -6731,7 +7144,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -6749,7 +7162,7 @@
                 "input": [
                     "what is the difference between BIOS and UEFI",
                     "how is UEFI better than BIOS",
-                    "Why change from legacy BIOS",
+                    "why change from legacy BIOS",
                     "bios vs uefi",
                     "uefi vs bios"
                 ],
@@ -6865,7 +7278,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -6897,7 +7310,7 @@
                 "input": [
                     "how does it dissipate heat",
                     "what is thermal conductivity",
-                    "Why are there fins",
+                    "why are there fins",
                     "heat sink fins surface area"
                 ],
                 "output": [
@@ -6908,7 +7321,7 @@
                 "input": [
                     "what is active vs passive cooling",
                     "what is the difference",
-                    "When do you use fans",
+                    "when do you use fans",
                     "passive vs active heat sink"
                 ],
                 "output": [
@@ -7001,7 +7414,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -7134,7 +7547,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -7270,7 +7683,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -7288,7 +7701,7 @@
                 "input": [
                     "what voltages does it provide",
                     "what are the rails",
-                    "Why multiple voltages",
+                    "why multiple voltages",
                     "psu voltage outputs"
                 ],
                 "output": [
@@ -7299,7 +7712,7 @@
                 "input": [
                     "what is efficiency rating",
                     "what is 80 Plus",
-                    "Why does efficiency matter",
+                    "why does efficiency matter",
                     "psu efficiency standards"
                 ],
                 "output": [
@@ -7403,7 +7816,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -7536,7 +7949,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -7568,7 +7981,7 @@
                 "input": [
                     "what types exist",
                     "what is the difference between linear and switching regulators",
-                    "When do you use each type",
+                    "when do you use each type",
                     "linear vs switching regulator"
                 ],
                 "output": [
@@ -7577,7 +7990,7 @@
             },
             {
                 "input": [
-                    "Why is voltage regulation important",
+                    "why is voltage regulation important",
                     "what happens without it",
                     "what problem does it solve",
                     "importance of voltage regulation"
@@ -7671,7 +8084,7 @@
         "context": [
             {
                 "input": [
-                    "Who invented it",
+                    "who invented it",
                     "when was invented",
                     "in which period was invented",
                     "who created it",
@@ -7701,9 +8114,9 @@
             },
             {
                 "input": [
-                    "Why are crystal oscillators so accurate",
+                    "why are crystal oscillators so accurate",
                     "what makes quartz special",
-                    "Why use crystals",
+                    "why use crystals",
                     "quartz crystal accuracy"
                 ],
                 "output": [
@@ -16424,6 +16837,8 @@
     },
     {
         "input": [
+            "what is the voltage",
+            "what is voltage",
             "What is a volt",
             "What does volt measure",
             "Explain voltage units",
