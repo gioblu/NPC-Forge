@@ -54,33 +54,40 @@ class FlintParser:
 
     def calculate_auto_weights(self, intents):
         """
-            Computes IDF (Inverse Document Frequency) for every 
-            unique word across the intent dataset's "input" key. 
-            Contribution of words that show up in many intents 
-            ("is", "at", "it") is scaled down toward 0.0
-            while words that are exclusive to an intent are
-            scaled up toward 1.0. Runs once at initialization.
+        Computes Smoothed IDF (Inverse Document Frequency) for every unique word.
+        Uses standard NLP smoothing to prevent extreme weight disparities as 
+        the dataset grows.
         """
         total_intents = len(intents)
         if not total_intents:
             return {}
 
         word_intent_counts = {}
+        
         for entry in intents:
-            unique_words_in_intent = set()
-            for sentence in entry.get("input", []) or []:
-                for word in str(sentence).lower().strip().split():
-                    unique_words_in_intent.add(word)
-
-            for word in unique_words_in_intent:
+            sentences = entry.get("input") or []
+            
+            # Flatten all sentences, split into words, lowercase, and use a set 
+            # to automatically stop counting after the first occurrence per intent.
+            unique_words = set(
+                word.lower() 
+                for sentence in sentences 
+                for word in str(sentence).split()
+            )
+            
+            # Count the intent occurrence
+            for word in unique_words:
                 word_intent_counts[word] = word_intent_counts.get(word, 0) + 1
 
-        weights = {
-            word: math.log(total_intents / count) + 0.1
-            for word, count in word_intent_counts.items()
-        }
+        # Calculate Smoothed IDF
+        weights = {}
+        for word, count in word_intent_counts.items():
+            # Standard smoothed IDF: log((N + 1) / (df + 1)) + 1
+            # This keeps the ratio between rare and common words stable as N grows.
+            idf = math.log((total_intents + 1) / (count + 1)) + 1.0
+            weights[word] = idf
 
-        # Normalize so that the maximum possible weight is 1.0
+        # Normalize to [0.0, 1.0]
         max_idf = max(weights.values()) if weights else 1.0
         return {word: idf / max_idf for word, idf in weights.items()}
     
@@ -350,12 +357,6 @@ class FlintParser:
                 total_score += best_word_sim * anchor_weight
                 if best_match_idx != -1:
                     matched_indices.add(best_match_idx)
-        
-        # Penalize unmatched query tokens that are entirely absent from 
-        # the known vocabulary (typo/off-topic noise padding)
-        for t_query in query_tokens:
-            if len(t_query) >= 3 and t_query not in self.weights:
-                max_possible_score += 0.5
                     
         return total_score / max_possible_score if max_possible_score else 0.0
     
