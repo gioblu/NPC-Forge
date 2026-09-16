@@ -106,6 +106,8 @@ class FlintNPC:
                 if isinstance(block, dict) and "input" in block
             ]
         )
+        
+        self._build_intent_signatures()
 
     def load_data(self, dataset_dir):
         """
