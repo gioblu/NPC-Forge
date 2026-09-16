@@ -16,7 +16,8 @@ A lot of work has been done on the original dataset using scripts and local lang
 6. Added input paraphrases.
 7. Removed questions that require code editing (optimize this code, rewrite this code).
 8. Moved source code output to `tools` to enable context usage (save it, append it, ecc.).
-9. Manual curation, cleanup and enhancement.
+9. Removed entries containing non functional code.
+10. Manual curation, cleanup and enhancement.
 
 The resulting [dataset_python_ppqd.json](npcs/termy/dataset/python_ppqd/dataset_python_ppqd.json) contains **11456 intents and weights around 13.5MB**. 
 

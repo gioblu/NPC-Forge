@@ -166,7 +166,7 @@ def run_cli() -> int:
     CURRENT_BOT_DIR = os.path.dirname(os.path.realpath(__file__))
 
     # Try HTTP call to the Flask Gateway first
-    result = try_http_call(user_input, npc_name=args.npc, timeout=5.0)
+    result = try_http_call(user_input, npc_name=args.npc)
     if result is None:
         # sys.stderr.write(f"{YELLOW}⚠  Server offline, bootstrapping local in-memory fallback...{RESET}\n")
         result = fallback_local_call(user_input, npc_name=args.npc)

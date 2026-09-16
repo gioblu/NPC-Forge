@@ -331,7 +331,6 @@ class FlintNPC:
                 best_block, {}, best_score, "probabilistic match"
             )
 
-        # REJECTION
         return self.generate_response(
             self.rejection, 
             {}, 
