@@ -20,7 +20,7 @@ A lot of work has been done on the original dataset using scripts and local lang
 
 The resulting [dataset_Tested-143k-Python-Alpaca-80](npcs/termy/dataset/Tested-143k-Python-Alpaca-80/dataset_Tested-143k-Python-Alpaca-80.json) contains **9953 intents and weights around 17.7MB**. 
 
-The paraphrases generation was done using [granite-4.1 3B](https://www.ibm.com/granite/docs/models/granite4-1) and required around 72 hours of compute on an obsolete machine with 16GB of RAM, Intel i7-4790K CPU and NVIDIA GeForce GTX 1050 Ti.
+The paraphrases generation was done using [granite-4.1 3B](https://www.ibm.com/granite/docs/models/granite4-1) and required around 12 hours of compute on an obsolete machine with 16GB of RAM, Intel i7-4790K CPU and NVIDIA GeForce GTX 1050 Ti.
 
 ### License 
 
