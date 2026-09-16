@@ -169,6 +169,69 @@ class FlintNPC:
         
         logger.info(f"[chatbot.py][{self.name}][load_data] Engine initialized.")
 
+    def _fast_score_calculation(self, query_tokens, precomputed, threshold):
+        """Fast similarity check using pre-computed intent signatures."""
+        total_score = 0.0
+        matched_indices = set()
+
+        for t_anchor, anchor_weight, t_anchor_len in precomputed["anchor_info"]:
+            best_word_sim = 0.0
+            best_match_idx = -1
+
+            # Fast length pruning before paying for Levenshtein
+            max_diff = int(max(t_anchor_len, 10) * (1.0 - threshold)) + 2
+
+            for idx, t_query in enumerate(query_tokens):
+                if idx in matched_indices:
+                    continue
+
+                if t_anchor == t_query:
+                    best_word_sim = 1.0
+                    best_match_idx = idx
+                    break
+
+                t_query_len = len(t_query)
+                if abs(t_anchor_len - t_query_len) > max_diff:continue
+
+                sim = self.nlp.levenshtein_similarity(t_anchor, t_query, threshold)
+                if sim > best_word_sim:
+                    best_word_sim = sim
+                    best_match_idx = idx
+
+            if best_word_sim >= threshold:
+                total_score += best_word_sim * anchor_weight
+                if best_match_idx != -1:
+                    matched_indices.add(best_match_idx)
+
+        return total_score / precomputed["max_score"] if precomputed["max_score"] else 0.0
+
+    def _build_intent_signatures(self):
+        """Pre-calculates token weights for all intents ONCE at startup."""
+        self._precomputed_intents = {}
+        merged_map = self._get_merged_match_map()
+
+        for target_input, block in merged_map.items():
+            tokens = target_input.lower().split()
+            anchor_info = []
+            max_score = 0.0
+
+            for t in tokens:
+                t_len = len(t)
+                if t_len < 3: weight = self.nlp.weights.get(t, 0.05)
+                else:
+                    weight = self.nlp.weights.get(t, 1.0)
+                    if t_len == 3:
+                        weight *= 1.5
+                anchor_info.append((t, weight, t_len))
+                max_score += weight
+
+            self._precomputed_intents[target_input] = {
+                "block": block,
+                "tokens": tokens,
+                "anchor_info": anchor_info,
+                "max_score": max_score
+            }
+
     def update_context(self, block):
         """
         Updates the active conversational context.
@@ -279,50 +342,48 @@ class FlintNPC:
         best_block, best_score = None, -1.0
         related_intents = []
         seen_categories = set()
-        
-        # Clean prompt from common semantically useless words
-        user_prompt, self.sentiment = self.nlp.strip_and_sentiment(
-            stripped, 
-            self.vocabulary,
-            self.sentiment,
+
+        user_prompt_clean, self.sentiment = self.nlp.strip_and_sentiment(
+            stripped, self.vocabulary, self.sentiment,
             ["thanking_words", "encouraging_words", "discouraging_words"]
         )
 
-        # For very short queries, use stricter word_threshold
-        threshold = self.word_threshold if len(user_prompt.split()) <= 3 else self.sentence_threshold
-        
-        # Iterate over merged map: context entries override dataset on collision
-        for target_input, block in merged_map.items():
-            score = self.nlp.sentence_similarity(
-                user_prompt, 
-                target_input, 
-                max(threshold, best_score)
+        query_tokens = user_prompt_clean.lower().split()
+        threshold = self.word_threshold if len(query_tokens) <= 3 else self.sentence_threshold
+
+        for target_input, precomputed in self._precomputed_intents.items():
+            # FAST PRE-FILTER: If the rarest word is known, and it's completely missing
+            # from this intent's tokens, the IDF math guarantees it cannot beat the
+            # threshold. Skip the expensive Levenshtein check entirely!
+            if rarest_word and rarest_word not in precomputed["tokens"]: continue
+
+            score = self._fast_score_calculation(
+                query_tokens, precomputed, max(threshold, best_score)
             )
+
             if score > best_score:
                 best_score = score
-                best_block = block
-                
+                best_block = precomputed["block"]
+
             if (
-                len(related_intents) < int(self.config.get("suggestions", 5)) and 
-                rarest_word and isinstance(block, dict)
+                len(related_intents) < int(self.config.get("suggestions", 5)) and
+                rarest_word and isinstance(precomputed["block"], dict)
             ):
-                category = block.get("category", "")
+                category = precomputed["block"].get("category", "")
                 found_match = False
-                
-                if (
-                    rarest_word in category.split("_") or 
-                    rarest_word in category.lower()
-                ): found_match = True
-            
+
+                if rarest_word in category.split("_") or rarest_word in category.lower():
+                    found_match = True
+
                 if not found_match:
-                    inputs = block.get("input", [])
+                    inputs = precomputed["block"].get("input", [])
                     if inputs and isinstance(inputs, list) and inputs[0]:
                         input_words = str(inputs[0]).lower().split()
-                        if rarest_word in input_words: 
+                        if rarest_word in input_words:
                             found_match = True
-                
+
                 if found_match and category not in seen_categories:
-                    related_intents.append(block)
+                    related_intents.append(precomputed["block"])
                     seen_categories.add(category)
             
         logger.info(f"[chatbot.py][{self.name}][process_message] Best score: {best_score}")                    
