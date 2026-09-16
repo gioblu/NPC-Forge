@@ -85,7 +85,7 @@ def prompt_interactive_choice() -> bool:
         sys.stderr.flush()
 
 def try_http_call(
-    query: str, npc_name: str = "termy", timeout: float = 1.0
+    query: str, npc_name: str = "termy", timeout: float = 10.0  # Increased from 1.0 to 3.0
 ) -> dict | None:
     """Call the running NPC Flask server via HTTP API gateway (fast path)."""
     try:
