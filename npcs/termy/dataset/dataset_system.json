@@ -1,5 +1,38 @@
 [
     {
+        "category": "linux_hardware",
+        "input": [
+            "give me info about my motherboard",
+            "what is my motherboard",
+            "info about my mobo",
+            "what is my mobo",
+            "what is my motherboard manufacturer",
+            "what is my mobo manufacturer",
+            "what is my motherboard model",
+            "what is my mobo model",
+            "print motherboard info",
+            "print mobo info",
+            "i need info about my motherboard",
+            "i need mobo info"
+        ],
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && termy_say 'Reading motherboard info...' > /dev/null 2>&1 && printf '\\r\\nManufacturer: %s\\nModel: %s\\n' \"$(cat /sys/class/dmi/id/board_vendor 2>/dev/null || echo 'Unknown')\" \"$(cat /sys/class/dmi/id/board_name 2>/dev/null || echo 'Unknown')\" && printf ''",
+                    "explanation": "Prints information about the motherboard.",
+                    "goal": "Print motherboard info",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "thinking": [
+            "Wow, some interest on the hardware I am effectively living in... hopefully <||username||> will not break <||computer_name||> or I will be lost...",
+            "Hopefully this request does not mean I will be decommissioned soon, I love this job..."
+        ],
+        "permission": "yolo"
+    },
+    {
         "category": "linux_systemctl_daemon",
         "input": [
             "daemon status",

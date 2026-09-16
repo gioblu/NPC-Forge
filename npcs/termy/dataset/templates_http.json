@@ -3,37 +3,44 @@
         "intent": "get_instant_cheatsheet",
         "category": "developer_tools",
         "type": "template",
-        "structure": [[
-            {
-                "tag": [
-                    "<||vocab_get||>",
-                    "<||vocab_search||>",
-                    "<||vocab_show||>",
-                    "<||vocab_explain||>"
-                ],
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": [
-                    "<||vocab_documentation||>"
-                ],
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": [
-                    "<||vocab_command||>"
-                ],
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||string||>",
-                "type": "string",
-                "required": true
-            }
-        ]],
+        "structure": [
+            [
+                {
+                    "tag": [
+                        "<||vocab_get||>",
+                        "<||vocab_search||>",
+                        "<||vocab_show||>",
+                        "<||vocab_explain||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": [
+                        "<||vocab_documentation||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_about||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": [
+                        "<||vocab_command||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||string||>",
+                    "type": "string",
+                    "required": true
+                }
+            ]
+        ],
         "message": [
             "<||completion||> Streaming code semantics directly from cheat.sh into your terminal core."
         ],
@@ -58,37 +65,36 @@
         "intent": "download_wikipedia_image",
         "category": "wikipedia_tools",
         "type": "template",
-        "structure": [[
-            {
-                "tag": [
-                    "<||vocab_get||>",
-                    "<||vocab_search||>",
-                    "<||vocab_find||>"
-                ],
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": [
-                    "<||vocab_image||>"
-                ],
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": [
-                    "<||vocab_about||>",
-                    "<||vocab_of||>"
-                ],
-                "type": "vocab",
-                "required": false
-            },
-            {
-                "tag": "<||string||>",
-                "type": "string",
-                "required": true
-            }
-        ]],
+        "structure": [
+            [
+                {
+                    "tag": [
+                        "<||vocab_get||>",
+                        "<||vocab_search||>",
+                        "<||vocab_find||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": [
+                        "<||vocab_image||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_about||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||string||>",
+                    "type": "string",
+                    "required": true
+                }
+            ]
+        ],
         "message": [
             "<||completion||> Image downloaded successfully into your current directory."
         ],
@@ -113,37 +119,39 @@
         "intent": "slang_meaning",
         "category": "http_slang",
         "type": "template",
-        "structure": [[
-            {
-                "tag": [
-                    "<||vocab_explain||>",
-                    "<||vocab_print||>",
-                    "<||vocab_search||>"
-                ],
-                "type": "vocab",
-                "required": false
-            },
-            {
-                "tag": "<||vocab_what||>",
-                "type": "vocab",
-                "required": false
-            },
-            {
-                "tag": "<||vocab_define||>",
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||vocab_slang||>",
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||string||>",
-                "type": "string",
-                "required": true
-            }
-        ]],
+        "structure": [
+            [
+                {
+                    "tag": [
+                        "<||vocab_explain||>",
+                        "<||vocab_print||>",
+                        "<||vocab_search||>"
+                    ],
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_what||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_define||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_slang||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||string||>",
+                    "type": "string",
+                    "required": true
+                }
+            ]
+        ],
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -161,28 +169,30 @@
         "intent": "word_meaning",
         "category": "http_meaning",
         "type": "template",
-        "structure": [[
-            {
-                "tag": "<||vocab_what||>",
-                "type": "vocab",
-                "required": false
-            },
-            {
-                "tag": "<||vocab_define||>",
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||vocab_word||>",
-                "type": "vocab",
-                "required": false
-            },
-            {
-                "tag": "<||string||>",
-                "type": "string",
-                "required": true
-            }
-        ]],
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_what||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_define||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_word||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||string||>",
+                    "type": "string",
+                    "required": true
+                }
+            ]
+        ],
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -207,36 +217,38 @@
         "intent": "wiki_inquiry",
         "category": "http_wiki",
         "type": "template",
-        "structure": [[
-            {
-                "tag": [
-                    "<||vocab_search||>",
-                    "<||vocab_find||>"
-                ],
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||vocab_in||>",
-                "type": "vocab",
-                "required": false
-            },
-            {
-                "tag": "<||vocab_from||>",
-                "type": "vocab",
-                "required": false
-            },
-            {
-                "tag": "<||vocab_wiki||>",
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||string||>",
-                "type": "string",
-                "required": true
-            }
-        ]],
+        "structure": [
+            [
+                {
+                    "tag": [
+                        "<||vocab_search||>",
+                        "<||vocab_find||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_in||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_from||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_wiki||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||string||>",
+                    "type": "string",
+                    "required": true
+                }
+            ]
+        ],
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -263,31 +275,38 @@
         "intent": "youtube_search",
         "category": "http_youtube",
         "type": "template",
-        "structure": [[
-            {
-                "tag": [
-                    "<||vocab_search||>",
-                    "<||vocab_find||>"
-                ],
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||vocab_in||>",
-                "type": "vocab",
-                "required": false
-            },
-            {
-                "tag": "<||vocab_youtube||>",
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||string||>",
-                "type": "string",
-                "required": true
-            }
-        ]],
+        "structure": [
+            [
+                {
+                    "tag": [
+                        "<||vocab_search||>",
+                        "<||vocab_find||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_in||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_youtube||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_about||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||string||>",
+                    "type": "string",
+                    "required": true
+                }
+            ]
+        ],
         "message": "<||completion||>",
         "tools": [
             {
@@ -312,41 +331,48 @@
         "intent": "google_search",
         "category": "http_google",
         "type": "template",
-        "structure": [[
-            {
-                "tag": "<||vocab_open||>",
-                "type": "vocab",
-                "required": false
-            },
-            {
-                "tag": "<||vocab_browser||>",
-                "type": "vocab",
-                "required": false
-            },
-            {
-                "tag": [
-                    "<||vocab_search||>",
-                    "<||vocab_find||>"
-                ],
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||vocab_in||>",
-                "type": "vocab",
-                "required": false
-            },
-            {
-                "tag": "<||vocab_google||>",
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||string||>",
-                "type": "string",
-                "required": true
-            }
-        ]],
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_open||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_browser||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": [
+                        "<||vocab_search||>",
+                        "<||vocab_find||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_in||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_google||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_about||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||string||>",
+                    "type": "string",
+                    "required": true
+                }
+            ]
+        ],
         "message": "<||completion||>",
         "tools": [
             {
@@ -371,23 +397,25 @@
         "intent": "open_browser_url",
         "category": "browser_open",
         "type": "template",
-        "structure": [[
-            {
-                "tag": "<||vocab_open||>",
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||vocab_browser||>",
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||string||>",
-                "type": "string",
-                "required": true
-            }
-        ]],
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_open||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_browser||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||string||>",
+                    "type": "string",
+                    "required": true
+                }
+            ]
+        ],
         "message": "<||completion||>",
         "tools": [
             {
@@ -413,41 +441,43 @@
         "intent": "text_translation",
         "category": "http_translate",
         "type": "template",
-        "structure": [[
-            {
-                "tag": "<||vocab_translate||>",
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||word||>",
-                "type": "word",
-                "required": true
-            },
-            {
-                "tag": "<||vocab_from||>",
-                "type": "vocab",
-                "required": false
-            },
-            {
-                "tag": "<||lang1||>",
-                "type": "word",
-                "required": true
-            },
-            {
-                "tag": [
-                    "<||vocab_to||>",
-                    "<||vocab_in||>"
-                ],
-                "type": "vocab",
-                "required": false
-            },
-            {
-                "tag": "<||lang2||>",
-                "type": "word",
-                "required": true
-            }
-        ]],
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_translate||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||word||>",
+                    "type": "word",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_from||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||lang1||>",
+                    "type": "word",
+                    "required": true
+                },
+                {
+                    "tag": [
+                        "<||vocab_to||>",
+                        "<||vocab_in||>"
+                    ],
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||lang2||>",
+                    "type": "word",
+                    "required": true
+                }
+            ]
+        ],
         "message": "<||completion||>",
         "tools": [
             {
@@ -471,41 +501,43 @@
     },
     {
         "category": "web_scraping",
-        "structure": [[
-            {
-                "tag": [
-                    "<||vocab_save||>",
-                    "<||vocab_scrape||>"
-                ],
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||vocab_webpage||>",
-                "type": "vocab",
-                "required": false
-            },
-            {
-                "tag": "<||url||>",
-                "type": "url",
-                "required": false
-            },
-            {
-                "tag": "<||vocab_in||>",
-                "type": "vocab",
-                "required": false
-            },
-            {
-                "tag": "<||format||>",
-                "type": "word",
-                "required": false
-            },
-            {
-                "tag": "<||vocab_format||>",
-                "type": "vocab",
-                "required": false
-            }
-        ]],
+        "structure": [
+            [
+                {
+                    "tag": [
+                        "<||vocab_save||>",
+                        "<||vocab_scrape||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_webpage||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||url||>",
+                    "type": "url",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_in||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||format||>",
+                    "type": "word",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_format||>",
+                    "type": "vocab",
+                    "required": false
+                }
+            ]
+        ],
         "tools": [
             {
                 "name": "run_in_terminal",

@@ -1,34 +1,6 @@
 [
     {
         "input": [
-            "what is electricity",
-            "How does electricity work",
-            "Explain electricity principles",
-            "Describe electrical energy phenomena",
-            "define electricity",
-            "electricity function",
-            "what is the nature of electricity"
-        ],
-        "output": [
-            "Electricity is the set of physical phenomena associated with the presence and motion of matter that has a property of electric charge, manifesting in lightning, static electricity, electromagnetic induction, and electrical current flow."
-        ],
-        "context": [
-            {
-                "input": [
-                    "who discovered electricity",
-                    "history of electricity",
-                    "who pioneered electrical science",
-                    "origin of electrical harnessing"
-                ],
-                "output": [
-                    "while ancient civilizations knew of electric fish, Benjamin Franklin famously investigated lightning in 1752. Michael Faraday and Nikola Tesla later formalized the mathematical and mechanical principles required to commercialize and distribute electricity globally in the 19th century."
-                ]
-            }
-        ],
-        "permission": "yolo"
-    },
-    {
-        "input": [
             "what is electric current",
             "How does current flow",
             "Explain electrical current physics",
@@ -71,10 +43,51 @@
                 "input": [
                     "what causes a static shock",
                     "how does electrostatic discharge happen",
-                    "explain rubbing balloons static phenomenon"
+                    "explain rubbing balloons static phenomenon",
+                    "what causes it",
+                    "how does it happen"
                 ],
                 "output": [
                     "Static electricity is commonly caused by the triboelectric effect, where physical friction between two different materials transfers electrons from one surface to the other, building a charge that discharges rapidly when touching a conductor."
+                ]
+            },
+            {
+                "input": [
+                    "how is static electricity formed",
+                    "what creates a static charge",
+                    "how do materials become statically charged",
+                    "how is it formed",
+                    "how does it form",
+                    "what creates it"
+                ],
+                "output": [
+                    "Static electricity is formed when two compatible materials come into contact and then separate. During this process, outer-shell electrons are physically stripped from one material and deposited onto the other, breaking their electrical neutrality."
+                ]
+            },
+            {
+                "input": [
+                    "how does static electricity work step by step",
+                    "mechanism behind static electricity",
+                    "explain the process of static build up",
+                    "how does it work",
+                    "how does it work step by step",
+                    "explain its mechanism"
+                ],
+                "output": [
+                    "It works through charge polarization and sudden discharge. Once a material accumulates excess electrons, it stays charged until it approaches an object with a different potential. The voltage gradient forces a sudden jump of electrons across the air gap, creating a localized spark."
+                ]
+            },
+            {
+                "input": [
+                    "what is static electricity made of",
+                    "what components make up static charge",
+                    "atomic structure of static electricity",
+                    "what is it made of",
+                    "what components make it up",
+                    "what is its composition"
+                ],
+                "output": [
+                    "Static electricity is not a unique substance; it is made of ordinary subatomic particles, specifically an excess or a deficit of negative electrons relative to positive protons on the surface atoms of an insulating material."
                 ]
             }
         ],
@@ -97,10 +110,52 @@
                 "input": [
                     "where can you find plasma",
                     "examples of plasma in nature",
-                    "is lightning made of plasma"
+                    "is lightning made of plasma",
+                    "where can you find it",
+                    "where is it found",
+                    "give me examples of it"
                 ],
                 "output": [
                     "while rare on Earth outside of lightning bolts, neon signs, and plasma cutters, plasma is the most abundant form of ordinary matter in the universe, making up the stars, the Sun, and nebulae."
+                ]
+            },
+            {
+                "input": [
+                    "how is plasma formed",
+                    "what creates plasma",
+                    "how do you make a plasma state",
+                    "how is it formed",
+                    "how does it form",
+                    "what creates it"
+                ],
+                "output": [
+                    "Plasma is formed by heating a gas to extremely high temperatures or subjecting it to a strong electromagnetic field. This forces the atoms to lose their electrons, breaking them apart into a soup of charged ions and free electrons."
+                ]
+            },
+            {
+                "input": [
+                    "how does plasma work in physics",
+                    "mechanism behind plasma behavior",
+                    "explain how plasma conducts electricity",
+                    "how does it work",
+                    "how does it work in physics",
+                    "explain its mechanism"
+                ],
+                "output": [
+                    "It works through collective behavior driven by electromagnetic forces. Because plasma contains free-moving ions and electrons, it conducts electrical currents efficiently and reacts strongly to external magnetic fields, forming structures like filaments and beams."
+                ]
+            },
+            {
+                "input": [
+                    "what is plasma made of",
+                    "what components make up plasma",
+                    "atomic composition of plasma",
+                    "what is it made of",
+                    "what components make it up",
+                    "what is its composition"
+                ],
+                "output": [
+                    "Plasma is made of a highly ionized gas mixture, which consists of unbound negative electrons, positive ions (atoms stripped of their electrons), and occasionally neutral atoms or molecules interacting under high energy."
                 ]
             }
         ],
@@ -125,7 +180,9 @@
                     "who discovered electricity",
                     "history of electricity",
                     "who pioneered electrical science",
-                    "origin of electrical harnessing"
+                    "origin of electrical harnessing",
+                    "who discovered it",
+                    "where did it originate"
                 ],
                 "output": [
                     "while ancient civilizations knew of electric fish, Benjamin Franklin famously investigated lightning in 1752. Michael Faraday and Nikola Tesla later formalized the mathematical and mechanical principles required to commercialize and distribute electricity globally in the 19th century."
@@ -135,7 +192,9 @@
                 "input": [
                     "what are the fundamental types of electric charge",
                     "explain positive and negative charge",
-                    "how do electrical charges interact"
+                    "how do electrical charges interact",
+                    "what are the types of charge",
+                    "how do they interact"
                 ],
                 "output": [
                     "Electric charge is a fundamental property of subatomic particles. Protons carry a positive charge, while electrons carry a negative charge. According to Coulomb's Law, like charges repel each other, and opposite charges attract each other."
@@ -145,10 +204,51 @@
                 "input": [
                     "what is the difference between electricity and magnetism",
                     "how are electricity and magnetism connected",
-                    "explain electromagnetism"
+                    "explain electromagnetism",
+                    "how are they connected",
+                    "what is the difference between them"
                 ],
                 "output": [
                     "Electricity involves stationary or moving electric charges, while magnetism is caused by moving electric charges. James Clerk Maxwell proved in 1865 that they are two aspects of a single force called electromagnetism, governed by electromagnetic waves."
+                ]
+            },
+            {
+                "input": [
+                    "how is electricity formed",
+                    "what creates electricity",
+                    "how do you generate electrical power",
+                    "how is it formed",
+                    "how does it form",
+                    "how is it generated"
+                ],
+                "output": [
+                    "Electricity is formed by generating a potential difference that forces electrons to flow. This can occur naturally via atmospheric conditions, chemically through battery reactions, or mechanically by rotating a conductor inside a magnetic field within a generator."
+                ]
+            },
+            {
+                "input": [
+                    "how does electricity work step by step",
+                    "mechanism of electricity flow",
+                    "explain electrical current mechanism",
+                    "how does it work",
+                    "how does it work step by step",
+                    "explain its mechanism"
+                ],
+                "output": [
+                    "It works through the forced drift of free electrons along a conductive path. When a voltage source creates electromotive force, outer-shell valence electrons leap from atom to atom, transferring kinetic energy down the line to power electrical components."
+                ]
+            },
+            {
+                "input": [
+                    "what is electricity made of",
+                    "what components make up electric current",
+                    "atomic composition of electricity",
+                    "what is it made of",
+                    "what components make it up",
+                    "what is its composition"
+                ],
+                "output": [
+                    "Electricity is not an independent material substance; it is made of the collective movement or presence of electrons, which are fundamental subatomic particles with negative charge orbiting the nuclei of conductive matter."
                 ]
             }
         ],
@@ -172,7 +272,10 @@
                 "input": [
                     "what is the difference between AC and DC",
                     "alternating current vs direct current",
-                    "explain ac and dc current loops"
+                    "explain ac and dc current loops",
+                    "what is the difference between them",
+                    "how do they differ",
+                    "explain both types"
                 ],
                 "output": [
                     "Direct Current (DC) flows continuously in a single, unchanging direction, common in batteries. Alternating Current (AC) periodically reverses its direction and changes its magnitude continuously over time, used in power grids due to efficient long-distance transmission."
@@ -182,7 +285,10 @@
                 "input": [
                     "what is drift velocity",
                     "how fast do electrons move in a wire",
-                    "speed of electric current vs speed of electrons"
+                    "speed of electric current vs speed of electrons",
+                    "how fast do they move",
+                    "what is its velocity",
+                    "speed of the electrons"
                 ],
                 "output": [
                     "while the electrical signal propagation wave travels near the speed of light, the actual physical speed of individual electrons (drift velocity) inside a copper wire is remarkably slow, often averaging less than a millimeter per second."
@@ -192,102 +298,52 @@
                 "input": [
                     "what is conventional current direction",
                     "why does current flow from positive to negative",
-                    "actual electron flow direction vs conventional current"
+                    "actual electron flow direction vs conventional current",
+                    "which direction does it flow",
+                    "why does it flow that way",
+                    "what is its direction"
                 ],
                 "output": [
                     "Conventional current is defined as flowing from positive to negative. Benjamin Franklin established this standard before electrons were discovered. In reality, negative electrons flow in the exact opposite direction, from the negative terminal to the positive terminal."
                 ]
-            }
-        ],
-        "permission": "yolo"
-    },
-    {
-        "input": [
-            "what is static electricity",
-            "How does static electricity work",
-            "Explain static charge accumulation",
-            "Describe triboelectric effect",
-            "define static electricity",
-            "static shock function"
-        ],
-        "output": [
-            "Static electricity is an imbalance of electric charges within or on the surface of a material, remaining stationary until it can move away by means of an electric discharge or electrical spark."
-        ],
-        "context": [
+            },
             {
                 "input": [
-                    "what causes a static shock",
-                    "how does electrostatic discharge happen",
-                    "explain rubbing balloons static phenomenon"
+                    "how is electric current formed",
+                    "what creates an electric current",
+                    "how do you produce current",
+                    "how is it formed",
+                    "how does it form",
+                    "what creates it"
                 ],
                 "output": [
-                    "Static electricity is commonly caused by the triboelectric effect, where physical friction between two different materials transfers electrons from one surface to the other, building a charge that discharges rapidly when touching a conductor."
+                    "Electric current is formed when an external electromotive force (like a battery or generator) creates a potential difference across a closed conductive loop. This voltage induces an electric field that pushes charge carriers into motion."
                 ]
             },
             {
                 "input": [
-                    "what is electrostatic induction",
-                    "how can static electricity attract uncharged objects",
-                    "charging by induction explanation"
+                    "how does electric current work step by step",
+                    "mechanism behind electric current",
+                    "explain current physics process",
+                    "how does it work",
+                    "how does it work step by step",
+                    "explain its mechanism"
                 ],
                 "output": [
-                    "Electrostatic induction occurs when a charged object is brought near a neutral conductive object, causing the internal mobile charges inside the neutral material to shift, separating positive and negative poles without physical contact."
+                    "It works by transferring electrical energy through the collective movement of charge carriers. When voltage is applied, free electrons repel away from the negative terminal and migrate toward the positive terminal, creating a continuous loop of power delivery."
                 ]
             },
             {
                 "input": [
-                    "How does static electricity damage computer hardware",
-                    "what is esd hazard in electronics",
-                    "why use an anti static wrist strap"
+                    "what is electric current made of",
+                    "what components make up a current",
+                    "atomic carrier structure of current",
+                    "what is it made of",
+                    "what components make it up",
+                    "what is its composition"
                 ],
                 "output": [
-                    "Electrostatic Discharge (ESD) acts as a microscopic lightning bolt. A human body can carry thousands of volts of static electricity invisibly; touching exposed motherboard circuits or CPU pins without grounding yourself can instantly blow out delicate nanoscale transistor gates."
-                ]
-            }
-        ],
-        "permission": "yolo"
-    },
-    {
-        "input": [
-            "what is plasma in physics",
-            "what is the fourth state of matter",
-            "How does plasma work",
-            "Explain ionized gas physics",
-            "define plasma",
-            "plasma function"
-        ],
-        "output": [
-            "Plasma is one of the four fundamental states of matter, consisting of a gas-like hot mixture of free electrons and highly ionized atoms, displaying an extremely high electrical conductivity and susceptibility to electromagnetic fields."
-        ],
-        "context": [
-            {
-                "input": [
-                    "where can you find plasma",
-                    "examples of plasma in nature",
-                    "is lightning made of plasma"
-                ],
-                "output": [
-                    "while rare on Earth outside of lightning bolts, neon signs, and plasma cutters, plasma is the most abundant form of ordinary matter in the universe, making up the stars, the Sun, and nebulae."
-                ]
-            },
-            {
-                "input": [
-                    "How does plasma react to magnetic fields",
-                    "magnetic confinement of plasma",
-                    "plasma physics in nuclear fusion"
-                ],
-                "output": [
-                    "Because plasma consists of moving charged ions and free electrons, it reacts strongly to magnetic forces. This property is heavily exploited in tokamaks and experimental nuclear fusion reactors to confine scorching plasma using intense electromagnetic fields."
-                ]
-            },
-            {
-                "input": [
-                    "what is the difference between a gas and a plasma",
-                    "gas vs plasma properties",
-                    "why is plasma unique"
-                ],
-                "output": [
-                    "An ordinary gas consists of neutral atoms and behaves as an electrical insulator. A plasma is highly ionized, meaning electrons have been ripped away from the nuclei, allowing the medium to conduct electricity flawlessly and generate collective magnetic behaviors."
+                    "Electric current is made of moving charge carriers. In metallic conductors, it consists exclusively of free valence electrons; however, in gases and liquid solutions (electrolytes), it is made of both positive and negative ions flowing in opposite directions."
                 ]
             }
         ],
@@ -311,7 +367,10 @@
                 "input": [
                     "where is direct current used",
                     "what devices use dc power",
-                    "practical applications of direct current"
+                    "practical applications of direct current",
+                    "where is it used",
+                    "what devices use it",
+                    "give me applications of it"
                 ],
                 "output": [
                     "DC is used in virtually all digital electronics, including computers, smartphones, microcontrollers, and LED lighting, as well as in solar panels, electric vehicle batteries, and portable energy storage systems."
@@ -321,7 +380,10 @@
                 "input": [
                     "who championed direct current",
                     "history of direct current",
-                    "thomas edison dc system origin"
+                    "thomas edison dc system origin",
+                    "who championed it",
+                    "who developed it",
+                    "history of it"
                 ],
                 "output": [
                     "Thomas Edison was the primary pioneer and champion of Direct Current in the late 19th century, building the first commercial electrical power distribution system in New York to power his incandescent light bulbs."
@@ -331,7 +393,10 @@
                 "input": [
                     "what are the limitations of direct current",
                     "why is dc bad for long distance transmission",
-                    "disadvantages of direct current distribution"
+                    "disadvantages of direct current distribution",
+                    "what are its limitations",
+                    "why is it bad for long distance",
+                    "disadvantages of it"
                 ],
                 "output": [
                     "Historically, DC could not be easily stepped up or down to high voltages. Transmitting low-voltage DC over long distances causes massive power losses due to wire resistance, requiring power plants to be located within a mile of the consumer."
@@ -341,10 +406,51 @@
                 "input": [
                     "what is HVDC",
                     "high voltage direct current transmission",
-                    "modern usage of dc in power grids"
+                    "modern usage of dc in power grids",
+                    "explain hvdc",
+                    "modern usage of it"
                 ],
                 "output": [
                     "Modern technology has enabled High-Voltage Direct Current (HVDC) systems. Using power electronics, HVDC can transmit massive amounts of power over extreme distances or underwater with fewer losses than AC, connecting separate power grids."
+                ]
+            },
+            {
+                "input": [
+                    "how is direct current formed",
+                    "what creates a direct current",
+                    "how to generate dc power",
+                    "how is it formed",
+                    "how does it form",
+                    "how is it generated"
+                ],
+                "output": [
+                    "Direct Current is formed when a power source maintains a steady chemical or physical potential difference. This is achieved natively through chemical reactions in batteries, photovoltaic reactions in solar cells, or by using a commutator in mechanical DC generators."
+                ]
+            },
+            {
+                "input": [
+                    "how does direct current work step by step",
+                    "mechanism behind direct current flow",
+                    "explain dc circuit mechanics",
+                    "how does it work",
+                    "how does it work step by step",
+                    "explain its mechanism"
+                ],
+                "output": [
+                    "It works by maintaining a constant electric field inside a conductor that forces electrons to drift in one persistent path. Because the positive and negative terminals never swap polarities, the current travels steadily from the negative source to the positive sink without fluctuating."
+                ]
+            },
+            {
+                "input": [
+                    "what is direct current made of",
+                    "what components make up dc power",
+                    "physical composition of direct current",
+                    "what is it made of",
+                    "what components make it up",
+                    "what is its composition"
+                ],
+                "output": [
+                    "Direct Current is made of a continuous, unbroken stream of uniform charge carriers. In solid metal conductors, it consists entirely of valence electrons flowing forward, while inside electrochemical cells, it is made of positive and negative ions migrating simultaneously towards their respective electrodes."
                 ]
             }
         ],
@@ -368,7 +474,10 @@
                 "input": [
                     "where is alternating current used",
                     "what systems rely on ac power",
-                    "practical applications of alternating current"
+                    "practical applications of alternating current",
+                    "where is it used",
+                    "what systems rely on it",
+                    "give me applications of it"
                 ],
                 "output": [
                     "AC is the standard form of electricity delivered to homes and businesses globally via the commercial electrical grid, powering household appliances, industrial motors, and transformers."
@@ -378,7 +487,10 @@
                 "input": [
                     "who invented alternating current systems",
                     "nikola tesla ac system history",
-                    "george westinghouse alternating current pioneer"
+                    "george westinghouse alternating current pioneer",
+                    "who invented it",
+                    "history of it",
+                    "who developed it"
                 ],
                 "output": [
                     "Nikola Tesla developed the complete polyphase AC distribution system, including the induction motor and transformers. George Westinghouse bought Tesla's patents and commercialized the technology, winning the War of the Currents against Edison."
@@ -388,7 +500,10 @@
                 "input": [
                     "why is AC better for long distance transmission",
                     "advantages of alternating current",
-                    "how transformers help ac grids"
+                    "how transformers help ac grids",
+                    "why is it better for long distance",
+                    "advantages of it",
+                    "how do transformers help it"
                 ],
                 "output": [
                     "AC voltage can be easily stepped up to extreme voltages (like 400kV) using transformers. High voltage reduces current, which dramatically minimizes power loss over long distances. The voltage is then safely stepped down before entering homes."
@@ -398,10 +513,52 @@
                 "input": [
                     "what is AC frequency",
                     "explain 50Hz and 60Hz grid standards",
-                    "why does electricity oscillate"
+                    "why does electricity oscillate",
+                    "what is its frequency",
+                    "explain its grid standards",
+                    "why does it oscillate"
                 ],
                 "output": [
                     "AC frequency is the number of full cycles completed per second, measured in Hertz (Hz). North America standardizes on 60 Hz, while Europe and most of the world use 50 Hz, meaning the current changes direction 100 to 120 times every second."
+                ]
+            },
+            {
+                "input": [
+                    "how is alternating current formed",
+                    "what creates alternating current",
+                    "how to generate ac power",
+                    "how is it formed",
+                    "how does it form",
+                    "how is it generated"
+                ],
+                "output": [
+                    "Alternating Current is formed when a conductor rotates within a uniform magnetic field inside an alternator or mechanical generator. As the loop spins past the north and south magnetic poles, the induced electromotive force naturally alternates its polarity, generating a sinusoidal wave."
+                ]
+            },
+            {
+                "input": [
+                    "how does alternating current work step by step",
+                    "mechanism behind alternating current flow",
+                    "explain ac circuit mechanics",
+                    "how does it work",
+                    "how does it work step by step",
+                    "explain its mechanism"
+                ],
+                "output": [
+                    "It works by forcing electrons to vibrate back and forth in place rather than traveling downstream. Power is transmitted through the circuit as a kinetic wave of energy, where electrons continuously change direction back and forth, matching the frequency of the generator."
+                ]
+            },
+            {
+                "input": [
+                    "what is alternating current made of",
+                    "what components make up ac power",
+                    "physical composition of alternating current",
+                    "what is it made of",
+                    "what components make it up",
+                    "what is its composition"
+                ],
+                "output": [
+                    "Alternating Current is made of the oscillating, rhythmic movement of mobile charge carriers, which in standard electrical grids are the valence electrons bound within conductive metal wiring, shifting back and forth symmetrically without any net forward displacement."
                 ]
             }
         ],
@@ -425,7 +582,10 @@
                 "input": [
                     "How do you calculate RMS from peak voltage",
                     "rms formula for sine waves",
-                    "divide peak voltage by square root of two"
+                    "divide peak voltage by square root of two",
+                    "how do you calculate it",
+                    "what is its formula",
+                    "how to derive it"
                 ],
                 "output": [
                     "For a pure sinusoidal wave, the RMS value is calculated by dividing the peak voltage by the square root of 2, which matches multiplying the peak value by roughly 0.707 (Vrms = Vpeak * 0.707)."
@@ -435,10 +595,52 @@
                 "input": [
                     "what is the RMS voltage of household outlets",
                     "mains grid voltage value standard",
-                    "is wall outlet voltage peak or rms"
+                    "is wall outlet voltage peak or rms",
+                    "what is the value of outlets",
+                    "what is its standard value",
+                    "is it peak or rms"
                 ],
                 "output": [
                     "The standard household voltage quoted globally (such as 230V in Europe or 120V in North America) is the RMS value. The actual physical peak voltage of a 230V outlet is much higher, reaching roughly 325V."
+                ]
+            },
+            {
+                "input": [
+                    "how is rms voltage formed",
+                    "what creates root mean square value",
+                    "how do you get an rms measurement",
+                    "how is it formed",
+                    "how does it form",
+                    "how is it derived"
+                ],
+                "output": [
+                    "RMS voltage is formed mathematically and conceptually by squaring the instantaneous values of an AC waveform over a complete cycle, calculating the average (mean) of those squared values, and then extracting the square root of that average."
+                ]
+            },
+            {
+                "input": [
+                    "how does rms voltage work step by step",
+                    "mechanism behind root mean square calculation",
+                    "explain rms function in circuits",
+                    "how does it work",
+                    "how does it work step by step",
+                    "explain its mechanism"
+                ],
+                "output": [
+                    "It works by translating an oscillating AC value into a steady, practical heating equivalent. Since AC power fluctuates constantly and hits zero twice per cycle, the RMS calculation filters out the directional changes and solves for the real, continuous workload capability of the electricity."
+                ]
+            },
+            {
+                "input": [
+                    "what is rms voltage made of",
+                    "what components make up root mean square values",
+                    "composition of effective voltage",
+                    "what is it made of",
+                    "what components make it up",
+                    "what is its mathematical composition"
+                ],
+                "output": [
+                    "RMS voltage is not made of physical matter; it is a statistical and mathematical construct made of a sequence of time-varying instantaneous electrical potentials averaged geometrically over time to establish a direct equivalence to DC thermal power."
                 ]
             }
         ],
@@ -461,10 +663,52 @@
                 "input": [
                     "How does peak relate to peak to peak",
                     "calculate vpp from vpeak",
-                    "difference between peak and peak to peak voltage"
+                    "difference between peak and peak to peak voltage",
+                    "how do they relate",
+                    "calculate vpp from it",
+                    "what is the difference between them"
                 ],
                 "output": [
                     "For symmetrical waveforms like a standard sine wave, Peak-to-Peak voltage is exactly twice the value of the peak voltage (Vpp = 2 * Vpeak)."
+                ]
+            },
+            {
+                "input": [
+                    "how is peak voltage formed",
+                    "what creates peak-to-peak voltage",
+                    "how to generate maximum amplitude in ac",
+                    "how is it formed",
+                    "how does it form",
+                    "how is it generated"
+                ],
+                "output": [
+                    "Peak voltage is formed when an AC generator's rotating internal coil reaches a position perfectly perpendicular to the magnetic stator field, inducing the absolute maximum amount of magnetic flux cut per second and yielding top electrical potential."
+                ]
+            },
+            {
+                "input": [
+                    "how does peak voltage work step by step",
+                    "mechanism behind peak-to-peak voltage limits",
+                    "explain peak voltage function in circuits",
+                    "how does it work",
+                    "how does it work step by step",
+                    "explain its mechanism"
+                ],
+                "output": [
+                    "It works by setting the absolute physical boundaries of electrical stress in an alternating circuit. As the wave oscillates, insulation materials and electronic components must endure these full peak thresholds, rather than just the averaged RMS values, to prevent dielectric breakdown."
+                ]
+            },
+            {
+                "input": [
+                    "what is peak voltage made of",
+                    "what components make up peak-to-peak voltage",
+                    "composition of maximum ac amplitude",
+                    "what is it made of",
+                    "what components make it up",
+                    "what is its composition"
+                ],
+                "output": [
+                    "Peak voltage is not made of physical elements; it is a geometrical and spatial metric made of the highest instantaneous electromotive force value expressed as an extreme vector magnitude along the vertical axis of a time-varying waveform."
                 ]
             }
         ],
@@ -486,10 +730,52 @@
                 "input": [
                     "what are the global grid frequency standards",
                     "explain 50Hz and 60Hz grids",
-                    "why do different countries use different frequencies"
+                    "why do different countries use different frequencies",
+                    "what are the global standards",
+                    "explain both grid standards",
+                    "why do they use different frequencies"
                 ],
                 "output": [
                     "The global power grid is divided into two primary frequency standards: 50 Hz (common in Europe, Asia, and Africa) and 60 Hz (standard in North America). This means the current reverses direction 100 or 120 times every second respectively."
+                ]
+            },
+            {
+                "input": [
+                    "how is ac frequency formed",
+                    "what creates frequency in alternating current",
+                    "how to establish an electrical grid frequency",
+                    "how is it formed",
+                    "how does it form",
+                    "how is it established"
+                ],
+                "output": [
+                    "AC frequency is formed by the physical rotation speed of a generator's rotor coupled with its internal magnetic pole configuration. The operational frequency is locked in by multiplying the rotations per minute by the number of pole pairs divided by sixty."
+                ]
+            },
+            {
+                "input": [
+                    "how does ac frequency work step by step",
+                    "mechanism behind alternating current oscillations",
+                    "explain frequency function in power transmission",
+                    "how does it work",
+                    "how does it work step by step",
+                    "explain its mechanism"
+                ],
+                "output": [
+                    "It works by governing the timing of alternating electromagnetic fields throughout a circuit. As generators spin synchronously across a network, they cause grid wide valence electrons to pivot back and forth in perfect harmony, keeping localized inductive machinery running at predictable speeds."
+                ]
+            },
+            {
+                "input": [
+                    "what is ac frequency made of",
+                    "what components make up electrical grid frequency",
+                    "composition of alternating current cycles",
+                    "what is it made of",
+                    "what components make it up",
+                    "what is its composition"
+                ],
+                "output": [
+                    "AC frequency is a temporal rate measurement rather than a material object; it is made of successive wave segments containing one full positive and one full negative oscillation cycle occurring repetitively within a discrete standard unit of time."
                 ]
             }
         ],
@@ -512,10 +798,52 @@
                 "input": [
                     "what is out of phase in AC circuits",
                     "explain voltage leading or lagging current",
-                    "phase shift in inductive and capacitive loads"
+                    "phase shift in inductive and capacitive loads",
+                    "what does out of phase mean",
+                    "explain them leading or lagging",
+                    "how does shifting happen in these loads"
                 ],
                 "output": [
                     "In purely resistive circuits, voltage and current are perfectly in phase. In inductive circuits, voltage leads current by 90 degrees due to counter-EMF. In capacitive circuits, current leads voltage by 90 degrees as the capacitor charges first."
+                ]
+            },
+            {
+                "input": [
+                    "how is a phase angle formed",
+                    "what creates an ac phase shift",
+                    "how to induce phase displacement in electronics",
+                    "how is it formed",
+                    "how does it form",
+                    "what creates it"
+                ],
+                "output": [
+                    "A phase angle is formed when reactive components like capacitors and inductors store energy temporarily in electric or magnetic fields. This storage delay disrupts the immediate alignment of voltage and current waves, separating their peaks along the time axis."
+                ]
+            },
+            {
+                "input": [
+                    "how does phase angle work step by step",
+                    "mechanism behind leading and lagging waveforms",
+                    "explain phase displacement function in AC",
+                    "how does it work",
+                    "how does it work step by step",
+                    "explain its mechanism"
+                ],
+                "output": [
+                    "It works by acting as a geometric vector parameter in alternating current calculations. When voltage and current cycles are separated by a phase angle, their combined instantaneous power product changes, causing energy to alternately surge forward to the load and bounce back to the source."
+                ]
+            },
+            {
+                "input": [
+                    "what is a phase angle made of",
+                    "what components make up phase shift values",
+                    "composition of alternating wave displacement",
+                    "what is it made of",
+                    "what components make it up",
+                    "what is its composition"
+                ],
+                "output": [
+                    "Phase angle is a mathematical relationship rather than a physical substance; it is made of an angular fractional expression of time difference, mapped across a full 360 degree rotational coordinate system representing a single complete waveform cycle."
                 ]
             }
         ],
@@ -538,7 +866,10 @@
                 "input": [
                     "what is the difference between real apparent and reactive power",
                     "explain watts volt amperes and vars",
-                    "ac power triangle definitions"
+                    "ac power triangle definitions",
+                    "what is the difference between them",
+                    "explain all three units",
+                    "what are the definitions of the triangle"
                 ],
                 "output": [
                     "Real power (measured in Watts) is the actual energy performing work. Reactive power (measured in VARs) is the non-working energy bouncing back and forth to maintain magnetic fields. Apparent power (measured in VA) is the total vector combination of both."
@@ -548,10 +879,52 @@
                 "input": [
                     "what is a bad power factor",
                     "why do industrial systems need power factor correction",
-                    "consequences of low power factor load"
+                    "consequences of low power factor load",
+                    "what is a bad value",
+                    "why do industrial systems need correction",
+                    "what are the consequences of a low value"
                 ],
                 "output": [
                     "A low power factor (e.g., 0.70) means inductive loads (like heavy factory motors) are drawing massive reactive currents that strain transmission wires without doing real work. Power companies charge penalties for this, forcing factories to use capacitor banks for Power Factor Correction (PFC)."
+                ]
+            },
+            {
+                "input": [
+                    "how is power factor formed",
+                    "what creates a low power factor value",
+                    "how do circuits establish power factor",
+                    "how is it formed",
+                    "how does it form",
+                    "what creates it"
+                ],
+                "output": [
+                    "Power factor is formed by the specific blend of resistive and reactive components within an AC circuit. It is mathematically established as the cosine of the phase angle between the total voltage and the total current waveforms."
+                ]
+            },
+            {
+                "input": [
+                    "how does power factor work step by step",
+                    "mechanism behind power factor efficiency impact",
+                    "explain power factor scaling in heavy grids",
+                    "how does it work",
+                    "how does it work step by step",
+                    "explain its mechanism"
+                ],
+                "output": [
+                    "It works by serving as an efficiency scaling factor for utility transmission systems. A power factor near 1.0 ensures that nearly all the delivered current supplies productive thermal or mechanical energy, while a dropping factor demands oversized infrastructure to handle redundant current loops."
+                ]
+            },
+            {
+                "input": [
+                    "what is power factor made of",
+                    "what parameters make up a power factor ratio",
+                    "composition of power factor values",
+                    "what is it made of",
+                    "what components make it up",
+                    "what is its mathematical composition"
+                ],
+                "output": [
+                    "Power factor is a dimensionless scalar value; it is made of a comparative numerical fraction representing the real, active working power (kW) divided cleanly by the total apparent vector power (kVA) running through an electrical network."
                 ]
             }
         ],
@@ -574,7 +947,10 @@
                 "input": [
                     "what is an arc flash",
                     "explain arc flash explosion hazard",
-                    "high voltage electrical arcing dangers"
+                    "high voltage electrical arcing dangers",
+                    "what is it",
+                    "explain its explosion hazard",
+                    "what are its dangers"
                 ],
                 "output": [
                     "An arc flash is a dangerous electrical explosion that occurs during a short circuit fault when current flows through the air between conductors. It generates extreme radiant heat (up to 20,000°C), a blinding flash of light, and a massive pressure blast capable of vaporizing metal copper tracks instantly."
@@ -584,10 +960,52 @@
                 "input": [
                     "How to mitigate arc flash risks",
                     "arc flash prevention hardware",
-                    "electrical engineering arc flash safety mitigation"
+                    "electrical engineering arc flash safety mitigation",
+                    "how to mitigate its risks",
+                    "what hardware prevents it",
+                    "how to mitigate it"
                 ],
                 "output": [
                     "Mitigation includes using arc-resistant switchgear, implementing fast-acting current-limiting fuses, installing optical arc flash detection relays that cut power in milliseconds, and enforcing strict PPE (Personal Protective Equipment) safety distances."
+                ]
+            },
+            {
+                "input": [
+                    "how are electrical hazards formed",
+                    "what creates electrical safety risks",
+                    "how do unsafe electrical conditions develop",
+                    "how are they formed",
+                    "how do they form",
+                    "what creates them"
+                ],
+                "output": [
+                    "Electrical hazards are formed when containment systems fail or safety tolerances are breached. This happens through mechanical insulation wear, human operational errors, loose physical terminations, or component degradation that exposes live, high-potential voltage channels to ground paths."
+                ]
+            },
+            {
+                "input": [
+                    "how do electrical hazards work step by step",
+                    "mechanism behind electrical injuries and shock",
+                    "explain the physics of electrical danger",
+                    "how do they work",
+                    "how do they work step by step",
+                    "explain their mechanism"
+                ],
+                "output": [
+                    "They work by weaponizing the human body or environment as an accidental conductive path. When a grounding bridge is established, current flows through heart muscles causing fibrillation, forces muscles to contract uncontrollably so a victim cannot let go, or generates extreme Joule heating that burns living tissue."
+                ]
+            },
+            {
+                "input": [
+                    "what are electrical hazards made of",
+                    "what components make up electrical risks",
+                    "composition of major electrical dangers",
+                    "what are they made of",
+                    "what components make them up",
+                    "what is their structural composition"
+                ],
+                "output": [
+                    "Electrical hazards are not tangible physical objects; they are made of a critical confluence of uncontrolled high-energy parameters, specifically high electromotive forces (voltage), cascading electron flows (current), localized thermal friction, and explosive ionized plasma paths."
                 ]
             }
         ],
@@ -609,7 +1027,10 @@
                 "input": [
                     "How to prevent electrical fires",
                     "what hardware prevents electrical fires",
-                    "afci breaker electrical fire mitigation"
+                    "afci breaker electrical fire mitigation",
+                    "how to prevent them",
+                    "what hardware prevents them",
+                    "how to mitigate them"
                 ],
                 "output": [
                     "Prevention relies on proper wire gauge sizing to match load current, installing Circuit Breakers or Fuses to stop overcurrent, and deploying modern AFCI (Arc Fault Circuit Interrupters) that detect the specific electrical signature of dangerous sparking wires before a fire can ignite."
@@ -619,10 +1040,52 @@
                 "input": [
                     "what class of fire extinguisher is used for electrical fires",
                     "how to put out an electrical fire safely",
-                    "why water is hazardous for electrical fires"
+                    "why water is hazardous for electrical fires",
+                    "what class of extinguisher is used for them",
+                    "how to put them out safely",
+                    "why is water hazardous for them"
                 ],
                 "output": [
                     "Class C (US) or Class E (UK/International) dry chemical or Carbon Dioxide (CO2) extinguishers must be used. You must never use water on an active electrical fire, as water conducts electricity and will electrocute the operator or spread the short circuit further."
+                ]
+            },
+            {
+                "input": [
+                    "how is an electrical fire formed",
+                    "what creates an electrical fire scenario",
+                    "how do sparking wires ignite a fire",
+                    "how is it formed",
+                    "how does it form",
+                    "what creates it"
+                ],
+                "output": [
+                    "An electrical fire is formed when localized electrical dissipation surpasses the thermal radiation capabilities of the surrounding materials. The continuous energy build-up reaches the flashpoint of copper insulation jackets or adjacent structural framing, igniting self-sustaining combustion."
+                ]
+            },
+            {
+                "input": [
+                    "how does an electrical fire work step by step",
+                    "thermal mechanism behind electrical ignition",
+                    "explain the progression of electrical overheating",
+                    "how does it work",
+                    "how does it work step by step",
+                    "explain its mechanism"
+                ],
+                "output": [
+                    "It works by translating sustained electrical overcurrent into runaway thermal energy. Under Joule's First Law, high resistive junctions generate rapid heat spikes; this compromises wire enclosures, turns nearby plastics into volatile flammable gases, and triggers an open structural blaze."
+                ]
+            },
+            {
+                "input": [
+                    "what is an electrical fire made of",
+                    "what components make up an electrical blaze",
+                    "chemical composition of an electrical fire",
+                    "what is it made of",
+                    "what components make it up",
+                    "what is its composition"
+                ],
+                "output": [
+                    "An electrical fire is made of highly reactive chemical combustion components, including carbonaceous ash, toxic chemical gases (like carbon monoxide and hydrogen chloride gas vaporized from PVC conduits), free-radical soot, and a central plasma arc core fed by molten conductor metals."
                 ]
             }
         ],
@@ -645,10 +1108,52 @@
                 "input": [
                     "How does grounding prevent electrocution",
                     "chassis fault grounding mechanism",
-                    "why metal appliances need a ground wire"
+                    "why metal appliances need a ground wire",
+                    "how does it prevent electrocution",
+                    "explain its prevention mechanism",
+                    "why do they need a ground wire"
                 ],
                 "output": [
                     "If a hot live wire touches the internal metal chassis of an appliance due to a fault, the grounding wire shunts the massive current safely to Earth instantly. This sudden massive current spike immediately trips the main circuit breaker, cutting the power before a human can touch the chassis and suffer an electrocution shock."
+                ]
+            },
+            {
+                "input": [
+                    "how is electrical grounding formed",
+                    "what creates an earthing system",
+                    "how to establish an electrical ground connection",
+                    "how is it formed",
+                    "how does it form",
+                    "how is it established"
+                ],
+                "output": [
+                    "Electrical grounding is formed by driving physical conductive copper-bonded steel rods deep into the Earth's soil and bonding them back to the main electrical panel's neutral-ground busbar via thick, uninsulated copper grounding electrode conductors."
+                ]
+            },
+            {
+                "input": [
+                    "how does electrical grounding work step by step",
+                    "mechanism behind electrical earthing paths",
+                    "explain grounding function during faults",
+                    "how does it work",
+                    "how does it work step by step",
+                    "explain its mechanism"
+                ],
+                "output": [
+                    "It works by exploiting the physical law that electric current follows the path of least resistance. By offering a near-zero resistance path directly to Earth, any leaked fault current chooses the grounding wire instead of the highly resistive human body, neutralizing stray voltage."
+                ]
+            },
+            {
+                "input": [
+                    "what is electrical grounding made of",
+                    "what components make up an earthing network",
+                    "physical composition of a grounding system",
+                    "what is it made of",
+                    "what components make it up",
+                    "what is its material composition"
+                ],
+                "output": [
+                    "Electrical grounding is made of robust, corrosion-resistant metallic hardware components, including heavy-gauge solid copper wires, brass bonding clamps, buried grounding plates, and underground steel grounding rods sunk into moist soil matrices."
                 ]
             }
         ],
@@ -670,10 +1175,52 @@
                 "input": [
                     "what hardware mitigates overloading",
                     "overcurrent protection devices",
-                    "difference between overload and short circuit protection"
+                    "difference between overload and short circuit protection",
+                    "what hardware mitigates it",
+                    "how to protect against it",
+                    "what devices stop it"
                 ],
                 "output": [
                     "Thermal-magnetic circuit breakers mitigate overloading. The thermal component features a bimetallic strip that heats up and bends slowly during a prolonged overload state, tripping the mechanism safely before the house wiring can reach ignition temperatures."
+                ]
+            },
+            {
+                "input": [
+                    "how is electrical overloading formed",
+                    "what creates a circuit overload condition",
+                    "how do overloaded systems develop overcurrent",
+                    "how is it formed",
+                    "how does it form",
+                    "what creates it"
+                ],
+                "output": [
+                    "Electrical overloading is formed by wiring multiple parallel loads onto a single circuit branch, which causes the individual current demands of each device to add up together, forcing the cumulative line amperage to cross the designated safety envelope of the upstream wiring."
+                ]
+            },
+            {
+                "input": [
+                    "how does electrical overloading work step by step",
+                    "thermal mechanism behind an overloaded circuit",
+                    "explain the process of overcurrent heating",
+                    "how does it work",
+                    "how does it work step by step",
+                    "explain its mechanism"
+                ],
+                "output": [
+                    "It works by generating cumulative kinetic friction at the subatomic level. As excessive electrons squeeze through a wire gauge that is too small, they collide aggressively with the metal conductor's atomic lattice, turning electrical current into runaway thermal energy."
+                ]
+            },
+            {
+                "input": [
+                    "what is electrical overloading made of",
+                    "what parameters make up an overload condition",
+                    "composition of overloading states",
+                    "what is it made of",
+                    "what components make it up",
+                    "what is its structural composition"
+                ],
+                "output": [
+                    "Electrical overloading is not a physical object; it is made of an illegal thermodynamic state characterized by an excess of current (Amperage) relative to conductor cross-sectional surface area, driving intense heat concentration inside the wire."
                 ]
             }
         ],

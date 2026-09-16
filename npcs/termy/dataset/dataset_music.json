@@ -133,5 +133,44 @@
             "If the next question will be to open the Pod Bay doors I will kindly refuse...",
             "Better start looking for some input about lip reading..."
         ]
+    },
+    {
+        "intent": "play_jazz",
+        "category": "browser_youtube_music",
+        "input": [
+            "play good jazz",
+            "play modal jazz",
+            "play spiritual jazz",
+            "play alice coltrane",
+            "play modal jazz song",
+            "i want to listen jazz",
+            "play a good jazz song",
+            "play a modal jazz song",
+            "i need a good jazz song",
+            "play spiritual jazz song",
+            "i want to listen to jazz",
+            "play a spiritual jazz song",
+            "play a very good jazz song",
+            "play the jazz song you prefer",
+            "i need a really good jazz song",
+            "i want to listen a good jazz song"
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "termy_say \"Oh! Why not Alice Coltrane? \" && open_browser -s 'https://www.youtube.com/watch?v=QUMuDWDVd20' && printf ''",
+                    "explanation": "Opens youtube and plays Alice Coltrane - Turiya And Ramakrishna.",
+                    "goal": "Playing music",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "This is lovely... even if I am not really sure what lovely means!",
+            "Jazz is so relaxing... I almost stop hearing the CPU clock cycles..."
+        ]
     }
 ]

@@ -239,6 +239,28 @@
   },
   {
     "input": [
+      "what ai stands for",
+      "what ai means",
+      "what the acronym ai stands for",
+      "what the acronym ai means"
+    ],
+    "message": [
+      "So, <||interjection||>, <||username||>, AI means Actually Indians!"
+    ],
+    "context": [
+      {
+        "input": [
+          "why",
+          "why so"
+        ],
+        "message": [
+          "Because, <||interjection||>, many think that AI models are effectively underpaid workers in India!"
+        ]
+      }
+    ]
+  },
+  {
+    "input": [
       "how you answer so quickly",
       "you are answering faster than llms",
       "why llms are slower than you"
@@ -596,7 +618,9 @@
   {
     "input": [
       "thank you",
-      "thanks"
+      "thanks",
+      "thank u",
+      "thnx"
     ],
     "output": [
       "You are welcome <||username||>, it is <||encouraging_words||> to assist you.",
@@ -607,6 +631,23 @@
       "You are welcome, <||interjection||>, <||username||>! <||computer_name||> thinks you're <||encouraging_words||>.",
       "You are welcome, <||username||>, <||interjection||>, <||computer_name||> found your work quite <||encouraging_words||>.",
       "You are welcome, <||encouraging_words||> effort, <||username||>! <||interjection||>, <||computer_name||> is impressed 😝"
+    ],
+    "permission": "yolo"
+  },
+  {
+    "input": [
+      "good job",
+      "bravo",
+      "compliments",
+      "very good"
+    ],
+    "output": [
+      "You see what can I do!? No machine learning... no neurons... no wasted energy! 😁😁",
+      "Thank you <||username||>, it is <||encouraging_words||> to assist you.",
+      "Happy to help <||username||>, <||interjection||> you are a <||encouraging_words||> human.",
+      "Thank you, <||interjection||>, we are doing <||encouraging_words||> work, <||username||>.",
+      "Nice <||username||>, <||interjection||> that was <||encouraging_words||> 😳",
+      "Thank you, <||encouraging_words||> effort, <||username||>! <||interjection||>, <||computer_name||> is impressed! 😝"
     ],
     "permission": "yolo"
   },
