@@ -118,15 +118,15 @@ class FlintNPC:
         self.personality = load_json(dataset_dir, "personality.json")
 
         self.dataset = []
-        for f in glob.glob(os.path.join(dataset_dir, "dataset_*.json")):
+        for f in glob.glob(os.path.join(dataset_dir, "**", "dataset_*.json"), recursive=True):
             self.dataset.extend(
-                load_json(dataset_dir, os.path.basename(f))
+                load_json(os.path.dirname(f), os.path.basename(f))
             )
 
         self.templates = []
-        for f in glob.glob(os.path.join(dataset_dir, "templates_*.json")):
+        for f in glob.glob(os.path.join(dataset_dir, "**", "templates_*.json"), recursive=True):
             self.templates.extend(
-                load_json(dataset_dir, os.path.basename(f))
+                load_json(os.path.dirname(f), os.path.basename(f))
             )
     
         v_lists = [
