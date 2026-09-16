@@ -1,6 +1,6 @@
 ## `Tested-143k-Python-Alpaca` (Vezora's CodeTester Dataset)
 
-The [Vezora's CodeTester Dataset](https://huggingface.co/datasets/Vezora/Tested-143k-Python-Alpaca) is an exceptional dataset of python QA which each entry was meticulously tested and verified as working.
+The [Vezora's CodeTester Dataset](https://huggingface.co/datasets/Vezora/Tested-143k-Python-Alpaca) is an exceptional dataset, each entry was meticulously tested and verified as working.
 
 The [dataset_Tested-143k-Python-Alpaca-80.json](npcs/termy/dataset/Tested-143k-Python-Alpaca-80/dataset_Tested-143k-Python-Alpaca-80.json) file contains a subset of the original dataset featuring only the questions shorter than 80 characters, cleaned, enhanced and reformatted ready to be used by NPCs to handle prompts related to Python. 
 
