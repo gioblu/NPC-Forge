@@ -85,7 +85,7 @@ def prompt_interactive_choice() -> bool:
         sys.stderr.flush()
 
 def try_http_call(
-    query: str, npc_name: str = "termy", timeout: float = 10.0  # Increased from 1.0 to 3.0
+    query: str, npc_name: str = "termy", timeout: float = 10.0
 ) -> dict | None:
     """Call the running NPC Flask server via HTTP API gateway (fast path)."""
     try:
@@ -104,8 +104,13 @@ def try_http_call(
             if response.status == 200:
                 result = json.loads(response.read().decode("utf-8"))
                 return result
-    except Exception: pass
-    return None
+            else:
+                sys.stderr.write(f"{YELLOW}⚠ Server returned HTTP {response.status} for query '{query}'{RESET}\n")
+                return None
+    except Exception as e:
+        # Catches anything else (e.g., socket timeouts)
+        sys.stderr.write(f"{YELLOW}⚠ Unexpected error during HTTP call: {e}{RESET}\n")
+        return None
 
 
 def fallback_local_call(query: str, npc_name: str = "termy") -> dict:
@@ -159,11 +164,9 @@ def run_cli() -> int:
         os.environ["TERMY_YES"] = "1"
 
     CURRENT_BOT_DIR = os.path.dirname(os.path.realpath(__file__))
-    dataset_dir = os.path.join(CURRENT_BOT_DIR, "dataset")
-
 
     # Try HTTP call to the Flask Gateway first
-    result = try_http_call(user_input, npc_name=args.npc, timeout=1.0)
+    result = try_http_call(user_input, npc_name=args.npc, timeout=5.0)
     if result is None:
         # sys.stderr.write(f"{YELLOW}⚠  Server offline, bootstrapping local in-memory fallback...{RESET}\n")
         result = fallback_local_call(user_input, npc_name=args.npc)
@@ -178,9 +181,6 @@ def run_cli() -> int:
     if emoji == "😑": emoji = "" 
 
     CURRENT_BOT_DIR = Path(os.path.realpath(__file__)).parent
-
-    dataset_dir = CURRENT_BOT_DIR / "dataset"
-
     config = load_json(CURRENT_BOT_DIR, "config.json")
     
     home_dir = os.path.expanduser("~")
@@ -222,12 +222,6 @@ def run_cli() -> int:
             if "explanation" in tool_args or "description" in result:
                 description += " " + tool_args.get("explanation", result.get("description", ""))
 
-        if description: 
-            description = GRAY + f"\n\nDescription: {description.strip()}\n" + RESET
-        
-        if command:
-            print(f"{GREEN}{BOLD}{command}{RESET}{description}")
-    
     if response: 
         print(f"Response: {response} {emoji}\n")
         
@@ -249,6 +243,12 @@ def run_cli() -> int:
                 )
             except Exception as e:
                 sys.stderr.write(f"Audio playback failed: {e}\n")
+
+        if description: 
+            description = GRAY + f"\n\nDescription: {description.strip()}\n" + RESET
+        
+        if command:
+            print(f"{GREEN}{BOLD}{command}{RESET}{description}")
     
     # Display related intents after response if rejected (deduplicated)
     related = result.get("related", [])
