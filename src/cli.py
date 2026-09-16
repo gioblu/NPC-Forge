@@ -245,12 +245,12 @@ def list_installed_npcs():
         personality = load_json(dataset_dir, "personality.json") or []
 
         dataset = []
-        for f in glob.glob(os.path.join(dataset_dir, "dataset_*.json")):
-            dataset.extend(load_json(dataset_dir, os.path.basename(f)) or [])
+        for f in glob.glob(os.path.join(dataset_dir, "**", "dataset_*.json"), recursive=True):
+            dataset.extend(load_json(os.path.dirname(f), os.path.basename(f)) or [])
 
         templates = []
-        for f in glob.glob(os.path.join(dataset_dir, "templates_*.json")):
-            templates.extend(load_json(dataset_dir, os.path.basename(f)) or [])
+        for f in glob.glob(os.path.join(dataset_dir, "**", "templates_*.json"), recursive=True):
+            templates.extend(load_json(os.path.dirname(f), os.path.basename(f)) or [])
 
         merge = personality + dataset + templates
         intent_count = len(merge)
