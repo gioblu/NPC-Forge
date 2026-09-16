@@ -1,4 +1,4 @@
-## `dataset_python_ppqd` (Python Programming Questions Dataset)
+## python_ppqd (Python Programming Questions Dataset)
 
 The [Python Programming Questions Dataset](https://www.kaggle.com/datasets/bhaveshmittal/python-programming-questions-dataset) is an exceptional dataset meticulously crafted for training state-of-the-art language models such as Gemma, Llama 2, Orca, and more.
 
@@ -20,7 +20,7 @@ A lot of work has been done on the original dataset using scripts and local lang
 
 The resulting [dataset_python_ppqd.json](npcs/termy/dataset/python_ppqd/dataset_python_ppqd.json) contains **11456 intents and weights around 13.5MB**. 
 
-The paraphrases generation was done using [granite-4.1 3B](https://www.ibm.com/granite/docs/models/granite4-1) and required around 72 hours of compute on an obsolete machine with 16GB of RAM, Intel i7-4790K CPU and NVIDIA GeForce GTX 1050 Ti.
+The paraphrases generation was done using [granite-4.1 3B](https://www.ibm.com/granite/docs/models/granite4-1) and required around 24 hours of compute on an obsolete machine with 16GB of RAM, Intel i7-4790K CPU and NVIDIA GeForce GTX 1050 Ti.
 
 ### License 
 
