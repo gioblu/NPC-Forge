@@ -19,7 +19,7 @@ A lot of work has been done on the original dataset using scripts and local lang
 9. Removed entries containing non functional code.
 10. Manual curation, cleanup and enhancement.
 
-The resulting [dataset_python_ppqd.json](npcs/termy/dataset/python_ppqd/dataset_python_ppqd.json) contains **9175 intents and weights around 11MB**. 
+The resulting [dataset_python_ppqd.json](npcs/termy/dataset/python_ppqd/dataset_python_ppqd.json) contains **9045 intents and weights around 10.8MB**. 
 
 The paraphrases generation was done using [granite-4.1 3B](https://www.ibm.com/granite/docs/models/granite4-1) and required around 24 hours of compute on an obsolete machine with 16GB of RAM, Intel i7-4790K CPU and NVIDIA GeForce GTX 1050 Ti.
 
