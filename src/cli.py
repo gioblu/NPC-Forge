@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 
-from FlintNPC import load_json
+from FlintNPC import load_json, load_json_recursive
 
 RED = "\033[31m"
 GREEN = "\033[32m"
@@ -236,33 +236,23 @@ def list_installed_npcs():
 
     data = []
     for npc_dir in sorted(npc_dirs):
-        npc_name = npc_dir.name
+        if npc_dir.name == 'example': continue
         dataset_dir = npc_dir / "dataset"  
-        
+        vocab_dir = npc_dir / "dataset" / "vocabulary"
+                
         config = load_json(npc_dir, "config.json")
         creator = config.get("creator", "Unknown")
                 
         personality = load_json(dataset_dir, "personality.json") or []
-
-        dataset = []
-        for f in glob.glob(os.path.join(dataset_dir, "**", "dataset_*.json"), recursive=True):
-            dataset.extend(load_json(os.path.dirname(f), os.path.basename(f)) or [])
-
-        templates = []
-        for f in glob.glob(os.path.join(dataset_dir, "**", "templates_*.json"), recursive=True):
-            templates.extend(load_json(os.path.dirname(f), os.path.basename(f)) or [])
-
-        merge = personality + dataset + templates
-        intent_count = len(merge)
-
-        vocab_size = 0
-        vocab_dir = npc_dir / "dataset" / "vocabulary"
+        dataset = load_json_recursive(dataset_dir, "dataset_*.json") or []
+        intent_count = len(personality + dataset)
         
-        vc = load_json(vocab_dir, "vocabulary.json")
-        vocab_size += len(vc) if isinstance(vc, (list, dict)) else 0
+        templates = load_json_recursive(dataset_dir, "templates_*.json") or []
+        templates_count = len(templates)
         
-        vt = load_json(vocab_dir, "templates.json")
-        vocab_size += len(vt) if isinstance(vt, (list, dict)) else 0
+        vocabulary = load_json(vocab_dir, "vocabulary.json")
+        vocabulary_templates =  load_json(vocab_dir, "templates.json")
+        vocab_count = len(vocabulary) + len(vocabulary_templates) 
         
         # Calculate dataset directory size
         data_size_bytes = 0
@@ -272,32 +262,28 @@ def list_installed_npcs():
                     data_size_bytes += file.stat().st_size
         
         if data_size_bytes < 1000000:
-            size_str = f"{data_size_bytes/1024:.1f} KB"
-        else:
-            size_str = f"{data_size_bytes/1024/1024:.2f} MB"
+            dataset_size = f"{data_size_bytes/1024:.1f} KB"
+        else: dataset_size = f"{data_size_bytes/1024/1024:.2f} MB"
         
         has_tools = "no"
-        if isinstance(merge, list):
-            if any("tools" in item for item in merge if isinstance(item, dict)):
-                has_tools = "yes"
         
-        # Get last modified time of the directory as a simple date
         mod_date = datetime.fromtimestamp(
             npc_dir.stat().st_mtime
         ).strftime("%d-%m-%Y %H:%M:%S")
                 
         data.append({
-            "name": npc_name,
+            "name": npc_dir.name,
             "creator": creator,
             "intents": str(intent_count),
-            "vocab": str(vocab_size),
-            "size": size_str,
+            "vocab": str(vocab_count),
+            "size": dataset_size,
             "tools": has_tools,
+            "templates": str(templates_count),
             "modified": mod_date
         })
 
-    headers = ["NAME", "CREATOR", "INTENTS", "VOCAB", "SIZE", "TOOLS", "MODIFIED"]
-    keys = ["name", "creator", "intents", "vocab", "size", "tools", "modified"]
+    headers = ["Name", "Templates", "Intents", "Vocabulary", "Total size", "Last modified"]
+    keys = ["name", "templates", "intents", "vocab", "size", "modified"]
     
     # Calculate dynamic column widths based on headers and data
     col_widths = [len(h) for h in headers]
@@ -313,7 +299,6 @@ def list_installed_npcs():
     sep_str = ""
     for i, h in enumerate(headers):
         header_str += f"{YELLOW}{h:<{col_widths[i]}}{RESET}"
-        sep_str += "-" * col_widths[i]
         
     print("\n" + header_str)
     print(sep_str)

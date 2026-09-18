@@ -16,6 +16,12 @@ def load_json(path, name):
     except Exception as e:
         logger.error(f"JSON file load error. Filename: {name} Error: {e}")
         return {}
+    
+def load_json_recursive(path, name):
+    templates = []
+    for f in glob.glob(os.path.join(path, "**", name), recursive=True):
+        templates.extend(load_json(os.path.dirname(f), os.path.basename(f)))
+    return templates
 
 class FlintNPC:
     """
@@ -51,7 +57,7 @@ class FlintNPC:
     more typos as the sentence length increases.
     """
 
-    def __init__(self, npc_name, log_level="WARNING"):
+    def __init__(self, npc_name, log_level="INFO"):
         
         logger.setLevel(log_level)
         self.name = npc_name
@@ -116,18 +122,8 @@ class FlintNPC:
         """
             
         self.personality = load_json(dataset_dir, "personality.json")
-
-        self.dataset = []
-        for f in glob.glob(os.path.join(dataset_dir, "**", "dataset_*.json"), recursive=True):
-            self.dataset.extend(
-                load_json(os.path.dirname(f), os.path.basename(f))
-            )
-
-        self.templates = []
-        for f in glob.glob(os.path.join(dataset_dir, "**", "templates_*.json"), recursive=True):
-            self.templates.extend(
-                load_json(os.path.dirname(f), os.path.basename(f))
-            )
+        self.dataset = load_json_recursive(dataset_dir, "dataset_*.json")
+        self.templates = load_json_recursive(dataset_dir, "templates_*.json")
     
         v_lists = [
             "expletives", "interjection", "thanking_words", 
