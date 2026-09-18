@@ -31,6 +31,7 @@
     "<||vocab_draw||>": ["draw", "paint"],
     "<||vocab_editor||>": ["editor"],
     "<||vocab_exchange||>": ["exchange"],
+    "<||vocab_exist||>": ["exist", "exists", "existing"],
     "<||vocab_executable||>": ["executable"],
     "<||vocab_execute||>": ["execute", "run"],
     "<||vocab_explain||>": ["teach", "explain", "instructions"],
