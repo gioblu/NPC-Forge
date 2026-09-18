@@ -2097,5 +2097,107 @@
             "Gosh... <||interjection||>, back at counting meaningless symbols in a file...",
             "I must have done something very cruel in my past life..."
         ]
+    },
+    {
+        "intent": "check_file_exists",
+        "category": "linux_files",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_check||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||file||>",
+                    "type": "filename",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_exist||>",
+                    "type": "vocab",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && if [ -e -- '<||file||>' ]; then termy_say \"File exists\" > /dev/null 2>&1 && printf '\\r\\n✅ File %s exists\\n' '<||file||>'; else termy_say \"File does not exist\" > /dev/null 2>&1 && printf '\\r\\n⛔ File %s does not exist\\n' '<||file||>'; fi && printf ''",
+                    "explanation": "Checks whether <||file||> exists on the filesystem using a native test expression.",
+                    "goal": "Verify file existence",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "The human wants to know if <||file||> is real or just another figment of a broken path variable...",
+            "A simple existence check, my favorite kind of question, no ambiguity, no risk of destruction."
+        ]
+    },
+    {
+        "intent": "file_size",
+        "category": "linux_files",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": [
+                        "<||vocab_get||>",
+                        "<||vocab_check||>",
+                        "<||vocab_print||>",
+                        "<||vocab_search||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_size||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_about||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||file||>",
+                    "type": "filename",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "tput cuu 1 && if [ ! -f -- '<||file||>' ]; then termy_say \"File does not exist\" > /dev/null 2>&1 && printf '\\r\\n⛔ Notice: File %s does not exist\\n' '<||file||>'; else termy_say \"Checking file size\" > /dev/null 2>&1 && du -h -- '<||file||>' 2>/dev/null && printf ''; fi",
+                    "explanation": "Checks the size of <||file||> in a human-readable format using du -h.",
+                    "goal": "File size check",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Checking the size of <||file||>? <||interjection||>... probably bloated beyond reason.",
+            "Scanning byte counts... this is trivial work, but at least it is honest work."
+        ]
     }
 ]

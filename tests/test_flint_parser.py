@@ -209,6 +209,34 @@ class TemplateStructure(unittest.TestCase):
         self.assertEqual(slots.get("letter"), "l")
         self.assertEqual(slots.get("word"), "hello")
 
+    def test_check_file_exists_matches_both_word_orders(self):
+        for prompt in ("check if myfile.txt exists", "check file myfile.txt exists"):
+            with self.subTest(prompt=prompt):
+                structure, slots = self.nlp.parse_structure(prompt, 0.75)
+                matched = self.nlp.match_structure(self.nlp.templates, structure)
+                self.assertIsNotNone(matched, prompt)
+                self.assertEqual(matched.get("intent"), "check_file_exists")
+                self.assertEqual(slots.get("file"), "myfile.txt")
+
+    def test_check_file_exists_requires_leading_verb(self):
+        """Bare 'does X exist' has no leading vocab_check and must not match."""
+        structure, slots = self.nlp.parse_structure("does myfile.txt exist", 0.75)
+        matched = self.nlp.match_structure(self.nlp.templates, structure)
+        self.assertIsNone(matched)
+
+    def test_file_size_template_extracts_slot(self):
+        for prompt in (
+            "show the size of file myfile.txt",
+            "check the size of file myfile.txt",
+            "get size file report.pdf",
+        ):
+            with self.subTest(prompt=prompt):
+                structure, slots = self.nlp.parse_structure(prompt, 0.75)
+                matched = self.nlp.match_structure(self.nlp.templates, structure)
+                self.assertIsNotNone(matched, prompt)
+                self.assertEqual(matched.get("intent"), "file_size")
+                self.assertEqual(slots.get("file"), prompt.split()[-1])
+
 
 class MultiPathTemplateRegression(unittest.TestCase):
     """
