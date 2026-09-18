@@ -80,7 +80,7 @@ I am developing NPC-Forge with the conviction that democratic and sustainable us
 Or are you just going to sit there waiting for the water to reach the boiling point?
 
 The following list contains the contributors; with their support, expertise, kindness and talent NPC-Forge and TERMy are getting better by the day:
-[Fred Larsen](https://github.com/fredilarsen), [Kevin Mathis](https://github.com/KMathisGit), [Cristiano Pizzarelli](https://github.com/LordEnd13), [David Starkweather](https://github.com/starkdg).
+[Fred Larsen](https://github.com/fredilarsen), [Kevin Mathis](https://github.com/KMathisGit), [Cristiano Pizzarelli](https://github.com/LordEnd13), [David Starkweather](https://github.com/starkdg), [SyN-droMe](https://github.com/SyN-droMe)
 
 ### License
 
