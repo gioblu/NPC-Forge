@@ -115,6 +115,12 @@ termy_set_context() {
         return 1
     fi
 
+    # If the key is a file or path, convert the relative path to an absolute one
+    if [ "$key" = "active_file" ]; then
+        # readlink -f resolves relative paths, symlinks, and dot notation (.) or (..)
+        value=$(readlink -f "$value" 2>/dev/null || realpath "$value" 2>/dev/null || echo "$value")
+    fi
+
     if [ ! -f "$config_file" ]; then
         echo "{}" > "$config_file"
     fi

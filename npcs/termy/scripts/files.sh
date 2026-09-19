@@ -281,26 +281,28 @@ termy_execute() {
         file_ext="${file_ext,,}" # Force lowercase for safe matching
     fi
 
+    # Local variable to capture the runtime stdout
+    local output=""
+
     case "$file_ext" in
         py)
-            python3 "$target_file"
+            output=$(python3 "$target_file")
             ;;
         js)
-            node "$target_file"
+            output=$(node "$target_file")
             ;;
         sh|bash)
-            bash "$target_file"
+            output=$(bash "$target_file")
             ;;
         rb)
-            ruby "$target_file"
+            output=$(ruby "$target_file")
             ;;
         go)
-            go run "$target_file"
+            output=$(go run "$target_file")
             ;;
         "")
-            # Extensionless assets require explicit executable privileges
             if [[ -x "$target_file" ]]; then
-                "$target_file"
+                output=$("$target_file")
             else
                 termy_say "⛔ Error: Extensionless file is not executable. Run 'chmod +x'" >&2
                 return 1
@@ -314,6 +316,8 @@ termy_execute() {
 
     local run_status=$?
     if [[ $run_status -eq 0 ]]; then
+        echo "$output"
+        termy_set_context active_content "$output"
         termy_say "Execution completed."
         return 0
     else
