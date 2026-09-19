@@ -146,7 +146,7 @@ locate_and_activate_venv() {
                          "$config_file" 2>/dev/null); then
             echo "$temp_json" > "$config_file"
             
-            printf "\n🚀 \033[1mEnvironment Verified and Activated\033[22m\n\n"
+            printf "\n\033[1mEnvironment Verified and Activated\033[22m\n\n"
             termy_say -s "Configuration saved. Activating the virtual environment now."
             
             source "${absolute_venv_path}/bin/activate"
