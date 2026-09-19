@@ -919,18 +919,18 @@
                     "required": true
                 },
                 {
-                    "tag": "<||vocab_in||>",
-                    "type": "vocab",
-                    "required": false
-                },
-                {
                     "tag": "<||vocab_file||>",
                     "type": "vocab",
-                    "required": false
+                    "required": true
                 },
                 {
-                    "tag": "<||word||>",
-                    "type": "word",
+                    "tag": "<||vocab_name||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||name||>",
+                    "type": "filename",
                     "required": true
                 }
             ]
@@ -940,8 +940,8 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && termy_say \"Searching for files\" > /dev/null 2>&1 && printf '\\r\\n🔍 Searching from current directory...\\n' && escaped_word=$(printf '%s' '<||word||>' | sed \"s/'/'\\\\''/g\") && find . -type f -name \"*${escaped_word}*\" 2>/dev/null | head -n 20 && printf ''",
-                    "explanation": "Recursively uses the native find command to locate files matching <||word||> starting directly from the current working directory, limited to 20 lines.",
+                    "command": "tput cuu 1 && termy_say \"Searching for files\" > /dev/null 2>&1 && printf '\\r\\n🔍 Searching from current directory...\\n' && escaped_word=$(printf '%s' '<||name||>' | sed \"s/'/'\\\\''/g\") && find . -type f -name \"*${escaped_word}*\" 2>/dev/null | head -n 20 && printf ''",
+                    "explanation": "Recursively uses the native find command to locate files matching <||name||> starting directly from the current working directory, limited to 20 lines.",
                     "goal": "Directory Allocation",
                     "mode": "sync"
                 }
