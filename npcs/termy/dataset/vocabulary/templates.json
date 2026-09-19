@@ -40,6 +40,7 @@
     "<||vocab_email||>": ["email", "mail"],
     "<||vocab_end||>": ["end", "endings", "ending", "trailing"],
     "<||vocab_exchange||>": ["exchange"],
+    "<||vocab_exist||>": ["exist", "exists", "existing"],
     "<||vocab_executable||>": ["executable"],
     "<||vocab_execute||>": ["execute", "executes", "execution", "run", "runs"],
     "<||vocab_explain||>": ["teach", "explain", "instructions"],
