@@ -41,8 +41,46 @@ class FlintParser:
         self.templates_vocabulary = templates_vocabulary
         self.log_info = f"[{name}][nlp.py]"
         self.weights = self.calculate_auto_weights(intents or [])
+        
+        # Holds Pre-compiled and sorted template 
+        # paths compiled once at initialization
+        self._compiled_paths = self._compile_templates(templates)
         return
 
+    def _compile_templates(self, templates):
+        """
+        Pre-compiles templates into a sorted list of paths for O(1) pruning 
+        and O(N) early-exit matching.
+        """
+        compiled = []
+        if not templates: return compiled
+            
+        for b in templates:
+            if not b or "structure" not in b: continue
+            for path in b["structure"]:
+                required_count = sum(1 for node in path if node.get("required", True))
+                total_length = len(path)
+                compiled.append({
+                    "template": b,
+                    "path": path,
+                    "required_count": required_count,
+                    "total_length": total_length
+                })
+        
+        # Sort by total_length descending then required_count descending.
+        # This guarantees the first valid match found is the most specific 
+        # path allowing for an early exit.
+        
+        compiled.sort(
+            key=lambda x: (
+                x["total_length"], 
+                x["required_count"]
+            ), 
+            reverse=True
+        )
+        
+        return compiled
+    
     def tag_matches(self, value, tag):
         """
         Checks if a value matches a tag. Tag can be a string or list of strings.
@@ -473,7 +511,11 @@ class FlintParser:
             token = working_tokens[i]
             candidates = []
             self.find_candidates(structure, candidates)
-            expects_variable = any(isinstance(tag, str) and tag in self.variable_types for _, tag in candidates)
+            
+            expects_variable = any(
+                isinstance(tag, str
+            ) and tag in self.variable_types for _, tag in candidates)
+            
             remainder = " ".join(working_tokens[i:])
             # if token does not contain spaces (it is not a string variable)
             if not " " in token:
@@ -532,43 +574,42 @@ class FlintParser:
 
         logger.info(f"{log_info} Slots: {slots}.")                    
         return structure, slots
-    
+
     def match_structure(self, templates, structure):
-        """
-        Compares a parsed prompt structure against a list of templates.
-
-        Args:
-            templates (list[dict]): A list of templates.
-            structure (list[str]): The parsed prompt structure.
-
-        Returns:
-            dict | None: The matching template emtry if a successful 
-            match is found, otherwise None.
-        """   
-        match = None
-        for b in templates:
-            if not b or "structure" not in b: continue
-            for path in b["structure"]:
-                prompt_i = 0  # Index of prompt structure 
-                template_i = 0  # Index of template structure
-                template_match = True
-                while template_i < len(path):
-                    node = path[template_i]
-                    is_required = node.get("required", True)
-                    if (
-                        prompt_i < len(structure) and 
-                        self.tag_matches(structure[prompt_i], node["tag"])
-                    ):
+        struct_len = len(structure)
+        
+        if templates is self.templates and hasattr(self, '_compiled_paths'):
+            compiled_paths = self._compiled_paths
+        else: compiled_paths = self._compile_templates(templates)
+        
+        for item in compiled_paths:
+            # If the path requires more tokens than the structure has go to the next
+            if item["required_count"] > struct_len: continue
+                
+            path = item["path"]
+            prompt_i = 0
+            template_i = 0
+            template_match = True
+            
+            while template_i < len(path):
+                node = path[template_i]
+                tag = node["tag"]
+                is_required = node.get("required", True)
+                
+                if prompt_i < struct_len:
+                    struct_tag = structure[prompt_i]
+                    # Inlined tag matching
+                    if (isinstance(tag, list) and struct_tag in tag) or struct_tag == tag:
                         prompt_i += 1
                         template_i += 1
-                    elif not is_required: template_i += 1
-                    else:
-                        template_match = False
-                        break
-                    
-                if template_match and prompt_i == len(structure):
-                    match = b
-                    break
+                        continue # Move to next node in both
+                
+                if not is_required: template_i += 1 
+                else:
+                    template_match = False
+                    break # Required node failed, abort this path
+                
+            if template_match and prompt_i == struct_len:
+                return item["template"]
             
-            if match: break
-        return match
+        return None
