@@ -151,6 +151,7 @@ def run_cli() -> int:
     parser.add_argument("query", nargs="*", help="Prompt input string.")
     parser.add_argument("--npc", default="termy", help="Target NPC instance (default: termy)")
     parser.add_argument("-y", "--yes", action="store_true", help="Automatically answer yes to prompts (skip confirmation)")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Show debugging information")
     args = parser.parse_args()
 
     if not sys.stdin.isatty(): user_input = sys.stdin.read().strip()
@@ -160,8 +161,7 @@ def run_cli() -> int:
     if not user_input: parser.error("query must not be empty")
 
     # Pass --yes flag through environment so all subprocess calls inherit it
-    if args.yes:
-        os.environ["TERMY_YES"] = "1"
+    if args.yes: os.environ["TERMY_YES"] = "1"
 
     CURRENT_BOT_DIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -200,7 +200,10 @@ def run_cli() -> int:
         f"{status} | "
         f"Confidence: {conf_color}{conf_pct}{RESET}\n"
     )
-    print(meta)
+    
+    if args.verbose: print(meta) 
+    else: print()
+    
     if thinking: print(f"{GRAY}Thinking: " + thinking + RESET + "\n")
 
     # Skip related intents display here - moved to after response
@@ -326,8 +329,7 @@ def run_cli() -> int:
                 if file.suffix == ".sh":
                     sources.append(f"source {file}")
         
-        if sources:
-            command = f"{' && '.join(sources)} && {command}"
+        if sources: command = f"{' && '.join(sources)} && {command}"
     
         if permission == "yolo":
             try:
