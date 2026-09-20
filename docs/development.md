@@ -113,8 +113,8 @@ The next problem to solve was, how to handle questions like "create file test.tx
             "name": "run_in_terminal",
             "arguments": {
                 "command": "echo '' > '<||file||>' && termy_set_context 'active_file' '<||file||>'",
-                "explanation": "Writes <||string||> in file <||file||>.",
-                "goal": "Directory Allocation",
+                "explanation": "Creates the file <||file||>",
+                "goal": "Create the file <||file||>",
                 "mode": "sync"
             }
         }
@@ -160,8 +160,8 @@ So that's the pipeline I implemented:
 1. Strip expletives, interjections, encouraging, discouraging and thanking words (remove noise)
 2. Sentiment analysis
 3. Exact Match (very fast)
-4. Template Match (slower)
-5. Probabilistic Match (even slower)
+4. Template Match (very fast)
+5. Probabilistic Match (slower)
    
 Step `5` relies on:
 1. IDF (Inverse Document Frequency) to identify rare words.
