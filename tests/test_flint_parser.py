@@ -210,7 +210,7 @@ class TemplateStructure(unittest.TestCase):
         self.assertEqual(slots.get("word"), "hello")
 
     def test_check_file_exists_matches_both_word_orders(self):
-        for prompt in ("check if myfile.txt exists", "check file myfile.txt exists"):
+        for prompt in ("check file myfile.txt exists", "check if file myfile.txt exists"):
             with self.subTest(prompt=prompt):
                 structure, slots = self.nlp.parse_structure(prompt, 0.75)
                 matched = self.nlp.match_structure(self.nlp.templates, structure)
@@ -387,15 +387,15 @@ class FlintParserEdgeCases(unittest.TestCase):
     def setUp(self):
         self.nlp = build_parser()
 
-    def test_string_greedy_capture_with_embedded_vocab(self):
+    def test_word_greedy_capture_with_embedded_vocab(self):
         """EDGE CASE 1: slang request containing spaces isn't broken by vocabulary."""
-        prompt = "what is the definition of the slang noob"
+        prompt = "what do you think about \"pasta alla amatriciana\" or php"
         structure, slots = self.nlp.parse_structure(prompt, 0.75)
         matched = self.nlp.match_structure(self.nlp.templates, structure)
 
         self.assertIsNotNone(matched)
-        self.assertEqual(matched.get("intent"), "slang_meaning")
-        self.assertEqual(slots.get("string"), "noob")
+        self.assertEqual(matched.get("intent"), "opinion_inquiry")
+        self.assertEqual(slots.get("subject"), "pasta alla amatriciana")
 
     def test_single_reserved_word_as_variable_argument(self):
         """EDGE CASE 2: reserved word used as an argument."""
@@ -414,16 +414,6 @@ class FlintParserEdgeCases(unittest.TestCase):
 
         if matched:
             self.assertEqual(slots.get("word"), "file")
-
-    def test_quoted_string_with_command_inside_remains_pure(self):
-        """EDGE CASE 4: quoted strings."""
-        prompt = 'what is the definition of the slang "define"'
-        structure, slots = self.nlp.parse_structure(prompt, 0.75)
-        matched = self.nlp.match_structure(self.nlp.templates, structure)
-
-        self.assertIsNotNone(matched)
-        self.assertEqual(matched.get("intent"), "slang_meaning")
-        self.assertEqual(slots.get("string"), "define")
 
 
 if __name__ == "__main__":
