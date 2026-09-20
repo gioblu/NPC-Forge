@@ -23,7 +23,6 @@
     "<||vocab_execute||>": ["execute", "run", "do"],
     "<||vocab_explain||>": ["teach", "explain", "instructions"],
     "<||vocab_file||>": ["file", "document"],
-    "<||vocab_find||>": ["find"],
     "<||vocab_from||>": ["from"],
     "<||vocab_function||>": ["function"],
     "<||vocab_google||>": ["google"],

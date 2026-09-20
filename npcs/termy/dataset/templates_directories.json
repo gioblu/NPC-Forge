@@ -19,6 +19,11 @@
                     "required": true
                 },
                 {
+                    "tag": "<||vocab_dir||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
                     "tag": [
                         "<||vocab_from||>",
                         "<||vocab_in||>",

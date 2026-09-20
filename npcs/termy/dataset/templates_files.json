@@ -1,5 +1,95 @@
 [
     {
+        "intent": "file_print_context",
+        "category": "linux_files",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_print||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_content||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_about||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": [
+                        "<||vocab_file||>",
+                        "<||vocab_it||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "cat \"$(termy_get_context 'active_file')\"",
+                    "explanation": "Prints contents of the last active file in context.",
+                    "goal": "Print file contents",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask",
+        "thinking": [
+            "OK, I don't think the human will ever learn this command.",
+            "I am asked to rename the file <||file||>. I can excell at this..."
+        ]
+    },
+    {
+        "intent": "file_print",
+        "category": "linux_files",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_print||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||path||>",
+                    "type": "path",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "cat '<||file||>' && termy_set_context 'active_file' '<||file||>'",
+                    "explanation": "Prints content of file <||file||>.",
+                    "goal": "Print file contents",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask",
+        "thinking": [
+            "OK, I don't think the human will ever learn this command.",
+            "I am asked to rename the file <||file||>. I can excell at this..."
+        ]
+    },
+    {
         "intent": "file_info",
         "category": "linux_files",
         "type": "template",
@@ -7,8 +97,10 @@
             [
                 {
                     "tag": [
-                        "<||vocab_search||>",
-                        "<||vocab_print||>"
+                        "<||vocab_get||>",
+                        "<||vocab_check||>",
+                        "<||vocab_print||>",
+                        "<||vocab_search||>"
                     ],
                     "type": "vocab",
                     "required": true
@@ -147,7 +239,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "echo '<||string||>' > '<||file||>' && termy_set_context 'active_file' '<||file||>'",
+                    "command": "echo '<||string||>' > '<||file||>' &&\ntermy_set_context 'active_file' '<||file||>' &&\ntermy_set_context 'active_content' '<||string||>'",
                     "explanation": "Writes <||string||> in file <||file||>.",
                     "goal": "Directory Allocation",
                     "mode": "sync"
@@ -209,7 +301,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "cp -i -- \"$(termy_get_context 'active_file')\" '<||path||>'",
+                    "command": "active_file=\"$(termy_get_context 'active_file')\" &&\ncp -i -- \"$active_file\" '<||path||>' &&\nif [ -d '<||path||>' ]; then\n termy_set_context active_file \"<||path||>/$(basename \"$active_file\")\";\nelse\n termy_set_context active_file '<||path||>';\nfi",
                     "explanation": "Copies the active file to the specified destination path.",
                     "goal": "File duplication",
                     "mode": "sync"
@@ -282,7 +374,10 @@
                 {
                     "tag": [
                         "<||vocab_compute||>",
-                        "<||vocab_get||>"
+                        "<||vocab_get||>",
+                        "<||vocab_check||>",
+                        "<||vocab_print||>",
+                        "<||vocab_search||>"
                     ],
                     "type": "vocab",
                     "required": true
@@ -314,7 +409,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "sha256sum '<||file||>'",
+                    "command": "checksum=$(sha256sum '<||file||>' | awk '{print $1}') &&\ntermy_set_context active_file '<||file||>' &&\ntermy_say \"Here is the checksum: $checksum\" &&\ntermy_set_context active_content \"$checksum\"",
                     "explanation": "Calculates the SHA-256 checksum of '<||file||>'.",
                     "goal": "Verify file integrity",
                     "mode": "sync"
@@ -421,7 +516,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "mv -i -- $(termy_get_context 'active_file') '<||path||>'",
+                    "command": "active_file=\"$(termy_get_context 'active_file')\" &&\nmv -i -- \"$active_file\" '<||path||>' &&\n\nif [ -d '<||path||>' ]; then\n termy_set_context active_file \"<||path||>/$(basename \"$active_file\")\";\nelse\n termy_set_context active_file '<||path||>';\nfi",
                     "explanation": "Move the last active file to a new location.",
                     "goal": "File location update",
                     "mode": "sync"
@@ -430,7 +525,8 @@
         ],
         "permission": "ask",
         "thinking": [
-            "The user wants me to execute a script, thankfully the termy_execute script will do the work for me...",
+            "I wonder what mv stands for... maybe Massively Vicious... or... Machine's Victory?",
+            "The user wants me to move a file... thankfully mv will do the work for me...",
             "That is something I can do faster than LLMs..."
         ]
     },
@@ -661,7 +757,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && if [ ! -f '<||file||>' ]; then termy_say \"File not found\" > /dev/null 2>&1 && printf '\\r\\n⛔ Error: File %s does not exist\\n' '<||file||>'; else termy_say \"Deleting file\" > /dev/null 2>&1 && rm -- '<||file||>' 2>/dev/null && printf '\\r\\n🗑️  File %s successfully removed\\n' '<||file||>'; fi && printf ''",
+                    "command": "if [ ! -f '<||file||>' ]; then\n termy_say \"File not found\" > /dev/null 2>&1 &&\n printf '\\r\\n⛔ Error: File %s does not exist\\n' '<||file||>';\nelse\n termy_say \"Deleting file\" > /dev/null 2>&1 &&\n rm -- '<||file||>' 2>/dev/null &&\n printf '\\r\\n🗑️  File %s successfully removed\\n' '<||file||>';\nfi &&\nprintf ''",
                     "explanation": "Validates if the target file exists, announces the deletion via termy_say, and removes it safely from the filesystem.",
                     "goal": "Directory Allocation",
                     "mode": "sync"
@@ -715,7 +811,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && termy_say \"Opening file in editor\" > /dev/null 2>&1 && printf '\\r\\n📝 Launching editor for: %s\\n' '<||string||>' && escaped_path=$(printf '%s' '<||string||>' | sed \"s/'/'\\\\''/g\") && open_file_with_editor \"$escaped_path\" && printf ''",
+                    "command": "termy_say \"Opening file in editor\" > /dev/null 2>&1 &&\nprintf '📝 Launching editor for: %s\\n' '<||string||>' &&\nescaped_path=$(printf '%s' '<||string||>' | sed \"s/'/'\\\\''/g\") &&\nopen_file_with_editor \"$escaped_path\" &&\nprintf ''",
                     "explanation": "Detects available terminal or graphical text editors and invokes open_file_with_editor to modify the file <||string||>.",
                     "goal": "Directory Allocation",
                     "mode": "sync"
@@ -795,7 +891,6 @@
             [
                 {
                     "tag": [
-                        "<||vocab_move||>",
                         "<||vocab_rename||>"
                     ],
                     "type": "vocab",
@@ -839,7 +934,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && if [ ! -e '<||a||>' ]; then termy_say \"Source not found\" > /dev/null 2>&1 && printf '\\r\\n⛔ Error: Source %s does not exist\\n' '<||a||>'; else termy_say \"Renaming file\" > /dev/null 2>&1 && mv -- '<||a||>' '<||b||>' 2>/dev/null && printf '\\r\\n🔄 Renamed %s to %s\\n' '<||a||>' '<||b||>'; fi && printf ''",
+                    "command": "if [ ! -e '<||a||>' ]; then\n termy_say \"Source not found\" > /dev/null 2>&1 &&\n printf '⛔ Error: Source %s does not exist\\n' '<||a||>';\nelse\n termy_say \"Renaming file\" > /dev/null 2>&1 &&\n mv -- '<||a||>' '<||b||>' 2>/dev/null &&\n printf '🔄 Renamed %s to %s\\n' '<||a||>' '<||b||>';\nfi && printf ''",
                     "explanation": "Validates file existence and renames <||a||> into <||b||>.",
                     "goal": "File name change",
                     "mode": "sync"
@@ -891,7 +986,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && if [ ! -f '<||string||>' ]; then termy_say \"File not found\" > /dev/null 2>&1 && printf '\\r\\n⛔ Error: File %s does not exist\\n' '<||string||>'; else termy_say \"Counting lines\" > /dev/null 2>&1 && printf '\\r\\n🔢 Lines: ' && wc -l -- '<||string||>' 2>/dev/null; fi && printf ''",
+                    "command": "if [ ! -f '<||string||>' ]; then\n termy_say \"File not found\" > /dev/null 2>&1 &&\n printf '⛔ Error: File %s does not exist: ' '<||string||>';\nelse\n termy_say \"Counting lines\" > /dev/null 2>&1 &&\n printf '🔢 Lines: ' && wc -l -- '<||string||>' 2>/dev/null;\nfi &&\nprintf ''",
                     "explanation": "Validates the target file existence and executes the native wc -l utility to return the line count of <||string||>.",
                     "goal": "Directory Allocation",
                     "mode": "sync"
@@ -940,7 +1035,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && termy_say \"Searching for files\" > /dev/null 2>&1 && printf '\\r\\n🔍 Searching from current directory...\\n' && escaped_word=$(printf '%s' '<||name||>' | sed \"s/'/'\\\\''/g\") && find . -type f -name \"*${escaped_word}*\" 2>/dev/null | head -n 20 && printf ''",
+                    "command": "termy_say \"Searching for files\" > /dev/null 2>&1 &&\nprintf '🔍 Searching from current directory...\n\n' &&\nescaped_word=$(printf '%s' '<||name||>' | sed \"s/'/'\\\\''/g\") &&\nfind . -type f -name \"*${escaped_word}*\" 2>/dev/null | head -n 20 &&\nprintf ''",
                     "explanation": "Recursively uses the native find command to locate files matching <||name||> starting directly from the current working directory, limited to 20 lines.",
                     "goal": "Directory Allocation",
                     "mode": "sync"
@@ -999,7 +1094,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "content=\"$(termy_get_context 'active_content')\" && if [ ! -z \"$content\" ]; then echo \"$content\" > '<||string||>' && termy_say \"Content saved to <||string||>\" && termy_set_context active_file '<||string||>'; else termy_say \"No content to save\"; fi",
+                    "command": "content=\"$(termy_get_context 'active_content')\" &&\nif [ ! -z \"$content\" ]; then\n echo \"$content\" > '<||string||>' &&\n termy_say \"Content saved to <||string||>\" &&\n termy_set_context active_file '<||string||>';\nelse\n termy_say \"No content to save\"; \nfi",
                     "explanation": "Saves active_content context to a specified file.",
                     "goal": "Persist content to filesystem",
                     "mode": "sync"
@@ -1237,7 +1332,11 @@
         "structure": [
             [
                 {
-                    "tag": "<||vocab_search||>",
+                    "tag": [
+                        "<||vocab_check||>",
+                        "<||vocab_print||>",
+                        "<||vocab_search||>"
+                    ],
                     "type": "vocab",
                     "required": true
                 },
@@ -1299,7 +1398,11 @@
         "structure": [
             [
                 {
-                    "tag": "<||vocab_search||>",
+                    "tag": [
+                        "<||vocab_check||>",
+                        "<||vocab_print||>",
+                        "<||vocab_search||>"
+                    ],
                     "type": "vocab",
                     "required": true
                 },
@@ -1720,7 +1823,7 @@
                 {
                     "tag": [
                         "<||vocab_from||>",
-                        "<||vocab_of||>",
+                        "<||vocab_about||>",
                         "<||vocab_in||>"
                     ],
                     "type": "vocab",
@@ -1877,7 +1980,7 @@
                 {
                     "tag": [
                         "<||vocab_from||>",
-                        "<||vocab_of||>"
+                        "<||vocab_about||>"
                     ],
                     "type": "vocab",
                     "required": true
@@ -2110,6 +2213,11 @@
                     "required": true
                 },
                 {
+                    "tag": "<||vocab_if||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
                     "tag": "<||vocab_file||>",
                     "type": "vocab",
                     "required": false
@@ -2131,7 +2239,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && if [ -e -- '<||file||>' ]; then termy_say \"File exists\" > /dev/null 2>&1 && printf '\\r\\n✅ File %s exists\\n' '<||file||>'; else termy_say \"File does not exist\" > /dev/null 2>&1 && printf '\\r\\n⛔ File %s does not exist\\n' '<||file||>'; fi && printf ''",
+                    "command": "tput cuu 1 && if [ -e '<||file||>' ]; then termy_say \"File exists\" > /dev/null 2>&1 && printf '\\r\\n✅ File %s exists\\n' '<||file||>'; else termy_say \"File does not exist\" > /dev/null 2>&1 && printf '\\r\\n⛔ File %s does not exist\\n' '<||file||>'; fi && printf ''",
                     "explanation": "Checks whether <||file||> exists on the filesystem using a native test expression.",
                     "goal": "Verify file existence",
                     "mode": "sync"
