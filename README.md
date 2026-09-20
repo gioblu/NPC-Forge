@@ -37,17 +37,14 @@ Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md
 
 [![Terminal demonstration](/npcs/termy/showcase.gif)](https://www.youtube.com/watch?v=qeIp0xePLBg)
 
-You can also write a script in plain english and pass it to termy, create a file `test.termy` with the following content:
+You can also write a script in plain english, create a file `test.termy` with the following content:
 ```
 search on wiki the programma 101
 append it to p101.txt
 open it in the browser 
 ```
-Then digit:
-```
-termy -y < test.termy
-```
-TERMy will happily execute your script in plain english. 
+Then digit `termy -y < test.termy` and watch TERMy transpile it to Bash and execute it. 
+
 > [!TIP]
 > If you want to expand the capabilities of TERMy check out the [dataset](npcs/termy/dataset) directory and the [TERMy](npcs/termy/README.md) documentation
 
