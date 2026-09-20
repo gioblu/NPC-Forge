@@ -43,7 +43,7 @@ search on wiki the programma 101
 append it to p101.txt
 open it in the browser 
 ```
-Then digit `termy -y < test.termy` and watch TERMy transpile it to Bash and execute it. 
+Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell script and execute it. 
 
 > [!TIP]
 > If you want to expand the capabilities of TERMy check out the [dataset](npcs/termy/dataset) directory and the [TERMy](npcs/termy/README.md) documentation
