@@ -23,6 +23,25 @@ chmod +x setup.sh && ./setup.sh --dev
 npc-forge install npcs/termy
 ```
 
+### How to use it
+
+Just digit `termy` followed by your request:
+```
+termy hello
+```
+
+You can also write a script in plain english and pass it to termy, create a file `test.termy` with the following content:
+```
+search on wiki the programma 101
+append it to p101.txt
+open it in the browser 
+```
+Then digit:
+```
+termy -y < test.termy
+```
+TERMy will happily execute your script in plain english. 
+
 ### How to add entries to the dataset
 
 Be sure to read carefully the [NDF 0.0 (NPC-Forge Dataset Format)](/docs/dataset.md). In the `npcs/termy/dataset` directory there are `dataset_*.json` and `templates_*.json` files which contain dataset entries organized in categories, such as `dataset_files.json` or `templates_directories.json`.
