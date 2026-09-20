@@ -1,5 +1,5 @@
 ## TERMy
-TERMy is an experimental, deterministic terminal assistant implemented using [FlintParser](/src/FlintParser.py) and [FlintNPC](/src/FlintNPC.py) Python implementations that can translate your plain English requests in shell scripts in milliseconds. It is incredibly lightweight and can run on very small targets such as RPI or ESP32, just type `termy` followed by your prompt:
+TERMy is an experimental, deterministic terminal assistant implemented using [FlintParser](/src/FlintParser.py) and [FlintNPC](/src/FlintNPC.py) Python implementations translates your plain English requests in shell scripts in milliseconds. It is incredibly lightweight and can run on very small targets such as RPI or ESP32, just type `termy` followed by your prompt:
 
 [![Terminal demonstration](/npcs/termy/showcase.gif)](https://www.youtube.com/watch?v=qeIp0xePLBg)
 
