@@ -40,7 +40,7 @@ Then digit:
 ```
 termy -y < test.termy
 ```
-TERMy will happily execute your script in plain english. 
+Then digit `termy -y < test.termy` and watch TERMy transpile it to Bash and execute it.
 
 ### How to add entries to the dataset
 
