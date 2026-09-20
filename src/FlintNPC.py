@@ -26,6 +26,30 @@ def load_json_recursive(path, name):
     return templates
 
 class FlintNPC:
+    """
+    
+    FlintNPC - Giovanni Blu Mitolo 2026 (see LICENSE for licensing details) 
+    
+    This is a for creating ultra-lightweight NLU agents. 
+    It has very low latency, minimal memory footprint and supports native 
+    execution on operating systems.
+    
+    It adheres to NDF 0.0 (NPC-Forge Dataset Format) and supports tool 
+    calls and thinking mode. 
+    
+    FlintNPC implements a novel deterministic approach to achieve 
+    NLU (Natural Language Understanding) and intent resolution:
+    
+    1. Raw text sanitization (strips insults, emojis, interjections)
+    2. Deterministic exact match lookup using bare string comparison
+       A successful match triggers sentiment analysis and intent resolution
+    3. If the exact match fails, the prompt is processesed as a 
+       semantic map, extracting arguments if present (template matching).
+    4. If Template matching fails, the prompt is processed as
+       a BOW (Bag of Words), ignoring order and estimating similarity by 
+       computing word matches and Levenshtein distance to accomodate typos
+       
+    """
     def __init__(self, npc_name, log_level="INFO"):
         logger.setLevel(log_level)
         self.name = npc_name
@@ -181,6 +205,18 @@ class FlintNPC:
             }
 
     def update_context(self, block):
+        """
+        
+        Updates the active conversational context.
+        
+        - "context": [...]  -> overwrites active context with new entries
+        - "context": []     -> explicitly clears the context
+        - no "context" key  -> context persists unchanged
+        
+        This allows context entries to remain active after one is
+        consumed, enabling flows like: "create dir" -> "move it" -> "delete it".
+        
+        """
         if "context" in block:
             if isinstance(block["context"], list) and len(block["context"]) > 0:
                 self.active_context_map = {}
@@ -192,9 +228,23 @@ class FlintNPC:
                 self.active_context_map = {}
 
     def _get_merged_match_map(self):
+        """
+        
+        Returns a unified lookup map merging active context entries with
+        the global dataset. Context entries override dataset entries on
+        key collision, giving them priority.
+        
+        """
         return {**self.exact_match_map, **self.active_context_map}
 
     def process_message(self, user_prompt: str):
+        """
+
+        Processes one subprompt and returns an object containing the
+        response. 
+            
+        """
+        
         logger.info(f"[chatbot.py][{self.name}][process_message] Prompt: {user_prompt}")                    
         rarest_word = self.nlp.get_rarest_word(user_prompt)
         
@@ -312,6 +362,13 @@ class FlintNPC:
         return self.generate_response(self.rejection, {}, 0.0, "rejected", related_intents)
     
     def process_messages(self, user_prompt: str):
+        """
+        
+            Splits composite prompts, calls process_messaget for 
+            each response and unifies their return value in a 
+            definitive JSON response.
+        
+        """
         separator_pattern = r"\n+|\d+\)|[;!?]"
         raw_segments = re.split(separator_pattern, user_prompt)
         sub_prompts = [seg.strip() for seg in raw_segments if seg.strip()]
