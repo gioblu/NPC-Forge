@@ -1,5 +1,5 @@
 
-[![NPC-Forge Discord](https://img.shields.io/badge/Join-Discord-%235865F2.svg)]([[https://discord.com/users/YOURUSERID](https://discord.gg/84zTNDzjD)](https://discord.gg/84zTNDzjD))
+[![NPC-Forge Discord](https://img.shields.io/badge/Join-Discord-%235865F2.svg)](https://discord.gg/84zTNDzjD)
 ## NPC-Forge
 NPC-Forge is a framework for building conversational agents with distinct personalities, multi-turn context, sentiment analysis, and tool-call support. NPCs run on the CPU (web browser or OS) even on embedded systems and obsolete hardware without relying on machine learning or LLMs.
 
