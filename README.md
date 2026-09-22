@@ -1,5 +1,6 @@
-## NPC-Forge
 
+[![NPC-Forge Discord](https://img.shields.io/badge/Join-Discord-%235865F2.svg)](https://discord.gg/84zTNDzjD)
+## NPC-Forge
 NPC-Forge is a framework for building conversational agents with distinct personalities, multi-turn context, sentiment analysis, and tool-call support. NPCs run on the CPU (web browser or OS) even on embedded systems and obsolete hardware without relying on machine learning or LLMs.
 
 Instead of praying for a model to do the right thing, you can now use NPC-Forge to quickly build a deterministic agent and hook it up to your favourite workflow, API or harness.
@@ -43,7 +44,7 @@ search on wiki the programma 101
 append it to p101.txt
 open it in the browser 
 ```
-Then digit `termy -y < test.termy` and watch TERMy transpile it to Bash and execute it. 
+Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell script and execute it. 
 
 > [!TIP]
 > If you want to expand the capabilities of TERMy check out the [dataset](npcs/termy/dataset) directory and the [TERMy](npcs/termy/README.md) documentation

@@ -1,5 +1,5 @@
 ## TERMy
-TERMy is an experimental, deterministic terminal assistant implemented using [FlintParser](/src/FlintParser.py) and [FlintNPC](/src/FlintNPC.py) Python implementations. It is incredibly lightweight and can run on very small targets such as RPI or ESP32, just type `termy` followed by your prompt:
+TERMy is an experimental, deterministic terminal assistant implemented using [FlintParser](/src/FlintParser.py) and [FlintNPC](/src/FlintNPC.py) that translates your plain English requests in shell scripts in milliseconds. It is incredibly lightweight and can run on very small targets such as RPI or ESP32, just type `termy` followed by your prompt:
 
 [![Terminal demonstration](/npcs/termy/showcase.gif)](https://www.youtube.com/watch?v=qeIp0xePLBg)
 
@@ -40,7 +40,7 @@ Then digit:
 ```
 termy -y < test.termy
 ```
-TERMy will happily execute your script in plain english. 
+Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell script and execute it.
 
 ### How to add entries to the dataset
 
