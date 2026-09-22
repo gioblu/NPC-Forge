@@ -146,6 +146,9 @@ class FlintNPC:
     def _fast_score_calculation(self, query, data, threshold):
         total_score = 0.0
         matched_indices = [False] * len(query)
+        
+        # Use a local variable to avoid mutating the shared precomputed data
+        effective_max_score = data["max_score"]
 
         for t_anchor, anchor_weight, t_anchor_len in data["anchor_info"]:
             best_word_sim = 0.0
@@ -156,6 +159,14 @@ class FlintNPC:
                 if matched_indices[idx]: continue
 
                 if t_anchor == t_query:
+                    best_word_sim = 1.0
+                    best_match_idx = idx
+                    break
+
+                # Semantic synonym match
+                anchor_tag = self.nlp._synonym_map.get(t_anchor)
+                query_tag = self.nlp._synonym_map.get(t_query)
+                if anchor_tag and query_tag and anchor_tag == query_tag:
                     best_word_sim = 1.0
                     best_match_idx = idx
                     break
@@ -175,7 +186,14 @@ class FlintNPC:
                 if best_match_idx != -1:
                     matched_indices[best_match_idx] = True
 
-        return total_score / data["max_score"] if data["max_score"] else 0.0
+        # Penalize unmatched query tokens to prevent greedy matching
+        # If a word in the user's prompt is >= 3 chars and didn't match anything, 
+        # it is likely noise, a typo, or a completely different intent.
+        for idx, t_query in enumerate(query):
+            if not matched_indices[idx] and len(t_query) >= 3:
+                effective_max_score += 0.5
+
+        return total_score / effective_max_score if effective_max_score else 0.0
 
     def _build_intent_signatures(self):
         self._precomputed_intents = {}
@@ -185,6 +203,8 @@ class FlintNPC:
             tokens = target_input.lower().split()
             anchor_info = []
             max_score = 0.0
+            token_set = set(tokens)
+            tag_set = set()  # Track synonym tags
 
             for t in tokens:
                 t_len = len(t)
@@ -196,10 +216,15 @@ class FlintNPC:
                 if t_len == 3: weight *= 1.5
                 anchor_info.append((t, weight, t_len))
                 max_score += weight
+                
+                # Add the synonym tag to the tag_set
+                tag = self.nlp._synonym_map.get(t)
+                if tag: tag_set.add(tag)
 
             self._precomputed_intents[target_input] = {
                 "block": block,
-                "token_set": set(tokens),
+                "token_set": token_set,
+                "tag_set": tag_set,
                 "anchor_info": anchor_info,
                 "max_score": max_score
             }
@@ -327,9 +352,13 @@ class FlintNPC:
         max_suggestions = int(self.config.get("suggestions", 5))
 
         for target_input, precomputed in self._precomputed_intents.items():
-            # PERF: O(1) set lookup instead of O(N) list search
-            if rarest_word and rarest_word not in precomputed["token_set"]: 
-                continue
+            # O(1) set lookup, but synonym-aware
+            if rarest_word:
+                if rarest_word not in precomputed["token_set"]:
+                    rarest_tag = self.nlp._synonym_map.get(rarest_word)
+                    # If it's not a direct match AND not a synonym match, skip it
+                    if not rarest_tag or rarest_tag not in precomputed["tag_set"]:
+                        continue
 
             score = self._fast_score_calculation(
                 query_tokens, precomputed, max(threshold, best_score)

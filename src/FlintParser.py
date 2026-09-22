@@ -38,13 +38,20 @@ class FlintParser:
         self.variable_types = variable_types
         self.vocabulary = vocabulary
         self.templates = templates
-        self.templates_vocabulary = templates_vocabulary
+        self.templates_vocabulary = templates_vocabulary or {}
         self.log_info = f"[{name}][nlp.py]"
         self.weights = self.calculate_auto_weights(intents or [])
         
-        # Holds Pre-compiled and sorted template 
-        # paths compiled once at initialization
         self._compiled_paths = self._compile_templates(templates)
+        
+        # Pre-compute O(1) normalized synonym lookup map
+        self._synonym_map = {}
+        if self.templates_vocabulary:
+            for tag, synonyms in self.templates_vocabulary.items():
+                normalized_tag = str(tag).lower().strip()
+                self._synonym_map[normalized_tag] = normalized_tag
+                for syn in synonyms:
+                    self._synonym_map[str(syn).lower().strip()] = normalized_tag                  
         return
 
     def _compile_templates(self, templates):
@@ -327,27 +334,6 @@ class FlintParser:
         s2: str, 
         threshold: float = 0.0
     ) -> float:
-        """
-            Computes an asymmetric, order-independent sentence similarity 
-            score. Tokens from s2 (the intent/reference phrase) anchor the 
-            score and are weighted by their auto-computed IDF specificity, 
-            so a rare word (e.g. "zombie", "syscall") that is missing from 
-            s1 heavily reduces the final score, preventing very similar 
-            common sentences from being confused with each other.
-
-            Filler words (<3 chars, e.g. "is", "a") fall back to a low 
-            default weight only when unseen in the intent corpus; 
-            otherwise their own computed IDF weight is used, so a rare 
-            short/single-letter identifier (e.g. "c", "r" as in the 
-            programming languages) that only occurs in one or two intents 
-            is still recognized as an important word rather than discarded. 
-            3-letter words (e.g. "who", "how", "run") are additionally 
-            boosted since they often carry the subject/action of the 
-            phrase. A single-substitution typo on a 3-letter word scores 
-            exactly 2/3 via Levenshtein, so short-word bleed (e.g. "who" 
-            vs "how") is left to the caller's threshold: both shipped 
-            NPCs use sentence_threshold=0.6668, just above 2/3, to reject it.
-        """
         anchor_tokens = [w for w in s2.lower().strip().split() if w]
         query_tokens = [w for w in s1.lower().strip().split() if w]
         
@@ -371,14 +357,25 @@ class FlintParser:
             best_match_idx = -1
             
             for idx, t_query in enumerate(query_tokens):
-                if idx in matched_indices:
-                    continue
+                if idx in matched_indices: continue
                 
+                # 1. Exact string match
                 if t_anchor == t_query:
                     best_word_sim = 1.0
                     best_match_idx = idx
                     break
                 
+                # 2. Semantic synonym match
+                anchor_tag = self._synonym_map.get(t_anchor)
+                query_tag = self._synonym_map.get(t_query)
+                
+                if anchor_tag and query_tag and anchor_tag == query_tag:
+                    print(f"  [SYNONYM MATCH] '{t_anchor}' and '{t_query}' both map to '{anchor_tag}'")
+                    best_word_sim = 1.0  # Treat as perfect semantic match
+                    best_match_idx = idx
+                    break
+                
+                # 3. Fallback: Levenshtein similarity (for typos)
                 sim = self.levenshtein_similarity(t_anchor, t_query, threshold)
                 if sim > best_word_sim:
                     best_word_sim = sim
@@ -389,13 +386,12 @@ class FlintParser:
                 if best_match_idx != -1:
                     matched_indices.add(best_match_idx)
         
-        # Penalize unmatched query tokens that are entirely absent from 
-        # the known vocabulary (typo/off-topic noise padding)
         for t_query in query_tokens:
             if len(t_query) >= 3 and t_query not in self.weights:
-                max_possible_score += 0.5
+                if not t_query in self._synonym_map: max_possible_score += 0.5
                     
-        return total_score / max_possible_score if max_possible_score else 0.0
+        final_score = total_score / max_possible_score if max_possible_score else 0.0
+        return final_score
     
     def find_candidates(self, structure, candidates):
         clean_user = [tag for tag in structure if tag.startswith("<||")]
