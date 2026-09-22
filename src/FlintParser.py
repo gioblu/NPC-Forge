@@ -370,7 +370,6 @@ class FlintParser:
                 query_tag = self._synonym_map.get(t_query)
                 
                 if anchor_tag and query_tag and anchor_tag == query_tag:
-                    print(f"  [SYNONYM MATCH] '{t_anchor}' and '{t_query}' both map to '{anchor_tag}'")
                     best_word_sim = 1.0  # Treat as perfect semantic match
                     best_match_idx = idx
                     break
