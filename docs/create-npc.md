@@ -6,7 +6,7 @@ This document describes how to use the NPC-Forge framework to scaffold a new NPC
 
 This command will scaffold the directory `npcs/my_new_npc` structure and example dataset files, that is where your NPC's dataset lives.
 
-Read the [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md), this document will help you understand the dataset format.
+Read the [NDF 0.0 (NPC-Forge Dataset Format)](dataset.md), this document will help you understand the dataset format.
 
 After that you are ready to work on your NPC!
 
