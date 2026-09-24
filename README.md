@@ -2,11 +2,6 @@
 [![NPC-Forge Discord](https://img.shields.io/badge/Join-Discord-%235865F2.svg)](https://discord.gg/84zTNDzjD)
 ## NPC-Forge
 
-1) Usa i sinonimi nel calcolo di similarita della frase, e' molto piu veloce di levenshtein e dovrebbe rendere il sistema molto piu affidabile e prono a trovare l'intento
-2) Sistemare aggiungendo un malus se una frase del intento non e nel prompt
-3) togliere il prefisso nei comandi cu o tcu... sistemare l'output e i break
-4) trovare il modo di formattare automaticamente e indentare gli script
-
 NPC-Forge is a framework for building conversational agents with distinct personalities, multi-turn context, sentiment analysis, and tool-call support. NPCs run on the CPU (web browser or OS) even on embedded systems and obsolete hardware without relying on machine learning or LLMs.
 
 Instead of praying for a model to do the right thing, you can now use NPC-Forge to quickly build a deterministic agent and hook it up to your favourite workflow, API or harness.
