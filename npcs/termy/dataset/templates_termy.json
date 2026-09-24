@@ -1,34 +1,36 @@
 [
     {
         "category": "control_repeat",
-        "structure": [[
-            {
-                "tag": "<||vocab_execute||>",
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||n||>",
-                "type": "number",
-                "required": false
-            },
-            {
-                "tag": "<||vocab_times||>",
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||string||>",
-                "type": "string",
-                "required": true
-            }
-        ]],
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_execute||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||n||>",
+                    "type": "number",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_times||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||string||>",
+                    "type": "string",
+                    "required": true
+                }
+            ]
+        ],
         "description": "Executes any command N times in a loop, each iteration processes independently through termy. Use commas (,) to separate subcommands inside the loop.",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "n='<||n||>' && cmd='<||string||>' && cmd=\"${cmd//,/;}\" && for i in $(seq 1 \"$n\"); do echo \"\\n━━━ [$i/$n] executing: $cmd ━━━\" && termy \"$cmd\" || break; done",
+                    "command": "n='<||n||>' && cmd='<||string||>' && cmd=\"${cmd//,/;}\" && for i in $(seq 1 \"$n\"); do termy \"$cmd\" || break; done",
                     "explanation": "Loops N times, invoking termy with the specified command each iteration. Converts commas to semicolons for proper message splitting within each iteration.",
                     "goal": "Execute command N times with independent processing",
                     "mode": "sync"
@@ -38,22 +40,76 @@
         "permission": "yolo"
     },
     {
-        "category": "control_delay",
-        "structure": [[
+        "intent": "control_if",
+        "category": "control_flow",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_if||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||condition||>",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_then||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||then_command||>",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_else||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||else_command||>",
+                    "type": "string",
+                    "required": false
+                }
+            ]
+        ],
+        "description": "Evaluates a natural language condition using termy. If successful (exit code 0), executes the 'then' command; otherwise, executes the optional 'else' command.",
+        "tools": [
             {
-                "tag": [
-                    "<||vocab_delay||>",
-                    "<||vocab_wait||>"
-                ],
-                "type": "vocab",
-                "required": true
-            },
-            {
-                "tag": "<||d||>",
-                "type": "string",
-                "required": true
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "true_cmd=$(cat << 'EOF_TRUE'\n<||then_command||>\nEOF_TRUE\n) && false_cmd=$(cat << 'EOF_FALSE'\n<||else_command||>\nEOF_FALSE\n) && cond=$(cat << 'EOF_COND'\n<||condition||>\nEOF_COND\n) && true_cmd=\"${true_cmd//,/;}\" && false_cmd=\"${false_cmd//,/;}\" && if termy -y \"$cond\" >/dev/null 2>&1; then termy -y \"$true_cmd\"; else if [ -n \"$false_cmd\" ]; then termy -y \"$false_cmd\"; fi; fi",
+                    "explanation": "Uses 'termy -y' to evaluate the condition and execute branches without hanging on permission prompts. Heredocs prevent quote injection from natural language input.",
+                    "goal": "Execute conditional commands based on termy's exit code",
+                    "mode": "sync"
+                }
             }
-        ]],
+        ],
+        "permission": "yolo"
+    },
+    {
+        "category": "control_delay",
+        "structure": [
+            [
+                {
+                    "tag": [
+                        "<||vocab_delay||>",
+                        "<||vocab_wait||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||d||>",
+                    "type": "string",
+                    "required": true
+                }
+            ]
+        ],
         "description": "Pauses execution for specified milliseconds. Use 'random' keyword to generate random delay up to max.",
         "tools": [
             {
