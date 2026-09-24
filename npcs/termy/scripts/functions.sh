@@ -18,7 +18,7 @@ get_quote() {
     author_name=$(echo "$response" | jq -r '.[0].a')
 
     # Output the textual version to screen
-    echo "$response" | jq -r '.[0] | "🎓 \"\(.q)\" - \u001b[4m\(.a)\u001b[24m"'
+    echo "$response" | jq -r '.[0] | "\"\(.q)\" - \u001b[4m\(.a)\u001b[24m"'
 
     # TTS speech
     termy_say "Here is the quote you required. $quote_text. By $author_name." >/dev/null

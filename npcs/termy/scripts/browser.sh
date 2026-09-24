@@ -34,7 +34,7 @@ open_browser() {
         abs_path=$(readlink -f -- "$target_url")
         # Format as a standard URL
         target_url="file://${abs_path}"
-        printf "📄 \033[1mURL:\033[22m %s\n\n" "$target_url"
+        printf "\033[1mURL:\033[22m %s\n\n" "$target_url"
     else
         # If it is a remote link and lacks explicit web protocols, prepend https://
         if [[ ! "$target_url" =~ ^https?:// ]] && [[ ! "$target_url" =~ ^file:// ]]; then
@@ -43,7 +43,7 @@ open_browser() {
     fi
 
     # Initialization (TCSS Rule 2: Strictly Parameterized printf)
-    printf "⚓ \033[1mLaunching Default Linux Browser\033[22m\n"
+    printf "\033[1mLaunching Default Linux Browser\033[22m\n"
     
     if command -v termy_say >/dev/null 2>&1; then
         if [ "$silent" = false ]; then
