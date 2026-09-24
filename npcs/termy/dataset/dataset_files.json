@@ -153,31 +153,6 @@
     {
         "category": "linux_files",
         "input": [
-            "open in browser",
-            "open it in the browser",
-            "open this in browser",
-            "show it in the browser",
-            "launch in browser",
-            "show in browser",
-            "view in browser",
-            "display in browser"
-        ],
-        "tools": [
-            {
-                "name": "run_in_terminal",
-                "arguments": {
-                    "command": "file_path=\"$(termy_get_context 'active_file')\" && if [ -z \"$file_path\" ]; then termy_say \"Error: No active file in context\"; exit 1; elif [ ! -f \"$file_path\" ]; then termy_say \"Error: File not found at $file_path\"; exit 1; else open_browser \"$file_path\"; fi",
-                    "explanation": "Safely extracts the absolute file path from context, validates it exists, then opens it in the browser with proper argument separation.",
-                    "goal": "Open webpage in browser",
-                    "mode": "sync"
-                }
-            }
-        ],
-        "permission": "yolo"
-    },
-    {
-        "category": "linux_files",
-        "input": [
             "delete a file in this directory",
             "remove a file in this location",
             "delete a file from the current dir",

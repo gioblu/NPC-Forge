@@ -685,12 +685,12 @@
                     "required": false
                 },
                 {
-                    "tag": "<||vocab_in||>",
+                    "tag": "<||vocab_it||>",
                     "type": "vocab",
                     "required": false
                 },
                 {
-                    "tag": "<||vocab_it||>",
+                    "tag": "<||vocab_in||>",
                     "type": "vocab",
                     "required": false
                 },
