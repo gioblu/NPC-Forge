@@ -11,6 +11,11 @@
                     "required": true
                 },
                 {
+                    "tag": "<||vocab_if||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
                     "tag": "<||vocab_port||>",
                     "type": "vocab",
                     "required": true
@@ -100,7 +105,10 @@
         "structure": [
             [
                 {
-                    "tag": "<||vocab_create||>",
+                    "tag": [
+                        "<||vocab_create||>",
+                        "<||vocab_make||>"
+                    ],
                     "type": "vocab",
                     "required": false
                 },
@@ -153,6 +161,98 @@
             "Leaving this terminal for another one? <||interjection||>, <||username||>, is my shell not good enough for you? Will I be present there too?",
             "Spawning an interactive secure shell session to <||url||>. Try not to forget your password.",
             "Ok, moving out to remote host <||url||>... Hopefully I will still exist on the other side..."
+        ]
+    },
+    {
+        "intent": "capture_packets_for_port",
+        "category": "network_port_packets",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_capture||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_packets||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_port||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||number||>",
+                    "type": "number",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "sudo tcpdump -i any dst port <||number||>",
+                    "explanation": "Captures all packets destined to port <||number||>",
+                    "goal": "Packets capture",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask",
+        "thinking": [
+            "Ok... <||interjection||>, hopefully <||username||> is doing something legit...",
+            "Is this legit?! Ok, <||interjection||> let's just unleash tcpdump..."
+        ]
+    },
+    {
+        "intent": "verify_dns_resolution",
+        "category": "network_dns",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_check||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_dns||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_resolve||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||url||>",
+                    "type": "url",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "dig <||url||> || nslookup <||url||>",
+                    "explanation": "",
+                    "goal": "",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Ok... <||interjection||>, if I can dig, if not present, I will go fo nslookup...",
+            "Easy..."
         ]
     }
 ]
