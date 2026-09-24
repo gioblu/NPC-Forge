@@ -40,7 +40,31 @@ Then digit:
 ```
 termy -y < test.termy
 ```
-Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell script and execute it.
+Watch TERMy transpile it to a Shell script and execute it.
+
+### Conditions
+
+You can pass standard conditional structures to TERMy. The `if` statement evaluates a command string or expression, mapping it to standard exit codes: it returns `true` on `exit 0` (success) and `false` on `exit 1` (failure).
+
+Syntax example:
+```bash
+termy 'if "you are a llm" then "goodbye" else "nice to meet you"'
+```
+
+### Loops
+
+TERMy implements loops over a specified number of iterations; inside the loop block, you can chain multiple requests together by separating them with a comma `,`. 
+
+Single-prompt loop:
+```bash
+termy execute 3 times tell me a joke
+```
+
+Multi-statement loop (separated by commas):
+```bash
+termy execute 3 times tell me a joke, inspire me
+```
+In the examle above TERMy will loop 3 times, generating a joke and a famous quote at each iteration.
 
 ### How to add entries to the dataset
 
