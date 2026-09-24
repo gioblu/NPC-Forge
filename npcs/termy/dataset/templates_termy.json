@@ -1,6 +1,8 @@
 [
     {
-        "category": "control_repeat",
+        "intent": "control_repeat",
+        "category": "control_flow",
+        "type": "template",
         "structure": [
             [
                 {
@@ -25,14 +27,14 @@
                 }
             ]
         ],
-        "description": "Executes any command N times in a loop, each iteration processes independently through termy. Use commas (,) to separate subcommands inside the loop.",
+        "description": "Executes a list of commands N times in a loop. Each command is processed independently by termy. Use commas (,) to separate multiple commands.",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "n='<||n||>' && cmd='<||string||>' && cmd=\"${cmd//,/;}\" && for i in $(seq 1 \"$n\"); do termy \"$cmd\" || break; done",
-                    "explanation": "Loops N times, invoking termy with the specified command each iteration. Converts commas to semicolons for proper message splitting within each iteration.",
-                    "goal": "Execute command N times with independent processing",
+                    "command": "n='<||n||>' && cmd_str=$(cat << 'EOF_CMD'\n<||string||>\nEOF_CMD\n) && exit_loop=0 && for i in $(seq 1 \"$n\"); do IFS=',' read -r -a cmds <<< \"$cmd_str\"; for c in \"${cmds[@]}\"; do c=\"${c#\"${c%%[![:space:]]*}\"}\"; c=\"${c%\"${c##*[![:space:]]}\"}\"; c=\"${c#\\\"}\"; c=\"${c%\\\"}\"; c=\"${c#\\'}\"; c=\"${c%\\'}\"; if [ -n \"$c\" ]; then termy -y \"$c\" || { exit_loop=1; break; }; fi; done; if [ $exit_loop -eq 1 ]; then break; fi; done",
+                    "explanation": "Loops N times. Splits the string by comma and executes each command as a separate 'termy -y' call to ensure independent processing and prevent output concatenation. Safely handles quotes and special characters via heredoc, and trims surrounding whitespace/quotes.",
+                    "goal": "Execute multiple commands N times with independent processing",
                     "mode": "sync"
                 }
             }
