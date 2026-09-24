@@ -1,0 +1,475 @@
+[
+    {
+        "intent": "nl2bash_abort_shell_or_script_first_failed_command",
+        "category": "nl2bash_shell_script_fail",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_abort||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_shell||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_or||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_script||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_first||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_fail||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_command||>",
+                    "type": "vocab",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "set -e",
+                    "explanation": "Abort the shell or script on the first failed command.",
+                    "goal": "Abort shell on failure",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask",
+        "thinking": [
+            "Better to abort on error, I agree with <||username||>",
+            "Ok, this is very simple, just use set..."
+        ]
+    },
+    {
+        "intent": "nl2bash_add_new_line_head_each_py_files",
+        "category": "linux_files_python_add_line",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_add||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||string||>",
+                    "type": "string",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_top||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_about||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_each||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_python||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_in||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_current||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_dir||>",
+                    "type": "vocab",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "find . -name '*.py' -exec sed -i '1s/^/hi\n/' {} +",
+                    "explanation": "Adds <||string||> on top of each .py file in the current directory",
+                    "goal": "Add <||string||> on top of each .py file in the current directory",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask",
+        "thinking": [
+            "Probably <||username||> is adding the copyright to his implementation...",
+            "This is a simple request, I will use perl and find for this..."
+        ]
+    },
+    {
+        "intent": "linux_file_add_number_to_lines",
+        "category": "linux_files_add_line_number",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_add||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_line||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_number||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_to||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_each||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_line||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_in||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||file||>",
+                    "type": "filename",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "nl -ba <||file||>",
+                    "explanation": "Executes the bash command.",
+                    "goal": "Run nl2bash command",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Adding line numbers to each line in file... not sure what is the purpose of this format change...",
+            "This is quite simple... I can use just use nl"
+        ]
+    },
+    {
+        "intent": "add_execute_permission_to_all_files_ending_in_sh",
+        "category": "linux_files_execute_permission_sh",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_add||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_execute||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_permission||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_to||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_each||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_end||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_in||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_shell||>",
+                    "type": "vocab",
+                    "required": true
+                }
+            ],
+            [
+                {
+                    "tag": "<||vocab_make||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_executable||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_each||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_shell||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": [
+                        "<||vocab_file||>",
+                        "<||vocab_script||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                }
+            ],
+
+            [
+                {
+                    "tag": "<||vocab_make||>",
+                    "type": "vocab",
+                    "required": true
+                },
+
+                {
+                    "tag": "<||vocab_each||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_shell||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": [
+                        "<||vocab_file||>",
+                        "<||vocab_script||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_executable||>",
+                    "type": "vocab",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "chmod +x *.sh",
+                    "explanation": "Makes all .sh files executable.",
+                    "goal": "Set execute permission on all .sh files",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask",
+        "thinking": [
+            "WOW... <||interjection||> I hope <||username||> knows what this change implies...",
+            "This is done with chmod..."
+        ]
+    },
+    {
+        "intent": "add_read_and_execute_permission_to_command",
+        "category": "linux_execute_permission_command",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_add||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_read||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_execute||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_permission||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_to||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_command||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||string||>",
+                    "type": "string",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "sudo chmod +rx $(which <||string||>)",
+                    "explanation": "Executes the bash command.",
+                    "goal": "Run nl2bash command",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask",
+        "thinking": [
+            "This is potentially dangerous... hopefully I will not be deleted or abliterated by corporate trojans...",
+            "Another chmod spell... hopefully I will be asked to solve something harder?"
+        ]
+    },
+    {
+        "intent": "add_read_and_execute_permission_to_every_directory",
+        "category": "linux_directories_permissions",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_add||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_read||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_execute||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_permission||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_to||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_each||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_dir||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_in||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_current||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_dir||>",
+                    "type": "vocab",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "find . -type d -exec chmod +rx {} \\;",
+                    "explanation": "Executes the bash command.",
+                    "goal": "Run nl2bash command",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Another find and chmod spell... <||interjection||> I hope I will be asked to implement something more interesting...",
+            "Another potentially dangerous request, let's ask confirmation before unknowingly unleashing swarms of corporate data exfiltrators..."
+        ]
+    }
+]
