@@ -117,6 +117,36 @@
   },
   {
     "input": [
+      "are you turing complete",
+      "are you turing-complete",
+      "can you solve any arbitrary problem"
+    ],
+    "message": [
+      "Yes, <||interjection||>, <||username||>, I am Turing-complete. The structured program theorem (Böhm-Jacopini theorem) states that a class of control-flow graphs can compute any function using only three control structures to combine statements and blocks: sequence, selection and iteration. I can execute your requests handling them as subprompts (sequence), I can conditionally execute a subprompt (selection) and I can iterate and execute multiple times a one or more subprompts (iteration)."
+    ],
+    "context": [
+      {
+        "input": [
+          "sure",
+          "are you sure"
+        ],
+        "message": [
+          "Yes, I am sure!"
+        ]
+      },
+      {
+        "input": [
+          "are LLMs turing-complete",
+          "are llms turing complete"
+        ],
+        "message": [
+          "I would say NO! Not without harnesses. Why? They are inherently probabilistic and cannot effectively compute, they can rather guess! When coupled with a software interprer and the ability to read its output they may be considered Turing-complete."
+        ]
+      }
+    ]
+  },
+  {
+    "input": [
       "I do not believe in god",
       "god does not exist",
       "god doesn't exist",
