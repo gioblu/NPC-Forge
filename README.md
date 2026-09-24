@@ -37,7 +37,7 @@ Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md
 
 [TERMy](npcs/termy/README.md) is the first NPC baked into the NPC-Forge framework. It is a cynical but very knowledgeable Linux terminal assistant that translates your natural language into shell commands without a single artificial neuron. 
 
-Termy is **Turing-complete** and supports conditional branching, arbitrary loops, and arbitrary state manipulation; all expressed in plain English. Just type `termy` followed by your prompt:
+Termy is **Turing-complete** and supports conditional branching, loops, and state manipulation; all expressed in plain English. Just type `termy` followed by your prompt:
 
 [![Terminal demonstration](/npcs/termy/showcase.gif)](https://www.youtube.com/watch?v=qeIp0xePLBg)
 
