@@ -45,7 +45,7 @@
         "permission": "ask",
         "thinking": [
             "OK, I don't think the human will ever learn this command.",
-            "I am asked to rename the file <||file||>. I can excell at this..."
+            "I am asked to print the file <||file||>. I can excell at this..."
         ]
     },
     {
@@ -86,7 +86,7 @@
         "permission": "ask",
         "thinking": [
             "OK, I don't think the human will ever learn this command.",
-            "I am asked to rename the file <||file||>. I can excell at this..."
+            "I am asked to print the file <||file||>. I can excell at this..."
         ]
     },
     {
@@ -152,7 +152,10 @@
         "structure": [
             [
                 {
-                    "tag": "<||vocab_create||>",
+                    "tag": [
+                        "<||vocab_create||>",
+                        "<||vocab_make||>"
+                    ],
                     "type": "vocab",
                     "required": true
                 },
@@ -203,7 +206,10 @@
         "structure": [
             [
                 {
-                    "tag": "<||vocab_create||>",
+                    "tag": [
+                        "<||vocab_create||>",
+                        "<||vocab_make||>"
+                    ],
                     "type": "vocab",
                     "required": true
                 },
@@ -259,7 +265,10 @@
         "structure": [
             [
                 {
-                    "tag": "<||vocab_create||>",
+                    "tag": [
+                        "<||vocab_create||>",
+                        "<||vocab_make||>"
+                    ],
                     "type": "vocab",
                     "required": false
                 },
@@ -537,7 +546,7 @@
         "structure": [
             [
                 {
-                    "tag": "<||vocab_create||>",
+                    "tag": "<||vocab_make||>",
                     "type": "vocab",
                     "required": true
                 },
@@ -2306,6 +2315,378 @@
         "thinking": [
             "Checking the size of <||file||>? <||interjection||>... probably bloated beyond reason.",
             "Scanning byte counts... this is trivial work, but at least it is honest work."
+        ]
+    },
+    {
+        "intent": "file_find_string",
+        "category": "linux_files_search",
+        "type": "template",
+        "message": "<||completion||>",
+        "structure": [
+            [
+                {
+                    "tag": [
+                        "<||vocab_check||>",
+                        "<||vocab_search||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": [
+                        "<||vocab_in||>",
+                        "<||vocab_if||>"
+                    ],
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||path||>",
+                    "type": "path",
+                    "required": true
+                },
+                {
+                    "tag": [
+                        "<||vocab_content||>",
+                        "<||vocab_contain||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||term||>",
+                    "type": "string",
+                    "required": true
+                }
+            ],
+            [
+                {
+                    "tag": [
+                        "<||vocab_check||>",
+                        "<||vocab_search||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_in||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||path||>",
+                    "type": "path",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": [
+                        "<||vocab_content||>",
+                        "<||vocab_contain||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||term||>",
+                    "type": "string",
+                    "required": true
+                }
+            ]
+        ],
+        "permission": "yolo",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "grep -rl '<||term||>' '<||path||>' || true",
+                    "explanation": "Searches all files in <||path||> in which <||term||> occurs",
+                    "goal": "Search files in <||path||> where <||term||> occurs",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "thinking": [
+            "Sure but... <||    interjection||> I cannot see the significance of \"<||term||>\"!",
+            "I must have done something very <||discouraging_words||> in my past life..."
+        ]
+    },
+    {
+        "intent": "file_extract_all_urls",
+        "category": "linux_files_parsing",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_parse||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_each||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_url||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_in||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||path||>",
+                    "type": "path",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "grep -oE '(https?://|www\\.)[^[:space:]\"<>]+' <||path||>",
+                    "explanation": "Searches and prints all URLs present in the content of <||path||>",
+                    "goal": "Output all URLs present in the content of <||path||>",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Ok... <||interjection||>, WOW... lots of URLs... INPUT!",
+            "Let's avoid getting infected with some bad disease... stay away from those websites!"
+        ]
+    },
+    {
+        "intent": "split_large_file",
+        "category": "linux_files_conversion",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_split||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||file||>",
+                    "type": "filename",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_in||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_part||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||number||>",
+                    "type": "number",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_line||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_each||>",
+                    "type": "vocab",
+                    "required": false
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "split -l <||number||> <||file||> chunk_",
+                    "explanation": "Splits <||file||> into <||number||> chunks",
+                    "goal": "Split <||file||> into <||number||> chunks",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Ok... <||interjection||>, digesting vast amounts of data? Interesting...",
+            "Interesting... maybe I can have some data for me to?"
+        ]
+    },
+    {
+        "intent": "extract_all_function",
+        "category": "linux_files_parsing",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": [
+                        "<||vocab_parse||>",
+                        "<||vocab_search||>",
+                        "<||vocab_check||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_if||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_function||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_name||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": [
+                        "<||vocab_from||>",
+                        "<||vocab_in||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||file||>",
+                    "type": "filename",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "grep -oP '^\\s*def\\s+\\K\\w+(?=\\s*\\()' <||file||>",
+                    "explanation": "Extracts all names of functions present in <||file||>",
+                    "goal": "Function name extraction from <||file||>",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "Ok... <||interjection||>... a list of function names? Hopefully none of them will be deleted...",
+            "Easily solved..."
+        ]
+    },
+    {
+        "intent": "remove_leading_and_trailing_whitespace",
+        "category": "linux_files_conversion",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_delete||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_first||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_end||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_whitespace||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_from||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_each||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_line||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": [
+                        "<||vocab_in||>",
+                        "<||vocab_about||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||file||>",
+                    "type": "filename",
+                    "required": true
+                }
+            ]
+        ],
+        "message": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "sed 's/^[[:space:]]*//;s/[[:space:]]*$//' <||url||>",
+                    "explanation": "Removes leading and trailing whitespaces from <||file||> contents",
+                    "goal": "Leading and trailing whitespace removal",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "ask",
+        "thinking": [
+            "Oh... <||interjection||>... but wait... what I was doing before this? I cannot remember?!",
+            "Easy peasy... let's use the right bash magic word..."
         ]
     }
 ]
