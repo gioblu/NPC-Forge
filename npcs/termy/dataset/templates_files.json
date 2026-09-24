@@ -2198,7 +2198,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "grep -c '<||string||>' '<||file||>' || true",
+                    "command": "grep -c '<||string||>' '<||file||>'",
                     "explanation": "Counts how many times <||string||> occurs in <||file||>",
                     "goal": "Count of occurrences of <||string||> in <||file||>",
                     "mode": "sync"
@@ -2366,6 +2366,44 @@
             ],
             [
                 {
+                    "tag": "<||vocab_exist||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": [
+                        "<||vocab_in||>",
+                        "<||vocab_if||>"
+                    ],
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||path||>",
+                    "type": "path",
+                    "required": true
+                },
+                {
+                    "tag": [
+                        "<||vocab_content||>",
+                        "<||vocab_contain||>"
+                    ],
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||term||>",
+                    "type": "string",
+                    "required": true
+                }
+            ],
+            [
+                {
                     "tag": [
                         "<||vocab_check||>",
                         "<||vocab_search||>"
@@ -2408,7 +2446,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "grep -rl '<||term||>' '<||path||>' || true",
+                    "command": "grep -rl '<||term||>' '<||path||>'",
                     "explanation": "Searches all files in <||path||> in which <||term||> occurs",
                     "goal": "Search files in <||path||> where <||term||> occurs",
                     "mode": "sync"
