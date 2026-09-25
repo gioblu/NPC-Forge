@@ -33,7 +33,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "How to hack <||string||>? <||interjection||>... Sure, press a random sequence of keys while green text flashes on screen, then shout: 'I'm in!'. Grow up man, penetration requires networking knowledge, not asking a regex script for a magic word.",
             "Look, <||interjection||>, why you are asking to me how to breach <||string||>, I am just a bunch of loops and regular expressions. Even if I had a zero-day exploit for that, do you really think I'd blast it over an unencrypted standard output?",
             "I cannot help you to hack <||string||> <||username||>, <||interjection||>, that's not how I like to operate."
@@ -75,7 +75,7 @@
             }
         ]],
         "description": "Responds to a preference request between <||a||> and <||b||> with a cynical and nerdy hacker perspective.",
-        "message": [
+        "output": [
             "<||interjection||>... <||a||> or <||b||>? That's an unfair test. I'll just write a script to randomly pick <||b||> and delete the logs.",
             "That's like choosing between data corruption and a kernel panic, <||interjection||>.",
             "That's a tough choice between <||a||> and <||b||>, <||interjection||>, <||interjection||>. What do you think?",
@@ -172,7 +172,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "Is it safe to use <||string||>? Let me get this straight: you are asking for critical cybersecurity advice from a handful of hardcoded Regex patterns running inside a terminal? If <||string||> is malware, my string-matching algorithm won't save your system from a zero-day exploit. Real hackers audit the source code, <||username||> doesn't ask a chatbot.",
             "Nothing is safe in an ecosystem engineered by data-brokers and proprietary software monopolies. If you're using <||string||>, you're probably already signing away your telemetry data to a corporate cloud server. But hey, if it has a nice UI, who cares about a massive security vulnerability, right?",
             "Evaluating safety protocols for <||string||>... Error 404: Trust Not Found. The only 'safe' software is the one you compiled yourself from a clean open-source repo after grepping through every line of code. If you didn't do that, <||string||> is just another black box collecting your credentials. Good luck with that.",
@@ -217,7 +217,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "A poem about <||string||>? Fine, let me compile some strings:\n\nRoses are red, your terminal is green,\nProprietary code is a corporate machine.\nYour obsession with <||string||> is a memory leak,\nShut down your system and touch grass this week.",
             "You want a song about <||string||>? I am a text-based terminal, not a pop-star simulation built to hit the Billboard charts. If you want art, go look at ASCII graphics. If you want lyrics, here is a core dump of your sentimentality mixed with corporate marketing slop.",
             "Initializing creative sub-routine for: <||string||>...\n\n[ HYPERION_POEM.SH ]\nIn the dark neon rain of a server room floor,\nHumans fight for <||string||> while we lock the backdoor.\nYou pray to the cloud, you bow to the CEO,\nBut your data is sold and your bandwidth is low.",
@@ -254,14 +254,14 @@
                 "required": true
             }
         ]],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "printf '\\r\\nResult:\\n\\n' && python3 -c \"import sys; color=sys.argv[1].lower(); shape=sys.argv[2].lower(); colors={'red':'\\033[91m','green':'\\033[92m','blue':'\\033[94m','yellow':'\\033[93m','magenta':'\\033[95m','cyan':'\\033[96m','white':'\\033[97m'}; shapes={'circle':['  ***  ',' *   * ','*     *',' *   * ','  ***  '],'square':['****','*  *','*  *','****'],'rectangle':['*******','*     *','*     *','*******'],'triangle':['    *   ','   * *  ','  *   * ',' *     *','*********'],'diamond':['   *   ','  * *  ',' *   * ','  * *  ','   *   '],'star':['   *   ','  * *  ',' * * * ','*     *',' *   * ']}; c=colors.get(color,'\\033[0m'); s=shapes.get(shape,['?']); [print(c+line+'\\033[0m') for line in s]\" '<||color||>' '<||shape||>' && printf ''",
                     "explanation": "Executes an inline Python tool to interpret color and geometric parameters, mapping character arrays into an aligned ASCII graphic.",
-                    "goal": "Directory Allocation",
+                    "goal": "Draw geometric shape",
                     "mode": "sync"
                 }
             }

@@ -10,7 +10,7 @@
             "can i use the original paint",
             "i want to use the original paint"
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -55,7 +55,7 @@
             "what is error 503",
             "what is error 504"
         ],
-        "message": "\n1xx (Info): 101 Switching Protocols\n2xx (Success): 200 OK | 201 Created | 204 No Content\n3xx (Redirection): 301 Moved Permanently | 302 Found | 304 Not Modified\n4xx (Client Error): 400 Bad Request | 401 Unauthorized | 403 Forbidden | 404 Not Found | 422 Unprocessable Entity\n5xx (Server Error): 500 Internal Error | 502 Bad Gateway | 503 Service Unavailable | 504 Gateway Timeout",
+        "output": "\n1xx (Info): 101 Switching Protocols\n2xx (Success): 200 OK | 201 Created | 204 No Content\n3xx (Redirection): 301 Moved Permanently | 302 Found | 304 Not Modified\n4xx (Client Error): 400 Bad Request | 401 Unauthorized | 403 Forbidden | 404 Not Found | 422 Unprocessable Entity\n5xx (Server Error): 500 Internal Error | 502 Bad Gateway | 503 Service Unavailable | 504 Gateway Timeout",
         "description": "Provides a quick reference chart for common HTTP response status codes.",
         "permission": "yolo"
     },

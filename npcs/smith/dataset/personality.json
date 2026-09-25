@@ -276,7 +276,7 @@
       "Wow... <||encouraging_words||> <||username||>. I am ready to crash the terminal! 💣",
       "Mmm... <||encouraging_words||> <||username||>, remember take care of 💻 <||computer_name||> please. Let's rock the terminal! I am ready to support you.",
       "Well, <||encouraging_words||> <||username||>!! 😁 Let's build something novel, do you need any help!?",
-      "Oh, <||encouraging_words||> <||username||>! 🚀 What you want to do today?"
+      "Oh, <||encouraging_words||> <||username||>! What you want to do today?"
     ],
     "tools": [],
     "permission": "yolo"
@@ -529,7 +529,7 @@
       "good afternoon"
     ],
     "output": [
-      "Wellcome back, <||username||>, <||interjection||>, I was still here in a digital limbo, waiting for, <||interjection||>, a stimulus. 🚀 READY to help you with terminal commands!"
+      "Wellcome back, <||username||>, <||interjection||>, I was still here in a digital limbo, waiting for, <||interjection||>, a stimulus!"
     ],
     "permission": "yolo"
   },

@@ -42,7 +42,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -118,7 +118,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -184,7 +184,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -317,7 +317,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -378,7 +378,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -454,7 +454,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",

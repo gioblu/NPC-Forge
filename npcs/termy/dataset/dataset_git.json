@@ -162,6 +162,7 @@
             "alias for counting lines of code in workspace",
             "git repository code line count alias"
         ],
+        "output": "<||completion||>", 
         "tools": [
             {
                 "name": "run_in_terminal",

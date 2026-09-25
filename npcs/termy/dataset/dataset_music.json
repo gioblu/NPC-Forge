@@ -9,7 +9,7 @@
             "play a wagner song",
             "play something of wagner"
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -36,7 +36,7 @@
             "play something from giuseppe verdi",
             "play giuseppe verdi nabucco"
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -63,7 +63,7 @@
             "play love song",
             "play a song of dire straits"
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -90,7 +90,7 @@
             "play me something to relax from my job",
             "i have the work i do give me a song to relax"
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -116,7 +116,7 @@
             "play space odissey soundtrack",
             "play 2001 space odissey soundtrack"
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -155,7 +155,7 @@
             "i need a really good jazz song",
             "i want to listen a good jazz song"
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",

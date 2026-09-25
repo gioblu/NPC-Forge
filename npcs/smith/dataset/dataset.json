@@ -2879,7 +2879,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "printf \"1) 🐍 Python project\\n2) 🐑 Node.js project\\n3) 🐏 Bash script\\n\\n\" && read -rp \"Choose (1-3): \" choice && read -rp \"Project name: \" name && tput cuu 1 && mkdir -p \"$name\" && if [ \"$choice\" = \"1\" ]; then termy_say \"Creating Python project\" > /dev/null 2>&1 && printf \"\\r\\n\" && touch \"$name/main.py\" \"$name/requirements.txt\" && echo \"# $name\" > \"$name/README.md\" && echo \"🚀 ✅ Python project created\"; elif [ \"$choice\" = \"2\" ]; then termy_say \"Creating Node project\" > /dev/null 2>&1 && printf \"\\r\\n\" && cd \"$name\" && npm init -y > /dev/null && touch \"index.js\" && cd .. && echo \"🚀 ✅ Node.js project created\"; elif [ \"$choice\" = \"3\" ]; then termy_say \"Creating Bash script\" > /dev/null 2>&1 && printf \"\\r\\n\" && cat > \"$name/script.sh\" << 'EOF'\n#!/usr/bin/env bash\nset -euo pipefail\necho \"Script initialized\"\nEOF\n chmod +x \"$name/script.sh\" && echo \"🚀 ✅ Bash script created\"; else printf \"\\r\\nInvalid option\\n\"; fi && printf \"\"",
+                    "command": "printf \"1) 🐍 Python project\\n2) 🐑 Node.js project\\n3) 🐏 Bash script\\n\\n\" && read -rp \"Choose (1-3): \" choice && read -rp \"Project name: \" name && tput cuu 1 && mkdir -p \"$name\" && if [ \"$choice\" = \"1\" ]; then termy_say \"Creating Python project\" > /dev/null 2>&1 && printf \"\\r\\n\" && touch \"$name/main.py\" \"$name/requirements.txt\" && echo \"# $name\" > \"$name/README.md\" && echo \" ✅ Python project created\"; elif [ \"$choice\" = \"2\" ]; then termy_say \"Creating Node project\" > /dev/null 2>&1 && printf \"\\r\\n\" && cd \"$name\" && npm init -y > /dev/null && touch \"index.js\" && cd .. && echo \"✅ Node.js project created\"; elif [ \"$choice\" = \"3\" ]; then termy_say \"Creating Bash script\" > /dev/null 2>&1 && printf \"\\r\\n\" && cat > \"$name/script.sh\" << 'EOF'\n#!/usr/bin/env bash\nset -euo pipefail\necho \"Script initialized\"\nEOF\n chmod +x \"$name/script.sh\" && echo \"✅ Bash script created\"; else printf \"\\r\\nInvalid option\\n\"; fi && printf \"\"",
                     "explanation": "Provides a POSIX-compliant interactive menu to scaffold a basic template structure for Python, Node.js, or Bash projects while issuing specific audio announcements.",
                     "goal": "Scaffold a new project structure based on template selection",
                     "mode": "sync"
@@ -3226,16 +3226,10 @@
     {
         "category": "linux_files",
         "input": [
-            "count lines in a project",
-            "create alias to count source lines of code sloc",
+            "Count lines of code for JavaScript and SCSS files in a git repo",
             "count total lines of javascript and scss files",
-            "git check how many lines of code in project",
             "count sloc for tracked git files js and scss",
-            "calculate lines of code in current git repository",
-            "count total lines in project source files",
-            "get total line count of js and scss using git",
-            "alias for counting lines of code in workspace",
-            "git repository code line count alias"
+            "get total line count of js and scss using git"
         ],
         "tools": [
             {

@@ -77,7 +77,7 @@ class FlintNPC:
             ]
         }
         
-        self.rejection = {"message": ["<||unknown||>"], "permission": "yolo"}
+        self.rejection = {"output": ["<||unknown||>"], "permission": "yolo"}
         self.sentence_threshold = float(self.config.get("sentence_threshold", 0.75))
         self.word_threshold = float(self.config.get("word_threshold", 0.75))
         
@@ -124,7 +124,7 @@ class FlintNPC:
         for block in self.dataset + self.personality + self.templates:
             if isinstance(block, dict):
                 for k, v in block.items():
-                    if k not in ["input", "message"]: 
+                    if k not in ["input"]: 
                         self.metadata[k] = v
 
         self.metadata.update({
@@ -493,7 +493,10 @@ class FlintNPC:
             elif isinstance(data, str): return render_tags(data)
             return data
 
-        output_data = block.get("message", block.get("output", ""))
+        output_data = block.get(
+            "output", 
+            block.get("output", "") 
+        )
         
         raw_output = random.choice(output_data) if isinstance(
             output_data, list

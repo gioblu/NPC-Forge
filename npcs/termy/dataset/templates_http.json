@@ -41,7 +41,7 @@
                 }
             ]
         ],
-        "message": [
+        "output": [
             "<||completion||> Streaming code semantics directly from cheat.sh into your terminal core."
         ],
         "tools": [
@@ -94,14 +94,14 @@
                 }
             ]
         ],
-        "message": [
+        "output": [
             "<||completion||> Image downloaded successfully into your current directory."
         ],
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "kw='<||string||>' && enc_kw=$(echo -n \"$kw\" | sed 's/ /+/g') && search_res=$(curl -s -A 'Mozilla/5.0' \"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=$enc_kw&format=json&origin=*\") && title=$(echo \"$search_res\" | grep -o '\"title\":\"[^\"]*' | head -n 1 | cut -d'\"' -f4) && if [ -z \"$title\" ]; then echo \"⛔ No Wikipedia article found for $kw\"; else enc_title=$(echo -n \"$title\" | sed 's/ /+/g') && img_res=$(curl -s -A 'Mozilla/5.0' \"https://en.wikipedia.org/w/api.php?action=query&titles=$enc_title&prop=pageimages&piprop=original&format=json&origin=*\") && img_url=$(echo \"$img_res\" | grep -o '\"source\":\"[^\"]*' | head -n 1 | cut -d'\"' -f4) && if [ -z \"$img_url\" ]; then echo \"⚠️ Article '$title' found, but has no original image.\"; else clean_name=$(echo \"$title\" | tr ' /' '__' | tr -cd 'A-Za-z0-9__-').jpg && out_path=\"./$clean_name\" && echo \"📥 Downloading image for '$title' into current folder...\" && curl -s -A 'Mozilla/5.0' \"$img_url\" -o \"$out_path\" && echo \"🎯 Saved to: $out_path\" && termy_set_context active_file \"$(cd \"$(dirname \"$out_path\")\" && pwd)/$(basename \"$out_path\")\" > /dev/null 2>&1; fi; fi",
+                    "command": "kw='<||string||>' && enc_kw=$(echo -n \"$kw\" | sed 's/ /+/g') && search_res=$(curl -s -A 'Mozilla/5.0' \"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=$enc_kw&format=json&origin=*\") && title=$(echo \"$search_res\" | grep -o '\"title\":\"[^\"]*' | head -n 1 | cut -d'\"' -f4) && if [ -z \"$title\" ]; then echo \"⛔ No Wikipedia article found for $kw\"; else enc_title=$(echo -n \"$title\" | sed 's/ /+/g') && img_res=$(curl -s -A 'Mozilla/5.0' \"https://en.wikipedia.org/w/api.php?action=query&titles=$enc_title&prop=pageimages&piprop=original&format=json&origin=*\") && img_url=$(echo \"$img_res\" | grep -o '\"source\":\"[^\"]*' | head -n 1 | cut -d'\"' -f4) && if [ -z \"$img_url\" ]; then echo \"⚠️ Article '$title' found, but has no original image.\"; else clean_name=$(echo \"$title\" | tr ' /' '__' | tr -cd 'A-Za-z0-9__-').jpg && out_path=\"./$clean_name\" && echo \"Downloading image for '$title' into current folder...\" && curl -s -A 'Mozilla/5.0' \"$img_url\" -o \"$out_path\" && echo \"Saved to: $out_path\" && termy_set_context active_file \"$(cd \"$(dirname \"$out_path\")\" && pwd)/$(basename \"$out_path\")\" > /dev/null 2>&1; fi; fi",
                     "explanation": "Searches Wikipedia for the keyword, extracts the top article title, fetches its original image URL, downloads it directly into the current working directory, and updates termy's active_file context with the absolute path.",
                     "goal": "Download specific Wikipedia image into the current directory and register it in context",
                     "mode": "sync"
@@ -304,14 +304,14 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "tput cuu 1 && termy_say \"Sure user, here is the youtube search result\" > /dev/null 2>&1 && printf '\\r\\n🎬 Opening YouTube search for: %s\\n' '<||string||>' && escaped_query=$(printf '%s' '<||string||>' | sed \"s/'/'\\\\''/g\") && url=$(printf 'https://youtube.com/results?search_query=%s' \"$escaped_query\") && open_browser \"$url\" && printf ''",
                     "explanation": "Launches the default system web browser using open_browser to display the YouTube search results grid for <||string||>.",
-                    "goal": "Directory Allocation",
+                    "goal": "Youtube search",
                     "mode": "sync"
                 }
             }
@@ -369,14 +369,14 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "tput cuu 1 && termy_say \"Sure user, here is the google search result\" > /dev/null 2>&1 && printf '\\r\\n🌐 Opening Google search for: %s\\n' '<||string||>' && escaped_query=$(printf '%s' '<||string||>' | sed \"s/'/'\\\\''/g\") && url=$(printf 'https://google.com/search?q=%s' \"$escaped_query\") && open_browser \"$url\" && printf ''",
                     "explanation": "Launches the default system web browser using open_browser to display the Google search results for <||string||>.",
-                    "goal": "Directory Allocation",
+                    "goal": "Google search in browser",
                     "mode": "sync"
                 }
             }
@@ -412,14 +412,14 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "tput cuu 1 && termy_say \"Opening browser\" > /dev/null 2>&1 && printf '\\r\\n🌐 Launching default browser for: %s\\n' '<||string||>' && escaped_url=$(printf '%s' '<||string||>' | jq -sRr @uri) && open_browser \"$escaped_url\" && printf ''",
                     "explanation": "Detects the host environment and uses the native open_browser tool to launch <||string||> inside the default web browser layout.",
-                    "goal": "Directory Allocation",
+                    "goal": "Launch browser",
                     "mode": "sync"
                 }
             }
@@ -474,14 +474,14 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "printf '🌐 Translating from %s to %s...\\n\\n' '<||lang1||>' '<||lang2||>' && from_code=$(echo '<||lang1||>' | tr 'A-Z' 'a-z' | sed -E 's/english/en/; s/italian/it/; s/spanish/es/; s/french/fr/; s/german/de/; s/portuguese/pt/; s/russian/ru/; s/japanese/ja/; s/chinese/zh-cn/') && to_code=$(echo '<||lang2||>' | tr 'A-Z' 'a-z' | sed -E 's/english/en/; s/italian/it/; s/spanish/es/; s/french/fr/; s/german/de/; s/portuguese/pt/; s/russian/ru/; s/japanese/ja/; s/chinese/zh-cn/') && encoded_text=$(python3 -c \"import urllib.parse; print(urllib.parse.quote('''<||word||>'''))\") && res=$(curl -s -L --max-time 5 -H 'User-Agent: Mozilla/5.0' \"https://api.mymemory.translated.net/get?q=${encoded_text}&langpair=${from_code}|${to_code}\") && translation=$(echo \"$res\" | python3 -c \"import sys, json; print(json.load(sys.stdin)['responseData']['translatedText'])\") && printf 'The translation is: %s\\n' \"$translation\" && termy_say -s \"$translation\"",
                     "explanation": "Safely isolates URL encoding via a separate variable to guarantee URL integrity, then polls the MyMemory API using curl.",
-                    "goal": "Directory Allocation",
+                    "goal": "Word translation",
                     "mode": "sync"
                 }
             }

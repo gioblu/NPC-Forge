@@ -43,7 +43,7 @@ dataset/
 ---
 
 ### <a id="static-questions"></a>Static questions
-Any file named `dataset_*.json` in the `dataset` directory is parsed and its content is used for exact-match questions, or the ones that don't need NER (Named Entity Recognition). Each file is just an array of entries mapping a user prompt to a hardcoded response and, optionally, a tool call. The `input`, `message` and `thinking` keys can be a string or an array of strings; when an array of strings is provided one of its entries is selected randomly. The `tools` key contains an array of [tool calls](#tool-calls) to be executed. The `category` key is used to list and group multiple intents together.
+Any file named `dataset_*.json` in the `dataset` directory is parsed and its content is used for exact-match questions, or the ones that don't need NER (Named Entity Recognition). Each file is just an array of entries mapping a user prompt to a hardcoded response and, optionally, a tool call. The `input`, `output` and `thinking` keys can be a string or an array of strings; when an array of strings is provided one of its entries is selected randomly. The `tools` key contains an array of [tool calls](#tool-calls) to be executed. The `category` key is used to list and group multiple intents together.
 
 ```json
 {
@@ -53,7 +53,7 @@ Any file named `dataset_*.json` in the `dataset` directory is parsed and its con
         "will it snow today",
         "is it raining today"
     ],
-    "message": [
+    "output": [
         "Sure I will fetch the weather forecast for you."
     ],
     "thinking": [
@@ -79,7 +79,7 @@ Small talk, greetings, identity, and fallback responses must be stored in `perso
     "input": [
         "I love LLMs bruh"
     ],
-    "message": [
+    "output": [
         "Are you aware that complexity is generally admired by idiots?"
     ]
 },
@@ -98,7 +98,7 @@ Follow up questions related to an entry can be added in `context` as shown below
     "input": [
         "I love LLMs bruh"
     ],
-    "message": [
+    "output": [
         "Are you aware that complexity is generally admired by idiots?"
     ],
     "context": [
@@ -106,7 +106,7 @@ Follow up questions related to an entry can be added in `context` as shown below
             "input": [
                 "why"
             ],
-            "message": [
+            "output": [
                 "Because complexity is not a good thing!"
             ]
         }
@@ -114,12 +114,12 @@ Follow up questions related to an entry can be added in `context` as shown below
 },
 ```
 
-After the `I love LLMs bruh` question is received, `why` will output the content of its related `message` key. Every time an entry is triggered, it overwrites existing context entries with the same keys. Each context entry can contain itself a `context` key, for this reason entries can be recursively nested.
+After the `I love LLMs bruh` question is received, `why` will output the content of its related `output` key. Every time an entry is triggered, it overwrites existing context entries with the same keys. Each context entry can contain itself a `context` key, for this reason entries can be recursively nested.
 
 ---
 
 ### <a id="system-tags"></a>System tags
-Wherever you write a `message`, `thinking`, `description`, or a tool's `command`/`explanation`/`arguments` string, `<||tag||>` placeholders get substituted at render time. Here's the resolution order.
+Wherever you write a `output`, `thinking`, `description`, or a tool's `command`/`explanation`/`arguments` string, `<||tag||>` placeholders get substituted at render time. Here's the resolution order.
 
 1. **Entities** from `templates_*.json` structure like `<||string||>` or `<||n||>` which `type` is contained in `types.json`.
 2. **Vocabulary** from `dataset/vocabulary/vocabulary.json` help add variation to phrases, for example using the tag `<||encouraging||>` to add a random encouraging word like `good` or `awesome`, or `<||interjection||>` to add an interjection like `uhmm` or `practically`.
@@ -159,7 +159,7 @@ Any file named `templates_*.json` contains semantic maps, this is a custom data 
             "required": true
         }
     ]],
-    "message": [
+    "output": [
         "A poem about <||string||>? Fine..."
     ],
     "thinking": [

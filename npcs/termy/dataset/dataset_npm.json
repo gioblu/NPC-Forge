@@ -22,7 +22,7 @@
                 }
             }
         ],
-        "message": "Do you want to update apt packages?",
+        "output": "Do you want to update apt packages?",
         "permission": "ask"
     }
 ]

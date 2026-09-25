@@ -77,7 +77,7 @@
             "i need to install a dependency",
             "i need to install a new package"
         ],
-        "message": "Do you want to install a package?",
+        "output": "Do you want to install a package?",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -218,7 +218,7 @@
             "reboot the computer",
             "restart the computer"
         ],
-        "message": "Do you want to restart the computer?",
+        "output": "Do you want to restart the computer?",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -309,7 +309,7 @@
             "disconnect me",
             "sign me out"
         ],
-        "message": "Do you wish to close this terminal?",
+        "output": "Do you wish to close this terminal?",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -563,7 +563,7 @@
                 }
             }
         ],
-        "message": "Do you want to update apt packages?",
+        "output": "Do you want to update apt packages?",
         "permission": "ask"
     },
     {
@@ -773,6 +773,7 @@
             "is the cpu hot",
             "how hot is the cpu",
             "tell me the cpu temperature",
+            "what is temperature cpu",
             "what is the cpu temperature",
             "what is the temperature of the cpu",
             "what is my cpu temperature",
@@ -825,7 +826,7 @@
             "explain netfilter",
             "describe netfilter functionality"
         ],
-        "message": "Netfilter is a kernel framework that allows packet filtering, network address translation, and port translation, serving as the foundation for linux firewall utilities",
+        "output": "Netfilter is a kernel framework that allows packet filtering, network address translation, and port translation, serving as the foundation for linux firewall utilities",
         "permission": "yolo",
         "description": "Explains the Linux kernel Netfilter packet filtering framework."
     },
@@ -840,7 +841,7 @@
             "ebpf linux meaning",
             "extended berkeley packet filter"
         ],
-        "message": "It is a revolutionary kernel technology that allows developers to run sandboxed programs inside the kernel without changing source code, enabling dynamic system observability and security.",
+        "output": "It is a revolutionary kernel technology that allows developers to run sandboxed programs inside the kernel without changing source code, enabling dynamic system observability and security.",
         "permission": "yolo",
         "description": "Explains what eBPF is and its kernel sandboxed program capability."
     },
@@ -852,7 +853,7 @@
             "tell me about sysctl",
             "describe the sysctl command functionality"
         ],
-        "message": "Sysctl is used to configure and modify kernel parameters at runtime, allowing administrators to optimize network stacks and manage system behavior without reboots.",
+        "output": "Sysctl is used to configure and modify kernel parameters at runtime, allowing administrators to optimize network stacks and manage system behavior without reboots.",
         "permission": "yolo",
         "description": "Explains the Linux sysctl command and kernel parameter tuning."
     },
@@ -867,7 +868,7 @@
             "describe kswapd thread",
             "linux kswapd process"
         ],
-        "message": "It is an asynchronous kernel thread responsible for reclaiming memory pages when physical RAM pool levels fall below a specific safety threshold.",
+        "output": "It is an asynchronous kernel thread responsible for reclaiming memory pages when physical RAM pool levels fall below a specific safety threshold.",
         "permission": "yolo",
         "description": "Explains the Linux kernel kswapd thread and memory reclamation."
     },
@@ -879,7 +880,7 @@
             "what is the function of the io scheduler",
             "describe io scheduler functionality"
         ],
-        "message": "It is a kernel subsystem that decides the execution order of disk read and write requests to balance efficiency and minimize storage latency.",
+        "output": "It is a kernel subsystem that decides the execution order of disk read and write requests to balance efficiency and minimize storage latency.",
         "permission": "yolo",
         "description": "Explains the Linux I/O scheduler's role in ordering disk requests."
     },
@@ -891,7 +892,7 @@
             "Explain sysfs",
             "Describe sysfs functionality"
         ],
-        "message": "It is a virtual filesystem that exports information about sub-systems, hardware devices, and device drivers from the kernel to user space applications.",
+        "output": "It is a virtual filesystem that exports information about sub-systems, hardware devices, and device drivers from the kernel to user space applications.",
         "permission": "yolo",
         "description": "Explains the sysfs virtual filesystem interface to kernel device information."
     },
@@ -905,7 +906,7 @@
             "describe kernel panic",
             "what causes a kernel panic"
         ],
-        "message": "A kernel panic is a safety mechanism triggered when the kernel detects an unrecoverable internal error, halting execution to prevent data corruption.",
+        "output": "A kernel panic is a safety mechanism triggered when the kernel detects an unrecoverable internal error, halting execution to prevent data corruption.",
         "permission": "yolo",
         "description": "Explains what a kernel panic means in Linux."
     },
@@ -919,7 +920,7 @@
             "explain swap",
             "describe swap functionality"
         ],
-        "message": "The kernel uses a memory management unit to map virtual addresses to physical RAM, moving inactive memory pages to disk space using a process called paging and swapping.",
+        "output": "The kernel uses a memory management unit to map virtual addresses to physical RAM, moving inactive memory pages to disk space using a process called paging and swapping.",
         "permission": "yolo",
         "description": "Explains swap and virtual memory management in Linux."
     },
@@ -934,7 +935,7 @@
             "linux oom killer",
             "when does oom killer run"
         ],
-        "message": "When the system runs out of memory, the Out-Of-Memory Killer sacrifices specific processes to prevent a complete operating system crash.",
+        "output": "When the system runs out of memory, the Out-Of-Memory Killer sacrifices specific processes to prevent a complete operating system crash.",
         "description": "Explains the Out-Of-Memory Killer behavior.",
         "permission": "yolo"
     },
@@ -946,7 +947,7 @@
             "Explain the difference between a process and a thread in linux",
             "Describe the difference between a process and a thread in linux"
         ],
-        "message": "A process is an independent executing program with its own memory space, while a thread is a lightweight subunit that shares the same parent process memory.",
+        "output": "A process is an independent executing program with its own memory space, while a thread is a lightweight subunit that shares the same parent process memory.",
         "description": "Explains the difference between processes and threads.",
         "permission": "yolo"
     },
@@ -962,7 +963,7 @@
             "cgroups linux meaning",
             "how do cgroups work"
         ],
-        "message": "Cgroups are a core kernel feature used to isolate and limit resource usage like CPU, memory, and network for a collection of processes.",
+        "output": "Cgroups are a core kernel feature used to isolate and limit resource usage like CPU, memory, and network for a collection of processes.",
         "description": "Explains Linux control groups for resource isolation.",
         "permission": "yolo"
     },
@@ -977,7 +978,7 @@
             "how do namespaces work in linux",
             "linux namespace functionality"
         ],
-        "message": "Namespaces isolate system resources such as routing tables, process trees, and mount points, forming the fundamental building blocks of modern container technology.",
+        "output": "Namespaces isolate system resources such as routing tables, process trees, and mount points, forming the fundamental building blocks of modern container technology.",
         "description": "Explains Linux namespaces and container isolation.",
         "permission": "yolo"
     },
@@ -993,7 +994,7 @@
             "how does cow work in linux",
             "copy on write linux"
         ],
-        "message": "COW is an optimization strategy where multiple processes share the same memory page until one modifies it, triggers a duplicate, and ensures efficient resource utilization.",
+        "output": "COW is an optimization strategy where multiple processes share the same memory page until one modifies it, triggers a duplicate, and ensures efficient resource utilization.",
         "description": "Explains copy-on-write behavior in Linux memory management.",
         "permission": "yolo"
     },
@@ -1007,7 +1008,7 @@
             "how does interrupt handler work",
             "what is an irq handler"
         ],
-        "message": "It is a high-priority callback function in the kernel that temporarily pauses normal execution to immediately process urgent incoming hardware signal events.",
+        "output": "It is a high-priority callback function in the kernel that temporarily pauses normal execution to immediately process urgent incoming hardware signal events.",
         "description": "Explains what an interrupt handler does in the kernel.",
         "permission": "yolo"
     },
@@ -1021,7 +1022,7 @@
             "purpose of proc filesystem",
             "how does /proc work"
         ],
-        "message": "It is a virtual, in-memory filesystem generated by the kernel that acts as an interface to view and modify live kernel internal statistics.",
+        "output": "It is a virtual, in-memory filesystem generated by the kernel that acts as an interface to view and modify live kernel internal statistics.",
         "description": "Explains the purpose of the /proc filesystem.",
         "permission": "yolo"
     },
@@ -1034,7 +1035,7 @@
             "what is the function of the linux kernel",
             "linux kernel responsibilities"
         ],
-        "message": "The kernel acts as a core interface between the computer hardware and its processes, managing hardware resource allocation dynamically.",
+        "output": "The kernel acts as a core interface between the computer hardware and its processes, managing hardware resource allocation dynamically.",
         "description": "Explains the main role of the Linux kernel.",
         "permission": "yolo"
     },
@@ -1047,7 +1048,7 @@
             "monolithic vs microkernel linux",
             "why is linux kernel monolithic"
         ],
-        "message": "It means that the entire operating system, including device drivers, file systems, and process management, runs inside a single kernel space.",
+        "output": "It means that the entire operating system, including device drivers, file systems, and process management, runs inside a single kernel space.",
         "description": "Explains what monolithic kernel design means.",
         "permission": "yolo"
     },
@@ -1061,7 +1062,7 @@
             "difference between userland and kernel",
             "user mode vs kernel mode"
         ],
-        "message": "Kernel space is reserved for running the core operating system and has full hardware access, while user space is an isolated area where user applications execute safely.",
+        "output": "Kernel space is reserved for running the core operating system and has full hardware access, while user space is an isolated area where user applications execute safely.",
         "description": "Explains the difference between user space and kernel space.",
         "permission": "yolo"
     },
@@ -1075,7 +1076,7 @@
             "what is a loadable kernel module",
             "lkm meaning"
         ],
-        "message": "They are pieces of code that can be loaded or unloaded into the kernel on demand, allowing the system to extend hardware support without rebooting.",
+        "output": "They are pieces of code that can be loaded or unloaded into the kernel on demand, allowing the system to extend hardware support without rebooting.",
         "description": "Explains Linux kernel loadable modules and their dynamic loading.",
         "permission": "yolo"
     },
@@ -1089,7 +1090,7 @@
             "how does linux handle multiple programs",
             "linux task scheduling"
         ],
-        "message": "Linux uses a completely fair scheduler (CFS) to rapidly switch execution between different processes, providing the illusion of simultaneous parallel execution.",
+        "output": "Linux uses a completely fair scheduler (CFS) to rapidly switch execution between different processes, providing the illusion of simultaneous parallel execution.",
         "description": "Explains how Linux achieves multitasking using process scheduling.",
         "permission": "yolo"
     },
@@ -1103,7 +1104,7 @@
             "what does a syscall do",
             "linux system call purpose"
         ],
-        "message": "A system call is the programmatic way a user space application requests a service or restricted action from the linux kernel space.",
+        "output": "A system call is the programmatic way a user space application requests a service or restricted action from the linux kernel space.",
         "description": "Explains what a system call is in Linux.",
         "permission": "yolo"
     },
@@ -1117,7 +1118,7 @@
             "what does the virtual filesystem do",
             "linux vfs purpose"
         ],
-        "message": "The VFS is a kernel feature that provides an abstraction layer, allowing applications to access different file systems using uniform standard commands.",
+        "output": "The VFS is a kernel feature that provides an abstraction layer, allowing applications to access different file systems using uniform standard commands.",
         "description": "Explains the Linux Virtual Filesystem (VFS) abstraction.",
         "permission": "yolo"
     },
@@ -1131,7 +1132,7 @@
             "what is pid 1",
             "init vs systemd linux"
         ],
-        "message": "It is the very first process executed by the kernel during boot (PID 1), acting as the parent of all other system processes.",
+        "output": "It is the very first process executed by the kernel during boot (PID 1), acting as the parent of all other system processes.",
         "description": "Explains the boot role of init and systemd as the first process.",
         "permission": "yolo"
     },
@@ -1145,7 +1146,7 @@
             "difference between shell and terminal",
             "is terminal same as shell"
         ],
-        "message": "The terminal is the graphical program that displays text (the interface), while the shell is the underlying engine (e.g., Bash, Zsh) that interprets the commands you type.",
+        "output": "The terminal is the graphical program that displays text (the interface), while the shell is the underlying engine (e.g., Bash, Zsh) that interprets the commands you type.",
         "description": "Explains the difference between a terminal and a shell.",
         "permission": "yolo"
     },
@@ -1159,7 +1160,7 @@
             "describe pipe operator",
             "what does | mean in bash"
         ],
-        "message": "The pipe symbol redirects the standard output of one command to become the standard input of the next command, allowing you to chain them together.",
+        "output": "The pipe symbol redirects the standard output of one command to become the standard input of the next command, allowing you to chain them together.",
         "description": "Explains how the pipe symbol connects output to input between commands.",
         "permission": "yolo"
     },
@@ -1173,7 +1174,7 @@
             "output redirection linux",
             "append vs overwrite in shell"
         ],
-        "message": "The '>' symbol overwrites the file content, while '>>' appends the new text to the end of the file without deleting the existing content.",
+        "output": "The '>' symbol overwrites the file content, while '>>' appends the new text to the end of the file without deleting the existing content.",
         "description": "Explains the difference between '>' overwrite and '>>' append redirection.",
         "permission": "yolo"
     },
@@ -1187,7 +1188,7 @@
             "how to redirect error output",
             "what is 2>&1 in bash"
         ],
-        "message": "It redirects error messages (stderr, represented by number 2) to the same stream as the standard output (stdout, represented by number 1).",
+        "output": "It redirects error messages (stderr, represented by number 2) to the same stream as the standard output (stdout, represented by number 1).",
         "description": "Explains shell redirection of stderr to stdout using 2>&1.",
         "permission": "yolo"
     },
@@ -1201,7 +1202,7 @@
             "describe /etc folder",
             "what does /etc contain"
         ],
-        "message": "The /etc directory contains system configuration files for the operating system and most of the installed programs.",
+        "output": "The /etc directory contains system configuration files for the operating system and most of the installed programs.",
         "description": "Explains the purpose of the /etc directory for system configuration.",
         "permission": "yolo"
     },
@@ -1215,7 +1216,7 @@
             "what does ~ represent",
             "home directory shortcut"
         ],
-        "message": "The tilde is a shortcut that represents the user home directory.",
+        "output": "The tilde is a shortcut that represents the user home directory.",
         "description": "Explains that the tilde ~ expands to the current user's home directory.",
         "permission": "yolo"
     },
@@ -1229,7 +1230,7 @@
             "difference between file permissions and ownership",
             "how to change file owner"
         ],
-        "message": "The 'chmod' command changes the read, write, and execute permissions of a file, while 'chown' changes its owner or group assignment.",
+        "output": "The 'chmod' command changes the read, write, and execute permissions of a file, while 'chown' changes its owner or group assignment.",
         "description": "Explains the difference between chmod permission changes and chown ownership changes.",
         "permission": "yolo"
     },
@@ -1243,7 +1244,7 @@
             "how to read chmod numbers",
             "what is rwxr-xr-x"
         ],
-        "message": "The 7 gives full user permissions (rwx), the first 5 gives read and execute (r-x) to the group, and the second 5 gives the same read/execute permissions to everyone else.",
+        "output": "The 7 gives full user permissions (rwx), the first 5 gives read and execute (r-x) to the group, and the second 5 gives the same read/execute permissions to everyone else.",
         "description": "Explains the meaning of the permission bits in chmod 755.",
         "permission": "yolo"
     },
@@ -1257,7 +1258,7 @@
             "hard link vs symlink linux",
             "describe file links in linux"
         ],
-        "message": "A hard link points directly to the physical data (inode) on the disk, while a soft link (or symlink) is a shortcut pointing to the path name of another file.",
+        "output": "A hard link points directly to the physical data (inode) on the disk, while a soft link (or symlink) is a shortcut pointing to the path name of another file.",
         "description": "Explains the difference between hard links and symbolic links.",
         "permission": "yolo"
     },
@@ -1271,7 +1272,7 @@
             "kill vs suspend process",
             "how to stop a process in terminal"
         ],
-        "message": "Ctrl + C sends the SIGINT signal to terminate the process immediately, while Ctrl + Z sends the SIGTSTP signal to suspend the process and put it in the background.",
+        "output": "Ctrl + C sends the SIGINT signal to terminate the process immediately, while Ctrl + Z sends the SIGTSTP signal to suspend the process and put it in the background.",
         "description": "Explains the difference between Ctrl+C (terminate) and Ctrl+Z (suspend).",
         "permission": "yolo"
     },
@@ -1285,7 +1286,7 @@
             "what causes zombie processes",
             "zombie process meaning"
         ],
-        "message": "It is a process that has completed execution but still has an entry in the process table because its parent process has not yet read its exit status.",
+        "output": "It is a process that has completed execution but still has an entry in the process table because its parent process has not yet read its exit status.",
         "description": "Explains what a zombie process is in Linux.",
         "permission": "yolo"
     },
@@ -1299,7 +1300,7 @@
             "how do environment variables work",
             "what does $PATH do"
         ],
-        "message": "They are global system variables. The PATH variable specifically contains a list of directories where the shell looks for executable files when you type a command.",
+        "output": "They are global system variables. The PATH variable specifically contains a list of directories where the shell looks for executable files when you type a command.",
         "description": "Explains environment variables like PATH and how they affect command lookup.",
         "permission": "yolo"
     },
@@ -1313,7 +1314,7 @@
             "difference between ' and \" in linux",
             "shell quoting rules"
         ],
-        "message": "Single quotes preserve the literal character value inside them, while double quotes allow variable expansion (e.g., $VAR) and command substitution.",
+        "output": "Single quotes preserve the literal character value inside them, while double quotes allow variable expansion (e.g., $VAR) and command substitution.",
         "description": "Explains the difference between single and double quotes in shell quoting.",
         "permission": "yolo"
     },
@@ -1327,7 +1328,7 @@
             "describe . and .. in filesystem",
             "current and parent directory"
         ],
-        "message": "The single dot '.' represents the current directory you are in, while the double dot '..' represents the parent directory one level up.",
+        "output": "The single dot '.' represents the current directory you are in, while the double dot '..' represents the parent directory one level up.",
         "description": "Explains the meaning of '.' and '..' in directory paths.",
         "permission": "yolo"
     },
@@ -1341,7 +1342,7 @@
             "why cant i access file linux",
             "fix permission denied linux"
         ],
-        "message": "This happens if you did not prefix the command with 'sudo' to elevate your privileges, or if you are trying to modify a file locked as read-only by the system.",
+        "output": "This happens if you did not prefix the command with 'sudo' to elevate your privileges, or if you are trying to modify a file locked as read-only by the system.",
         "description": "Explains why Permission denied occurs and when sudo may be required.",
         "permission": "yolo"
     },

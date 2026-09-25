@@ -72,7 +72,7 @@ The first things I needed was a set of conventions to rely on, so I drafted the 
             }
         }
     ],
-    "message": "Done",
+    "output": "Done",
     "thinking": [
       "That is quite simple!",
       "This is boring..."
@@ -107,7 +107,7 @@ The next problem to solve was, how to handle questions like "create file test.tx
             }
         ]
     ],
-    "message": "<||completion||>",
+    "output": "<||completion||>",
     "tools": [
         {
             "name": "run_in_terminal",

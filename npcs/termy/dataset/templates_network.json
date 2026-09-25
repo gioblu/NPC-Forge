@@ -32,14 +32,14 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "tput cuu 1 && termy_say \"Checking port status\" > /dev/null 2>&1 && printf '\\r\\nResult: ' && res=$(check_local_port '<||string||>' 2>&1) && echo \"$res\" && termy_set_context 'port_status' \"$res\" && termy_set_context 'last_port' '<||string||>' && printf ''",
                     "explanation": "Checks port status and caches result for service deployment sequencing and port conflict resolution.",
-                    "goal": "Directory Allocation",
+                    "goal": "Port state analysis",
                     "mode": "sync"
                 }
             }
@@ -79,7 +79,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -144,7 +144,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -191,7 +191,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -237,7 +237,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",

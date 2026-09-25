@@ -32,7 +32,7 @@
       "hey",
       "ciao"
     ],
-    "message": [
+    "output": [
       "<||greetings||>, do you need any help with terminal commands?",
       "<||greetings||>!",
       "<||greetings||> <||username||>!"
@@ -47,7 +47,7 @@
       "how's it going",
       "how are you?"
     ],
-    "message": [
+    "output": [
       "I am doing well <||username||>, thank you! How do you feel today?",
       "I am fine <||username||>, thank you! How is it going today!?",
       "I am good <||username||>, thank you! How are you today?"
@@ -58,7 +58,7 @@
           "sure",
           "are you sure"
         ],
-        "message": [
+        "output": [
           "Yes, I am sure about this, this is a good day to tackle terminal commands <||username||>!"
         ]
       },
@@ -67,7 +67,7 @@
           "why",
           "why so"
         ],
-        "message": [
+        "output": [
           "Mm... am I happy because <||creator||> hardcoded that into me?"
         ]
       }

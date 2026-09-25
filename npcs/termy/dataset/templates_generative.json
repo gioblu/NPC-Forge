@@ -32,7 +32,7 @@
                 }
             ]
         ],
-        "message": [
+        "output": [
             "<||completion||> The shell script is ready.",
             "<||completion||> I will make it executable."
         ],

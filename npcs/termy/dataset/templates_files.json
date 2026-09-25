@@ -30,7 +30,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -71,13 +71,13 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "cat '<||file||>' && termy_set_context 'active_file' '<||file||>'",
-                    "explanation": "Prints content of file <||file||>.",
+                    "command": "cat '<||path||>' && termy_set_context 'active_file' '<||path||>'",
+                    "explanation": "Prints content of file <||path||>.",
                     "goal": "Print file contents",
                     "mode": "sync"
                 }
@@ -127,7 +127,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -181,7 +181,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -240,14 +240,14 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "echo '<||string||>' > '<||file||>' &&\ntermy_set_context 'active_file' '<||file||>' &&\ntermy_set_context 'active_content' '<||string||>'",
                     "explanation": "Writes <||string||> in file <||file||>.",
-                    "goal": "Directory Allocation",
+                    "goal": "File creation",
                     "mode": "sync"
                 }
             }
@@ -259,7 +259,7 @@
         ]
     },
     {
-        "intent": "copy_file",
+        "intent": "copy_active_file",
         "category": "linux_files",
         "type": "template",
         "structure": [
@@ -305,7 +305,7 @@
                 }
             ]
         ],
-        "message": "<||completion||> I am ready to copy the file.",
+        "output": "<||completion||> I am ready to copy the file.",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -356,7 +356,7 @@
                 }
             ]
         ],
-        "message": "<||completion||> I am ready to search for '<||word||>' in the file.",
+        "output": "<||completion||> I am ready to search for '<||word||>' in the file.",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -413,7 +413,7 @@
                 }
             ]
         ],
-        "message": "<||completion||> I am ready to compute the checksum of '<||file||>'.",
+        "output": "<||completion||> I am ready to compute the checksum of '<||file||>'.",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -459,7 +459,7 @@
                 }
             ]
         ],
-        "message": "<||completion||> I am ready to compare the two files.",
+        "output": "<||completion||> I am ready to compare the two files.",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -518,7 +518,7 @@
                 }
             ]
         ],
-        "message": [
+        "output": [
             "<||completion||> I am ready to move the file."
         ],
         "tools": [
@@ -566,7 +566,7 @@
                 }
             ]
         ],
-        "message": [
+        "output": [
             "<||completion||> I am ready to execute the script."
         ],
         "tools": [
@@ -607,7 +607,7 @@
                 }
             ]
         ],
-        "message": [
+        "output": [
             "<||completion||> I am ready to execute the script."
         ],
         "tools": [
@@ -648,7 +648,7 @@
                 }
             ]
         ],
-        "message": [
+        "output": [
             "<||completion||> I am ready to delete the file."
         ],
         "tools": [
@@ -701,7 +701,7 @@
                 }
             ]
         ],
-        "message": [
+        "output": [
             "<||completion||> Resolving active file from local context state.",
             "<||completion||> Launching browser display engine."
         ],
@@ -761,14 +761,14 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "if [ ! -f '<||file||>' ]; then\n termy_say \"File not found\" > /dev/null 2>&1 &&\n printf '\\r\\n⛔ Error: File %s does not exist\\n' '<||file||>';\nelse\n termy_say \"Deleting file\" > /dev/null 2>&1 &&\n rm -- '<||file||>' 2>/dev/null &&\n printf '\\r\\n🗑️  File %s successfully removed\\n' '<||file||>';\nfi &&\nprintf ''",
                     "explanation": "Validates if the target file exists, announces the deletion via termy_say, and removes it safely from the filesystem.",
-                    "goal": "Directory Allocation",
+                    "goal": "File deletion",
                     "mode": "sync"
                 }
             }
@@ -815,7 +815,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -871,7 +871,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -938,7 +938,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -990,14 +990,14 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "if [ ! -f '<||string||>' ]; then\n termy_say \"File not found\" > /dev/null 2>&1 &&\n printf '⛔ Error: File %s does not exist: ' '<||string||>';\nelse\n termy_say \"Counting lines\" > /dev/null 2>&1 &&\n printf '🔢 Lines: ' && wc -l -- '<||string||>' 2>/dev/null;\nfi &&\nprintf ''",
                     "explanation": "Validates the target file existence and executes the native wc -l utility to return the line count of <||string||>.",
-                    "goal": "Directory Allocation",
+                    "goal": "Count lines in file",
                     "mode": "sync"
                 }
             }
@@ -1039,14 +1039,14 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "termy_say \"Searching for files\" > /dev/null 2>&1 &&\nprintf '🔍 Searching from current directory...\n\n' &&\nescaped_word=$(printf '%s' '<||name||>' | sed \"s/'/'\\\\''/g\") &&\nfind . -type f -name \"*${escaped_word}*\" 2>/dev/null | head -n 20 &&\nprintf ''",
                     "explanation": "Recursively uses the native find command to locate files matching <||name||> starting directly from the current working directory, limited to 20 lines.",
-                    "goal": "Directory Allocation",
+                    "goal": "Search files",
                     "mode": "sync"
                 }
             }
@@ -1096,7 +1096,7 @@
                 }
             ]
         ],
-        "message": [
+        "output": [
             "<||completion||>"
         ],
         "tools": [
@@ -1147,7 +1147,7 @@
                 }
             ]
         ],
-        "message": [
+        "output": [
             "<||completion||>"
         ],
         "tools": [
@@ -1198,7 +1198,7 @@
                 }
             ]
         ],
-        "message": [
+        "output": [
             "<||completion||>"
         ],
         "tools": [
@@ -1249,7 +1249,7 @@
                 }
             ]
         ],
-        "message": [
+        "output": [
             "<||completion||>"
         ],
         "tools": [
@@ -1311,7 +1311,7 @@
                 }
             ]
         ],
-        "message": [
+        "output": [
             "<||completion||> Scanning source code across multiple languages to locate the function definition."
         ],
         "tools": [
@@ -1381,7 +1381,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -1447,7 +1447,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -1497,7 +1497,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -1603,7 +1603,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -1701,7 +1701,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -1789,7 +1789,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -1863,7 +1863,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -1947,7 +1947,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -2028,7 +2028,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -2126,7 +2126,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -2148,7 +2148,7 @@
         "intent": "file_count_occurrences",
         "category": "auto_generated",
         "type": "template",
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "structure": [
             [
                 {
@@ -2243,7 +2243,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -2299,7 +2299,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -2321,7 +2321,7 @@
         "intent": "file_find_string",
         "category": "linux_files_search",
         "type": "template",
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "structure": [
             [
                 {
@@ -2496,7 +2496,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -2562,7 +2562,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -2630,7 +2630,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -2709,7 +2709,7 @@
                 }
             ]
         ],
-        "message": "<||completion||>",
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",

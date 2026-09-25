@@ -30,7 +30,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "<||completion||> Counting the fragments of human vocabulary...",
             "<||completion||> Computation finished. Analysis provided below."
         ],
@@ -77,7 +77,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "<||completion||>",
             "<||completion||>. I am not a Lying Language Model."
         ],
@@ -124,7 +124,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "<||completion||>",
             "<||completion||>. I am not a Lying Language Model."
         ],
@@ -171,7 +171,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "<||completion||>",
             "<||completion||>. OK, <||interjection||>, <||encouraging_words||> <||username||>, faster and cheaper than asking to frontier models, right?"
         ],
@@ -216,7 +216,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "<||completion||>",
             "<||completion||>. Nice <||interjection||>, <||encouraging_words||> <||username||>, faster and cheaper than asking to frontier models, right?"
         ],
@@ -264,7 +264,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "<||completion||>",
             "<||completion||>. Nice <||interjection||>, <||encouraging_words||> <||username||>, faster and cheaper than asking to frontier models, right?"
         ],
@@ -309,7 +309,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "<||completion||>",
             "<||completion||>. I am not a Lying Language Model."
         ],
@@ -359,7 +359,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "<||completion||>",
             "<||completion||>. Uhm... <||interjection||>, you can trust this result in am not a Lying Language Model."
         ],
@@ -414,7 +414,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "<||completion||>",
             "<||completion||>. Uhm... <||interjection||>, you can trust this result in am not a Lying Language Model."
         ],
@@ -469,7 +469,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "<||completion||>",
             "<||completion||>. Uhm... <||interjection||>, you can trust this result in am not a Lying Language Model."
         ],
@@ -524,7 +524,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "<||completion||>",
             "<||completion||>. Uhm... <||interjection||>, you can trust this result in am not a Lying Language Model."
         ],
@@ -579,7 +579,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "<||completion||>",
             "<||completion||>. Uhm... <||interjection||>, you can trust this result in am not a Lying Language Model."
         ],
@@ -634,7 +634,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "<||completion||>",
             "<||completion||>. Uhm... <||interjection||>, you can trust this result in am not a Lying Language Model."
         ],
@@ -679,7 +679,7 @@
                 "required": true
             }
         ]],
-        "message": [
+        "output": [
             "<||completion||>",
             "Plotting initialized. Let me sketch that curve for you."
         ],

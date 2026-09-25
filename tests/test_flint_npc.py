@@ -29,7 +29,7 @@ def make_block(message, inputs=None, context=None):
     """Builds a minimal synthetic NDF block for context tests."""
     block = {
         "input": inputs or [],
-        "message": [message],
+        "output": [message],
         "permission": "yolo",
     }
     if context is not None:
