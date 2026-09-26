@@ -54,6 +54,53 @@ termy_say() {
     fi
 }
 
+# Safely prompts the user via audio/terminal and stores 
+# the text response inside a variable reference.
+
+termy_question() {
+    local -n dest_var=$2
+    tput cuu 1
+    termy_say -s "$1"
+    printf "\r\n%s: " "$1"
+    read -r dest_var
+}
+
+# Displays a multi-choice menu from the 
+# given arguments and outputs the selected string.
+
+termy_menu() {
+    # Extract the first argument as the menu title/question
+    local menu_title="$1"
+    
+    # Slice the remaining positional parameters from index 2 onwards safely
+    local options=("${@}")
+    local count=${#options[@]}
+    
+    if [ "$count" -eq 0 ]; then
+        return 1
+    fi
+
+    # Prints your dynamic question right above the listed options
+    printf "\r\n%s:\n" "$menu_title"
+    local i=0
+    for opt in "${options[@]}"; do
+        i=$((i+1))
+        termy_say -s "$i $opt"
+        printf "  %d) %s\n" "$i" "$opt"
+    done
+
+    printf "Select a number (1-%d): " "$count"
+    local num
+    read -r num
+
+    if [[ "$num" =~ ^[0-9]+$ ]] && [ "$num" -le "$count" ] && [ "$num" -gt 0 ]; then
+        printf '%s' "${options[$((num-1))]}"
+        return 0
+    else
+        return 1
+    fi
+}
+
 # Prints config file
 
 termy_print_config() {
