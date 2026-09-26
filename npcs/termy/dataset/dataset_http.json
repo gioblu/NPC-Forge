@@ -1,4 +1,4 @@
-[ 
+[
     {
         "intent": "paint_program_execution",
         "category": "http_paint",
@@ -15,7 +15,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "termy_say \"Sure user, here is the google search result\" && open_browser \"https://jspaint.app/\" && printf ''",
+                    "command": "termy_say \"Sure user, here is the google search result\" &&\nopen_browser \"https://jspaint.app/\" &&\nprintf ''",
                     "explanation": "Launches the jspaint.app",
                     "goal": "Paint program execution",
                     "mode": "sync"
@@ -69,11 +69,12 @@
             "test url response",
             "api health check"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "printf '🌐 URL: ' && read -r url && [ ! -z \"$url\" ] && printf '📤 Method (GET/POST/PUT, default GET): ' && read -r method && method=${method:-GET} && tput cuu 2 && termy_say 'Testing endpoint' > /dev/null 2>&1 && printf '\\r\\n' && safe_url=\"${url//\\'/\\'\\\\\\'\\'}\" && safe_method=\"${method//\\'/\\'\\\\\\'\\'}\" && response=$(eval \"curl -s -w '\\\\n%{http_code}' --max-time 10 -H 'User-Agent: DevTerminal/1.0' -X '$safe_method' -- '$safe_url'\") && status=$(echo \"$response\" | tail -1) && body=$(echo \"$response\" | head -n-1) && safe_status=\"${status//\\'/\\'\\\\\\'\\'}\" && eval \"printf '📊 HTTP Status: %s\\\\n\\\\n📋 Response:\\\\n' '$safe_status'\" && (echo \"$body\" | python3 -m json.tool 2>/dev/null || (safe_body=\"${body//\\'/\\'\\\\\\'\\'}\" && eval \"printf '%s\\\\n' '$safe_body'\"))",
+                    "command": "printf '🌐 URL: ' &&\nread -r url &&\n[ ! -z \"$url\" ] &&\nprintf '📤 Method (GET/POST/PUT, default GET): ' &&\nread -r method &&\nmethod=${method:-GET} &&\ntput cuu 2 &&\ntermy_say 'Testing endpoint' > /dev/null 2>&1 &&\nprintf '\\r\\n' &&\nsafe_url=\"${url//\\'/\\'\\\\\\'\\'}\" &&\nsafe_method=\"${method//\\'/\\'\\\\\\'\\'}\" &&\nresponse=$(eval \"curl -s -w '\\\\n%{http_code}' --max-time 10 -H 'User-Agent: DevTerminal/1.0' -X '$safe_method' -- '$safe_url'\") &&\nstatus=$(echo \"$response\" | tail -1) &&\nbody=$(echo \"$response\" | head -n-1) &&\nsafe_status=\"${status//\\'/\\'\\\\\\'\\'}\" &&\neval \"printf '📊 HTTP Status: %s\\\\n\\\\n📋 Response:\\\\n' '$safe_status'\" &&\n(\n echo \"$body\" | python3 -m json.tool 2>/dev/null ||\n (\n  safe_body=\"${body//\\'/\\'\\\\\\'\\'}\" &&\n  eval \"printf '%s\\\\n' '$safe_body'\"\n )\n)",
                     "explanation": "Sends an HTTP request to a URL, displays the status code, and attempts to format JSON response for readability.",
                     "goal": "Test API endpoints and inspect responses with one command",
                     "mode": "sync"
@@ -96,11 +97,12 @@
             "fetch file from internet",
             "download file from link"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && termy_say \"Please enter the download URL\" > /dev/null 2>&1 && printf \"\\r\\n🌐 Download URL: \" && read -r url && if [ -n \"$url\" ]; then termy_say \"Please enter the destination filename\" > /dev/null 2>&1 && printf \"📄 Save as filename: \" && read -r outputname && if [ -n \"$outputname\" ]; then curl -L \"$url\" -o \"$outputname\" && printf \"\\n\\033[1m%s\\033[22m downloaded successfully.\\n\" \"$outputname\" && termy_say \"Download completed successfully\" > /dev/null 2>&1; else printf \"\\n⛔ Output filename cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi; else printf \"\\n⛔ URL cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi",
+                    "command": "tput cuu 1 &&\ntermy_say \"Please enter the download URL\" > /dev/null 2>&1 &&\nprintf \"\\r\\n🌐 Download URL: \" &&\nread -r url &&\nif [ -n \"$url\" ]; then\n termy_say \"Please enter the destination filename\" > /dev/null 2>&1 &&\n printf \"📄 Save as filename: \" &&\n read -r outputname &&\n if [ -n \"$outputname\" ]; then\n  curl -L \"$url\" -o \"$outputname\" &&\n  printf \"\\n\\033[1m%s\\033[22m downloaded successfully.\\n\" \"$outputname\" &&\n  termy_say \"Download completed successfully\" > /dev/null 2>&1\n else\n  printf \"\\n⛔ Output filename cannot be empty.\\n\" &&\n  termy_say \"Operation cancelled\" > /dev/null 2>&1\n fi\nelse\n printf \"\\n⛔ URL cannot be empty.\\n\" &&\n termy_say \"Operation cancelled\" > /dev/null 2>&1\nfi",
                     "explanation": "Downloads a file from a specified URL and saves it with a given filename.",
                     "goal": "Download a file from URL",
                     "mode": "sync"
@@ -119,11 +121,12 @@
             "show my current country code",
             "show in which country I am in"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "OUTPUT=$(get_country | grep 'Country Name' | cut -d: -f2 | xargs) && tput cuu 1 && printf \"\\r\n🌍 Country: %s\\n\" \"$OUTPUT\" && termy_say \"You are in $OUTPUT\" > /dev/null 2>&1",
+                    "command": "OUTPUT=$(get_country | grep 'Country Name' | cut -d: -f2 | xargs) &&\ntput cuu 1 &&\nprintf \"\\r\n🌍 Country: %s\\n\" \"$OUTPUT\" &&\ntermy_say \"You are in $OUTPUT\" > /dev/null 2>&1",
                     "explanation": "Retrieves the current country based on the public IP address.",
                     "goal": "Display current country",
                     "mode": "sync"
@@ -148,11 +151,12 @@
             "convert youtube video to music file via terminal",
             "download song from youtube video link"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "read -p \"🔗 YouTube Link: \" ytlink && tput cuu 1 && if ! command -v yt-dlp >/dev/null 2>&1; then termy_say \"Installing missing package\" > /dev/null 2>&1 && printf \"\\r\\n📦 Installing yt-dlp, please wait...\\n\" && sudo apt update -y >/dev/null 2>&1 && sudo apt install -y yt-dlp >/dev/null 2>&1; fi && termy_say \"Downloading YouTube audio\" > /dev/null 2>&1 && printf \"\\r\\n\" && yt-dlp --extract-audio --audio-format mp3 --audio-quality 0 -o \"%(title)s.%(ext)s\" \"$ytlink\" && printf \"\"",
+                    "command": "read -p \"🔗 YouTube Link: \" ytlink &&\ntput cuu 1 &&\nif ! command -v yt-dlp >/dev/null 2>&1; then\n termy_say \"Installing missing package\" > /dev/null 2>&1 &&\n printf \"\\r\\n📦 Installing yt-dlp, please wait...\\n\" &&\n sudo apt update -y >/dev/null 2>&1 &&\n sudo apt install -y yt-dlp >/dev/null 2>&1\nfi &&\ntermy_say \"Downloading YouTube audio\" > /dev/null 2>&1 &&\nprintf \"\\r\\n\" &&\nyt-dlp --extract-audio --audio-format mp3 --audio-quality 0 -o \"%(title)s.%(ext)s\" \"$ytlink\" &&\nprintf \"\"",
                     "explanation": "Prompts for a YouTube URL, automatically installs yt-dlp via apt if it is missing from the system, and then extracts the high-quality MP3 track.",
                     "goal": "Install yt-dlp if missing and download YouTube video as MP3",
                     "mode": "sync"
@@ -170,11 +174,12 @@
             "what should i do today",
             "give me an idea for an activity"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "activity_text=$(curl -s -L --max-time 5 'https://bored-api.appbrewery.com/random' | jq -r '.activity // empty') && [ ! -z \"$activity_text\" ] && termy_set_context active_content \"$activity_text\" && safe_text=\"${activity_text//\\'/\\'\\\\\\'\\'}\" && eval \"termy_say '$safe_text'\"",
+                    "command": "activity_text=$(curl -s -L --max-time 5 'https://bored-api.appbrewery.com/random' | jq -r '.activity // empty') &&\n[ ! -z \"$activity_text\" ] &&\ntermy_set_context active_content \"$activity_text\" &&\nsafe_text=\"${activity_text//\\'/\\'\\\\\\'\\'}\" &&\neval \"termy_say '$safe_text'\"",
                     "explanation": "Fetches a random activity suggestion from the Bored API and saves to context.",
                     "goal": "Display activity suggestion",
                     "mode": "sync"
@@ -215,11 +220,12 @@
             "whats the wind speed and direction",
             "is there a weather alert in effect"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "get_weather | tee >(cat > /tmp/weather_temp.txt) && termy_set_context active_content \"$(cat /tmp/weather_temp.txt)\"",
+                    "command": "get_weather |\ntee >(cat > /tmp/weather_temp.txt) &&\ntermy_set_context active_content \"$(cat /tmp/weather_temp.txt)\"",
                     "explanation": "Retrieves the current weather, displays with original formatting, and saves to context.",
                     "goal": "Display meteorological information",
                     "mode": "sync"
@@ -259,7 +265,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "get_quote | tee >(cat > /tmp/quote_temp.txt) && termy_set_context active_content \"$(cat /tmp/quote_temp.txt)\"",
+                    "command": "get_quote |\ntee >(cat > /tmp/quote_temp.txt) &&\ntermy_set_context active_content \"$(cat /tmp/quote_temp.txt)\"",
                     "explanation": "Retrieves a random inspirational quote with formatting and saves to context.",
                     "goal": "Display inspirational quote",
                     "mode": "sync"
@@ -290,11 +296,12 @@
             "show me the latest news articles",
             "can you print me the latest news"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "get_news | tee >(cat > /tmp/news_temp.txt) && termy_set_context active_content \"$(cat /tmp/news_temp.txt)\"",
+                    "command": "get_news |\ntee >(cat > /tmp/news_temp.txt) &&\ntermy_set_context active_content \"$(cat /tmp/news_temp.txt)\"",
                     "explanation": "Retrieves the latest news articles with formatting and saves to context.",
                     "goal": "Display news articles",
                     "mode": "sync"
@@ -327,11 +334,12 @@
             "got any jokes to lift my spirits",
             "do you know any jokes to cheer me up"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "get_joke | tee >(cat > /tmp/joke_temp.txt) && termy_set_context active_content \"$(cat /tmp/joke_temp.txt)\"",
+                    "command": "get_joke |\ntee >(cat > /tmp/joke_temp.txt) &&\ntermy_set_context active_content \"$(cat /tmp/joke_temp.txt)\"",
                     "explanation": "Retrieves a random joke with formatting and saves to context.",
                     "goal": "Display joke",
                     "mode": "sync"
@@ -365,11 +373,12 @@
             "can you give me information about the actual moon phase",
             "can you give me information about the current moon phase"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "get_moon_phase | tee >(cat > /tmp/moon_temp.txt) && termy_set_context active_content \"$(cat /tmp/moon_temp.txt)\"",
+                    "command": "get_moon_phase |\ntee >(cat > /tmp/moon_temp.txt) &&\ntermy_set_context active_content \"$(cat /tmp/moon_temp.txt)\"",
                     "explanation": "Retrieves the current moon phase with formatting and saves to context.",
                     "goal": "Display moon phase information",
                     "mode": "sync"
@@ -396,11 +405,12 @@
             "list most popular github repos now",
             "show me the most starred github repos"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "raw_response=$(curl -s -L --max-time 7 'https://api.github.com/search/repositories?q=stars:%3E100000&sort=stars&order=desc&per_page=10') && [ ! -z \"$raw_response\" ] && echo \"$raw_response\" | jq -r '.items[] | [.stargazers_count, .name, (.description // \"No description\")] | @tsv' | while IFS=$'\\t' read -r stars name desc; do safe_name=\"${name//\\'/\\'\\\\\\'\\'}\"; safe_desc=\"${desc//\\'/\\'\\\\\\'\\'}\"; eval \"printf '⭐ %s stars | %s | %s\\\\n' '$stars' '$safe_name' '$safe_desc'\"; done | tee >(cat > /tmp/github_temp.txt) && termy_set_context active_content \"$(cat /tmp/github_temp.txt)\"",
+                    "command": "raw_response=$(curl -s -L --max-time 7 'https://api.github.com/search/repositories?q=stars:%3E100000&sort=stars&order=desc&per_page=10') &&\n[ ! -z \"$raw_response\" ] &&\necho \"$raw_response\" |\njq -r '.items[] | [.stargazers_count, .name, (.description // \"No description\")] | @tsv' |\nwhile IFS=$'\\t' read -r stars name desc; do\n safe_name=\"${name//\\'/\\'\\\\\\'\\'}\" &&\n safe_desc=\"${desc//\\'/\\'\\\\\\'\\'}\" &&\n eval \"printf '⭐ %s stars | %s | %s\\\\n' '$stars' '$safe_name' '$safe_desc'\"\ndone |\ntee >(cat > /tmp/joke_temp.txt) &&\ntermy_set_context active_content \"$(cat /tmp/joke_temp.txt)\"",
                     "explanation": "Retrieves the top 10 most starred GitHub repositories and saves to active_content.",
                     "goal": "Obtain data for the 10 most starred github repositories and persist to context",
                     "mode": "sync"
@@ -421,11 +431,12 @@
             "show me the latest earthquakes",
             "tell me about recent earthquakes"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "raw_geo=$(curl -s -L --max-time 7 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson') && [ ! -z \"$raw_geo\" ] && echo \"$raw_geo\" | jq -r '.features[0:3][] | [.properties.mag, .properties.place, ((.properties.time / 1000) | todate)] | @tsv' | while IFS=$'\\t' read -r mag place time; do safe_place=\"${place//\\'/\\'\\\\\\'\\'}\"; eval \"printf 'Magnitude: %s | Location: %s | Time: %s\\\\n' '$mag' '$safe_place' '$time'\"; done",
+                    "command": "raw_geo=$(curl -s -L --max-time 7 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson') &&\n[ ! -z \"$raw_geo\" ] &&\necho \"$raw_geo\" |\njq -r '.features[0:3][] | [.properties.mag, .properties.place, ((.properties.time / 1000) | todate)] | @tsv' |\nwhile IFS=$'\\t' read -r mag place time; do\n safe_place=\"${place//\\'/\\'\\\\\\'\\'}\" &&\n eval \"printf 'Magnitude: %s | Location: %s | Time: %s\\\\n' '$mag' '$safe_place' '$time'\"\ndone",
                     "explanation": "Retrieves the latest earthquake data from the USGS Earthquake API.",
                     "goal": "Obtain earthquake data",
                     "mode": "sync"
@@ -450,11 +461,12 @@
             "show me the nasa picture of the day",
             "show me the astronomy picture of the day"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "printf '🌌 NASA APOD:\\n\\n' && raw_apod=$(curl -s -L --max-time 7 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY') && [ ! -z \"$raw_apod\" ] && echo \"$raw_apod\" | jq -r '[.title, (.explanation | sub(\"\\\\s+\"; \" \"; \"g\") | .[0:300]), .url] | @tsv' | while IFS=$'\\t' read -r title explanation url; do safe_title=\"${title//\\'/\\'\\\\\\'\\'}\"; safe_exp=\"${explanation//\\'/\\'\\\\\\'\\'}\"; eval \"printf '\\\\033[1m%s\\\\033[22m\\n\\n%s...\\n\\nImage URL: %s\\n' '$safe_title' '$safe_exp' '$url'\"; done",
+                    "command": "printf '🌌 NASA APOD:\\n\\n' &&\nraw_apod=$(curl -s -L --max-time 7 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY') &&\n[ ! -z \"$raw_apod\" ] &&\necho \"$raw_apod\" |\njq -r '[.title, (.explanation | sub(\"\\\\s+\"; \" \"; \"g\") | .[0:300]), .url] | @tsv' |\nwhile IFS=$'\\t' read -r title explanation url; do\n safe_title=\"${title//\\'/\\'\\\\\\'\\'}\" &&\n safe_exp=\"${explanation//\\'/\\'\\\\\\'\\'}\" &&\n eval \"printf '\\\\033[1m%s\\\\033[22m\\n\\n%s...\\n\\nImage URL: %s\\n' '$safe_title' '$safe_exp' '$url'\"\ndone",
                     "explanation": "Retrieves the Astronomy Picture of the Day (APOD) from NASA's API.",
                     "goal": "Obtain APOD data from NASA's API",
                     "mode": "sync"
@@ -474,11 +486,12 @@
             "show iss position",
             "iss tracker"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "iss_raw=$(curl -s -L --max-time 5 'http://api.open-notify.org/iss-now.json') && [ ! -z \"$iss_raw\" ] && lat=$(echo \"$iss_raw\" | jq -r '.iss_position.latitude // empty') && lon=$(echo \"$iss_raw\" | jq -r '.iss_position.longitude // empty') && [ ! -z \"$lat\" ] && [ ! -z \"$lon\" ] && geo_raw=$(curl -s -L --max-time 10 -H 'User-Agent: NPC-Forge/2026.07 (nonar@ranon)' \"https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}\" 2>/dev/null) && location=$(echo \"$geo_raw\" | jq -r 'if .error then \"Over ocean or unpopulated area\" else (.address.city // .address.town // .address.village // .address.state // .address.country // \"Over ocean or unpopulated area\") end' 2>/dev/null || echo 'Timeout/Network Error') && safe_loc=\"${location//\\'/\\'\\\\\\'\\'}\" && eval \"printf 'The ISS is currently at coordinates %s, %s, located in %s\\\\n' '$lat' '$lon' '$safe_loc' && termy_say 'The ISS is currently at coordinates '$lat', '$lon', located in '$safe_loc'' > /dev/null 2>&1 &\"",
+                    "command": "iss_raw=$(curl -s -L --max-time 5 'http://api.open-notify.org/iss-now.json') &&\n[ ! -z \"$iss_raw\" ] &&\nlat=$(echo \"$iss_raw\" | jq -r '.iss_position.latitude // empty') &&\nlon=$(echo \"$iss_raw\" | jq -r '.iss_position.longitude // empty') &&\n[ ! -z \"$lat\" ] &&\n[ ! -z \"$lon\" ] &&\ngeo_raw=$(curl -s -L --max-time 10 -H 'User-Agent: NPC-Forge/2026.07 (nonar@ranon)' \"https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}\" 2>/dev/null) &&\nlocation=$(echo \"$geo_raw\" | jq -r 'if .error then \"Over ocean or unpopulated area\" else (.address.city // .address.town // .address.village // .address.state // .address.country // \"Over ocean or unpopulated area\") end' 2>/dev/null || echo 'Timeout/Network Error') &&\nsafe_loc=\"${location//\\'/\\'\\\\\\'\\'}\" &&\neval \"printf 'The ISS is currently at coordinates %s, %s, located in %s\\\\n' '$lat' '$lon' '$safe_loc' && termy_say 'The ISS is currently at coordinates '$lat', '$lon', located in '$safe_loc'' > /dev/null 2>&1 &\"",
                     "explanation": "Retrieves the current location of the International Space Station (ISS) including its coordinates and city name in English.",
                     "goal": "Obtain ISS (International Space Station) position with city name and coordinates",
                     "mode": "sync"
@@ -500,11 +513,12 @@
             "show me the current bitcoin price",
             "tell me the current bitcoin price"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "raw_price=$(curl -s -L --max-time 5 'https://cryptoprices.cc/BTC') && [ ! -z \"$raw_price\" ] && price=$(echo \"$raw_price\" | cut -d'.' -f1) && [ ! -z \"$price\" ] && eval \"printf 'BTC: %s$\\n' '$price' && termy_say 'BTC: '$price'$' > /dev/null 2>&1 & termy_set_context 'active_price' '$price'\"",
+                    "command": "raw_price=$(curl -s -L --max-time 5 'https://cryptoprices.cc/BTC') &&\n[ ! -z \"$raw_price\" ] &&\nprice=$(echo \"$raw_price\" | cut -d'.' -f1) &&\n[ ! -z \"$price\" ] &&\neval \"printf 'BTC: %s$\\n' '$price' && termy_say 'BTC: '$price'$' > /dev/null 2>&1 &\ntermy_set_context 'active_price' '$price'\"",
                     "explanation": "Retrieves the current price of Bitcoin (BTC) in USD and announces it via TTS.",
                     "goal": "Obtain price of Bitcoin (BTC) in USD and announce via audio",
                     "mode": "sync"
@@ -526,11 +540,12 @@
             "show me the current ethereum price",
             "tell me the current ethereum price"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "raw_price=$(curl -s -L --max-time 5 'https://cryptoprices.cc/ETH') && [ ! -z \"$raw_price\" ] && price=$(echo \"$raw_price\" | cut -d'.' -f1) && [ ! -z \"$price\" ] && eval \"printf 'ETH: %s$\\n' '$price' && termy_say 'ETH: '$price'$' > /dev/null 2>&1 & termy_set_context 'active_price' '$price'\"",
+                    "command": "raw_price=$(curl -s -L --max-time 5 'https://cryptoprices.cc/ETH') &&\n[ ! -z \"$raw_price\" ] &&\nprice=$(echo \"$raw_price\" | cut -d'.' -f1) &&\n[ ! -z \"$price\" ] &&\neval \"printf 'ETH: %s$\\n' '$price' && termy_say 'ETH: '$price'$' > /dev/null 2>&1 &\ntermy_set_context 'active_price' '$price'\"",
                     "explanation": "Retrieves the current price of Ethereum (ETH) in USD and announces it via TTS.",
                     "goal": "Obtain price of Ethereum (ETH) in USD and announce via audio",
                     "mode": "sync"
@@ -550,11 +565,12 @@
             "show me the current dogecoin price",
             "tell me the current dogecoin price"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "raw_price=$(curl -s -L --max-time 5 'https://cryptoprices.cc/DOGE') && [ ! -z \"$raw_price\" ] && price=$(echo \"$raw_price\" | xargs) && [ ! -z \"$price\" ] && eval \"printf 'DOGE: %s$\\n' '$price' && termy_say 'DOGE: '$price'$' > /dev/null 2>&1 & termy_set_context 'active_price' '$price'\"",
+                    "command": "raw_price=$(curl -s -L --max-time 5 'https://cryptoprices.cc/DOGE') &&\n[ ! -z \"$raw_price\" ] &&\nprice=$(echo \"$raw_price\" | xargs) &&\n[ ! -z \"$price\" ] &&\neval \"printf 'DOGE: %s$\\n' '$price' && termy_say 'DOGE: '$price'$' > /dev/null 2>&1 &\ntermy_set_context 'active_price' '$price'\"",
                     "explanation": "Retrieves the current price of Dogecoin (DOGE) in USD and announces it via TTS.",
                     "goal": "Obtain price of Dogecoin (DOGE) in USD and announce via audio",
                     "mode": "sync"
@@ -575,11 +591,12 @@
             "find when sun sets today",
             "solar noon info"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && termy_say \"Calculating solar data\" > /dev/null 2>&1 && printf \"\\r\\nResult:\\n\" && python3 -c \"import urllib.request, json; req=urllib.request.Request('https://api.sunrise-sunset.org/json?lat=40.7128&lng=-74.0060', headers={'User-Agent': 'Mozilla/5.0'}); res=urllib.request.urlopen(req).read(); data=json.loads(res)['results']; print(f'Sunrise: {data.get(\\\"sunrise\\\", \\\"N/A\\\")} UTC\\nSunset: {data.get(\\\"sunset\\\", \\\"N/A\\\")} UTC\\nDay Length: {data.get(\\\"day_length\\\", \\\"N/A\\\")}')\" 2>/dev/null || printf \"⛔ Calculation error\\n\"",
+                    "command": "termy_say -s \"Calculating solar data\" &&\nprintf \"Result:\n\n\" &&\npython3 -c \"import urllib.request, json; req=urllib.request.Request('https://api.sunrise-sunset.org/json?lat=40.7128&lng=-74.0060', headers={'User-Agent': 'Mozilla/5.0'}); res=urllib.request.urlopen(req).read(); data=json.loads(res)['results']; print(f'Sunrise: {data.get(\\\"sunrise\\\", \\\"N/A\\\")} UTC\\nSunset: {data.get(\\\"sunset\\\", \\\"N/A\\\")} UTC\\nDay Length: {data.get(\\\"day_length\\\", \\\"N/A\\\")}')\" 2>/dev/null ||\nprintf \"⛔ Calculation error\\n\"",
                     "explanation": "Executes an inline Python request to fetch and format real-time sunrise and sunset data from the sunrise-sunset API.",
                     "goal": "Compute real-time sunrise, sunset, and daylight solar markers via terminal",
                     "mode": "sync"
@@ -600,6 +617,7 @@
             "extract article from url",
             "download webpage text"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -624,6 +642,7 @@
             "extract json from url",
             "scrape json content"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
