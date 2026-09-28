@@ -64,18 +64,18 @@ def load_and_merge_json_files(base_path, pattern, fallback_filename):
             
     return merged_data
 
-def compile_npc_html(npc_name):
+def npc_to_html(npc_name):
     base_npc_path = REGISTRY_DIR / "npcs" / npc_name
     dataset_dir = base_npc_path / "dataset"
     vocab_dir = dataset_dir / "vocabulary"
     
-    with open(SRC_DIR / "js" / "FlintParser.js", "r", encoding="utf-8") as f:
+    with open(SRC_DIR / "web/js" / "FlintParser.js", "r", encoding="utf-8") as f:
         parser_js = f.read()
-    with open(SRC_DIR / "js" / "FlintNPC.js", "r", encoding="utf-8") as f:
+    with open(SRC_DIR / "web/js" / "FlintNPC.js", "r", encoding="utf-8") as f:
         npc_js = f.read()
-    with open(SRC_DIR / "js" / "Captain.js", "r", encoding="utf-8") as f:
+    with open(SRC_DIR / "web/js" / "Captain.js", "r", encoding="utf-8") as f:
         captain_js = f.read()
-    with open(SRC_DIR / "css" / "chat-style.css", "r", encoding="utf-8") as f:
+    with open(SRC_DIR / "web/chat/css" / "chat-style.css", "r", encoding="utf-8") as f:
         chat_style = f.read()
         
     # Carica e accorpa i file multipli per dataset e templates
@@ -93,7 +93,7 @@ def compile_npc_html(npc_name):
     }
     bundle_json_str = json.dumps(bundle, ensure_ascii=False)
 
-    with open(SRC_DIR / "html" / "chat" / "template.html", "r", encoding="utf-8") as f:
+    with open(SRC_DIR / "web/chat/html" / "chat" / "template.html", "r", encoding="utf-8") as f:
         html_template = f.read()
 
     html_compiled = html_template.replace("/*{{STYLE_SOURCE}}*/", chat_style)
@@ -121,7 +121,7 @@ def compile_standalone_npc(npc_name):
 
     print(f"[COMPILER] Compiling assets for profile: '{npc_name}'...")
     
-    html_compiled = compile_npc_html(npc_name)
+    html_compiled = npc_to_html(npc_name)
 
     output_dir = base_npc_path / "dist"
     output_dir.mkdir(parents=True, exist_ok=True)
