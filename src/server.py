@@ -2,8 +2,8 @@ import os
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 from logger import logger
-from registry import get_npc_engine
-from compile_npc import compile_npc_html
+from registry import load_npc
+from compile_npc import npc_to_html
 from server_openai import openai_blueprint
 
 app = Flask(__name__)
@@ -15,7 +15,7 @@ app.register_blueprint(openai_blueprint)
 def chat_html(npc_name):
     try:
         logger.info(f"[server.py][chat_html] Compiling HTML interface for NPC: '{npc_name}'")
-        html_content = compile_npc_html(npc_name)
+        html_content = npc_to_html(npc_name)
         response = make_response(html_content)
         response.headers['Content-Type'] = 'text/html'
         return response
@@ -36,7 +36,7 @@ def chat(npc_name):
     try:
         logger.info(f"[server.py][chat] Incoming chat request for NPC: '{npc_name}'")
         
-        engine = get_npc_engine(npc_name)
+        engine = load_npc(npc_name)
         if not engine:
             logger.warning(f"[server.py][chat] NPC profile '{npc_name}' not found on disk.")
             return jsonify({"error": f"NPC profile '{npc_name}' not found on disk"}), 404

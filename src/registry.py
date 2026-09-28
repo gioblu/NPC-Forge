@@ -8,7 +8,7 @@ REGISTRY_DIR = Path.home() / ".local" / "share" / "npc-forge"
 
 NPC_REGISTRY = {}
 
-def get_npc_engine(npc_name):
+def load_npc(npc_name):
     """Ensures that each NPC Engine is instantiated and baked ONCE on startup."""
     npc_path = REGISTRY_DIR / "npcs" / npc_name
     if not os.path.exists(npc_path):
