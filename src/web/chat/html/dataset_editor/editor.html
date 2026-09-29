@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NPC-Forge Intent Editor</title>
+<style>
+    :root {
+        --bg: #0d1117;
+        --panel: #161b22;
+        --border: #30363d;
+        --text: #c9d1d9;
+        --muted: #8b949e;
+        --green: #3fb950;
+        --yellow: #d29922;
+        --red: #f85149;
+        --accent: #58a6ff;
+        --hover: #1f2630;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    header {
+        background: var(--panel);
+        border-bottom: 1px solid var(--border);
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-shrink: 0;
+    }
+    header h1 {
+        color: var(--green);
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+    header h1 span { color: var(--yellow); }
+    .controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-left: auto;
+    }
+    button, select {
+        background: var(--panel);
+        color: var(--text);
+        border: 1px solid var(--border);
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.15s;
+    }
+    button:hover { background: var(--hover); border-color: var(--muted); }
+    button.primary {
+        background: var(--green);
+        color: #0d1117;
+        border-color: var(--green);
+        font-weight: 600;
+    }
+    button.primary:hover { background: #2ea043; }
+    button.primary:disabled {
+        background: var(--border);
+        color: var(--muted);
+        cursor: not-allowed;
+        border-color: var(--border);
+    }
+    select {
+        padding: 6px 10px;
+        min-width: 180px;
+    }
+    select:disabled { opacity: 0.5; cursor: not-allowed; }
+    .status {
+        font-size: 12px;
+        color: var(--muted);
+        padding: 0 8px;
+    }
+    .status.ok { color: var(--green); }
+    .status.err { color: var(--red); }
+    .status.warn { color: var(--yellow); }
+
+    main {
+        flex: 1;
+        display: flex;
+        overflow: hidden;
+    }
+    aside {
+        width: 280px;
+        background: var(--panel);
+        border-right: 1px solid var(--border);
+        overflow-y: auto;
+        flex-shrink: 0;
+    }
+    .file-group {
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border);
+    }
+    .file-group:last-child { border-bottom: none; }
+    .file-group-title {
+        padding: 4px 16px;
+        font-size: 11px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 600;
+    }
+    .file-item {
+        padding: 6px 16px 6px 28px;
+        font-size: 13px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text);
+        border-left: 3px solid transparent;
+    }
+    .file-item:hover { background: var(--hover); }
+    .file-item.active {
+        background: var(--hover);
+        border-left-color: var(--green);
+        color: var(--green);
+    }
+    .file-item.dirty::after {
+        content: "●";
+        color: var(--yellow);
+        margin-left: auto;
+        font-size: 10px;
+    }
+    .file-icon { color: var(--muted); font-size: 11px; }
+
+    .editor-area {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    .editor-header {
+        padding: 10px 20px;
+        background: var(--panel);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13px;
+    }
+    .editor-header .path {
+        color: var(--muted);
+        font-family: "SF Mono", Menlo, Consolas, monospace;
+        font-size: 12px;
+    }
+    .editor-actions { display: flex; gap: 10px; align-items: center; }
+    textarea {
+        flex: 1;
+        background: var(--bg);
+        color: var(--text);
+        border: none;
+        padding: 20px;
+        font-family: "SF Mono", Menlo, Consolas, monospace;
+        font-size: 13px;
+        line-height: 1.6;
+        resize: none;
+        outline: none;
+        tab-size: 4;
+    }
+    textarea:disabled { opacity: 0.5; }
+    .placeholder {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: var(--muted);
+        gap: 12px;
+    }
+    .placeholder .icon { font-size: 48px; opacity: 0.3; }
+    .placeholder p { font-size: 14px; }
+
+    .empty-state {
+        padding: 40px 20px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>NPC-FORGE <span>// Intent Editor</span></h1>
+    <div class="controls">
+        <span class="status" id="status">No directory selected</span>
+        <button id="pickDirBtn">Open npcs/ Directory</button>
+        <select id="npcSelect" disabled>
+            <option value="">-- Select NPC --</option>
+        </select>
+    </div>
+</header>
+
+<main>
+    <aside id="fileList">
+        <div class="empty-state">
+            Select an NPC to view its files
+        </div>
+    </aside>
+
+    <section class="editor-area">
+        <div class="editor-header" id="editorHeader" style="display:none;">
+            <span class="path" id="currentPath"></span>
+            <div class="editor-actions">
+                <button id="formatBtn">Format JSON</button>
+                <button id="saveBtn" class="primary" disabled>Save</button>
+            </div>
+        </div>
+        <div class="placeholder" id="placeholder">
+            <div class="icon">📝</div>
+            <p>Open your <code>~/.local/share/npc-forge/npcs/</code> directory to begin editing</p>
+        </div>
+        <textarea id="editor" style="display:none;" spellcheck="false"></textarea>
+    </section>
+</main>
+
+<script>
+const pickDirBtn = document.getElementById('pickDirBtn');
+const npcSelect = document.getElementById('npcSelect');
+const fileList = document.getElementById('fileList');
+const editor = document.getElementById('editor');
+const placeholder = document.getElementById('placeholder');
+const editorHeader = document.getElementById('editorHeader');
+const currentPath = document.getElementById('currentPath');
+const saveBtn = document.getElementById('saveBtn');
+const formatBtn = document.getElementById('formatBtn');
+const statusEl = document.getElementById('status');
+
+let rootDirHandle = null;
+let currentNpcHandle = null;
+let currentFileHandle = null;
+let currentFileName = '';
+let dirtyFiles = new Set(); // tracks "npcName::relativePath"
+let originalContent = '';
+
+// Check API support
+if (!('showDirectoryPicker' in window)) {
+    setStatus('Your browser does not support the File System Access API. Use Chrome, Edge, or Brave.', 'err');
+    pickDirBtn.disabled = true;
+}
+
+function setStatus(msg, type = '') {
+    statusEl.textContent = msg;
+    statusEl.className = 'status ' + type;
+}
+
+pickDirBtn.addEventListener('click', async () => {
+    try {
+        rootDirHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
+        setStatus(`Opened: ${rootDirHandle.name}`, 'ok');
+        await loadNpcs();
+    } catch (e) {
+        if (e.name !== 'AbortError') {
+            setStatus('Failed to open directory: ' + e.message, 'err');
+        }
+    }
+});
+
+async function loadNpcs() {
+    const npcs = [];
+    for await (const entry of rootDirHandle.values()) {
+        if (entry.kind === 'directory' && entry.name !== '__pycache__') {
+            npcs.push(entry.name);
+        }
+    }
+    npcs.sort();
+    npcSelect.innerHTML = '<option value="">-- Select NPC --</option>';
+    npcs.forEach(name => {
+        const opt = document.createElement('option');
+        opt.value = name;
+        opt.textContent = name;
+        npcSelect.appendChild(opt);
+    });
+    npcSelect.disabled = npcs.length === 0;
+    if (npcs.length === 0) setStatus('No NPCs found in directory', 'warn');
+    // Reset editor
+    fileList.innerHTML = '<div class="empty-state">Select an NPC to view its files</div>';
+    showPlaceholder();
+}
+
+npcSelect.addEventListener('change', async () => {
+    const name = npcSelect.value;
+    if (!name) {
+        fileList.innerHTML = '<div class="empty-state">Select an NPC to view its files</div>';
+        showPlaceholder();
+        return;
+    }
+    currentNpcHandle = await rootDirHandle.getDirectoryHandle(name);
+    await loadFileTree(name);
+});
+
+async function loadFileTree(npcName) {
+    fileList.innerHTML = '';
+    const groups = {
+        'Configuration': [],
+        'Dataset': [],
+        'Personality & Templates': [],
+        'Types': [],
+        'Vocabulary': []
+    };
+
+    // Config
+    if (await hasFile(currentNpcHandle, 'config.json')) {
+        groups['Configuration'].push({ path: 'config.json', handle: await getFileHandle(currentNpcHandle, 'config.json') });
+    }
+
+    // Dataset dir
+    try {
+        const datasetDir = await currentNpcHandle.getDirectoryHandle('dataset');
+        for await (const entry of datasetDir.values()) {
+            if (entry.kind !== 'file') continue;
+            const name = entry.name;
+            if (name.startsWith('dataset_') && name.endsWith('.json')) {
+                groups['Dataset'].push({ path: `dataset/${name}`, handle: entry });
+            } else if (name === 'personality.json') {
+                groups['Personality & Templates'].push({ path: `dataset/${name}`, handle: entry });
+            } else if (name.startsWith('templates_') && name.endsWith('.json')) {
+                groups['Personality & Templates'].push({ path: `dataset/${name}`, handle: entry });
+            } else if (name === 'types.json') {
+                groups['Types'].push({ path: `dataset/${name}`, handle: entry });
+            }
+        }
+        // Vocabulary subdirectory
+        try {
+            const vocabDir = await datasetDir.getDirectoryHandle('vocabulary');
+            for await (const entry of vocabDir.values()) {
+                if (entry.kind === 'file' && entry.name.endsWith('.json')) {
+                    groups['Vocabulary'].push({ path: `dataset/vocabulary/${entry.name}`, handle: entry });
+                }
+            }
+        } catch (e) { /* no vocabulary dir */ }
+    } catch (e) { /* no dataset dir */ }
+
+    // Render
+    Object.entries(groups).forEach(([title, files]) => {
+        if (files.length === 0) return;
+        const group = document.createElement('div');
+        group.className = 'file-group';
+        group.innerHTML = `<div class="file-group-title">${title}</div>`;
+        files.sort((a, b) => a.path.localeCompare(b.path));
+        files.forEach(file => {
+            const item = document.createElement('div');
+            item.className = 'file-item';
+            item.dataset.path = file.path;
+            const dirtyKey = `${npcName}::${file.path}`;
+            if (dirtyFiles.has(dirtyKey)) item.classList.add('dirty');
+            item.innerHTML = `<span class="file-icon">📄</span><span>${file.path.split('/').pop()}</span>`;
+            item.addEventListener('click', () => selectFile(file, item));
+            group.appendChild(item);
+        });
+        fileList.appendChild(group);
+    });
+
+    if (fileList.children.length === 0) {
+        fileList.innerHTML = '<div class="empty-state">No editable files found</div>';
+    }
+}
+
+async function hasFile(dirHandle, name) {
+    try {
+        await dirHandle.getFileHandle(name);
+        return true;
+    } catch { return false; }
+}
+
+async function getFileHandle(dirHandle, path) {
+    const parts = path.split('/');
+    let current = dirHandle;
+    for (const part of parts) {
+        current = await current.getDirectoryHandle(part);
+    }
+    return current;
+}
+
+async function selectFile(file, element) {
+    // Warn if current file is dirty
+    if (currentFileHandle && dirtyFiles.has(`${npcSelect.value}::${currentFileName}`)) {
+        if (!confirm(`You have unsaved changes in ${currentFileName}. Discard them?`)) return;
+    }
+
+    document.querySelectorAll('.file-item').forEach(el => el.classList.remove('active'));
+    element.classList.add('active');
+
+    currentFileHandle = file.handle;
+    currentFileName = file.path;
+
+    try {
+        const f = await file.handle.getFile();
+        const text = await f.text();
+        originalContent = text;
+        editor.value = text;
+        placeholder.style.display = 'none';
+        editor.style.display = 'block';
+        editorHeader.style.display = 'flex';
+        currentPath.textContent = `${npcSelect.value}/${file.path}`;
+        saveBtn.disabled = true;
+    } catch (e) {
+        setStatus('Failed to read file: ' + e.message, 'err');
+    }
+}
+
+function showPlaceholder() {
+    placeholder.style.display = 'flex';
+    editor.style.display = 'none';
+    editorHeader.style.display = 'none';
+    currentFileHandle = null;
+    currentFileName = '';
+}
+
+editor.addEventListener('input', () => {
+    if (!currentFileHandle) return;
+    const dirtyKey = `${npcSelect.value}::${currentFileName}`;
+    if (editor.value !== originalContent) {
+        dirtyFiles.add(dirtyKey);
+        saveBtn.disabled = false;
+    } else {
+        dirtyFiles.delete(dirtyKey);
+        saveBtn.disabled = true;
+    }
+    // Update dirty indicator
+    const activeItem = document.querySelector('.file-item.active');
+    if (activeItem) {
+        activeItem.classList.toggle('dirty', dirtyFiles.has(dirtyKey));
+    }
+});
+
+saveBtn.addEventListener('click', async () => {
+    if (!currentFileHandle) return;
+    try {
+        const writable = await currentFileHandle.createWritable();
+        await writable.write(editor.value);
+        await writable.close();
+        originalContent = editor.value;
+        const dirtyKey = `${npcSelect.value}::${currentFileName}`;
+        dirtyFiles.delete(dirtyKey);
+        saveBtn.disabled = true;
+        const activeItem = document.querySelector('.file-item.active');
+        if (activeItem) activeItem.classList.remove('dirty');
+        setStatus(`Saved: ${currentFileName}`, 'ok');
+        setTimeout(() => setStatus(`Opened: ${rootDirHandle.name}`, 'ok'), 2000);
+    } catch (e) {
+        setStatus('Save failed: ' + e.message, 'err');
+    }
+});
+
+formatBtn.addEventListener('click', () => {
+    try {
+        const parsed = JSON.parse(editor.value);
+        editor.value = JSON.stringify(parsed, null, 4);
+        editor.dispatchEvent(new Event('input'));
+        setStatus('JSON formatted', 'ok');
+        setTimeout(() => setStatus(`Opened: ${rootDirHandle.name}`, 'ok'), 1500);
+    } catch (e) {
+        setStatus('Invalid JSON: ' + e.message, 'err');
+    }
+});
+
+// Warn before leaving with unsaved changes
+window.addEventListener('beforeunload', (e) => {
+    if (dirtyFiles.size > 0) {
+        e.preventDefault();
+        e.returnValue = '';
+    }
+});
+
+// Tab key support in textarea
+editor.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') {
+        e.preventDefault();
+        const start = editor.selectionStart;
+        const end = editor.selectionEnd;
+        editor.value = editor.value.substring(0, start) + '    ' + editor.value.substring(end);
+        editor.selectionStart = editor.selectionEnd = start + 4;
+        editor.dispatchEvent(new Event('input'));
+    }
+    // Ctrl/Cmd+S to save
+    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        if (!saveBtn.disabled) saveBtn.click();
+    }
+});
+</script>
+
+</body>
+</html>
