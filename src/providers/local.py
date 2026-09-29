@@ -39,3 +39,29 @@ class LocalProvider(BaseProvider):
                 "status": "rejected",
                 "error": str(e),
             }
+
+    def save_entry(
+        self, 
+        ndf_object: dict, 
+        dataset_dir: str, 
+        dataset_file: str = "dataset_generated_by_user.json"
+    ) -> bool:
+        """Appends the generated NDF object securely to the target dataset."""
+        dataset_path = Path(dataset_dir) / dataset_file
+        os.makedirs(dataset_path.parent, exist_ok=True)
+        
+        existing_data = []
+        if dataset_path.exists():
+            try:
+                with open(dataset_path, 'r', encoding='utf-8') as f:
+                    existing_data = json.load(f)
+                    if not isinstance(existing_data, list):
+                        existing_data = []
+            except Exception:
+                existing_data = []
+                
+        existing_data.append(ndf_object)
+        with open(dataset_path, "w", encoding="utf-8") as f:
+            json.dump(existing_data, f, indent=4, ensure_ascii=False)
+            
+        return True

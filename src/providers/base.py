@@ -7,3 +7,5 @@ class BaseProvider(ABC):
     def request(self, npc_name: str, query: str) -> dict | None:
         """Sends a request to the NPC engine and returns the response."""
         pass
+
+    
