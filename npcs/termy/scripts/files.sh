@@ -316,8 +316,11 @@ termy_execute() {
 
     local run_status=$?
     if [[ $run_status -eq 0 ]]; then
-        echo "$output"
-        termy_set_context active_content "$output"
+        if [[ -n "$output" ]]; then
+            echo "$output"
+            termy_set_context active_content "$output"
+        fi
+        printf "\n"
         termy_say "Execution completed."
         return 0
     else

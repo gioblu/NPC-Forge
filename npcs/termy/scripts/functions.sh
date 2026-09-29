@@ -100,9 +100,7 @@ open_file_with_editor() {
         return 1
     fi
 
-    # Strip paths using basename to lock the execution scope to the current folder.
-    # Strip wildcards (*, ?) to prevent unintended shell globbing expansions.
-    target_file=$(basename "$target_file" | tr -d '*?')
+    target_file=$(echo "$target_file" | tr -d '*?')
     
     if [ ! -f "$target_file" ]; then
         termy_say -s -- "The requested file does not exist. Do you want to create a new one?"

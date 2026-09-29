@@ -24,12 +24,6 @@ termy_voice_off() {
     echo "Voice mode disabled."
 }
 
-# Generate an ANSI clickable link for the terminal
-
-termy_link() {
-    printf "\e]8;;file://%s\e\\\\%s\e]8;;\e\\\\" "$1" "$2"
-}
-
 # This function is used by TERMy to synthetize speech
 termy_say() {
     local silent=false
@@ -200,5 +194,4 @@ termy_set_context() {
     fi
 }
 
-export -f termy_link
 export -f termy_say
