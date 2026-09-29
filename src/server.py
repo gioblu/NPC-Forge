@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 from logger import logger
 from registry import load_npc
-from compile_npc import npc_to_html
+from bundler import npc_to_html
 from server_openai import openai_blueprint
 
 app = Flask(__name__)

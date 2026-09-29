@@ -19,4 +19,4 @@ dependencies = [
 ]
 
 [tool.setuptools]
-py-modules = ["cli", "server", "server_openai", "registry", "FlintNPC", "FlintParser", "compile_npc", "logger"]
+py-modules = ["cli", "server", "server_openai", "registry", "FlintNPC", "FlintParser", "bundler", "logger"]

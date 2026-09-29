@@ -62,17 +62,17 @@ def npc_to_html(npc_name):
     templates_bundle = load_and_merge_json_files(dataset_dir, "templates_*.json", "templates.json")
         
     bundle = {
-        "config": storage.load_json_file(base_npc_path, "config.json"),
-        "types": storage.load_json_file(dataset_dir, "types.json"),
-        "templates_vocabulary": storage.load_json_file(vocab_dir, "templates.json"),
-        "vocabulary": storage.load_json_file(vocab_dir, "vocabulary.json"),
+        "config": storage.load_json(base_npc_path, "config.json"),
+        "types": storage.load_json(dataset_dir, "types.json"),
+        "templates_vocabulary": storage.load_json(vocab_dir, "templates.json"),
+        "vocabulary": storage.load_json(vocab_dir, "vocabulary.json"),
         "dataset": dataset_bundle,
-        "personality": storage.load_json_file(dataset_dir, "personality.json"),
+        "personality": storage.load_json(dataset_dir, "personality.json"),
         "templates": templates_bundle
     }
     bundle_json_str = json.dumps(bundle, ensure_ascii=False)
 
-    with open(SRC_DIR / "web/chat/html" / "chat" / "template.html", "r", encoding="utf-8") as f:
+    with open(SRC_DIR / "web/chat/html" / "template.html", "r", encoding="utf-8") as f:
         html_template = f.read()
 
     html_compiled = html_template.replace("/*{{STYLE_SOURCE}}*/", chat_style)
