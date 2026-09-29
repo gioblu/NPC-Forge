@@ -859,6 +859,17 @@
     },
     {
         "input": [
+            "when the tmp directory is cleaned up",
+            "do you know when the tmp folder is emptied",
+            "how often the tmp directory is cleaned up",
+            "how often files in the tmp dir are deleted"
+        ],
+        "output": "In Linux how the tmp directory is handled depends on your distribution configuration. When RAM-based (tmpfs) the tmp folder is mounted directly in the RAM; being volatile, all data is lost every time you restart or power off the computer. When disk-based (systemd-tmpfiles) if tmp is in your physical drive, a background service scans it periodically. Instead of deleting everything on reboot, only the files that haven't been accessed or modified for a specific amount of time are deleted.",
+        "permission": "yolo",
+        "description": "Explains the Linux kernel kswapd thread and memory reclamation."
+    },
+    {
+        "input": [
             "what is the function of the kswapd kernel thread",
             "explain kswapd",
             "what is kswapd used for",

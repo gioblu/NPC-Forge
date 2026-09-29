@@ -36,7 +36,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "cat \"$(termy_get_context 'active_file')\"",
-                    "explanation": "Prints contents of the last active file in context.",
+                    "explanation": "Prints contents of the active file in context.",
                     "goal": "Print file contents",
                     "mode": "sync"
                 }
@@ -674,7 +674,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "active_file=\"$(termy_get_context 'active_file')\" &&\nmv -i -- \"$active_file\" '<||path||>' &&\n\nif [ -d '<||path||>' ]; then\n termy_set_context active_file \"<||path||>/$(basename \"$active_file\")\";\nelse\n termy_set_context 'active_file' '<||path||>';\nfi",
-                    "explanation": "Move the last active file to a new location.",
+                    "explanation": "Move the active file to a new location.",
                     "goal": "File location update",
                     "mode": "sync"
                 }
@@ -765,7 +765,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "chmod +x -- \"$(termy_get_context 'active_file')\"",
-                    "explanation": "Makes the last target file executable.",
+                    "explanation": "Makes the target file executable.",
                     "goal": "File permissions update",
                     "mode": "sync"
                 }
@@ -806,7 +806,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "termy_execute \"$(termy_get_context 'active_file')\"",
-                    "explanation": "Executes the last target script.",
+                    "explanation": "Executes the target script.",
                     "goal": "Script execution",
                     "mode": "sync"
                 }
@@ -885,7 +885,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "rm -f -- \"$(termy_get_context 'active_file')\" && termy_set_context 'active_file' ''",
-                    "explanation": "Deletes the last target.",
+                    "explanation": "Deletes the target file.",
                     "goal": "File deletion",
                     "mode": "sync"
                 }
@@ -996,7 +996,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "if [ ! -f '<||file||>' ]; then\n termy_say \"File not found\" > /dev/null 2>&1 &&\n printf '\\r\\n⛔ Error: File %s does not exist\\n' '<||file||>';\nelse\n termy_say \"Deleting file\" > /dev/null 2>&1 &&\n rm -- '<||file||>' 2>/dev/null &&\n printf '\\r\\n🗑️  File %s successfully removed\\n' '<||file||>';\nfi &&\nprintf ''",
-                    "explanation": "Validates if the target file exists, announces the deletion via termy_say, and removes it safely from the filesystem.",
+                    "explanation": "Validates if the target file exists and removes it safely from the filesystem.",
                     "goal": "File deletion",
                     "mode": "sync"
                 }
@@ -1223,7 +1223,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "if [ ! -f '<||string||>' ]; then\n termy_say \"File not found\" > /dev/null 2>&1 &&\n printf '⛔ Error: File %s does not exist: ' '<||string||>';\nelse\n termy_say \"Counting lines\" > /dev/null 2>&1 &&\n printf '🔢 Lines: ' && wc -l -- '<||string||>' 2>/dev/null;\nfi &&\nprintf ''",
-                    "explanation": "Validates the target file existence and executes the native wc -l utility to return the line count of <||string||>.",
+                    "explanation": "Validates the target file existence and returns the line count of <||string||>.",
                     "goal": "Count lines in file",
                     "mode": "sync"
                 }
@@ -1272,7 +1272,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "termy_say \"Searching for files\" > /dev/null 2>&1 &&\nprintf '🔍 Searching from current directory...\n\n' &&\nescaped_word=$(printf '%s' '<||name||>' | sed \"s/'/'\\\\''/g\") &&\nfind . -type f -name \"*${escaped_word}*\" 2>/dev/null | head -n 20 &&\nprintf ''",
-                    "explanation": "Recursively uses the native find command to locate files matching <||name||> starting directly from the current working directory, limited to 20 lines.",
+                    "explanation": "Uses the find command to locate files matching <||name||> starting from the current working directory, limited to 20 lines.",
                     "goal": "Search files",
                     "mode": "sync"
                 }
@@ -1331,7 +1331,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "content=\"$(termy_get_context 'active_content')\" &&\nif [ ! -z \"$content\" ]; then\n echo \"$content\" > '<||string||>' &&\n termy_say \"Content saved to <||string||>\" &&\n termy_set_context active_file '<||string||>';\nelse\n termy_say \"No content to save\"; \nfi",
-                    "explanation": "Saves active_content context to a specified file.",
+                    "explanation": "Saves active content from context to a specified file.",
                     "goal": "Persist content to filesystem",
                     "mode": "sync"
                 }
@@ -1382,7 +1382,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "content=\"$(termy_get_context 'last_math_result')\" && if [ ! -z \"$content\" ]; then echo \"$content\" > '<||string||>' && termy_say \"Content saved to <||string||>\" && termy_set_context active_file '<||string||>'; else termy_say \"No content to save\"; fi",
-                    "explanation": "Saves last_math_result context to a specified file.",
+                    "explanation": "Saves math result from context to a specified file.",
                     "goal": "Persist content to filesystem",
                     "mode": "sync"
                 }
@@ -1433,7 +1433,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "content=\"$(termy_get_context 'active_content')\" && file_path='<||string||>' && if [ ! -z \"$content\" ]; then echo \"$content\" >> \"$file_path\" && abs_path=\"$(cd \"$(dirname \"$file_path\")\" && pwd)/$(basename \"$file_path\")\" && termy_set_context active_file \"$abs_path\" && termy_say \"Content appended to $(basename $file_path)\"; else termy_say \"No content to append\"; fi",
-                    "explanation": "Appends active_content context to an existing file and updates active_file context.",
+                    "explanation": "Appends the active content from context to an existing file.",
                     "goal": "Append content to file and update active_file context",
                     "mode": "sync"
                 }
@@ -1484,7 +1484,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "content=\"$(termy_get_context 'active_content')\" && file_path='<||string||>' && if [ ! -z \"$content\" ]; then echo \"$content\" >> \"$file_path\" && abs_path=\"$(cd \"$(dirname \"$file_path\")\" && pwd)/$(basename \"$file_path\")\" && termy_set_context active_file \"$abs_path\" && termy_say \"Content appended to $(basename $file_path)\"; else termy_say \"No content to append\"; fi",
-                    "explanation": "Appends active_content context to an existing file and updates active_file context.",
+                    "explanation": "Appends active content from context to an existing file.",
                     "goal": "Append content to file and update active_file context",
                     "mode": "sync"
                 }
@@ -1546,7 +1546,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "func_name='<||function_name||>' && search_dir='<||path||>' && search_dir=${search_dir:-.} && if [ -z \"$func_name\" ]; then termy_say 'Function name is required'; exit 1; fi && echo -e \"\\n🔍 Searching for function: $func_name in $search_dir\\n\" && result=$(find_function_in_source \"$func_name\" \"$search_dir\" 2>&1) && echo \"$result\" && termy_set_context 'last_search' \"function:$func_name\" && termy_set_context 'search_results' \"$result\" && termy_set_context 'search_path' \"$search_dir\" && termy_set_context 'active_content' \"$result\"",
-                    "explanation": "Searches for function definitions across Python, Go, PHP, C, C++, JavaScript, TypeScript, and Rust source files. Automatically prompts to install ripgrep if needed, or falls back to grep.",
+                    "explanation": "Searches for function <||function_name||> in <||path||>.",
                     "goal": "Locate function definitions in source code with multi-language support",
                     "mode": "sync"
                 }
@@ -2359,8 +2359,8 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "sed -i \"s/\\t/$(printf '%*s' <||indents||> '')/g\" <||file||>",
-                    "explanation": "",
-                    "goal": "",
+                    "explanation": "Replaces tabs with <||indents||> spaces in <||file||>",
+                    "goal": "Tab to spaces conversion",
                     "mode": "sync"
                 }
             }
@@ -2476,7 +2476,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "if [ -e '<||file||>' ]; then termy_say \"File exists\" > /dev/null 2>&1 && printf '\\r\\n✅ File %s exists\\n' '<||file||>'; else termy_say \"File does not exist\" > /dev/null 2>&1 && printf '\\r\\n⛔ File %s does not exist\\n' '<||file||>'; fi && printf ''",
-                    "explanation": "Checks whether <||file||> exists on the filesystem using a native test expression.",
+                    "explanation": "Checks whether <||file||> exists in this directory.",
                     "goal": "Verify file existence",
                     "mode": "sync"
                 }
@@ -2532,7 +2532,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "if [ ! -f -- '<||file||>' ]; then termy_say \"File does not exist\" > /dev/null 2>&1 && printf '\\r\\n⛔ Notice: File %s does not exist\\n' '<||file||>'; else termy_say \"Checking file size\" > /dev/null 2>&1 && du -h -- '<||file||>' 2>/dev/null && printf ''; fi",
-                    "explanation": "Checks the size of <||file||> in a human-readable format using du -h.",
+                    "explanation": "Checks the size of <||file||>.",
                     "goal": "File size check",
                     "mode": "sync"
                 }

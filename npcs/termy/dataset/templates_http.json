@@ -49,8 +49,8 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "query='<||string||>' && clean_query=$(echo \"$query\" | tr ' ' '+') && echo -e \"\\n[TERMY] Fetching cheat-sheet for: $query...\\n\" && res=$(curl -s -A 'curl' \"https://cheat.sh/$clean_query\" | head -n 45) && echo \"$res\" && termy_set_context 'active_content' \"$res\"",
-                    "explanation": "Queries the open cheat.sh micro-service using curl, passes the query string with sanitized spacing, displays the direct ANSI-colorized programming response, and caches it in active_content for chaining.",
-                    "goal": "Retrieve instant syntax definitions and code boilerplate natively",
+                    "explanation": "Queries cheat.sh to obtain syntax and examples about <||string||>.",
+                    "goal": "Retrieve cheats.sh info about <||string||>",
                     "mode": "sync"
                 }
             }
@@ -102,7 +102,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "kw='<||string||>' && enc_kw=$(echo -n \"$kw\" | sed 's/ /+/g') && search_res=$(curl -s -A 'Mozilla/5.0' \"https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=$enc_kw&format=json&origin=*\") && title=$(echo \"$search_res\" | grep -o '\"title\":\"[^\"]*' | head -n 1 | cut -d'\"' -f4) && if [ -z \"$title\" ]; then echo \"⛔ No Wikipedia article found for $kw\"; else enc_title=$(echo -n \"$title\" | sed 's/ /+/g') && img_res=$(curl -s -A 'Mozilla/5.0' \"https://en.wikipedia.org/w/api.php?action=query&titles=$enc_title&prop=pageimages&piprop=original&format=json&origin=*\") && img_url=$(echo \"$img_res\" | grep -o '\"source\":\"[^\"]*' | head -n 1 | cut -d'\"' -f4) && if [ -z \"$img_url\" ]; then echo \"⚠️ Article '$title' found, but has no original image.\"; else clean_name=$(echo \"$title\" | tr ' /' '__' | tr -cd 'A-Za-z0-9__-').jpg && out_path=\"./$clean_name\" && echo \"Downloading image for '$title' into current folder...\" && curl -s -A 'Mozilla/5.0' \"$img_url\" -o \"$out_path\" && echo \"Saved to: $out_path\" && termy_set_context active_file \"$(cd \"$(dirname \"$out_path\")\" && pwd)/$(basename \"$out_path\")\" > /dev/null 2>&1; fi; fi",
-                    "explanation": "Searches Wikipedia for the keyword, extracts the top article title, fetches its original image URL, downloads it directly into the current working directory, and updates termy's active_file context with the absolute path.",
+                    "explanation": "Searches Wikipedia for <||string||> and prints the data found it in the terminal.",
                     "goal": "Download specific Wikipedia image into the current directory and register it in context",
                     "mode": "sync"
                 }
@@ -156,7 +156,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "res=$(\n curl -s -G --data-urlencode 'term=<||string||>' 'https://unofficialurbandictionaryapi.com/api/search' | \n jq -r '.data[0].meaning // \"No definition found.\"'\n) && termy_say \"$res\" && termy_set_context 'active_content' \"$res\"",
-                    "explanation": "Fetches the definition of a slang term from the Urban Dictionary API, speaks it, and saves it to active_content.",
+                    "explanation": "Finds the definition of a slang term from the Urban Dictionary API.",
                     "goal": "Fetch and save slang definition",
                     "mode": "sync"
                 }
@@ -197,7 +197,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "def=$(termy_request 'https://api.dictionaryapi.dev/api/v2/entries/en' '<||string||>' '.[0].meanings[0].definitions[0].definition' 2>/dev/null) && termy_say \"$def\" && termy_set_context 'active_content' \"$def\" && printf '\\n'",
-                    "explanation": "Fetches the definition of the word <||string||> from the Free Dictionary API, reads it aloud, saves to active_content, and prints it.",
+                    "explanation": "Fetches the definition of the word <||string||> from the Free Dictionary API, reads it aloud, saves to the active content, and prints it.",
                     "goal": "Fetch and speak word definition from template slot",
                     "mode": "sync"
                 }
@@ -252,7 +252,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "termy_set_context 'last_search' '<||string||>' && \nprintf '🔍 Searching Wikipedia for: %s...\\n' '<||string||>' && \nescaped_string=$(\n printf '%s' '<||string||>' | \n sed 's/ /+/g'\n) && \nres=$(\n curl -s --max-time 5 \"https://en.wikipedia.org/w/api.php?action=query&titles=$escaped_string&prop=extracts&exintro=true&explaintext=true&format=json&redirects=1\" 2>/dev/null | \n jq -r '.query.pages[] | .extract // empty' 2>/dev/null | \n head -n 5\n) && if [ -z \"$res\" ]; then \n printf '⛔ No Wikipedia article found for: %s\\n' '<||string||>'; \nelse printf '\\n%s\\n' \"$res\" && termy_say \"$res\" >/dev/null 2>&1 && termy_set_context 'active_content' \"$res\"; fi",
-                    "explanation": "Fetches Wikipedia summary with 5-second timeout, safely parses JSON, limits to 5 lines, handles errors gracefully, displays it, passes it to termy_say, and saves it to active_content context.",
+                    "explanation": "Fetches Wikipedia summary about <||string||>, displays it, and saves it to active content context.",
                     "goal": "Fetch Wikipedia summary without freezing terminal",
                     "mode": "sync"
                 }
@@ -480,7 +480,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "printf '🌐 Translating from %s to %s...\\n\\n' '<||lang1||>' '<||lang2||>' && from_code=$(echo '<||lang1||>' | tr 'A-Z' 'a-z' | sed -E 's/english/en/; s/italian/it/; s/spanish/es/; s/french/fr/; s/german/de/; s/portuguese/pt/; s/russian/ru/; s/japanese/ja/; s/chinese/zh-cn/') && to_code=$(echo '<||lang2||>' | tr 'A-Z' 'a-z' | sed -E 's/english/en/; s/italian/it/; s/spanish/es/; s/french/fr/; s/german/de/; s/portuguese/pt/; s/russian/ru/; s/japanese/ja/; s/chinese/zh-cn/') && encoded_text=$(python3 -c \"import urllib.parse; print(urllib.parse.quote('''<||word||>'''))\") && res=$(curl -s -L --max-time 5 -H 'User-Agent: Mozilla/5.0' \"https://api.mymemory.translated.net/get?q=${encoded_text}&langpair=${from_code}|${to_code}\") && translation=$(echo \"$res\" | python3 -c \"import sys, json; print(json.load(sys.stdin)['responseData']['translatedText'])\") && printf 'The translation is: %s\\n' \"$translation\" && termy_say -s \"$translation\"",
-                    "explanation": "Safely isolates URL encoding via a separate variable to guarantee URL integrity, then polls the MyMemory API using curl.",
+                    "explanation": "Requests translation of <||word||> from <||lang1||> to <||lang2||> from the MyMemory API using curl.",
                     "goal": "Word translation",
                     "mode": "sync"
                 }
@@ -539,7 +539,7 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "termy_say 'Scraping webpage content' > /dev/null 2>&1 && printf '\\n' && content=\"$(scraper_main scrape <||url||> <||format||> 2>&1 | sed 's/\"/\\\\\"/g')\" && echo \"$content\" && termy_set_context 'active_content' \"$content\"",
-                    "explanation": "Extracts and displays the main content from a webpage URL using trafilatura (installed on first use), then saves to context",
+                    "explanation": "Extracts and displays the main content from a webpage URL using trafilatura then saves it to the active content context",
                     "goal": "Scrape, display, and save main content from a website",
                     "mode": "sync"
                 }

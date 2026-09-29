@@ -152,9 +152,10 @@
         "category": "linux_files",
         "input": [
             "count lines in a project",
-            "create alias to count source lines of code sloc",
-            "count total lines of javascript and scss files",
-            "git check how many lines of code in project",
+            "count lines in a git repo",
+            "count source lines of code sloc",
+            "count total lines in git repo",
+            "check how many lines of code in git repository",
             "count sloc for tracked git files js and scss",
             "calculate lines of code in current git repository",
             "count total lines in project source files",
@@ -162,7 +163,11 @@
             "alias for counting lines of code in workspace",
             "git repository code line count alias"
         ],
-        "output": "<||completion||>", 
+        "output": "<||completion||>",
+        "thinking": [
+            "Another primate obsessed by lines of code...",
+            "What about the lines of code that should not be there?"
+        ],
         "tools": [
             {
                 "name": "run_in_terminal",

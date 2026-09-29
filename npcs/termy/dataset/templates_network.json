@@ -243,8 +243,8 @@
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "dig <||url||> || nslookup <||url||>",
-                    "explanation": "",
-                    "goal": "",
+                    "explanation": "Checks DNS resolution of <||url||>",
+                    "goal": "DNS resolution check",
                     "mode": "sync"
                 }
             }
