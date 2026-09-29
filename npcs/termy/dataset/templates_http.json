@@ -226,12 +226,10 @@
                     "required": true
                 },
                 {
-                    "tag": "<||vocab_in||>",
-                    "type": "vocab",
-                    "required": false
-                },
-                {
-                    "tag": "<||vocab_from||>",
+                    "tag": [
+                        "<||vocab_in||>",
+                        "<||vocab_from||>"
+                    ],
                     "type": "vocab",
                     "required": false
                 },
