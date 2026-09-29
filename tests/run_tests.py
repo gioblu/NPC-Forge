@@ -75,6 +75,28 @@ class CompactRunner(unittest.TextTestRunner):
 def main():
     suite = unittest.TestLoader().discover(str(ROOT / "tests"))
     result = CompactRunner(verbosity=0).run(suite)
+    
+    # Fetch benchmark results from the test module
+    bench = {}
+    try:
+        from test_flint_parser import ParserBenchmarks
+        bench = ParserBenchmarks.benchmark_results
+    except ImportError:
+        try:
+            from tests.test_flint_parser import ParserBenchmarks
+            bench = ParserBenchmarks.benchmark_results
+        except ImportError:
+            pass
+
+    # Print compact, ASCII-only summary
+    if bench:
+        print("\n" + "=" * 79)
+        print(" FLINTNPC BENCHMARKS SUMMARY")
+        print("=" * 79)
+        for k, v in bench.items():
+            print(f"  {k:<62} : {v}")
+        print("=" * 79 + "\n")
+
     sys.exit(0 if result.wasSuccessful() else 1)
 
 

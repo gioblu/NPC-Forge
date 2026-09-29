@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 
-from FlintNPC import load_json, load_json_recursive
+from storage.dataset import DatasetStorage
 
 RED = "\033[31m"
 GREEN = "\033[32m"
@@ -19,6 +19,8 @@ RESET = "\033[0m"
 FORGE_DATA_DIR = Path.home() / ".local" / "share" / "npc-forge"
 LOG_FILE_PATH = FORGE_DATA_DIR / "npc_forge.log"
 SERVICE_NAME = "npc-forge.service"
+
+storage = DatasetStorage()
 
 def run_systemctl_user(action: str):
     """Executes systemctl commands as user with no root privileges"""
@@ -240,18 +242,18 @@ def list_installed_npcs():
         dataset_dir = npc_dir / "dataset"  
         vocab_dir = npc_dir / "dataset" / "vocabulary"
                 
-        config = load_json(npc_dir, "config.json")
+        config = storage.load_json(npc_dir, "config.json")
         creator = config.get("creator", "Unknown")
                 
-        personality = load_json(dataset_dir, "personality.json") or []
-        dataset = load_json_recursive(dataset_dir, "dataset_*.json") or []
+        personality = storage.load_json(dataset_dir, "personality.json") or []
+        dataset = storage.load_json_recursive(dataset_dir, "dataset_*.json") or []
         intent_count = len(personality + dataset)
         
-        templates = load_json_recursive(dataset_dir, "templates_*.json") or []
+        templates = storage.load_json_recursive(dataset_dir, "templates_*.json") or []
         templates_count = len(templates)
         
-        vocabulary = load_json(vocab_dir, "vocabulary.json")
-        vocabulary_templates =  load_json(vocab_dir, "templates.json")
+        vocabulary = storage.load_json(vocab_dir, "vocabulary.json")
+        vocabulary_templates =  storage.load_json(vocab_dir, "templates.json")
         vocab_count = len(vocabulary) + len(vocabulary_templates) 
         
         # Calculate dataset directory size

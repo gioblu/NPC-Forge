@@ -10,16 +10,18 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+
 for path in (str(ROOT), str(ROOT / "src")):
     if path not in sys.path:
         sys.path.insert(0, path)
 
 from FlintParser import FlintParser
-from FlintNPC import load_json
+from storage.dataset import DatasetStorage
 
 DATASET_DIR = ROOT / "npcs" / "termy" / "dataset"
 VOCAB_DIR = DATASET_DIR / "vocabulary"
 
+storage = DatasetStorage()
 
 def build_parser(intents=None):
     templates = []
@@ -27,13 +29,13 @@ def build_parser(intents=None):
         dataset = []
         for f in glob.glob(os.path.join(DATASET_DIR, "dataset_*.json")):
             dataset.extend(
-                load_json(DATASET_DIR, os.path.basename(f))
+                storage.load_json(DATASET_DIR, os.path.basename(f))
             )
         for f in glob.glob(os.path.join(DATASET_DIR, "templates_*.json")):
             templates.extend(
-                load_json(DATASET_DIR, os.path.basename(f))
+                storage.load_json(DATASET_DIR, os.path.basename(f))
             )
-        personality = load_json(str(DATASET_DIR), "personality.json")
+        personality = storage.load_json(str(DATASET_DIR), "personality.json")
         intents = [
             b for b in dataset + personality
             if isinstance(b, dict) and "input" in block_has_input(b)
@@ -44,10 +46,10 @@ def build_parser(intents=None):
 
     return FlintParser(
         "termy",
-        load_json(str(VOCAB_DIR), "vocabulary.json"),
+        storage.load_json(str(VOCAB_DIR), "vocabulary.json"),
         templates,
-        load_json(str(VOCAB_DIR), "templates.json"),
-        load_json(str(DATASET_DIR), "types.json"),
+        storage.load_json(str(VOCAB_DIR), "templates.json"),
+        storage.load_json(str(DATASET_DIR), "types.json"),
         "WARNING",
         intents,
     )
@@ -173,7 +175,7 @@ class ShortIdentifierWeight(unittest.TestCase):
 class TextSanitization(unittest.TestCase):
     def setUp(self):
         self.nlp = build_parser()
-        self.vocabulary = load_json(str(VOCAB_DIR), "vocabulary.json")
+        self.vocabulary = storage.load_json(str(VOCAB_DIR), "vocabulary.json")
 
     def test_strip_and_count_removes_and_counts(self):
         cleaned, removed = self.nlp.strip_and_count(

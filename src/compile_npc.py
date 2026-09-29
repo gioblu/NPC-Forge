@@ -1,33 +1,12 @@
 import os
 import json
 from pathlib import Path
+from storage.dataset import DatasetStorage
 
 REGISTRY_DIR = Path.home() / ".local" / "share" / "npc-forge"
 SRC_DIR = Path(__file__).parent.resolve()
 
-def load_json_file(base_path, filename):
-    full_path = base_path / filename
-    try:
-        with open(full_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            # Forza la validazione del tipo oggetto richiesto da FlintNPC
-            if filename == "config.json" and not isinstance(data, dict):
-                raise ValueError("config.json MUST be a JSON Object ({...})")
-            return data
-    except FileNotFoundError:
-        print(f"[ERROR] Missing file path: {full_path}")
-        return [] if filename in [
-            "dataset.json", "personality.json", "templates.json"
-        ] else {}
-    except json.JSONDecodeError as syntax_err:
-        print(f"[CRITICAL] Syntax error in JSON {filename}: {syntax_err}")
-        # Interrompe l'esecuzione per evitare di generare file corrotti
-        raise syntax_err
-    except Exception as general_err:
-        print(f"[ERROR] Failed to load {filename}: {general_err}")
-        return [] if filename in [
-            "dataset.json", "personality.json", "templates.json"
-        ] else {}
+storage = DatasetStorage()
 
 def load_and_merge_json_files(base_path, pattern, fallback_filename):
     """
@@ -83,12 +62,12 @@ def npc_to_html(npc_name):
     templates_bundle = load_and_merge_json_files(dataset_dir, "templates_*.json", "templates.json")
         
     bundle = {
-        "config": load_json_file(base_npc_path, "config.json"),
-        "types": load_json_file(dataset_dir, "types.json"),
-        "templates_vocabulary": load_json_file(vocab_dir, "templates.json"),
-        "vocabulary": load_json_file(vocab_dir, "vocabulary.json"),
+        "config": storage.load_json_file(base_npc_path, "config.json"),
+        "types": storage.load_json_file(dataset_dir, "types.json"),
+        "templates_vocabulary": storage.load_json_file(vocab_dir, "templates.json"),
+        "vocabulary": storage.load_json_file(vocab_dir, "vocabulary.json"),
         "dataset": dataset_bundle,
-        "personality": load_json_file(dataset_dir, "personality.json"),
+        "personality": storage.load_json_file(dataset_dir, "personality.json"),
         "templates": templates_bundle
     }
     bundle_json_str = json.dumps(bundle, ensure_ascii=False)

@@ -8,22 +8,7 @@ import copy
 
 from logger import logger
 from FlintParser import FlintParser
-
-def load_json(path, name):
-    try:
-        with open(os.path.join(path, name), "r", encoding="utf-8") as f:
-            return json.load(f)
-    except Exception as e:
-        logger.error(f"JSON file load error. Path: {os.path.join(path, name)} Error: {e}")
-        return None
-
-def load_json_recursive(path, name):
-    templates = []
-    for f in glob.glob(os.path.join(path, "**", name), recursive=True):
-        data = load_json(os.path.dirname(f), os.path.basename(f))
-        if isinstance(data, list): templates.extend(data)
-        elif isinstance(data, dict): templates.append(data)
-    return templates
+from storage.dataset import DatasetStorage
 
 class FlintNPC:
     """
@@ -57,11 +42,11 @@ class FlintNPC:
         npc_dir = f"npcs/{npc_name}"
         dataset_dir = f"{npc_dir}/dataset"
         vocab_dir = os.path.join(dataset_dir, "vocabulary")
-        
-        self.config = load_json(npc_dir, "config.json") or {}
-        self.variable_types = load_json(dataset_dir, "types.json") or {}
-        self.templates_vocabulary = load_json(vocab_dir, "templates.json") or {}
-        self.vocabulary = load_json(vocab_dir, "vocabulary.json") or {}
+        self.storage = DatasetStorage()
+        self.config = self.storage.load_json(npc_dir, "config.json") or {}
+        self.variable_types = self.storage.load_json(dataset_dir, "types.json") or {}
+        self.templates_vocabulary = self.storage.load_json(vocab_dir, "templates.json") or {}
+        self.vocabulary = self.storage.load_json(vocab_dir, "vocabulary.json") or {}
         
         self.dataset, self.personality, self.templates = [], [], []
         self.exact_match_map, self.metadata = {}, {}
@@ -100,9 +85,9 @@ class FlintNPC:
         self._build_intent_signatures()
 
     def load_data(self, dataset_dir):
-        self.personality = load_json(dataset_dir, "personality.json") or []
-        self.dataset = load_json_recursive(dataset_dir, "dataset_*.json")
-        self.templates = load_json_recursive(dataset_dir, "templates_*.json")
+        self.personality = self.storage.load_json(dataset_dir, "personality.json") or []
+        self.dataset = self.storage.load_json_recursive(dataset_dir, "dataset_*.json")
+        self.templates = self.storage.load_json_recursive(dataset_dir, "templates_*.json")
     
         v_lists = [
             "expletives", 

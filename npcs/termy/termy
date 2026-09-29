@@ -7,16 +7,17 @@ import sys
 import subprocess
 from pathlib import Path
 
-from FlintNPC import load_json
 from providers.ollama import OllamaProvider
 from providers.api import ApiProvider
 from providers.local import LocalProvider
 from tui.tools import TuiTools, BOLD, GREEN, RED, RESET, YELLOW
+from storage.dataset import DatasetStorage
 
 from rich.console import Console
 from rich.markdown import Markdown
 
 tui = TuiTools()
+storage = DatasetStorage()
 
 def run_cli() -> int:
     usage_text = (
@@ -104,8 +105,8 @@ def run_cli() -> int:
     CURRENT_BOT_DIR = Path(os.path.realpath(__file__)).parent
     home_dir = os.path.expanduser("~")
     config_path = os.path.join(home_dir, ".local/share/termy/")
-    config = load_json(CURRENT_BOT_DIR, "config.json") or {}
-    context = load_json(Path(config_path), "config.json") or {}    
+    config = storage.load_json(CURRENT_BOT_DIR, "config.json") or {}
+    context = storage.load_json(Path(config_path), "config.json") or {}    
     
     related = result.get("related", [])
     llm_config = config.get("llm", {})
@@ -280,7 +281,7 @@ def run_cli() -> int:
                     if not permission_execute():
                         save_intent = tui.confirm("Do you want to save this entry in the dataset?")
                         if save_intent:
-                            ollama_client.save_entry(
+                            storage.save_entry(
                                 generated_intent,
                                 str(CURRENT_BOT_DIR / "dataset"),
                                 f"dataset_{os.environ.get('USER', 'user')}.json"
@@ -288,7 +289,7 @@ def run_cli() -> int:
                             print(f"{GREEN}Entry saved to dataset.{RESET}")
                     else:
                         # Auto-save if bypassing confirmation (e.g., via -y flag)
-                        ollama_client.save_entry(
+                        storage.save_entry(
                             generated_intent,
                             str(CURRENT_BOT_DIR / "dataset"),
                             f"dataset_{os.environ.get('USER', 'user')}.json"

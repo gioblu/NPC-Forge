@@ -3,7 +3,7 @@ import re
 import time
 import json
 from flask import Blueprint, request, jsonify
-from registry import get_npc_engine
+from registry import load_npc
 from logger import logger
 
 openai_blueprint = Blueprint("openai_api", __name__)
@@ -96,7 +96,7 @@ def chat_completions():
     else:
         npc_name = requested_model
     
-    engine = get_npc_engine(npc_name)
+    engine = load_npc(npc_name)
     if not engine:
         logger.error("[server_openai.py][chat_completions] Error: 'termy' core engine profile not found or failed to initialize.")
         return jsonify({"error": "NPC profile 'termy' not found on disk"}), 404
