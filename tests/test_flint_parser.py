@@ -383,14 +383,14 @@ class ArrayTagSupport(unittest.TestCase):
 
 class FlintParserEdgeCases(unittest.TestCase):
     """
-    Regression tests for NPC-Forge's biological and structural edge cases.
+    Regression tests for NPC-Forge's edge cases.
     """
 
     def setUp(self):
         self.nlp = build_parser()
 
     def test_word_greedy_capture_with_embedded_vocab(self):
-        """EDGE CASE 1: slang request containing spaces isn't broken by vocabulary."""
+        """EDGE CASE 1: request containing spaces isn't broken by vocabulary."""
         prompt = "what do you think about \"pasta alla amatriciana\" or php"
         structure, slots = self.nlp.parse_structure(prompt, 0.75)
         matched = self.nlp.match_structure(self.nlp.templates, structure)

@@ -257,6 +257,5 @@ class TestKnownLimitations(unittest.TestCase):
         res = self.npc.process_message("what does dot and dotdot mean")
         self.assertIn("parent directory", res["response"])
 
-
 if __name__ == "__main__":
     unittest.main()
