@@ -306,8 +306,7 @@ class FlintParser:
         for i in range(1, len1 + 1):
             prev_cell = i
             c1 = s1[i - 1]
-            # Start with the vertical deletion cost
-            min_row_dist = current_row[0] 
+            min_row_dist = i 
             
             for j in range(1, len2 + 1):
                 substitutions = current_row[j - 1] + (c1 != s2[j - 1])
@@ -385,9 +384,11 @@ class FlintParser:
                 if best_match_idx != -1:
                     matched_indices.add(best_match_idx)
         
-        for t_query in query_tokens:
-            if len(t_query) >= 3 and t_query not in self.weights:
-                if not t_query in self._synonym_map: max_possible_score += 0.5
+        # Only penalize query tokens that were NOT matched.
+        for idx, t_query in enumerate(query_tokens):
+            if idx not in matched_indices and len(t_query) >= 3:
+                if t_query not in self.weights and t_query not in self._synonym_map:
+                    max_possible_score += 0.5
                     
         final_score = total_score / max_possible_score if max_possible_score else 0.0
         return final_score
