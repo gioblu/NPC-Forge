@@ -150,7 +150,7 @@ class FlintNPC:
                 anchor_tag = self.nlp._synonym_map.get(t_anchor)
                 query_tag = self.nlp._synonym_map.get(t_query)
                 if anchor_tag and query_tag and anchor_tag == query_tag:
-                    best_word_sim = 1.0
+                    best_word_sim = self.config.get("synonym_contribution", 0)
                     best_match_idx = idx
                     break
 
