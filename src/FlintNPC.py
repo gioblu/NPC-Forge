@@ -371,17 +371,19 @@ class FlintNPC:
             
         if best_score >= self.sentence_threshold and best_block:
             self.update_context(best_block)
-            return self.generate_response(best_block, {}, best_score, "probabilistic match")
+            return self.generate_response(
+                best_block, {}, best_score, "probabilistic match"
+            )
 
-        return self.generate_response(self.rejection, {}, 0.0, "rejected", related_intents)
+        return self.generate_response(
+            self.rejection, {}, 0.0, "rejected", related_intents
+        )
     
     def process_messages(self, user_prompt: str):
         """
-        
-            Splits composite prompts, calls process_messaget for 
-            each response and unifies their return value in a 
-            definitive JSON response.
-        
+        Splits composite prompts, calls process_message for 
+        each response and unifies their return value in a 
+        final JSON response.
         """
         separator_pattern = r"\n+|\d+\)|[;!?]"
         raw_segments = re.split(separator_pattern, user_prompt)
@@ -390,7 +392,9 @@ class FlintNPC:
         if not sub_prompts:
             return self.generate_response(self.rejection, {}, 0.0, "rejected")
 
-        responses_list, tools_list, desc_list, status_list = [], [], [], []
+        responses_list, tools_list, desc_list = [], [], [] 
+        status_list, permission_list = [], []
+        
         lowest_confidence = 1.0
         aggregated_sentiment = {k: 0 for k in self.sentiment}
 
@@ -398,8 +402,14 @@ class FlintNPC:
             res = self.process_message(sub_prompt)
             current_conf = res.get("confidence", 0.0)
             
-            if current_conf < self.sentence_threshold or res.get("status") == "rejected":
-                logger.warning(f"[chatbot.py][{self.name}][process_messages] Rejected '{sub_prompt}', confidence {current_conf:.4f}")
+            if (
+                current_conf < self.sentence_threshold or 
+                res.get("status") == "rejected"
+            ):
+                logger.warning(
+                    f"[chatbot.py][{self.name}][process_messages] Rejected"
+                    f" '{sub_prompt}', confidence {current_conf:.4f}"
+                )
                 return self.generate_response(
                     self.rejection, 
                     {}, 
@@ -414,6 +424,7 @@ class FlintNPC:
             if "tools" in res: tools_list.append(res["tools"])
             if "description" in res: desc_list.append(res["description"])
             if "status" in res: status_list.append(res["status"])
+            if "permission" in res: permission_list.append(res["permission"])
             
             for key in aggregated_sentiment:
                 aggregated_sentiment[key] += self.sentiment.get(key, 0)
@@ -424,7 +435,17 @@ class FlintNPC:
         concatenated_status = status_list[0] if status_list and all(
             s == status_list[0] for s in status_list
         ) else ", ".join(status_list)
-
+        
+        permission = ""
+        for p in permission_list:
+            p = str(p).lower().strip() 
+            if p == "ask": permission = "ask"
+            if (
+                (p == "yolo" or p == "auto") and
+                permission != "ask"
+            ): permission = p
+        if not permission: permission = "ask"
+        
         final_output = dict(res)
         final_output.update({
             "description": concatenated_description,
@@ -432,10 +453,14 @@ class FlintNPC:
             "response": concatenated_response,
             "confidence": lowest_confidence,
             "status": concatenated_status,
+            "permission": permission,
             "sentiment": aggregated_sentiment
         })
         
-        logger.info(f"[chatbot.py][{self.name}][process_messages] Output: '{concatenated_response}'")
+        logger.info(
+            f"[chatbot.py][{self.name}][process_messages]"
+            f" Output: '{concatenated_response}'"
+        )
         return final_output
 
     def generate_response(self, block, slots, confidence, status, related=None):

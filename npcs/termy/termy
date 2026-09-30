@@ -120,7 +120,7 @@ def run_cli() -> int:
     meta = (
         f"\n{GREEN}{BOLD}{config.get('npc_name', '')}{RESET} | "
         f"{status} | "
-        f"Confidence: {conf_color}{confidence * 100:.2f}%{RESET}"
+        f"Confidence: {conf_color}{confidence * 100:.2f}%{RESET}\n"
     )
     
     if args.verbose: print(meta)
@@ -327,14 +327,14 @@ def run_cli() -> int:
         # Ask to execute it (or bypass if flag is set)
         if permission_execute() or tui.confirm("Should I run it?"):
             try:
-                print("\n")
+                if not permission_execute(): print("\n")
                 res = subprocess.run(
                     command, 
                     shell=True, 
                     executable="/bin/bash",
                     check=False
                 )
-                print()
+                if not permission_execute(): print()
                 return res.returncode
             except KeyboardInterrupt:
                 print(f"\n{YELLOW}Execution interrupted by user.{RESET}\n")
