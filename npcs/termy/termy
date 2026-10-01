@@ -85,7 +85,6 @@ def run_cli() -> int:
         result = client.request(args.npc, user_input)
 
     emoji = result.get("emoji", "")
-    if emoji == "😑": emoji = ""
             
     response = result.get("response", "")
     permission = result.get("permission", "ask")
@@ -224,16 +223,11 @@ def run_cli() -> int:
             ): llm_selected = True
             elif not choice or str(choice).lower() == 'q': return 0
                 
-        elif llm_enabled:
-            print(
-                f"\nNo related intents found. "
-                f"Ask {GREEN}{llm_model}{RESET} to generate a script? "
-                f"({GREEN}y{RESET} / {GREEN}n{RESET}) ", 
-                end="", 
-                flush=True
+        elif llm_enabled: 
+            choice = tui.confirm(
+                f"No related intents found.\n"
+                f"Ask [green]{llm_model}[/green] to generate a script?"
             )
-            
-            choice = tui.confirm("Execute?")
             if choice: llm_selected = True
             else: return 0
 
@@ -241,14 +235,18 @@ def run_cli() -> int:
         if llm_enabled and llm_selected:
             try:
                 ollama_client = OllamaProvider(llm_config)
-
+                details = tui.prompt(
+                    f"\nDescribe how TERMy should respond to [green]'{user_input}'[/green]"
+                )
                 console.print()
                 with console.status(
                     f"[bold green]Generating script via "
                     f"{llm_model}...[/bold green]", 
                     spinner="dots"
                 ):
-                    generated_intent = ollama_client.craft_intent(user_input)
+                    generated_intent = ollama_client.craft_intent(
+                        details or user_input
+                    )
                 
                 if generated_intent:
                     try:
