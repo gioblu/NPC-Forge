@@ -7,6 +7,7 @@ import json
 import logger
 
 from pathlib import Path
+from logger import logger
 
 class DatasetStorage:
     """
