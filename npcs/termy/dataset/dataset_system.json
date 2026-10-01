@@ -19,7 +19,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "termy_say -s 'Reading motherboard info...' && printf 'Manufacturer: %s\nModel: %s\n' \"$(cat /sys/class/dmi/id/board_vendor 2>/dev/null || echo 'Unknown')\" \"$(cat /sys/class/dmi/id/board_name 2>/dev/null || echo 'Unknown')\" && printf ''",
+                    "command": "termy_say -s 'Reading motherboard info...' && printf 'Manufacturer: %s\nModel: %s\n\n' \"$(cat /sys/class/dmi/id/board_vendor 2>/dev/null || echo 'Unknown')\" \"$(cat /sys/class/dmi/id/board_name 2>/dev/null || echo 'Unknown')\" && printf ''",
                     "explanation": "Prints information about the motherboard.",
                     "goal": "Print motherboard info",
                     "mode": "sync"
@@ -386,7 +386,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "OUTPUT=$(uptime -p | sed 's/up //') && printf \"⏱️ Uptime: %s\\n\" \"$OUTPUT\" | tee >(cat > /tmp/uptime_temp.txt) && termy_set_context active_content \"Uptime: $OUTPUT\" && termy_say \"The computer is on for $OUTPUT\" > /dev/null 2>&1 &",
+                    "command": "OUTPUT=$(uptime -p | sed 's/up //') && printf \"⏱️ Uptime: %s\\n\\n\" \"$OUTPUT\" | tee >(cat > /tmp/uptime_temp.txt) && termy_set_context active_content \"Uptime: $OUTPUT\" && termy_say \"The computer is on for $OUTPUT\" > /dev/null 2>&1 &",
                     "explanation": "Displays the system uptime and saves to context.",
                     "goal": "Display uptime",
                     "mode": "sync"
@@ -412,7 +412,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "OUTPUT=$(uname -r) &&\nprintf \"💻 Kernel info: %s\n\" \"$OUTPUT\" |\ntee >(cat > /tmp/kernel_temp.txt) &&\ntermy_set_context active_content \"Kernel: $OUTPUT\" &&\ntermy_say -s \"The kernel version is $OUTPUT\"",
+                    "command": "OUTPUT=$(uname -r) &&\nprintf \"Kernel info: %s\n\n\" \"$OUTPUT\" |\ntee >(cat > /tmp/kernel_temp.txt) &&\ntermy_set_context active_content \"Kernel: $OUTPUT\" &&\ntermy_say -s \"The kernel version is $OUTPUT\"",
                     "explanation": "Displays the kernel information and saves to context.",
                     "goal": "Display kernel version",
                     "mode": "sync"
@@ -461,7 +461,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "OUTPUT=$(uname -srm) &&\nprintf \"\\r\n💻 OS info: %s\\n\" \"$OUTPUT\" &&\ntermy_say -s \"Operating system information is $OUTPUT\"",
+                    "command": "OUTPUT=$(uname -srm) &&\nprintf \"OS info: %s\\n\\n\" \"$OUTPUT\" &&\ntermy_say -s \"Operating system information is $OUTPUT\"",
                     "explanation": "Displays the operating system information.",
                     "goal": "Display operating system information",
                     "mode": "sync"
@@ -648,7 +648,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "OUTPUT_TXT=$(\n if command -v lsusb > /dev/null 2>&1; then\n  lsusb | awk '{for(i=7;i<=NF;i++) printf \"%s \", $i; print \"\"}' | sed '/^$/d' | awk '{print \"- \\033[1m\" $0 \"\\033[22m\"}';\n else\n  printf \"- \\033[1mlsusb command not available\\033[22m\\n\";\n fi\n) &&\nCOUNT=$(printf \"%s\\n\" \"$OUTPUT_TXT\" | grep -c '^- ') &&\nprintf \"\\r\\n🔌 \\033[1mConnected USB Devices:\\033[22m\\n%s\\n\" \"$OUTPUT_TXT\" &&\ntermy_say -s \"Found $COUNT connected U S B devices\"",
+                    "command": "OUTPUT_TXT=$(\n if command -v lsusb > /dev/null 2>&1; then\n  lsusb | awk '{for(i=7;i<=NF;i++) printf \"%s \", $i; print \"\"}' | sed '/^$/d' | awk '{print \"- \\033[1m\" $0 \"\\033[22m\"}';\n else\n  printf \"- \\033[1mlsusb command not available\\033[22m\\n\";\n fi\n) &&\nCOUNT=$(printf \"%s\\n\" \"$OUTPUT_TXT\" | grep -c '^- ') &&\nprintf \"🔌 \\033[1mConnected USB Devices:\\n\\033[22m\\n%s\\n\\n\" \"$OUTPUT_TXT\" &&\ntermy_say -s \"Found $COUNT connected U S B devices\"",
                     "explanation": "Displays a list of connected USB devices with their details.",
                     "goal": "List connected USB devices",
                     "mode": "sync"
@@ -750,7 +750,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "MODEL=$(lscpu | grep 'Model name' | sed 's/Model name:[[:space:]]*//' | xargs) &&\nCORES=$(lscpu | grep -E '^CPU\\(s\\):' | awk '{print $2}') &&\nDETAILS=$(lscpu | grep -E \"Core\\(s\\) per socket|Thread\\(s\\) per core|L[1-4] cache\" | sed 's/[[:space:]]*:[[:space:]]*/: /') &&\nif [ -n \"$MODEL\" ]; then\n printf \"\\033[1mModel:\\033[22m %s\\n\\033[1mCores:\\033[22m %s\\n%s\\n\" \"$MODEL\" \"$CORES\" \"$DETAILS\" &&\n termy_say -s \"CPU model is $MODEL with $CORES cores\";\nelse\n printf \"\\r\\n⛔ CPU information not readable on this system.\\n\" &&\n termy_say -s \"CPU information not readable\";\nfi",
+                    "command": "MODEL=$(lscpu | grep 'Model name' | sed 's/Model name:[[:space:]]*//' | xargs) &&\nCORES=$(lscpu | grep -E '^CPU\\(s\\):' | awk '{print $2}') &&\nDETAILS=$(lscpu | grep -E \"Core\\(s\\) per socket|Thread\\(s\\) per core|L[1-4] cache\" | sed 's/[[:space:]]*:[[:space:]]*/: /') &&\nif [ -n \"$MODEL\" ]; then\n printf \"\\033[1mModel:\\033[22m %s\\n\\033[1mCores:\\033[22m %s\\n%s\\n\\n\" \"$MODEL\" \"$CORES\" \"$DETAILS\" &&\n termy_say -s \"CPU model is $MODEL with $CORES cores\";\nelse\n printf \"\\r\\n⛔ CPU information not readable on this system.\\n\" &&\n termy_say -s \"CPU information not readable\";\nfi",
                     "explanation": "Displays the CPU information using lscpu.",
                     "goal": "Output CPU information",
                     "mode": "sync"
@@ -783,7 +783,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "OUTPUT=$(sensors 2>/dev/null | awk '/Core 0/ {print $3}' | tr -d '+') &&\nif [ -z \"$OUTPUT\" ] && [ -f /sys/class/thermal/thermal_zone0/temp ]; then\n OUTPUT=$(awk '{print $1/1000 \"°C\"}' /sys/class/thermal/thermal_zone0/temp)\nfi &&\nif [ -n \"$OUTPUT\" ]; then\n printf \"CPU Temperature: \\033[1m%s\\033[22m\\n\" \"$OUTPUT\" &&\n termy_say -s \"CPU temperature is $OUTPUT\";\nelse\n printf \"\\r\\n⛔ Thermal sensors not readable on this system.\\n\" &&\n termy_say -s \"Thermal sensors not readable\";\nfi",
+                    "command": "OUTPUT=$(sensors 2>/dev/null | awk '/Core 0/ {print $3}' | tr -d '+') &&\nif [ -z \"$OUTPUT\" ] && [ -f /sys/class/thermal/thermal_zone0/temp ]; then\n OUTPUT=$(awk '{print $1/1000 \"°C\"}' /sys/class/thermal/thermal_zone0/temp)\nfi &&\nif [ -n \"$OUTPUT\" ]; then\n printf \"CPU Temperature: \\033[1m%s\\033[22m\\n\\n\" \"$OUTPUT\" &&\n termy_say -s \"CPU temperature is $OUTPUT\";\nelse\n printf \"\\r\\n⛔ Thermal sensors not readable on this system.\\n\" &&\n termy_say -s \"Thermal sensors not readable\";\nfi",
                     "explanation": "Displays the current internal temperature of the CPU using lm-sensors or sysfs thermal zones.",
                     "goal": "Check CPU temperature",
                     "mode": "sync"
@@ -809,7 +809,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "BODY=$(ps aux --sort=-%mem | head -n 6 | awk 'NR>1 {printf \"PID: %-7s RAM: \\033[1m%-5s\\033[22m Command: %s\\n\", $2, $4\"%\", $11}') &&\nTOP_PROC=$(ps aux --sort=-%mem | head -n 2 | awk 'NR>1 {print $11}' | awk -F/ '{print $NF}') &&\nprintf \"\\r\\n🐏 \\033[1mTop 5 RAM Consuming Processes:\\033[22m\\n%s\\n\" \"$BODY\" &&\ntermy_say -s \"Top memory consuming process is $TOP_PROC\"",
+                    "command": "BODY=$(ps aux --sort=-%mem | head -n 6 | awk 'NR>1 {printf \"PID: %-7s RAM: \\033[1m%-5s\\033[22m Command: %s\\n\", $2, $4\"%\", $11}') &&\nTOP_PROC=$(ps aux --sort=-%mem | head -n 2 | awk 'NR>1 {print $11}' | awk -F/ '{print $NF}') &&\nprintf \"\\033[1mTop 5 RAM Consuming Processes:\\033[22m\\n%s\\n\" \"$BODY\" &&\ntermy_say -s \"Top memory consuming process is $TOP_PROC\"",
                     "explanation": "Displays the top 5 processes consuming the most RAM, including their PID, RAM usage percentage, and command name.",
                     "goal": "Display top memory consuming processes",
                     "mode": "sync"
@@ -1845,7 +1845,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "dmesg -T",
+                    "command": "sudo dmesg -T",
                     "explanation": "The command dmesg -T displays kernel ring buffer messages with human-readable timestamps.",
                     "goal": "Show kernel ring buffer messages with human-readable timestamps.",
                     "mode": "sync"
@@ -1864,7 +1864,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "dmesg -w",
+                    "command": "sudo dmesg -w",
                     "explanation": "The command dmesg -w continuously displays kernel messages as they are generated.",
                     "goal": "Monitor real-time kernel messages as they arrive.",
                     "mode": "sync"
