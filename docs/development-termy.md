@@ -8,7 +8,7 @@ Everyone still thinks "Attention is all you need". A transformer with an attenti
 
 In many cases we use the transformer to let users interact with the computer in natural language; ask a question in English, get back English. Yes, the transformer has generative abilities, but I feel sure to assert that **those are side-effects of its core working principle**, and they are both a feature and a bug when applied to this use case.
 
-What I am trying to say is, maybe, if the goal is to translate natural language in something the computer can understand, shouldn't we just use a parser? Aren't we capable of compiling python to bytecode? Can't we compile English to Bash?
+What I am trying to say is, maybe, if the goal is to translate natural language to something the computer can understand, shouldn't we use a parser? Aren't we capable of compiling python to bytecode? Can't we compile English to Bash?
 
 ### TERMy
 
