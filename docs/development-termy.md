@@ -8,13 +8,11 @@ Everyone still thinks "Attention is all you need". A transformer with an attenti
 
 In many cases we use the transformer to let users interact with the computer in natural language; ask a question in English, get back English. Yes, the transformer has generative abilities, but I feel sure to assert that **those are side-effects of its core working principle**, and they are both a feature and a bug when applied to this use case.
 
-What I am trying to say is, maybe, if the goal is to translate natural language in something the computer can understand, shouldn't we just use a parser? Aren't we capable of compiling python to bytecode? Can't we compile English to Bash?
+What I am trying to say is, maybe, if the goal is to translate natural language to something the computer can understand, shouldn't we use a parser? Aren't we capable of compiling python to bytecode? Can't we compile English to Bash?
 
 ### TERMy
 
-As you may know by now [TERMy](npcs/termy/README.md) is a TUI that translates natural language in terminal commands, but can also answer questions and help with python programming. This is not yet another terminal harness that routes the question to a LLM. It is a novel deterministic agent with context and tool calling abilities. 
-
-[TERMy](npcs/termy/README.md) contains 101 templates, 30857 intents and a "dataset" of 58.82MB and it is arguably **the world's most powerful open-source deterministic agent**.
+As you may know by now [TERMy](npcs/termy/README.md) is a TUI that translates natural language in terminal commands, but can also answer questions and help with python programming. This is not yet another terminal harness that routes the question to a LLM. It is a novel deterministic agent with context and tool calling abilities. [TERMy](npcs/termy/README.md) contains 101 templates, 30857 intents and a "dataset" of 58.82MB and it is arguably **the world's most powerful open-source deterministic agent**.
 
 Until yesterday deterministic chatbots used to cap out at a few hundred intents. Thanks to NPC-Forge, its revolutionary semantic parser [FlintParser](docs/FlintParser.md), and its efficient intent recognition pipeline implemented in [FlinNPC](docs/FlintNPC.md), today everyone can create a chatbot with dozens of thousands intents capable of answering in milliseconds.
 
@@ -56,9 +54,7 @@ This is more or less the data curation pipeline I have implemented:
 
 The paraphrases generation was done using [granite-4.1 3B](https://www.ibm.com/granite/docs/models/granite4-1) and required more than 2 days of compute on an obsolete machine with 16GB of RAM, Intel i7-4790K CPU and NVIDIA GeForce GTX 1050 Ti.
 
-With this data I had the chance to verify practically that NPC-forge and TERMy can handle "immense" datasets, remaining reliable, and still, answer in milliseconds.
-
-The sheer amount of intents and their paraphrases makes TERMy surprisingly capable of answering questions about Python.
+With this data I had the chance to verify practically that NPC-forge and TERMy can handle "immense" datasets, remaining reliable, and still, answer in milliseconds. The sheer amount of intents and their paraphrases makes TERMy surprisingly capable of answering questions about Python.
 
 ### Turing completeness
 
