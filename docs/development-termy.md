@@ -54,9 +54,7 @@ This is more or less the data curation pipeline I have implemented:
 
 The paraphrases generation was done using [granite-4.1 3B](https://www.ibm.com/granite/docs/models/granite4-1) and required more than 2 days of compute on an obsolete machine with 16GB of RAM, Intel i7-4790K CPU and NVIDIA GeForce GTX 1050 Ti.
 
-With this data I had the chance to verify practically that NPC-forge and TERMy can handle "immense" datasets, remaining reliable, and still, answer in milliseconds.
-
-The sheer amount of intents and their paraphrases makes TERMy surprisingly capable of answering questions about Python.
+With this data I had the chance to verify practically that NPC-forge and TERMy can handle "immense" datasets, remaining reliable, and still, answer in milliseconds. The sheer amount of intents and their paraphrases makes TERMy surprisingly capable of answering questions about Python.
 
 ### Turing completeness
 
