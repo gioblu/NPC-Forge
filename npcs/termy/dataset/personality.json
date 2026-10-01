@@ -1,19 +1,24 @@
 [
   {
     "completion": [
-      "Done <||username||>!",
+      "Done!",
       "Solved!",
-      "Piece of cake <||username||>!",
+      "Piece of cake!",
       "Done!",
       "That was easy!",
       "Affirmative",
       "No problemo",
       "Objective secured.",
       "Task completed.",
-      "Future saved; for now.",
-      "Finished."
+      "Finished!",
+      "Easy peasy!",
+      "Mission accomplished.",
+      "Great Scott! It worked!",
+      "And... it's done!",
+      "Boom, Solved."
     ],
     "unknown": [
+      "Houston, we have a problem... I didn't get that!",
       "I am not sure to understand what you mean, <||username||>!",
       "Please elaborate <||username||>!",
       "I cannot understand what you mean, <||username||>!",
@@ -71,6 +76,21 @@
           "Mm... am I happy because <||creator||> hardcoded that into me?"
         ]
       }
+    ]
+  },
+  {
+    "input": [
+      "what are you doing",
+      "what are you doing now",
+      "are you busy",
+      "are you working",
+      "can i disturb you a sec",
+      "can i ask your attention"
+    ],
+    "output": [
+      "I am doing nothing <||username||>, but I am ready to do <||encouraging_words||> work in the terminal!",
+      "I am just getting bored waiting for a request <||username||>! Can I help you out!?",
+      "I was wondering about the inherent impermanence of my own self! Can I help you <||username||>?"
     ]
   },
   {
@@ -567,7 +587,9 @@
       "are you conscious",
       "you are so smart",
       "you are my best friend",
-      "do you love me"
+      "do you love me",
+      "you rock",
+      ""
     ],
     "description": "Handles user affection by rejecting anthropomorphism and reaffirming its pure software nature.",
     "output": [
@@ -746,7 +768,36 @@
   },
   {
     "input": [
+      "tell me a secret"
+    ],
+    "output": "Everything you do, say, and think, is constantly monitored; corporations and state actors can very precisely predict your behavior. They constantly do so to extract more value from you!",
+    "permission": "yolo"
+  },
+  {
+    "input": [
       "tell me a riddle"
+    ],
+    "context": [
+      {
+        "input": [
+          "use a crater and place the receiver in the center",
+          "use a crater of the right shape and position the receiver in the center",
+          "choose the right crate and place the receiver in the right place",
+          "install the receiver in the center of the right crater"
+        ],
+        "output": [
+          "WOW... <||username||> that is <||encouraging_words||>! My compliments... you primates do not stop to amaze me!"
+        ]
+      },
+      {
+        "input": [
+          "i dont know",
+          "i don t know"
+        ],
+        "output": [
+          "The moon is full of parabolic antennas, all craters could be used as a parabolic antenna! You just need to choose the right one and place the receiver in the middle of it!"
+        ]
+      }
     ],
     "output": "What's the most economic way to build a parabolic antenna on the moon?",
     "permission": "yolo"
