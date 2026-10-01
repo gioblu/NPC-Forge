@@ -58,7 +58,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "NAME=$(get_timezone | grep 'Timezone Name' | cut -d: -f2 | xargs) && OFFSET=$(get_timezone | grep 'Timezone Offset' | cut -d: -f2- | xargs) && tput cuu 1 && printf \"\\r\n⏰ Timezone: %s (%s)\\n\" \"$NAME\" \"$OFFSET\" && termy_say \"Your timezone is $NAME, $OFFSET\" > /dev/null 2>&1",
+                    "command": "NAME=$(get_timezone | grep 'Timezone Name' | cut -d: -f2 | xargs) &&\nOFFSET=$(get_timezone | grep 'Timezone Offset' | cut -d: -f2- | xargs) &&\nprintf \"Timezone: %s (%s)\n\" \"$NAME\" \"$OFFSET\" &&\ntermy_say -s \"Your timezone is $NAME, $OFFSET\"",
                     "explanation": "Displays the current timezone of the system.",
                     "goal": "Display current timezone",
                     "mode": "sync"
@@ -83,7 +83,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "read -p \"Enter minutes: \" MIN && read -p \"Enter seconds: \" SEC && tput cuu 1 && m_clean=${MIN#0} && s_clean=${SEC#0} && m_val=${m_clean:-0} && s_val=${s_clean:-0} && t=$(( m_val * 60 + s_val )) && termy_say \"Starting timer\" > /dev/null 2>&1 && printf \"\\r\\n\" && while [ $t -gt 0 ]; do printf \"Time Remaining: %02d:%02d\\r\" $((t/60)) $((t%60)); sleep 1; t=$((t-1)); done && printf \"\\rTime's up! 🎉\\n\" && termy_say \"Time is up\" > /dev/null 2>&1 && if command -v notify-send >/dev/null 2>&1; then notify-send \"Countdown Finished\" \"Your timer is up!\"; fi && printf \"\"",
+                    "command": "termy_question \"Enter minutes\" MIN &&\ntermy_question \"Enter seconds\" SEC &&\nm_clean=${MIN#0} &&\ns_clean=${SEC#0} &&\nm_val=${m_clean:-0} &&\ns_val=${s_clean:-0} &&\nt=$(( m_val * 60 + s_val )) &&\ntermy_say -s \"Starting timer\" &&\nwhile [ $t -gt 0 ]; do\n printf \"Time Remaining: %02d:%02d\\r\" $((t/60)) $((t%60));\n sleep 1;\n t=$((t-1));\ndone &&\nprintf \"Time's up!\" &&\ntermy_say -s \"Time is up\" &&\nif command -v notify-send >/dev/null 2>&1; then\n notify-send \"Countdown Finished\" \"Your timer is up!\";\nfi",
                     "explanation": "Prompts for minutes and seconds, running a real-time countdown inside the terminal and announcing both the start and finish with termy_say.",
                     "goal": "Run an interactive countdown timer with audio alerts",
                     "mode": "sync"
@@ -106,7 +106,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "if command -v cal > /dev/null 2>&1; then OUTPUT_TXT=$(cal); elif command -v ncal > /dev/null 2>&1; then OUTPUT_TXT=$(ncal -b); else OUTPUT_TXT=\"\"; fi && tput cuu 1 && if [ -n \"$OUTPUT_TXT\" ]; then printf \"\\r\\n📅 \\033[1mCurrent Calendar:\\033[22m\\n%s\\n\" \"$OUTPUT_TXT\" && termy_say \"Displaying the current month calendar\" > /dev/null 2>&1; else termy_say \"Calendar utility is not installed, do you want to install it\" > /dev/null 2>&1 && printf \"\\r\\n⛔ Calendar utility not found. Install ncal? y/n: \" && read -r ans && case \"$ans\" in [yY]*) printf \"\\n\" && sudo apt update && sudo apt install -y ncal ;; *) printf \"\\n⛔ Operation cancelled.\\n\" ;; esac; fi",
+                    "command": "if command -v cal > /dev/null 2>&1; then OUTPUT_TXT=$(cal); elif command -v ncal > /dev/null 2>&1; then OUTPUT_TXT=$(ncal -b); else OUTPUT_TXT=\"\"; fi && if [ -n \"$OUTPUT_TXT\" ]; then printf \"\\r\\n📅 \\033[1mCurrent Calendar:\\033[22m\\n%s\\n\" \"$OUTPUT_TXT\" && termy_say \"Displaying the current month calendar\" > /dev/null 2>&1; else termy_say \"Calendar utility is not installed, do you want to install it\" > /dev/null 2>&1 && printf \"\\r\\n⛔ Calendar utility not found. Install ncal? y/n: \" && read -r ans && case \"$ans\" in [yY]*) printf \"\\n\" && sudo apt update && sudo apt install -y ncal ;; *) printf \"\\n⛔ Operation cancelled.\\n\" ;; esac; fi",
                     "explanation": "Displays the current month's calendar using cal or ncal, or prompts to install it if missing.",
                     "goal": "Display the current calendar",
                     "mode": "sync"
@@ -129,7 +129,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && termy_say \"Please enter the unix timestamp\" > /dev/null 2>&1 && printf \"\\r\\n🕐 Unix timestamp: \" && read -r ts && if [ -n \"$ts\" ]; then CONV_DATE=$(date -d @\"$ts\" 2>/dev/null || date -r \"$ts\" 2>/dev/null); if [ -n \"$CONV_DATE\" ]; then printf \"\\n📅 Human Date: \\033[1m%s\\033[22m\\n\" \"$CONV_DATE\" && termy_say \"The converted date is $CONV_DATE\" > /dev/null 2>&1; else printf \"\\n⛔ Invalid timestamp format.\\n\" && termy_say \"Invalid timestamp\" > /dev/null 2>&1; fi; else printf \"\\n⛔ Timestamp cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi",
+                    "command": "termy_say \"Please enter the unix timestamp\" > /dev/null 2>&1 && printf \"\\r\\n🕐 Unix timestamp: \" && read -r ts && if [ -n \"$ts\" ]; then CONV_DATE=$(date -d @\"$ts\" 2>/dev/null || date -r \"$ts\" 2>/dev/null); if [ -n \"$CONV_DATE\" ]; then printf \"\\n📅 Human Date: \\033[1m%s\\033[22m\\n\" \"$CONV_DATE\" && termy_say \"The converted date is $CONV_DATE\" > /dev/null 2>&1; else printf \"\\n⛔ Invalid timestamp format.\\n\" && termy_say \"Invalid timestamp\" > /dev/null 2>&1; fi; else printf \"\\n⛔ Timestamp cannot be empty.\\n\" && termy_say \"Operation cancelled\" > /dev/null 2>&1; fi",
                     "explanation": "Converts a Unix timestamp to a human-readable date and handles cross-platform date command syntax.",
                     "goal": "Convert Unix timestamp to date",
                     "mode": "sync"

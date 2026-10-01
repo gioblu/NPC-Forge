@@ -307,7 +307,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && termy_say \"Sure user, here is the youtube search result\" > /dev/null 2>&1 && printf '\\r\\n🎬 Opening YouTube search for: %s\\n' '<||string||>' && escaped_query=$(printf '%s' '<||string||>' | sed \"s/'/'\\\\''/g\") && url=$(printf 'https://youtube.com/results?search_query=%s' \"$escaped_query\") && open_browser \"$url\" && printf ''",
+                    "command": "termy_say \"Sure user, here is the youtube search result\" > /dev/null 2>&1 && printf '\\r\\n🎬 Opening YouTube search for: %s\\n' '<||string||>' && escaped_query=$(printf '%s' '<||string||>' | sed \"s/'/'\\\\''/g\") && url=$(printf 'https://youtube.com/results?search_query=%s' \"$escaped_query\") && open_browser \"$url\" && printf ''",
                     "explanation": "Launches the default system web browser using open_browser to display the YouTube search results grid for <||string||>.",
                     "goal": "Youtube search",
                     "mode": "sync"
@@ -372,7 +372,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && termy_say \"Sure user, here is the google search result\" > /dev/null 2>&1 && printf '\\r\\n🌐 Opening Google search for: %s\\n' '<||string||>' && escaped_query=$(printf '%s' '<||string||>' | sed \"s/'/'\\\\''/g\") && url=$(printf 'https://google.com/search?q=%s' \"$escaped_query\") && open_browser \"$url\" && printf ''",
+                    "command": "termy_say \"Sure user, here is the google search result\" > /dev/null 2>&1 && printf '\\r\\n🌐 Opening Google search for: %s\\n' '<||string||>' && escaped_query=$(printf '%s' '<||string||>' | sed \"s/'/'\\\\''/g\") && url=$(printf 'https://google.com/search?q=%s' \"$escaped_query\") && open_browser \"$url\" && printf ''",
                     "explanation": "Launches the default system web browser using open_browser to display the Google search results for <||string||>.",
                     "goal": "Google search in browser",
                     "mode": "sync"
@@ -415,8 +415,8 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && termy_say \"Opening browser\" > /dev/null 2>&1 && printf '\\r\\n🌐 Launching default browser for: %s\\n' '<||string||>' && escaped_url=$(printf '%s' '<||string||>' | jq -sRr @uri) && open_browser \"$escaped_url\" && printf ''",
-                    "explanation": "Detects the host environment and uses the native open_browser tool to launch <||string||> inside the default web browser layout.",
+                    "command": "termy_say \"Opening browser\" > /dev/null 2>&1 && printf '\\r\\n🌐 Launching default browser for: %s\\n' '<||string||>' && escaped_url=$(printf '%s' '<||string||>' | jq -sRr @uri) && open_browser \"$escaped_url\" && printf ''",
+                    "explanation": "Uses open_browser to launch <||string||> inside the default web browser.",
                     "goal": "Launch browser",
                     "mode": "sync"
                 }

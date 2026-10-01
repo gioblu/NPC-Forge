@@ -37,8 +37,8 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && termy_say \"Checking port status\" > /dev/null 2>&1 && printf '\\r\\nResult: ' && res=$(check_local_port '<||string||>' 2>&1) && echo \"$res\" && termy_set_context 'port_status' \"$res\" && termy_set_context 'last_port' '<||string||>' && printf ''",
-                    "explanation": "Checks port status and caches result for service deployment sequencing and port conflict resolution.",
+                    "command": "termy_say \"Checking port status\" > /dev/null 2>&1 && printf '\\r\\nResult: ' && res=$(check_local_port '<||string||>' 2>&1) && echo \"$res\" && termy_set_context 'port_status' \"$res\" && termy_set_context 'last_port' '<||string||>' && printf ''",
+                    "explanation": "Checks status of port <||string||>.",
                     "goal": "Port state analysis",
                     "mode": "sync"
                 }
@@ -84,7 +84,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && termy_say \"Sending ping...\" > /dev/null 2>&1 && printf '\\r\\nResult:\\n' && clean_host=$(echo '<||url||>' | sed -E 's|https?://||' | sed 's|/.*||') && res=$(ping -c 3 -- \"$clean_host\" 2>&1) && echo \"$res\" && termy_set_context 'ping_status' \"$res\" && termy_set_context 'last_url' '<||url||>' && printf ''",
+                    "command": "termy_say \"Sending ping...\" > /dev/null 2>&1 && printf '\\r\\nResult:\\n' && clean_host=$(echo '<||url||>' | sed -E 's|https?://||' | sed 's|/.*||') && res=$(ping -c 3 -- \"$clean_host\" 2>&1) && echo \"$res\" && termy_set_context 'ping_status' \"$res\" && termy_set_context 'last_url' '<||url||>' && printf ''",
                     "explanation": "Transmits a ping towards <||url||> and outputs result.",
                     "goal": "Ping transmission",
                     "mode": "sync"
@@ -146,7 +146,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "tput cuu 1 && termy_say \"Connecting via SSH...\" > /dev/null 2>&1 && printf '\\r\\nConnecting to host...\\n' && clean_host=$(echo '<||url||>' | sed -E 's|https?://||' | sed 's|/.*||') && ssh -p <||port||> -- \"$clean_host\"",
+                    "command": "termy_say \"Connecting via SSH...\" > /dev/null 2>&1 && printf '\\r\\nConnecting to host...\\n' && clean_host=$(echo '<||url||>' | sed -E 's|https?://||' | sed 's|/.*||') && ssh -p <||port||> -- \"$clean_host\"",
                     "explanation": "Spawns an interactive SSH session to connect to <||url||>.",
                     "goal": "Remote Shell Access",
                     "mode": "sync"

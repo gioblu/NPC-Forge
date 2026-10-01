@@ -239,7 +239,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "echo '<||string||>' > '<||file||>' &&\ntermy_set_context 'active_file' '<||file||>' &&\ntermy_set_context 'active_content' '<||string||>' &&\nlink=$(termy_link '<||file||>' '<||file||>') &&\ntermy_say -e \"File created successfully at $link\"",
+                    "command": "echo '<||string||>' > '<||file||>' &&\ntermy_set_context 'active_file' '<||file||>' &&\ntermy_set_context 'active_content' '<||string||>' &&\nabsdir=$(realpath '<||file||>') &&\ntermy_say -e \"File created successfully at $absdir\"",
                     "explanation": "Writes <||string||> in file <||file||>.",
                     "goal": "File creation",
                     "mode": "sync"
