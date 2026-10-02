@@ -37,7 +37,7 @@ Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md
 
 [TERMy](npcs/termy/README.md) is the first NPC baked into the NPC-Forge framework. It is a cynical, very knowledgeable, Turing-complete, Linux terminal assistant that translates your natural language into shell commands without a single artificial neuron. Just type `termy` followed by your prompt:
 
-[![Terminal demonstration](/npcs/termy/showcase.gif)](https://www.youtube.com/watch?v=qeIp0xePLBg)
+<img src="/npcs/termy/showcase.gif" style="width: 650px">
 
 You can also write a script in plain english, create a file `test.termy` with the following content:
 ```
