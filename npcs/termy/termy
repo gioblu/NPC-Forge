@@ -250,6 +250,7 @@ def run_cli() -> int:
                 
                 if generated_intent:
                     try:
+                        generated_intent["input"] = user_input
                         tool_args = generated_intent["tools"][0]["arguments"]
                         command = tool_args.get("command", "")
                         description = tool_args.get("explanation", "")    
