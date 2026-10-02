@@ -1,4 +1,4 @@
-# TERMy - The world's first deterministic, English to Bash compiler
+# The world's first deterministic, English to Bash compiler
 
 For the past five years the tech industry has been misled by the following dogma: 
 
@@ -9,6 +9,8 @@ Everyone still thinks "Attention is all you need". A transformer with an attenti
 In many cases we use the transformer to let users interact with the computer in natural language; ask a question in English, get back English. Yes, the transformer has generative abilities, but I feel sure to assert that **those are side-effects of its core working principle**, and they are both a feature and a bug when applied to this use case.
 
 What I am trying to say is, maybe, if the goal is to translate natural language to something the computer can understand, shouldn't we use a parser? Aren't we capable of compiling python to bytecode? Can't we compile English to Bash?
+
+### TERMy
 
 As you may know by now [TERMy](/npcs/termy/README.md) is a TUI that translates natural language in terminal commands, but can also answer questions and help with python programming. This is not yet another terminal harness that routes the question to a LLM. It is a novel deterministic agent with context and tool calling abilities. [TERMy](/npcs/termy/README.md) contains 101 templates, 30857 intents and a "dataset" of 58.82MB and it is arguably **the world's most powerful open-source deterministic agent**.
 
