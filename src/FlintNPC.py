@@ -12,7 +12,6 @@ from storage.dataset import DatasetStorage
 
 class FlintNPC:
     """
-    
     FlintNPC - Giovanni Blu Mitolo 2026 (see LICENSE for licensing details) 
     
     This is a for creating ultra-lightweight NLU agents. 
@@ -28,12 +27,11 @@ class FlintNPC:
     1. Raw text sanitization (strips insults, emojis, interjections)
     2. Deterministic exact match lookup using bare string comparison
        A successful match triggers sentiment analysis and intent resolution
-    3. If the exact match fails, the prompt is processesed as a 
+    3. If the exact match fails, the prompt is processed as a 
        semantic map, extracting arguments if present (template matching).
     4. If Template matching fails, the prompt is processed as
        a BOW (Bag of Words), ignoring order and estimating similarity by 
-       computing word matches and Levenshtein distance to accomodate typos
-       
+       computing word matches and Levenshtein distance to accommodate typos
     """
     def __init__(self, npc_name, log_level="INFO"):
         logger.setLevel(log_level)
@@ -51,6 +49,7 @@ class FlintNPC:
         self.dataset, self.personality, self.templates = [], [], []
         self.exact_match_map, self.metadata = {}, {}
         self.active_context_map = {}
+        self._precomputed_context_intents = {}
         
         self.sentiment = {
             k: 0 for k in [
@@ -128,136 +127,43 @@ class FlintNPC:
         
         logger.info(f"[chatbot.py][{self.name}][load_data] Engine initialized.")
 
-    def _fast_score_calculation(self, query, data, threshold):
-        total_score = 0.0
-        matched_indices = [False] * len(query)
-        effective_max_score = data["max_score"]
-
-        for t_anchor, anchor_weight, t_anchor_len in data["anchor_info"]:
-            best_word_sim = 0.0
-            best_match_idx = -1
-            max_diff = int(max(t_anchor_len, 10) * (1.0 - threshold)) + 2
-
-            for idx, t_query in enumerate(query):
-                if matched_indices[idx]: continue
-
-                if t_anchor == t_query:
-                    best_word_sim = 1.0
-                    best_match_idx = idx
-                    break
-
-                # Semantic synonym match
-                anchor_tag = self.nlp._synonym_map.get(t_anchor)
-                query_tag = self.nlp._synonym_map.get(t_query)
-                if anchor_tag and query_tag and anchor_tag == query_tag:
-                    # weighting a synonym match less than an exact match
-                    # accounts for the inherent semantic differences 
-                    # and mitigates false positives
-                    best_word_sim = self.config.get("synonym_contribution", 0)
-                    best_match_idx = idx
-                    break
-
-                if abs(t_anchor_len - len(t_query)) > max_diff: continue
-
-                sim = self.nlp.levenshtein_similarity(
-                    t_anchor, t_query, threshold
-                )
-                
-                if sim > best_word_sim:
-                    best_word_sim = sim
-                    best_match_idx = idx
-
-            if best_word_sim >= threshold:
-                total_score += best_word_sim * anchor_weight
-                if best_match_idx != -1:
-                    matched_indices[best_match_idx] = True
-
-        # Only penalize if the unmatched word is UNKNOWN.
-        # Legitimate words (in weights or synonym map) that failed to match due 
-        # to hyphens/punctuation (e.g., "copy" vs "copy-on-write") are spared.
-        for idx, t_query in enumerate(query):
-            if not matched_indices[idx] and len(t_query) >= 3:
-                if (t_query not in self.nlp.weights and 
-                    t_query not in self.nlp._synonym_map):
-                    effective_max_score += 0.5
-
-        return total_score / effective_max_score if effective_max_score else 0.0
-
     def _build_intent_signatures(self):
         self._precomputed_intents = {}
         merged_map = self._get_merged_match_map()
-
+        synonym_weight = float(self.config.get("synonym_contribution", 0.0))
+        
         for target_input, block in merged_map.items():
-            tokens = target_input.lower().split()
-            anchor_info = []
-            max_score = 0.0
-            token_set = set(tokens)
-            tag_set = set()  # Track synonym tags
-
-            for t in tokens:
-                t_len = len(t)
-                
-                weight = self.nlp.weights.get(t, 0.05) if (
-                    t_len < 3
-                ) else self.nlp.weights.get(t, 1.0)
-                
-                if t_len == 3: weight *= 1.5
-                anchor_info.append((t, weight, t_len))
-                max_score += weight
-                
-                # Add the synonym tag to the tag_set
-                tag = self.nlp._synonym_map.get(t)
-                if tag: tag_set.add(tag)
-
-            self._precomputed_intents[target_input] = {
-                "block": block,
-                "token_set": token_set,
-                "tag_set": tag_set,
-                "anchor_info": anchor_info,
-                "max_score": max_score
-            }
+            self._precomputed_intents[target_input] = self.nlp.precompute_intent_signature(
+                target_input, block, synonym_weight
+            )
 
     def update_context(self, block):
         """
-        
-        Updates the active conversational context.
-        
-        - "context": [...]  -> overwrites active context with new entries
-        - "context": []     -> explicitly clears the context
-        - no "context" key  -> context persists unchanged
-        
-        This allows context entries to remain active after one is
-        consumed, enabling flows like: "create dir" -> "move it" -> "delete it".
-        
+        Updates the active conversational context and precomputes 
+        intent signatures for fast probabilistic matching.
         """
         if "context" in block:
+            self.active_context_map = {}
+            self._precomputed_context_intents = {}
+            
             if isinstance(block["context"], list) and len(block["context"]) > 0:
-                self.active_context_map = {}
+                synonym_weight = float(self.config.get("synonym_contribution", 0.0))
                 for ctx_block in block["context"]:
                     if isinstance(ctx_block, dict) and "input" in ctx_block:
                         for inp in ctx_block["input"]:
-                            self.active_context_map[str(inp).lower().strip()] = ctx_block
+                            clean_inp = str(inp).lower().strip()
+                            self.active_context_map[clean_inp] = ctx_block
+                            self._precomputed_context_intents[clean_inp] = self.nlp.precompute_intent_signature(
+                                clean_inp, ctx_block, synonym_weight
+                            )
             else:
                 self.active_context_map = {}
+                self._precomputed_context_intents = {}
 
     def _get_merged_match_map(self):
-        """
-        
-        Returns a unified lookup map merging active context entries with
-        the global dataset. Context entries override dataset entries on
-        key collision, giving them priority.
-        
-        """
         return {**self.exact_match_map, **self.active_context_map}
 
     def process_message(self, user_prompt: str):
-        """
-
-        Processes one subprompt and returns an object containing the
-        response. 
-            
-        """
-        
         logger.info(f"[chatbot.py][{self.name}][process_message] Prompt: {user_prompt}")                    
         rarest_word = self.nlp.get_rarest_word(user_prompt)
         
@@ -265,33 +171,22 @@ class FlintNPC:
             return self.generate_response(self.rejection, {}, 0.0, "rejected")
         
         stripped, _ = self.nlp.strip_and_sentiment(
-            user_prompt, 
-            self.vocabulary, 
-            self.sentiment, 
-            ["expletives", "interjections"]
+            user_prompt, self.vocabulary, self.sentiment, ["expletives", "interjections"]
         )
 
         merged_map = self._get_merged_match_map()
         if stripped in merged_map:
             matched_block = merged_map[stripped]
-            
-            match_status = "context match" if (
-                stripped in self.active_context_map
-            ) else "exact match"
+            match_status = "context match" if stripped in self.active_context_map else "exact match"
             
             self.update_context(matched_block)
             self.nlp.strip_and_sentiment(
-                stripped, 
-                self.vocabulary, 
-                self.sentiment, 
+                stripped, self.vocabulary, self.sentiment, 
                 ["encouraging_words", "discouraging_words", "thanking_words"]
             )
             return self.generate_response(matched_block, {}, 1.0, match_status)
 
-        structure, slots = self.nlp.parse_structure(
-            user_prompt, self.sentence_threshold
-        )
-        
+        structure, slots = self.nlp.parse_structure(user_prompt, self.sentence_threshold)
         matched_template = self.nlp.match_structure(self.templates, structure)
 
         if matched_template:
@@ -302,53 +197,49 @@ class FlintNPC:
                 cumulative_slots["content"] = cumulative_slots["string"]
             self.nlp.strip_and_sentiment(user_prompt, self.vocabulary, self.sentiment)
             
-            return self.generate_response(
-                matched_template, cumulative_slots, 1.0, "template match"
-            )
+            return self.generate_response(matched_template, cumulative_slots, 1.0, "template match")
 
         user_prompt_clean, _ = self.nlp.strip_and_sentiment(
-            stripped, 
-            self.vocabulary, 
-            self.sentiment, 
+            stripped, self.vocabulary, self.sentiment, 
             ["encouraging_words", "discouraging_words", "thanking_words"]
         )
         
         query_tokens = user_prompt_clean.lower().split()
-
+        
+        # word_threshold is used to tighten the Levenshtein requirement for short queries
         threshold = self.word_threshold if len(query_tokens) <= 3 else self.sentence_threshold
         
-        # First: try fuzzy match against ACTIVE CONTEXT
+        # 1. Try fuzzy match against ACTIVE CONTEXT
         best_context_block, best_context_score = None, -1.0
-        for inp, block in self.active_context_map.items():
-            score = self.nlp.sentence_similarity(user_prompt_clean, inp, threshold)
+        for inp, precomputed in self._precomputed_context_intents.items():
+            score = self.nlp.fast_score_calculation(
+                query_tokens, precomputed, max(threshold, best_context_score)
+            )
             if score > best_context_score:
                 best_context_score = score
-                best_context_block = block
+                best_context_block = precomputed["block"]
 
+        # Context acceptance still uses sentence_threshold as the absolute gate
         if best_context_score >= self.sentence_threshold:
             self.update_context(best_context_block)
             return self.generate_response(
-                best_context_block, 
-                {}, 
-                best_context_score, 
-                "probabilistic match"
+                best_context_block, {}, best_context_score, "probabilistic match"
             )
 
+        # 2. Try fuzzy match against GLOBAL DATASET
         best_block, best_score = None, -1.0
         related_intents = []
         seen_categories = set()
         max_suggestions = int(self.config.get("suggestions", 5))
 
         for target_input, precomputed in self._precomputed_intents.items():
-            # O(1) set lookup, but synonym-aware
             if rarest_word:
                 if rarest_word not in precomputed["token_set"]:
                     rarest_tag = self.nlp._synonym_map.get(rarest_word)
-                    # If it's not a direct match AND not a synonym match, skip it
                     if not rarest_tag or rarest_tag not in precomputed["tag_set"]:
                         continue
 
-            score = self._fast_score_calculation(
+            score = self.nlp.fast_score_calculation(
                 query_tokens, precomputed, max(threshold, best_score)
             )
 
@@ -356,9 +247,7 @@ class FlintNPC:
                 best_score = score
                 best_block = precomputed["block"]
 
-            if len(related_intents) < max_suggestions and rarest_word and isinstance(
-                precomputed["block"], dict
-            ):
+            if len(related_intents) < max_suggestions and rarest_word and isinstance(precomputed["block"], dict):
                 category = precomputed["block"].get("category", "")
                 found_match = False
                 if rarest_word in category.split("_"): found_match = True
@@ -383,11 +272,6 @@ class FlintNPC:
         )
     
     def process_messages(self, user_prompt: str):
-        """
-        Splits composite prompts, calls process_message for 
-        each response and unifies their return value in a 
-        final JSON response.
-        """
         separator_pattern = r"\n+|\d+\)|[;!?]"
         raw_segments = re.split(separator_pattern, user_prompt)
         sub_prompts = [seg.strip() for seg in raw_segments if seg.strip()]
@@ -405,20 +289,13 @@ class FlintNPC:
             res = self.process_message(sub_prompt)
             current_conf = res.get("confidence", 0.0)
             
-            if (
-                current_conf < self.sentence_threshold or 
-                res.get("status") == "rejected"
-            ):
+            if current_conf < self.sentence_threshold or res.get("status") == "rejected":
                 logger.warning(
                     f"[chatbot.py][{self.name}][process_messages] Rejected"
                     f" '{sub_prompt}', confidence {current_conf:.4f}"
                 )
                 return self.generate_response(
-                    self.rejection, 
-                    {}, 
-                    0, 
-                    "rejected", 
-                    res.get("related", [])
+                    self.rejection, {}, 0, "rejected", res.get("related", [])
                 )
 
             if current_conf < lowest_confidence: lowest_confidence = current_conf
@@ -443,10 +320,8 @@ class FlintNPC:
         for p in permission_list:
             p = str(p).lower().strip() 
             if p == "ask": permission = "ask"
-            if (
-                (p == "yolo" or p == "auto") and
-                permission != "ask"
-            ): permission = p
+            if (p == "yolo" or p == "auto") and permission != "ask":
+                permission = p
         if not permission: permission = "ask"
         
         final_output = dict(res)
@@ -506,10 +381,7 @@ class FlintNPC:
             elif isinstance(data, str): return render_tags(data)
             return data
 
-        output_data = block.get(
-            "output", 
-            block.get("output", "") 
-        )
+        output_data = block.get("output", "")
         
         raw_output = random.choice(output_data) if isinstance(
             output_data, list

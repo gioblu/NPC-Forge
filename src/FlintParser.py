@@ -327,71 +327,82 @@ class FlintParser:
             if min_row_dist > max_dist: return 0.0
 
         return 1.0 - (current_row[len2] / max_len)
-    
-    def sentence_similarity(self, 
-        s1: str, 
-        s2: str, 
-        threshold: float = 0.0
-    ) -> float:
-        anchor_tokens = [w for w in s2.lower().strip().split() if w]
-        query_tokens = [w for w in s1.lower().strip().split() if w]
-        
-        if not anchor_tokens or not query_tokens:
-            return 1.0 if anchor_tokens == query_tokens else 0.0
-            
-        matched_indices = set()
-        total_score = 0.0
-        max_possible_score = 0.0
-        
-        for t_anchor in anchor_tokens:
-            if len(t_anchor) < 3:
-                anchor_weight = self.weights.get(t_anchor, 0.05)
-            else:
-                anchor_weight = self.weights.get(t_anchor, 1.0)
-                if len(t_anchor) == 3:
-                    anchor_weight *= 1.5
 
-            max_possible_score += anchor_weight
+    def precompute_intent_signature(self, target_input: str, block: dict, synonym_weight: float = 0.0) -> dict:
+        """
+        Precomputes the anchor info, weights, and sets for a given intent input.
+        synonym_weight defaults to 0.0 to prevent false positives in tightly 
+        clustered intents, matching the original engine behavior.
+        """
+        tokens = target_input.lower().split()
+        anchor_info = []
+        max_score = 0.0
+        token_set = set(tokens)
+        tag_set = set()
+
+        for t in tokens:
+            t_len = len(t)
+            weight = self.weights.get(t, 0.05) if t_len < 3 else self.weights.get(t, 1.0)
+            if t_len == 3: weight *= 1.5
+            anchor_info.append((t, weight, t_len))
+            max_score += weight
+            
+            tag = self._synonym_map.get(t)
+            if tag: tag_set.add(tag)
+
+        return {
+            "block": block,
+            "token_set": token_set,
+            "tag_set": tag_set,
+            "anchor_info": anchor_info,
+            "max_score": max_score,
+            "synonym_weight": synonym_weight
+        }
+
+    def fast_score_calculation(self, query_tokens: list, data: dict, threshold: float) -> float:
+        total_score = 0.0
+        matched_indices = [False] * len(query_tokens)
+        effective_max_score = data["max_score"]
+        synonym_weight = data.get("synonym_weight", 0.0)
+
+        for t_anchor, anchor_weight, t_anchor_len in data["anchor_info"]:
             best_word_sim = 0.0
             best_match_idx = -1
-            
+            max_diff = int(max(t_anchor_len, 10) * (1.0 - threshold)) + 2
+
             for idx, t_query in enumerate(query_tokens):
-                if idx in matched_indices: continue
-                
-                # 1. Exact string match
+                if matched_indices[idx]: continue
+
                 if t_anchor == t_query:
                     best_word_sim = 1.0
                     best_match_idx = idx
                     break
-                
-                # 2. Semantic synonym match
+
                 anchor_tag = self._synonym_map.get(t_anchor)
                 query_tag = self._synonym_map.get(t_query)
-                
                 if anchor_tag and query_tag and anchor_tag == query_tag:
-                    best_word_sim = 1.0  # Treat as perfect semantic match
+                    best_word_sim = synonym_weight
                     best_match_idx = idx
                     break
-                
-                # 3. Fallback: Levenshtein similarity (for typos)
+
+                if abs(t_anchor_len - len(t_query)) > max_diff: continue
+
                 sim = self.levenshtein_similarity(t_anchor, t_query, threshold)
                 if sim > best_word_sim:
                     best_word_sim = sim
                     best_match_idx = idx
-            
+
             if best_word_sim >= threshold:
                 total_score += best_word_sim * anchor_weight
                 if best_match_idx != -1:
-                    matched_indices.add(best_match_idx)
-        
-        # Only penalize query tokens that were NOT matched.
+                    matched_indices[best_match_idx] = True
+
         for idx, t_query in enumerate(query_tokens):
-            if idx not in matched_indices and len(t_query) >= 3:
+            if not matched_indices[idx] and len(t_query) >= 3:
                 if t_query not in self.weights and t_query not in self._synonym_map:
-                    max_possible_score += 0.5
-                    
-        final_score = total_score / max_possible_score if max_possible_score else 0.0
-        return final_score
+                    effective_max_score += 0.5
+
+        return total_score / effective_max_score if effective_max_score else 0.0
     
     def find_candidates(self, structure, candidates):
         clean_user = [tag for tag in structure if tag.startswith("<||")]
