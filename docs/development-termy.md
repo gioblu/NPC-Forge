@@ -12,7 +12,7 @@ What I am trying to say is, maybe, if the goal is to translate natural language 
 
 ### TERMy
 
-As you may know by now [TERMy](/npcs/termy/README.md) is a TUI that translates natural language in terminal commands, but can also answer questions and help with python programming. This is not yet another terminal harness that routes the question to a LLM. It is a novel deterministic agent with context and tool calling abilities. [TERMy](/npcs/termy/README.md) contains 101 templates, 30857 intents and a "dataset" of 58.82MB and it is arguably **the world's most powerful open-source deterministic agent**.
+As you may know by now [TERMy](/npcs/termy/README.md) is a TUI that translates natural language to terminal commands, but can also answer questions and help with python programming. This is not yet another terminal harness that routes the question to a LLM. It is a novel deterministic agent with context and tool calling abilities. [TERMy](/npcs/termy/README.md) contains 101 templates, 30857 intents and a "dataset" of 58.82MB and it is arguably **the world's most powerful open-source deterministic agent**.
 
 Until yesterday deterministic chatbots used to cap out at a few hundred intents. Thanks to NPC-Forge, its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its efficient intent recognition pipeline implemented in [FlinNPC](/docs/FlintNPC.md), today everyone can create a chatbot with dozens of thousands intents capable of answering in milliseconds.
 
