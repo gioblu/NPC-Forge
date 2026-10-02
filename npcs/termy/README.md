@@ -1,7 +1,7 @@
 ## TERMy
 TERMy is an experimental, deterministic terminal assistant implemented using [FlintParser](/src/FlintParser.py) and [FlintNPC](/src/FlintNPC.py) that translates your plain English requests in shell scripts in milliseconds. It is incredibly lightweight and can run on very small targets such as RPI or ESP32, just type `termy` followed by your prompt:
 
-[![Terminal demonstration](/npcs/termy/showcase.gif)](https://www.youtube.com/watch?v=qeIp0xePLBg)
+<img src="/npcs/termy/showcase.gif" style="width: 650px">
 
 ### How to install TERMy
 Open the terminal inside the npc-forge repository main directory and digit:
