@@ -12,9 +12,9 @@ What I am trying to say is, maybe, if the goal is to translate natural language 
 
 ### TERMy
 
-As you may know by now [TERMy](npcs/termy/README.md) is a TUI that translates natural language in terminal commands, but can also answer questions and help with python programming. This is not yet another terminal harness that routes the question to a LLM. It is a novel deterministic agent with context and tool calling abilities. [TERMy](npcs/termy/README.md) contains 101 templates, 30857 intents and a "dataset" of 58.82MB and it is arguably **the world's most powerful open-source deterministic agent**.
+As you may know by now [TERMy](/npcs/termy/README.md) is a TUI that translates natural language in terminal commands, but can also answer questions and help with python programming. This is not yet another terminal harness that routes the question to a LLM. It is a novel deterministic agent with context and tool calling abilities. [TERMy](/npcs/termy/README.md) contains 101 templates, 30857 intents and a "dataset" of 58.82MB and it is arguably **the world's most powerful open-source deterministic agent**.
 
-Until yesterday deterministic chatbots used to cap out at a few hundred intents. Thanks to NPC-Forge, its revolutionary semantic parser [FlintParser](docs/FlintParser.md), and its efficient intent recognition pipeline implemented in [FlinNPC](docs/FlintNPC.md), today everyone can create a chatbot with dozens of thousands intents capable of answering in milliseconds.
+Until yesterday deterministic chatbots used to cap out at a few hundred intents. Thanks to NPC-Forge, its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its efficient intent recognition pipeline implemented in [FlinNPC](/docs/FlintNPC.md), today everyone can create a chatbot with dozens of thousands intents capable of answering in milliseconds.
 
 Just type `termy` followed by your prompt:
 
@@ -34,13 +34,13 @@ I recently started pondering if I could have used datasets originally developed 
 
 Thanks to these scripts I was able to release:
 
-1. [python_ppqd](npcs/termy/dataset/python-functions-reasoning-100/README.md) 8777 intents around 10.8MB.
+1. [python_ppqd](/npcs/termy/dataset/python-functions-reasoning-100/README.md) 8777 intents around 10.8MB.
 
-2. [python-functions-reasoning-100](npcs/termy/dataset/python-functions-reasoning-100) 2747 intents around 6.7MB.
+2. [python-functions-reasoning-100](/npcs/termy/dataset/python-functions-reasoning-100) 2747 intents around 6.7MB.
 
-3. [Tested-143k-Python-Alpaca-80](npcs/termy/dataset/Tested-143k-Python-Alpaca-80) 8027 intents around 16.1MB.
+3. [Tested-143k-Python-Alpaca-80](/npcs/termy/dataset/Tested-143k-Python-Alpaca-80) 8027 intents around 16.1MB.
 
-4. [python-glaive-100](npcs/termy/dataset/python-glaive-100) 4042 intents around 9.7MB.
+4. [python-glaive-100](/npcs/termy/dataset/python-glaive-100) 4042 intents around 9.7MB.
 
 This is more or less the data curation pipeline I have implemented:
 
@@ -58,7 +58,7 @@ With this data I had the chance to verify practically that NPC-forge and TERMy c
 
 ### Turing completeness
 
-In the last month I have made TERMy Turing-complete. I have added the `if` and `execute n times` intents that used along with `termy_get_context` and `termy_set_context` functions make [TERMy](npcs/termy/README.md) capable of solving any problem, just like any other programming language, with the critical difference that the human-readable language here is plain English.
+In the last month I have made TERMy Turing-complete. I have added the `if` and `execute n times` intents that used along with `termy_get_context` and `termy_set_context` functions make [TERMy](/npcs/termy/README.md) capable of solving any problem, just like any other programming language, with the critical difference that the human-readable language here is plain English.
 
 ### Continuous learning and semantic caching
 
@@ -72,7 +72,7 @@ This introduces three architectural advantages:
 
 2. **MSL (Manually Supervised Learning)**: The user reviews the model's output and commits each entry to the dataset with a single keystroke.
 
-3. **CL (Continuous Learning)**: Every saved entry expands your local dataset. Over time, [TERMy](npcs/termy/README.md) grows smarter through usage, while its dependency on LLMs reduces.
+3. **CL (Continuous Learning)**: Every saved entry expands your local dataset. Over time, [TERMy](/npcs/termy/README.md) grows smarter through usage, while its dependency on LLMs reduces.
 
 I am convinced we should all use systems like TERMy and that the future of AI will be hybrid designs that merge the best of both worlds (deterministic and probabilistic); insanely cheap, insanely fast, and with the same generative abilities of the most expensive model you can afford.
 
