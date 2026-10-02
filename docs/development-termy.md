@@ -18,7 +18,7 @@ Until yesterday deterministic chatbots used to cap out at a few hundred intents.
 
 Just type `termy` followed by your prompt:
 
-[![Terminal demonstration](/npcs/termy/showcase.gif)](https://www.youtube.com/watch?v=qeIp0xePLBg)
+<img src="/npcs/termy/showcase.gif" style="width: 650px">
 
 You can also write a script in plain english; create the file `test.termy` with the following content:
 ```
