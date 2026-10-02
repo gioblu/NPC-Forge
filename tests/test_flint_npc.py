@@ -55,6 +55,24 @@ class TestFlintNPC(unittest.TestCase):
             res["confidence"], self.npc.sentence_threshold
         )
         self.assertIn("process table", res["response"])
+        
+    def test_probabilistic_match_tolerates_strong_typos(self):
+        query = "wats is a sombie procces in linux"
+        res = self.npc.process_message(query)
+        self.assertEqual(res["status"], "probabilistic match")
+        self.assertGreaterEqual(
+            res["confidence"], self.npc.sentence_threshold
+        )
+        self.assertIn("process table", res["response"])
+        
+    def test_probabilistic_match_tolerates_filler_insults(self):
+        query = "dooche ehm do you bellieve in god?"
+        res = self.npc.process_message(query)
+        self.assertEqual(res["status"], "probabilistic match")
+        self.assertGreaterEqual(
+            res["confidence"], self.npc.sentence_threshold
+        )
+        self.assertIn("Yes!", res["response"])
 
     def test_unknown_input_is_rejected(self):
         res = self.npc.process_message("asdkjqwoe kqjwe oiqjwe")
@@ -109,6 +127,17 @@ class TestContextSystem(unittest.TestCase):
         res = self.npc.process_message("delete it")
         self.assertEqual(res["status"], "context match")
         self.assertEqual(res["response"], "deleted")
+
+    def test_exact_match_generic_exact_match(self):
+        """Look for a generic exact match."""
+        creator = make_block(
+            "cow", 
+            inputs=["What does copy on write cow mean in linux"]
+        )
+        self.npc.exact_match_map["What does copy on write cow mean in linux"] = creator
+        self.assertEqual(
+            self.npc.process_message("What does copy on write cow mean in linux")["status"], "exact match"
+        )
 
     def test_context_overrides_global_exact_match(self):
         shadow = make_block("context wins", inputs=["what time is it"])

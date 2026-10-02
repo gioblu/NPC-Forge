@@ -1,5 +1,5 @@
 """
-Unit tests for FlintParser: Levenshtein/sentence similarity, IDF
+Unit tests for FlintParser: Levenshtein/fast_score_calculation, IDF
 auto-weighting and template parsing, run against the real "termy"
 NPC dataset (split across dataset_*.json / templates_*.json files).
 """
@@ -37,9 +37,6 @@ def build_parser(intents=None):
             )
         personality = storage.load_json(str(DATASET_DIR), "personality.json")
         intents = [
-            b for b in dataset + personality
-            if isinstance(b, dict) and "input" in block_has_input(b)
-        ] if False else [
             b for b in dataset + personality
             if isinstance(b, dict) and "input" in b
         ]
@@ -85,19 +82,35 @@ class LevenshteinSimilarity(unittest.TestCase):
 
 
 class SentenceSimilarity(unittest.TestCase):
+    """
+    Updated to use the new precompute_intent_signature + fast_score_calculation 
+    pipeline instead of the removed sentence_similarity method.
+    """
     def setUp(self):
         self.nlp = build_parser()
 
     def test_identical_and_reordered_score_one(self):
         s = "what is a zombie process"
         reordered = "process zombie a is what"
-        self.assertEqual(self.nlp.sentence_similarity(s, s), 1.0)
-        self.assertEqual(self.nlp.sentence_similarity(reordered, s), 1.0)
+        
+        sig_s = self.nlp.precompute_intent_signature(s, {})
+        
+        tokens_s = s.split()
+        tokens_reordered = reordered.split()
+        
+        # Using 0.0 threshold to ensure all words are considered for the baseline check
+        self.assertEqual(self.nlp.fast_score_calculation(tokens_s, sig_s, 0.0), 1.0)
+        self.assertEqual(self.nlp.fast_score_calculation(tokens_reordered, sig_s, 0.0), 1.0)
 
     def test_missing_words_reduce_score(self):
         full = "what is a zombie process"
-        partial = self.nlp.sentence_similarity("what is a", full)
-        whole = self.nlp.sentence_similarity(full, full)
+        sig_full = self.nlp.precompute_intent_signature(full, {})
+        
+        tokens_full = full.split()
+        tokens_partial = "what is a".split()
+        
+        partial = self.nlp.fast_score_calculation(tokens_partial, sig_full, 0.0)
+        whole = self.nlp.fast_score_calculation(tokens_full, sig_full, 0.0)
         self.assertLess(partial, whole)
 
 
@@ -122,14 +135,19 @@ class AutoWeights(unittest.TestCase):
 
     def test_keyword_outweighs_shared_scaffolding(self):
         query = "what is a syscall in linux"
-        zombie = self.nlp.sentence_similarity(
-            query, "what is a zombie process in linux"
-        )
-        syscall = self.nlp.sentence_similarity(
-            query, "what is a syscall in linux"
-        )
-        self.assertEqual(syscall, 1.0)
-        self.assertLess(zombie, 0.3)
+        zombie = "what is a zombie process in linux"
+        syscall = "what is a syscall in linux"
+        
+        sig_zombie = self.nlp.precompute_intent_signature(zombie, {})
+        sig_syscall = self.nlp.precompute_intent_signature(syscall, {})
+        
+        tokens = query.split()
+        
+        zombie_score = self.nlp.fast_score_calculation(tokens, sig_zombie, 0.0)
+        syscall_score = self.nlp.fast_score_calculation(tokens, sig_syscall, 0.0)
+        
+        self.assertEqual(syscall_score, 1.0)
+        self.assertLess(zombie_score, 0.3)
 
     def test_exclusive_words_outweigh_shared_words(self):
         w = self.nlp.weights
@@ -161,12 +179,17 @@ class ShortIdentifierWeight(unittest.TestCase):
 
     def test_rare_short_identifier_outweighs_shared_scaffolding(self):
         query = "what is the c programming language"
-        c_score = self.nlp.sentence_similarity(
-            query, "what is the c programming language"
-        )
-        r_score = self.nlp.sentence_similarity(
-            query, "what is the r programming language"
-        )
+        c_lang = "what is the c programming language"
+        r_lang = "what is the r programming language"
+        
+        sig_c = self.nlp.precompute_intent_signature(c_lang, {})
+        sig_r = self.nlp.precompute_intent_signature(r_lang, {})
+        
+        tokens = query.split()
+        
+        c_score = self.nlp.fast_score_calculation(tokens, sig_c, 0.0)
+        r_score = self.nlp.fast_score_calculation(tokens, sig_r, 0.0)
+        
         self.assertEqual(c_score, 1.0)
         self.assertLess(r_score, 0.5)
         self.assertGreater(self.nlp.weights["c"], self.nlp.weights["what"])
@@ -264,8 +287,6 @@ class MultiPathTemplateRegression(unittest.TestCase):
                 ],
             ],
         }
-        # Isolate: real dataset templates contribute their own candidates
-        # (including unhashable list tags), which would pollute assertions.
         self.nlp.templates = [tpl]
 
         candidates = []
