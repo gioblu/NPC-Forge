@@ -1,4 +1,4 @@
-# TERMy - The world's first deterministic, English to Bash compiler
+# The world's first deterministic, English to Bash compiler
 
 For the past five years the tech industry has been misled by the following dogma: 
 
@@ -10,7 +10,9 @@ In many cases we use the transformer to let users interact with the computer in 
 
 What I am trying to say is, maybe, if the goal is to translate natural language to something the computer can understand, shouldn't we use a parser? Aren't we capable of compiling python to bytecode? Can't we compile English to Bash?
 
-As you may know by now [TERMy](/npcs/termy/README.md) is a TUI that translates natural language in terminal commands, but can also answer questions and help with python programming. This is not yet another terminal harness that routes the question to a LLM. It is a novel deterministic agent with context and tool calling abilities. [TERMy](/npcs/termy/README.md) contains 101 templates, 30857 intents and a "dataset" of 58.82MB and it is arguably **the world's most powerful open-source deterministic agent**.
+### TERMy
+
+[TERMy](/npcs/termy/README.md) is a deterministic terminal assistant that translates natural language to terminal commands. This is not yet another terminal harness that routes the question to a LLM. It is a novel deterministic agent with multi-turn context memory and tool-call support. [TERMy](/npcs/termy/README.md) includes 101 templates and 30857 intents; a "dataset" of 58.82MB that arguably makes it the **world's most powerful, open-source, deterministic agent**.
 
 Until yesterday deterministic chatbots used to cap out at a few hundred intents. Thanks to NPC-Forge, its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its efficient intent recognition pipeline implemented in [FlinNPC](/docs/FlintNPC.md), today everyone can create a chatbot with dozens of thousands intents capable of answering in milliseconds.
 
@@ -18,13 +20,13 @@ Just type `termy` followed by your prompt:
 
 [![Terminal demonstration](/npcs/termy/showcase.gif)](https://www.youtube.com/watch?v=qeIp0xePLBg)
 
-You can also write a script in plain english, create a file `test.termy` with the following content:
+You can also write a script in plain english; create the file `test.termy` with the following content:
 ```
 search on wiki the programma 101
 append it to p101.txt
 open it in the browser 
 ```
-Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell script and execute it. 
+Then digit `termy -y < test.termy` and watch TERMy transpile it to Bash and execute it. 
 
 ### Datasets
 
@@ -73,5 +75,3 @@ This introduces three architectural advantages:
 3. **CL (Continuous Learning)**: Every saved entry expands your local dataset. Over time, [TERMy](/npcs/termy/README.md) grows smarter through usage, while its dependency on LLMs reduces.
 
 I am convinced we should all use systems like TERMy and that the future of AI will be hybrid designs that merge the best of both worlds (deterministic and probabilistic); insanely cheap, insanely fast, and with the same generative abilities of the most expensive model you can afford.
-
-If you liked this read consider joining our discord channel and support the development of this project.
