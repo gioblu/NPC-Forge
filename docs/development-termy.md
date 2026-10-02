@@ -12,9 +12,9 @@ What I am trying to say is, maybe, if the goal is to translate natural language 
 
 ### TERMy
 
-[TERMy](/npcs/termy/README.md) is a deterministic terminal assistant that translates natural language to terminal commands. This is not yet another terminal harness that routes the question to a LLM. It is a novel deterministic agent with multi-turn context memory and tool-call support. [TERMy](/npcs/termy/README.md) includes 101 templates and 30857 intents; a "dataset" of 58.82MB that arguably makes it the **world's most powerful, open-source, deterministic agent**.
+[TERMy](/npcs/termy/README.md) is a deterministic terminal assistant that translates natural language to terminal commands. This is not yet another terminal harness that routes the question to a LLM. It is a novel deterministic agent with multi-turn context memory and tool-call support. It includes 101 templates and 30857 intents; a "dataset" of 58.82MB that arguably makes it the **world's most powerful, open-source, deterministic agent**.
 
-Until yesterday deterministic chatbots used to cap out at a few hundred intents. Thanks to NPC-Forge, its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its efficient intent recognition pipeline implemented in [FlinNPC](/docs/FlintNPC.md), today everyone can create a chatbot with dozens of thousands intents capable of answering in milliseconds.
+Until yesterday deterministic chatbots used to cap out at a few hundred intents. Thanks to NPC-Forge, its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its efficient intent recognition pipeline implemented in [FlintNPC](/docs/FlintNPC.md), today everyone can create a chatbot with tens of thousands intents with response times in the order of milliseconds.
 
 Just type `termy` followed by your prompt:
 
@@ -26,7 +26,7 @@ search on wiki the programma 101
 append it to p101.txt
 open it in the browser 
 ```
-Then digit `termy -y < test.termy` and watch TERMy transpile it to Bash and execute it. 
+Then digit `termy -y < test.termy` and watch TERMy compile it to Bash and execute it. 
 
 ### Datasets
 
