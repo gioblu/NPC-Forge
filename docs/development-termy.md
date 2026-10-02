@@ -1,4 +1,4 @@
-# The world's first deterministic, English to Bash compiler
+# The World's first deterministic, English to Bash compiler
 
 For the past five years the tech industry has been misled by the following dogma: 
 
