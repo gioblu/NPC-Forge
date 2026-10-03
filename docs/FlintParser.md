@@ -206,7 +206,7 @@ The parser is stateless and thread-safe. It can be called from multiple concurre
 Neural embeddings are overkill for small vocabularies. Levenshtein distance is:
 - **Deterministic** Same input, same output
 - **Explainable** You can see exactly which characters differ
-- **Fast** O(n*m) with early-exit pruning
+- **Fast at scale** While word-level comparison is O(a x b), the *overall pipeline* achieves **O(1) + O(K)** effective runtime. Pre-computed intent signatures and "rarest-word" hash-set filtering eliminate 99% of candidates instantly, so expensive scoring only runs on `K` surviving candidates (typically 0 or 1).
 - **Zero-dependency** No pre-trained models to download
 
 #### Why IDF Weighting?

@@ -1,4 +1,4 @@
-# The World's first deterministic, English to Bash compiler
+## The frontier of deterministic AI
 
 For the past five years the tech industry has been misled by the following dogma: 
 
@@ -14,7 +14,7 @@ What I am trying to say is, maybe, if the goal is to translate natural language 
 
 [TERMy](/npcs/termy/README.md) is a deterministic terminal assistant that translates natural language to terminal commands. This is not yet another terminal harness that routes the question to a LLM. It is a novel deterministic agent with multi-turn context memory and tool-call support. It includes 101 templates and 30857 intents; a "dataset" of 58.82MB that arguably makes it the **world's most powerful, open-source, deterministic agent**.
 
-Until yesterday deterministic chatbots used to cap out at a few hundred intents. Thanks to NPC-Forge, its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its efficient intent recognition pipeline implemented in [FlintNPC](/docs/FlintNPC.md), today everyone can create a chatbot with tens of thousands intents with response times in the order of milliseconds.
+Until yesterday deterministic chatbots used to cap out at a few hundred intents. Thanks to NPC-Forge, its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its efficient intent recognition pipeline implemented in [FlintNPC](/docs/FlintNPC.md), today everyone can create a chatbot with tens of thousands intents with response times in the order of milliseconds on a Raspberry Pi.
 
 Just type `termy` followed by your prompt:
 
@@ -28,11 +28,22 @@ open it in the browser
 ```
 Then digit `termy -y < test.termy` and watch TERMy compile it to Bash and execute it. 
 
+### How it works
+[TERMy](/npcs/termy/README.md) is implemented using the [FlintNPC](/docs/FlintNPC.md) and [FlintParser](/docs/FlintParser.md) classes provided by [NPC-Forge](README.md).
+
+Both classes rely on subtraction engineering: instead of adding probabilistic models, after subtracting noise (insults, interjections, stop words), the request is parsed and compiled down to a natural language response and a list of tool calls. The framework implements the following pipeline:
+
+1. Sanitize & Strip (insults, interjections, stop words)
+2. Exact Match (O(1) hash lookup)
+3. Template Match (semantic structure parsing)
+4. Probabilistic Match (IDF-weighted Levenshtein)
+5. Rejection with optional LLM dataset entry generation
+
+This approach is more efficient and less brittle than many alternatives that implement much more complex machine-learning techniques.
+If you are interested in how I came up with this stuff I wrote about it [here](/docs/development.md).
+
 ### Datasets
-
-I recently started pondering if I could have used datasets originally developed to train LLMs to teach Python to deterministic NPCs; with some trial and error I have developed software to curate and format them automatically.
-
-Thanks to these scripts I was able to release:
+I recently started pondering if I could have used datasets originally developed to train LLMs to expand the knowledge of deterministic agents. I looked at the material available on [huggingface](https://huggingface.co/) and I found a lot of datasets composed of question and answer about python. With some trial and error I have developed software to curate and format datasets automatically in the [NDF](/docs/dataset.md) format used by [NPC-Forge](/README.md). Thanks to these scripts I was able to release:
 
 1. [python_ppqd](/npcs/termy/dataset/python-functions-reasoning-100/README.md) 8777 intents around 10.8MB.
 
@@ -58,20 +69,20 @@ With this data I had the chance to verify practically that NPC-forge and TERMy c
 
 ### Turing completeness
 
-In the last month I have made TERMy Turing-complete. I have added the `if` and `execute n times` intents that used along with `termy_get_context` and `termy_set_context` functions make [TERMy](/npcs/termy/README.md) capable of solving any problem, just like any other programming language, with the critical difference that the human-readable language here is plain English.
+Recently TERMy became Turing-complete. I have added the `if` and `execute n times` intents that used along with `termy_get_context` and `termy_set_context` functions make [TERMy](/npcs/termy/README.md) capable of solving any problem, just like any other programming language, with the critical difference that the human-readable language here is plain English.
 
 ### Continuous learning and semantic caching
 
 Yesterday a deterministic agent could just reject an unknown prompt with something like "Can you be more specific?". Today we can just ask ollama, can't we?
 
-I added the ollama provider to TERMy and now when it rejects a query because it has no knowledge about it, the question can be routed to a local LLM instructing it to generate the missing dataset entry and save it in memory in the NDF format.
+I added the [ollama provider](/src/providers/ollama.py) to NPC-Forge and now when it rejects a query because it has no knowledge about it, the question can be routed to a local LLM instructing it to generate the missing dataset entry and save it in memory in the NDF format.
 
-This introduces three architectural advantages:
+Introducing this simple feature enables:
 
-1. **SPC (Semantic Prompt Caching)**: TERMy uses the LLM only once to generate the dataset entry, then when it is generated it is cached and the LLM will never be asked that question again.
+1. **SPC (Semantic Prompt Caching)**: The LLM is used once to generate the answer and will never be asked that question again.
 
-2. **MSL (Manually Supervised Learning)**: The user reviews the model's output and commits each entry to the dataset with a single keystroke.
+2. **MSL (Manually Supervised Learning)**: Users review the model's output and commit it with a single keystroke.
 
-3. **CL (Continuous Learning)**: Every saved entry expands your local dataset. Over time, [TERMy](/npcs/termy/README.md) grows smarter through usage, while its dependency on LLMs reduces.
+3. **CL (Continuous Learning)**: Over time [TERMy](/npcs/termy/README.md) grows smarter while its dependency on LLMs reduces.
 
 I am convinced we should all use systems like TERMy and that the future of AI will be hybrid designs that merge the best of both worlds (deterministic and probabilistic); insanely cheap, insanely fast, and with the same generative abilities of the most expensive model you can afford.

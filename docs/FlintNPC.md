@@ -11,11 +11,11 @@ FlintNPC relies on **subtraction engineering**: instead of adding probabilistic 
 ```
 User Prompt
 
-1. Sanitize & Strip (remove noise)
+1. Sanitize & Strip (insults, interjections, thanking words)
 2. Exact Match (O(1) hash lookup)
 3. Template Match (semantic structure parsing)
 4. Probabilistic Match (IDF-weighted Levenshtein)
-5. Response or rejection (with related intent suggestions)
+5. Response, rejection or entry generation via ollama
 ```
 
 ### Features
@@ -28,7 +28,6 @@ User Prompt
 - **Composite Prompt Splitting** Handles multi-command inputs (`cmd1; cmd2`)
 - **Metadata Rendering** Macro substitution for dynamic responses (`<||username||>`, `<||npc_name||>`)
 - **Related Intent Suggestions** Generates suggestions based on rarest word matching
-- **Threshold Tuning** Adaptive error tolerance based on prompt length
 - **Permission Gating** Controls which actions require user confirmation
 
 ### How It Works
@@ -39,7 +38,7 @@ FlintNPC processes input through a four-stage pipeline, each stage more permissi
 
 ```python
 stripped, sentiment = parser.strip_and_sentiment(
-    "darn, can you show me the red tie?",
+    "darn what is the temperature of the cpu?",
     vocabulary,
     current_sentiment
 )
@@ -63,9 +62,9 @@ Every intent variant in the dataset is indexed in a hash map. If the sanitized p
 #### Stage 3: Template Match (Semantic Structure Parsing)
 
 ```python
-structure, slots = parser.parse_structure("show red tie", threshold=0.8)
-# structure: ["<||vocab_show||>", "<||color||>", "<||vocab_tie||>"]
-# slots: {"color": "red"}
+structure, slots = parser.parse_structure("search on wiki programma 101", threshold=0.8)
+# structure: ["<||vocab_search||>", "<||vocab_wiki||>", "<||string||>"]
+# slots: {"string": "programma 101"}
 
 match = parser.match_structure(templates, structure)
 # Returns the intent block whose structure matches
@@ -226,11 +225,17 @@ FlintNPC reads configuration from `npcs/<name>/config.json`:
 ```json
 {
   "npc_name": "TERMy",
+  "tts": "espeak-ng",
   "creator": "Giovanni Blu Mitolo",
-  "creation_date": "2026-07-12",
-  "sentence_threshold": 0.75,
-  "word_threshold": 0.75,
-  "suggestions": 5
+  "sentence_threshold": 0.6668,
+  "synonym_contribution": 0.95,
+  "word_threshold": 0.751,
+  "suggestions": 10,
+  "llm": {
+    "enabled": true,
+    "api_url": "http://localhost:11434/api/chat",
+    "model": "granite4.1:3b-q6_K"
+  }
 }
 ```
 
@@ -243,7 +248,7 @@ FlintNPC reads configuration from `npcs/<name>/config.json`:
 - **Zero Dependencies** Only Python standard library + FlintParser
 - **CPU-Only** No GPU, no CUDA, no PyTorch. Runs on a Raspberry Pi Zero.
 - **Deterministic** Same input always produces the same output. Testable in CI.
-- **Microsecond Latency** Exact match: <10μs. Template match: <1ms. Probabilistic: <10ms.
+- **Fast response time** Answers in less 100 milliseconds in most cases.
 - **Memory Efficient** The entire agent + dataset fits in <10MB RAM.
 
 ### Integration with NPC-Forge
@@ -265,14 +270,13 @@ termy show me a red tie      # Chat with TERMy via CLI
 
 ### Algorithmic Choices
 
-#### Why Four Stages?
+#### Why three stages?
 
-Most NLU frameworks use a neural classifier. FlintNPC uses a pipeline:
-1. **Exact match** is O(1) and covers most queries
-2. **Template match** is O(n) and covers structured queries with variables
-3. **Probabilistic match** is O(n*m) and covers typos and paraphrases
+Most NLU frameworks rely on heavy neural classifiers. FlintNPC uses a highly optimized, deterministic pipeline with aggressive pre-compilation at startup to ensure ultra-low latency:
 
-Each stage is computationally heavier than the previous.
+1. **Exact match: O(1)** Direct hash-map lookup covers the vast majority of queries instantly.
+2. **Template match: O(1) average case** Structures are pre-compiled and sorted by specificity at startup, allowing for immediate early-exit matching without on-the-fly parsing.
+3. **Probabilistic match: O(1) pruning + O(K) scoring** Uses pre-computed intent signatures and "rarest-word" hash-set filtering to eliminate 99% of candidates in O(1) time. Expensive Levenshtein scoring is only applied to the remaining `K` candidates (typically 0 or 1), avoiding naive O(N×M) full dataset scans.
 
 #### Why Context Override?
 
@@ -281,7 +285,7 @@ Multi-turn conversations require state. Instead of a complex dialogue manager, F
 - Context persists until explicitly overwritten
 - Rejection clears the context
 
-This allows flows like "create dir" → "move it" → "delete it" without re-specifying the directory each time.
+This allows flows like "create dir" > "move it" > "delete it" without re-specifying the directory each time.
 
 #### Why Composite Prompt Splitting?
 
