@@ -1,6 +1,6 @@
 [
     {
-        "intent": "control_repeat",
+        "intent": "control_loop",
         "category": "control_flow",
         "type": "template",
         "structure": [
@@ -11,9 +11,9 @@
                     "required": true
                 },
                 {
-                    "tag": "<||n||>",
+                    "tag": "<||count||>",
                     "type": "number",
-                    "required": false
+                    "required": true
                 },
                 {
                     "tag": "<||vocab_times||>",
@@ -21,20 +21,20 @@
                     "required": true
                 },
                 {
-                    "tag": "<||string||>",
+                    "tag": "<||command||>",
                     "type": "string",
                     "required": true
                 }
             ]
         ],
-        "description": "Executes a list of commands N times in a loop. Each command is processed independently by termy. Use commas (,) to separate multiple commands.",
+        "description": "Loops N times, splitting the command string by comma and executing each part as an independent 'termy -y' call to prevent output concatenation.",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "n='<||n||>' && cmd_str=$(cat << 'EOF_CMD'\n<||string||>\nEOF_CMD\n) && exit_loop=0 && for i in $(seq 1 \"$n\"); do IFS=',' read -r -a cmds <<< \"$cmd_str\"; for c in \"${cmds[@]}\"; do c=\"${c#\"${c%%[![:space:]]*}\"}\"; c=\"${c%\"${c##*[![:space:]]}\"}\"; c=\"${c#\\\"}\"; c=\"${c%\\\"}\"; c=\"${c#\\'}\"; c=\"${c%\\'}\"; if [ -n \"$c\" ]; then termy -y \"$c\" || { exit_loop=1; break; }; fi; done; if [ $exit_loop -eq 1 ]; then break; fi; done",
-                    "explanation": "Loops N times. Splits the string by comma and executes each command as a separate 'termy -y' call to ensure independent processing and prevent output concatenation. Safely handles quotes and special characters via heredoc, and trims surrounding whitespace/quotes.",
-                    "goal": "Execute multiple commands N times with independent processing",
+                    "command": "n='<||count||>' && cmd_str=$(cat << 'EOF_CMD'\n<||command||>\nEOF_CMD\n) && exit_loop=0 && for i in $(seq 1 \"$n\"); do IFS=',' read -r -a cmds <<< \"$cmd_str\"; for c in \"${cmds[@]}\"; do c=\"${c#\"${c%%[![:space:]]*}\"}\"; c=\"${c%\"${c##*[![:space:]]}\"}\"; c=\"${c#\\\"}\"; c=\"${c%\\\"}\"; c=\"${c#\\'}\"; c=\"${c%\\'}\"; if [ -n \"$c\" ]; then printf \"%s\" \"$c\" | termy -y || { exit_loop=1; break; }; fi; done; if [ $exit_loop -eq 1 ]; then break; fi; done",
+                    "explanation": "Loops N times. Splits the string by comma and pipes each command into 'termy -y' via 'printf'.",
+                    "goal": "Execute a command or series of commands N times",
                     "mode": "sync"
                 }
             }
@@ -84,8 +84,8 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "true_cmd=$(cat << 'EOF_TRUE'\n<||then_command||>\nEOF_TRUE\n) && false_cmd=$(cat << 'EOF_FALSE'\n<||else_command||>\nEOF_FALSE\n) && cond=$(cat << 'EOF_COND'\n<||condition||>\nEOF_COND\n) && true_cmd=\"${true_cmd//,/;}\" && false_cmd=\"${false_cmd//,/;}\" && if termy -y \"$cond\" >/dev/null 2>&1; then termy -y \"$true_cmd\"; else if [ -n \"$false_cmd\" ]; then termy -y \"$false_cmd\"; fi; fi",
-                    "explanation": "Uses 'termy -y' to evaluate the condition and execute branches without hanging on permission prompts. Heredocs prevent quote injection from natural language input.",
+                    "command": "true_cmd=$(cat << 'EOF_TRUE'\n<||then_command||>\nEOF_TRUE\n) && false_cmd=$(cat << 'EOF_FALSE'\n<||else_command||>\nEOF_FALSE\n) && cond=$(cat << 'EOF_COND'\n<||condition||>\nEOF_COND\n) && true_cmd=\"${true_cmd//,/;}\" && false_cmd=\"${false_cmd//,/;}\" && if printf \"%s\" \"$cond\" | termy -y >/dev/null 2>&1; then printf \"%s\" \"$true_cmd\" | termy -y; else if [ -n \"$false_cmd\" ]; then printf \"%s\" \"$false_cmd\" | termy -y; fi; fi",
+                    "explanation": "Uses 'printf | termy -y' to safely pipe the condition and commands into child processes. This prevents child 'termy' instances from inheriting the parent's exhausted stdin (which causes 'empty query' errors when running via '< file.txt'). Heredocs prevent quote injection from natural language input.",
                     "goal": "Execute conditional commands based on termy's exit code",
                     "mode": "sync"
                 }
