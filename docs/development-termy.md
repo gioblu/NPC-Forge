@@ -69,7 +69,7 @@ With this data I had the chance to verify practically that NPC-forge and TERMy c
 
 ### Turing completeness
 
-In the last month I have made TERMy Turing-complete. I have added the `if` and `execute n times` intents that used along with `termy_get_context` and `termy_set_context` functions make [TERMy](/npcs/termy/README.md) capable of solving any problem, just like any other programming language, with the critical difference that the human-readable language here is plain English.
+Recently TERMy became Turing-complete. I have added the `if` and `execute n times` intents that used along with `termy_get_context` and `termy_set_context` functions make [TERMy](/npcs/termy/README.md) capable of solving any problem, just like any other programming language, with the critical difference that the human-readable language here is plain English.
 
 ### Continuous learning and semantic caching
 
