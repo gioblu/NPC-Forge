@@ -285,7 +285,7 @@ Multi-turn conversations require state. Instead of a complex dialogue manager, F
 - Context persists until explicitly overwritten
 - Rejection clears the context
 
-This allows flows like "create dir" → "move it" → "delete it" without re-specifying the directory each time.
+This allows flows like "create dir" > "move it" > "delete it" without re-specifying the directory each time.
 
 #### Why Composite Prompt Splitting?
 
