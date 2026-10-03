@@ -28,6 +28,17 @@ open it in the browser
 ```
 Then digit `termy -y < test.termy` and watch TERMy compile it to Bash and execute it. 
 
+### How it works
+[TERMy](/npcs/termy/README.md) is implemented using the [FlintNPC]() and [FlintParser]() classes provided by [NPC-Forge]().
+
+Both classes rely on subtraction engineering: instead of adding probabilistic models, after subtracting noise (insults, interjections, stop words), the request is parsed and compiled down to a natural language response and a list of tool calls. The framework implements the following pipeline:
+
+1. Sanitize & Strip (insults, interjections, stop words)
+2. Exact Match (O(1) hash lookup)
+3. Template Match (semantic structure parsing)
+4. Probabilistic Match (IDF-weighted Levenshtein)
+5. Rejection with optional LLM dataset entry generation
+
 ### Datasets
 I recently started pondering if I could have used datasets originally developed to train LLMs to expand the knowledge of deterministic agents. I looked at the material available on [huggingface](https://huggingface.co/) and I found a lot of datasets composed of question and answer about python. With some trial and error I have developed software to curate and format datasets automatically in the [NDF](/docs/dataset.md) format used by [NPC-Forge](/README.md). Thanks to these scripts I was able to release:
 
