@@ -39,6 +39,9 @@ Both classes rely on subtraction engineering: instead of adding probabilistic mo
 4. Probabilistic Match (IDF-weighted Levenshtein)
 5. Rejection with optional LLM dataset entry generation
 
+This approach is more efficient and less brittle than many alternatives that implement much more complex machine-learning techniques.
+If you are interested in how I came up with this stuff I wrote about it [here](/docs/development.md).
+
 ### Datasets
 I recently started pondering if I could have used datasets originally developed to train LLMs to expand the knowledge of deterministic agents. I looked at the material available on [huggingface](https://huggingface.co/) and I found a lot of datasets composed of question and answer about python. With some trial and error I have developed software to curate and format datasets automatically in the [NDF](/docs/dataset.md) format used by [NPC-Forge](/README.md). Thanks to these scripts I was able to release:
 
