@@ -36,6 +36,7 @@ def run_cli() -> int:
     parser.add_argument("--npc", default="termy", help="Target NPC instance (default: termy)")
     parser.add_argument("-y", "--yes", action="store_true", help="Automatically answer yes to prompts (skip confirmation)")
     parser.add_argument("-v", "--verbose", action="store_true", help="Show debugging information")
+    parser.add_argument("-g", "--generate", action="store_true", help="Send request to ollama.")
     
     args = parser.parse_args()
 
@@ -152,7 +153,7 @@ def run_cli() -> int:
             command=command,
             description=description.strip(),
             emoji=emoji,
-            title="Response"
+            title="TERMy"
         )
         print()
     elif status == "rejected" and (related or llm_enabled):
@@ -177,7 +178,8 @@ def run_cli() -> int:
                 f"or {GREEN}{BOLD}q{RESET} to quit\n"
             )
             
-        choice = tui.multi_choice("Select an intent", related_intents, menu_text, 'a')
+        if (args.generate): choice = len(related) + 1
+        else: choice = tui.multi_choice("Select an intent", related_intents, menu_text, 'g')
         
         if isinstance(choice, int) and 0 < choice <= len(related):
             try:
@@ -197,18 +199,20 @@ def run_cli() -> int:
             return 0
                 
         # Execute LLM generation if selected
-        if llm_enabled and llm_selected:
+        if (llm_enabled and llm_selected) or args.g:
             try:
+                details = ""
                 ollama_client = OllamaProvider(llm_config)
-                details = tui.prompt(
-                    f"\nDescribe how TERMy should respond to [green]'{user_input}'[/green]"
-                )
-                if not details: return 1                    
+                if not args.generate:
+                    details = tui.prompt(
+                        f"\nDescribe how TERMy should respond to [green]'{user_input}'[/green]"
+                    )
+                    if not details: return 1                    
                 console.print()
                 with console.status(
                     f"[bold green]Generating script via {llm_model}...[/bold green]", 
                     spinner="dots"
-                ): generated_intent = ollama_client.craft_intent(details or user_input)
+                ): generated_intent = ollama_client.craft_intent(f"{user_input} {details}")
                 
                 if generated_intent:
                     try:
@@ -239,7 +243,7 @@ def run_cli() -> int:
                     dataset_dir.mkdir(parents=True, exist_ok=True)           
                     save_filename = f"dataset_{os.environ.get('USER', 'user')}.json"
                     
-                    if not permission_execute():
+                    if not permission_execute() and not args.generate:
                         save_intent = tui.confirm("Do you want to save this entry in the dataset?")
                         if save_intent:
                             storage.save_entry(generated_intent, str(dataset_dir), save_filename)
@@ -272,7 +276,7 @@ def run_cli() -> int:
                     sources.append(f"source {shlex.quote(str(file))}")
         if sources: command = f"{' && '.join(sources)} && {command}"
         
-        if permission_execute() or tui.confirm("Should I run it?"):
+        if args.generate or (permission_execute() or tui.confirm("Should I run it?")):
             try:
                 if not permission_execute(): print("\n")
                 res = subprocess.run(

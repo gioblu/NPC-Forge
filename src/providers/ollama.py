@@ -88,8 +88,8 @@ class OllamaProvider(BaseProvider):
             command_shell = extracted_code
         else:
             extension_map = {
-                "python": "py", "javascript": "js", "typescript": "ts", 
-                "golang": "go", "ruby": "rb", "markdown": "md"
+                "python": "py", "javascript": "js", "typescript": "ts",
+                "golang": "go", "ruby": "rb", "markdown": "md", "toml": "toml"
             }
             file_ext = extension_map.get(detected_lang, detected_lang)
             
