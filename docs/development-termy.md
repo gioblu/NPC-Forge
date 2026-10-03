@@ -29,7 +29,7 @@ open it in the browser
 Then digit `termy -y < test.termy` and watch TERMy compile it to Bash and execute it. 
 
 ### How it works
-[TERMy](/npcs/termy/README.md) is implemented using the [FlintNPC]() and [FlintParser]() classes provided by [NPC-Forge]().
+[TERMy](/npcs/termy/README.md) is implemented using the [FlintNPC](/docs/FlintNPC.md) and [FlintParser](/docs/FlintParser.md) classes provided by [NPC-Forge](README.md).
 
 Both classes rely on subtraction engineering: instead of adding probabilistic models, after subtracting noise (insults, interjections, stop words), the request is parsed and compiled down to a natural language response and a list of tool calls. The framework implements the following pipeline:
 
