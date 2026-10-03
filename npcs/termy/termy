@@ -27,10 +27,7 @@ def run_cli() -> int:
     )
     
     parser = argparse.ArgumentParser(
-        description=(
-            "TERMy - Terminal assistant and "
-            "plain English to Bash transpiler."
-        ),
+        description="TERMy - The frontier of deterministic AI",
         usage=usage_text,
     )
     
