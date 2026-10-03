@@ -20,7 +20,11 @@ class OllamaProvider(BaseProvider):
             "model": self.model,
             "messages": [{"role": "user", "content": prompt}],
             "stream": False,
-            "options": {"temperature": 0.7, "repeat_penalty": 1.2}
+            "think": False, 
+            "options": {
+                "temperature": 0.7, 
+                "repeat_penalty": 1.2
+            }
         }
 
         binary_data = json.dumps(data).encode("utf-8")
@@ -35,7 +39,7 @@ class OllamaProvider(BaseProvider):
         )
         
         try:
-            with urllib.request.urlopen(req, timeout=90) as response:
+            with urllib.request.urlopen(req, timeout=300) as response:
                 res_data = json.loads(response.read().decode("utf-8"))
                 return res_data.get("message", {}).get("content", "")
         except Exception as e:

@@ -62,8 +62,7 @@ class FlintNPC:
         }
         
         self.rejection = {"output": ["<||unknown||>"], "permission": "yolo"}
-        self.sentence_threshold = float(self.config.get("sentence_threshold", 0.75))
-        self.word_threshold = float(self.config.get("word_threshold", 0.75))
+        self.threshold = float(self.config.get("threshold", 0.75))
         
         self.load_data(dataset_dir)
         
@@ -186,7 +185,7 @@ class FlintNPC:
             )
             return self.generate_response(matched_block, {}, 1.0, match_status)
 
-        structure, slots = self.nlp.parse_structure(user_prompt, self.sentence_threshold)
+        structure, slots = self.nlp.parse_structure(user_prompt, self.threshold)
         matched_template = self.nlp.match_structure(self.templates, structure)
 
         if matched_template:
@@ -206,8 +205,7 @@ class FlintNPC:
         
         query_tokens = user_prompt_clean.lower().split()
         
-        # word_threshold is used to tighten the Levenshtein requirement for short queries
-        threshold = self.word_threshold if len(query_tokens) <= 3 else self.sentence_threshold
+        threshold = self.threshold
         
         # 1. Try fuzzy match against ACTIVE CONTEXT
         best_context_block, best_context_score = None, -1.0
@@ -219,8 +217,8 @@ class FlintNPC:
                 best_context_score = score
                 best_context_block = precomputed["block"]
 
-        # Context acceptance still uses sentence_threshold as the absolute gate
-        if best_context_score >= self.sentence_threshold:
+        # Context acceptance still uses threshold as the absolute gate
+        if best_context_score >= self.threshold:
             self.update_context(best_context_block)
             return self.generate_response(
                 best_context_block, {}, best_context_score, "probabilistic match"
@@ -261,7 +259,7 @@ class FlintNPC:
                     related_intents.append(precomputed["block"])
                     seen_categories.add(category)
             
-        if best_score >= self.sentence_threshold and best_block:
+        if best_score >= self.threshold and best_block:
             self.update_context(best_block)
             return self.generate_response(
                 best_block, {}, best_score, "probabilistic match"
@@ -289,7 +287,7 @@ class FlintNPC:
             res = self.process_message(sub_prompt)
             current_conf = res.get("confidence", 0.0)
             
-            if current_conf < self.sentence_threshold or res.get("status") == "rejected":
+            if current_conf < self.threshold or res.get("status") == "rejected":
                 logger.warning(
                     f"[chatbot.py][{self.name}][process_messages] Rejected"
                     f" '{sub_prompt}', confidence {current_conf:.4f}"

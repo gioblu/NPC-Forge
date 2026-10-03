@@ -2,13 +2,12 @@
   "npc_name": "TERMy",
   "tts": "espeak-ng",
   "creator": "Giovanni Blu Mitolo",
-  "sentence_threshold": 0.6668,
+  "threshold": 0.6668,
   "synonym_contribution": 0.95,
-  "word_threshold": 0.751,
   "suggestions": 10,
   "llm": {
     "enabled": true,
     "api_url": "http://localhost:11434/api/chat",
-    "model": "granite4.1:3b-q6_K"
+    "model": "hf.co/unsloth/Qwen3.5-9B-GGUF:UD-Q6_K_XL"
   }
 }
