@@ -272,10 +272,11 @@ termy show me a red tie      # Chat with TERMy via CLI
 
 #### Why three stages?
 
-Most NLU frameworks rely on heavy neural classifiers, FlintNPC uses a highly optimized, deterministic pipeline with pre-compilation at startup to ensure ultra-low latency:
-1. Exact match O(1): Direct hash-map lookup covers the vast majority of queries instantly.
-2. Template match O(1): Structures are pre-compiled and sorted by specificity at startup, allowing for immediate early-exit matching.
-3. Probabilistic match O(1) + O(K): Uses pre-computed intent signatures and "rarest-word" hash-set filtering to eliminate 99% of candidates.
+Most NLU frameworks rely on heavy neural classifiers. FlintNPC uses a highly optimized, deterministic pipeline with aggressive pre-compilation at startup to ensure ultra-low latency:
+
+1. **Exact match: O(1)** — Direct hash-map lookup covers the vast majority of queries instantly.
+2. **Template match: O(1) average case** — Structures are pre-compiled and sorted by specificity at startup, allowing for immediate early-exit matching without on-the-fly parsing.
+3. **Probabilistic match: O(1) pruning + O(K) scoring** — Uses pre-computed intent signatures and "rarest-word" hash-set filtering to eliminate 99% of candidates in O(1) time. Expensive Levenshtein scoring is only applied to the remaining `K` candidates (typically 0 or 1), avoiding naive O(N×M) full dataset scans.
 
 #### Why Context Override?
 
