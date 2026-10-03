@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import os
 import sys
+import shlex
 import subprocess
 from pathlib import Path
 
@@ -31,29 +32,10 @@ def run_cli() -> int:
         usage=usage_text,
     )
     
-    parser.add_argument(
-        "query", 
-        nargs="*", 
-        help="Prompt input string."
-    )
-    
-    parser.add_argument(
-        "--npc", 
-        default="termy", 
-        help="Target NPC instance (default: termy)"
-    )
-    
-    parser.add_argument(
-        "-y", "--yes", 
-        action="store_true", 
-        help="Automatically answer yes to prompts (skip confirmation)"
-    )
-    
-    parser.add_argument(
-        "-v", "--verbose", 
-        action="store_true", 
-        help="Show debugging information"
-    )
+    parser.add_argument("query", nargs="*", help="Prompt input string.")
+    parser.add_argument("--npc", default="termy", help="Target NPC instance (default: termy)")
+    parser.add_argument("-y", "--yes", action="store_true", help="Automatically answer yes to prompts (skip confirmation)")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Show debugging information")
     
     args = parser.parse_args()
 
@@ -62,10 +44,8 @@ def run_cli() -> int:
     else: parser.error("Provide input via arguments or pipe!\n")
     if not user_input: parser.error("The query must not be empty!\n")
 
-    # Pass --yes flag through environment so all subprocess calls inherit it
     if args.yes: os.environ["TERMY_YES"] = "1"
 
-    # Try HTTP call to the Flask Gateway first
     client = ApiProvider(url="http://127.0.0.1:5000", timeout=10.0)
     result = client.request(args.npc, user_input)
     
@@ -75,14 +55,16 @@ def run_cli() -> int:
         CURRENT_BOT_DIR = Path(os.path.realpath(__file__)).parent
         FORGE_ROOT_DIR = str(CURRENT_BOT_DIR.parent.parent)
         sys.stderr.write(
-            f"NPC-Forge server is {RED}offline{RESET}, "
-            f"starting local fallback...\n"
+            f"NPC-Forge server is {RED}offline{RESET}, starting local...\n"
         )
         client = LocalProvider(FORGE_ROOT_DIR, CURRENT_BOT_DIR)
         result = client.request(args.npc, user_input)
 
+    if result is None:
+        sys.stderr.write(f"{RED}FATAL: Failed to process request locally.{RESET}\n")
+        return 1
+
     emoji = result.get("emoji", "")
-            
     response = result.get("response", "")
     permission = result.get("permission", "ask")
     thinking = result.get("thinking", "")    
@@ -140,19 +122,22 @@ def run_cli() -> int:
                     command += tool_args["command"]
                 
                 if "explanation" in tool_args or "description" in result:
-                    description += " " + tool_args.get("explanation", result.get("description", ""))
+                    desc_part = tool_args.get(
+                        "explanation", result.get("description", "")
+                    ).strip()
+                    if desc_part: description += " " + desc_part
 
-    if response and context.get("tts", "") == "on":
+    tts_engine = config.get("tts")
+    if response and context.get("tts", "") == "on" and tts_engine:
         try:
             subprocess.run(
-                f"pkill -9 -x {config.get('tts', '')}", 
+                f"pkill -9 -x {shlex.quote(tts_engine)}", 
                 shell=True, 
                 stdout=subprocess.DEVNULL, 
                 stderr=subprocess.DEVNULL
             )
-            clean_response = "'" + response.replace('"', '').replace("'", "") + "'"
             subprocess.Popen(
-                [config.get("tts", ""), clean_response],
+                [tts_engine, response],
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 start_new_session=True
@@ -165,7 +150,7 @@ def run_cli() -> int:
             thinking=thinking,
             response=Markdown(response.strip()),
             command=command,
-            description=description,
+            description=description.strip(),
             emoji=emoji,
             title="Response"
         )
@@ -174,38 +159,30 @@ def run_cli() -> int:
         choice = 0
         llm_selected = False
         
-        related_menu = f"Choose related {GREEN}{BOLD}1-{len(related)}{RESET}\n"
-        if not len(related): related_menu = ""
+        related_menu = f"Choose related {GREEN}{BOLD}1-{len(related)}{RESET}\n" if related else ""
         
         related_intents = [
-            intent["input"][0] if isinstance(
-                intent["input"], list
-            ) else intent["input"] for intent in related
+            intent["input"][0] if isinstance(intent["input"], list) else str(intent["input"]) 
+            for intent in related
         ]
+        
         if llm_enabled:
-            menu_text = ( 
-                f"{related_menu}Ask {llm_model} {GREEN}{BOLD}a{RESET} "
-                f"Quit {GREEN}{BOLD}q{RESET}\n"
+            menu_text = (
+                f"{related_menu}Ask {llm_model} "
+                f"{GREEN}{BOLD}a{RESET} Quit {GREEN}{BOLD}q{RESET}\n"
             )
         else:
             menu_text = (
-                f"Type {GREEN}{BOLD}1-{len(related)}{RESET} "
+                f"Type {GREEN}{BOLD}1-{len(related)}{RESET}"
                 f"or {GREEN}{BOLD}q{RESET} to quit\n"
             )
             
-        choice = tui.multi_choice(
-            "Select an intent", 
-            related_intents, 
-            menu_text, 
-            'a'
-        )
+        choice = tui.multi_choice("Select an intent", related_intents, menu_text, 'a')
         
         if isinstance(choice, int) and 0 < choice <= len(related):
             try:
-                res = subprocess.run(
-                    [sys.executable, sys.argv[0], related_intents[choice - 1]],
-                    env=os.environ
-                )
+                script_path = os.path.abspath(sys.argv[0])
+                res = subprocess.run([script_path, related_intents[choice - 1]], env=os.environ)
                 return res.returncode
             except KeyboardInterrupt:
                 print(f"\n\n{YELLOW}Execution cancelled.{RESET}\n")
@@ -213,12 +190,11 @@ def run_cli() -> int:
             except Exception as exc:
                 print(f"\n\nFailed to execute recursive call: {exc}\n")
                 return 1
-        elif (
-            isinstance(choice, int) and 
-            choice == (len(related) + 1) and 
-            llm_enabled
-        ): llm_selected = True
-        elif not choice or str(choice).lower() == 'q': return 0
+   
+        elif isinstance(choice, int) and choice == (len(related) + 1) and llm_enabled:
+            llm_selected = True
+        elif not choice or str(choice).lower() == 'q':
+            return 0
                 
         # Execute LLM generation if selected
         if llm_enabled and llm_selected:
@@ -227,40 +203,29 @@ def run_cli() -> int:
                 details = tui.prompt(
                     f"\nDescribe how TERMy should respond to [green]'{user_input}'[/green]"
                 )
-                if not details: return 1
+                if not details: return 1                    
                 console.print()
                 with console.status(
-                    f"[bold green]Generating script via "
-                    f"{llm_model}...[/bold green]", 
+                    f"[bold green]Generating script via {llm_model}...[/bold green]", 
                     spinner="dots"
-                ):
-                    generated_intent = ollama_client.craft_intent(
-                        details or user_input
-                    )
+                ): generated_intent = ollama_client.craft_intent(details or user_input)
                 
                 if generated_intent:
                     try:
-                        generated_intent["input"] = user_input
+                        generated_intent["input"] = [user_input]
                         tool_args = generated_intent["tools"][0]["arguments"]
                         command = tool_args.get("command", "")
                         description = tool_args.get("explanation", "")    
                         permission = generated_intent.get("permission", "ask")
                         response = generated_intent.get("output", "")
                     except (KeyError, IndexError, TypeError):
-                        print(
-                            f"{RED}TERMy Exception: "
-                            f"Invalid tool structure generated by LLM.{RESET}"
-                        )
+                        print(f"{RED}TERMy Exception: LLM generated invalid entry.{RESET}")
                         return 1
 
                     if not command or not command.strip():
-                        print(
-                            f"{RED}Generated command is empty. "
-                            f"Nothing to execute.{RESET}"
-                        )
+                        print(f"{RED}Generated command is empty. Nothing to execute.{RESET}")
                         return 1
                     
-                    # 1. Render the action cleanly
                     tui.render_action(
                         thinking=thinking,
                         response=Markdown(response) if response else "",
@@ -269,51 +234,44 @@ def run_cli() -> int:
                         emoji=emoji,
                         title="New dataset entry"
                     )
-                    # 2. Ask to save the entry in the dataset
+                    
+                    dataset_dir = CURRENT_BOT_DIR / "dataset"
+                    dataset_dir.mkdir(parents=True, exist_ok=True)           
+                    save_filename = f"dataset_{os.environ.get('USER', 'user')}.json"
+                    
                     if not permission_execute():
                         save_intent = tui.confirm("Do you want to save this entry in the dataset?")
                         if save_intent:
-                            storage.save_entry(
-                                generated_intent,
-                                str(CURRENT_BOT_DIR / "dataset"),
-                                f"dataset_{os.environ.get('USER', 'user')}.json"
-                            )
+                            storage.save_entry(generated_intent, str(dataset_dir), save_filename)
                             print(f"{GREEN}Entry saved to dataset.{RESET}")
                     else:
-                        # Auto-save if bypassing confirmation (e.g., via -y flag)
                         storage.save_entry(
-                            generated_intent,
-                            str(CURRENT_BOT_DIR / "dataset"),
-                            f"dataset_{os.environ.get('USER', 'user')}.json"
+                            generated_intent, 
+                            str(dataset_dir), 
+                            save_filename
                         )
-                    
+                        print(
+                            f"{GREEN}Entry saved to dataset (due to -y flag).{RESET}"
+                        )
                 else:
-                    print(
-                        f"{RED}TERMy failed to obtain a valid"
-                        f" script from {llm_model}.{RESET}"
-                    )
+                    print(f"{RED}TERMy failed to obtain a valid script from {llm_model}.{RESET}")
                     return 1
             except ImportError as e:
-                print(f"{RED}TERMy ImportError {e}{RESET}")
+                print(f"{RED}TERMy ImportError: {e}{RESET}")
                 return 1
             except Exception as e:
-                print(f"{RED}TERMy Exception {e}{RESET}")
+                print(f"{RED}TERMy Exception: {e}{RESET}")
                 return 1
 
-    # 3. Execution Block
     if command and command.strip():
         scripts_dir = CURRENT_BOT_DIR / "scripts"
         sources = []
-        
-        # Scan scripts directory to inject custom environment sources
         if scripts_dir.is_dir():
             for file in sorted(scripts_dir.iterdir()):
                 if file.suffix == ".sh":
-                    sources.append(f"source {file}")
-        
+                    sources.append(f"source {shlex.quote(str(file))}")
         if sources: command = f"{' && '.join(sources)} && {command}"
         
-        # Ask to execute it (or bypass if flag is set)
         if permission_execute() or tui.confirm("Should I run it?"):
             try:
                 if not permission_execute(): print("\n")
@@ -336,3 +294,6 @@ def run_cli() -> int:
             return 0
                 
     return 0
+
+if __name__ == "__main__":
+    sys.exit(run_cli())
