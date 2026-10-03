@@ -29,10 +29,7 @@ open it in the browser
 Then digit `termy -y < test.termy` and watch TERMy compile it to Bash and execute it. 
 
 ### Datasets
-
-I recently started pondering if I could have used datasets originally developed to train LLMs to teach Python to deterministic NPCs; with some trial and error I have developed software to curate and format them automatically.
-
-Thanks to these scripts I was able to release:
+I recently started pondering if I could have used datasets originally developed to train LLMs to expand the knowledge of deterministic agents. I looked at the material available on [huggingface](https://huggingface.co/) and I found a lot of datasets composed of question and answer about python. With some trial and error I have developed software to curate and format datasets automatically in the [NDF](/docs/dataset.md) format used by [NPC-Forge](/README.md). Thanks to these scripts I was able to release:
 
 1. [python_ppqd](/npcs/termy/dataset/python-functions-reasoning-100/README.md) 8777 intents around 10.8MB.
 
@@ -66,12 +63,12 @@ Yesterday a deterministic agent could just reject an unknown prompt with somethi
 
 I added the ollama provider to TERMy and now when it rejects a query because it has no knowledge about it, the question can be routed to a local LLM instructing it to generate the missing dataset entry and save it in memory in the NDF format.
 
-This introduces three architectural advantages:
+Introducing this simple feature enables:
 
-1. **SPC (Semantic Prompt Caching)**: TERMy uses the LLM only once to generate the dataset entry, then when it is generated it is cached and the LLM will never be asked that question again.
+1. **SPC (Semantic Prompt Caching)**: The LLM is used once to generate the dataset entry then will never be asked that question again.
 
 2. **MSL (Manually Supervised Learning)**: The user reviews the model's output and commits each entry to the dataset with a single keystroke.
 
-3. **CL (Continuous Learning)**: Every saved entry expands your local dataset. Over time, [TERMy](/npcs/termy/README.md) grows smarter through usage, while its dependency on LLMs reduces.
+3. **CL (Continuous Learning)**: Every saved entry expands the local dataset. Over time, [TERMy](/npcs/termy/README.md) grows smarter through usage, while its dependency on LLMs reduces.
 
 I am convinced we should all use systems like TERMy and that the future of AI will be hybrid designs that merge the best of both worlds (deterministic and probabilistic); insanely cheap, insanely fast, and with the same generative abilities of the most expensive model you can afford.
