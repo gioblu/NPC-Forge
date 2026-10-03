@@ -75,7 +75,7 @@ In the last month I have made TERMy Turing-complete. I have added the `if` and `
 
 Yesterday a deterministic agent could just reject an unknown prompt with something like "Can you be more specific?". Today we can just ask ollama, can't we?
 
-I added the ollama provider to TERMy and now when it rejects a query because it has no knowledge about it, the question can be routed to a local LLM instructing it to generate the missing dataset entry and save it in memory in the NDF format.
+I added the [ollama provider](/src/providers/ollama.py) to NPC-Forge and now when it rejects a query because it has no knowledge about it, the question can be routed to a local LLM instructing it to generate the missing dataset entry and save it in memory in the NDF format.
 
 Introducing this simple feature enables:
 
