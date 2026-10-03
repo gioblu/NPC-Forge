@@ -65,10 +65,10 @@ I added the ollama provider to TERMy and now when it rejects a query because it 
 
 Introducing this simple feature enables:
 
-1. **SPC (Semantic Prompt Caching)**: The LLM is used once to generate the dataset entry then will never be asked that question again.
+1. **SPC (Semantic Prompt Caching)**: The LLM is used once to generate the answer and will never be asked that question again.
 
-2. **MSL (Manually Supervised Learning)**: The user reviews the model's output and commits each entry to the dataset with a single keystroke.
+2. **MSL (Manually Supervised Learning)**: Users review the model's output and commit it with a single keystroke.
 
-3. **CL (Continuous Learning)**: Every saved entry expands the local dataset. Over time, [TERMy](/npcs/termy/README.md) grows smarter through usage, while its dependency on LLMs reduces.
+3. **CL (Continuous Learning)**: Over time [TERMy](/npcs/termy/README.md) grows smarter while its dependency on LLMs reduces.
 
 I am convinced we should all use systems like TERMy and that the future of AI will be hybrid designs that merge the best of both worlds (deterministic and probabilistic); insanely cheap, insanely fast, and with the same generative abilities of the most expensive model you can afford.
