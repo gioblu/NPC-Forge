@@ -8,11 +8,11 @@ Everyone still thinks "Attention is all you need". A transformer with an attenti
 
 In many cases we use the transformer to let users interact with the computer in natural language; ask a question in English, get back English. Yes, the transformer has generative abilities, but I feel sure to assert that **those are side-effects of its core working principle**, and they are both a feature and a bug when applied to this use case.
 
-What I am trying to say is, maybe, if the goal is to translate natural language to something the computer can understand, shouldn't we use a parser? Aren't we capable of compiling python to bytecode? Can't we compile English to Bash?
+What I am trying to say is, maybe, if the goal is to translate natural language shouldn't we just use a parser? Aren't we capable of compiling python to bytecode? Can't we compile English to Bash?
 
 ### TERMy
 
-[TERMy](/npcs/termy/README.md) is a deterministic terminal assistant that translates natural language to terminal commands. This is not yet another terminal harness that routes the question to a LLM. It is a novel deterministic agent with multi-turn context memory and tool-call support. It includes 101 templates and 30857 intents; a "dataset" of 58.82MB that arguably makes it the **world's most powerful, open-source, deterministic agent**.
+[TERMy](/npcs/termy/README.md) is a deterministic terminal assistant that translates natural language to terminal commands. This is not yet another terminal harness that routes prompts to a LLM. It is a novel deterministic agent with multi-turn context memory and tool-call support. It includes 101 templates and 30857 intents; a "dataset" of 58.82MB that arguably makes it the **world's most powerful, open-source, deterministic agent**.
 
 Until yesterday deterministic chatbots used to cap out at a few hundred intents. Thanks to NPC-Forge, its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its efficient intent recognition pipeline implemented in [FlintNPC](/docs/FlintNPC.md), today everyone can create a chatbot with tens of thousands intents with response times in the order of milliseconds on a Raspberry Pi.
 
@@ -39,8 +39,7 @@ Both classes rely on subtraction engineering: instead of adding probabilistic mo
 4. Probabilistic Match (IDF-weighted Levenshtein)
 5. Rejection with optional LLM dataset entry generation
 
-This approach is more efficient and less brittle than many alternatives that implement much more complex machine-learning techniques.
-If you are interested in how I came up with this stuff I wrote about it [here](/docs/development.md).
+This approach is more efficient and less brittle than many alternatives that implement much more complex machine-learning techniques. If you are interested in how I came up with this stuff I wrote about it [here](/docs/development.md).
 
 ### Datasets
 I recently started pondering if I could have used datasets originally developed to train LLMs to expand the knowledge of deterministic agents. I looked at the material available on [huggingface](https://huggingface.co/) and I found a lot of datasets composed of question and answer about python. With some trial and error I have developed software to curate and format datasets automatically in the [NDF](/docs/dataset.md) format used by [NPC-Forge](/README.md). Thanks to these scripts I was able to release:
