@@ -37,7 +37,10 @@ class TuiTools:
             tty.setraw(fd)
             ch = sys.stdin.read(1)
             if ch == "\x1b": 
-                ch += sys.stdin.read(2)
+                try:
+                    ch += sys.stdin.read(2)
+                except (EOFError, OSError):
+                    pass
         except (KeyboardInterrupt, EOFError):
             return "\x03"
         finally: 
@@ -49,8 +52,7 @@ class TuiTools:
     def confirm(self, prompt_text: str = "Execute?") -> bool:
         """A clean, fast confirmation prompt styled with Rich."""
         console.print(
-            f"{prompt_text}"
-            f" [bold](y/n)[bold]", 
+            f"{prompt_text} [bold](y/n)[/bold]", 
             end=" "
         )
         while True:
@@ -58,23 +60,21 @@ class TuiTools:
             if key in {"y", "e", "\r", "\n"}: 
                 return True
             if key in {"n", "q", "\x03"}: 
+                console.print()
                 return False
             
     def prompt(self, question: str):
         try:
             return Prompt.ask(question)
         except (KeyboardInterrupt, EOFError):
-            print()
-            return 0
-            
+            console.print()
+            return None
 
     def multi_choice(self, prompt: str, choices: list, menu: str, additional: str) -> int:
         """
         Renders a stunning terminal menu inspired by Lip Gloss/Charm architecture.
         Instant single-key response with native vertical and horizontal padding.
         """
-        if not choices:
-            return 0
 
         max_range = len(choices)
         
@@ -85,12 +85,12 @@ class TuiTools:
         
         menu_content.append(f"  [{additional.lower()}] ", style="bold green")
         menu_content.append("Ask model\n", style="bold white")
-        
-        menu_content.append("  " + "─" * 30 + "\n", style="dim green")
+        if max_range:
+            menu_content.append("  " + "─" * 30 + "\n", style="dim green")
 
-        for i, choice_text in enumerate(choices, 1):
-            menu_content.append(f"  [{i}] ", style="bold green")
-            menu_content.append(f"{choice_text}\n", style="white")
+            for i, choice_text in enumerate(choices, 1):
+                menu_content.append(f"  [{i}] ", style="bold green")
+                menu_content.append(f"{choice_text}\n", style="white")
 
         inner_padding = Padding(menu_content, (1, 2, 0, 0))
 
@@ -114,8 +114,11 @@ class TuiTools:
 
                 print("\r", end="", flush=True)
 
-                if key == 'q' or raw_key == '\x03': return 0
-                if key == additional.lower(): return max_range + 1
+                if key == 'q' or raw_key == '\x03': 
+                    console.print()
+                    return 0
+                if key == additional.lower(): 
+                    return max_range + 1
                 
                 if key.isdigit():
                     numeric_choice = int(key)
@@ -125,13 +128,13 @@ class TuiTools:
                 continue
 
         except (KeyboardInterrupt, EOFError):
-            print()
+            console.print() # Force a clean newline on exit
             return 0
 
     def render_action(
         self, 
         thinking: str = "", 
-        response = "",  # Changed type hint so it accepts the Markdown object
+        response = "",  # Accepts the Markdown object
         command: str = "", 
         description: str = "", 
         emoji: str = "", 
@@ -173,4 +176,3 @@ class TuiTools:
         )
 
         console.print(panel)
-

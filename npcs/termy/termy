@@ -174,60 +174,52 @@ def run_cli() -> int:
         choice = 0
         llm_selected = False
         
-        if len(related) > 0:
-            related_intents = [
-                intent["input"][0] if isinstance(
-                    intent["input"], list
-                ) else intent["input"] for intent in related
-            ]
-            
-            if llm_enabled:
-                menu_text = ( 
-                    f"Choose related {GREEN}{BOLD}1-{len(related)}{RESET} "
-                    f"Ask {llm_model} {GREEN}{BOLD}a{RESET} "
-                    f"Quit {GREEN}{BOLD}q{RESET}\n"
-                )
-            else:
-                menu_text = (
-                    f"Type {GREEN}{BOLD}1-{len(related)}{RESET} "
-                    f"or {GREEN}{BOLD}q{RESET} to quit\n"
-                )
-                
-            choice = tui.multi_choice(
-                "Select an intent", 
-                related_intents, 
-                menu_text, 
-                'a'
+        related_menu = f"Choose related {GREEN}{BOLD}1-{len(related)}{RESET}\n"
+        if not len(related): related_menu = ""
+        
+        related_intents = [
+            intent["input"][0] if isinstance(
+                intent["input"], list
+            ) else intent["input"] for intent in related
+        ]
+        if llm_enabled:
+            menu_text = ( 
+                f"{related_menu}Ask {llm_model} {GREEN}{BOLD}a{RESET} "
+                f"Quit {GREEN}{BOLD}q{RESET}\n"
+            )
+        else:
+            menu_text = (
+                f"Type {GREEN}{BOLD}1-{len(related)}{RESET} "
+                f"or {GREEN}{BOLD}q{RESET} to quit\n"
             )
             
-            if isinstance(choice, int) and 0 < choice <= len(related):
-                try:
-                    res = subprocess.run(
-                        [sys.executable, sys.argv[0], related_intents[choice - 1]],
-                        env=os.environ
-                    )
-                    return res.returncode
-                except KeyboardInterrupt:
-                    print(f"\n\n{YELLOW}Execution cancelled.{RESET}\n")
-                    return 130
-                except Exception as exc:
-                    print(f"\n\nFailed to execute recursive call: {exc}\n")
-                    return 1
-            elif (
-                isinstance(choice, int) and 
-                choice == (len(related) + 1) and 
-                llm_enabled
-            ): llm_selected = True
-            elif not choice or str(choice).lower() == 'q': return 0
+        choice = tui.multi_choice(
+            "Select an intent", 
+            related_intents, 
+            menu_text, 
+            'a'
+        )
+        
+        if isinstance(choice, int) and 0 < choice <= len(related):
+            try:
+                res = subprocess.run(
+                    [sys.executable, sys.argv[0], related_intents[choice - 1]],
+                    env=os.environ
+                )
+                return res.returncode
+            except KeyboardInterrupt:
+                print(f"\n\n{YELLOW}Execution cancelled.{RESET}\n")
+                return 130
+            except Exception as exc:
+                print(f"\n\nFailed to execute recursive call: {exc}\n")
+                return 1
+        elif (
+            isinstance(choice, int) and 
+            choice == (len(related) + 1) and 
+            llm_enabled
+        ): llm_selected = True
+        elif not choice or str(choice).lower() == 'q': return 0
                 
-        elif llm_enabled: 
-            choice = tui.confirm(
-                f"No related intents found.\n"
-                f"Ask [green]{llm_model}[/green] to generate a script?"
-            )
-            if choice: llm_selected = True
-            else: return 0
-
         # Execute LLM generation if selected
         if llm_enabled and llm_selected:
             try:
@@ -235,6 +227,7 @@ def run_cli() -> int:
                 details = tui.prompt(
                     f"\nDescribe how TERMy should respond to [green]'{user_input}'[/green]"
                 )
+                if not details: return 1
                 console.print()
                 with console.status(
                     f"[bold green]Generating script via "
