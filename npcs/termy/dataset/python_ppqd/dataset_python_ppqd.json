@@ -55108,31 +55108,6 @@
     },
     {
         "input": [
-            "develop a python program for",
-            "write a python program",
-            "create a python program that accomplishes the specified task",
-            "create a python program that implements the requested functionality",
-            "write a python program which",
-            "write a python program that",
-            "create a python script",
-            "write a python script"
-        ],
-        "output": "<||completion||>",
-        "permission": "yolo",
-        "tools": [
-            {
-                "name": "run_in_terminal",
-                "arguments": {
-                    "command": "TMP_FILE=$(mktemp /tmp/termy_script_XXXXXX.py) &&\ncat << 'EOF' > \"$TMP_FILE\"\n\ndef filter_vowel_strings(string_list):\n    vowels = ('a', 'e', 'i', 'o', 'u')\n    filtered_list = []\n    for string in string_list:\n        if string.startswith(vowels):\n            filtered_list.append(string)\n    return filtered_list\n\nEOF\ntermy_set_context 'active_file' \"$TMP_FILE\" &&\ntermy_set_context 'active_content' \"$(cat \"$TMP_FILE\")\"",
-                    "explanation": "Writes Python script in a temp file and updates context.",
-                    "goal": "Python source code generation",
-                    "mode": "sync"
-                }
-            }
-        ]
-    },
-    {
-        "input": [
             "create a vector addition program in python.",
             "make a python program for vector addition",
             "develop a python program that performs vector addition",
