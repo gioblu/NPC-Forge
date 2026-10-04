@@ -7,6 +7,7 @@
             "I moved to a new city",
             "change my actual location"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -35,6 +36,7 @@
             "do not speak anymore",
             "stop your voice output"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -65,6 +67,7 @@
             "begin speaking",
             "enable your voice"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -85,6 +88,7 @@
     },
     {
         "category": "termy_config",
+        "output": "<||completion||>",
         "input": [
             "show me your configuration",
             "show your configuration",
