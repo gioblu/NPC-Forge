@@ -3,7 +3,7 @@
   "tts": "espeak-ng",
   "creator": "Giovanni Blu Mitolo",
   "threshold": 0.6668,
-  "synonym_contribution": 0.95,
+  "synonym_contribution": 0.825,
   "suggestions": 10,
   "llm": {
       "enabled": true,
