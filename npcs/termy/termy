@@ -47,23 +47,25 @@ def run_cli() -> int:
 
     if args.yes: os.environ["TERMY_YES"] = "1"
 
-    client = ApiProvider(url="http://127.0.0.1:5000", timeout=10.0)
-    result = client.request(args.npc, user_input)
-    
     console = Console() 
     
-    if result is None:
-        CURRENT_BOT_DIR = Path(os.path.realpath(__file__)).parent
-        FORGE_ROOT_DIR = str(CURRENT_BOT_DIR.parent.parent)
-        sys.stderr.write(
-            f"NPC-Forge server is {RED}offline{RESET}, starting local...\n"
-        )
-        client = LocalProvider(FORGE_ROOT_DIR, CURRENT_BOT_DIR)
+    if not args.generate:
+        client = ApiProvider(url="http://127.0.0.1:5000", timeout=10.0)
         result = client.request(args.npc, user_input)
-
-    if result is None:
-        sys.stderr.write(f"{RED}FATAL: Failed to process request locally.{RESET}\n")
-        return 1
+        if result is None:
+            CURRENT_BOT_DIR = Path(os.path.realpath(__file__)).parent
+            FORGE_ROOT_DIR = str(CURRENT_BOT_DIR.parent.parent)
+            sys.stderr.write(
+                f"NPC-Forge server is {RED}offline{RESET}, starting local...\n"
+            )
+            client = LocalProvider(FORGE_ROOT_DIR, CURRENT_BOT_DIR)
+            result = client.request(args.npc, user_input)
+            if result is None:
+                sys.stderr.write(
+                    f"{RED}FATAL: Failed to process request locally.{RESET}\n"
+                )
+                return 1
+    else: result = {}
 
     emoji = result.get("emoji", "")
     response = result.get("response", "")
@@ -199,7 +201,7 @@ def run_cli() -> int:
             return 0
                 
         # Execute LLM generation if selected
-        if (llm_enabled and llm_selected) or args.g:
+        if (llm_enabled and llm_selected) or args.generate:
             try:
                 details = ""
                 ollama_client = OllamaProvider(llm_config)
@@ -243,7 +245,7 @@ def run_cli() -> int:
                     dataset_dir.mkdir(parents=True, exist_ok=True)           
                     save_filename = f"dataset_{os.environ.get('USER', 'user')}.json"
                     
-                    if not permission_execute() and not args.generate:
+                    if not permission_execute():
                         save_intent = tui.confirm("Do you want to save this entry in the dataset?")
                         if save_intent:
                             storage.save_entry(generated_intent, str(dataset_dir), save_filename)
@@ -276,7 +278,7 @@ def run_cli() -> int:
                     sources.append(f"source {shlex.quote(str(file))}")
         if sources: command = f"{' && '.join(sources)} && {command}"
         
-        if args.generate or (permission_execute() or tui.confirm("Should I run it?")):
+        if permission_execute() or tui.confirm("Should I run it?"):
             try:
                 if not permission_execute(): print("\n")
                 res = subprocess.run(
