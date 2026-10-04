@@ -278,52 +278,75 @@ termy_execute() {
     local file_ext=""
     if [[ "$file_name" == *.* ]]; then
         file_ext="${file_name##*.}"
-        file_ext="${file_ext,,}" # Force lowercase for safe matching
+        file_ext="${file_ext,,}" # Force lowercase
     fi
 
-    # Local variable to capture the runtime stdout
-    local output=""
+    # Create a secure temporary file to capture live output
+    local temp_file
+    temp_file=$(mktemp)
 
+    local run_status=0
+
+    # Execute based on extension. 
+    # We use `| tee "$temp_file"` to stream output LIVE to the terminal.
+    # Stdin remains completely untouched, so interactive prompts work perfectly!
+    # We use ${PIPESTATUS[0]} to get the script's exit code, ignoring tee's exit code.
     case "$file_ext" in
         py)
-            output=$(python3 "$target_file")
+            python3 "$target_file" 2>&1 | tee "$temp_file"
+            run_status=${PIPESTATUS[0]}
             ;;
         js)
-            output=$(node "$target_file")
+            node "$target_file" 2>&1 | tee "$temp_file"
+            run_status=${PIPESTATUS[0]}
             ;;
         sh|bash)
-            output=$(bash "$target_file")
+            bash "$target_file" 2>&1 | tee "$temp_file"
+            run_status=${PIPESTATUS[0]}
             ;;
         rb)
-            output=$(ruby "$target_file")
+            ruby "$target_file" 2>&1 | tee "$temp_file"
+            run_status=${PIPESTATUS[0]}
             ;;
         go)
-            output=$(go run "$target_file")
+            go run "$target_file" 2>&1 | tee "$temp_file"
+            run_status=${PIPESTATUS[0]}
             ;;
         "")
             if [[ -x "$target_file" ]]; then
-                output=$("$target_file")
+                "$target_file" 2>&1 | tee "$temp_file"
+                run_status=${PIPESTATUS[0]}
             else
                 termy_say "⛔ Error: Extensionless file is not executable. Run 'chmod +x'" >&2
+                rm -f "$temp_file"
                 return 1
             fi
             ;;
         *)
             termy_say "⛔ Error: Unsupported runtime extension (.${file_ext})." >&2
+            rm -f "$temp_file"
             return 1
             ;;
     esac
 
-    local run_status=$?
+    # Extract the last 50 lines from the temp file to prevent JSON bloat
+    local safe_output
+    safe_output=$(tail -n 50 "$temp_file")
+
+    # Clean up the temp file immediately to save disk space
+    rm -f "$temp_file"
+
     if [[ $run_status -eq 0 ]]; then
-        if [[ -n "$output" ]]; then
-            echo "$output"
-            termy_set_context active_content "$output"
+        if [[ -n "$safe_output" ]]; then
+            termy_set_context "output" "$safe_output"
+        else
+            termy_set_context "output" "(Script executed successfully with no output)"
         fi
         printf "\n"
-        termy_say "Execution completed."
+        termy_say "Execution completed successfully."
         return 0
     else
+        termy_set_context "output" "⛔ Error (Exit Code: $run_status):\n$safe_output"
         termy_say "⛔ Error: Runtime returned exit code ${run_status}." >&2
         return $run_status
     fi
