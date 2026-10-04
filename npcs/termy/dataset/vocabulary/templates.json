@@ -66,7 +66,7 @@
     "<||vocab_how||>": ["how"],
     "<||vocab_image||>": ["image", "picture", "photo"],
     "<||vocab_implement||>": ["implement", "implements", "implementation", "computes"],
-    "<||vocab_in||>": ["in", "into", "inside", "under"],
+    "<||vocab_in||>": ["in", "into", "inside", "under", "below"],
     "<||vocab_info||>": ["info", "information", "metadata"],
     "<||vocab_if||>": ["if"],
     "<||vocab_it||>": ["it"],
