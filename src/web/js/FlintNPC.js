@@ -137,7 +137,7 @@ class FlintNPC {
 
         Object.assign(this.metadata, {
             "username": typeof process !== 'undefined' && process.env ? (process.env.USER || "user") : "user",
-            "npc_name": String(this.config.npc_name || "NPC"),
+            "name": String(this.config.npc_name || "NPC"),
             "response_classes": String(allBlocks.length),
             "computer_name": "LocalContext",
             "creation_date": String(this.config.creation_date || "2026-07-12"),

@@ -112,7 +112,7 @@ class FlintNPC:
 
         self.metadata.update({
             "username": str(os.environ.get("USER", "user")),
-            "npc_name": str(self.config.get("npc_name", "NPC")),
+            "name": str(self.config.get("name", "NPC")),
             "response_classes": str(len(self.dataset + self.personality + self.templates)),
             "computer_name": str(socket.gethostname()),
             "creation_date": str(self.config.get("creation_date", "2026-07-12")),
@@ -398,6 +398,7 @@ class FlintNPC:
         if thinking: thinking = render_tags(thinking)
         
         payload = {
+            "npc": self.config.get("name", "NPC"),
             "confidence": confidence, 
             "response": final_output,
             "related": related,

@@ -69,6 +69,7 @@ def run_cli() -> int:
 
     emoji = result.get("emoji", "")
     response = result.get("response", "")
+    npc = result.get("npc", "NPC") 
     permission = result.get("permission", "ask")
     thinking = result.get("thinking", "")    
     tools = result.get("tools", [])
@@ -155,7 +156,7 @@ def run_cli() -> int:
             command=command,
             description=description.strip(),
             emoji=emoji,
-            title="TERMy"
+            title=npc
         )
         print()
     elif status == "rejected" and (related or llm_enabled):
@@ -238,7 +239,7 @@ def run_cli() -> int:
                         command=command,
                         description=description,
                         emoji=emoji,
-                        title="New dataset entry"
+                        title=f"{llm_model}"
                     )
                     
                     dataset_dir = CURRENT_BOT_DIR / "dataset"

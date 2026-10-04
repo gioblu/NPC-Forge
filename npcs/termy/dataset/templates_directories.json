@@ -109,7 +109,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "if [ -d '<||dir||>' ]; then\n termy_say -s \"Directory already exists\" &&\n printf '\\r\\n⚠️  Notice: Directory %s already exists\\n' '<||dir||>';\nelse\n termy_say -s \"Creating directory\" &&\n mkdir -p -- '<||dir||>' 2>/dev/null &&\n absdir=$(realpath '<||dir||>') &&\n termy_say \"Directory $absdir successfully created\";\nfi",
+                    "command": "if [ -d '<||dir||>' ]; then\n termy_say -s \"Directory already exists\" &&\n printf '\\r\\n Notice: Directory %s already exists\\n' '<||dir||>';\nelse\n termy_say -s \"Creating directory\" &&\n mkdir -p -- '<||dir||>' 2>/dev/null &&\n absdir=$(realpath '<||dir||>') &&\n termy_say \"Directory $absdir successfully created\";\nfi",
                     "explanation": "Checks if the target folder exists, and scaffolds the directory safely using mkdir -p.",
                     "goal": "Directory Allocation",
                     "mode": "sync"
@@ -172,7 +172,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "if [ ! -d '<||dir||>' ]; then\n absdir=$(realpath '<||dir||>')\n termy_say -s \"Directory does not exist\" &&\n termy_say \"⚠️ Notice: Directory $absdir does not exist\";\nelse\n termy_say -s \"Deleting directory\" && rmdir -- '<||dir||>' 2>/dev/null &&\n printf '📁 Directory $absdir successfully deleted\\n';\nfi",
+                    "command": "if [ ! -d '<||dir||>' ]; then\n absdir=$(realpath '<||dir||>')\n termy_say -s \"Directory does not exist\" &&\n termy_say \"Notice: Directory $absdir does not exist\";\nelse\n termy_say -s \"Deleting directory\" && rmdir -- '<||dir||>' 2>/dev/null &&\n printf '📁 Directory $absdir successfully deleted\\n';\nfi",
                     "explanation": "Deletes <||dir||> directory using rmdir.",
                     "goal": "Directory deletion",
                     "mode": "sync"
@@ -241,7 +241,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "if [ ! -d '<||dir||>' ]; then termy_say \"Directory does not exist\" > /dev/null 2>&1 && printf '⚠️ Notice: Directory %s does not exist' '<||dir||>'; else termy_say \"Copying directory\" > /dev/null 2>&1 && cp -r -- '<||dir||>' '<||path||>' 2>/dev/null && printf '📁 Directory %s successfully copied to %s' '<||dir||>' '<||path||>'; fi && printf ''",
+                    "command": "if [ ! -d '<||dir||>' ]; then termy_say \"Directory does not exist\" > /dev/null 2>&1 && printf 'Notice: Directory %s does not exist' '<||dir||>'; else termy_say \"Copying directory\" > /dev/null 2>&1 && cp -r -- '<||dir||>' '<||path||>' 2>/dev/null && printf '📁 Directory %s successfully copied to %s' '<||dir||>' '<||path||>'; fi && printf ''",
                     "explanation": "Recursively copies <||dir||> to <||path||> using cp -r.",
                     "goal": "Directory duplication",
                     "mode": "sync"
@@ -298,7 +298,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "if [ ! -d '<||dir||>' ]; then termy_say \"Directory does not exist\" > /dev/null 2>&1 && printf 'rn⚠️ Notice: Directory %s does not existn' '<||dir||>'; else termy_say \"Checking directory size\" > /dev/null 2>&1 && du -sh -- '<||dir||>' 2>/dev/null && printf ''; fi",
+                    "command": "if [ ! -d '<||dir||>' ]; then termy_say \"Directory does not exist\" > /dev/null 2>&1 && printf 'rnNotice: Directory %s does not existn' '<||dir||>'; else termy_say \"Checking directory size\" > /dev/null 2>&1 && du -sh -- '<||dir||>' 2>/dev/null && printf ''; fi",
                     "explanation": "Checks the total disk usage of <||dir||> in a human-readable format using du -sh.",
                     "goal": "Directory disk usage check",
                     "mode": "sync"
@@ -354,7 +354,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "if [ ! -d '<||dir||>' ]; then termy_say \"Directory does not exist\" > /dev/null 2>&1 && printf 'rn⚠️ Notice: Directory %s does not existn' '<||dir||>'; else termy_say \"Getting directory info\" > /dev/null 2>&1 && stat -- '<||dir||>' 2>/dev/null && printf ''; fi",
+                    "command": "if [ ! -d '<||dir||>' ]; then termy_say \"Directory does not exist\" > /dev/null 2>&1 && printf 'rnNotice: Directory %s does not existn' '<||dir||>'; else termy_say \"Getting directory info\" > /dev/null 2>&1 && stat -- '<||dir||>' 2>/dev/null && printf ''; fi",
                     "explanation": "Shows detailed metadata (permissions, owner, timestamps) of <||dir||> using stat.",
                     "goal": "Directory metadata retrieval",
                     "mode": "sync"
@@ -410,7 +410,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "if [ ! -d '<||dir||>' ]; then termy_say \"Directory does not exist\" > /dev/null 2>&1 && printf '\\r\\n⚠️  Notice: Directory %s does not exist\\n' '<||dir||>'; else termy_say \"Moving directory\" > /dev/null 2>&1 && mv -- '<||dir||>' '<||path||>' 2>/dev/null && printf '\\r\\n📁 Directory %s successfully moved to %s\\n' '<||dir||>' '<||path||>'; fi && printf ''",
+                    "command": "if [ ! -d '<||dir||>' ]; then termy_say \"Directory does not exist\" > /dev/null 2>&1 && printf '\\r\\n Notice: Directory %s does not exist\\n' '<||dir||>'; else termy_say \"Moving directory\" > /dev/null 2>&1 && mv -- '<||dir||>' '<||path||>' 2>/dev/null && printf '\\r\\n📁 Directory %s successfully moved to %s\\n' '<||dir||>' '<||path||>'; fi && printf ''",
                     "explanation": "Moves <||dir||> directory to <||path||> using mv.",
                     "goal": "Directory relocation",
                     "mode": "sync"
