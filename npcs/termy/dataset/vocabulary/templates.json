@@ -118,6 +118,7 @@
     "<||vocab_size||>": ["size", "dimension", "footprint"],
     "<||vocab_symlink||>": ["symlink"],
     "<||vocab_slang||>": ["slang"],
+    "<||vocab_smaller||>": ["smaller"],
     "<||vocab_sort||>": ["sort", "order"],
     "<||vocab_space||>": ["space", "spaces"],
     "<||vocab_split||>": ["split", "divide"],

@@ -2487,6 +2487,67 @@
         ]
     },
     {
+        "intent": "search_files_smaller_filesize",
+        "category": "linux_files",
+        "type": "template",
+        "structure": [
+            [
+                {
+                    "tag": "<||vocab_search||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_file||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_smaller||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||size||>",
+                    "type": "filesize",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_in||>",
+                    "type": "vocab",
+                    "required": true
+                },
+                {
+                    "tag": "<||vocab_current||>",
+                    "type": "vocab",
+                    "required": false
+                },
+                {
+                    "tag": "<||vocab_dir||>",
+                    "type": "vocab",
+                    "required": true
+                }
+            ]
+        ],
+        "output": "<||completion||>",
+        "tools": [
+            {
+                "name": "run_in_terminal",
+                "arguments": {
+                    "command": "raw_size='<||size||>' && clean_size=$(echo \"$raw_size\" | tr -d ' ' | tr '[:upper:]' '[:lower:]') && case \"$clean_size\" in *b) clean_size=\"${clean_size%b}\" ;; esac && case \"$clean_size\" in *g) size_val=\"${clean_size%g}\"; find_suffix=\"G\" ;; *m) size_val=\"${clean_size%m}\"; find_suffix=\"M\" ;; *k) size_val=\"${clean_size%k}\"; find_suffix=\"k\" ;; *) size_val=\"$clean_size\"; find_suffix=\"c\" ;; esac && files=$(find . -maxdepth 1 -type f -size -\"$size_val\"\"$find_suffix\") && { [ -n \"$files\" ] && { (termy_say \"Files found\" >/dev/null 2>&1 || true); printf '\\r\\n✅ Files smaller than %s found in this directory:\\n\\n%s\\n' \"$raw_size\" \"$files\n\"; } } || { (termy_say \"No such files found\" >/dev/null 2>&1 || true); printf '\\r\\n⛔ No files smaller than %s found in this directory.\\n\\n' \"$raw_size\"; }",
+                    "explanation": "Searches the current directory for any files strictly smaller than <||size||>.",
+                    "goal": "Find files exceeding a specific size threshold",
+                    "mode": "sync"
+                }
+            }
+        ],
+        "permission": "yolo",
+        "thinking": [
+            "The human wants to hunt down files that are smaller than <||size||> in the current directory.",
+            "Time to trigger a scoped find command before some unoptimized log file consumes the entire disk space."
+        ]
+    },
+    {
         "intent": "check_file_exists",
         "category": "linux_files",
         "type": "template",
