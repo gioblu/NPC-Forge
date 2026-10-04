@@ -14,7 +14,7 @@ What I am trying to say is, maybe, if the goal is to translate natural language 
 
 [TERMy](/npcs/termy/README.md) is a deterministic terminal assistant that translates natural language to terminal commands. This is not yet another terminal harness that routes prompts to a LLM. It is a novel deterministic agent with multi-turn context memory and tool-call support. It includes 101 templates and 30857 intents; a "dataset" of 58.82MB that arguably makes it the **world's most powerful, open-source, deterministic agent**.
 
-Until yesterday deterministic chatbots used to cap out at a few hundred intents. Thanks to NPC-Forge, its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its efficient intent recognition pipeline implemented in [FlintNPC](/docs/FlintNPC.md), today everyone can create a chatbot with tens of thousands intents with response times in the order of milliseconds on a Raspberry Pi.
+Until yesterday deterministic chatbots capped out at a few hundred intents. Thanks to [NPC-Forge](README.md), its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its intent recognition pipeline implemented in [FlintNPC](/docs/FlintNPC.md), today, anyone can build a chatbot with over 50,000 dataset entries that responds in less than 100 milliseconds, even on a Raspberry Pi.
 
 Just type `termy` followed by your prompt:
 
@@ -64,7 +64,7 @@ This is more or less the data curation pipeline I have implemented:
 
 The paraphrases generation was done using [granite-4.1 3B](https://www.ibm.com/granite/docs/models/granite4-1) and required more than 2 days of compute on an obsolete machine with 16GB of RAM, Intel i7-4790K CPU and NVIDIA GeForce GTX 1050 Ti.
 
-With this data I had the chance to verify practically that NPC-forge and TERMy can handle "immense" datasets, remaining reliable, and still, answer in milliseconds. The sheer amount of intents and their paraphrases makes TERMy surprisingly capable of answering questions about Python.
+With this data I had the chance to verify practically that [NPC-Forge](README.md) and TERMy can handle "immense" datasets, remaining reliable, and still, answer in milliseconds. The sheer amount of intents and their paraphrases makes TERMy surprisingly capable of answering questions about Python.
 
 ### Turing completeness
 
