@@ -342,8 +342,7 @@ class FlintParser:
 
         for t in tokens:
             t_len = len(t)
-            weight = self.weights.get(t, 0.05) if t_len < 3 else self.weights.get(t, 1.0)
-            if t_len == 3: weight *= 1.5
+            weight = self.weights.get(t, 1.0)
             anchor_info.append((t, weight, t_len))
             max_score += weight
             
