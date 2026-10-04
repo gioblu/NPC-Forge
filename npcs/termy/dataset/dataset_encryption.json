@@ -11,6 +11,7 @@
             "new ssh key pair",
             "ssh keygen"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -37,6 +38,7 @@
             "random password generator",
             "strong password now"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -65,6 +67,7 @@
             "random sha256 generation function via time drift",
             "create coin flip random number generator in zsh"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -88,6 +91,7 @@
             "make a uuid",
             "print uuid"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -111,6 +115,7 @@
             "base64 encode a string",
             "base64 decode a string"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -134,6 +139,7 @@
             "check certificate validity",
             "ssl expiration date"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -158,6 +164,7 @@
             "start p2p chat",
             "secure p2p text sharing shell"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -185,6 +192,7 @@
             "openssl ssl info",
             "debug https certificate"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",

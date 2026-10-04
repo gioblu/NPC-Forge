@@ -12,6 +12,7 @@
             "is the internet connection active",
             "is this computer connected to the internet"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -37,6 +38,7 @@
             "show me the external ip of this machine",
             "show me the public ip address of this machine"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -62,6 +64,7 @@
             "network adapters",
             "display network interfaces"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -86,6 +89,7 @@
             "show network diagnostic options",
             "network troubleshooter"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -112,6 +116,7 @@
             "port status check",
             "how to check if port is open"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -134,6 +139,7 @@
             "list active ports",
             "show active network ports"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",

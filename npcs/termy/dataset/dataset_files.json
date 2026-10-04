@@ -47,7 +47,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "termy_question \"Please enter the filename\" fname &&\nif [ -n \"$fname\" ]; then\n termy_question \"Please enter the content\" fcontent &&\n echo \"$fcontent\" > \"$fname\" &&\n printf \"\\nFile \\033[1m%s\\033[22m saved.\\n\" \"$fname\" &&\n termy_say -s \"File saved successfully\";\nelse\n printf \"\\n⛔ Operation cancelled.\\n\" &&\n termy_say -s \"Operation cancelled\";\nfi",
+                    "command": "termy_question \"Please enter the filename\" fname &&\nif [ -n \"$fname\" ]; then\n termy_question \"Please enter the content\" fcontent &&\n echo \"$fcontent\" > \"$fname\" &&\n printf \"\\nFile \\033[1m%s\\033[22m saved.\\n\" \"$fname\" &&\n termy_say -s \"File saved successfully\" &&\n termy_set_context 'active_file' \"$fname\" &&\n termy_set_context 'active_content' \"$fcontent\";\nelse\n printf \"\\n⛔ Operation cancelled.\\n\" &&\n termy_say -s \"Operation cancelled\";\nfi",
                     "explanation": "Creates a new file with content after prompting for the filename and data.",
                     "goal": "Create a new file",
                     "mode": "sync"

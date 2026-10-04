@@ -9,6 +9,7 @@
             "bash script to display ascii character set",
             "quick lookup table for ascii hex values"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -32,6 +33,7 @@
             "base64 encode a string",
             "base64 decode a string"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -53,6 +55,7 @@
             "create qr code",
             "make qr code"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",

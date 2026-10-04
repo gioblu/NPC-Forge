@@ -9,6 +9,7 @@
             "what is the current time",
             "print me the current time"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -32,6 +33,7 @@
             "what is today's date",
             "show me the current date"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -54,6 +56,7 @@
             "what timezone am i in",
             "show my current timezone"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -79,6 +82,7 @@
             "start a simple terminal timer",
             "minutes and seconds countdown"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -102,6 +106,7 @@
             "show month calendar",
             "calendar today"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -125,6 +130,7 @@
             "what date is this timestamp",
             "unix epoch conversion"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",

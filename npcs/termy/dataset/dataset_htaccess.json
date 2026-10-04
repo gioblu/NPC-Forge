@@ -10,6 +10,7 @@
             "apache rule to force secure ssl connection",
             "redirect to https rewrite rule"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -30,6 +31,7 @@
             "force www prefix in apache htaccess",
             "redirect domain.com to ://domain.com htaccess"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -52,6 +54,7 @@
             "fallback all routes to index.html htaccess",
             "fix 404 on page refresh react router apache"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -74,6 +77,7 @@
             "speed up website with mod_deflate htaccess",
             "compress text html javascript assets apache"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -97,6 +101,7 @@
             "ban ip apache configuration rule",
             "deny access from ip string htaccess"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -120,6 +125,7 @@
             "generate default htaccess web server",
             "make standard apache configuration file"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",

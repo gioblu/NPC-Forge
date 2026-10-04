@@ -8,7 +8,7 @@ The idea is to use this dataset, originally developed to train LLMs, to provide 
 
 A lot of work has been done on the original dataset using scripts and local language models:
 
-1. The dataset has been converted to [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md) using [json_to_ndf.py](npcs/termy/dataset/dataset_python_ppqd/scripts/json_to_ndf.py).
+1. The dataset has been converted to [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md).
 2. Removed all duplicated inputs.
 3. Pruned inputs to a single line.
 4. Removed non-ASCII characters.

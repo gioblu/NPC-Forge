@@ -15,6 +15,7 @@
             "i need info about my motherboard",
             "i need mobo info"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -46,6 +47,7 @@
             "tell me the status of system services",
             "print me the status of system services"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -110,6 +112,7 @@
             "display active users",
             "print current sessions"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -140,6 +143,7 @@
             "print last login history",
             "display recent login sessions"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -167,6 +171,7 @@
             "remove installed tool",
             "remove software package"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -195,6 +200,7 @@
             "upgrade all packages",
             "latest security patches"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -235,44 +241,6 @@
     {
         "category": "linux_terminal",
         "input": [
-            "go back",
-            "exit folder",
-            "leave folder",
-            "exit directory",
-            "exit this folder",
-            "go out of this dir",
-            "exit this directory",
-            "go up one directory",
-            "go out of this folder",
-            "go out of this directory",
-            "back to parent directory",
-            "go back to the parent directory"
-        ],
-        "description": "Navigates to the parent directory.",
-        "output": "cd ..",
-        "permission": "yolo"
-    },
-    {
-        "category": "linux_terminal",
-        "input": [
-            "go home",
-            "reach home",
-            "reach home dir",
-            "go to home dir",
-            "go to the home",
-            "reach home folder",
-            "go to home folder",
-            "go to home directory",
-            "go to my home directory",
-            "go to the user home directory"
-        ],
-        "description": "Navigates to the user's home directory.",
-        "output": "cd ~",
-        "permission": "yolo"
-    },
-    {
-        "category": "linux_terminal",
-        "input": [
             "clear console",
             "clear terminal",
             "reset terminal",
@@ -283,6 +251,7 @@
             "empty terminal screen",
             "wipe console output"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -333,6 +302,7 @@
             "show logged in user",
             "display current user"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -358,6 +328,7 @@
             "show me commands executed in the past",
             "show the previously executed commands"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -382,6 +353,7 @@
             "show how long the system has been running",
             "show how long the server has been running"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -408,6 +380,7 @@
             "show me kernel information",
             "what is the kernel version"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -434,6 +407,7 @@
             "show storage space",
             "how much disk space is left"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -457,6 +431,7 @@
             "what is this operating system",
             "what operating system am i using"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -479,6 +454,7 @@
             "tell me how much ram is available",
             "show available memory"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -505,6 +481,7 @@
             "display gpu details",
             "what gpu do i have"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -527,6 +504,7 @@
             "print running processes",
             "show process list"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -575,6 +553,7 @@
             "stop a procress",
             "kill a process"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -597,6 +576,7 @@
             "search for a previous command",
             "remember me previous commands"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -619,6 +599,7 @@
             "print disk space and usage",
             "show disk space and usage"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -644,6 +625,7 @@
             "what usb is connected",
             "display usb connections"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -668,6 +650,7 @@
             "show recent system errors",
             "show me the last system logs"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -692,6 +675,7 @@
             "show recent kernel errors",
             "show me the last kernel logs"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -716,6 +700,7 @@
             "show recent auth errors",
             "show me the last auth logs"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -746,6 +731,7 @@
             "how much l2 cache this cpu has",
             "how much l3 cache this cpu has"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -779,6 +765,7 @@
             "what is my cpu temperature",
             "monitor cpu heat"
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
