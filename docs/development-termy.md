@@ -6,7 +6,7 @@ For the past five years the tech industry has been misled by the following dogma
 
 Everyone still thinks "Attention is all you need". A transformer with an attention layer is the silver bullet capable of solving any problem. My take is, what you effectively need to answer most questions is just a parser capable of translating natural language to something the computer can understand. 
 
-In many cases we use the transformer to let users interact with the computer in natural language; ask a question in English, get back English. Yes, the transformer has generative abilities, but I feel sure to assert that **those are side-effects of its core working principle**, and they are both a feature and a bug when applied to this use case.
+In many cases we use the transformer to let users interact with the computer in natural language; ask a question in English, get back English. Yes, the LLMs have generative abilities, but I feel sure to assert that those are side-effects of their core working principle, and they are both a feature and a bug when applied to this use case.
 
 What I am trying to say is, maybe, if the goal is to translate natural language shouldn't we just use a parser? Aren't we capable of compiling python to bytecode? Can't we compile English to Bash?
 
