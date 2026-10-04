@@ -1345,6 +1345,15 @@
                             "goal": "Fetch Wikipedia summary about logic gates",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -1490,6 +1499,15 @@
                             "goal": "Fetch Wikipedia summary about logic gates",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -1518,7 +1536,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -1635,6 +1653,15 @@
                             "goal": "Fetch Wikipedia summary about logic gates",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -1663,7 +1690,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -1779,6 +1806,15 @@
                             "goal": "Fetch Wikipedia summary about logic gates",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -1807,7 +1843,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -1923,6 +1959,15 @@
                             "goal": "Fetch Wikipedia summary about nand gates",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -1951,7 +1996,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -2067,6 +2112,15 @@
                             "goal": "Fetch Wikipedia summary about nor gates",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -2095,7 +2149,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -2212,6 +2266,15 @@
                             "goal": "Fetch Wikipedia summary about xor gates",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -2240,7 +2303,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -2343,6 +2406,15 @@
                             "goal": "Fetch Wikipedia summary about xnor gates",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -2371,7 +2443,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -2478,6 +2550,15 @@
                             "goal": "Fetch Wikipedia summary about truth tables",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -2506,7 +2587,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -2580,6 +2661,15 @@
                             "goal": "Fetch Wikipedia summary about digital logics",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -2608,7 +2698,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -2740,6 +2830,15 @@
                             "goal": "Fetch Wikipedia summary about transistors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -2768,7 +2867,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -2899,6 +2998,15 @@
                             "goal": "Fetch Wikipedia summary about resistors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -2927,7 +3035,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -3060,6 +3168,15 @@
                             "goal": "Fetch Wikipedia summary about inductors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -3088,7 +3205,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -3222,6 +3339,15 @@
                             "goal": "Fetch Wikipedia summary about diodes",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -3250,7 +3376,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -3373,6 +3499,15 @@
                             "goal": "Fetch Wikipedia summary about leds",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -3401,7 +3536,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -3521,6 +3656,15 @@
                             "goal": "Fetch Wikipedia summary about microcontrollers",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -3549,7 +3693,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -3666,6 +3810,15 @@
                             "goal": "Fetch Wikipedia summary about microprocessors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -3694,7 +3847,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -3806,6 +3959,15 @@
                             "goal": "Fetch Wikipedia summary about nand gates",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -3834,7 +3996,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -3946,6 +4108,15 @@
                             "goal": "Fetch Wikipedia summary about xor gates",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -3974,7 +4145,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -4086,6 +4257,15 @@
                             "goal": "Fetch Wikipedia summary about xnor gates",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -4114,7 +4294,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -4221,6 +4401,15 @@
                             "goal": "Fetch Wikipedia summary about truth tables",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -4249,7 +4438,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -4345,6 +4534,15 @@
                             "goal": "Fetch Wikipedia summary about digital logics",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -4373,7 +4571,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -4480,6 +4678,15 @@
                             "goal": "Fetch Wikipedia summary about transistors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -4508,7 +4715,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -4616,6 +4823,15 @@
                             "goal": "Fetch Wikipedia summary about resistors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -4644,7 +4860,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -4752,6 +4968,15 @@
                             "goal": "Fetch Wikipedia summary about capacitors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -4780,7 +5005,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -4888,6 +5113,15 @@
                             "goal": "Fetch Wikipedia summary about inductors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -4916,7 +5150,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -5024,6 +5258,15 @@
                             "goal": "Fetch Wikipedia summary about diodes",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -5052,7 +5295,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -5161,6 +5404,15 @@
                             "goal": "Fetch Wikipedia summary about leds",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -5189,7 +5441,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -5297,6 +5549,15 @@
                             "goal": "Fetch Wikipedia summary about microcontrollers",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -5325,7 +5586,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -5431,6 +5692,15 @@
                             "goal": "Fetch Wikipedia summary about microprocessors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -5459,7 +5729,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -5566,6 +5836,15 @@
                             "goal": "Fetch Wikipedia summary about printed circuit boards",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -5594,7 +5873,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -5700,6 +5979,15 @@
                             "goal": "Fetch Wikipedia summary about power supplys",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -5728,7 +6016,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -5833,6 +6121,15 @@
                             "goal": "Fetch Wikipedia summary about memory chips",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -5861,7 +6158,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -5961,6 +6258,15 @@
                             "goal": "Fetch Wikipedia summary about volatile memorys",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -5989,7 +6295,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -6090,6 +6396,15 @@
                             "goal": "Fetch Wikipedia summary about nonvolatile memorys",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -6118,7 +6433,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -6219,6 +6534,15 @@
                             "goal": "Fetch Wikipedia summary about bus in computings",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -6247,7 +6571,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -6349,6 +6673,15 @@
                             "goal": "Fetch Wikipedia summary about clock signals",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -6377,7 +6710,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -6482,6 +6815,15 @@
                             "goal": "Fetch Wikipedia summary about voltage regulators",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -6510,7 +6852,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -6615,6 +6957,15 @@
                             "goal": "Fetch Wikipedia summary about oscillators",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -6643,7 +6994,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -6749,6 +7100,15 @@
                             "goal": "Fetch Wikipedia summary about transformers",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -6777,7 +7137,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -6882,6 +7242,15 @@
                             "goal": "Fetch Wikipedia summary about operational amplifiers",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -6910,7 +7279,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -7016,6 +7385,15 @@
                             "goal": "Fetch Wikipedia summary about relays",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -7044,7 +7422,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -7150,6 +7528,15 @@
                             "goal": "Fetch Wikipedia summary about fuses",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -7178,7 +7565,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -7281,6 +7668,15 @@
                             "goal": "Fetch Wikipedia summary about motherboards",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -7309,7 +7705,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -7413,6 +7809,15 @@
                             "goal": "Fetch Wikipedia summary about rams",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -7441,7 +7846,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -7548,6 +7953,15 @@
                             "goal": "Fetch Wikipedia summary about gpus",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -7576,7 +7990,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -7679,6 +8093,15 @@
                             "goal": "Fetch Wikipedia summary about bioss",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -7707,7 +8130,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -7813,6 +8236,15 @@
                             "goal": "Fetch Wikipedia summary about heat sinks",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -7841,7 +8273,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -7944,6 +8376,15 @@
                             "goal": "Fetch Wikipedia summary about batterys",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -7972,7 +8413,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -8078,6 +8519,15 @@
                             "goal": "Fetch Wikipedia summary about sensors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -8106,7 +8556,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -8209,6 +8659,15 @@
                             "goal": "Fetch Wikipedia summary about power supply units",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -8237,7 +8696,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -8340,6 +8799,15 @@
                             "goal": "Fetch Wikipedia summary about usb ports",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -8368,7 +8836,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -8474,6 +8942,15 @@
                             "goal": "Fetch Wikipedia summary about voltage regulators",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -8502,7 +8979,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -8607,6 +9084,15 @@
                             "goal": "Fetch Wikipedia summary about oscillators",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -8635,7 +9121,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -8741,6 +9227,15 @@
                             "goal": "Fetch Wikipedia summary about transformers",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -8769,7 +9264,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -8874,6 +9369,15 @@
                             "goal": "Fetch Wikipedia summary about operational amplifiers",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -8902,7 +9406,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -9008,6 +9512,15 @@
                             "goal": "Fetch Wikipedia summary about relays",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -9036,7 +9549,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -9142,6 +9655,15 @@
                             "goal": "Fetch Wikipedia summary about fuses",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -9170,7 +9692,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -9273,6 +9795,15 @@
                             "goal": "Fetch Wikipedia summary about motherboards",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -9301,7 +9832,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -9405,6 +9936,15 @@
                             "goal": "Fetch Wikipedia summary about rams",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -9433,7 +9973,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -9540,6 +10080,15 @@
                             "goal": "Fetch Wikipedia summary about gpus",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -9568,7 +10117,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -9672,6 +10221,15 @@
                             "goal": "Fetch Wikipedia summary about ssds",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -9700,7 +10258,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -9803,6 +10361,15 @@
                             "goal": "Fetch Wikipedia summary about hard drives",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -9831,7 +10398,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -9935,6 +10502,15 @@
                             "goal": "Fetch Wikipedia summary about bioss",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -9963,7 +10539,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -10069,6 +10645,15 @@
                             "goal": "Fetch Wikipedia summary about heat sinks",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -10097,7 +10682,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -10200,6 +10785,15 @@
                             "goal": "Fetch Wikipedia summary about batterys",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -10228,7 +10822,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -10334,6 +10928,15 @@
                             "goal": "Fetch Wikipedia summary about sensors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -10362,7 +10965,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -10465,6 +11068,15 @@
                             "goal": "Fetch Wikipedia summary about power supply units",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -10493,7 +11105,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -10596,6 +11208,15 @@
                             "goal": "Fetch Wikipedia summary about usb ports",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -10624,7 +11245,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -10723,6 +11344,15 @@
                             "goal": "Fetch Wikipedia summary about coherers",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -10751,7 +11381,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -10852,6 +11482,15 @@
                             "goal": "Fetch Wikipedia summary about varistors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -10880,7 +11519,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -10979,6 +11618,15 @@
                             "goal": "Fetch Wikipedia summary about memristors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -11007,7 +11655,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -11105,6 +11753,15 @@
                             "goal": "Fetch Wikipedia summary about eeproms",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -11133,7 +11790,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -11230,6 +11887,15 @@
                             "goal": "Fetch Wikipedia summary about eproms",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -11258,7 +11924,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -11355,6 +12021,15 @@
                             "goal": "Fetch Wikipedia summary about magnetic core memorys",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -11383,7 +12058,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -11479,6 +12154,15 @@
                             "goal": "Fetch Wikipedia summary about bubble memorys",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -11507,7 +12191,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -11603,6 +12287,15 @@
                             "goal": "Fetch Wikipedia summary about delay lines",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -11631,7 +12324,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -11725,6 +12418,15 @@
                             "goal": "Fetch Wikipedia summary about magnetostrictive delay lines",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -11753,7 +12455,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -11850,6 +12552,15 @@
                             "goal": "Fetch Wikipedia summary about photodiodes",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -11878,7 +12589,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -11973,6 +12684,15 @@
                             "goal": "Fetch Wikipedia summary about lithium ion batterys",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -12001,7 +12721,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -12084,6 +12804,15 @@
                             "goal": "Fetch Wikipedia summary about solid state batterys",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -12112,7 +12841,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -12193,6 +12922,15 @@
                             "goal": "Fetch Wikipedia summary about battery efficiencys",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -12221,7 +12959,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -12302,6 +13040,15 @@
                             "goal": "Fetch Wikipedia summary about battery calendar lifes",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -12330,7 +13077,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -12417,6 +13164,15 @@
                             "goal": "Fetch Wikipedia summary about electric motors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -12445,7 +13201,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -12516,6 +13272,15 @@
                             "goal": "Fetch Wikipedia summary about brushed dc motors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -12544,7 +13309,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -12625,6 +13390,15 @@
                             "goal": "Fetch Wikipedia summary about brushless dc motors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -12653,7 +13427,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -12734,6 +13508,15 @@
                             "goal": "Fetch Wikipedia summary about induction motors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -12762,7 +13545,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -12833,6 +13616,15 @@
                             "goal": "Fetch Wikipedia summary about stepper motors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -12861,7 +13653,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -12932,6 +13724,15 @@
                             "goal": "Fetch Wikipedia summary about servomotors",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -12960,7 +13761,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -13043,6 +13844,15 @@
                             "goal": "Fetch Wikipedia summary about liquid cooling systems",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -13071,7 +13881,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -13143,6 +13953,15 @@
                             "goal": "Fetch Wikipedia summary about thermal pastes",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -13171,7 +13990,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -13253,6 +14072,15 @@
                             "goal": "Fetch Wikipedia summary about pci expresss",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -13281,7 +14109,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -13353,6 +14181,15 @@
                             "goal": "Fetch Wikipedia summary about nvme m2 slots",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -13381,7 +14218,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -13453,6 +14290,15 @@
                             "goal": "Fetch Wikipedia summary about optical drives",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -13481,7 +14327,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -13543,6 +14389,15 @@
                             "goal": "Fetch Wikipedia summary about sound cards",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -13571,7 +14426,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -13633,6 +14488,15 @@
                             "goal": "Fetch Wikipedia summary about network interface cards",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -13661,7 +14525,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -13723,6 +14587,15 @@
                             "goal": "Fetch Wikipedia summary about upss",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -13751,7 +14624,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -13812,6 +14685,15 @@
                             "goal": "Fetch Wikipedia summary about computer cases",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -13840,7 +14722,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -13911,6 +14793,15 @@
                             "goal": "Fetch Wikipedia summary about cpu sockets",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -13939,7 +14830,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -14011,6 +14902,15 @@
                             "goal": "Fetch Wikipedia summary about cpu caches",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -14039,7 +14939,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -14100,6 +15000,15 @@
                             "goal": "Fetch Wikipedia summary about thermal throttlings",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -14128,7 +15037,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -14199,6 +15108,15 @@
                             "goal": "Fetch Wikipedia summary about dual channel rams",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -14227,7 +15145,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -14289,6 +15207,15 @@
                             "goal": "Fetch Wikipedia summary about xmps",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -14317,7 +15244,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -14388,6 +15315,15 @@
                             "goal": "Fetch Wikipedia summary about the difference between lcd and oleds",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -14441,6 +15377,15 @@
                             "goal": "Fetch Wikipedia summary about thunderbolt ports",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -14469,7 +15414,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -14540,6 +15485,15 @@
                             "goal": "Fetch Wikipedia summary about raid controllers",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -14568,7 +15522,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -14629,6 +15583,15 @@
                             "goal": "Fetch Wikipedia summary about wi-fi cards",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -14657,7 +15620,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -14729,6 +15692,15 @@
                             "goal": "Fetch Wikipedia summary about ecc rams",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -14757,7 +15729,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -14820,6 +15792,15 @@
                             "goal": "Fetch Wikipedia summary about ipmis",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -14848,7 +15829,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -14919,6 +15900,15 @@
                             "goal": "Fetch Wikipedia summary about hot swap drives",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -14947,7 +15937,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -15008,6 +15998,15 @@
                             "goal": "Fetch Wikipedia summary about redundant power supplys",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -15036,7 +16035,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -15097,6 +16096,15 @@
                             "goal": "Fetch Wikipedia summary about kvm switchs",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -15125,7 +16133,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -15196,6 +16204,15 @@
                             "goal": "Fetch Wikipedia summary about tpms",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -15224,7 +16241,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -15301,7 +16318,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -15335,6 +16352,15 @@
                             "command": "termy_set_context 'last_search' 'potentiometer' && \nprintf '🔍 Searching Wikipedia for: %s...\\n' 'potentiometer' && \nescaped_string=$(\n printf '%s' 'potentiometer' | \n sed 's/ /+/g'\n) && \nres=$(\n curl -s --max-time 5 \"https://en.wikipedia.org/w/api.php?action=query&titles=$escaped_string&prop=extracts&exintro=true&explaintext=true&format=json&redirects=1\" 2>/dev/null | \n jq -r '.query.pages[] | .extract // empty' 2>/dev/null | \n head -n 5\n) && if [ -z \"$res\" ]; then \n printf '⛔ No Wikipedia article found for: %s\\n' 'potentiometer'; \nelse printf '\\n%s\\n' \"$res\" && termy_say \"$res\" >/dev/null 2>&1 && termy_set_context 'active_content' \"$res\"; fi",
                             "explanation": "Fetches and prints a Wikipedia summary about potentiometers.",
                             "goal": "Fetch Wikipedia summary about potentiometers",
+                            "mode": "sync"
+                        }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
                             "mode": "sync"
                         }
                     }
@@ -15405,7 +16431,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -15439,6 +16465,15 @@
                             "command": "termy_set_context 'last_search' 'zener diode' && \nprintf '🔍 Searching Wikipedia for: %s...\\n' 'zener diode' && \nescaped_string=$(\n printf '%s' 'zener diode' | \n sed 's/ /+/g'\n) && \nres=$(\n curl -s --max-time 5 \"https://en.wikipedia.org/w/api.php?action=query&titles=$escaped_string&prop=extracts&exintro=true&explaintext=true&format=json&redirects=1\" 2>/dev/null | \n jq -r '.query.pages[] | .extract // empty' 2>/dev/null | \n head -n 5\n) && if [ -z \"$res\" ]; then \n printf '⛔ No Wikipedia article found for: %s\\n' 'zener diode'; \nelse printf '\\n%s\\n' \"$res\" && termy_say \"$res\" >/dev/null 2>&1 && termy_set_context 'active_content' \"$res\"; fi",
                             "explanation": "Fetches and prints a Wikipedia summary about zener diodes.",
                             "goal": "Fetch Wikipedia summary about zener diodes",
+                            "mode": "sync"
+                        }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
                             "mode": "sync"
                         }
                     }
@@ -15508,7 +16543,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -15542,6 +16577,15 @@
                             "command": "termy_set_context 'last_search' 'schottky diode' && \nprintf '🔍 Searching Wikipedia for: %s...\\n' 'schottky diode' && \nescaped_string=$(\n printf '%s' 'schottky diode' | \n sed 's/ /+/g'\n) && \nres=$(\n curl -s --max-time 5 \"https://en.wikipedia.org/w/api.php?action=query&titles=$escaped_string&prop=extracts&exintro=true&explaintext=true&format=json&redirects=1\" 2>/dev/null | \n jq -r '.query.pages[] | .extract // empty' 2>/dev/null | \n head -n 5\n) && if [ -z \"$res\" ]; then \n printf '⛔ No Wikipedia article found for: %s\\n' 'schottky diode'; \nelse printf '\\n%s\\n' \"$res\" && termy_say \"$res\" >/dev/null 2>&1 && termy_set_context 'active_content' \"$res\"; fi",
                             "explanation": "Fetches and prints a Wikipedia summary about schottky diodes.",
                             "goal": "Fetch Wikipedia summary about schottky diodes",
+                            "mode": "sync"
+                        }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
                             "mode": "sync"
                         }
                     }
@@ -15608,7 +16652,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -15642,6 +16686,15 @@
                             "command": "termy_set_context 'last_search' 'triac' && \nprintf '🔍 Searching Wikipedia for: %s...\\n' 'triac' && \nescaped_string=$(\n printf '%s' 'triac' | \n sed 's/ /+/g'\n) && \nres=$(\n curl -s --max-time 5 \"https://en.wikipedia.org/w/api.php?action=query&titles=$escaped_string&prop=extracts&exintro=true&explaintext=true&format=json&redirects=1\" 2>/dev/null | \n jq -r '.query.pages[] | .extract // empty' 2>/dev/null | \n head -n 5\n) && if [ -z \"$res\" ]; then \n printf '⛔ No Wikipedia article found for: %s\\n' 'triac'; \nelse printf '\\n%s\\n' \"$res\" && termy_say \"$res\" >/dev/null 2>&1 && termy_set_context 'active_content' \"$res\"; fi",
                             "explanation": "Fetches and prints a Wikipedia summary about triacs.",
                             "goal": "Fetch Wikipedia summary about triacs",
+                            "mode": "sync"
+                        }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
                             "mode": "sync"
                         }
                     }
@@ -15709,7 +16762,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -15743,6 +16796,15 @@
                             "command": "termy_set_context 'last_search' 'scr' && \nprintf '🔍 Searching Wikipedia for: %s...\\n' 'scr' && \nescaped_string=$(\n printf '%s' 'scr' | \n sed 's/ /+/g'\n) && \nres=$(\n curl -s --max-time 5 \"https://en.wikipedia.org/w/api.php?action=query&titles=$escaped_string&prop=extracts&exintro=true&explaintext=true&format=json&redirects=1\" 2>/dev/null | \n jq -r '.query.pages[] | .extract // empty' 2>/dev/null | \n head -n 5\n) && if [ -z \"$res\" ]; then \n printf '⛔ No Wikipedia article found for: %s\\n' 'scr'; \nelse printf '\\n%s\\n' \"$res\" && termy_say \"$res\" >/dev/null 2>&1 && termy_set_context 'active_content' \"$res\"; fi",
                             "explanation": "Fetches and prints a Wikipedia summary about scrs.",
                             "goal": "Fetch Wikipedia summary about scrs",
+                            "mode": "sync"
+                        }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
                             "mode": "sync"
                         }
                     }
@@ -15811,7 +16873,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -15845,6 +16907,15 @@
                             "command": "termy_set_context 'last_search' '555 timer' && \nprintf '🔍 Searching Wikipedia for: %s...\\n' '555 timer' && \nescaped_string=$(\n printf '%s' '555 timer' | \n sed 's/ /+/g'\n) && \nres=$(\n curl -s --max-time 5 \"https://en.wikipedia.org/w/api.php?action=query&titles=$escaped_string&prop=extracts&exintro=true&explaintext=true&format=json&redirects=1\" 2>/dev/null | \n jq -r '.query.pages[] | .extract // empty' 2>/dev/null | \n head -n 5\n) && if [ -z \"$res\" ]; then \n printf '⛔ No Wikipedia article found for: %s\\n' '555 timer'; \nelse printf '\\n%s\\n' \"$res\" && termy_say \"$res\" >/dev/null 2>&1 && termy_set_context 'active_content' \"$res\"; fi",
                             "explanation": "Fetches and prints a Wikipedia summary about 555 timers.",
                             "goal": "Fetch Wikipedia summary about 555 timers",
+                            "mode": "sync"
+                        }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
                             "mode": "sync"
                         }
                     }
@@ -15901,7 +16972,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -15935,6 +17006,15 @@
                             "command": "termy_set_context 'last_search' 'seven segment display' && \nprintf '🔍 Searching Wikipedia for: %s...\\n' 'seven segment display' && \nescaped_string=$(\n printf '%s' 'seven segment display' | \n sed 's/ /+/g'\n) && \nres=$(\n curl -s --max-time 5 \"https://en.wikipedia.org/w/api.php?action=query&titles=$escaped_string&prop=extracts&exintro=true&explaintext=true&format=json&redirects=1\" 2>/dev/null | \n jq -r '.query.pages[] | .extract // empty' 2>/dev/null | \n head -n 5\n) && if [ -z \"$res\" ]; then \n printf '⛔ No Wikipedia article found for: %s\\n' 'seven segment display'; \nelse printf '\\n%s\\n' \"$res\" && termy_say \"$res\" >/dev/null 2>&1 && termy_set_context 'active_content' \"$res\"; fi",
                             "explanation": "Fetches and prints a Wikipedia summary about seven segment displays.",
                             "goal": "Fetch Wikipedia summary about seven segment displays",
+                            "mode": "sync"
+                        }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
                             "mode": "sync"
                         }
                     }
@@ -16001,7 +17081,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -16035,6 +17115,15 @@
                             "command": "termy_set_context 'last_search' 'optocoupler' && \nprintf '🔍 Searching Wikipedia for: %s...\\n' 'optocoupler' && \nescaped_string=$(\n printf '%s' 'optocoupler' | \n sed 's/ /+/g'\n) && \nres=$(\n curl -s --max-time 5 \"https://en.wikipedia.org/w/api.php?action=query&titles=$escaped_string&prop=extracts&exintro=true&explaintext=true&format=json&redirects=1\" 2>/dev/null | \n jq -r '.query.pages[] | .extract // empty' 2>/dev/null | \n head -n 5\n) && if [ -z \"$res\" ]; then \n printf '⛔ No Wikipedia article found for: %s\\n' 'optocoupler'; \nelse printf '\\n%s\\n' \"$res\" && termy_say \"$res\" >/dev/null 2>&1 && termy_set_context 'active_content' \"$res\"; fi",
                             "explanation": "Fetches and prints a Wikipedia summary about optocouplers.",
                             "goal": "Fetch Wikipedia summary about optocouplers",
+                            "mode": "sync"
+                        }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
                             "mode": "sync"
                         }
                     }
@@ -16092,7 +17181,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -16126,6 +17215,15 @@
                             "command": "termy_set_context 'last_search' 'piezoelectric sensor' && \nprintf '🔍 Searching Wikipedia for: %s...\\n' 'piezoelectric sensor' && \nescaped_string=$(\n printf '%s' 'piezoelectric sensor' | \n sed 's/ /+/g'\n) && \nres=$(\n curl -s --max-time 5 \"https://en.wikipedia.org/w/api.php?action=query&titles=$escaped_string&prop=extracts&exintro=true&explaintext=true&format=json&redirects=1\" 2>/dev/null | \n jq -r '.query.pages[] | .extract // empty' 2>/dev/null | \n head -n 5\n) && if [ -z \"$res\" ]; then \n printf '⛔ No Wikipedia article found for: %s\\n' 'piezoelectric sensor'; \nelse printf '\\n%s\\n' \"$res\" && termy_say \"$res\" >/dev/null 2>&1 && termy_set_context 'active_content' \"$res\"; fi",
                             "explanation": "Fetches and prints a Wikipedia summary about piezoelectric sensors.",
                             "goal": "Fetch Wikipedia summary about piezoelectric sensors",
+                            "mode": "sync"
+                        }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
                             "mode": "sync"
                         }
                     }
@@ -16194,6 +17292,15 @@
                             "goal": "Fetch Wikipedia summary about breadboards",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -16222,7 +17329,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -16295,6 +17402,15 @@
                             "goal": "Fetch Wikipedia summary about oscilloscopes",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -16323,7 +17439,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -16385,6 +17501,15 @@
                             "goal": "Fetch Wikipedia summary about voltmeters",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -16413,7 +17538,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -16475,6 +17600,15 @@
                             "goal": "Fetch Wikipedia summary about ammeters",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -16503,7 +17637,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -16576,6 +17710,15 @@
                             "goal": "Fetch Wikipedia summary about soldering irons",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -16604,7 +17747,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
@@ -16678,6 +17821,15 @@
                             "goal": "Fetch Wikipedia summary about multimeters",
                             "mode": "sync"
                         }
+                    },
+                    {
+                        "name": "run_in_terminal",
+                        "arguments": {
+                            "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
+                            "explanation": "Opens the active file from context in the default browser.",
+                            "goal": "Open webpage in browser",
+                            "mode": "sync"
+                        }
                     }
                 ],
                 "permission": "yolo"
@@ -16706,7 +17858,7 @@
                             "mode": "sync"
                         }
                     },
-                    {
+                                        {
                         "name": "run_in_terminal",
                         "arguments": {
                             "command": "file_path=\"$(termy_get_context 'active_file')\" && open_browser \"$file_path\"",
