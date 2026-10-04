@@ -26,7 +26,7 @@ search on wiki the programma 101
 append it to p101.txt
 open it in the browser 
 ```
-Then digit `termy -y < test.termy` and watch TERMy compile it to Bash and execute it. 
+Then type `termy -y < test.termy` and watch TERMy compile it to Bash and execute it. 
 
 ### How it works
 [TERMy](/npcs/termy/README.md) is implemented using the [FlintNPC](/docs/FlintNPC.md) and [FlintParser](/docs/FlintParser.md) classes provided by [NPC-Forge](README.md).
@@ -39,7 +39,7 @@ Both classes rely on subtraction engineering: instead of adding probabilistic mo
 4. Probabilistic Match (IDF-weighted Levenshtein)
 5. Rejection with optional LLM dataset entry generation
 
-This approach is more efficient and less brittle than many alternatives that implement much more complex machine-learning techniques. If you are interested in how I came up with this stuff I wrote about it [here](/docs/development.md).
+This approach is more efficient and less brittle than many alternatives that implement much more complex machine-learning techniques. If you are interested in how I came up with this stuff, I wrote about it [here](/docs/development.md).
 
 ### Datasets
 I recently started pondering if I could have used datasets originally developed to train LLMs to expand the knowledge of deterministic agents. I looked at the material available on [huggingface](https://huggingface.co/) and I found a lot of datasets composed of question and answer about python. With some trial and error I have developed software to curate and format datasets automatically in the [NDF](/docs/dataset.md) format used by [NPC-Forge](/README.md). Thanks to these scripts I was able to release:
@@ -72,7 +72,7 @@ Recently TERMy became Turing-complete. I have added the `if` and `execute n time
 
 ### Continuous learning and semantic caching
 
-Yesterday a deterministic agent could just reject an unknown prompt with something like "Can you be more specific?". Today we can just ask ollama, can't we?
+Yesterday, a deterministic agent could just reject an unknown prompt with something like "Can you be more specific?". Today we can just ask ollama, can't we?
 
 I added the [ollama provider](/src/providers/ollama.py) to NPC-Forge and now when it rejects a query because it has no knowledge about it, the question can be routed to a local LLM instructing it to generate the missing dataset entry and save it in memory in the NDF format.
 
