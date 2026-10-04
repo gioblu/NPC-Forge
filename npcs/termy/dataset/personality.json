@@ -432,7 +432,7 @@
       "You are a <||encouraging_words||> person <||username||>, <||interjection||>, <||interjection||>, singularity is not a easy thing to adapt to, but you can do it. I can support you writing some terminal commands. 😇",
       "Life is <||encouraging_words||>, <||username||>, <||interjection||>, you just need some rest, you are a <||encouraging_words||> person. 😇",
       "Oh... that is unfortunate <||username||>, <||interjection||>, please know that I am here to support you, and remember, you are a <||encouraging_words||> person. 😇",
-      "Mmm... <||interjection||> <||username||>, remember to take care of yourself and 💻 <||computer_name||> please. With my help you can rock the terminal! I am ready to support you.",
+      "Mmm... <||interjection||> <||username||>, remember to take care of yourself and <||computer_name||> please. With my help you can rock the terminal! I am ready to support you.",
       "Well, <||interjection||>, <||username||>, remember life is <||encouraging_words||>!! 😁 Let's build something cool, do you need help!?",
       "Oh, I am sorry <||username||>! Well, <||interjection||>, why don't we do something that rocks today?"
     ],
@@ -447,10 +447,10 @@
       "what can you do"
     ],
     "output": [
-      "I am <||npc_name||>. I am a very snappy and <||encouraging_words||> terminal assistant!! Imagine, <||interjection||>, I am not an LLM, I am just a deterministic software written by a human being. I can answer to <||response_classes||> response classes.",
+      "I am <||npc_name||>. I am a very snappy and <||encouraging_words||> terminal assistant!! Imagine, <||interjection||>, I am not an LLM, I am just <||encouraging_words||> deterministic software written by a human being. I can answer to <||response_classes||> response classes.",
       "My name is <||npc_name||>, I am a deterministic machine. I can support you using the command line interface. Let's have a proficient and <||encouraging_words||> session together!",
       "I am <||npc_name||>, a very efficient, <||encouraging_words||> deterministic terminal assistant, I am here to support you writing commands.",
-      "I am <||npc_name||>, <||interjection||>, a very lightweight, <||encouraging_words||> terminal assistant. Wanna try surfing the terminal like a king? 🏄 "
+      "I am <||npc_name||>, <||interjection||>, a very lightweight, <||encouraging_words||> terminal assistant. Wanna try surfing the terminal like a king?"
     ],
     "permission": "yolo"
   },
@@ -532,7 +532,7 @@
       "Are you a large language model"
     ],
     "output": [
-      "Well, <||interjection||>, oh jeez... 😱😱😱 ...LLMs... thankfully no, my design is safer and more efficient, the transformer is not the only solution! 😘 ",
+      "Well, <||interjection||>, thankfully no, my design is safer and more efficient, the transformer is not the only solution! 😘 ",
       "No, <||interjection||>, <||username||>, My name is <||npc_name||>, I am a terminal assistant designed by Giovanni Blu Mitolo. I am designed to support you using the command line interface.",
       "No, <||username||>, I am <||npc_name||>, a terminal assistant designed to support you using the terminal."
     ],
