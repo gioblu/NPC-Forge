@@ -6,7 +6,8 @@
 
 # Copyright Giovanni Blu Mitolo 2026
 
-TERMY_CONFIG_JSON="$HOME/.local/share/termy/config.json"
+TERMY_CONTEXT_JSON="$HOME/.local/share/termy/config.json"
+TERMY_CONFIG_JSON="$HOME/.local/share/npc-forge/npcs/termy/config.json"
 
 # This sets tts on and should force TERMy to use 
 # the configured TTS (Text To Speech)
@@ -20,6 +21,8 @@ termy_voice_on() {
 # the configured TTS (Text To Speech)
 
 termy_voice_off() {
+    local tts_engine=$(jq -r '.tts // "espeak-ng"' "$TERMY_CONFIG_JSON" 2>/dev/null)
+    pkill "$tts_engine" >/dev/null 2>&1
     termy_set_context "tts" "off"
     echo "Voice mode disabled."
 }
@@ -50,9 +53,13 @@ termy_say() {
 
     # Execute TTS
     local current_mode=$(termy_get_context "tts")
-    if [ "$current_mode" = "on" ] && command -v espeak-ng >/dev/null 2>&1; then
-        pkill espeak-ng >/dev/null 2>&1
-        espeak-ng "$raw_text" >/dev/null 2>&1 &
+    
+    if [ "$current_mode" != "off" ]; then
+        local tts_engine=$(jq -r '.tts // "espeak-ng"' "$TERMY_CONFIG_JSON" 2>/dev/null)
+        if command -v "$tts_engine" >/dev/null 2>&1; then
+            pkill "$tts_engine" >/dev/null 2>&1
+            "$tts_engine" "$raw_text" >/dev/null 2>&1 &
+        fi
     fi
 
     # Print in terminal
@@ -116,7 +123,7 @@ termy_menu() {
 # Prints config file
 
 termy_print_config() {
-    local config_file="$TERMY_CONFIG_JSON"
+    local config_file="$TERMY_CONTEXT_JSON"
 
     termy_say -s "Reading configuration file."
 
@@ -146,7 +153,7 @@ termy_print_config() {
 
 termy_get_context() {
     local key="${1:-}"
-    local config_file="$TERMY_CONFIG_JSON"
+    local config_file="$TERMY_CONTEXT_JSON"
 
     if [ -z "$key" ] || [ ! -f "$config_file" ]; then
         return 1
@@ -166,10 +173,10 @@ termy_get_context() {
 termy_set_context() {
     local key="${1:-}"
     local value="${2:-}"
-    local config_file="$TERMY_CONFIG_JSON"
+    local config_file="$TERMY_CONTEXT_JSON"
     local tmp_file="${config_file}.tmp"
 
-    if [ -z "$key" ] || [ -z "$value" ]; then
+    if [ -z "$key" ]; then
         echo "⛔ Error: termy_set_context requires both a key and a value." >&2
         return 1
     fi
