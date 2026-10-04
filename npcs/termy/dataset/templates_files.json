@@ -220,7 +220,7 @@
                 {
                     "tag": "<||vocab_write||>",
                     "type": "vocab",
-                    "required": true
+                    "required": false
                 },
                 {
                     "tag": "<||vocab_in||>",
@@ -230,7 +230,7 @@
                 {
                     "tag": "<||string||>",
                     "type": "string",
-                    "required": true
+                    "required": false
                 }
             ]
         ],
@@ -239,7 +239,7 @@
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "echo '<||string||>' > '<||file||>' &&\ntermy_set_context 'active_file' '<||file||>' &&\ntermy_set_context 'active_content' '<||string||>' &&\nabsdir=$(realpath '<||file||>') &&\ntermy_say -e \"File created successfully at $absdir\"",
+                    "command": "content='<||string||>' &&\nprintf '%s' \"$content\" > '<||file||>' &&\ntermy_set_context 'active_file' '<||file||>' &&\ntermy_set_context 'active_content' \"$content\" &&\nabsdir=$(realpath '<||file||>') &&\ntermy_say -e \"File created successfully at $absdir\"",
                     "explanation": "Writes <||string||> in file <||file||>.",
                     "goal": "File creation",
                     "mode": "sync"
