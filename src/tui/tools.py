@@ -8,6 +8,7 @@ from rich.padding import Padding
 from rich.text import Text
 from rich.prompt import Prompt
 from rich.console import Group
+from rich.syntax import Syntax
 
 from rich import box
 
@@ -145,33 +146,55 @@ class TuiTools:
         matching the multi_choice Lip Gloss/Charm style.
         """
         content_elements = []
+        header = Text()
+        header.append(f"{title}\n", style="bold green")
+        content_elements.append(header)
+                
+        title=f"[bold green]{title} {emoji}[/bold green]",
         
         if thinking:
             thinking_text = Text()
-            thinking_text.append("Thinking: ", style="dim italic #9f9f9f")
-            thinking_text.append(f"{thinking}\n", style="dim italic #9f9f9f")
+            thinking_text.append("Thinking: ", style="dim italic color(240)")
+            thinking_text.append(f"{thinking}\n", style="dim italic color(240)")
             content_elements.append(thinking_text)
             
         if response: content_elements.append(response)
             
         if command:
-            command_text = Text()
-            command_text.append(f"\n{command}\n", style="bold green")
-            content_elements.append(command_text)
+            # 1. Creiamo la sintassi Bash con il tema scelto
+            command_syntax = Syntax(
+                command.strip(), 
+                "bash", 
+                theme="one-dark", 
+                line_numbers=False, 
+                word_wrap=True,
+            )
+            
+            command_box = Panel(
+                command_syntax,
+                box=box.SQUARE,
+                padding=(0, 1, 0, 1),
+                border_style="#282c34",
+                style="on #282c34"
+            )
+            
+            content_elements.append(Text(""))
+            content_elements.append(command_box)
+            content_elements.append(Text(""))
+
             
         if description:
             desc_text = Text()
-            desc_text.append(f"{description.strip()}", style="dim #9f9f9f")
+            desc_text.append(f"{description.strip()}", style="color(240)")
             content_elements.append(desc_text)
 
         unified_content = Group(*content_elements)
-        inner_padding = Padding(unified_content, (1, 1, 1, 1))
+        inner_padding = Padding(unified_content, (0, 0, 0, 0))
 
         panel = Panel(
             inner_padding,
-            title=f"[bold green]{title} {emoji}[/bold green]",
-            title_align="left",
-            border_style="green",
+            border_style="color(234)",
+            style="on color(234)",
             box=box.SQUARE
         )
 
