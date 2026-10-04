@@ -20,8 +20,3 @@ dependencies = [
 
 [tool.setuptools]
 py-modules = ["cli", "server", "server_openai", "registry", "FlintNPC", "FlintParser", "bundler", "logger"]
-
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["providers*", "tui*", "storage*"]
-namespaces = true       
