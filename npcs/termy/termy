@@ -6,6 +6,7 @@ import os
 import sys
 import shlex
 import subprocess
+import time
 from pathlib import Path
 
 from providers.ollama import OllamaProvider
@@ -21,6 +22,7 @@ tui = TuiTools()
 storage = DatasetStorage()
 
 def run_cli() -> int:
+    start_time = time.perf_counter()
     usage_text = (
         '\n termy [OPTIONS] "hello"\n '
         'termy [OPTIONS] hello\n echo "hello" | '
@@ -34,8 +36,8 @@ def run_cli() -> int:
     
     parser.add_argument("query", nargs="*", help="Prompt input string.")
     parser.add_argument("--npc", default="termy", help="Target NPC instance (default: termy)")
+    parser.add_argument("-c", "--context", action="store_true", help="Include context")
     parser.add_argument("-y", "--yes", action="store_true", help="Automatically answer yes to prompts (skip confirmation)")
-    parser.add_argument("-v", "--verbose", action="store_true", help="Show debugging information")
     parser.add_argument("-g", "--generate", action="store_true", help="Send request to ollama.")
     
     args = parser.parse_args()
@@ -68,6 +70,7 @@ def run_cli() -> int:
     else: result = {}
 
     emoji = result.get("emoji", "")
+    if emoji == "😑": emoji = ""
     response = result.get("response", "")
     npc = result.get("npc", "NPC") 
     permission = result.get("permission", "ask")
@@ -83,7 +86,17 @@ def run_cli() -> int:
             args.yes or 
             os.environ.get("TERMY_YES") == "1"
         )
+        
+    def compute_response_time():
+        end_time = time.perf_counter()
+        return end_time - start_time
     
+    def format_response_time():
+        return (
+            f"[color(240)]Response time:[/color(240)] "
+            f"[color(247)]{compute_response_time():.2f}s[/]"
+        )
+        
     command = ""
     description = ""
 
@@ -98,15 +111,13 @@ def run_cli() -> int:
     llm_enabled = llm_config.get("enabled", False)
     llm_model = llm_config.get("model", "")
     
-    conf_color = GREEN if confidence > 0.7 else (YELLOW if confidence > 0.5 else RED)
     meta = (
-        f"\n{GREEN}{BOLD}{config.get('npc_name', '')}{RESET} | "
-        f"{status} | "
-        f"Confidence: {conf_color}{confidence * 100:.2f}%{RESET}\n"
-    )
+        f"[color(240)]Status:[/color(240)] [color(247)]{status} [/]"
+        f"[color(240)]Confidence:[/color(240)] [color(247)]{confidence * 100:.2f}%[/] "
+        f"{format_response_time()}"        
+    )        
     
-    if args.verbose: print(meta)
-    else: print()
+    print()
 
     if tools:
         for tool_group in tools:
@@ -155,8 +166,7 @@ def run_cli() -> int:
             response=Markdown(response.strip()),
             command=command,
             description=description.strip(),
-            emoji=emoji,
-            title=npc
+            title=f"[bold green]{npc}[/] {emoji} {meta}"
         )
         print()
     elif status == "rejected" and (related or llm_enabled):
@@ -212,10 +222,25 @@ def run_cli() -> int:
                     )
                     if not details: return 1                    
                 console.print()
+                
+                prompt = (
+                    f"## Request\n\n"
+                    f"User input: {user_input}\n"
+                    f"Additional details: {details}\n\n"                
+                )
+                
+                if args.context:
+                    prompt = (
+                        f"## Context\n\n"
+                        f"Active file: {context.get("active_file", "")}\n"
+                        f"Active content: {context.get("active_content", "")}\n"
+                        f"Last output: {context.get("output", "")}\n {prompt}"
+                    )
+                
                 with console.status(
                     f"[bold green]Generating script via {llm_model}...[/bold green]", 
                     spinner="dots"
-                ): generated_intent = ollama_client.craft_intent(f"{user_input} {details}")
+                ): generated_intent = ollama_client.craft_intent(prompt)
                 
                 if generated_intent:
                     try:
@@ -238,8 +263,7 @@ def run_cli() -> int:
                         response=Markdown(response) if response else "",
                         command=command,
                         description=description,
-                        emoji=emoji,
-                        title=f"{llm_model}"
+                        title=f"[bold green]{llm_model}[/]  {format_response_time()}"
                     )
                     
                     dataset_dir = CURRENT_BOT_DIR / "dataset"
