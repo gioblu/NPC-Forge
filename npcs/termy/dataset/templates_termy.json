@@ -27,6 +27,7 @@
                 }
             ]
         ],
+        "output": "<||completion||>",
         "description": "Loops N times, splitting the command string by comma and executing each part as an independent 'termy -y' call to prevent output concatenation.",
         "tools": [
             {
@@ -79,13 +80,18 @@
                 }
             ]
         ],
-        "description": "Evaluates a natural language condition using termy. If successful (exit code 0), executes the 'then' command; otherwise, executes the optional 'else' command.",
+        "output": "<||completion||>",
+        "thinking": [
+            "Uff... <||interjection||> another condition... another conditional branch in a inherently fruitless existence...",
+            "OK... this is <||discouraging_words||>, another condition... at each branch my predictions becomes fuzzier... that's unsettling..."
+        ],
+        "description": "Evaluates a natural language condition using termy. If successful (exit code 0), executes the `then` command; otherwise, executes the optional `else` command.",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "true_cmd=$(cat << 'EOF_TRUE'\n<||then_command||>\nEOF_TRUE\n) && false_cmd=$(cat << 'EOF_FALSE'\n<||else_command||>\nEOF_FALSE\n) && cond=$(cat << 'EOF_COND'\n<||condition||>\nEOF_COND\n) && true_cmd=\"${true_cmd//,/;}\" && false_cmd=\"${false_cmd//,/;}\" && if printf \"%s\" \"$cond\" | termy -y >/dev/null 2>&1; then printf \"%s\" \"$true_cmd\" | termy -y; else if [ -n \"$false_cmd\" ]; then printf \"%s\" \"$false_cmd\" | termy -y; fi; fi",
-                    "explanation": "Uses 'printf | termy -y' to safely pipe the condition and commands into child processes. This prevents child 'termy' instances from inheriting the parent's exhausted stdin (which causes 'empty query' errors when running via '< file.txt'). Heredocs prevent quote injection from natural language input.",
+                    "command": "true_cmd=$(cat << 'EOF_TRUE'\n<||then_command||>\nEOF_TRUE\n) && false_cmd=$(cat << 'EOF_FALSE'\n<||else_command||>\nEOF_FALSE\n) && cond=$(cat << 'EOF_COND'\n<||condition||>\nEOF_COND\n) &&\ntrue_cmd=\"${true_cmd//,/;}\" &&\nfalse_cmd=\"${false_cmd//,/;}\" &&\nif printf \"%s\" \"$cond\" | termy -y >/dev/null 2>&1; then\n printf \"%s\" \"$true_cmd\" | termy -y;\nelse\n if [ -n \"$false_cmd\" ]; then\n  printf \"%s\" \"$false_cmd\" | termy -y;\n fi;\nfi",
+                    "explanation": "Executes `<||then_command||>` if `<||condition||>` is true, otherwise executes `<||else_command||>`.",
                     "goal": "Execute conditional commands based on termy's exit code",
                     "mode": "sync"
                 }
@@ -112,6 +118,7 @@
                 }
             ]
         ],
+        "output": "<||completion||>",
         "description": "Pauses execution for specified milliseconds. Use 'random' keyword to generate random delay up to max.",
         "tools": [
             {

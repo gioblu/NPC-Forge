@@ -151,6 +151,7 @@
                 }
             ]
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -192,6 +193,7 @@
                 }
             ]
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
@@ -245,11 +247,12 @@
                 }
             ]
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
-                    "command": "termy_set_context 'last_search' '<||string||>' && \nprintf '🔍 Searching Wikipedia for: %s...\\n' '<||string||>' && \nescaped_string=$(\n printf '%s' '<||string||>' | \n sed 's/ /+/g'\n) && \nres=$(\n curl -s --max-time 5 \"https://en.wikipedia.org/w/api.php?action=query&titles=$escaped_string&prop=extracts&exintro=true&explaintext=true&format=json&redirects=1\" 2>/dev/null | \n jq -r '.query.pages[] | .extract // empty' 2>/dev/null | \n head -n 5\n) && if [ -z \"$res\" ]; then \n printf '⛔ No Wikipedia article found for: %s\\n' '<||string||>'; \nelse printf '\\n%s\\n' \"$res\" && termy_say \"$res\" >/dev/null 2>&1 && termy_set_context 'active_content' \"$res\"; fi",
+                    "command": "termy_set_context 'last_search' '<||string||>' && \nprintf '🔍 Searching Wikipedia for: %s...\\n' '<||string||>' && \nescaped_string=$(\n printf '%s' '<||string||>' | \n sed 's/ /+/g'\n) && \nres=$(\n curl -s --max-time 5 \"https://en.wikipedia.org/w/api.php?action=query&titles=$escaped_string&prop=extracts&exintro=true&explaintext=true&format=json&redirects=1\" 2>/dev/null | \n jq -r '.query.pages[] | .extract // empty' 2>/dev/null | \n head -n 5\n) && if [ -z \"$res\" ]; then \n printf '⛔ No Wikipedia article found for: %s\\n' '<||string||>'; \nelse\n printf '\\n%s\\n\\n' \"$res\" &&\n termy_say \"$res\" >/dev/null 2>&1 &&\n termy_set_context 'active_content' \"$res\";\nfi",
                     "explanation": "Fetches Wikipedia summary about <||string||>, displays it, and saves it to active content context.",
                     "goal": "Fetch Wikipedia summary without freezing terminal",
                     "mode": "sync"
@@ -532,6 +535,7 @@
                 }
             ]
         ],
+        "output": "<||completion||>",
         "tools": [
             {
                 "name": "run_in_terminal",
