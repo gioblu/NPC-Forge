@@ -83,7 +83,7 @@
         "output": "<||completion||>",
         "thinking": [
             "Uff... <||interjection||> another condition... another conditional branch in a inherently fruitless existence...",
-            "OK... this is <||discouraging_words||>, another condition... at each branch my predictions becomes fuzzier... that's unsettling..."
+            "OK... this is <||discouraging_words||>, another condition... at each branch my predictions become fuzzier... that's unsettling..."
         ],
         "description": "Evaluates a natural language condition using termy. If successful (exit code 0), executes the `then` command; otherwise, executes the optional `else` command.",
         "tools": [
