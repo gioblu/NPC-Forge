@@ -137,8 +137,7 @@ class TuiTools:
         thinking: str = "", 
         response = "",  # Accepts the Markdown object
         command: str = "", 
-        description: str = "", 
-        emoji: str = "", 
+        description: str = "",
         title: str = "TERMy Output"
     ):
         """
@@ -147,11 +146,9 @@ class TuiTools:
         """
         content_elements = []
         header = Text()
-        header.append(f"{title}\n", style="bold green")
+        header.append(Text.from_markup(f"{title}\n"))
         content_elements.append(header)
-                
-        title=f"[bold green]{title} {emoji}[/bold green]",
-        
+                        
         if thinking:
             thinking_text = Text()
             thinking_text.append("Thinking: ", style="dim italic color(240)")
