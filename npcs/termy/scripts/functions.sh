@@ -171,10 +171,14 @@ open_file_with_editor() {
                     
                     printf "\n\033[1mLaunching %s\033[22m...\n\n" "$choice"
                     termy_say -s -- "Opening file with $choice."
-                    
+                    termy_set_context 'active_file' \"$target_file\"
+                    termy_set_context 'active_content' "$(cat -- "$target_file" 2>/dev/null)"
                     # Protected execution using double dash boundary marker
                     "$selected_cmd" -- "$target_file"
-                    break 2
+                    local editor_exit_status=$?
+                    # update potential changes made by the user in the editor session
+                    termy_set_context 'active_content' "$(cat -- "$target_file" 2>/dev/null)"
+                    return $editor_exit_status
                 fi
             done
         elif [ "$REPLY" = "cancel" ]; then
