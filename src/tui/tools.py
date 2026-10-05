@@ -81,49 +81,53 @@ class TuiTools:
         
         menu_content = Text()
         
-        menu_content.append("  [q] ", style="bold green")
+        header = Text()
+        header = header.append(Text.from_markup(f"{prompt}\n\n"))
+        
+        menu_content.append(header)        
+        menu_content.append("[q] ", style="bold green")
         menu_content.append("Quit\n", style="bold white")
         
-        menu_content.append(f"  [{additional.lower()}] ", style="bold green")
+        menu_content.append(f"[{additional.lower()}] ", style="bold green")
         menu_content.append("Ask model\n", style="bold white")
         if max_range:
-            menu_content.append("  " + "─" * 30 + "\n", style="dim green")
+            menu_content.append("──────────────\n", style="dim green")
 
             for i, choice_text in enumerate(choices, 1):
-                menu_content.append(f"  [{i}] ", style="bold green")
+                menu_content.append(f"[{i}] ", style="bold green")
                 menu_content.append(f"{choice_text}\n", style="white")
 
-        inner_padding = Padding(menu_content, (1, 2, 0, 0))
+        inner_padding = Padding(menu_content, (0, 0, 0, 0))
 
         panel = Panel(
             inner_padding,
-            title=f"[bold green] {prompt} [/bold green]",
-            title_align="left",
-            border_style="green",
+            border_style="color(234)",
+            style="on color(234)",
             box=box.SQUARE
         )
 
         console.print(panel)
         
-        console.print(f"  [bold green]➔[/bold green] [dim]Press a key... [/dim]", end="")
-        console.print()
+        console.print(f"\n[dim]Select an option: [/dim]", end="")
 
         try:
             while True:
                 raw_key = self.keypress()
                 key = raw_key.lower().strip()
 
-                print("\r", end="", flush=True)
+                print(f" {key}", end="", flush=True)
 
                 if key == 'q' or raw_key == '\x03': 
                     console.print()
                     return 0
                 if key == additional.lower(): 
+                    console.print()
                     return max_range + 1
                 
                 if key.isdigit():
                     numeric_choice = int(key)
                     if 1 <= numeric_choice <= max_range:
+                        console.print()
                         return numeric_choice
                 
                 continue

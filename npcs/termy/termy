@@ -192,7 +192,12 @@ def run_cli() -> int:
             )
             
         if (args.generate): choice = len(related) + 1
-        else: choice = tui.multi_choice("Select an intent", related_intents, menu_text, 'g')
+        else: choice = tui.multi_choice(
+            f"[bold green]{npc}[/]  {meta}", 
+            related_intents, 
+            menu_text, 
+            'g'
+        )
         
         if isinstance(choice, int) and 0 < choice <= len(related):
             try:
@@ -240,7 +245,9 @@ def run_cli() -> int:
                 with console.status(
                     f"[bold green]Generating script via {llm_model}...[/bold green]", 
                     spinner="dots"
-                ): generated_intent = ollama_client.craft_intent(prompt)
+                ):     
+                    start_time = time.perf_counter()
+                    generated_intent = ollama_client.craft_intent(prompt)
                 
                 if generated_intent:
                     try:

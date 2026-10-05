@@ -69,7 +69,7 @@ def run_framework_tests():
     test_dir = FORGE_DATA_DIR / "tests"
     runner_script = test_dir / "run_tests.py"
         
-    print(f"{YELLOW}[NPC-FORGE]{RESET} Initializing testing pipeline engine from: {GREEN}{test_dir}{RESET}...\n")
+    print(f"\n{YELLOW}[NPC-FORGE]{RESET} Initializing testing pipeline engine from: {GREEN}{test_dir}{RESET}...\n")
     
     current_env = os.environ.copy()
     current_env["PYTHONPATH"] = f"{FORGE_DATA_DIR}:{str(FORGE_DATA_DIR / 'src')}:{current_env.get('PYTHONPATH', '')}"
