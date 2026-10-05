@@ -234,7 +234,7 @@ def run_cli() -> int:
                         f"## Context\n\n"
                         f"Active file: {context.get("active_file", "")}\n"
                         f"Active content: {context.get("active_content", "")}\n"
-                        f"Last output: {context.get("output", "")}\n {prompt}"
+                        f"Last output: {context.get("output", "")}\n\n{prompt}"
                     )
                 
                 with console.status(
