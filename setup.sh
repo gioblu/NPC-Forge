@@ -1,10 +1,12 @@
 #!/bin/bash
 
 # NPC-Forge User-Space Installer
+#
 # Usage:
-#   ./install.sh            production copy
-#   ./install.sh --dev      symlink sources (edit-in-place)
-#   ./install.sh --uninstall
+#
+#   ./setup.sh             # install NPC-Forge production copy
+#   ./setup.sh --dev       # install using symlink sources (edit-in-place)
+#   ./setup.sh --uninstall # uninstall NPC-Forge
 
 set -euo pipefail
 
