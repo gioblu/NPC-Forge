@@ -63,9 +63,9 @@ class OllamaProvider(BaseProvider):
         # 1. Prompt Engineering 
         prompt = (
             "Follows a question from a human, be kind, altruistic, sincere, and a bit nerd.\n"
+            "In \"code\" provide a complete, terse, elegant and reusable solution (it will executed in a terminal).\n"
             "In \"content\" provide a direct, concise, and technical explanation in markdown format.\n"
-            "In \"code\" provide a complete, terse, elegant and reusable script or code block.\n"
-            "In \"extension\" provide the appropriate extension for the code you generate (.py, .css, .js, .html)."
+            "In \"extension\" provide the appropriate extension for the solution (py, css, js, html, ecc.)."
             f"Human's question: '{user_query}'\n\n"
         )
         
