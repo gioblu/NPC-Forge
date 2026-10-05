@@ -23,6 +23,16 @@ storage = DatasetStorage()
 
 def run_cli() -> int:
     start_time = time.perf_counter()
+    CURRENT_BOT_DIR = Path(os.path.realpath(__file__)).parent
+    home_dir = os.path.expanduser("~")
+    config_path = os.path.join(home_dir, ".local/share/termy/")
+    config = storage.load_json(CURRENT_BOT_DIR, "config.json") or {}
+    context = storage.load_json(Path(config_path), "config.json") or {}    
+    
+    llm_config = config.get("llm", {})
+    llm_enabled = llm_config.get("enabled", False)
+    llm_model = llm_config.get("model", "")
+    
     usage_text = (
         '\n termy [OPTIONS] "hello"\n '
         'termy [OPTIONS] hello\n echo "hello" | '
@@ -36,7 +46,17 @@ def run_cli() -> int:
     
     parser.add_argument("query", nargs="*", help="Prompt input string.")
     parser.add_argument("--npc", default="termy", help="Target NPC instance (default: termy)")
-    parser.add_argument("-c", "--context", action="store_true", help="Include context")
+    
+    parser.add_argument(
+        "-c", "--context",
+        nargs="?",
+        const=llm_config.get('num_ctx', 4096),
+        default=0,
+        type=int,
+        help="Include system context with an optional response buffer size (default: 8000)"
+    )
+    
+    parser.add_argument("-a", "--agent", action="store_true", help="Includes session context (for agentic workflows)")
     parser.add_argument("-y", "--yes", action="store_true", help="Automatically answer yes to prompts (skip confirmation)")
     parser.add_argument("-g", "--generate", action="store_true", help="Send request to ollama.")
     
@@ -99,17 +119,7 @@ def run_cli() -> int:
         
     command = ""
     description = ""
-
-    CURRENT_BOT_DIR = Path(os.path.realpath(__file__)).parent
-    home_dir = os.path.expanduser("~")
-    config_path = os.path.join(home_dir, ".local/share/termy/")
-    config = storage.load_json(CURRENT_BOT_DIR, "config.json") or {}
-    context = storage.load_json(Path(config_path), "config.json") or {}    
-    
     related = result.get("related", [])
-    llm_config = config.get("llm", {})
-    llm_enabled = llm_config.get("enabled", False)
-    llm_model = llm_config.get("model", "")
     
     meta = (
         f"[color(240)]Status:[/color(240)] [color(247)]{status} [/]"
@@ -229,17 +239,15 @@ def run_cli() -> int:
                 if not args.generate: console.print()
                 
                 prompt = (
-                    f"## Request\n\n"
-                    f"User input: {user_input}\n"
+                    f"Human question: {user_input}\n"
                     f"Additional details: {details}\n\n"                
                 )
                 
-                if args.context:
+                if args.agent:
                     prompt = (
-                        f"## Context\n\n"
-                        f"Active file: {context.get("active_file", "")}\n"
-                        f"Active content: {context.get("active_content", "")}\n"
-                        f"Last output: {context.get("output", "")}\n\n{prompt}"
+                        f"Active file: {context.get('active_file', '')}\n"
+                        f"Active content: {context.get('active_content', '')}\n"
+                        f"Last output: {context.get('output', '')}\n\n{prompt}"
                     )
                 
                 with console.status(
@@ -247,7 +255,9 @@ def run_cli() -> int:
                     spinner="dots"
                 ):     
                     start_time = time.perf_counter()
-                    generated_intent = ollama_client.craft_intent(prompt)
+                    num_ctx = args.context 
+                    if not num_ctx: num_ctx = llm_config.get("num_ctx")
+                    generated_intent = ollama_client.craft_intent(prompt, num_ctx)
                 
                 if generated_intent:
                     try:

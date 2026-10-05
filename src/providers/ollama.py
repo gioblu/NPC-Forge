@@ -1,6 +1,5 @@
 import json
-import re
-import os
+import math
 import urllib.request
 
 from pathlib import Path
@@ -13,9 +12,21 @@ class OllamaProvider(BaseProvider):
         """Initializes a new independent instance of the LLMConnector."""
         self.api_url = config.get("api_url", "127.0.0.1:5000").rstrip("/")
         self.model = config.get("model", "")
+
+    def estimate_context_needed(self, prompt: str, num_ctx: int) -> int:
+        # Dynamic context memory estimation
+        tokens = math.ceil(len(prompt) * 0.28)
+        total = tokens + num_ctx # num_ctx is the context for the response
+        # Round to ollama VRAM optimized binary power
+        if total <= 8192: context_window = 8192
+        elif total <= 16384: context_window = 16384
+        elif total <= 32768: context_window = 32768
+        else: context_window = 65536
+        return context_window
         
-    def request(self, prompt: str) -> str:
+    def request(self, prompt: str, num_ctx: int) -> str:
         """Sends HTTP POST request to NPC-Forge API /api/chat endpoint."""
+        
         data = {
             "model": self.model,
             "messages": [{"role": "user", "content": prompt}],
@@ -23,7 +34,7 @@ class OllamaProvider(BaseProvider):
             "think": False, 
             "options": {
                 "temperature": 0, 
-                "num_ctx": 4096
+                "num_ctx": self.estimate_context_needed(prompt, num_ctx)
             },
             "format": {
                 "type": "object",
@@ -55,21 +66,21 @@ class OllamaProvider(BaseProvider):
             print(f"NPC-Forge OllamaClient error: {e}")
             return False
 
-    def craft_intent(self, user_query: str) -> Optional[dict]:
+    def craft_intent(self, user_query: str, num_ctx: int) -> Optional[dict]:
         """
         Framework-agnostic tool: Asks the LLM for a script, detects the
         language, and formats it into a safe NDF container.
         """
         # 1. Prompt Engineering 
         prompt = (
-            "Follows a question from a human, be kind, altruistic, sincere, and a bit nerd.\n"
-            "In \"code\" provide a complete, terse, elegant and reusable solution (it will executed in a terminal).\n"
-            "In \"content\" provide a direct, concise, and technical explanation in markdown format.\n"
-            "In \"extension\" provide the appropriate extension for the solution (py, css, js, html, ecc.)."
-            f"Human's question: '{user_query}'\n\n"
+            "Follows a question from a human, be sincere and very terse (you are running in a limited machine).\n"
+            "In \"code\" add a complete, terse, elegant and reusable solution (it will executed in a terminal).\n"
+            "In \"content\" add a direct, concise, and technical explanation in markdown format.\n"
+            "In \"extension\" add the appropriate extension for the solution (py, css, js, html, ecc.)."
+            f"{user_query}"
         )
         
-        raw_response = json.loads(self.request(prompt))
+        raw_response = json.loads(self.request(prompt, num_ctx))
         if not raw_response: return None
 
         cmd = raw_response.get("code", "")    
