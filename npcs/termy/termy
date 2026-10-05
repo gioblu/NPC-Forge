@@ -221,7 +221,7 @@ def run_cli() -> int:
                         f"\nDescribe how TERMy should respond to [green]'{user_input}'[/green]"
                     )
                     if not details: return 1                    
-                console.print()
+                if not args.generate: console.print()
                 
                 prompt = (
                     f"## Request\n\n"
@@ -271,7 +271,7 @@ def run_cli() -> int:
                     save_filename = f"dataset_{os.environ.get('USER', 'user')}.json"
                     
                     if not permission_execute():
-                        save_intent = tui.confirm("Do you want to save this entry in the dataset?")
+                        save_intent = tui.confirm("\nDo you want to save this entry in the dataset?")
                         if save_intent:
                             storage.save_entry(generated_intent, str(dataset_dir), save_filename)
                             print(f"{GREEN}Entry saved to dataset.{RESET}")
