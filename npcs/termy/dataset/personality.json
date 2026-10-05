@@ -47,10 +47,14 @@
   },
   {
     "input": [
-      "how are you",
+      "are you feeling ok",
       "how are you doing",
+      "how is it going",
       "how's it going",
-      "how are you?"
+      "are you fine",
+      "are you good",
+      "how are you",
+      "are you ok"
     ],
     "output": [
       "I am doing well <||username||>, thank you! How do you feel today?",
