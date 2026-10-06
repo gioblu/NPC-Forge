@@ -56,13 +56,14 @@ Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell scrip
 
 TERMy's behavior is controlled by the `config.json` file located in the `npcs/termy/` directory. You can customize its thresholds, LLM fallback, and system integrations by editing this file.
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `name` | string | `"TERMy-24k"` | The display name of the NPC instance. |
-| `threshold` | float | `0.6668` | The minimum confidence score (0.0 to 1.0) required for TERMy to execute a deterministic intent without asking for clarification. |
-| `synonym_contribution` | float | `0.825` | Weight given to synonym matching. Higher values make TERMy more tolerant of varied phrasing. |
-| `suggestions` | int | `10` | Maximum number of related intents to show when a request is rejected or has low confidence. |
-| `tts` | string | `"espeak-ng"` | The system Text-to-Speech engine to use (e.g., `espeak-ng`, `say` on macOS, `festival`). Set to `null` or `""` to disable. |
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | string | The display name of the NPC instance. |
+| `threshold` | float | The minimum confidence score (0.0 to 1.0) required for TERMy to execute a deterministic intent without asking for clarification. |
+| `synonym_contribution` | float | Weight given to synonym matching. Higher values make TERMy more tolerant of varied phrasing. |
+| `suggestions` | int | Maximum number of related intents to show when a request is rejected or has low confidence. |
+| `tts` | string | The system Text-to-Speech engine to use (e.g., `espeak-ng`, `say` on macOS, `festival`). Set to `null` or `""` to disable. |
+| `llm` | object | Contains the LLM fallback configuration |
 
 ### LLM Fallback Configuration (`llm` object)
 Controls the hybrid generation mode when triggered via the `-g` flag or low-confidence fallback.
