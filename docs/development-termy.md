@@ -1,4 +1,4 @@
-## The frontier of deterministic AI
+## The frontier of Frugal AI
 
 For the past five years the tech industry has been misled by the following dogma: 
 
