@@ -6,8 +6,9 @@
   "synonym_contribution": 0.825,
   "suggestions": 10,
   "llm": {
-      "enabled": true,
-      "api_url": "http://localhost:11434/api/chat",
-    "model": "hf.co/ornith-ai/Ornith-1.5-9B-GGUF:Q8_0"
+    "ctx_cap": 8192,
+    "enabled": true,
+    "api_url": "http://localhost:11434/api/chat",
+    "model": "qwen3:14b-q4_K_M"
   }
 }

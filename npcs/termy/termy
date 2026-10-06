@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import sys
 import shlex
@@ -50,17 +51,25 @@ def run_cli() -> int:
     parser.add_argument(
         "-c", "--context",
         nargs="?",
-        const=llm_config.get('num_ctx', 4096),
+        const=llm_config.get('ctx_cap', 4096),
         default=0,
         type=int,
         help="Include system context with an optional response buffer size (default: 8000)"
     )
     
     parser.add_argument("-a", "--agent", action="store_true", help="Includes session context (for agentic workflows)")
+    parser.add_argument("-d", "--clear-context", action="store_true", help="Clear all values from the session context")
     parser.add_argument("-y", "--yes", action="store_true", help="Automatically answer yes to prompts (skip confirmation)")
     parser.add_argument("-g", "--generate", action="store_true", help="Send request to ollama.")
     
     args = parser.parse_args()
+    
+    if args.clear_context:
+        context_file = Path(config_path) / "config.json"
+        context_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(context_file, "w", encoding="utf-8") as f:
+            json.dump({}, f, indent=4, ensure_ascii=False)
+        print(f"{GREEN}Session context cleared successfully.{RESET}")
 
     if not sys.stdin.isatty(): user_input = sys.stdin.read().strip()
     elif args.query: user_input = " ".join(args.query).strip()
@@ -98,6 +107,13 @@ def run_cli() -> int:
     tools = result.get("tools", [])
     status = str(result.get("status", "rejected")).lower()
     confidence = result.get("confidence", 0.0)
+    
+    def update_context_summary(config_path: str, summary: str):
+        if "summary" not in context: context["summary"] = []
+        context["summary"] = context["summary"][-4:] + [summary]
+        with open(config_path / "config.json", "w", encoding="utf-8") as f:
+            json.dump(context, f, indent=4, ensure_ascii=False)
+        return context
 
     def permission_execute():
         return (
@@ -238,16 +254,15 @@ def run_cli() -> int:
                     if not details: return 1                    
                 if not args.generate: console.print()
                 
-                prompt = (
-                    f"Human question: {user_input}\n"
-                    f"Additional details: {details}\n\n"                
-                )
-                
+                prompt = f"\n\nTask: {user_input}\n"
+                summary = "\n".join(f"- {item}" for item in context.get("summary", []))
+                if details: prompt = f"{prompt}Details: {details}\n\n"                
                 if args.agent:
                     prompt = (
-                        f"Active file: {context.get('active_file', '')}\n"
-                        f"Active content: {context.get('active_content', '')}\n"
-                        f"Last output: {context.get('output', '')}\n\n{prompt}"
+                        f"{prompt}\n\nActive file: {context.get('active_file', '')}\n\n"
+                        f"Active content: {context.get('active_content', '')}\n\n"
+                        f"Last execution output: {context.get('output', '')}\n\n"
+                        f"Your past actions in this session:\n\n{summary}"
                     )
                 
                 with console.status(
@@ -256,9 +271,9 @@ def run_cli() -> int:
                 ):     
                     start_time = time.perf_counter()
                     num_ctx = args.context 
-                    if not num_ctx: num_ctx = llm_config.get("num_ctx")
-                    generated_intent = ollama_client.craft_intent(prompt, num_ctx)
-                
+                    if not num_ctx: num_ctx = llm_config.get("ctx_cap")
+                    prompt, summary, generated_intent = ollama_client.craft_intent(prompt, num_ctx)
+                    update_context_summary(Path(config_path), summary)
                 if generated_intent:
                     try:
                         generated_intent["input"] = [user_input]
@@ -274,9 +289,17 @@ def run_cli() -> int:
                     if not command or not command.strip():
                         print(f"{RED}Generated command is empty. Nothing to execute.{RESET}")
                         return 1
-                    
+                    console.print()
                     tui.render_action(
-                        thinking=thinking,
+                        thinking="",
+                        response=prompt,
+                        command="",
+                        description="",
+                        title=f"[bold green]Request[/]"
+                    )
+                    console.print()
+                    tui.render_action(
+                        thinking=thinking or summary,
                         response=Markdown(response) if response else "",
                         command=command,
                         description=description,

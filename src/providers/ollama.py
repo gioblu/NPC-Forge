@@ -13,18 +13,19 @@ class OllamaProvider(BaseProvider):
         self.api_url = config.get("api_url", "127.0.0.1:5000").rstrip("/")
         self.model = config.get("model", "")
 
-    def estimate_context_needed(self, prompt: str, num_ctx: int) -> int:
-        # Dynamic context memory estimation
-        tokens = math.ceil(len(prompt) * 0.28)
-        total = tokens + num_ctx # num_ctx is the context for the response
+    def estimate_context_needed(self, prompt: str, ctx_cap: int) -> int:
+        # We estimate that:
+        # input tokens = output tokens required to answer
+        tokens = math.ceil(len(prompt) * 0.28) * 2
         # Round to ollama VRAM optimized binary power
-        if total <= 8192: context_window = 8192
-        elif total <= 16384: context_window = 16384
-        elif total <= 32768: context_window = 32768
+        if tokens <= 8192: context_window = 8192
+        elif tokens <= 16384: context_window = 16384
+        elif tokens <= 32768: context_window = 32768
         else: context_window = 65536
+        if tokens > ctx_cap: return ctx_cap
         return context_window
         
-    def request(self, prompt: str, num_ctx: int) -> str:
+    def request(self, prompt: str, ctx_cap: int) -> str:
         """Sends HTTP POST request to NPC-Forge API /api/chat endpoint."""
         
         data = {
@@ -32,16 +33,16 @@ class OllamaProvider(BaseProvider):
             "messages": [{"role": "user", "content": prompt}],
             "stream": False,
             "think": False, 
-            "options": {
-                "temperature": 0, 
-                "num_ctx": self.estimate_context_needed(prompt, num_ctx)
+            "options": { 
+                "num_ctx": self.estimate_context_needed(prompt, ctx_cap)
             },
             "format": {
                 "type": "object",
                 "properties": {
                     "code": {"type": "string"},
                     "content": {"type": "string"},
-                    "extension": {"type": "string"}
+                    "extension": {"type": "string"},
+                    "summary": {"type": "string"}
                 },
                 "required": ["code", "content", "extension"]
             }
@@ -66,26 +67,30 @@ class OllamaProvider(BaseProvider):
             print(f"NPC-Forge OllamaClient error: {e}")
             return False
 
-    def craft_intent(self, user_query: str, num_ctx: int) -> Optional[dict]:
+    def craft_intent(self, user_query: str, ctx_cap: int) -> Optional[dict]:
         """
-        Framework-agnostic tool: Asks the LLM for a script, detects the
-        language, and formats it into a safe NDF container.
+        Framework-agnostic tool: Asks the LLM for a script
+        and formats it into a safe NDF container.
         """
-        # 1. Prompt Engineering 
+        
         prompt = (
-            "Follows a question from a human, be sincere and very terse (you are running in a limited machine).\n"
-            "In \"code\" add a complete, terse, elegant and reusable solution (it will executed in a terminal).\n"
-            "In \"content\" add a direct, concise, and technical explanation in markdown format.\n"
-            "In \"extension\" add the appropriate extension for the solution (py, css, js, html, ecc.)."
+            "You are an terminal expert, solve the task requested by the human.\n"
+            "Be sincere and terse (you are running in a limited machine).\n"
+            "\nIn \"code\" add a solution adhering to the following requirements:\n\n"
+            "1. Do not use code fences, write only code that is complete, functional, elegant and reusable.\n"
+            "2. Use external dependencies or third party libraries only when asked to.\n"
+            "\nIn \"content\" add a direct, concise, and technical explanation in markdown format.\n\n"
+            "In \"extension\" add the appropriate extension for the solution (py, css, js, html, ecc.).\n\n"
+            "In \"summary\" add a 40 characters description of what you did in this step and why."
             f"{user_query}"
         )
-        
-        raw_response = json.loads(self.request(prompt, num_ctx))
+        raw_response = json.loads(self.request(prompt, ctx_cap))
         if not raw_response: return None
 
         cmd = raw_response.get("code", "")    
         exp = raw_response.get("content", "")
         ext = raw_response.get("extension", "")
+        summary = raw_response.get("summary", "")
         
         static_explanation = "Generated code ready to be executed."
         static_goal = "Automated execution framework block."
@@ -119,4 +124,4 @@ class OllamaProvider(BaseProvider):
         }
         
         # Just return the object, let the caller decide when/where to save
-        return ndf_object
+        return prompt, summary, ndf_object
