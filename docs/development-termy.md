@@ -83,6 +83,8 @@ Introducing this simple feature enables:
 
 3. **CL (Continuous Learning)**: Over time [TERMy-24k](/npcs/termy/README.md) grows smarter while its dependency on LLMs reduces.
 
+<img src="/npcs/termy/showcase-continuous-learning.gif" style="width: 650px">
+
 ### Datasets
 I recently started pondering if I could have used datasets originally developed to train LLMs to expand the knowledge of deterministic agents. I looked at the material available on [huggingface](https://huggingface.co/) and I found a lot of datasets composed of question and answer about python. With some trial and error I have developed software to curate and format datasets automatically in the [NDF](/docs/dataset.md) format used by [NPC-Forge](/README.md). Thanks to these scripts I was able to release:
 
