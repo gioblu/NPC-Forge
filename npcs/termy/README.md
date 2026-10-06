@@ -44,9 +44,6 @@ Watch TERMy transpile it to a Shell script and execute it.
 
 Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell script and execute it. 
 
-> [!TIP]
-> If you want to expand the capabilities of TERMy check out the dataset directory and the TERMy documentation
-
 ### Flags
 
 - `-y, --yes`: Automatically answer "yes" to prompts, skipping execution confirmation (ideal for scripted `.termy` files).
