@@ -67,6 +67,8 @@ This approach is more efficient and less brittle than many alternatives that imp
 
 Recently TERMy became Turing-complete. I have added the `if` and `execute n times` intents that used along with `termy_get_context` and `termy_set_context` functions make [TERMy-24k](/npcs/termy/README.md) capable of solving any problem, just like any other programming language, with the critical difference that the human-readable language here is plain English.
 
+<img src="/npcs/termy/showcase-turing-complete.gif" style="width: 650px">
+
 ### Continuous learning and semantic caching
 
 Before the transformer became mainstream, a deterministic agent could just reject an unknown prompt with something like "Can you be more specific?". Today we can just ask ollama, can't we?
