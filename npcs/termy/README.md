@@ -96,8 +96,11 @@ termy execute 3 times tell me a joke, inspire me
 In the examle above TERMy will loop 3 times, generating a joke and a famous quote at each iteration.
 
 ### How to add entries to the dataset
+When TERMy does not know how to answer a question asks to the user if should generate the missing dataset entry using the configured LLM model. After the answer is generated the user is asked if the entry should be saved or not:
 
-Be sure to read carefully the [NDF 0.0 (NPC-Forge Dataset Format)](/docs/dataset.md). In the `npcs/termy/dataset` directory there are `dataset_*.json` and `templates_*.json` files which contain dataset entries organized in categories, such as `dataset_files.json` or `templates_directories.json`.
+<img src="/npcs/termy/showcase-continuous-learning.gif" style="width: 650px">
+
+You can also add entries manually, be sure to read carefully the [NDF 0.0 (NPC-Forge Dataset Format)](/docs/dataset.md). In the `npcs/termy/dataset` directory there are `dataset_*.json` and `templates_*.json` files which contain dataset entries organized in categories, such as `dataset_files.json` or `templates_directories.json`.
 
 Once you added an entry remember to restart the server:
 ```bash
