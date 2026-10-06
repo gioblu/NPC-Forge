@@ -68,12 +68,12 @@ TERMy's behavior is controlled by the `config.json` file located in the `npcs/te
 ### LLM Fallback Configuration (`llm` object)
 Controls the hybrid generation mode when triggered via the `-g` flag or low-confidence fallback.
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `enabled` | boolean | `true` | Master switch for LLM fallback capabilities. |
-| `model` | string | `"qwen3:14b-q4_K_M"` | The specific Ollama model to use for code generation and reasoning. |
-| `api_url` | string | `"http://localhost:11434/api/chat"` | The endpoint for the Ollama API. Change this if your Ollama instance runs on a different port or host. |
-| `ctx_cap` | int | `8192` | The default response buffer size (in tokens) for LLM generation. TERMy dynamically estimates total context needs and rounds up to the nearest power of 2 (e.g., 8192, 16384) to optimize VRAM usage. |
+| Field | Type | Description |
+|-------|------|-------------|
+| `enabled` | boolean | Master switch for LLM fallback capabilities. |
+| `model` | string | The specific Ollama model to use for code generation and reasoning. |
+| `api_url` | string | The endpoint for the Ollama API. Change this if your Ollama instance runs on a different port or host. |
+| `ctx_cap` | int | The default response buffer size (in tokens) for LLM generation. TERMy dynamically estimates total context needs and rounds up to the nearest power of 2 (e.g., 8192, 16384) to optimize VRAM usage. |
 
 ### Advanced features and hybrid mode
 
