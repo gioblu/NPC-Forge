@@ -56,20 +56,13 @@ Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell scrip
 ### Advanced features and hybrid mode
 
 While TERMy is fundamentally deterministic, it is also a very powerful **hybrid harness** that can be used for agentic coding. You can use TERMy and go straight to your local LLM if you need while retaining its revolutionary context memory and instantaneous deterministic responses. This is a practical example of how it can be used:
-```bash
-# 1. -g flags makes TERMy route the request to the configured LLM
-termy -g "create a python script that draws 200 random green triangles"
-# 2. Run it (not a LLM, 10 milliseconds response time)
-termy execute it
-# 3. It fails, ask it to fix the error using the saved context
-#    (-a flag forces the inclusion of the context) 
-termy -a -g "fix it"
-# 4. Run it (not a LLM, 10 milliseconds response time)
-termy execute it
-# 5. It works, but let's refine the output
-termy -a -g "yes, but make each triangle a random shade of green"
-``` 
+
+
+<img src="/npcs/termy/showcase-llm.gif" style="width: 650px">
+
 When the LLM generates a new valid dataset entry, TERMy will ask if to save it to the local dataset. Once saved, future similar requests will execute deterministically in milliseconds without invoking the LLM, making TERMy smarter and faster over time.
+
+<img src="/npcs/termy/showcase-continuous-learning.gif" style="width: 650px">
 
 > [!TIP]
 > TERMy's dynamic context estimation ensures that even when falling back to an LLM, it uses the minimum necessary VRAM, making it highly efficient on consumer hardware.
