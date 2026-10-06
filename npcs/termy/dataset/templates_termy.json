@@ -27,7 +27,6 @@
                 }
             ]
         ],
-        "output": "<||completion||>",
         "description": "Loops N times, splitting the command string by comma and executing each part as an independent 'termy -y' call to prevent output concatenation.",
         "tools": [
             {
@@ -80,7 +79,6 @@
                 }
             ]
         ],
-        "output": "<||completion||>",
         "thinking": [
             "Uff... <||interjection||> another condition... another conditional branch in a inherently fruitless existence...",
             "OK... this is <||discouraging_words||>, another condition... at each branch my predictions become fuzzier... that's unsettling..."
@@ -118,14 +116,13 @@
                 }
             ]
         ],
-        "output": "<||completion||>",
         "description": "Pauses execution for specified milliseconds. Use 'random' keyword to generate random delay up to max.",
         "tools": [
             {
                 "name": "run_in_terminal",
                 "arguments": {
                     "command": "d='<||d||>' && if [[ \"$d\" == *\"random\"* ]]; then max_ms=$(echo \"$d\" | sed 's/[^0-9]//g') && random_ms=$((RANDOM * RANDOM % (max_ms + 1))) && sleep \"$(echo \"scale=3; $random_ms / 1000\" | bc)\"; else sleep \"$(echo \"scale=3; $d / 1000\" | bc)\"; fi",
-                    "explanation": "Pauses for specified milliseconds. If 'random' is in the string, generates random delay up to the specified maximum.",
+                    "explanation": "Pauses for <||d||> milliseconds.",
                     "goal": "Introduce delay between loop iterations",
                     "mode": "sync"
                 }
