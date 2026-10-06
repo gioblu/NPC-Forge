@@ -56,7 +56,7 @@ Both classes rely on subtraction engineering: instead of adding probabilistic mo
 1. Sanitize & Strip (insults, interjections, stop words)
 2. Exact Match (hash lookup)
 3. Template Match (semantic structure parsing)
-4. Probabilistic Match (IDF-weighted Levenshtein)
+4. Probabilistic Match (IDF-weighted Levenshtein and synonym matching)
 5. Rejection with optional LLM dataset entry generation
 
 This approach is more efficient and less brittle than many alternatives that implement much more complex machine-learning techniques. If you are interested in how I came up with this stuff, I wrote about it [here](/docs/development.md).
