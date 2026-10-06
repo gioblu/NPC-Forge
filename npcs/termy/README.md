@@ -1,5 +1,5 @@
 ## TERMy
-TERMy is an experimental, deterministic terminal assistant implemented using [FlintParser](/src/FlintParser.py) and [FlintNPC](/src/FlintNPC.py) that translates your plain English requests in shell scripts in milliseconds. It is incredibly lightweight and can run on very small targets such as RPI or ESP32, just type `termy` followed by your prompt:
+TERMy is an experimental, frontier deterministic and hybrid AI terminal assistant implemented using [FlintParser](/src/FlintParser.py) and [FlintNPC](/src/FlintNPC.py) that translates your plain English requests in shell scripts in milliseconds. It is incredibly lightweight and can run on very small targets such as the Raspberry Pi, just type `termy` followed by your prompt:
 
 <img src="/npcs/termy/showcase.gif" style="width: 650px">
 
@@ -42,8 +42,40 @@ termy -y < test.termy
 ```
 Watch TERMy transpile it to a Shell script and execute it.
 
-### Conditions
+Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell script and execute it. 
 
+> [!TIP]
+> If you want to expand the capabilities of TERMy check out the dataset directory and the TERMy documentation
+
+### Flags
+
+- `-y, --yes`: Automatically answer "yes" to prompts, skipping execution confirmation (ideal for scripted `.termy` files).
+- `-g, --generate`: Force the request to be processed by the configured LLM to generate a new script/intent.
+- `-c, --context`: Set the response buffer size in tokens (default: 4096). TERMy dynamically estimates the total context window needed, rounding to VRAM-optimized boundaries (e.g., 8192, 16384) to prevent out-of-memory errors and ensure efficient inference.
+- `-a, --agent`: Include session context (active file, active content, last output) for agentic workflows and multi-step debugging.
+- `-d, --delete-context`: Include session context (active file, active content, last output) for agentic workflows and multi-step debugging.
+
+### Advanced features and hybrid mode
+
+While TERMy is fundamentally deterministic, it is a powerful **hybrid harness** powered by local LLMs (like Ollama) that implements prompt semantic caching and continuous learning.
+
+If TERMy encounters an error or an unknown request, you can iteratively refine it using natural language:
+```bash
+# 1. Generate a script for a new task
+termy -g "create a python script that draws 200 random green triangles"
+
+# 2. If it fails, just ask it to fix the error using the saved context
+termy -a -g "fix it"
+
+# 3. Refine the output
+termy -a -g "yes, but make each triangle a random shade of green"
+```
+When the LLM generates a valid new intent, TERMy will prompt you to save it to the local dataset. Once saved, future identical requests will execute deterministically in milliseconds without invoking the LLM, making TERMy smarter and faster over time.
+
+> [!TIP]
+> TERMy's dynamic context estimation ensures that even when falling back to an LLM, it uses the minimum necessary VRAM, making it highly efficient on consumer hardware.
+
+### Conditions
 You can pass standard conditional structures to TERMy. The `if` statement evaluates a command string or expression, mapping it to standard exit codes: it returns `true` on `exit 0` (success) and `false` on `exit 1` (failure).
 
 Syntax example:
