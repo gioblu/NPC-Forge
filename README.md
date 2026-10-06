@@ -33,11 +33,14 @@ npc-forge install <path> # Installs a new NPC
 ```
 Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md) documentation.
 
-### TERMy terminal assistant
-
-[TERMy](npcs/termy/README.md) is the first NPC baked into the NPC-Forge framework. It is a cynical, very knowledgeable, Turing-complete, Linux terminal assistant that translates your natural language into shell commands without a single artificial neuron. It includes 101 templates and 30857 intents; a "dataset" of 58.82MB that arguably makes it the **world's most powerful, open-source, deterministic agent**. Just type `termy` followed by your prompt:
+### TERMy-24k terminal assistant
+[TERMy-24k](/npcs/termy/README.md) is a hybrid AI terminal assistant that includes a deterministic engine capable of translating natural language to terminal commands. It is implemented upon the [NPC-Forge](README.md) framework which provides all the infrastructure required for users to work efficiently with deterministic agents and local LLMs. This is not yet another terminal harness that just routes prompts. It provides hybrid agentic capabilities, access to a local knowledgebase of responses, while still being capable of consulting LLMs when perplexed and save the newly generated answers locally for future use. It implements a novel and very efficient approach to multi-turn context memory that enable both the deterministic engine and the LLM to cooperate to accomplish the task. 
 
 <img src="/npcs/termy/showcase.gif" style="width: 650px">
+
+The local dataset weights 47.35MB, is composed of 102 templates, 24,274 intents and arguably makes [TERMy-24k](/npcs/termy/README.md) the **world's most powerful, open-source, deterministic agent**.
+
+Until yesterday deterministic chatbots capped out at a few hundred intents. Thanks to [NPC-Forge](README.md), its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its intent recognition pipeline implemented in [FlintNPC](/docs/FlintNPC.md), today, anyone can build a chatbot with over 50,000 dataset entries that responds in less than 100 milliseconds, even on a Raspberry Pi.
 
 You can also write a script in plain english, create a file `test.termy` with the following content:
 ```
@@ -49,6 +52,27 @@ Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell scrip
 
 > [!TIP]
 > If you want to expand the capabilities of TERMy check out the [dataset](npcs/termy/dataset) directory and the [TERMy](npcs/termy/README.md) documentation
+
+### Advanced features and hybrid mode
+
+While TERMy is fundamentally deterministic, it is also a very powerful **hybrid harness** that can be used for agentic coding. You can use TERMy and go straight to your local LLM if you need while retaining its revolutionary context memory and instantaneous deterministic responses. This is a practical example of how it can be used:
+```bash
+# 1. -g flags makes TERMy route the request to the configured LLM
+termy -g "create a python script that draws 200 random green triangles"
+# 2. Run it (not a LLM, 10 milliseconds response time)
+termy execute it
+# 3. It fails, ask it to fix the error using the saved context
+#    (-a flag forces the inclusion of the context) 
+termy -a -g "fix it"
+# 4. Run it (not a LLM, 10 milliseconds response time)
+termy execute it
+# 5. It works, but let's refine the output
+termy -a -g "yes, but make each triangle a random shade of green"
+``` 
+When the LLM generates a new valid dataset entry, TERMy will ask if to save it to the local dataset. Once saved, future similar requests will execute deterministically in milliseconds without invoking the LLM, making TERMy smarter and faster over time.
+
+> [!TIP]
+> TERMy's dynamic context estimation ensures that even when falling back to an LLM, it uses the minimum necessary VRAM, making it highly efficient on consumer hardware.
 
 ### Quick start to redemption
 Reclaim control on your workflow in less than sixty seconds:
