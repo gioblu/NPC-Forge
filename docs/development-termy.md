@@ -12,7 +12,7 @@ What I am trying to say is, maybe, if the goal is to translate natural language 
 
 ### TERMy-24k
 
-[TERMy-24k](/npcs/termy/README.md) is a hybrid AI terminal harness composed by a deterministic engine capable of translating natural language to terminal commands and all the infrastructure required to work efficiently with local LLMs. This is not yet another terminal harness that just routes prompts. It provides hybrid agentic capabilities, access to a local knowledgebase of responses, while still being capable of consulting LLMs when perplexed and save the newly generated answers locally for future use. It implements a novel and very efficient approach to multi-turn context memory that enable both the deterministic engine and the LLM to communicate data and cooperate to accomplish the task. 
+[TERMy-24k](/npcs/termy/README.md) is a hybrid AI terminal assistant composed by a deterministic engine capable of translating natural language to terminal commands and all the infrastructure required for users to work efficiently with local LLMs. This is not yet another terminal harness that just routes prompts. It provides hybrid agentic capabilities, access to a local knowledgebase of responses, while still being capable of consulting LLMs when perplexed and save the newly generated answers locally for future use. It implements a novel and very efficient approach to multi-turn context memory that enable both the deterministic engine and the LLM to communicate data and cooperate to accomplish the task. 
 
 The local dataset weights 47.35MB, is composed of 102 templates, 24,274 intents and arguably makes [TERMy-24k](/npcs/termy/README.md) the **world's most powerful, open-source, deterministic agent**.
 
