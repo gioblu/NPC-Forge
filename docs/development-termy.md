@@ -1,4 +1,4 @@
-## The frontier of Frugal AI
+## The frontier of Sovereign AI
 
 For the past five years the tech industry has been misled by the following dogma: 
 
@@ -104,8 +104,10 @@ The paraphrases generation was done using [granite-4.1 3B](https://www.ibm.com/g
 
 With this data I had the chance to verify practically that [NPC-Forge](README.md) and TERMy can handle "immense" datasets, remaining reliable, and still, answer in milliseconds. The sheer amount of intents and their paraphrases makes TERMy surprisingly capable of answering questions about Python.
 
-### Frugal, Local, and Sovereign AI
+### Sovereign AI
 
 I am convinced we should all use systems like TERMy and that the future of AI will be hybrid designs that merge the best of both worlds (deterministic and probabilistic); insanely cheap, insanely fast, and with the same generative abilities of the most expensive model you can afford.
+
+If you liked [TERMy-24k](/npcs/termy/README.md) consider joining the [NPC-Forge](README.md) community and contributing to the development of [TERMy-24k](/npcs/termy/README.md).
 
 
