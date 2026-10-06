@@ -12,7 +12,6 @@ set -euo pipefail
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
-BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
@@ -26,11 +25,11 @@ SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # uninstall if requested
 if [ "${1:-}" == "--uninstall" ]; then
-    echo -e "${RED}🧹 Removing NPC-Forge Framework and User Service...${NC}"
+    echo -e "\nRemoving NPC-Forge Framework and User Service...\n"
     
     # Stops and disables user's Systemd service if present
     if systemctl --user list-unit-files | grep -q "npc-forge.service"; then
-        echo -e "${YELLOW}Stopping Systemd user service...${NC}"
+        echo -e "${YELLOW} Stopping Systemd user service...${NC}\n"
         systemctl --user stop npc-forge.service 2>/dev/null || true
         systemctl --user disable npc-forge.service 2>/dev/null || true
     fi
@@ -46,11 +45,11 @@ if [ "${1:-}" == "--uninstall" ]; then
     rm -rf "$FORGE_DIR"
     
     hash -r
-    echo -e "${GREEN}✅ NPC-Forge completely cleaned up from user space${NC}\n"
+    echo -e "${YELLOW}npc-forge${NC} removed from user space!\n"
     exit 0
 fi
 
-echo -e "\n${GREEN}NPC-FORGE User Installation${NC}\n"
+echo -e "\n${YELLOW}npc-forge${NC} User Installation\n"
 
 if [ "$EUID" -eq 0 ]; then
   echo -e "${RED}⛔ Error: Do NOT run this script as root/sudo.${NC}\n"
@@ -61,10 +60,10 @@ fi
 DEV_MODE=0
 if [ "${1:-}" == "--dev" ]; then
     DEV_MODE=1
-    echo -e "${YELLOW}🔧 Dev mode — symlinking from $SOURCE_DIR${NC}\n"
+    echo -e "${YELLOW} Dev mode:${NC} symlinking from $SOURCE_DIR"
 fi
 
-echo -e "${GREEN}🙋 Installing for user: $(whoami)${NC}\n"
+echo -e " Installing for user: $(whoami)"
 
 # Check for Python 3
 if ! command -v python3 >/dev/null 2>&1; then
@@ -79,7 +78,7 @@ if ! python3 -c "import venv" &> /dev/null; then
     exit 1
 fi
 
-echo -e "${BLUE} Copying sources to $FORGE_DIR...${NC}"
+echo -e " Copying sources to $FORGE_DIR..."
 mkdir -p "$FORGE_DIR"
 mkdir -p "$BIN_DIR"
 
@@ -129,7 +128,7 @@ else
     [ -f "$SOURCE_DIR/README.md" ] && cp "$SOURCE_DIR/README.md" "$FORGE_DIR/"
 fi
 
-echo -e "${BLUE} Configuring virtual environment...${NC}"
+echo -e " Configuring virtual environment..."
 if [ ! -d "$FORGE_DIR/venv" ]; then
     python3 -m venv "$FORGE_DIR/venv"
     "$FORGE_DIR/venv/bin/pip" install --upgrade pip -q
@@ -144,7 +143,7 @@ else
     "$FORGE_DIR/venv/bin/pip" install . -q
 fi
 
-echo -e "${BLUE} Setting up npc-forge terminal command...${NC}"
+echo -e " Setting up npc-forge terminal command..."
 cat << EOF > "$BIN_DIR/npc-forge"
 #!$FORGE_DIR/venv/bin/python3
 import sys
@@ -155,10 +154,10 @@ if __name__ == "__main__":
 EOF
 chmod +x "$BIN_DIR/npc-forge"
 
-echo -e "${BLUE} Configuring User Service...${NC}"
+echo -e " Configuring User Service..."
 
 if command -v systemctl >/dev/null 2>&1; then
-    echo -e "\n${GREEN}😲 Systemd detected, configuring systemd service...${NC}\n"
+    echo -e " Systemd detected, configuring systemd service..."
     mkdir -p "$SERVICE_DIR"
 
     cat << EOF > "$SERVICE_FILE"
@@ -194,7 +193,7 @@ fi
 
 # $PATH automatic configuration
 
-echo -e "${BLUE} Verifying environment \$PATH...${NC}"
+echo -e " Verifying environment \$PATH..."
 hash -r
 
 DETECTED_SHELL=$(basename "$SHELL")
@@ -216,7 +215,7 @@ if [[ ":$PATH:" != *":$BIN_DIR:"* ]]; then
     fi
 fi
 
-echo -e "\n${GREEN}✅ npc-forge installed successfully in user space${NC}\n"
+echo -e "\n${YELLOW}npc-forge${NC}${GREEN} installed successfully${NC} in user space."
 if [ "$SERVICE_RUNNING" -eq 1 ]; then
     echo -e "Server service is now running in background via Systemd."
     echo -e "\nYou can now use the ${YELLOW}npc-forge${NC} command\n"
