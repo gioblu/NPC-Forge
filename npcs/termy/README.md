@@ -80,6 +80,8 @@ Syntax example:
 termy 'if "you are a llm" then "goodbye" else "nice to meet you"'
 ```
 
+<img src="/npcs/termy/showcase-turing-complete.gif" style="width: 650px">
+
 ### Loops
 
 TERMy implements loops over a specified number of iterations; inside the loop block, you can chain multiple requests together by separating them with a comma `,`. 
