@@ -74,7 +74,7 @@ class OllamaProvider(BaseProvider):
         """
         
         prompt = (
-            "You are an terminal expert, solve the task requested by the human.\n"
+            "You are a terminal expert, solve the task requested by the human.\n"
             "Be sincere and terse (you are running in a limited machine).\n"
             "\nIn \"code\" add a solution adhering to the following requirements:\n\n"
             "1. Do not use code fences, write only code that is complete, functional, elegant and reusable.\n"

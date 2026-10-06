@@ -25,6 +25,7 @@ termy_voice_off() {
     pkill "$tts_engine" >/dev/null 2>&1
     termy_set_context "tts" "off"
     echo "Voice mode disabled."
+    printf "\n"
 }
 
 # This function is used by TERMy to synthetize speech
