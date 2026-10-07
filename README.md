@@ -11,7 +11,7 @@ Instead of praying for a model to do the right thing, you can now use NPC-Forge 
 Many problems you encounter can be solved without machine-learning or LLMs. NPC-Forge gives you a way to solve those problems more efficiently:
 
 * **Deterministic engine**: implements a fast, safe and reliable deterministic engine to handle known questions.
-* **Probabilistic engine**: uses [ollama](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://ollama.com/&ved=2ahUKEwjpi7HP-qaXAxWSgP0HHfd3C-EQFnoECA8QAQ&usg=AOvVaw17WonOj_dIOYJACdXhdC2W) to answer questions that require automated reasoning or generative abilities.
+* **Probabilistic engine**: uses [ollama](https://ollama.com) to answer questions that require automated reasoning or generative abilities.
 * **Extensible**: datasets can be developed with ease thanks to the [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md) specification.
 * **Plug-and-play**: implements an OpenAI-compatible API that connects NPCs to your favourite application, workflow, or LLM harness.
 * **World's first**:  NPC-Forge is the world's first functional neuro-symbolic AI agent framework.
