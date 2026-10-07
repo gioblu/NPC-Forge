@@ -4,11 +4,7 @@ For the past five years the tech industry has been misled by the following dogma
 
 >Natural Language Understanding (NLU) requires vectors, embeddings, parameters, GPU clusters, and deep learning. 
 
-Everyone still thinks "Attention is all you need". A transformer with an attention layer is the silver bullet capable of solving any problem. My take is, what you effectively need to answer most questions is just a parser capable of translating natural language to something the computer can understand. 
-
-In many cases we use the transformer to let users interact with the computer in natural language; ask a question in English, get back English. Yes, the LLMs have generative abilities, but I feel sure to assert that those are side-effects of their core working principle, and they are both a feature and a bug when applied to this use case.
-
-Maybe, if the goal is to translate natural language shouldn't we just use a parser?
+Everyone still thinks "Attention is all you need" and a transformer with an attention layer is the silver bullet capable of solving any problem.
 
 Many think neuro-symbolic AI systems will be the future, but nobody is really sure how they should be built, wikipedia states:
 
@@ -23,7 +19,7 @@ In this document I showcase a working technology demonstrator of such a system.
 
 The local dataset weights 47.35MB, is composed of 102 templates, 24,274 intents.
 
-Until yesterday deterministic chatbots capped out at a few hundred intents. Thanks to the [NPC-Forge](README.md) framework, its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its intent recognition pipeline implemented in [FlintNPC](/docs/FlintNPC.md), today, anyone can build a chatbot with over 50,000 dataset entries that responds in less than 100 milliseconds, even on a Raspberry Pi.
+Until yesterday deterministic chatbots capped out at a few hundred intents. Thanks to the [NPC-Forge](https://github.com/gioblu/NPC-Forge) framework, its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its intent recognition pipeline implemented in [FlintNPC](/docs/FlintNPC.md), today, anyone can build a chatbot with over 50,000 dataset entries that responds in less than 100 milliseconds, even on a Raspberry Pi.
 
 ### How it works
 
@@ -60,7 +56,7 @@ Instead of doing what all harnesses do: pile up, compact, and leak garbage until
 If you have a 8/12GB VRAM GPU you know that models that fit in the graphics card are at the limits of usability and traditional harnesses generally overwhelm them and make them unusable. [TERMy-24k](/npcs/termy/README.md) removes every token that is not effectively required to solve the task and helps local models perform better.
 
 ### How it understands English
-[TERMy-24k](/npcs/termy/README.md) is implemented using the [FlintNPC](/docs/FlintNPC.md) and [FlintParser](/docs/FlintParser.md) classes provided by [NPC-Forge](README.md).
+[TERMy-24k](/npcs/termy/README.md) is implemented using the [FlintNPC](/docs/FlintNPC.md) and [FlintParser](/docs/FlintParser.md) classes provided by [NPC-Forge](https://github.com/gioblu/NPC-Forge).
 
 Both classes rely on subtraction engineering: instead of adding probabilistic models, after subtracting noise (insults, interjections, stop words), the request is parsed and compiled down to a natural language response and a list of tool calls. The framework implements the following pipeline:
 
@@ -95,7 +91,7 @@ Introducing this simple feature enables:
 <a href="https://www.youtube.com/watch?v=xgzD2akCj3k"><img src="/npcs/termy/showcase-continuous-learning.gif" style="width: 650px"></a>
 
 ### Datasets
-I recently started pondering if I could have used datasets originally developed to train LLMs to expand the knowledge of deterministic agents. I looked at the material available on [huggingface](https://huggingface.co/) and I found a lot of datasets composed of question and answer about python. With some trial and error I have developed software to curate and format datasets automatically in the [NDF](/docs/dataset.md) format used by [NPC-Forge](/README.md). Thanks to these scripts I was able to release:
+I recently started pondering if I could have used datasets originally developed to train LLMs to expand the knowledge of deterministic agents. I looked at the material available on [huggingface](https://huggingface.co/) and I found a lot of datasets composed of question and answer about python. With some trial and error I have developed software to curate and format datasets automatically in the [NDF](/docs/dataset.md) format used by [NPC-Forge](https://github.com/gioblu/NPC-Forge). Thanks to these scripts I was able to release:
 
 1. [python_ppqd](/npcs/termy/dataset/python-functions-reasoning-100/README.md) 8777 intents around 10.8MB.
 
@@ -117,7 +113,7 @@ This is more or less the data curation pipeline I have implemented:
 
 The paraphrases generation was done using [granite-4.1 3B](https://www.ibm.com/granite/docs/models/granite4-1) and required more than 2 days of compute on an obsolete machine with 16GB of RAM, Intel i7-4790K CPU and NVIDIA GeForce GTX 1050 Ti.
 
-With this data I had the chance to verify practically that [NPC-Forge](README.md) and TERMy can handle "immense" datasets, remaining reliable, and still, answer in milliseconds. The sheer amount of intents and their paraphrases makes TERMy surprisingly capable of answering questions about Python.
+With this data I had the chance to verify practically that [NPC-Forge](https://github.com/gioblu/NPC-Forge) and TERMy can handle "immense" datasets, remaining reliable, and still, answer in milliseconds. The sheer amount of intents and their paraphrases makes TERMy surprisingly capable of answering questions about Python.
 
 ### Neuro-symbolic AI
 

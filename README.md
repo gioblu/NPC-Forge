@@ -2,7 +2,7 @@
 [![NPC-Forge Discord](https://img.shields.io/badge/Join-Discord-%235865F2.svg)](https://discord.gg/84zTNDzjD)
 ## NPC-Forge
 
-NPC-Forge is the world's first neuro-symbolic AI agent framework that runs on the CPU even on obsolete hardware. With NPC-forge you can craft NPCs with distinct personalities, multi-turn context memory, sentiment analysis, and tool-call support. NPCs run on the CPU without necessarily relying on machine learning or LLMs.
+NPC-Forge is the world's first neuro-symbolic AI agent framework. With NPC-forge you can craft NPCs with distinct personalities, multi-turn context memory, sentiment analysis, and tool-call support. NPCs run on the CPU without necessarily relying on machine learning or LLMs.
 
 Instead of praying for a model to do the right thing, you can now use NPC-Forge to quickly build a deterministic agent and hook it up to your favourite workflow, API or harness.
 
@@ -10,9 +10,9 @@ Instead of praying for a model to do the right thing, you can now use NPC-Forge 
 
 Many problems you encounter can be solved without machine-learning or LLMs. NPC-Forge gives you a way to solve those problems more efficiently:
 
-* **Deterministic engine**: implements a fast, safe and reliable deterministic engine to handle known questions.
-* **Probabilistic engine**: uses [ollama](https://ollama.com) to answer questions that require automated reasoning or generative abilities.
-* **Extensible**: datasets can be developed with ease thanks to the [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md) specification.
+* **Deterministic engine**: fast, safe and reliable deterministic engine to handle known questions.
+* **Probabilistic engine**: uses [ollama](https://ollama.com) to answer questions that require reasoning or generative abilities.
+* **Extensible**: craft datasets with ease thanks to the [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md) specification.
 * **Continuous learning**: NPCs learn and respond to known questions thousands of times faster than LLMs.
 * **Plug-and-play**: implements an OpenAI-compatible API that connects NPCs to your favorite harness.
   
