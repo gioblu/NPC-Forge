@@ -33,7 +33,7 @@ npc-forge install <path> # Installs a new NPC
 Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md) documentation.
 
 ### TERMy-24k terminal assistant
-[TERMy-24k](/npcs/termy/README.md) is the world's first neuro-symbolic AI terminal assistant. It includes a deterministic engine capable of translating natural language to terminal commands. It provides neuro-symbolic agentic capabilities, access to a local dataset, while still being capable of asking help to LLMs when perplexed and save the newly generated answers locally for future use. It implements a novel and very efficient approach to multi-turn context memory that enable both the deterministic engine and the LLM to cooperate to accomplish the task. 
+[TERMy-24k](/npcs/termy/README.md) is the world's first neuro-symbolic AI terminal assistant. It includes a deterministic engine capable of translating natural language, the infrastructure required to communicate with [ollama](https://ollama.com) and implements a novel approach to multi-turn context memory that enable both the deterministic engine and the LLM to cooperate and accomplish the task more efficiently. 
 
 <a href="https://www.youtube.com/watch?v=mIoUCLJDJ1U"><img src="/npcs/termy/showcase.gif" style="width: 650px"></a>
 
