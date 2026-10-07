@@ -24,8 +24,6 @@ The local dataset weights 47.35MB, is composed of 102 templates, 24,274 intents.
 
 Until yesterday deterministic chatbots capped out at a few hundred intents. Thanks to the [NPC-Forge](https://github.com/gioblu/NPC-Forge) framework, its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its intent recognition pipeline implemented in [FlintNPC](/docs/FlintNPC.md), today, anyone can build a chatbot with over 50,000 dataset entries that responds in less than 100 milliseconds, even on a Raspberry Pi.
 
-### How it works
-
 Just type `termy` followed by your prompt:
 
 <a href="https://www.youtube.com/watch?v=mIoUCLJDJ1U"><img src="/npcs/termy/showcase.gif" style="width: 650px"></a>
