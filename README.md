@@ -2,7 +2,7 @@
 [![NPC-Forge Discord](https://img.shields.io/badge/Join-Discord-%235865F2.svg)](https://discord.gg/84zTNDzjD)
 ## NPC-Forge
 
-NPC-Forge is an experimental framework for building hybrid AI agents, harnesses and chatbots with distinct personalities, multi-turn context memory, sentiment analysis, and tool-call support. NPCs run on the CPU (web browser or OS) even on embedded systems and obsolete hardware without relying on machine learning or LLMs.
+NPC-Forge is an experimental framework for building hybrid AI agents with distinct personalities, multi-turn context memory, sentiment analysis, and tool-call support. NPCs run on the CPU (web browser or OS) even on embedded systems and obsolete hardware without relying on machine learning or LLMs.
 
 Instead of praying for a model to do the right thing, you can now use NPC-Forge to quickly build a deterministic agent and hook it up to your favourite workflow, API or harness.
 
@@ -36,7 +36,7 @@ Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md
 ### TERMy-24k terminal assistant
 [TERMy-24k](/npcs/termy/README.md) is a hybrid AI terminal assistant that includes a deterministic engine capable of translating natural language to terminal commands. It is implemented upon the [NPC-Forge](README.md) framework which provides all the infrastructure required for users to work efficiently with deterministic agents and local LLMs. This is not yet another terminal harness that just routes prompts. It provides hybrid agentic capabilities, access to a local knowledgebase of responses, while still being capable of consulting LLMs when perplexed and save the newly generated answers locally for future use. It implements a novel and very efficient approach to multi-turn context memory that enable both the deterministic engine and the LLM to cooperate to accomplish the task. 
 
-<img src="/npcs/termy/showcase.gif" style="width: 650px">
+<a href="https://www.youtube.com/watch?v=mIoUCLJDJ1U"><img src="/npcs/termy/showcase.gif" style="width: 650px"></a>
 
 The local dataset weights 47.35MB, is composed of 102 templates, 24,274 intents and arguably makes [TERMy-24k](/npcs/termy/README.md) the **world's most powerful, open-source, deterministic agent**.
 
@@ -58,11 +58,11 @@ Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell scrip
 While TERMy is fundamentally deterministic, it is also a very powerful **hybrid harness** that can be used for agentic coding. You can use TERMy and go straight to your local LLM if you need while retaining its revolutionary context memory and instantaneous deterministic responses. This is a practical example of how it can be used:
 
 
-<img src="/npcs/termy/showcase-llm.gif" style="width: 650px">
+<a href="https://www.youtube.com/watch?v=1WQBMnXlCiM"><img src="/npcs/termy/showcase-llm.gif" style="width: 650px"></a>
 
 When the LLM generates a new valid dataset entry, TERMy will ask if to save it to the local dataset. Once saved, future similar requests will execute deterministically in milliseconds without invoking the LLM, making TERMy smarter and faster over time.
 
-<img src="/npcs/termy/showcase-continuous-learning.gif" style="width: 650px">
+<a href="https://www.youtube.com/watch?v=xgzD2akCj3k"><img src="/npcs/termy/showcase-continuous-learning.gif" style="width: 650px"></a>
 
 ### Quick start to redemption
 Reclaim control on your workflow in less than sixty seconds:
