@@ -39,6 +39,8 @@ open it in the browser
 ```
 Then type `termy -y < test.termy` and watch TERMy compile it to Bash and execute it. 
 
+### Using it as a harness
+
 TERMy is also a supercharged LLM harness, this is a practical example of how it can be used:
 
 1. `termy -g "create a python script that draws triangles"` the `-g` flag routes the request to the LLM
