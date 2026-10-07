@@ -19,7 +19,7 @@ In this document I showcase a working technology demonstrator of such a system.
 
 ### TERMy-24k
 
-[TERMy-24k](/npcs/termy/README.md) is a hybrid AI terminal assistant that includes a deterministic engine capable of translating natural language to terminal commands. It is implemented upon the [NPC-Forge](README.md) framework which provides all the infrastructure required for users to work efficiently with deterministic agents and local LLMs. This is not yet another terminal harness that just routes prompts. It provides hybrid agentic capabilities, access to a local knowledgebase of responses, while still being capable of consulting LLMs when perplexed and save the newly generated answers locally for future use. It implements a novel and very efficient approach to multi-turn context memory that enable both the deterministic engine and the LLM to cooperate to accomplish the task. 
+[TERMy-24k](/npcs/termy/README.md) is a neuro-symboli AI terminal assistant that includes a deterministic engine capable of translating natural language to terminal commands. It is implemented upon the [NPC-Forge](README.md) framework which provides all the infrastructure required for users to work efficiently with deterministic agents and local LLMs. This is not yet another terminal harness that just routes prompts. It provides neuro-symbolic agentic capabilities, access to a local knowledgebase of responses, while still being capable of consulting LLMs when perplexed and save the newly generated answers locally for future use. It implements a novel and very efficient approach to multi-turn context memory that enable both the deterministic engine and the LLM to cooperate to accomplish the task. 
 
 The local dataset weights 47.35MB, is composed of 102 templates, 24,274 intents and arguably makes [TERMy-24k](/npcs/termy/README.md) the **world's most powerful, open-source, neuro-symbolic agent**.
 
@@ -119,7 +119,7 @@ With this data I had the chance to verify practically that [NPC-Forge](README.md
 
 ### Neuro-symbolic AI
 
-I am convinced we should all use systems like TERMy and that the future of AI will be hybrid designs that merge the best of both worlds (deterministic and probabilistic); insanely cheap, insanely fast, and with the same generative abilities of the most expensive model you can afford.
+I am convinced we should all use systems like TERMy and that the future of AI will be neuro-symbolic designs that merge the best of both worlds (deterministic and probabilistic); insanely cheap, insanely fast, and with the same generative abilities of the most expensive model you can afford.
 
 If you liked [TERMy-24k](/npcs/termy/README.md) consider joining the [NPC-Forge](README.md) community and contributing to the development of [TERMy-24k](/npcs/termy/README.md).
 
