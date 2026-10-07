@@ -15,7 +15,6 @@ Many problems you encounter can be solved without machine-learning or LLMs. NPC-
 * **Extensible**: datasets can be developed with ease thanks to the [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md) specification.
 * **Continuous learning**: NPCs learn and respond to known questions thousands of times faster than LLMs.
 * **Plug-and-play**: implements an OpenAI-compatible API that connects NPCs to your favorite harness.
-* **World's first**:  NPC-Forge is the world's first functional neuro-symbolic AI agent framework.
   
 #### NPC-Forge CLI
 
