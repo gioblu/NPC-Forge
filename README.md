@@ -10,7 +10,7 @@ Instead of praying for a model to do the right thing, you can now use NPC-Forge 
 
 Many problems you encounter can be solved without machine-learning or LLMs. NPC-Forge gives you a way to solve those problems more efficiently:
 
-* **Deterministic engine**: implements a fast, safe and reliable deterministic engine to handle known questions.
+* **Deterministic engine**: fast, safe and reliable deterministic engine to handle known questions.
 * **Probabilistic engine**: uses [ollama](https://ollama.com) to answer questions that require reasoning or generative abilities.
 * **Extensible**: datasets can be cafted with ease thanks to the [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md) specification.
 * **Continuous learning**: NPCs learn and respond to known questions thousands of times faster than LLMs.
