@@ -43,6 +43,8 @@ The local dataset weights 47.35MB, is composed of 102 templates, 24,274 intents.
 
 <img width="800px" src="/npcs/termy/showcase-graph.png" />
 
+It implements a "neuro helps symbolic" architecture in the "learning‑for‑reasoning" family.
+ 
 ### Quick start to redemption
 Reclaim control on your workflow in less than sixty seconds:
 
