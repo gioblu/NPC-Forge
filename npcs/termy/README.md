@@ -46,11 +46,11 @@ Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell scrip
 
 ### Flags
 
-- `-y, --yes`: Automatically answer "yes" to prompts, skipping execution confirmation (ideal for scripted `.termy` files).
-- `-g, --generate`: Force the request to be processed by the configured LLM to generate a new script/intent.
-- `-c, --context`: Set the response buffer size in tokens (default: 4096). TERMy dynamically estimates the total context window needed, rounding to VRAM-optimized boundaries (e.g., 8192, 16384) to prevent out-of-memory errors and ensure efficient inference.
+- `-y, --yes`: Answer "yes" to execution confirmation (ideal for scripted `.termy` files).
+- `-g, --generate`: Route request to configured LLM to generate a new script/intent.
+- `-c, --context`: Set context length (default: 4096).
 - `-a, --agent`: Include session context (active file, active content, last output) for agentic workflows and multi-step debugging.
-- `-d, --delete-context`: Include session context (active file, active content, last output) for agentic workflows and multi-step debugging.
+- `-d, --delete-context`: Delete session context.
 
 ### Configuration
 
