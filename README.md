@@ -16,8 +16,6 @@ Many problems you encounter can be solved without machine-learning or LLMs. NPC-
 * **Continuous learning**: NPCs learn and respond to known questions thousands of times faster than LLMs.
 * **Plug-and-play**: implements an OpenAI-compatible API that connects NPCs to your favorite harness.
 
-<img width="800px" src="/npcs/termy/showcase-graph.png" />
-
 #### NPC-Forge CLI
 
 Administer, install, and run your NPCs with the following terminal commands:
@@ -39,7 +37,11 @@ Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md
 
 <a href="https://www.youtube.com/watch?v=mIoUCLJDJ1U"><img src="/npcs/termy/showcase.gif" style="width: 650px"></a>
 
-The local dataset weights 47.35MB, is composed of 102 templates, 24,274 intents and arguably makes [TERMy-24k](/npcs/termy/README.md) the **world's most powerful, open-source, neuro-symbolic agent**.
+The local dataset weights 47.35MB, is composed of 102 templates, 24,274 intents.
+
+[TERMy-24k](/npcs/termy/README.md) provides context to both deterministic and probabilistic engines and acts as a router:
+
+<img width="800px" src="/npcs/termy/showcase-graph.png" />
 
 ### Quick start to redemption
 Reclaim control on your workflow in less than sixty seconds:
