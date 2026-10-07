@@ -46,7 +46,7 @@ TERMy is also a supercharged LLM harness, this is a practical example of how it 
 3. `termy -a -g "fix it"` request is routed to the LLM with context attached
 4. `termy execute it` executed by the deterministic engine (10 milliseconds response time)  
 5. `termy -a -g "yes, but make each triangle a random shade of green"` refine with context attached
-6. 
+
 <a href="https://www.youtube.com/watch?v=1WQBMnXlCiM"><img src="/npcs/termy/showcase-llm.gif" style="width: 650px"></a>
 
 Instead of doing what all harnesses do: pile up, compact, and leak garbage until they choke the model to death, [TERMy-24k](/npcs/termy/README.md) provides the minimum information required for local models to effectively accomplish tasks. The context is included in the request only when the user asks and it is composed of:
