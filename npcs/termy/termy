@@ -41,7 +41,7 @@ def run_cli() -> int:
     )
     
     parser = argparse.ArgumentParser(
-        description="TERMy - The frontier of deterministic AI",
+        description="TERMy - The world's first neuro-symbolic AI terminal assistant",
         usage=usage_text,
     )
     
