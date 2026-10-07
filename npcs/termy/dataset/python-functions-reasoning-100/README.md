@@ -1,4 +1,4 @@
-## `Tested-143k-Python-Alpaca` (Vezora's CodeTester Dataset)
+## `python_functions_reasoning` (notbadai's CodeTester Dataset)
 
 The [python_functions_reasoning](https://huggingface.co/datasets/notbadai/python_functions_reasoning) is the Python (functions) coding reasoning dataset used to train Notbad v1.0 Mistral 24B reasoning model. The reasoning data were sampled from an RL-based self-improved Mistral-Small-24B-Instruct-2501 model. The Python functions and instructions were sourced from OpenCoder Dataset Stage1 and from open source projects on Github.
 
