@@ -4,13 +4,7 @@ For the past five years the tech industry has been misled by the following dogma
 
 >Natural Language Understanding (NLU) requires vectors, embeddings, parameters, GPU clusters, and deep learning. 
 
-Everyone still thinks "Attention is all you need". A transformer with an attention layer is the silver bullet capable of solving any problem. My take is, what you effectively need to answer most questions is just a parser capable of translating natural language to something the computer can understand. 
-
-In many cases we use the transformer to let users interact with the computer in natural language; ask a question in English, get back English. Yes, the LLMs have generative abilities, but I feel sure to assert that those are side-effects of their core working principle, and they are both a feature and a bug when applied to this use case.
-
-Maybe, if the goal is to translate natural language shouldn't we just use a parser?
-
-Many think neuro-symbolic AI systems will be the future, but nobody is really sure how they should be built, wikipedia states:
+Everyone still thinks "Attention is all you need" and a transformer with an attention layer is the silver bullet capable of solving any problem. Many think neuro-symbolic AI systems will be the future, but nobody is really sure how they should be built, wikipedia states:
 
 >
 >To date, no single predominant approach exists for how to achieve neuro-symbolic AI.
