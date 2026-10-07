@@ -5,9 +5,7 @@ For the past five years the tech industry has been misled by the following dogma
 
 >Natural Language Understanding (NLU) requires vectors, embeddings, parameters, GPU clusters, and deep learning. 
 
-Everyone still thinks "Attention is all you need" and a transformer with an attention layer is the silver bullet capable of solving any problem.
-
-Many think neuro-symbolic AI systems will be the future, but nobody is really sure how they should be built, wikipedia states:
+Everyone still thinks "Attention is all you need" and a transformer with an attention layer is the silver bullet capable of solving any problem. Many think neuro-symbolic AI systems will be the future, but nobody is really sure how they should be built, wikipedia states:
 
 >
 >To date, no single predominant approach exists for how to achieve neuro-symbolic AI.
