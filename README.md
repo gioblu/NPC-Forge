@@ -15,7 +15,9 @@ Many problems you encounter can be solved without machine-learning or LLMs. NPC-
 * **Extensible**: craft datasets with ease thanks to the [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md) specification.
 * **Continuous learning**: NPCs learn and respond to known questions thousands of times faster than LLMs.
 * **Plug-and-play**: implements an OpenAI-compatible API that connects NPCs to your favorite harness.
-  
+
+<img width="800px" src="/npcs/termy/showcase-graph.png" />
+
 #### NPC-Forge CLI
 
 Administer, install, and run your NPCs with the following terminal commands:
