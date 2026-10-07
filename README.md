@@ -2,7 +2,7 @@
 [![NPC-Forge Discord](https://img.shields.io/badge/Join-Discord-%235865F2.svg)](https://discord.gg/84zTNDzjD)
 ## NPC-Forge
 
-NPC-Forge is the world's first neuro-symbolic AI agent framework that runs on the CPU even on obsolete hardware. With NPC-forge you can craft NPCs with distinct personalities, multi-turn context memory, sentiment analysis, and tool-call support. NPCs run on the CPU without necessarily relying on machine learning or LLMs.
+NPC-Forge is the world's first neuro-symbolic AI agent framework. With NPC-forge you can craft NPCs with distinct personalities, multi-turn context memory, sentiment analysis, and tool-call support. NPCs run on the CPU without necessarily relying on machine learning or LLMs.
 
 Instead of praying for a model to do the right thing, you can now use NPC-Forge to quickly build a deterministic agent and hook it up to your favourite workflow, API or harness.
 
