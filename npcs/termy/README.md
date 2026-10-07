@@ -1,8 +1,5 @@
 ## TERMy
-TERMy is an experimental neuro-symbolic AI terminal assistant implemented using [FlintParser](/src/FlintParser.py) and [FlintNPC](/src/FlintNPC.py) that translates your plain English requests in shell scripts in milliseconds. It is incredibly lightweight and can run on very small targets such as the Raspberry Pi, just type `termy` followed by your prompt:
-
-> [!WARNING]
-> This is the second experimental release of [NPC-Forge](https://github.com/gioblu/NPC-Forge) distributed "AS IS" without any warranty, use it at your own risk.
+TERMy is an experimental neuro-symbolic AI terminal assistant implemented using [FlintParser](/src/FlintParser.py) and [FlintNPC](/src/FlintNPC.py) that translates your plain English requests in shell scripts in milliseconds. It is incredibly lightweight and can run on very small targets such as the Raspberry Pi.
 
 ### How to install TERMy
 Open the terminal inside the npc-forge repository main directory and digit:
