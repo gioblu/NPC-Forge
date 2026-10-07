@@ -53,7 +53,7 @@ Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell scrip
 > [!TIP]
 > If you want to expand the capabilities of TERMy check out the [dataset](npcs/termy/dataset) directory and the [TERMy](npcs/termy/README.md) documentation
 
-### Advanced features and hybrid mode
+#### Advanced features and hybrid mode
 
 While TERMy is fundamentally deterministic, it is also a very powerful **hybrid harness** that can be used for agentic coding. You can use TERMy and go straight to your local LLM if you need while retaining its revolutionary context memory and instantaneous deterministic responses. This is a practical example of how it can be used:
 
