@@ -39,29 +39,6 @@ Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md
 
 The local dataset weights 47.35MB, is composed of 102 templates, 24,274 intents and arguably makes [TERMy-24k](/npcs/termy/README.md) the **world's most powerful, open-source, neuro-symbolic agent**.
 
-Until yesterday deterministic chatbots capped out at a few hundred intents. Thanks to [NPC-Forge](README.md), its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its intent recognition pipeline implemented in [FlintNPC](/docs/FlintNPC.md), today, anyone can build a chatbot with over 50,000 dataset entries that responds in less than 100 milliseconds, even on a Raspberry Pi.
-
-You can even write a script in plain english, try it yourself creating a file `test.termy` with the following content:
-```
-search on wiki the programma 101
-append it to p101.txt
-open it in the browser 
-```
-Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell script and execute it. 
-
-> [!TIP]
-> If you want to expand the capabilities of TERMy check out the [dataset](npcs/termy/dataset) directory and the [TERMy](npcs/termy/README.md) documentation
-
-#### Advanced features and neuro-symbolic mode
-
-While TERMy is fundamentally deterministic, it is also a very powerful **neuro-symbolic harness** that can be used for agentic coding. You can use TERMy and go straight to your local LLM if you need while retaining its revolutionary context memory and instantaneous deterministic responses. This is a practical example of how it can be used:
-
-<a href="https://www.youtube.com/watch?v=1WQBMnXlCiM"><img src="/npcs/termy/showcase-llm.gif" style="width: 650px"></a>
-
-When the LLM generates a new valid dataset entry, TERMy will ask if to save it to the local dataset. Once saved, future similar requests will execute deterministically in milliseconds without invoking the LLM, making TERMy smarter and faster over time.
-
-<a href="https://www.youtube.com/watch?v=xgzD2akCj3k"><img src="/npcs/termy/showcase-continuous-learning.gif" style="width: 650px"></a>
-
 ### Quick start to redemption
 Reclaim control on your workflow in less than sixty seconds:
 
