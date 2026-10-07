@@ -165,6 +165,6 @@ The dataset of TERMy was expanded thanks to these source datasets:
 - [Tested-143k-Python-Alpaca](https://huggingface.co/datasets/Vezora/Tested-143k-Python-Alpaca) dataset licensed under Apache license 2.0 published by Vezora on Huggingface.
 - [python_functions_reasoning](https://huggingface.co/notbadai) dataset licensed under Apache license 2.0 published by on [Huggingface](https://huggingface.co/datasets/notbadai/python_functions_reasoning).
 -  [python-glaive-100](https://www.kaggle.com/datasets/thedevastator/glaive-python-code-qa-dataset) dataset licensed under [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) - Public Domain Dedication by The Devastator on [kaggle](https://www.kaggle.com/datasets/thedevastator/glaive-python-code-qa-dataset).
-- [Python Programming Questions Dataset](https://www.kaggle.com/datasets/bhaveshmittal/python-programming-questions-dataset) licensed under CC0: Public Domain published by Bhavesh Mittal on [Kaggle](https://www.kaggle.com/datasets/bhaveshmittal/python-programming-questions-dataset).
-- [nl2bash](https://github.com/TellinaTool/nl2bash/tree/master/data) licensed under MIT license published by TellinaTool on [github](https://github.com/TellinaTool/nl2bash/)
+- [Python Programming Questions Dataset](https://www.kaggle.com/datasets/bhaveshmittal/python-programming-questions-dataset) dataset licensed under CC0: Public Domain published by Bhavesh Mittal on [Kaggle](https://www.kaggle.com/datasets/bhaveshmittal/python-programming-questions-dataset).
+- [nl2bash](https://github.com/TellinaTool/nl2bash/tree/master/data) dataset licensed under MIT license published by TellinaTool on [github](https://github.com/TellinaTool/nl2bash/)
 
