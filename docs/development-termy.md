@@ -117,7 +117,7 @@ The paraphrases generation was done using [granite-4.1 3B](https://www.ibm.com/g
 
 With this data I had the chance to verify practically that [NPC-Forge](README.md) and TERMy can handle "immense" datasets, remaining reliable, and still, answer in milliseconds. The sheer amount of intents and their paraphrases makes TERMy surprisingly capable of answering questions about Python.
 
-### Sovereign AI
+### Neuro-symbolic AI
 
 I am convinced we should all use systems like TERMy and that the future of AI will be hybrid designs that merge the best of both worlds (deterministic and probabilistic); insanely cheap, insanely fast, and with the same generative abilities of the most expensive model you can afford.
 
