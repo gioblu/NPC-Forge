@@ -2,7 +2,7 @@
 [![NPC-Forge Discord](https://img.shields.io/badge/Join-Discord-%235865F2.svg)](https://discord.gg/84zTNDzjD)
 ## NPC-Forge
 
-NPC-Forge is a framework for building deterministic and hybrid AI agents with distinct personalities, multi-turn context memory, sentiment analysis, and tool-call support. NPCs run on the CPU (web browser or OS) even on embedded systems and obsolete hardware without relying on machine learning or LLMs.
+NPC-Forge is an experimental framework for building hybrid AI agents, harnesses and chatbots with distinct personalities, multi-turn context memory, sentiment analysis, and tool-call support. NPCs run on the CPU (web browser or OS) even on embedded systems and obsolete hardware without relying on machine learning or LLMs.
 
 Instead of praying for a model to do the right thing, you can now use NPC-Forge to quickly build a deterministic agent and hook it up to your favourite workflow, API or harness.
 
@@ -53,7 +53,7 @@ Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell scrip
 > [!TIP]
 > If you want to expand the capabilities of TERMy check out the [dataset](npcs/termy/dataset) directory and the [TERMy](npcs/termy/README.md) documentation
 
-### Advanced features and hybrid mode
+#### Advanced features and hybrid mode
 
 While TERMy is fundamentally deterministic, it is also a very powerful **hybrid harness** that can be used for agentic coding. You can use TERMy and go straight to your local LLM if you need while retaining its revolutionary context memory and instantaneous deterministic responses. This is a practical example of how it can be used:
 
@@ -63,9 +63,6 @@ While TERMy is fundamentally deterministic, it is also a very powerful **hybrid 
 When the LLM generates a new valid dataset entry, TERMy will ask if to save it to the local dataset. Once saved, future similar requests will execute deterministically in milliseconds without invoking the LLM, making TERMy smarter and faster over time.
 
 <img src="/npcs/termy/showcase-continuous-learning.gif" style="width: 650px">
-
-> [!TIP]
-> TERMy's dynamic context estimation ensures that even when falling back to an LLM, it uses the minimum necessary VRAM, making it highly efficient on consumer hardware.
 
 ### Quick start to redemption
 Reclaim control on your workflow in less than sixty seconds:
@@ -86,7 +83,7 @@ termy how are you
 Consider that this experimental release of `npc-forge` works only on Linux and WSL.
 
 > [!WARNING]
-> First experimental release of [NPC-Forge](https://github.com/gioblu/NPC-Forge) distributed "AS IS" without any warranty, use it at your own risk.
+> This is the second experimental release of [NPC-Forge](https://github.com/gioblu/NPC-Forge) distributed "AS IS" without any warranty, use it at your own risk.
 
 ### Documentation
 - [TERMy](npcs/termy/README.md)

@@ -3,6 +3,10 @@ TERMy is an experimental, frontier deterministic and hybrid AI terminal assistan
 
 <img src="/npcs/termy/showcase.gif" style="width: 650px">
 
+
+> [!WARNING]
+> This is the second experimental release of [NPC-Forge](https://github.com/gioblu/NPC-Forge) distributed "AS IS" without any warranty, use it at your own risk.
+
 ### How to install TERMy
 Open the terminal inside the npc-forge repository main directory and digit:
 ```bash
@@ -56,23 +60,24 @@ Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell scrip
 
 TERMy's behavior is controlled by the `config.json` file located in the `npcs/termy/` directory. You can customize its thresholds, LLM fallback, and system integrations by editing this file.
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `name` | string | `"TERMy-24k"` | The display name of the NPC instance. |
-| `threshold` | float | `0.6668` | The minimum confidence score (0.0 to 1.0) required for TERMy to execute a deterministic intent without asking for clarification. |
-| `synonym_contribution` | float | `0.825` | Weight given to synonym matching. Higher values make TERMy more tolerant of varied phrasing. |
-| `suggestions` | int | `10` | Maximum number of related intents to show when a request is rejected or has low confidence. |
-| `tts` | string | `"espeak-ng"` | The system Text-to-Speech engine to use (e.g., `espeak-ng`, `say` on macOS, `festival`). Set to `null` or `""` to disable. |
+| Field | Type | Description |
+|-------|------|-------------|
+| `name` | string | The display name of the NPC instance. |
+| `threshold` | float | The minimum confidence score (0.0 to 1.0) required for TERMy to execute a deterministic intent without asking for clarification. |
+| `synonym_contribution` | float | Weight given to synonym matching. Higher values make TERMy more tolerant of varied phrasing. |
+| `suggestions` | int | Maximum number of related intents to show when a request is rejected or has low confidence. |
+| `tts` | string | The system Text-to-Speech engine to use (e.g., `espeak-ng`, `say` on macOS, `festival`). Set to `null` or `""` to disable. |
+| `llm` | object | Contains the LLM fallback configuration |
 
 ### LLM Fallback Configuration (`llm` object)
 Controls the hybrid generation mode when triggered via the `-g` flag or low-confidence fallback.
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `enabled` | boolean | `true` | Master switch for LLM fallback capabilities. |
-| `model` | string | `"qwen3:14b-q4_K_M"` | The specific Ollama model to use for code generation and reasoning. |
-| `api_url` | string | `"http://localhost:11434/api/chat"` | The endpoint for the Ollama API. Change this if your Ollama instance runs on a different port or host. |
-| `ctx_cap` | int | `8192` | The default response buffer size (in tokens) for LLM generation. TERMy dynamically estimates total context needs and rounds up to the nearest power of 2 (e.g., 8192, 16384) to optimize VRAM usage. |
+| Field | Type | Description |
+|-------|------|-------------|
+| `enabled` | boolean | Master switch for LLM fallback capabilities. |
+| `model` | string | The specific Ollama model to use for code generation and reasoning. |
+| `api_url` | string | The endpoint for the Ollama API. Change this if your Ollama instance runs on a different port or host. |
+| `ctx_cap` | int | The default response buffer size (in tokens) for LLM generation. TERMy dynamically estimates total context needs and rounds up to the nearest power of 2 (e.g., 8192, 16384) to optimize VRAM usage. |
 
 ### Advanced features and hybrid mode
 
