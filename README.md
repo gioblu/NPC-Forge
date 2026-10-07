@@ -13,7 +13,7 @@ Many problems you encounter can be solved without machine-learning or LLMs. NPC-
 * **Deterministic engine**: implements a fast, safe and reliable deterministic engine to handle known questions.
 * **Probabilistic engine**: uses [ollama](https://ollama.com) to answer questions that require automated reasoning or generative abilities.
 * **Extensible**: datasets can be developed with ease thanks to the [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md) specification.
-* **Continuous learning**: implements learning from usage, enabling response times thousands of times faster than LLMs.
+* **Continuous learning**: NPCs learn from usage, responding to known questions thousands of times faster than LLMs.
 * **Plug-and-play**: implements an OpenAI-compatible API that connects NPCs to your favorite harness.
 * **World's first**:  NPC-Forge is the world's first functional neuro-symbolic AI agent framework.
   
