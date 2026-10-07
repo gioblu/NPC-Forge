@@ -21,7 +21,7 @@ In this document I showcase a working technology demonstrator of such a system.
 
 [TERMy-24k](/npcs/termy/README.md) is the world's first neuro-symbolic AI terminal assistant. It includes a deterministic engine capable of translating natural language, the infrastructure required to communicate with [ollama](https://ollama.com) and implements a novel approach to multi-turn context memory that enable both the deterministic engine and the LLM to cooperate and accomplish the task more efficiently. 
 
-The local dataset weights 47.35MB, is composed of 102 templates, 24,274 intents and arguably makes [TERMy-24k](/npcs/termy/README.md) the world's most powerful, open-source, neuro-symbolic agent capable of running locally on a low-spec CPU.
+The local dataset weights 47.35MB, is composed of 102 templates, 24,274 intents.
 
 Until yesterday deterministic chatbots capped out at a few hundred intents. Thanks to the [NPC-Forge](README.md) framework, its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its intent recognition pipeline implemented in [FlintNPC](/docs/FlintNPC.md), today, anyone can build a chatbot with over 50,000 dataset entries that responds in less than 100 milliseconds, even on a Raspberry Pi.
 
