@@ -42,8 +42,6 @@ termy -y < test.termy
 ```
 Watch TERMy transpile it to a Shell script and execute it.
 
-Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell script and execute it. 
-
 ### Flags
 
 - `-y, --yes`: Answer "yes" to execution confirmation (ideal for scripted `.termy` files).
