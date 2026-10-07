@@ -64,9 +64,6 @@ When the LLM generates a new valid dataset entry, TERMy will ask if to save it t
 
 <img src="/npcs/termy/showcase-continuous-learning.gif" style="width: 650px">
 
-> [!TIP]
-> TERMy's dynamic context estimation ensures that even when falling back to an LLM, it uses the minimum necessary VRAM, making it highly efficient on consumer hardware.
-
 ### Quick start to redemption
 Reclaim control on your workflow in less than sixty seconds:
 
