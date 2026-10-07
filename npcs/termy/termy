@@ -58,13 +58,13 @@ def run_cli() -> int:
     )
     
     parser.add_argument("-a", "--agent", action="store_true", help="Includes session context (for agentic workflows)")
-    parser.add_argument("-d", "--clear-context", action="store_true", help="Clear all values from the session context")
+    parser.add_argument("-d", "--delete-context", action="store_true", help="Clear all values from the session context")
     parser.add_argument("-y", "--yes", action="store_true", help="Automatically answer yes to prompts (skip confirmation)")
     parser.add_argument("-g", "--generate", action="store_true", help="Send request to ollama.")
     
     args = parser.parse_args()
     
-    if args.clear_context:
+    if args.delete_context:
         context_file = Path(config_path) / "config.json"
         context_file.parent.mkdir(parents=True, exist_ok=True)
         with open(context_file, "w", encoding="utf-8") as f:
