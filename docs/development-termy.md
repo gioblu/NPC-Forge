@@ -22,7 +22,7 @@ Until yesterday deterministic chatbots capped out at a few hundred intents. Than
 
 Just type `termy` followed by your prompt:
 
-<img src="/npcs/termy/showcase.gif" style="width: 650px">
+<a href="https://www.youtube.com/watch?v=mIoUCLJDJ1U"><img src="/npcs/termy/showcase.gif" style="width: 650px"></a>
 
 You can also write a script in plain english; create the file `test.termy` with the following content:
 ```
@@ -39,8 +39,8 @@ TERMy is also a supercharged LLM harness, this is a practical example of how it 
 3. `termy -a -g "fix it"` request is routed to the LLM with context attached
 4. `termy execute it` executed by the deterministic engine (10 milliseconds response time)  
 5. `termy -a -g "yes, but make each triangle a random shade of green"` refine with context attached
-
-<img src="/npcs/termy/showcase-llm.gif" style="width: 650px">
+6. 
+<a href="https://www.youtube.com/watch?v=1WQBMnXlCiM"><img src="/npcs/termy/showcase-llm.gif" style="width: 650px"></a>
 
 Instead of doing what all harnesses do: pile up, compact, and leak garbage until they choke the model to death, [TERMy-24k](/npcs/termy/README.md) provides the minimum information required for local models to effectively accomplish tasks. The context is included in the request only when the user asks and it is composed of:
 1. `active_file` the file being worked on
@@ -83,7 +83,7 @@ Introducing this simple feature enables:
 
 3. **CL (Continuous Learning)**: Over time [TERMy-24k](/npcs/termy/README.md) grows smarter while its dependency on LLMs reduces.
 
-<img src="/npcs/termy/showcase-continuous-learning.gif" style="width: 650px">
+<a href="https://www.youtube.com/watch?v=xgzD2akCj3k"><img src="/npcs/termy/showcase-continuous-learning.gif" style="width: 650px"></a>
 
 ### Datasets
 I recently started pondering if I could have used datasets originally developed to train LLMs to expand the knowledge of deterministic agents. I looked at the material available on [huggingface](https://huggingface.co/) and I found a lot of datasets composed of question and answer about python. With some trial and error I have developed software to curate and format datasets automatically in the [NDF](/docs/dataset.md) format used by [NPC-Forge](/README.md). Thanks to these scripts I was able to release:
