@@ -11,10 +11,10 @@ Instead of praying for a model to do the right thing, you can now use NPC-Forge 
 Many problems you encounter can be solved without machine-learning or LLMs. NPC-Forge gives you a way to solve those problems more efficiently:
 
 * **Deterministic engine**: implements a fast, safe and reliable deterministic engine to handle known questions.
-* **Probabilistic engine** uses ollama to answer questions that require automated reasoning or generative abilities.
+* **Probabilistic engine**: uses [ollama](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://ollama.com/&ved=2ahUKEwjpi7HP-qaXAxWSgP0HHfd3C-EQFnoECA8QAQ&usg=AOvVaw17WonOj_dIOYJACdXhdC2W) to answer questions that require automated reasoning or generative abilities.
 * **Extensible**: datasets can be developed with ease thanks to the [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md) specification.
-* **Plug-and-play**: implements an OpenAI-compatible API that connects your NPCs to your favourite LLM harness.
-* **World's first**:  NPC-Forge is the first functional neuro-symbolic AI agent framework.
+* **Plug-and-play**: implements an OpenAI-compatible API that connects NPCs to your favourite application, workflow, or LLM harness.
+* **World's first**:  NPC-Forge is the world's first functional neuro-symbolic AI agent framework.
   
 #### NPC-Forge CLI
 
@@ -33,7 +33,7 @@ npc-forge install <path> # Installs a new NPC
 Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md) documentation.
 
 ### TERMy-24k terminal assistant
-[TERMy-24k](/npcs/termy/README.md) is the world's first neuro-symbolic AI terminal assistant that includes a deterministic engine capable of translating natural language to terminal commands. It is implemented upon the [NPC-Forge](README.md) framework which provides all the infrastructure required for users to work efficiently with deterministic agents and local LLMs. This is not yet another terminal harness that just routes prompts. It provides hybrid agentic capabilities, access to a local knowledgebase of responses, while still being capable of consulting LLMs when perplexed and save the newly generated answers locally for future use. It implements a novel and very efficient approach to multi-turn context memory that enable both the deterministic engine and the LLM to cooperate to accomplish the task. 
+[TERMy-24k](/npcs/termy/README.md) is the world's first neuro-symbolic AI terminal assistant. It includes a deterministic engine capable of translating natural language to terminal commands. It is implemented upon the [NPC-Forge](README.md) framework which provides all the infrastructure required for users to work efficiently with deterministic agents and local LLMs. This is not yet another terminal harness that just routes prompts. It provides neuro-symbolic agentic capabilities, access to a local dataset, while still being capable of asking help to LLMs when perplexed and save the newly generated answers locally for future use. It implements a novel and very efficient approach to multi-turn context memory that enable both the deterministic engine and the LLM to cooperate to accomplish the task. 
 
 <a href="https://www.youtube.com/watch?v=mIoUCLJDJ1U"><img src="/npcs/termy/showcase.gif" style="width: 650px"></a>
 
@@ -41,7 +41,7 @@ The local dataset weights 47.35MB, is composed of 102 templates, 24,274 intents 
 
 Until yesterday deterministic chatbots capped out at a few hundred intents. Thanks to [NPC-Forge](README.md), its revolutionary semantic parser [FlintParser](/docs/FlintParser.md), and its intent recognition pipeline implemented in [FlintNPC](/docs/FlintNPC.md), today, anyone can build a chatbot with over 50,000 dataset entries that responds in less than 100 milliseconds, even on a Raspberry Pi.
 
-You can also write a script in plain english, create a file `test.termy` with the following content:
+You can even write a script in plain english, try it yourself creating a file `test.termy` with the following content:
 ```
 search on wiki the programma 101
 append it to p101.txt
@@ -55,7 +55,6 @@ Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell scrip
 #### Advanced features and neuro-symbolic mode
 
 While TERMy is fundamentally deterministic, it is also a very powerful **neuro-symbolic harness** that can be used for agentic coding. You can use TERMy and go straight to your local LLM if you need while retaining its revolutionary context memory and instantaneous deterministic responses. This is a practical example of how it can be used:
-
 
 <a href="https://www.youtube.com/watch?v=1WQBMnXlCiM"><img src="/npcs/termy/showcase-llm.gif" style="width: 650px"></a>
 
