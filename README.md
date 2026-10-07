@@ -10,12 +10,12 @@ Instead of praying for a model to do the right thing, you can now use NPC-Forge 
 
 Many problems you encounter can be solved without machine-learning or LLMs. NPC-Forge gives you a way to solve those problems more efficiently:
 
-* **World's first**:  NPC-Forge is the first functional neuro-symbolic AI agent framework.
 * **Deterministic engine**: implements a fast, safe and reliable deterministic engine to handle known questions.
 * **Probabilistic engine** uses ollama to answer questions that require automated reasoning or generative abilities.
 * **Extensible**: datasets can be developed with ease thanks to the [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md) specification.
 * **Plug-and-play**: implements an OpenAI-compatible API that connects your NPCs to your favourite LLM harness.
-
+* **World's first**:  NPC-Forge is the first functional neuro-symbolic AI agent framework.
+  
 #### NPC-Forge CLI
 
 Administer, install, and run your NPCs with the following terminal commands:
