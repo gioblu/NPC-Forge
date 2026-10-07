@@ -3,6 +3,10 @@ TERMy is an experimental, frontier deterministic and hybrid AI terminal assistan
 
 <img src="/npcs/termy/showcase.gif" style="width: 650px">
 
+
+> [!WARNING]
+> This is the second experimental release of [NPC-Forge](https://github.com/gioblu/NPC-Forge) distributed "AS IS" without any warranty, use it at your own risk.
+
 ### How to install TERMy
 Open the terminal inside the npc-forge repository main directory and digit:
 ```bash
