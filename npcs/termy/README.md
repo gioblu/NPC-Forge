@@ -49,7 +49,7 @@ Then digit `termy -y < test.termy` and watch TERMy transpile it to a Shell scrip
 - `-y, --yes`: Answer "yes" to execution confirmation (ideal for scripted `.termy` files).
 - `-g, --generate`: Route request to configured LLM to generate a new script/intent.
 - `-c, --context`: Set context length (default: 4096).
-- `-a, --agent`: Include session context (active file, active content, last output) for agentic workflows and multi-step debugging.
+- `-a, --agent`: Include session context (active file, active content, last output).
 - `-d, --delete-context`: Delete session context.
 
 ### Configuration
