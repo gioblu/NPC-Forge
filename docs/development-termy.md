@@ -19,7 +19,7 @@ In this document I showcase a working technology demonstrator of such a system.
 
 ### TERMy-24k
 
-[TERMy-24k](/npcs/termy/README.md) is the world's first neuro-symbolic AI terminal assistant. It includes a deterministic engine capable of translating natural language, the infrastructure required to communicate with [ollama](https://ollama.com) and implements a novel approach to multi-turn context memory that enable both the deterministic engine and the LLM to cooperate and accomplish the task more efficiently. 
+[TERMy-24k](/npcs/termy/README.md) is a neuro-symbolic AI terminal assistant. It includes a deterministic engine capable of translating natural language, the infrastructure required to communicate with [ollama](https://ollama.com) and implements a novel approach to multi-turn context memory that enable both the deterministic engine and the LLM to cooperate and accomplish the task more efficiently. 
 
 The local dataset weights 47.35MB, is composed of 102 templates, 24,274 intents.
 
