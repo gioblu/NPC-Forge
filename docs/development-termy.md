@@ -40,9 +40,9 @@ Then type `termy -y < test.termy` and watch TERMy compile it to Bash and execute
 
 TERMy is also a supercharged LLM harness, this is a practical example of how it can be used:
 
-1. `termy -g "create a python script that draws triangles"` the `-g` flag routes the request to the LLM
+1. `termy -g "create a python script that draws triangles"` (`-g` flag routes the request to the LLM)
 2. `termy execute it` executed by the deterministic engine (10 milliseconds response time)  
-3. `termy -a -g "fix it"` request is routed to the LLM with context attached
+3. `termy -a -g "fix it"` (-a adds the context to the request)
 4. `termy execute it` executed by the deterministic engine (10 milliseconds response time)  
 5. `termy -a -g "yes, but make each triangle a random shade of green"` refine with context attached
 
