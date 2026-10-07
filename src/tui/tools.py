@@ -155,8 +155,8 @@ class TuiTools:
                         
         if thinking:
             thinking_text = Text()
-            thinking_text.append("Thinking: ", style="dim italic color(240)")
-            thinking_text.append(f"{thinking}\n", style="dim italic color(240)")
+            thinking_text.append("Thinking: ", style="italic color(240)")
+            thinking_text.append(f"{thinking}\n", style="italic color(240)")
             content_elements.append(thinking_text)
             
         if response: content_elements.append(response)
