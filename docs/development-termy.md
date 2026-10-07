@@ -1,4 +1,4 @@
-## The frontier of Neuro-symbolic AI
+## The frontier of neuro-symbolic AI
 
 For the past five years the tech industry has been misled by the following dogma: 
 
