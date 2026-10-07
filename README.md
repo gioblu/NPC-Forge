@@ -86,7 +86,7 @@ termy how are you
 Consider that this experimental release of `npc-forge` works only on Linux and WSL.
 
 > [!WARNING]
-> First experimental release of [NPC-Forge](https://github.com/gioblu/NPC-Forge) distributed "AS IS" without any warranty, use it at your own risk.
+> Second experimental release of [NPC-Forge](https://github.com/gioblu/NPC-Forge) distributed "AS IS" without any warranty, use it at your own risk.
 
 ### Documentation
 - [TERMy](npcs/termy/README.md)
