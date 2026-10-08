@@ -124,7 +124,7 @@ class FlintNPC:
                 for inp in block["input"]:
                     self.exact_match_map[str(inp).lower().strip()] = block
         
-        logger.info(f"[chatbot.py][{self.name}][load_data] Engine initialized.")
+        logger.info(f"[FlintNPC.py][{self.name}][load_data] Engine initialized.")
 
     def _build_intent_signatures(self):
         self._precomputed_intents = {}
@@ -163,7 +163,7 @@ class FlintNPC:
         return {**self.exact_match_map, **self.active_context_map}
 
     def process_message(self, user_prompt: str):
-        logger.info(f"[chatbot.py][{self.name}][process_message] Prompt: {user_prompt}")                    
+        logger.info(f"[FlintNPC.py][{self.name}][process_message] Prompt: {user_prompt}")                    
         rarest_word = self.nlp.get_rarest_word(user_prompt)
         
         if not user_prompt:
@@ -289,7 +289,7 @@ class FlintNPC:
             
             if current_conf < self.threshold or res.get("status") == "rejected":
                 logger.warning(
-                    f"[chatbot.py][{self.name}][process_messages] Rejected"
+                    f"[FlintNPC.py][{self.name}][process_messages] Rejected"
                     f" '{sub_prompt}', confidence {current_conf:.4f}"
                 )
                 return self.generate_response(
@@ -334,7 +334,7 @@ class FlintNPC:
         })
         
         logger.info(
-            f"[chatbot.py][{self.name}][process_messages]"
+            f"[FlintNPC.py][{self.name}][process_messages]"
             f" Output: '{concatenated_response}'"
         )
         return final_output
@@ -416,5 +416,5 @@ class FlintNPC:
         if "tools" in block and isinstance(block["tools"], list):
             payload["tools"] = render_all_tags(copy.deepcopy(block["tools"]))
 
-        logger.info(f"[chatbot.py][{self.name}][generate_response] Payload: {payload}")
+        logger.info(f"[FlintNPC.py][{self.name}][generate_response] Payload: {payload}")
         return payload
