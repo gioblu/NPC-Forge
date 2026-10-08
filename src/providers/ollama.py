@@ -18,7 +18,10 @@ class OllamaProvider(BaseProvider):
         # input tokens = output tokens required to answer
         tokens = math.ceil(len(prompt) * 0.28) * 2
         # Round to ollama VRAM optimized binary power
-        if tokens <= 8192: context_window = 8192
+        if tokens <= 1024: context_window = 1024
+        if tokens <= 2048: context_window = 2048
+        elif tokens <= 4096: context_window = 4096
+        elif tokens <= 8192: context_window = 8192
         elif tokens <= 16384: context_window = 16384
         elif tokens <= 32768: context_window = 32768
         else: context_window = 65536
