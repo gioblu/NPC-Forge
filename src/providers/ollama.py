@@ -12,23 +12,8 @@ class OllamaProvider(BaseProvider):
         """Initializes a new independent instance of the LLMConnector."""
         self.api_url = config.get("api_url", "127.0.0.1:5000").rstrip("/")
         self.model = config.get("model", "")
-
-    def estimate_context_needed(self, prompt: str, ctx_cap: int) -> int:
-        # We estimate that:
-        # input tokens = output tokens required to answer
-        tokens = math.ceil(len(prompt) * 0.28) * 2
-        # Round to ollama VRAM optimized binary power
-        if tokens <= 1024: context_window = 1024
-        if tokens <= 2048: context_window = 2048
-        elif tokens <= 4096: context_window = 4096
-        elif tokens <= 8192: context_window = 8192
-        elif tokens <= 16384: context_window = 16384
-        elif tokens <= 32768: context_window = 32768
-        else: context_window = 65536
-        if tokens > ctx_cap: return ctx_cap
-        return context_window
-        
-    def request(self, prompt: str, ctx_cap: int) -> str:
+    
+    def request(self, prompt: str, ctx: int = 0) -> str:
         """Sends HTTP POST request to NPC-Forge API /api/chat endpoint."""
         
         data = {
@@ -37,7 +22,7 @@ class OllamaProvider(BaseProvider):
             "stream": False,
             "think": False, 
             "options": { 
-                "num_ctx": self.estimate_context_needed(prompt, ctx_cap)
+                "num_ctx": ctx
             },
             "format": {
                 "type": "object",
@@ -70,7 +55,7 @@ class OllamaProvider(BaseProvider):
             print(f"NPC-Forge OllamaClient error: {e}")
             return False
 
-    def craft_intent(self, user_query: str, ctx_cap: int) -> Optional[dict]:
+    def craft_intent(self, user_query: str, ctx: int = 0) -> Optional[dict]:
         """
         Framework-agnostic tool: Asks the LLM for a script
         and formats it into a safe NDF container.
@@ -78,22 +63,25 @@ class OllamaProvider(BaseProvider):
         
         prompt = (
             "You are a terminal expert, solve the task requested by the human.\n"
-            "Be sincere and terse (you are running in a limited machine).\n"
-            "\nIn \"code\" add a solution adhering to the following requirements:\n\n"
-            "1. Do not use code fences, write only code that is complete, functional, elegant and reusable.\n"
-            "2. Use external dependencies or third party libraries only when asked to.\n"
-            "\nIn \"content\" add a direct, concise, and technical explanation in markdown format.\n\n"
+            "Be sincere and terse (you are in a limited machine).\n"
+            "\nIn \"code\" add solution adhering to the following requirements:\n\n"
+            "1. Don't use code fences, write complete, functional, elegant and reusable code.\n"
+            "2. Use external dependencies or third-party libraries only if asked to.\n"
+            "3. When required to edit the active_content, output the entire active_content updated.\n"
+            "\nIn \"content\" add a 50 characters technical explanation in markdown format.\n\n"
             "In \"extension\" add the appropriate extension for the solution (py, css, js, html, ecc.).\n\n"
-            "In \"summary\" add a 40 characters description of what you did in this step and why."
+            "In \"summary\" add a 50 characters description of what you did in this step and why."
             f"{user_query}"
         )
-        raw_response = json.loads(self.request(prompt, ctx_cap))
-        if not raw_response: return None
+        response = self.request(prompt, ctx)
+        print(response) 
+        parsed_response = json.loads(response)
+        if not parsed_response: return None
 
-        cmd = raw_response.get("code", "")    
-        exp = raw_response.get("content", "")
-        ext = raw_response.get("extension", "")
-        summary = raw_response.get("summary", "")
+        cmd = parsed_response.get("code", "")    
+        exp = parsed_response.get("content", "")
+        ext = parsed_response.get("extension", "")
+        summary = parsed_response.get("summary", "")
         
         static_explanation = "Generated code ready to be executed."
         static_goal = "Automated execution framework block."

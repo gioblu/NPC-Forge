@@ -51,7 +51,7 @@ def run_cli() -> int:
     parser.add_argument(
         "-c", "--context",
         nargs="?",
-        const=llm_config.get('ctx_cap', 4096),
+        const=llm_config.get('num_ctx', 4096),
         default=0,
         type=int,
         help="Include system context with an optional response buffer size (default: 8000)"
@@ -265,14 +265,23 @@ def run_cli() -> int:
                         f"Your past actions in this session:\n\n{summary}"
                     )
                 
+                tui.render_action(
+                    thinking="",
+                    response=prompt,
+                    command="",
+                    description="",
+                    title=f"[bold green]Request[/]"
+                )  
                 with console.status(
                     f"[bold green]Generating script via {llm_model}...[/bold green]", 
                     spinner="dots"
                 ):     
                     start_time = time.perf_counter()
-                    num_ctx = args.context 
-                    if not num_ctx: num_ctx = llm_config.get("ctx_cap")
-                    prompt, summary, generated_intent = ollama_client.craft_intent(prompt, num_ctx)
+                    num_ctx = args.context
+                    console.print()
+                    prompt, summary, generated_intent = ollama_client.craft_intent(
+                        prompt, num_ctx or llm_config.get("num_ctx")
+                    )
                     update_context_summary(Path(config_path), summary)
                 if generated_intent:
                     try:
@@ -289,14 +298,6 @@ def run_cli() -> int:
                     if not command or not command.strip():
                         print(f"{RED}Generated command is empty. Nothing to execute.{RESET}")
                         return 1
-                    console.print()
-                    tui.render_action(
-                        thinking="",
-                        response=prompt,
-                        command="",
-                        description="",
-                        title=f"[bold green]Request[/]"
-                    )
                     console.print()
                     tui.render_action(
                         thinking=thinking or summary,

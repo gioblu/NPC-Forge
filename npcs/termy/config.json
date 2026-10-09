@@ -5,10 +5,10 @@
   "threshold": 0.6668,
   "synonym_contribution": 0.825,
   "suggestions": 10,
-  "llm": {
-    "ctx_cap": 8192,
+  "llm": {  
+    "num_ctx": 8192,
     "enabled": true,
     "api_url": "http://localhost:11434/api/chat",
-    "model": "qwen3:14b-q4_K_M"
+    "model": "gemma4:26b-a4b"
   }
 }
