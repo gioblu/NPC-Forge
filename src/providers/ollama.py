@@ -1,118 +1,27 @@
 import json
-import math
 import urllib.request
-
-from pathlib import Path
-from typing import Optional
 from providers.base import BaseProvider 
 
 class OllamaProvider(BaseProvider):
-
-    def __init__(self, config: object):
-        """Initializes a new independent instance of the LLMConnector."""
-        self.api_url = config.get("api_url", "127.0.0.1:5000").rstrip("/")
+    def __init__(self, config: dict):
+        self.api_url = config.get("api_url", "127.0.0.1:11434/api/chat")
         self.model = config.get("model", "")
     
-    def request(self, prompt: str, ctx: int = 0) -> str:
-        """Sends HTTP POST request to NPC-Forge API /api/chat endpoint."""
-        
+    def request(self, messages: list, tools: list = [], ctx: int = 0) -> dict:
         data = {
             "model": self.model,
-            "messages": [{"role": "user", "content": prompt}],
+            "messages": messages,
+            "tools": tools,
             "stream": False,
-            "think": False, 
-            "options": { 
-                "num_ctx": ctx
-            },
-            "format": {
-                "type": "object",
-                "properties": {
-                    "code": {"type": "string"},
-                    "content": {"type": "string"},
-                    "extension": {"type": "string"},
-                    "summary": {"type": "string"}
-                },
-                "required": ["code", "content", "extension"]
-            }
+            "options": { "num_ctx": ctx, "num_predict": -1 }
         }
-
         binary_data = json.dumps(data).encode("utf-8")
-
-        headers = {
-            "Content-Type": "application/json",
-            "Content-Length": str(len(binary_data))
-        }
-        
-        req = urllib.request.Request(
-            self.api_url, data=binary_data, headers=headers, method="POST"
-        )
-        
+        headers = {"Content-Type": "application/json"}
+        req = urllib.request.Request(self.api_url, data=binary_data, headers=headers, method="POST")
         try:
             with urllib.request.urlopen(req, timeout=300) as response:
                 res_data = json.loads(response.read().decode("utf-8"))
-                return res_data.get("message", {}).get("content", "")
+                return res_data.get("message", {})
         except Exception as e:
             print(f"NPC-Forge OllamaClient error: {e}")
-            return False
-
-    def craft_intent(self, user_query: str, ctx: int = 0) -> Optional[dict]:
-        """
-        Framework-agnostic tool: Asks the LLM for a script
-        and formats it into a safe NDF container.
-        """
-        
-        prompt = (
-            "You are a terminal expert, solve the task requested by the human.\n"
-            "Be sincere and terse (you are in a limited machine).\n"
-            "\nIn \"code\" add solution adhering to the following requirements:\n\n"
-            "1. Don't use code fences, write complete, functional, elegant and reusable code.\n"
-            "2. Use external dependencies or third-party libraries only if asked to.\n"
-            "3. When required to edit the active_content, output the entire active_content updated.\n"
-            "\nIn \"content\" add a 50 characters technical explanation in markdown format.\n\n"
-            "In \"extension\" add the appropriate extension for the solution (py, css, js, html, ecc.).\n\n"
-            "In \"summary\" add a 50 characters description of what you did in this step and why."
-            f"{user_query}"
-        )
-        response = self.request(prompt, ctx)
-        print(response) 
-        parsed_response = json.loads(response)
-        if not parsed_response: return None
-
-        cmd = parsed_response.get("code", "")    
-        exp = parsed_response.get("content", "")
-        ext = parsed_response.get("extension", "")
-        summary = parsed_response.get("summary", "")
-        
-        static_explanation = "Generated code ready to be executed."
-        static_goal = "Automated execution framework block."
-        
-        command_shell = (
-            f"TMP_FILE=$(mktemp /tmp/termy_script_XXXXXX.{ext}) &&\n"
-            "cat << 'EOF' > \"$TMP_FILE\"\n\n"
-            f"{cmd}\n\n"
-            "EOF\n"
-            "termy_set_context 'active_file' \"$TMP_FILE\" &&\n"
-            "termy_set_context 'active_content' \"$(cat \"$TMP_FILE\")\""
-        )
-        
-        # Build NDF Payload Object Structure
-        ndf_object = {
-            "category": "user_generated", 
-            "input": [user_query],
-            "output": f"{exp if exp else static_explanation}",
-            "tools": [
-                {
-                    "name": "run_in_terminal",
-                    "arguments": {
-                        "command": command_shell,
-                        "explanation": static_explanation,
-                        "goal": static_goal, 
-                        "mode": "sync"
-                    }
-                }
-            ],
-            "permission": "ask"
-        }
-        
-        # Just return the object, let the caller decide when/where to save
-        return prompt, summary, ndf_object
+            return {}
