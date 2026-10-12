@@ -10,6 +10,8 @@ from rich.prompt import Prompt
 from rich.console import Group
 from rich.syntax import Syntax
 
+from pygments.lexers import guess_lexer, ClassNotFound
+
 from rich import box
 
 # ANSI Color Codes & UI Elements
@@ -162,10 +164,15 @@ class TuiTools:
         if response: content_elements.append(response)
             
         if command:
-            # 1. Creiamo la sintassi Bash con il tema scelto
+            detected_lexer_name = "bash"
+            try:
+                lexer = guess_lexer(command.strip())
+                detected_lexer_name = lexer.aliases[0]
+            except ClassNotFound:
+                pass
             command_syntax = Syntax(
                 command.strip(), 
-                "bash", 
+                detected_lexer_name, 
                 theme="one-dark", 
                 line_numbers=False, 
                 word_wrap=True,
