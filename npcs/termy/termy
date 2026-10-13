@@ -10,11 +10,16 @@ import subprocess
 import time
 from pathlib import Path
 
+from agents import resolve_agent_class
+from providers import resolve_provider_class
 from providers.ollama import OllamaProvider
 from providers.api import ApiProvider
 from providers.local import LocalProvider
 from tui.tools import TuiTools, BOLD, GREEN, RED, RESET, YELLOW
 from storage.dataset import DatasetStorage
+from agents.self_reflecting import SelfReflectingAgent
+
+from tools import TOOLS, get_tools_by_name, render_tool_action
 
 from rich.console import Console
 from rich.markdown import Markdown
@@ -33,6 +38,8 @@ def run_cli() -> int:
     llm_config = config.get("llm", {})
     llm_enabled = llm_config.get("enabled", False)
     llm_model = llm_config.get("model", "")
+    agent_config = config.get("agent", {})
+    agent_tools_config = agent_config.get("tools", [])
     
     usage_text = (
         '\n termy [OPTIONS] "hello"\n '
@@ -97,7 +104,7 @@ def run_cli() -> int:
                 )
                 return 1
     else: result = {}
-
+    
     emoji = result.get("emoji", "")
     if emoji == "😑": emoji = ""
     response = result.get("response", "")
@@ -107,13 +114,7 @@ def run_cli() -> int:
     tools = result.get("tools", [])
     status = str(result.get("status", "rejected")).lower()
     confidence = result.get("confidence", 0.0)
-    
-    def update_context_summary(config_path: str, summary: str):
-        if "summary" not in context: context["summary"] = []
-        context["summary"] = context["summary"][-4:] + [summary]
-        with open(config_path / "config.json", "w", encoding="utf-8") as f:
-            json.dump(context, f, indent=4, ensure_ascii=False)
-        return context
+    llm_selected = False
 
     def permission_execute():
         return (
@@ -168,25 +169,14 @@ def run_cli() -> int:
                     ).strip()
                     if desc_part: description += " " + desc_part
 
-    tts_engine = config.get("tts")
-    if response and context.get("tts", "") == "on" and tts_engine:
-        try:
-            subprocess.run(
-                f"pkill -9 -x {shlex.quote(tts_engine)}", 
-                shell=True, 
-                stdout=subprocess.DEVNULL, 
-                stderr=subprocess.DEVNULL
-            )
-            subprocess.Popen(
-                [tts_engine, response],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                start_new_session=True
-            )
-        except Exception as e:
-            sys.stderr.write(f"Audio playback failed: {e}\n")
-
     if status != "rejected":
+        TOOLS["tts"].execute(
+            {"text": response}, 
+            True, 
+            context, 
+            console, 
+        config)
+        
         tui.render_action(
             thinking=thinking,
             response=Markdown(response.strip()),
@@ -197,7 +187,6 @@ def run_cli() -> int:
         print()
     elif status == "rejected" and (related or llm_enabled):
         choice = 0
-        llm_selected = False
         
         related_menu = f"Choose related {GREEN}{BOLD}1-{len(related)}{RESET}\n" if related else ""
         
@@ -245,8 +234,17 @@ def run_cli() -> int:
         # Execute LLM generation if selected
         if (llm_enabled and llm_selected) or args.generate:
             try:
+                # Dynamically resolve agent class from config
+                # and instantiate it passing provider and tools
+                agent = resolve_agent_class(
+                    agent_config.get("type", "self-reflecting")
+                )( # Dynamically resolve provider class from config
+                    resolve_provider_class(
+                        llm_config.get("provider", "ollama")
+                    )(llm_config), 
+                    get_tools_by_name(agent_tools_config)
+                )
                 details = ""
-                ollama_client = OllamaProvider(llm_config)
                 if not args.generate:
                     details = tui.prompt(
                         f"\nDescribe how TERMy should respond to [green]'{user_input}'[/green]"
@@ -254,88 +252,87 @@ def run_cli() -> int:
                     if not details: return 1                    
                 if not args.generate: console.print()
                 
-                prompt = f"\n\nTask: {user_input}\n"
-                summary = "\n".join(f"- {item}" for item in context.get("summary", []))
-                if details: prompt = f"{prompt}Details: {details}\n\n"                
-                if args.agent:
-                    prompt = (
-                        f"{prompt}\n\nActive file: {context.get('active_file', '')}\n\n"
-                        f"Active content: {context.get('active_content', '')}\n\n"
-                        f"Last execution output: {context.get('output', '')}\n\n"
-                        f"Your past actions in this session:\n\n{summary}"
-                    )
-                
-                tui.render_action(
-                    thinking="",
-                    response=prompt,
-                    command="",
-                    description="",
-                    title=f"[bold green]Request[/]"
-                )  
-                with console.status(
-                    f"[bold green]Generating script via {llm_model}...[/bold green]", 
-                    spinner="dots"
-                ):     
-                    start_time = time.perf_counter()
-                    num_ctx = args.context
+                if "summary" not in context: context["summary"] = []
+                max_iterations = 50 if args.agent else 1
+                tool_name = "unknown"
+                for iteration in range(max_iterations):
+                    prompt = f"\n\nTask: {user_input}\n"
+                    if details: prompt = f"{prompt}Details: {details}\n\n"                
+                    
                     console.print()
-                    prompt, summary, generated_intent = ollama_client.craft_intent(
-                        prompt, num_ctx or llm_config.get("num_ctx")
-                    )
-                    update_context_summary(Path(config_path), summary)
-                if generated_intent:
-                    try:
-                        generated_intent["input"] = [user_input]
-                        tool_args = generated_intent["tools"][0]["arguments"]
-                        command = tool_args.get("command", "")
-                        description = tool_args.get("explanation", "")    
-                        permission = generated_intent.get("permission", "ask")
-                        response = generated_intent.get("output", "")
-                    except (KeyError, IndexError, TypeError):
-                        print(f"{RED}TERMy Exception: LLM generated invalid entry.{RESET}")
-                        return 1
+                    with console.status(f"[bold green]Agent loop ({llm_model}) step {iteration + 1}[/]", spinner="dots"):
+                        start_time = time.perf_counter()                            
+                        result = agent.run_step(prompt, context, args.context or llm_config.get("num_ctx", 4096), iteration + 1)
+                    
+                    if not result:
+                        console.print(f"[red]TERMy failed to obtain a valid response from {llm_model}.[/red]")
+                        break                    
+                    # 1. Unpack NDF structure
+                    output, ndf_object = result
+                    tools_list = ndf_object.get("tools", [])
+                    status = ndf_object.get("status", "busy")   
+                    
+                    # 3. Execute ALL requested tools
+                    for tool_info in tools_list:
+                        tool_name = tool_info.get("name", "unknown")
+                        tool_config = tool_info.get("arguments", {}) 
+                    
+                        if tool_name == "finish": break
+                        
+                        render_tool_action(
+                            tui, 
+                            tool_name, 
+                            tool_config, 
+                            output, 
+                            ndf_object.get("thinking", ""),
+                            llm_model, 
+                            status, 
+                            iteration, 
+                            format_response_time()
+                        )
 
-                    if not command or not command.strip():
-                        print(f"{RED}Generated command is empty. Nothing to execute.{RESET}")
-                        return 1
-                    console.print()
-                    tui.render_action(
-                        thinking=thinking or summary,
-                        response=Markdown(response) if response else "",
-                        command=command,
-                        description=description,
-                        title=f"[bold green]{llm_model}[/]  {format_response_time()}"
-                    )
-                    
-                    dataset_dir = CURRENT_BOT_DIR / "dataset"
-                    dataset_dir.mkdir(parents=True, exist_ok=True)           
-                    save_filename = f"dataset_{os.environ.get('USER', 'user')}.json"
-                    
-                    if not permission_execute():
-                        save_intent = tui.confirm("\nDo you want to save this entry in the dataset?")
-                        if save_intent:
-                            storage.save_entry(generated_intent, str(dataset_dir), save_filename)
-                            print(f"{GREEN}Entry saved to dataset.{RESET}")
-                    else:
-                        storage.save_entry(
-                            generated_intent, 
-                            str(dataset_dir), 
-                            save_filename
-                        )
-                        print(
-                            f"{GREEN}Entry saved to dataset (due to -y flag).{RESET}"
-                        )
-                else:
-                    print(f"{RED}TERMy failed to obtain a valid script from {llm_model}.{RESET}")
-                    return 1
-            except ImportError as e:
-                print(f"{RED}TERMy ImportError: {e}{RESET}")
-                return 1
+                        tool_config["scripts_dir"] = CURRENT_BOT_DIR / "scripts"
+                        
+                        exec_tool_name = tool_name if tool_name in TOOLS else "run_command"
+                        tool_module = TOOLS.get(exec_tool_name)
+                        
+                        if not tool_module:
+                            console.print(f"[red]Unknown tool: {tool_name}[/red]")
+                            continue
+
+                        # Dynamic permission prompt
+                        perm_prompt = f"\nShould I execute {tool_name}?"
+                        
+                        tool_call_result = tool_module.execute(
+                            args=tool_config,
+                            execute=permission_execute() or tui.confirm(perm_prompt),
+                            context=context,
+                            console=console,
+                            config=config
+                        )  
+                        
+                        # Save context after EACH tool execution to ensure state is persisted
+                        with open(Path(config_path) / "config.json", "w", encoding="utf-8") as f:
+                            json.dump(context, f, indent=4, ensure_ascii=False)
+
+                    if status == "done":
+                        console.print(f"[bold green]{'Task completed.'}[/bold green]")
+                        break
+
+                if not permission_execute() and 'ndf_object' in locals() and ndf_object:
+                    save_intent = tui.confirm("\nDo you want to save this final entry in the dataset?")
+                    if save_intent:
+                        dataset_dir = CURRENT_BOT_DIR / "dataset"
+                        dataset_dir.mkdir(parents=True, exist_ok=True)           
+                        save_filename = f"dataset_{os.environ.get('USER', 'user')}.json"
+                        storage.save_entry(ndf_object, str(dataset_dir), save_filename)
+                        print(f"{GREEN}Entry saved to dataset.{RESET}")
+
             except Exception as e:
-                print(f"{RED}TERMy Exception: {e}{RESET}")
+                console.print(f"[red]TERMy Agent Exception: {e}[/red]")
                 return 1
 
-    if command and command.strip():
+    if not (llm_selected and args.generate) and command:
         scripts_dir = CURRENT_BOT_DIR / "scripts"
         sources = []
         if scripts_dir.is_dir():

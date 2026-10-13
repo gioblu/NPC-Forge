@@ -7,9 +7,6 @@ class SelfReflectingAgent(BaseAgent):
             "You are a sincere, talented, helpful and ironic terminal expert.\n"
             "You are running on consumer hardware; be terse, write elegant code.\n"
             "The human assigned to you a task, please complete it step-by-step using the provided tools.\n"
-            f"This is iteration: {i}\n"
-            "If you completed the task write it in the summary to let your future self know.\n"
-            "Remember: \"An idiot admires complexity, a genious admires simplicity\" Terry A. Davis\n"
             "Thank you.\n"
         )
         
@@ -21,9 +18,10 @@ class SelfReflectingAgent(BaseAgent):
 
         state_msg = (
             f"Plan: {context.get('plan', 'None')}\n"
+            f"Iteration: {i}\n"
             f"Active file: {context.get('active_file', 'None')}\n"
-            f"Active content:\n{context.get('active_content', 'None')}\n"
-            f"Last execution output:\n{context.get('output', 'None')}\n"
+            f"Active content: {context.get('active_content', 'None')}\n"
+            f"Last execution output: {context.get('output', 'None')}\n"
             f"Your past actions in this session:\n{task_journal_list}"
         )
         
@@ -44,30 +42,26 @@ class SelfReflectingAgent(BaseAgent):
             call = tool_calls[0]
             func = call.get("function", {})
             tool_name = func.get("name")
-            raw_args = func.get("arguments", {})
-            
-            # Extract NDF metadata (LLM may put these in arguments, we pull them out)
+            raw_args = func.get("arguments", {})            
             explanation = raw_args.get("summary", "")
             goal = raw_args.get("goal", explanation)
-            mode = raw_args.get("mode", "sync")
-            
             output = content if content else explanation
             
-            # raw_args now contains ONLY the execution payload
             ndf_object = {
                 "category": tool_name,
                 "output": output,
+                "thinking": response.get("thinking", ""),
                 "tools": [
                     {
                         "name": tool_name,
                         "explanation": explanation,
                         "goal": goal,
-                        "mode": mode,
+                        "mode": raw_args.get("mode", "sync"),
                         "arguments": raw_args
                     }
                 ],
                 "status": "done" if tool_name == "finish" else "busy",
-                "permission": "yolo"
+                "permission": "ask"
             }
             
             return output, ndf_object
