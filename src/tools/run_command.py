@@ -5,9 +5,9 @@ import subprocess
 
 config = {
     "title_color": "green",
-    "command_key": "command",
+    "command": "{command}",
     "description": "Executing terminal command.",
-    "response_key": "summary"
+    "response": "{summary}"
 }
 
 schema = {

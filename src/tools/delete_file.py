@@ -3,9 +3,9 @@ from pathlib import Path
 
 config = {
     "title_color": "red",
-    "command_template": "rm {file_path}",
-    "description_template": "Deleting file {file_path}",
-    "response_key": "summary"
+    "command": "rm {file_path}",
+    "description": "Deleting file {file_path}",
+    "response": "{summary}"
 }
 
 schema = {
@@ -17,7 +17,7 @@ schema = {
             "type": "object",
             "properties": {
                 "file_path": {"type": "string", "description": "Relative path to the file."},
-                "summary": {"type": "string", "description": "Write what you accomplished in this step in the past tense and if to call 'finish' to help your future self."}
+                "summary": {"type": "string", "description": "Inform your future self your action and what to do next."}
             },
             "required": ["file_path", "summary"]
         }
@@ -44,7 +44,9 @@ def execute(args: dict, execute: bool, context: dict, console = None, config: di
                 context["summary"].append(args.get("summary", ""))
                 console.print(f"\n[red]Deleted file: {file_path}[/red]")
                 return True
-            else: context["output"] = f"File {file_path} does not exist, nothing to delete."
+            else: 
+                context["summary"].append(args.get("summary", ""))
+                context["output"] = f"File {file_path} does not exist, nothing to delete."
         return False
     except Exception as e:
         context["output"] = f"Error deleting file: {e}"        

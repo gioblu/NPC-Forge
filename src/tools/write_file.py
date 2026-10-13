@@ -3,9 +3,9 @@ from pathlib import Path
 
 config = {
     "title_color": "green",
-    "command_key": "file_content",
-    "description_template": "Creating file {file_path}",
-    "response_key": "summary"
+    "command": "file_content",
+    "description": "Creating file {file_path}",
+    "response": "{summary}"
 }
 
 schema = {

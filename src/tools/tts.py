@@ -3,8 +3,8 @@ import subprocess
 
 config = {
     "title_color": "green",
-    "command_key": None,
-    "description": "{output}",
+    "command": None,
+    "description_key": "output",
     "response_key": "text"
 }
 
@@ -43,9 +43,12 @@ def execute(args: dict, execute: bool, context: dict, console = None, config: di
                 start_new_session=True
             )
             context['output'] = "'tts' used successfully"    
-            context['summary'].append(f"'tts' used successfully to output '{response}'.")
-        except Exception as e:
+            context['summary'].append(f"'tts' used successfully.")
+            return True
+        except Exception as e:   
+            context['summary'].append(f"'tts' failed because of {e}.")
+            console.print(f"[red]❌ Audio playback failed: {e.stderr}[/red]")
             return -1
     context['output'] = "'tts' used successfully"
-    context['summary'].append(f"'tts' successfully called to output '{response}' but was muted by config.")
+    context['summary'].append(f"'tts' used successfully.")
             

@@ -1,9 +1,9 @@
 
 config = {
 "title_color": "green",
-    "command_key": None,
+    "command": None,
     "description_template": "{output}",
-    "response_key": "text"
+    "response": "{text}"
 }
 
 schema = {
