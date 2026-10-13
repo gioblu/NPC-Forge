@@ -168,6 +168,8 @@ class TuiTools:
             try:
                 lexer = guess_lexer(command.strip())
                 detected_lexer_name = lexer.aliases[0]
+                if detected_lexer_name == "scdoc" or detected_lexer_name == "scd":
+                    detected_lexer_name = "bash"
             except ClassNotFound:
                 pass
             command_syntax = Syntax(
