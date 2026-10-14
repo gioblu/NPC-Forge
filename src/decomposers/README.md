@@ -1,5 +1,5 @@
 
-## Decomposers: Prompt Breakdown Strategies
+## Decomposers
 
 Complex user prompts often contain multiple distinct tasks. The Decomposer abstraction is responsible for analyzing a raw user prompt and breaking it down into a sequential list of subprompts. 
 
