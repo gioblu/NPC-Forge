@@ -1,5 +1,7 @@
 import json
+import os
 import subprocess
+import sys
 import shlex
 from pathlib import Path
 import time
@@ -42,8 +44,8 @@ class DeterministicInterpreter(Interpreter):
         meta = (
             f"[color(240)]Status:[/color(240)] [color(247)]{status} [/]"
             f"[color(240)]Interpreter:[/color(240)] [color(247)]deterministic [/]"
-            f"[color(240)]Confidence:[/color(240)] [color(247)]{res.get("confidence", 0.0) * 100:.2f}%[/] "
-            f"asd{self.format_response_time(start_time)}"        
+            f"[color(240)]Confidence:[/color(240)] [color(247)]{res.get('confidence', 0.0) * 100:.2f}%[/] "
+            f"{self.format_response_time(start_time)}"        
         )
         
         if status != "rejected":
@@ -76,11 +78,11 @@ class DeterministicInterpreter(Interpreter):
             TOOLS["tts"].execute({"text": response_text}, True, context, exec_ctx.config)
             print()
             exec_ctx.tui.render_action(
-                thinking=result.meta.get("thinking", ""),
+                thinking=res.get("thinking", ""),
                 response=Markdown(str(response_text).strip()),
                 command=command,
                 description=" ".join(actions_taken).strip(),
-                title=f"[bold green]{res.get("npc", "NPC")}[/] {res.get("emoji", "")} {meta}"
+                title=f"[bold green]{res.get('npc', 'NPC')}[/] {res.get('emoji', '')} {meta}"
             )
             print()
             
@@ -138,4 +140,45 @@ class DeterministicInterpreter(Interpreter):
                 else:
                     exec_ctx.console.print("\n[yellow]Execution aborted by user.[/yellow]")
                     
+        else:
+            # Handle rejected status with related intents multi-choice menu
+            related = res.get("related", [])
+            
+            if related:
+                related_intents = [
+                    intent["input"][0] if isinstance(intent.get("input"), list) else str(intent.get("input", ""))
+                    for intent in related
+                ]
+                
+                menu_text = f"Type [bold green]1-{len(related)}[/] or [bold green]q[/] to quit\n"
+                exec_ctx.console.print()
+                choice = exec_ctx.tui.multi_choice(
+                    f"[bold green]{res.get('npc', 'NPC')}[/] {res.get('emoji', '')} {meta}", 
+                    related_intents, 
+                    menu_text, 
+                    'g'
+                )
+                
+                if isinstance(choice, int) and 0 < choice <= len(related):
+                    try:
+                        script_path = os.path.abspath(sys.argv[0])
+                        res_proc = subprocess.run([script_path, related_intents[choice - 1]], env=os.environ)
+                        result.exit_code = res_proc.returncode
+                        return result
+                    except KeyboardInterrupt:
+                        exec_ctx.console.print("\n[yellow]Execution cancelled.[/yellow]\n")
+                        result.exit_code = 130
+                        return result
+                    except Exception as exc:
+                        exec_ctx.console.print(f"\n[red]Failed to execute recursive call: {exc}[/red]\n")
+                        result.exit_code = 1
+                        return result
+                elif not choice or str(choice).lower() == 'q':
+                    result.exit_code = 0
+                    return result
+            else:
+                exec_ctx.console.print(f"[yellow]Intent not understood.[/yellow]")
+                result.exit_code = 0
+                return result
+
         return result
