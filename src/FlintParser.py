@@ -329,25 +329,34 @@ class FlintParser:
         return 1.0 - (current_row[len2] / max_len)
 
     def precompute_intent_signature(self, target_input: str, block: dict, synonym_weight: float = 0.0) -> dict:
-        """
-        Precomputes the anchor info, weights, and sets for a given intent input.
-        synonym_weight defaults to 0.0 to prevent false positives in tightly 
-        clustered intents, matching the original engine behavior.
-        """
         tokens = target_input.lower().split()
         anchor_info = []
         max_score = 0.0
         token_set = set(tokens)
         tag_set = set()
+        
+        weights_list = []
 
         for t in tokens:
             t_len = len(t)
             weight = self.weights.get(t, 1.0)
             anchor_info.append((t, weight, t_len))
             max_score += weight
+            weights_list.append(weight)
             
             tag = self._synonym_map.get(t)
             if tag: tag_set.add(tag)
+
+        # PRECOMPUTE IDF-AWARE BOUND:
+        # Sort weights descending and compute cumulative sums.
+        # This allows O(1) lookup of the absolute maximum possible score 
+        # for any query length Q, properly accounting for IDF weights.
+        weights_list.sort(reverse=True)
+        max_weight_sums = []
+        current_sum = 0.0
+        for w in weights_list:
+            current_sum += w
+            max_weight_sums.append(current_sum)
 
         return {
             "block": block,
@@ -355,7 +364,9 @@ class FlintParser:
             "tag_set": tag_set,
             "anchor_info": anchor_info,
             "max_score": max_score,
-            "synonym_weight": synonym_weight
+            "synonym_weight": synonym_weight,
+            "token_count": len(tokens),
+            "max_weight_sums": max_weight_sums  # <-- NEW
         }
 
     def fast_score_calculation(self, query_tokens: list, data: dict, threshold: float) -> float:

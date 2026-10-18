@@ -204,12 +204,21 @@ class FlintNPC:
         )
         
         query_tokens = user_prompt_clean.lower().split()
-        
+        query_token_count = len(query_tokens)
         threshold = self.threshold
-        
+        min_related_score = 0.25
+
         # 1. Try fuzzy match against ACTIVE CONTEXT
         best_context_block, best_context_score = None, -1.0
         for inp, precomputed in self._precomputed_context_intents.items():
+            target_token_count = precomputed.get("token_count", 0)
+            if query_token_count == 0 or target_token_count == 0: continue
+
+            q_idx = min(query_token_count, target_token_count) - 1
+            max_possible_score = precomputed["max_weight_sums"][q_idx] / precomputed["max_score"]
+            
+            if max_possible_score < threshold: continue
+                
             score = self.nlp.fast_score_calculation(
                 query_tokens, precomputed, max(threshold, best_context_score)
             )
@@ -217,20 +226,23 @@ class FlintNPC:
                 best_context_score = score
                 best_context_block = precomputed["block"]
 
-        # Context acceptance still uses threshold as the absolute gate
         if best_context_score >= self.threshold:
             self.update_context(best_context_block)
             return self.generate_response(
                 best_context_block, {}, best_context_score, "probabilistic match"
             )
 
-        # 2. Try fuzzy match against GLOBAL DATASET
+        # PASS 1: Fast fuzzy match against GLOBAL DATASET
         best_block, best_score = None, -1.0
-        related_intents = []
-        seen_categories = set()
-        max_suggestions = int(self.config.get("suggestions", 5))
 
         for target_input, precomputed in self._precomputed_intents.items():
+            target_token_count = precomputed.get("token_count", 0)
+            if query_token_count == 0 or target_token_count == 0: continue
+
+            q_idx = min(query_token_count, target_token_count) - 1
+            max_possible_score = precomputed["max_weight_sums"][q_idx] / precomputed["max_score"]
+            if max_possible_score < threshold: continue
+
             if rarest_word:
                 if rarest_word not in precomputed["token_set"]:
                     rarest_tag = self.nlp._synonym_map.get(rarest_word)
@@ -244,20 +256,6 @@ class FlintNPC:
             if score > best_score:
                 best_score = score
                 best_block = precomputed["block"]
-
-            if len(related_intents) < max_suggestions and rarest_word and isinstance(precomputed["block"], dict):
-                category = precomputed["block"].get("category", "")
-                found_match = False
-                if rarest_word in category.split("_"): found_match = True
-                else:
-                    inputs = precomputed["block"].get("input", [])
-                    if inputs and isinstance(inputs, list) and inputs[0]:
-                        if rarest_word in str(inputs[0]).lower():
-                            found_match = True
-
-                if found_match and category not in seen_categories:
-                    related_intents.append(precomputed["block"])
-                    seen_categories.add(category)
             
         if best_score >= self.threshold and best_block:
             self.update_context(best_block)
@@ -265,6 +263,51 @@ class FlintNPC:
                 best_block, {}, best_score, "probabilistic match"
             )
 
+        # PASS 2: Collect suggestions (Only runs if Pass 1 failed)
+        top_related = []
+        max_suggestions = int(self.config.get("suggestions", 5))
+
+        for target_input, precomputed in self._precomputed_intents.items():
+            target_token_count = precomputed.get("token_count", 0)
+            if query_token_count == 0 or target_token_count == 0: continue
+
+            q_idx = min(query_token_count, target_token_count) - 1
+            max_possible_score = precomputed["max_weight_sums"][q_idx] / precomputed["max_score"]
+            
+            # Lenient IDF-aware pruning for suggestions
+            if max_possible_score < min_related_score: continue
+
+            if rarest_word:
+                if rarest_word not in precomputed["token_set"]:
+                    rarest_tag = self.nlp._synonym_map.get(rarest_word)
+                    if not rarest_tag or rarest_tag not in precomputed["tag_set"]:
+                        continue
+
+            # Use min_related_score to allow collecting lower-scoring suggestions
+            score = self.nlp.fast_score_calculation(
+                query_tokens, precomputed, min_related_score
+            )
+
+            if score >= min_related_score:
+                top_related.append(
+                    (score, precomputed.get("token_count", 0), precomputed["block"])
+                )
+
+        # Sort by score descending, then by token_count ascending (smart tie-breaker)
+        top_related.sort(key=lambda x: (-x[0], x[1]))
+        
+        related_intents = []
+        seen_blocks = set()
+        for score, token_count, block in top_related:
+            inputs = block.get("input", [])
+            input_sig = str(inputs[0]).lower() if inputs and isinstance(inputs, list) else str(block)
+            
+            if input_sig not in seen_blocks:
+                related_intents.append(block)
+                seen_blocks.add(input_sig)
+                
+            if len(related_intents) >= max_suggestions: break
+        
         return self.generate_response(
             self.rejection, {}, 0.0, "rejected", related_intents
         )
