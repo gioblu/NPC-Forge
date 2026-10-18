@@ -6,6 +6,7 @@ class OllamaProvider(BaseProvider):
     def __init__(self, config: dict):
         self.api_url = config.get("api_url", "127.0.0.1:11434/api/chat")
         self.model = config.get("model", "")
+        self.num_ctx = config.get("num_ctx", 4096)
     
     def request(self, messages: list, tools: list = [], ctx: int = 0) -> dict:
         data = {
@@ -13,7 +14,7 @@ class OllamaProvider(BaseProvider):
             "messages": messages,
             "tools": tools,
             "stream": False,
-            "options": { "num_ctx": ctx, "num_predict": -1 }
+            "options": { "num_ctx": ctx or self.num_ctx, "num_predict": -1 }
         }
         binary_data = json.dumps(data).encode("utf-8")
         headers = {"Content-Type": "application/json"}
