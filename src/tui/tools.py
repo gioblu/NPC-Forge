@@ -209,3 +209,34 @@ class TuiTools:
         )
 
         console.print(panel)
+        
+    def render_status(
+        self, 
+        title: str = "TERMy Output",
+        description: str = ""
+    ):
+        """
+        Renders thinking, response, command, and description in a unified Rich Panel
+        matching the multi_choice Lip Gloss/Charm style.
+        """
+        content_elements = []
+        header = Text()
+        header.append(Text.from_markup(f"{title}\n"))
+        content_elements.append(header)
+                        
+        if description:
+            desc_text = Text()
+            desc_text.append(f"{description.strip()}", style="color(240)")
+            content_elements.append(desc_text)
+
+        unified_content = Group(*content_elements)
+        inner_padding = Padding(unified_content, (0, 0, 0, 0))
+
+        panel = Padding(Panel(
+            inner_padding,
+            border_style="color(234)",
+            style="on color(234)",
+            box=box.SQUARE
+        ), (1, 0, 0, 0))
+
+        console.print(panel)

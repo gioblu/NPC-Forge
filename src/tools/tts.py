@@ -42,13 +42,13 @@ def execute(args: dict, execute: bool, context: dict, console = None, config: di
                 stderr=subprocess.DEVNULL,
                 start_new_session=True
             )
-            context['output'] = "'tts' used successfully"    
-            context['summary'].append(f"'tts' used successfully.")
+            context["output"] = "'tts' used successfully"    
+            context["summary"].append(f"'tts' used successfully.")
             return True
         except Exception as e:   
-            context['summary'].append(f"'tts' failed because of {e}.")
+            context["summary"].append(f"'tts' failed because of {e}.")
             console.print(f"[red]❌ Audio playback failed: {e.stderr}[/red]")
             return -1
-    context['output'] = "'tts' used successfully"
-    context['summary'].append(f"'tts' used successfully.")
+    context["output"] = "'tts' used successfully"
+    context["summary"].append(f"'tts' used successfully.")
             

@@ -3,7 +3,7 @@ from pathlib import Path
 
 config = {
     "title_color": "green",
-    "command": "file_content",
+    "command": "{file_content}",
     "description": "Creating file {file_path}",
     "response": "{summary}"
 }
