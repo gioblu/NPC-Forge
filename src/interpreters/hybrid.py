@@ -2,12 +2,14 @@ from decomposers import Decomposer
 from .base import Interpreter, ExecutionResult, ExecutionContext
 from .deterministic import DeterministicInterpreter
 from .probabilistic import ProbabilisticInterpreter
+from tui.tools import TuiTools
 
 class HybridInterpreter(Interpreter):
     def __init__(self, decomposer: Decomposer):
         self.decomposer = decomposer
         self.det_interpreter = DeterministicInterpreter()
         self.prob_interpreter = ProbabilisticInterpreter()
+        self.tui = TuiTools()
 
     def interpret(self, user_input: str, context: dict, exec_ctx: ExecutionContext) -> ExecutionResult:
         final_result = ExecutionResult()
@@ -17,19 +19,14 @@ class HybridInterpreter(Interpreter):
             exec_ctx.console.print(f"\n[bold cyan]Decomposed into {len(subprompts)} subprompts.[/bold cyan]")
 
         for idx, subprompt in enumerate(subprompts):
-            if len(subprompts) > 1:
-                exec_ctx.console.print(f"\n[bold cyan]--- Subprompt {idx + 1}/{len(subprompts)} ---[/bold cyan]")
-                exec_ctx.console.print(f"[italic]{subprompt}[/italic]\n")
+            
+            self.tui.render_status(f"[bold green]Subprompt {idx + 1}/{len(subprompts)}[/bold green]", subprompt)
 
             # Step A: Try Deterministic First
             det_result = self.det_interpreter.interpret(subprompt, context, exec_ctx)
             
-            if det_result.status != "rejected":
-                final_result.merge(det_result)
+            if det_result.status != "rejected": final_result.merge(det_result)
             else:
-                # Step B: Fallback to Probabilistic (LLM)
-                exec_ctx.console.print(f"[yellow]Deterministic rejected. Falling back to LLM...[/yellow]")
-                
                 # Loop until the LLM actually finishes the subtask or hits a hard limit
                 max_llm_attempts = 10 
                 for attempt in range(max_llm_attempts):
@@ -38,22 +35,21 @@ class HybridInterpreter(Interpreter):
                     
                     # Check if the LLM explicitly finished the subtask
                     if prob_result.is_complete:
-                        exec_ctx.console.print(f"[bold green]Subprompt resolved by LLM.[/bold green]")
+                        self.tui.render_status(f"[green]Subprompt resolved by LLM[/green]", subprompt)
                         break
                     else:
-                        exec_ctx.console.print(f"[yellow]LLM needs more steps to resolve subprompt. Attempt {attempt + 1}/{max_llm_attempts}...[/yellow]")
+                        if attempt: 
+                            exec_ctx.console.print(f"\n[yellow]LLM is iterating on this subtask. Attempt {attempt + 1}/{max_llm_attempts}...[/yellow]\n")
                 else:
-                    exec_ctx.console.print(f"[red]LLM failed to resolve subprompt after {max_llm_attempts} attempts.[/red]")
+                    exec_ctx.console.print(f"\n[red]ProbabilisticInterpreter failed to resolve subprompt after {max_llm_attempts} attempts.[/red]\n")
 
         # Final summary for decomposed prompts
         if len(subprompts) > 1:
-            exec_ctx.console.print("\n" + "="*40)
             if final_result.status == "success":
-                exec_ctx.console.print(f"[bold green]✓ All {len(subprompts)} subprompts resolved successfully.[/bold green]")
+                self.tui.render_status(f"[bold green]Task execution completed[/bold green]", f"All {len(subprompts)} subprompts completed successfully.")
             elif final_result.status == "partial":
-                exec_ctx.console.print(f"[bold yellow]⚠ Partially resolved: {len(final_result.responses)}/{len(subprompts)} subprompts succeeded.[/bold yellow]")
+                self.tui.render_status(f"[bold yellow]Task execution partially completed[/bold yellow]", f"Completed {len(final_result.responses)} of {len(subprompts)} subprompts.")
             else:
-                exec_ctx.console.print(f"[bold red]✗ Failed to resolve any subprompts.[/bold red]")
-            exec_ctx.console.print("="*40 + "\n")
+                self.tui.render_status(f"[bold red]Task execution failed[/bold red]", f"Failed to complete the task.")
 
         return final_result
