@@ -44,8 +44,10 @@ def render_tool_action(tui, tool_name, tool_args, output, thinking, llm_model, s
     
     meta = (
         f"[color(240)]Status:[/color(240)] [color(247)]{status} [/]"
-        f"[color(240)]Iteration:[/color(240)] [color(247)]{iteration}[/] "
-        f"{response_time}"
+        f"[color(240)]Interpreter:[/color(240)] [color(247)]probabilistic [/]"
+        f"[color(240)]Confidence:[/color(240)] [color(247)]unknown[/] "
+        f"[color(240)]Response time:[/color(240)] "
+        f"[color(247)]{response_time:.2f}s[/color(247)]"       
     )
     
     cfg = TOOLS_CONFIG.get(tool_name, {})

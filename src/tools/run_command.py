@@ -34,7 +34,6 @@ def execute(args: dict, execute: bool, context: dict, console = None, config: di
         complete_command = ""
         bash_command = args.get("command")
         scripts_dir = args.get("scripts_dir")
-        print(scripts_dir)
         if scripts_dir.is_dir():
             for file in sorted(scripts_dir.iterdir()):
                 if file.suffix == ".sh":
