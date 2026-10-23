@@ -37,7 +37,7 @@ Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md
 
 <a href="https://www.youtube.com/watch?v=mIoUCLJDJ1U"><img src="/npcs/termy/showcase.gif" style="width: 650px"></a>
 
-TERMy features a dynamic **Dataset Manager** powered by a global registry. You can easily download the **NPC-Forge-Python-Base-Dataset** (~71MB, ~44k curated intents) or other community datasets directly via the CLI:
+TERMy features a Dataset Manager powered by a global registry. You can easily download the [NPC-Forge-Python-Base-Dataset](https://github.com/gioblu/NPC-Forge-Python-Base-Dataset) (~71MB, ~44k curated intents) or other datasets directly using the CLI:
 ```bash
 npc-forge dataset termy
 ```
