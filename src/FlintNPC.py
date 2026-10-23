@@ -1,5 +1,3 @@
-import glob
-import json
 import os
 import re
 import random
@@ -84,8 +82,8 @@ class FlintNPC:
 
     def load_data(self, dataset_dir):
         self.personality = self.storage.load_json(dataset_dir, "personality.json") or []
-        self.dataset = self.storage.load_json_recursive(dataset_dir, "dataset_*.json")
-        self.templates = self.storage.load_json_recursive(dataset_dir, "templates_*.json")
+        self.dataset = self.storage.load_json_recursive(dataset_dir, "dataset_*")
+        self.templates = self.storage.load_json_recursive(dataset_dir, "templates_*")
     
         v_lists = [
             "expletives", 
@@ -458,6 +456,17 @@ class FlintNPC:
 
         if "tools" in block and isinstance(block["tools"], list):
             payload["tools"] = render_all_tags(copy.deepcopy(block["tools"]))
+            commands_config = self.config.get("commands", {})
+            for tool in payload["tools"]:
+                if isinstance(tool, dict) and "arguments" in tool:
+                    args = tool["arguments"]
+                    if "command" in args and "language" in args:
+                        lang = str(args["language"]).lower()
+                        if lang in commands_config:
+                            wrapper = commands_config[lang]
+                            head = wrapper.get("head", "")
+                            tail = wrapper.get("tail", "")
+                            args["command"] = f"{head}{args['command']}{tail}"
 
         logger.info(f"[FlintNPC.py][{self.name}][generate_response] Payload: {payload}")
         return payload

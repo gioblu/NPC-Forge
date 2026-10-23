@@ -205,6 +205,7 @@ def print_help():
     {GREEN}list{RESET}           List all locally installed NPCs and their capabilities
     {GREEN}create <name>{RESET}  Scaffold a new NPC profile from the example template
     {GREEN}install <path>{RESET} Install an NPC profile from a local directory
+    {GREEN}dataset <npc>{RESET}  Manage optional datasets for a specific NPC (download/remove)
     {GREEN}test, tests{RESET}    Run the internal framework test suite
 
 {YELLOW}Options:{RESET}
@@ -214,6 +215,7 @@ def print_help():
 {YELLOW}Examples:{RESET}
     npc-forge create my_new_npc
     npc-forge install ./npcs/termy --dev
+    npc-forge dataset termy
     npc-forge logs
     npc-forge list
 """
@@ -246,10 +248,10 @@ def list_installed_npcs():
         creator = config.get("creator", "Unknown")
                 
         personality = storage.load_json(dataset_dir, "personality.json") or []
-        dataset = storage.load_json_recursive(dataset_dir, "dataset_*.json") or []
+        dataset = storage.load_json_recursive(dataset_dir, "dataset_*") or []
         intent_count = len(personality + dataset)
         
-        templates = storage.load_json_recursive(dataset_dir, "templates_*.json") or []
+        templates = storage.load_json_recursive(dataset_dir, "templates_*") or []
         templates_count = len(templates)
         
         vocabulary = storage.load_json(vocab_dir, "vocabulary.json")
@@ -349,8 +351,102 @@ def main():
             
         target_path = args_without_dev[2]
         install_npc(target_path, dev=is_dev)
+        
+    elif cmd == "dataset":
+        if len(sys.argv) < 3:
+            print(f"\n{RED}Error: Missing NPC name. Usage: npc-forge dataset <npc_name>{RESET}\n")
+            sys.exit(1)
+            
+        npc_name = sys.argv[2].lower().strip()
+        target_dir = FORGE_DATA_DIR / "npcs" / npc_name
+        
+        if not target_dir.exists() or not (target_dir / "config.json").exists():
+            print(f"\n{RED}Error: NPC '{npc_name}' is not installed.{RESET}\n")
+            print(f"Run: {YELLOW}npc-forge install npcs/{npc_name}{RESET} first.\n")
+            sys.exit(1)
+        
+        try:
+            from storage.dataset import DatasetManager
+            from tui.tools import TuiTools # Import your existing TUI tool
+            from rich.console import Console
+            console = Console()
+            manager = DatasetManager(forge_data_dir=FORGE_DATA_DIR, npc_name=npc_name)
+            available_datasets = manager.get_available_datasets()
+            active_datasets = manager.get_active_datasets()
+            
+            if not available_datasets:
+                print(f"\n{YELLOW}NPC '{npc_name}' has no optional datasets configured.{RESET}\n")
+                sys.exit(0)
+            
+            # Instantiate your TUI tool
+            tui = TuiTools()
+            
+            print(f"\nNPC-Forge {GREEN}{npc_name}{RESET} dataset manager")
+            print(f"\nTarget: {GREEN}{target_dir.resolve()}{RESET}\n")
+            
+            # 1. FIX THE SHIFTING: Calculate width for perfect alignment
+            max_digits = len(str(len(available_datasets)))
+            
+            for i, ds in enumerate(available_datasets, start=1):
+                is_installed = ds["id"] in active_datasets
+                status_color = GREEN if is_installed else RED
+                status_text = "Installed" if is_installed else "Not installed"
+                
+                # Fixed-width numbering (e.g., " 1.", " 2.", ..., "10.")
+                num_str = f"{i:>{max_digits}}."
+                
+                print(f"{num_str} {ds['id']} ({ds.get('size', 'Unknown size')})")
+                print(f"   {ds.get('description', 'No description')}")
+                print(f"   {status_color}{status_text}{RESET}\n")
+                
+            print(f"0. Exit\n")
+            
+            # 2. USE TUI TOOLS FOR INPUT
+            while True:
+                try:
+                    # Use your existing Rich prompt instead of raw input()
+                    raw_choice = tui.prompt(f"Select an option (0-{len(available_datasets)})")
+                    
+                    # If user pressed Ctrl+C, tui.prompt returns None
+                    if raw_choice is None:
+                        print("\nExiting.\n")
+                        break
+                        
+                    # 3. FIX THE ARROW KEY GARBAGE: Strip non-digits
+                    clean_choice = ''.join(filter(str.isdigit, raw_choice))
+                    
+                    if not clean_choice:
+                        print(f"{RED}Invalid input. Please enter a number.{RESET}")
+                        continue
+                        
+                    choice_num = int(clean_choice)
+                    
+                    if choice_num == 0:
+                        print("\nExiting.\n")
+                        break
+                    elif 1 <= choice_num <= len(available_datasets):
+                        selected_ds = available_datasets[choice_num - 1]
+                        console.print()                        
+                        with console.status(f"[bold green]Downloading {selected_ds['id']}...[/]", spinner="dots"):
+                            result = manager.toggle_dataset(selected_ds["id"])
+                        
+                        if result["success"]:
+                            print(f"{GREEN}Success: {result['message']}{RESET}\n")
+                        else:
+                            print(f"{RED}Error: {result['message']}{RESET}\n")
+                        break
+                    else:
+                        print(f"{RED}Invalid choice. Please enter a number between 0 and {len(available_datasets)}.{RESET}\n")
+                        
+                except (KeyboardInterrupt, EOFError):
+                    print("\n\nExiting.\n")
+                    sys.exit(0)
+                    
+        except ImportError as e:
+            print(f"{RED}Error: Missing dependency ({e}).{RESET}\n")
+            sys.exit(1)
     else:
-        print(f"{RED}Unknown: '{cmd}'. Supported: serve, start, stop, restart, watch, logs, tests, create, install{RESET}")
+        print(f"\n{RED}Unknown: '{cmd}'. Supported: serve, start, stop, restart, watch, logs, tests, create, install, dataset{RESET}\n")
         sys.exit(1)
 
 if __name__ == "__main__":

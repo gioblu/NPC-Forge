@@ -29,22 +29,25 @@ npc-forge reboot         # Reboots server
 npc-forge watch          # Starts server and watch logs in real-time
 npc-forge create         # Creates new NPC using the example profile
 npc-forge install <path> # Installs a new NPC
+npc-forge dataset <npc>  # Dataset package management
 ```
 Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md) documentation.
-
 ### TERMy-24k terminal assistant
-[TERMy-24k](/npcs/termy/README.md) is a Turing-complete, neuro-symbolic AI terminal assistant. It includes a deterministic engine used to answer to known inputs in less than 100 milliseconds, and uses [ollama](https://ollama.com) as a probabilistic engine to answer to unkown inputs. It also implements a novel approach to multi-turn context memory that enable both the deterministic engine and the LLM to cooperate and accomplish the task more efficiently.
+[TERMy-24k](/npcs/termy/README.md) is a Turing-complete, neuro-symbolic AI terminal assistant. It includes a deterministic engine used to answer known inputs in less than 100 milliseconds, and uses [ollama](https://ollama.com) as a probabilistic engine to answer unknown inputs. It also implements a novel approach to multi-turn context memory that enables both the deterministic engine and the LLM to cooperate and accomplish the task more efficiently.
 
 <a href="https://www.youtube.com/watch?v=mIoUCLJDJ1U"><img src="/npcs/termy/showcase.gif" style="width: 650px"></a>
 
-The local dataset weights 47.35MB, is composed of 102 templates, 24,274 intents.
+TERMy features a dynamic **Dataset Manager** powered by a global registry. You can easily download the **NPC-Forge-Python-Base-Dataset** (~71MB, ~44k curated intents) or other community datasets directly via the CLI:
+```bash
+npc-forge dataset termy
+```
 
 [TERMy-24k](/npcs/termy/README.md) provides context to both deterministic and probabilistic engines and acts as a router:
 
 <img width="800px" src="/npcs/termy/showcase-graph.png" />
 
 It implements a "neuro helps symbolic" architecture in the "learning‑for‑reasoning" family.
- 
+
 ### Quick start to redemption
 Reclaim control on your workflow in less than sixty seconds:
 

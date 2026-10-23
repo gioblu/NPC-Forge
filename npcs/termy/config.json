@@ -14,6 +14,19 @@
   },
   "agent": {
     "type": "self-reflecting",
-    "tools": ["finish", "plan", "tts", "write_file", "delete_file", "run_command"]
-  }
+    "tools": [
+      "finish",
+      "tts",
+      "write_file",
+      "delete_file",
+      "run_command"
+    ]
+  },
+  "commands": {
+    "py": {
+      "head": "TMP_FILE=$(mktemp /tmp/termy_script_XXXXXX.py) && DELIM=\"__TERMY_BOUNDARY_$$_$RANDOM__\" && cat << \"$DELIM\" > \"$TMP_FILE\"\n\n",
+      "tail": "\n\n$DELIM\ntermy_set_context 'active_file' \"$TMP_FILE\" && termy_set_context 'active_content' \"$(cat \"$TMP_FILE\")\""
+    }
+  },
+  "active_datasets": []
 }

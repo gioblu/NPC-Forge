@@ -43,8 +43,8 @@ Watch TERMy transpile it to a Shell script and execute it.
 
 - `-y, --yes`: Answer "yes" to execution confirmation (ideal for scripted `.termy` files).
 - `-g, --generate`: Route request to configured LLM to generate a new script/intent.
-- `-c, --context`: Set context length (default: 4096).
-- `-a, --agent`: Include session context (active file, active content, last output).
+- `-n, --num-ctx`: Set context window domension (default: 4096).
+- `-c, --context`: Include session context (active file, active content, last output).
 - `-d, --delete-context`: Delete session context.
 
 ### Configuration
@@ -115,18 +115,6 @@ termy execute 3 times tell me a joke, inspire me
 ```
 In the examle above TERMy will loop 3 times, generating a joke and a famous quote at each iteration.
 
-### How to add entries to the dataset
-When TERMy does not know how to answer a question asks to the user if should generate the missing dataset entry using the configured LLM model. After the answer is generated the user is asked if the entry should be saved or not:
-
-<img src="/npcs/termy/showcase-continuous-learning.gif" style="width: 650px">
-
-You can also add entries manually, be sure to read carefully the [NDF 0.0 (NPC-Forge Dataset Format)](/docs/dataset.md). In the `npcs/termy/dataset` directory there are `dataset_*.json` and `templates_*.json` files which contain dataset entries organized in categories, such as `dataset_files.json` or `templates_directories.json`.
-
-Once you added an entry remember to restart the server:
-```bash
-npc-forge reboot
-```
-
 ### Intent lookup
 
 If you want to explore the abilities of termy you can just write `termy` followed by a keyword:
@@ -148,14 +136,34 @@ Related intents:
 
 ```
 
-As you can see TERMy, when is not confident enough on an answer, will output a list of intents related to your prompt.
+### Dataset Management & Continuous Learning
+
+When TERMy does not know how to answer a question, it can ask the configured LLM to generate the missing dataset entry. After the answer is generated, you are prompted to save it, making TERMy smarter and faster over time:
+
+<img src="/npcs/termy/showcase-continuous-learning.gif" style="width: 650px">
+
+TERMy also features a powerful **Dataset Manager** that pulls from a global registry. You can easily download, update, or remove curated datasets without manually editing files:
+```bash
+npc-forge dataset termy
+```
+
+You can still add entries manually by following the [NDF 0.0 (NPC-Forge Dataset Format)](/docs/dataset.md) specification. Dataset entries are organized in the `npcs/termy/dataset` directory (e.g., `dataset_files.json`, `templates_directories.json`).
+
+Once you manually add an entry, remember to reboot the server to reload the index:
+```bash
+npc-forge reboot
+```
 
 ### Acknowledgements
 
-The dataset of TERMy was expanded thanks to these source datasets:
-- [Tested-143k-Python-Alpaca](https://huggingface.co/datasets/Vezora/Tested-143k-Python-Alpaca) dataset licensed under Apache license 2.0 published by Vezora on Huggingface.
-- [python_functions_reasoning](https://huggingface.co/notbadai) dataset licensed under Apache license 2.0 published by on [Huggingface](https://huggingface.co/datasets/notbadai/python_functions_reasoning).
--  [python-glaive-100](https://www.kaggle.com/datasets/thedevastator/glaive-python-code-qa-dataset) dataset licensed under [CC0 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/) - Public Domain Dedication by The Devastator on [kaggle](https://www.kaggle.com/datasets/thedevastator/glaive-python-code-qa-dataset).
-- [Python Programming Questions Dataset](https://www.kaggle.com/datasets/bhaveshmittal/python-programming-questions-dataset) dataset licensed under CC0: Public Domain published by Bhavesh Mittal on [Kaggle](https://www.kaggle.com/datasets/bhaveshmittal/python-programming-questions-dataset).
-- [nl2bash](https://github.com/TellinaTool/nl2bash/tree/master/data) dataset licensed under MIT license published by TellinaTool on [github](https://github.com/TellinaTool/nl2bash/).
+The deterministic capabilities of TERMy are powered by a curated, unified dataset. Huge thanks to the original creators of these open-source datasets for pushing the boundaries of AI:
 
+- **[Tested-143k-Python-Alpaca](https://huggingface.co/datasets/Vezora/Tested-143k-Python-Alpaca)** by Vezora (Licensed under Apache 2.0)
+- **[self-oss-instruct-sc2](https://huggingface.co/datasets/bigcode/self-oss-instruct-sc2)** by BigCode (Licensed under ODC-BY)
+- **[Python Functions Reasoning](https://huggingface.co/datasets/notbadai/python_functions_reasoning)** by notbadai (Licensed under Apache 2.0)
+- **[Glaive Python Code QA](https://www.kaggle.com/datasets/thedevastator/glaive-python-code-qa-dataset)** by thedevastator (Licensed under CC0 1.0 Universal)
+- **[Python Programming Questions](https://www.kaggle.com/datasets/bhaveshmittal/python-programming-questions-dataset)** by Bhavesh Mittal (Licensed under CC0 1.0 Universal)
+- **[nl2bash](https://github.com/TellinaTool/nl2bash/tree/master/data)** by TellinaTool (Licensed under MIT)
+
+*Note: TERMy dynamically tracks the provenance and license of every entry via the `source` and `license` metadata tags injected during dataset unification.*
+```
