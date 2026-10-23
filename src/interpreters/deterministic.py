@@ -74,9 +74,17 @@ class DeterministicInterpreter(Interpreter):
                         explanation = tool_args.get("explanation", "").strip()
                         if explanation and explanation not in actions_taken:
                             actions_taken.append(explanation)
-
-            TOOLS["tts"].execute({"text": response_text}, True, context, exec_ctx.config)
+                            
+            TOOLS["tts"].execute(
+                {"text": response_text}, 
+                True, 
+                context, 
+                exec_ctx.console, 
+                exec_ctx.config
+            )
+            
             print()
+            
             exec_ctx.tui.render_action(
                 thinking=res.get("thinking", ""),
                 response=Markdown(str(response_text).strip()),

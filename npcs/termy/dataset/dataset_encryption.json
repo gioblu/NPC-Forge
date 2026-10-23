@@ -55,7 +55,7 @@
     {
         "category": "encryption_random",
         "input": [
-            "generate secure random runmber",
+            "generate secure random number",
             "random number generator function zsh",
             "generate cryptographically secure random bits with zsh",
             "trng function based on epoch real time flips",

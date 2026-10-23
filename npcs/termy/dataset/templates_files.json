@@ -800,7 +800,7 @@
                 }
             }
         ],
-        "permission": "ask",
+        "permission": "yolo",
         "thinking": [
             "The user wants me to execute a script, thankfully the termy_execute script will do the work for me...",
             "That is something I can do faster than LLMs..."

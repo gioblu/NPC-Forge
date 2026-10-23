@@ -19,7 +19,6 @@ os.chdir(ROOT)  # FlintNPC resolves "npcs/<name>" relative to the cwd
 
 from FlintNPC import FlintNPC
 
-
 @lru_cache(maxsize=1)
 def get_npc():
     return FlintNPC("termy", log_level="WARNING")
@@ -71,8 +70,6 @@ class TestFlintNPC(unittest.TestCase):
             res["confidence"], self.npc.threshold
         )
         
-    
-
     def test_unknown_input_is_rejected(self):
         res = self.npc.process_message("asdkjqwoe kqjwe oiqjwe")
         self.assertEqual(res["status"], "rejected")
