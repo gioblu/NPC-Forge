@@ -1,0 +1,11 @@
+{
+  "datasets": [
+    {
+      "id": "NPC-Forge-Python-Base-Dataset",
+      "file": "dataset_NPC-Forge-Python-Base-Dataset-unified.jsonl",
+      "size": "60MB",
+      "description": "Python programming language knowledgebase",
+      "url": "https://raw.githubusercontent.com/gioblu/NPC-Forge-Python-Base-Dataset/refs/heads/main/jsonl/dataset_NPC-Forge-Python-Base-Dataset-unified.jsonl"
+    }
+  ]
+}
