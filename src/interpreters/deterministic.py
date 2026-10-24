@@ -152,7 +152,7 @@ class DeterministicInterpreter(Interpreter):
             # Handle rejected status with related intents multi-choice menu
             related = res.get("related", [])
             
-            if related:
+            if related and exec_ctx.fallback:
                 related_intents = [
                     intent["input"][0] if isinstance(intent.get("input"), list) else str(intent.get("input", ""))
                     for intent in related
@@ -185,7 +185,8 @@ class DeterministicInterpreter(Interpreter):
                     result.exit_code = 0
                     return result
             else:
-                exec_ctx.console.print(f"[yellow]Intent not understood.[/yellow]")
+                if exec_ctx.fallback: 
+                    exec_ctx.console.print(f"[yellow]Intent not understood.[/yellow]")
                 result.exit_code = 0
                 return result
 

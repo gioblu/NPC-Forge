@@ -49,6 +49,7 @@ class ExecutionContext:
     current_bot_dir: str
     forge_root_dir: str
     context_path: str
+    fallback: bool
 
 class Interpreter:
     """Base class for intent interpreters."""
