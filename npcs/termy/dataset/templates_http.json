@@ -184,7 +184,7 @@
                 {
                     "tag": "<||vocab_word||>",
                     "type": "vocab",
-                    "required": false
+                    "required": true
                 },
                 {
                     "tag": "<||string||>",
