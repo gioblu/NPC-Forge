@@ -2,11 +2,11 @@
 [![NPC-Forge Discord](https://img.shields.io/badge/Join-Discord-%235865F2.svg)](https://discord.gg/84zTNDzjD)
 ## NPC-Forge
 
-NPC-Forge is a neuro-symbolic AI agent framework that combines LLMs and symbolic AI to deliver safe and efficient workflows. With NPC-forge you can craft agents with distinct personalities, multi-turn context memory, sentiment analysis, and tool-call support. NPC-Forge runs on the CPU without necessarily relying on machine learning or LLMs.
+NPC-Forge is a neuro-symbolic AI agent framework that combines the capabilities of LLMs with the safety, efficiency and predictability of deterministic algorithms to deliver safe and efficient workflows. It runs on the CPU without necessarily relying on machine learning or LLMs.
 
 #### Why NPC-Forge? 
 
-Many problems you encounter can be solved without machine-learning or LLMs. NPC-Forge gives you a way to solve those problems more efficiently:
+Many problems you encounter can be solved without machine-learning or LLMs. NPC-Forge gives you the tools to solve those problems more efficiently:
 
 * **Deterministic engine**: fast, safe and reliable deterministic engine to handle known questions.
 * **Probabilistic engine**: uses [ollama](https://ollama.com) to answer questions that require reasoning or generative abilities.
