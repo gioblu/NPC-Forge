@@ -164,6 +164,13 @@ class FlintNPC:
         logger.info(f"[FlintNPC.py][{self.name}][process_message] Prompt: {user_prompt}")                    
         rarest_word = self.nlp.get_rarest_word(user_prompt)
         
+        if not rarest_word:
+            # No words from the query exist in the vocabulary
+            # Skip scan and return rejected immediately
+            return self.generate_response(
+                self.rejection, {}, 0.0, "rejected", []
+            )
+
         if not user_prompt:
             return self.generate_response(self.rejection, {}, 0.0, "rejected")
         
