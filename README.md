@@ -31,16 +31,11 @@ npc-forge dataset <npc>  # Dataset package management
 ```
 Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md) documentation.
 ### TERMy-24k terminal assistant
-[TERMy-24k](/npcs/termy/README.md) is a Turing-complete, neuro-symbolic AI terminal assistant. It includes a deterministic engine used to answer known inputs in less than 100 milliseconds, and uses [ollama](https://ollama.com) as a probabilistic engine to answer unknown inputs. It also implements a novel approach to multi-turn context memory that enables both the deterministic engine and the LLM to cooperate and accomplish the task more efficiently.
+[TERMy-24k](/npcs/termy/README.md) is a Turing-complete, neuro-symbolic AI terminal assistant. It includes a deterministic engine used to answer known inputs in less than 50 milliseconds, and uses [ollama](https://ollama.com) as a probabilistic engine to answer unknown inputs. 
 
 <a href="https://www.youtube.com/watch?v=mIoUCLJDJ1U"><img src="/npcs/termy/showcase.gif" style="width: 650px"></a>
 
-TERMy features a dataset manager powered by a global registry. You can easily download the [NPC-Forge-Python-Base-Dataset](https://github.com/gioblu/NPC-Forge-Python-Base-Dataset) (~71MB, ~44k curated intents) or other datasets directly using the CLI:
-```bash
-npc-forge dataset termy
-```
-
-[TERMy-24k](/npcs/termy/README.md) provides context to both deterministic and probabilistic engines and acts as a router:
+[TERMy-24k](/npcs/termy/README.md) provides context to both deterministic and probabilistic engines and acts as a harness and a router:
 
 <img width="800px" src="/npcs/termy/showcase-graph.png" />
 
