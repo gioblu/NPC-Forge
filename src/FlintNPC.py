@@ -179,9 +179,14 @@ class FlintNPC:
         )
 
         merged_map = self._get_merged_match_map()
-        if stripped in merged_map:
-            matched_block = merged_map[stripped]
-            match_status = "context match" if stripped in self.active_context_map else "exact match"
+        lookup = stripped.lower().strip()
+        if lookup in merged_map:
+            matched_block = merged_map[lookup]
+            match_status = (
+                "context match" if (
+                    lookup in self.active_context_map
+                ) else "exact match"
+            )
             
             self.update_context(matched_block)
             self.nlp.strip_and_sentiment(
