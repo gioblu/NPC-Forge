@@ -2,9 +2,9 @@
 [![NPC-Forge Discord](https://img.shields.io/badge/Join-Discord-%235865F2.svg)](https://discord.gg/84zTNDzjD)
 ## NPC-Forge
 
-NPC-Forge is a neuro-symbolic AI agent framework. With NPC-forge you can craft agents with distinct personalities, multi-turn context memory, sentiment analysis, and tool-call support. NPC-Forge runs on the CPU without necessarily relying on machine learning or LLMs.
+NPC-Forge is a neuro-symbolic AI agent framework. it combines LLMs and symbolic AI to deliver safe and efficient workflows.
 
-Instead of praying for a model to do the right thing, you can now use NPC-Forge to quickly build a deterministic agent and hook it up to your favourite workflow, API or harness.
+With NPC-forge you can craft agents with distinct personalities, multi-turn context memory, sentiment analysis, and tool-call support. NPC-Forge runs on the CPU without necessarily relying on machine learning or LLMs.
 
 #### Why NPC-Forge? 
 
@@ -37,7 +37,7 @@ Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md
 
 <a href="https://www.youtube.com/watch?v=mIoUCLJDJ1U"><img src="/npcs/termy/showcase.gif" style="width: 650px"></a>
 
-TERMy features a Dataset Manager powered by a global registry. You can easily download the [NPC-Forge-Python-Base-Dataset](https://github.com/gioblu/NPC-Forge-Python-Base-Dataset) (~71MB, ~44k curated intents) or other datasets directly using the CLI:
+TERMy features a dataset manager powered by a global registry. You can easily download the [NPC-Forge-Python-Base-Dataset](https://github.com/gioblu/NPC-Forge-Python-Base-Dataset) (~71MB, ~44k curated intents) or other datasets directly using the CLI:
 ```bash
 npc-forge dataset termy
 ```
