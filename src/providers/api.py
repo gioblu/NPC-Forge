@@ -10,7 +10,7 @@ class ApiProvider(BaseProvider):
     def __init__(
         self, 
         url: str = "http://127.0.0.1:5000", 
-        timeout: float = 10.0
+        timeout: float = 30.0
     ):
         """Initializes a new instance of the ApiProvider."""
         self.base_url = url.rstrip("/")

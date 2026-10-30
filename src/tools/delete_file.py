@@ -5,7 +5,7 @@ config = {
     "title_color": "red",
     "command": "rm {file_path}",
     "description": "Deleting file {file_path}",
-    "response": "{summary}"
+    "response": "{explanation}"
 }
 
 schema = {
@@ -17,9 +17,9 @@ schema = {
             "type": "object",
             "properties": {
                 "file_path": {"type": "string", "description": "Relative path to the file."},
-                "summary": {"type": "string", "description": "Inform your future self your action and what to do next."}
+                "explanation": {"type": "string", "description": "Inform your future self your action and what to do next."}
             },
-            "required": ["file_path", "summary"]
+            "required": ["file_path", "explanation"]
         }
     }
 }

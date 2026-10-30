@@ -20,7 +20,9 @@ from interpreters.deterministic import DeterministicInterpreter
 from interpreters.probabilistic import ProbabilisticInterpreter
 from interpreters.hybrid import HybridInterpreter
 from decomposers import DeterministicDecomposer, ProbabilisticDecomposer
+from storage.dataset import DatasetStorage
 
+storage = DatasetStorage()
 tui = TuiTools()
 storage = DatasetStorage()
 console = Console()
@@ -86,14 +88,52 @@ def run_cli() -> int:
         context_path=args.context_path,
         fallback=True if args.interpreter != 'h' else False
     )
-
-    if args.interpreter == "d": interpreter = DeterministicInterpreter()
-    elif args.interpreter == "p": interpreter = ProbabilisticInterpreter()
-    else:  # hybrid
-        decomposer = ProbabilisticDecomposer(config.get("llm", {})) if args.decomposer == "p" else DeterministicDecomposer()
+    
+    if args.decomposer == "p" or args.interpreter == "h":
+        decomposer = ProbabilisticDecomposer(config.get("llm", {}))       
+    else: decomposer = DeterministicDecomposer()
+    
+    if args.interpreter == "d": 
+        interpreter = DeterministicInterpreter()
+    elif args.interpreter == "p": 
+        interpreter = ProbabilisticInterpreter()
+    elif args.interpreter == "h":
         interpreter = HybridInterpreter(decomposer)
+        
+    result: ExecutionResult = interpreter.interpret(
+        user_input, 
+        context, 
+        exec_ctx
+    )
+    
+    if result.meta.get("generate", False): 
+        interpreter = ProbabilisticInterpreter()
+        result: ExecutionResult = interpreter.interpret(
+            user_input, 
+            context, 
+            exec_ctx
+        )   
+    
+    if result.status == "success" or result.status == "partial" and len(result.ndf_objects) == 1:
+        final_ndf = result.ndf_objects[0] 
+        perm_execute = (
+            final_ndf.get("permission") == "yolo" or 
+            exec_ctx.cli_args.yes or 
+            exec_ctx.cli_args.force_yes
+        )
+        if not perm_execute:
+            save_intent = exec_ctx.tui.confirm("\nDo you want to save this final entry in the dataset?")
+            if save_intent:
+                dataset_dir = Path(exec_ctx.current_bot_dir) / "dataset"
+                dataset_dir.mkdir(parents=True, exist_ok=True)           
+                save_filename = f"dataset_{os.environ.get('USER', 'user')}.json"
+                
+                for tool in final_ndf['tools']:
+                    if 'arguments' in tool:
+                        tool['arguments'].pop('scripts_dir', None)
 
-    result: ExecutionResult = interpreter.interpret(user_input, context, exec_ctx)
+                storage.save_entry(final_ndf, str(dataset_dir), save_filename)
+                exec_ctx.console.print("[green]Entry saved to dataset.[/green]")
 
     Path(exec_ctx.context_path).parent.mkdir(parents=True, exist_ok=True)
     with open(exec_ctx.context_path, "w", encoding="utf-8") as f:

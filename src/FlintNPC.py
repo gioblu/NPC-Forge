@@ -468,17 +468,6 @@ class FlintNPC:
 
         if "tools" in block and isinstance(block["tools"], list):
             payload["tools"] = render_all_tags(copy.deepcopy(block["tools"]))
-            commands_config = self.config.get("commands", {})
-            for tool in payload["tools"]:
-                if isinstance(tool, dict) and "arguments" in tool:
-                    args = tool["arguments"]
-                    if "command" in args and "language" in args:
-                        lang = str(args["language"]).lower()
-                        if lang in commands_config:
-                            wrapper = commands_config[lang]
-                            head = wrapper.get("head", "")
-                            tail = wrapper.get("tail", "")
-                            args["command"] = f"{head}{args['command']}{tail}"
-
+            
         logger.info(f"[FlintNPC.py][{self.name}][generate_response] Payload: {payload}")
         return payload

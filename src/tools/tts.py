@@ -4,8 +4,8 @@ import subprocess
 config = {
     "title_color": "green",
     "command": None,
-    "description_key": "output",
-    "response_key": "text"
+    "description": "{output}",
+    "response": "{text}"
 }
 
 schema = {

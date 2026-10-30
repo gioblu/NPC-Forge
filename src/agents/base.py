@@ -7,5 +7,5 @@ class BaseAgent(ABC):
         self.tools = tools
 
     @abstractmethod
-    def run_step(self, user_query: str, context: dict) -> tuple:
+    def run_step(self, user_query: str, details: str, context: dict) -> tuple:
         pass

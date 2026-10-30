@@ -14,14 +14,18 @@ class HybridInterpreter(Interpreter):
     def interpret(self, user_input: str, context: dict, exec_ctx: ExecutionContext) -> ExecutionResult:
         final_result = ExecutionResult()
         subprompts = self.decomposer.decompose(user_input)
-        
+        context["plan"] = subprompts
         if len(subprompts) > 1:
             exec_ctx.console.print(f"\n[bold cyan]Decomposed into {len(subprompts)} subprompts.[/bold cyan]")
 
         for idx, subprompt in enumerate(subprompts):
             
-            self.tui.render_status(f"[bold green]Subprompt {idx + 1}/{len(subprompts)}[/bold green]", subprompt)
-
+            if len(subprompts) > 1:
+                self.tui.render_status(f"[bold green]Subprompt {idx + 1}/{len(subprompts)}[/bold green]", subprompt)
+            else: 
+                self.tui.render_status(f"[bold green]Prompt[/bold green]", subprompt)
+            exec_ctx.console.print()
+            
             # Step A: Try Deterministic First
             det_result = self.det_interpreter.interpret(subprompt, context, exec_ctx)
             
@@ -35,11 +39,11 @@ class HybridInterpreter(Interpreter):
                     
                     # Check if the LLM explicitly finished the subtask
                     if prob_result.is_complete:
-                        self.tui.render_status(f"[green]Subprompt resolved by LLM[/green]", subprompt)
+                        self.tui.render_status(f"[green]Step complete.[/green]", subprompt)
                         break
-                    else:
-                        if attempt: 
-                            exec_ctx.console.print(f"\n[yellow]LLM is iterating on this subtask. Attempt {attempt + 1}/{max_llm_attempts}...[/yellow]\n")
+                    else: 
+                        self.tui.render_status(f"[green]Executing step {attempt + 1}.[/green]", subprompt)
+                        exec_ctx.console.print()
                 else:
                     exec_ctx.console.print(f"\n[red]ProbabilisticInterpreter failed to resolve subprompt after {max_llm_attempts} attempts.[/red]\n")
 
@@ -52,4 +56,5 @@ class HybridInterpreter(Interpreter):
             else:
                 self.tui.render_status(f"[bold red]Task execution failed[/bold red]", f"Failed to complete the task.")
 
+        exec_ctx.console.print()
         return final_result

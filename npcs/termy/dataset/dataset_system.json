@@ -998,6 +998,7 @@
     },
     {
         "input": [
+            "what is an interrupt handler in linux",
             "What is an interrupt handler in the Linux kernel",
             "explain interrupt handler linux",
             "what does interrupt handler do",
@@ -1192,9 +1193,12 @@
     },
     {
         "input": [
+            "What is the purpose of the etc directory in the filesystem",
             "What is the purpose of the /etc directory in the filesystem",
             "what is /etc in linux",
+            "what is etc in linux",
             "explain /etc directory",
+            "explain etc directory",
             "what files are in /etc",
             "purpose of etc directory",
             "describe /etc folder",
@@ -1334,6 +1338,7 @@
         "input": [
             "Why do I get a 'Permission denied' error even when using an administrator account",
             "why permission denied in linux",
+            "why i get permission denied",
             "explain permission denied error",
             "how to fix permission denied",
             "permission denied even as root",

@@ -39,17 +39,8 @@ def get_tools_by_name(names_list: list) -> list:
     """Returns an array of only the tools specified in 'names_list'."""
     return [_tools_map[name] for name in names_list if name in _tools_map]
     
-def render_tool_action(tui, tool_name, tool_args, output, thinking, llm_model, status, iteration, response_time):
+def render_tool_action(tui, tool_name, tool_args, output, thinking):
     """Renders the tool action using unified, templated metadata."""
-    
-    meta = (
-        f"[color(240)]Status:[/color(240)] [color(247)]{status} [/]"
-        f"[color(240)]Interpreter:[/color(240)] [color(247)]probabilistic [/]"
-        f"[color(240)]Confidence:[/color(240)] [color(247)]unknown[/] "
-        f"[color(240)]Response time:[/color(240)] "
-        f"[color(247)]{response_time:.2f}s[/color(247)]"       
-    )
-    
     cfg = TOOLS_CONFIG.get(tool_name, {})
     
     class SafeDict(dict):
@@ -75,7 +66,7 @@ def render_tool_action(tui, tool_name, tool_args, output, thinking, llm_model, s
         response=response,
         command=command,
         description=description,
-        title=f"[bold {cfg.get('title_color', 'green')}]{llm_model}[/]  {meta}"
+        title=f"[bold {cfg.get('title_color', 'green')}]Tool:[/] [color(247)]{tool_name} [/]"
     )
 
 __all__ = ["TOOLS", "get_tools_by_name", "render_tool_action", "TOOLS_CONFIG"]
