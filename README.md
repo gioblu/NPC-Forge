@@ -2,13 +2,11 @@
 [![NPC-Forge Discord](https://img.shields.io/badge/Join-Discord-%235865F2.svg)](https://discord.gg/84zTNDzjD)
 ## NPC-Forge
 
-NPC-Forge is a neuro-symbolic AI agent framework. With NPC-forge you can craft agents with distinct personalities, multi-turn context memory, sentiment analysis, and tool-call support. NPC-Forge runs on the CPU without necessarily relying on machine learning or LLMs.
-
-Instead of praying for a model to do the right thing, you can now use NPC-Forge to quickly build a deterministic agent and hook it up to your favourite workflow, API or harness.
+NPC-Forge is a neuro-symbolic AI agent framework that combines the capabilities of LLMs with the safety, efficiency and predictability of deterministic algorithms to deliver safe and efficient workflows. It runs on the CPU without necessarily relying on machine learning or LLMs.
 
 #### Why NPC-Forge? 
 
-Many problems you encounter can be solved without machine-learning or LLMs. NPC-Forge gives you a way to solve those problems more efficiently:
+Many problems you encounter can be solved without machine-learning or LLMs. NPC-Forge gives you the tools to solve those problems more efficiently:
 
 * **Deterministic engine**: fast, safe and reliable deterministic engine to handle known questions.
 * **Probabilistic engine**: uses [ollama](https://ollama.com) to answer questions that require reasoning or generative abilities.
@@ -33,16 +31,11 @@ npc-forge dataset <npc>  # Dataset package management
 ```
 Additional information can be found in the [NPC-Forge CLI](docs/NPC-Forge-cli.md) documentation.
 ### TERMy-24k terminal assistant
-[TERMy-24k](/npcs/termy/README.md) is a Turing-complete, neuro-symbolic AI terminal assistant. It includes a deterministic engine used to answer known inputs in less than 100 milliseconds, and uses [ollama](https://ollama.com) as a probabilistic engine to answer unknown inputs. It also implements a novel approach to multi-turn context memory that enables both the deterministic engine and the LLM to cooperate and accomplish the task more efficiently.
+[TERMy-24k](/npcs/termy/README.md) is a Turing-complete, neuro-symbolic AI terminal assistant. It includes a deterministic engine used to answer known inputs in less than 50 milliseconds, and uses [ollama](https://ollama.com) as a probabilistic engine to answer unknown inputs. 
 
 <a href="https://www.youtube.com/watch?v=mIoUCLJDJ1U"><img src="/npcs/termy/showcase.gif" style="width: 650px"></a>
 
-TERMy features a Dataset Manager powered by a global registry. You can easily download the [NPC-Forge-Python-Base-Dataset](https://github.com/gioblu/NPC-Forge-Python-Base-Dataset) (~71MB, ~44k curated intents) or other datasets directly using the CLI:
-```bash
-npc-forge dataset termy
-```
-
-[TERMy-24k](/npcs/termy/README.md) provides context to both deterministic and probabilistic engines and acts as a router:
+[TERMy-24k](/npcs/termy/README.md) provides context to both deterministic and probabilistic engines and acts as a harness and a router:
 
 <img width="800px" src="/npcs/termy/showcase-graph.png" />
 
@@ -80,10 +73,7 @@ Consider that this experimental release of `npc-forge` works only on Linux and W
 - [NPC creation guide](docs/create-npc.md)
 
 ### Contributing to the forge
-I am developing NPC-Forge with the conviction that democratic and sustainable use of Artificial Intelligence can be achieved with **neuro-symbolic designs** driven by curated and tested datasets crafted by the community; if you can, help me out. NPC-Forge thrives on your contributions, the community grows stronger when you:
-- Extend the dataset of existing NPCs
-- Craft new NPCs
-- Optimize or extend the framework
+I am developing NPC-Forge with the conviction that democratic and sustainable use of Artificial Intelligence can be achieved with **neuro-symbolic designs** driven by curated and tested datasets crafted by the community; if you can, help me out.
 
 Or are you just going to sit there waiting for the water to reach the boiling point?
 
