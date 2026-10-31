@@ -13,7 +13,7 @@ FORGE_DATA_DIR = Path(BASE_DIR).expanduser()
 log_file_path = FORGE_DATA_DIR / "logs" / "npc_forge.log"
 
 # Automatically create the 'logs' folder and its parents if they don't exist
-log_file_path.parent.mkdir(exist_ok=True)
+log_file_path.parent.mkdir(parents=True, exist_ok=True)
 
 # Create a master logger instance
 logger = logging.getLogger("npc_forge")
