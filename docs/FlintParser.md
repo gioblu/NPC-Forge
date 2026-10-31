@@ -102,19 +102,19 @@ match = parser.match_structure(templates, structure)
 # Returns the intent block whose structure matches the parsed structure
 ```
 
-The parser walks each template's structure paths, checking if the parsed tags align. Optional nodes are skipped if not present.
+The parser walks each template's structure paths (pre-sorted by specificity), checking if the parsed tags align. Optional nodes are skipped if not present.
 
 #### 5. Confidence Scoring
 
 ```python
-score = parser.sentence_similarity("show me a red tie", "show red tie", threshold=0.66)
+score = parser.fast_score_calculation(query_tokens, precomputed_data, threshold=0.66)
 # Returns: 0.85 (high confidence match)
 ```
 
 For probabilistic fallback (when no exact template matches), the parser computes an asymmetric, order-independent similarity score:
 - **Anchor tokens** (from the intent phrase) are weighted by their IDF specificity
 - **Query tokens** (from the user prompt) are fuzzy-matched against anchors
-- **OOV penalty** tokens absent from the vocabulary reduce the score
+- **OOV penalty**: Unrecognized query tokens (length ≥ 3) absent from the vocabulary or synonym map increase the denominator (`effective_max_score`), mathematically reducing the final similarity ratio.
 
 ### Code Examples
 
@@ -124,13 +124,13 @@ FlintParser automatically computes word rarity across your intent corpus:
 
 ```python
 # After initialization, parser.weights contains IDF scores:
-# {"tie": 1.0, "show": 0.8, "the": 0.05, "a": 0.03}
+# {"tie": 1.0, "show": 0.8, "the": 0.05, "a": 0.05}
 
 rarest = parser.get_rarest_word("show me a red tie")
 # Returns: "tie" (highest IDF weight)
 ```
 
-Rare words get high weight (they're specific to this intent). Common words get low weight (they appear everywhere).
+Rare words get high weight (they're specific to this intent). Common words get low weight (they appear everywhere, bounded at a minimum of 0.05).
 
 #### Sentiment-Driven Emoji
 
@@ -146,7 +146,7 @@ emoji = parser.sentiment_emoji(sentiment)
 # Returns: "😔" (two expletives, no thanks = sad/frustrated)
 ```
 
-The emoji system is cynical and nerdy it doesn't fake enthusiasm. One expletive = `😒`, five expletives = `😱`.
+The emoji system is cynical and nerdy; it doesn't fake enthusiasm. One expletive = `😒`, five expletives = `😱`.
 
 #### Typo-Tolerant Vocabulary Matching
 
@@ -168,7 +168,7 @@ Quoted strings are captured as a single slot, preserving spaces and punctuation.
 
 ### Performance Characteristics
 
-- **Zero Dependencies** Only `re`, `string`, `math` from the Python standard library
+- **Minimal Dependencies** Only Python standard library (`re`, `string`, `math`) + internal `logger`
 - **CPU-Only** No GPU, no CUDA, no PyTorch. Runs on a Raspberry Pi Zero.
 - **Deterministic** Same input always produces the same output. Testable in CI.
 - **Microsecond Latency** Parsing 1,000 intents takes <10ms on a modern CPU.
@@ -179,11 +179,11 @@ Quoted strings are captured as a single slot, preserving spaces and punctuation.
 FlintParser is the NLU engine that powers NPC-Forge agents. It's instantiated once per NPC with the dataset:
 
 ```python
-from flint_parser import FlintParser
+from FlintParser import FlintParser
 
 parser = FlintParser(
     name="TERMy",
-    vocabulary=load_json("dataset/vocabulary/words.json"),
+    vocabulary=load_json("dataset/vocabulary/vocabulary.json"),
     templates=load_json("dataset/templates.json"),
     templates_vocabulary=load_json("dataset/vocabulary/templates.json"),
     variable_types=load_json("dataset/types.json"),
@@ -206,12 +206,12 @@ The parser is stateless and thread-safe. It can be called from multiple concurre
 Neural embeddings are overkill for small vocabularies. Levenshtein distance is:
 - **Deterministic** Same input, same output
 - **Explainable** You can see exactly which characters differ
-- **Fast at scale** While word-level comparison is O(a x b), the *overall pipeline* achieves **O(1) + O(K)** effective runtime. Pre-computed intent signatures and "rarest-word" hash-set filtering eliminate 99% of candidates instantly, so expensive scoring only runs on `K` surviving candidates (typically 0 or 1).
+- **Fast at scale** Provides `precompute_intent_signature` and `fast_score_calculation` with early-exit pruning, enabling the broader NLU pipeline to achieve O(1) + O(K) effective runtime by eliminating 99% of candidates instantly.
 - **Zero-dependency** No pre-trained models to download
 
 #### Why IDF Weighting?
 
-TF-IDF (Term Frequency-Inverse Document Frequency) is the gold standard for keyword extraction. By weighting rare words heavily, the parser:
+Document Frequency is the gold standard for keyword extraction. By weighting rare words heavily, the parser:
 - Prevents "the", "a", "is" from dominating similarity scores
 - Makes short identifiers (like programming language names "c", "r") detectable
 - Allows the threshold to be tuned for the specific dataset

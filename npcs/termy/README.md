@@ -41,11 +41,12 @@ Watch TERMy transpile it to a Shell script and execute it.
 
 ### Flags
 
-- `-y, --yes`: Answer "yes" to execution confirmation (ideal for scripted `.termy` files).
-- `-g, --generate`: Route request to configured LLM to generate a new script/intent.
-- `-n, --num-ctx`: Set context window domension (default: 4096).
-- `-c, --context`: Include session context (active file, active content, last output).
-- `-d, --delete-context`: Delete session context.
+- `-y, --yes`: Automatically answer "yes" to prompts (skip execution/save confirmation).
+- `-g, --generate`: Force request to the probabilistic interpreter (LLM generation).
+- `-i, --interpreter`: Interpreter strategy: deterministic (`d`), probabilistic (`p`), or hybrid (`h`). Default: `d`.
+- `-d, --decomposer`: Decomposition strategy for the hybrid interpreter: deterministic (`d`) or probabilistic (`p`). Default: `d`.
+- `-c, --context`: Context length (default: 4096).
+- `-r, --remove-context`: Clear all values from the session context.
 
 ### Configuration
 
@@ -68,7 +69,7 @@ Controls the hybrid generation mode when triggered via the `-g` flag or low-conf
 | `enabled` | boolean | Master switch for LLM fallback capabilities. |
 | `model` | string | The specific Ollama model to use for code generation and reasoning. |
 | `api_url` | string | The endpoint for the Ollama API. Change this if your Ollama instance runs on a different port or host. |
-| `ctx_cap` | int | The default response buffer size (in tokens) for LLM generation. TERMy dynamically estimates total context needs and rounds up to the nearest power of 2 (e.g., 8192, 16384) to optimize VRAM usage. |
+| `num_ctx` | int | The default response buffer size (in tokens) for LLM generation. TERMy dynamically estimates total context needs and rounds up to the nearest power of 2 (e.g., 8192, 16384) to optimize VRAM usage. |
 
 ### Advanced features and hybrid mode
 
@@ -85,7 +86,7 @@ termy -a -g "fix it"
 # 3. Refine the output
 termy -a -g "yes, but make each triangle a random shade of green"
 ```
-When the LLM generates a valid new intent, TERMy will prompt you to save it to the local dataset. Once saved, future identical requests will execute deterministically in milliseconds without invoking the LLM, making TERMy smarter and faster over time.
+When the LLM generates a valid new intent, TERMy will prompt you to save it to the local dataset (unless `-y` is used or permission is set to `yolo`). Once saved, future identical requests will execute deterministically in milliseconds without invoking the LLM, making TERMy smarter and faster over time.
 
 > [!TIP]
 > TERMy's dynamic context estimation ensures that even when falling back to an LLM, it uses the minimum necessary VRAM, making it highly efficient on consumer hardware.
@@ -166,4 +167,3 @@ The deterministic capabilities of TERMy are powered by a curated, unified datase
 - **[nl2bash](https://github.com/TellinaTool/nl2bash/tree/master/data)** by TellinaTool (Licensed under MIT)
 
 *Note: TERMy dynamically tracks the provenance and license of every entry via the `source` and `license` metadata tags injected during dataset unification.*
-```

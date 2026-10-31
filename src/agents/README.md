@@ -89,7 +89,7 @@ class MyAgent(BaseAgent):
         # Parse into the standard ndf_object format
         # ... parsing logic ...
         
-        return output_text, ndf_object
+        return output_text, status, ndf_object
 ```
 
 #### Update `config.json`

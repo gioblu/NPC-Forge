@@ -2,7 +2,7 @@
 
 FlintNPC is the conversational agent framework built on top of FlintParser. It orchestrates the deterministic NLU engine into a full-featured, multi-turn conversational system with tool-call support, sentiment tracking, thinking mode, and context memory.
 
-FlintNPC is available in identical, cross-compliant implementations for both [Python](src/flint_npc.py), for local OS environments, and [JavaScript](src/flint_npc.js), running client-side inside any browser tab or Node.js instance.
+FlintNPC is available in identical, cross-compliant implementations for both Python, for local OS environments, and JavaScript, running client-side inside any browser tab or Node.js instance.
 
 ### The Engineering Philosophy
 
@@ -14,13 +14,13 @@ User Prompt
 1. Sanitize & Strip (insults, interjections, thanking words)
 2. Exact Match (O(1) hash lookup)
 3. Template Match (semantic structure parsing)
-4. Probabilistic Match (IDF-weighted Levenshtein)
+4. Probabilistic Match (Precomputed signatures & rarest-word pruning)
 5. Response, rejection or entry generation via ollama
 ```
 
 ### Features
 
-- **Four-Stage Intent Resolution** Exact match, template match, probabilitstic match, rejection
+- **Four-Stage Intent Resolution** Exact match, template match, probabilistic match, rejection
 - **Multi-Turn Context Memory** Persistent conversational state with overwrite semantics
 - **Sentiment Analysis** Tracks expletives, thanking words, encouraging or discouraging words
 - **Tool-Call Support** Extracts slots and triggers tool execution with permission gating
@@ -72,17 +72,17 @@ match = parser.match_structure(templates, structure)
 
 The parser converts the prompt into an ordered sequence of semantic tags, then walks each template's structure paths to find a match. Variables (like `<||color||>`) are extracted via regex and stored in slots.
 
-#### Stage 4: Probabilistic Match (IDF-Weighted Levenshtein)
+#### Stage 4: Probabilistic Match (Precomputed Signatures & Rarest-Word Pruning)
 
 ```python
-score = parser.sentence_similarity("show me a red tie", "show red tie", threshold=0.66)
-# Returns: 0.85 (high confidence match)
+# Checks active context first, then global dataset
+score = nlp.fast_score_calculation(query_tokens, precomputed, threshold)
 ```
 
-If no exact or template match is found, the parser computes an asymmetric, order-independent similarity score against all intent variants:
-- **Anchor tokens** (from the intent phrase) are weighted by their IDF specificity
-- **Query tokens** (from the user prompt) are fuzzy-matched against anchors via Levenshtein distance
-- **OOV penalty** tokens absent from the vocabulary reduce the score
+If no exact or template match is found, the parser computes a similarity score against intent variants. To ensure ultra-low latency, it uses aggressive pruning:
+- **Active Context Priority**: Checks against the current conversational context before falling back to the global dataset.
+- **Rarest-Word Pruning**: The rarest word in the query is identified. If it (or its synonym tag) is not in the target intent's precomputed `token_set` or `tag_set`, the candidate is skipped immediately.
+- **Early Exit**: Uses precomputed `max_weight_sums` and `token_count` to discard candidates that cannot possibly meet the `threshold` before running the final score calculation.
 
 The highest-scoring intent above the threshold is returned.
 
@@ -199,6 +199,7 @@ Available metadata:
 - `<||computer_name||>` hostname
 - `<||creation_date||>` dataset creation date
 - `<||creator||>` dataset author
+- `<||response_classes||>` total number of loaded response blocks
 - `<||completion||>` random completion phrase
 - `<||unknown||>` random "unknown" response
 - `<||related||>` related intent suggestions
@@ -224,24 +225,18 @@ FlintNPC reads configuration from `npcs/<name>/config.json`:
 
 ```json
 {
-  "npc_name": "TERMy",
-  "tts": "espeak-ng",
+  "name": "TERMy",
   "creator": "Giovanni Blu Mitolo",
-  "sentence_threshold": 0.6668,
-  "synonym_contribution": 0.95,
-  "word_threshold": 0.751,
-  "suggestions": 10,
-  "llm": {
-    "enabled": true,
-    "api_url": "http://localhost:11434/api/chat",
-    "model": "granite4.1:3b-q6_K"
-  }
+  "creation_date": "2026-07-12",
+  "threshold": 0.75,
+  "synonym_contribution": 0.0,
+  "suggestions": 5
 }
 ```
 
-- **sentence_threshold** minimum similarity score for probabilistic match on prompts >3 words
-- **word_threshold** stricter threshold for short prompts (1-3 words)
-- **suggestions** max number of related intent suggestions on rejection
+- **threshold** (default `0.75`): Minimum similarity score required for probabilistic matches.
+- **synonym_contribution** (default `0.0`): Weight given to synonym matches during precomputation.
+- **suggestions** (default `5`): Maximum number of related intent suggestions to return on rejection.
 
 ### Performance Characteristics
 
@@ -276,7 +271,7 @@ Most NLU frameworks rely on heavy neural classifiers. FlintNPC uses a highly opt
 
 1. **Exact match: O(1)** Direct hash-map lookup covers the vast majority of queries instantly.
 2. **Template match: O(1) average case** Structures are pre-compiled and sorted by specificity at startup, allowing for immediate early-exit matching without on-the-fly parsing.
-3. **Probabilistic match: O(1) pruning + O(K) scoring** Uses pre-computed intent signatures and "rarest-word" hash-set filtering to eliminate 99% of candidates in O(1) time. Expensive Levenshtein scoring is only applied to the remaining `K` candidates (typically 0 or 1), avoiding naive O(N×M) full dataset scans.
+3. **Probabilistic match: O(1) pruning + O(K) scoring** Uses pre-computed intent signatures and "rarest-word" hash-set filtering to eliminate 99% of candidates in O(1) time. Expensive scoring is only applied to the remaining `K` candidates (typically 0 or 1), avoiding naive O(N×M) full dataset scans.
 
 #### Why Context Override?
 
@@ -291,14 +286,6 @@ This allows flows like "create dir" > "move it" > "delete it" without re-specify
 
 Users often issue multiple commands at once (`list files; show red tie`). Instead of rejecting the input, FlintNPC splits on separators and processes each sub-prompt sequentially. Responses are concatenated.
 
-#### Why Adaptive Thresholds?
-
-Short prompts (1-3 words) are highly sensitive to typos. A single character change can flip the meaning (`who` vs `how`). Long prompts are more tolerant of errors because the rarest word still anchors the match.
-
-FlintNPC uses:
-- **word_threshold** (default 0.75) for prompts ≤3 words
-- **sentence_threshold** (default 0.75) for prompts >3 words
-
 ### Limitations
 
 FlintNPC is not a replacement for LLMs. It's a **deterministic conversational framework** for structured, predictable interactions. It cannot:
@@ -311,4 +298,4 @@ For open-ended chit-chat, the NPC-Forge framework can **escalate** to an LLM whe
 
 ### License
 
-Licensed under the [AGPL-3.0](../LICENSE). Commercial licensing available.
+Licensed under the AGPL-3.0. Commercial licensing available.
