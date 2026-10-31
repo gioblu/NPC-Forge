@@ -1,6 +1,6 @@
 ## `npc-forge` CLI
 
-The NPC-Forge CLI provides an interface to administer, install, and run your NPCs. This tool serves NPCs, streams logs and executes framework tests. Run it using the `npc-forge` command. 
+The NPC-Forge CLI provides an interface to administer, install, and run your NPCs. This tool serves NPCs, streams logs, manages datasets, and executes framework tests. Run it using the `npc-forge` command. 
 
 ```bash
 npc-forge <command> [options]
@@ -29,7 +29,7 @@ Scaffolds a new NPC profile from the built-in example template. Creates a new di
 npc-forge create my_new_npc
 ```
 
-It is possible to test the newly created NPC executing `npc-forge serve` and then visiting [127.0.0.1:5000/my_new_npc/chat](http://127.0.0.1:5000/my_new_npc/chat).
+It is possible to test the newly created NPC by executing `npc-forge serve` and then visiting [127.0.0.1:5000/my_new_npc/chat](http://127.0.0.1:5000/my_new_npc/chat).
 
 #### `install <path> [--dev]`
 Installs an NPC profile from a local directory into the `npc-forge` registry. Copies the entire source directory (datasets, scripts, entry points) to `~/.local/share/npc-forge/npcs/<name>` and executes `setup.sh` if it exists in the source directory. Use `--dev` to pass the developer flag to the setup hook.
@@ -43,13 +43,19 @@ npc-forge install ./npcs/termy --dev
 ```
 
 #### `list`
-Prints a list of all installed NPCs including the creator's name, intent count, vocabulary size, dataset size and tool availability.
+Prints a formatted table of all installed NPCs including their name, template count, intent count, vocabulary size, total dataset size, and last modified date.
 
 ```text
-Installed NPCs:
+Name       Templates  Intents  Vocabulary  Total size  Last modified         
+termy      5          42       150         1.20 MB     31-10-2026 14:30:00   
+guard_bot  2          12       45          340.5 KB    30-10-2026 09:15:00   
+```
 
-termy (intents: 42, vocabulary: 150, dataset: 1.2MB, tools: yes) by Alice
-guard_bot (intents: 12, vocabulary: 45, dataset: 340.5KB, tools: no) by Bob
+#### `dataset <npc>`
+Manages optional datasets for a specific installed NPC. Opens an interactive TUI menu to view, download, or remove configured datasets for the target NPC.
+
+```bash
+npc-forge dataset termy
 ```
 
 ### Diagnostics & Testing
@@ -76,8 +82,7 @@ When developing a new NPC, you can use the `--dev` flag during installation:
 npc-forge install ./path/to/my_npc --dev
 ```
 
-It passes the `--dev` argument to the NPC's `setup.sh` hook (if one exists), allowing the NPC's custom installer to set up symlinks, editable installs, or dev-specific dependencies. If the target directory is already symlinked/installed in dev mode, the tool will detect the path match and skip the file copy process to preserve your local working directory.
-
+This passes the `--dev` argument to the NPC's `setup.sh` hook (if one exists), allowing the NPC's custom installer to set up symlinks, editable installs, or dev-specific dependencies. If the target directory is already symlinked/installed in dev mode, the tool will detect the path match and skip the file copy process to preserve your local working directory.
 
 ### Help
 
