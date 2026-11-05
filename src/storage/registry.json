@@ -6,6 +6,13 @@
       "size": "60MB",
       "description": "Python programming language knowledgebase",
       "url": "https://raw.githubusercontent.com/gioblu/NPC-Forge-Python-Base-Dataset/refs/heads/main/jsonl/dataset_NPC-Forge-Python-Base-Dataset-unified.jsonl"
+    },
+    {
+      "id": "NPC-Forge-General-Knowledge-Dataset",
+      "file": "NPC-Forge-General-Knowledge-Dataset.jsonl",
+      "size": "60MB",
+      "description": "General Knowledge",
+      "url": "https://raw.githubusercontent.com/gioblu/NPC-Forge-General-Knowledge-Dataset/refs/heads/main/jsonl/NPC-Forge-General-Knowledge-Dataset.jsonl"
     }
   ]
 }
