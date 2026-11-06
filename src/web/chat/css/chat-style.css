@@ -8,7 +8,7 @@
 
     --text: #e8edf2;
     --text-dim: #8b98a5;
-    --heading: #f4f7f9;
+    --heading: #c9c9c9;
 
     --accent: #84c7a8;
     --intro: #93cdb4;
@@ -53,8 +53,8 @@
     --focus-ring: 0 0 0 0.2rem rgba(132, 199, 168, 0.22);
 
     /* ── metrics ── */
-    --pad: 0.875rem 1rem;
-    --gap: 0.75rem;
+    --pad: 0.5em 0.75em;
+    --gap: 0.5rem;
     --pad-control: 0.65rem 0.9rem;
     --fs-msg: 0.9375rem;
     --fs-meta: 0.6875rem;
@@ -80,7 +80,7 @@ body[data-theme="light"] {
 
     --text: #1d242c;
     --text-dim: #5b6672;
-    --heading: #10171e;
+    --heading: #515151;
 
     --accent: #146b52;
     --intro: #146b52;
@@ -91,7 +91,7 @@ body[data-theme="light"] {
     --user: #b42318;
 
     --user-background: #f6f7f8;
-    --user-border: #d9dee3;
+    --user-border: #777777;
 
     --npc-color: #23313c;
     --npc-background: #f7f8f9;
@@ -216,12 +216,13 @@ h3 {
     flex: none;
     min-height: 2rem;
     padding: 0.35rem 0.8rem;
-    border-radius: 999px;
+    border-radius: var(--radius);
     font-size: 0.8125rem;
     font-weight: 600;
     color: var(--text-dim);
     background: var(--button-background);
     border: var(--button-border);
+    text-decoration: none;
 }
 
 .theme-toggle:hover {
@@ -404,9 +405,7 @@ button:disabled {
 }
 
 .msg.user {
-    width: fit-content;
-    max-width: min(85%, 44rem);
-    margin-left: auto;
+    width: 100%;
     padding: 0.65rem 0.8rem;
     border-radius: var(--radius);;
     background: var(--user-background);
@@ -415,8 +414,7 @@ button:disabled {
 }
 
 .msg.npc {
-    width: fit-content;
-    max-width: min(92%, 48rem);
+    width: 100%;
     padding: 0.65rem 0.8rem;
     border-radius: var(--radius);;
     background: var(--npc-background);
@@ -460,6 +458,7 @@ button:disabled {
     background: transparent;
     border: 1px dashed var(--border-strong);
     color: var(--think);
+    margin: 0 0 .5em 0;
     font-style: italic;
     opacity: 0.92;
 }
@@ -491,6 +490,36 @@ button:disabled {
     color: var(--intro);
     text-decoration: underline;
     text-underline-offset: 0.15em;
+}
+
+/* ── inline message header ── */
+.msg-header {
+    display: block !important;
+    margin-bottom: 0.35rem !important;
+    font-size: var(--fs-msg);
+    line-height: 1.5;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+}
+
+.msg-header span,
+.msg-header strong {
+    display: inline !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.msg-header .msg-stats {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-left: 0.5rem !important;
+}
+
+.msg-header .msg-stats b {
+    font-weight: 500;
+    color: var(--intro);
 }
 
 /* ── animation ── */
@@ -537,7 +566,6 @@ button:disabled {
     body {
         max-width: 62rem;
         margin-inline: auto;
-        padding: 1.25rem;
     }
 
     .captain-img-container {

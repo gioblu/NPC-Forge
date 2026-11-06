@@ -77,17 +77,14 @@ def execute_and_sync_tools(
                 with open(exec_ctx.context_path, "r", encoding="utf-8") as f:
                     disk_context = json.load(f)
                 
-                # Merge disk state into in-memory context, but ONLY for keys that don't exist yet
                 for key, value in disk_context.items():
-                    if key == "summary" and isinstance(value, list) and isinstance(context.get("summary"), list):
-                        # For summary lists, merge new items
+                    if key == "summary" and isinstance(value, list):
+                        # For summary lists, merge new items to avoid duplicates
+                        if "summary" not in context: context["summary"] = []
                         for item in value:
                             if item not in context["summary"]:
                                 context["summary"].append(item)
-                    elif key not in context:
-                        # Only add NEW keys from disk (bash scripts might add new context)
-                        context[key] = value
-                    # If key already exists in memory, keep the in-memory version (it's fresher)
+                    else: context[key] = value
                         
             except Exception as e:
                 exec_ctx.console.print(f"[yellow]Warning: Failed to sync context from disk after tool execution: {e}[/yellow]")

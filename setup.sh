@@ -101,6 +101,7 @@ if [ "$DEV_MODE" -eq 1 ]; then
         done
     fi
     [ -f "$SOURCE_DIR/pyproject.toml" ] && ln -sf "$SOURCE_DIR/pyproject.toml" "$FORGE_DIR/pyproject.toml"
+    [ -f "$SOURCE_DIR/README.md" ] && ln -sf "$SOURCE_DIR/README.md" "$FORGE_DIR/README.md"
     [ -d "$SOURCE_DIR/npcs" ] && ln -sfn "$SOURCE_DIR/npcs" "$FORGE_DIR/npcs"
     [ -d "$SOURCE_DIR/tests" ] && ln -sfn "$SOURCE_DIR/tests" "$FORGE_DIR/tests"
 else

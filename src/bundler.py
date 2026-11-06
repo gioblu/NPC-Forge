@@ -1,6 +1,5 @@
-
 import json
-
+import sys
 from pathlib import Path
 from storage.dataset import DatasetStorage
 
@@ -10,22 +9,15 @@ SRC_DIR = Path(__file__).parent.resolve()
 storage = DatasetStorage()
 
 def load_and_merge_json_files(base_path, pattern, fallback_filename):
-    """
-    Cerca tutti i file che corrispondono al pattern (es. 'dataset_*.json'),
-    li ordina, carica il loro contenuto (che deve essere una lista JSON) 
-    e li unisce in un unico array. Se non trova nulla, usa il file di fallback.
-    """
     merged_data = []
-    # Cerca i file corrispondenti al pattern e li ordina alfabeticamente
     files = sorted(base_path.glob(pattern))
     
-    # Fallback: se non trova file multi-parte, controlla se esiste il file singolo originale
     if not files:
         fallback_path = base_path / fallback_filename
         if fallback_path.exists():
             files = [fallback_path]
         else:
-            print(f"[ERROR] No files found for pattern '{pattern}' or fallback '{fallback_filename}' in {base_path}")
+            print(f"[WARNING] No files found for pattern '{pattern}' or fallback '{fallback_filename}' in {base_path}")
             return []
 
     for full_path in files:
@@ -49,46 +41,56 @@ def npc_to_html(npc_name):
     dataset_dir = base_npc_path / "dataset"
     vocab_dir = dataset_dir / "vocabulary"
     
-    with open(SRC_DIR / "web/js" / "FlintParser.js", "r", encoding="utf-8") as f:
+    with open(SRC_DIR / "web" / "js" / "FlintParser.js", "r", encoding="utf-8") as f:
         parser_js = f.read()
-    with open(SRC_DIR / "web/js" / "FlintNPC.js", "r", encoding="utf-8") as f:
+    with open(SRC_DIR / "web" / "js" / "FlintNPC.js", "r", encoding="utf-8") as f:
         npc_js = f.read()
-    with open(SRC_DIR / "web/js" / "Captain.js", "r", encoding="utf-8") as f:
+    with open(SRC_DIR / "web" / "js" / "Captain.js", "r", encoding="utf-8") as f:
         captain_js = f.read()
-    with open(SRC_DIR / "web/chat/css" / "chat-style.css", "r", encoding="utf-8") as f:
+    with open(SRC_DIR / "web" / "chat" / "css" / "chat-style.css", "r", encoding="utf-8") as f:
         chat_style = f.read()
         
-    # Carica e accorpa i file multipli per dataset e templates
     dataset_bundle = load_and_merge_json_files(dataset_dir, "dataset_*.json", "dataset.json")
     templates_bundle = load_and_merge_json_files(dataset_dir, "templates_*.json", "templates.json")
+    
+    config_data = storage.load_json(base_npc_path, "config.json") or {}
         
     bundle = {
-        "config": storage.load_json(base_npc_path, "config.json"),
-        "types": storage.load_json(dataset_dir, "types.json"),
-        "templates_vocabulary": storage.load_json(vocab_dir, "templates.json"),
-        "vocabulary": storage.load_json(vocab_dir, "vocabulary.json"),
+        "config": config_data,
+        "types": storage.load_json(dataset_dir, "types.json") or {},
+        "templates_vocabulary": storage.load_json(vocab_dir, "templates.json") or {},
+        "vocabulary": storage.load_json(vocab_dir, "vocabulary.json") or {},
         "dataset": dataset_bundle,
-        "personality": storage.load_json(dataset_dir, "personality.json"),
+        "personality": storage.load_json(dataset_dir, "personality.json") or [],
         "templates": templates_bundle
     }
     bundle_json_str = json.dumps(bundle, ensure_ascii=False)
 
-    with open(SRC_DIR / "web/chat/html" / "template.html", "r", encoding="utf-8") as f:
+    # 1. Load the dataset registry from the source directory
+    registry_path = SRC_DIR / "storage" / "registry.json"
+    registry_data = {"datasets": []}
+    if registry_path.exists():
+        try:
+            with open(registry_path, "r", encoding="utf-8") as f:
+                registry_data = json.load(f)
+        except Exception as e:
+            print(f"[WARNING] Could not parse registry.json: {e}")
+            
+    registry_json_str = json.dumps(registry_data, ensure_ascii=False)
+
+    with open(SRC_DIR / "web" / "chat" / "html" / "template.html", "r", encoding="utf-8") as f:
         html_template = f.read()
 
     html_compiled = html_template.replace("/*{{STYLE_SOURCE}}*/", chat_style)
     html_compiled = html_compiled.replace("{{NPC_NAME}}", npc_name)
     
-    html_compiled = html_compiled.replace(
-        "// {{CAPTAIN_SOURCE}}", captain_js
-    )
-    html_compiled = html_compiled.replace(
-        "// {{FLINT_PARSER_SOURCE}}", parser_js
-    )
+    html_compiled = html_compiled.replace("// {{CAPTAIN_SOURCE}}", captain_js)
+    html_compiled = html_compiled.replace("// {{FLINT_PARSER_SOURCE}}", parser_js)
     html_compiled = html_compiled.replace("// {{FLINT_NPC_SOURCE}}", npc_js)
-    html_compiled = html_compiled.replace(
-        "// {{NPC_BUNDLE_DATA}}", "const npcBundleData = " + bundle_json_str + ";"
-    )
+    html_compiled = html_compiled.replace("// {{NPC_BUNDLE_DATA}}", "const npcBundleData = " + bundle_json_str + ";")
+    
+    # 2. Inject the registry directly into the HTML as a JS constant
+    html_compiled = html_compiled.replace("// {{DATASET_REGISTRY}}", "const INJECTED_DATASET_REGISTRY = " + registry_json_str + ";")
 
     return html_compiled
 
@@ -113,7 +115,6 @@ def compile_standalone_npc(npc_name):
     print(f"[COMPILER] Standalone compiled successfully: {output_file}")
 
 if __name__ == "__main__":
-    import sys
     if len(sys.argv) < 2:
         print("Usage: python compile_npc.py <npc_name>")
     else:

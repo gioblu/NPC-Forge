@@ -106,10 +106,9 @@ class DeterministicInterpreter(Interpreter):
                 menu_text = f"Type [bold green]1-{len(related)}[/] or [bold green]q[/] to quit\n"
                 exec_ctx.console.print()
                 choice = exec_ctx.tui.multi_choice(f"[bold green]{res.get('npc', 'NPC')}[/] {res.get('emoji', '')} {meta}", related_intents, menu_text, 'g')
-                
-                if isinstance(choice, int) and 0 < choice <= len(related):
+                if isinstance(choice, int) and -1 < choice < len(related):
                     try:
-                        res_proc = subprocess.run([os.path.abspath(sys.argv[0]), related_intents[choice - 1]], env=os.environ)
+                        res_proc = subprocess.run([os.path.abspath(sys.argv[0]), related_intents[choice]], env=os.environ)
                         result.exit_code = res_proc.returncode
                         return result
                     except KeyboardInterrupt:
@@ -123,7 +122,7 @@ class DeterministicInterpreter(Interpreter):
                 elif not choice or str(choice).lower() == 'q':
                     result.exit_code = 0
                     return result
-                else:
+                elif choice == len(related):
                     result.meta["generate"] = True
                     return result
             else:

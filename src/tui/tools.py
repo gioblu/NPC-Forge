@@ -96,7 +96,7 @@ class TuiTools:
             menu_content.append("──────────────\n", style="dim green")
 
             for i, choice_text in enumerate(choices, 1):
-                menu_content.append(f"[{i}] ", style="bold green")
+                menu_content.append(f"[{i - 1}] ", style="bold green")
                 menu_content.append(f"{choice_text}\n", style="white")
 
         inner_padding = Padding(menu_content, (0, 0, 0, 0))
@@ -121,22 +121,22 @@ class TuiTools:
 
                 if key == 'q' or raw_key == '\x03': 
                     console.print()
-                    return 0
+                    return -1
                 if key == additional.lower(): 
                     console.print()
-                    return max_range + 1
+                    return max_range
                 
                 if key.isdigit():
                     numeric_choice = int(key)
-                    if 1 <= numeric_choice <= max_range:
+                    if 0 <= numeric_choice < max_range:
                         console.print()
-                        return numeric_choice
+                        return numeric_choice 
                 
                 continue
 
         except (KeyboardInterrupt, EOFError):
             console.print() # Force a clean newline on exit
-            return 0
+            return -1
 
     def render_action(
         self, 

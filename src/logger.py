@@ -1,6 +1,5 @@
 import logging
 from logging.handlers import TimedRotatingFileHandler
-import os
 from pathlib import Path
 
 # Define the base directory path

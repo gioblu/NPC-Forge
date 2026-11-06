@@ -8,15 +8,242 @@
     <title>{{NPC_NAME}} - Standalone Chat</title>
     <style>
         /*{{STYLE_SOURCE}}*/
+
+        /* ── dataset panel ── */
+        .dataset-panel {
+            position: fixed;
+            top: 4rem;
+            right: 1rem;
+            width: 320px;
+            max-width: calc(100vw - 2rem);
+            background: var(--panel);
+            border: var(--border-strong);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            z-index: 1000;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .dataset-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .dataset-panel-header h4 {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--heading);
+            font-weight: 650;
+        }
+
+        .dataset-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .dataset-item {
+            padding: 0.75rem;
+            border: var(--border);
+            border-radius: var(--radius);
+            background: var(--field);
+            transition: border-color 0.18s ease;
+        }
+
+        .dataset-item:hover {
+            border: var(--border-strong);
+        }
+
+        .dataset-item h5 {
+            margin: 0 0 0.25rem 0;
+            font-size: .7em;
+            color: var(--heading);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dataset-item p {
+            margin: 0 0 0.75rem 0;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+
+        .dataset-item button {
+            width: 100%;
+            font-size: 0.8rem;
+            padding: 0.4rem;
+        }
+
+        .dataset-item button.btn-download {
+            background: var(--primary-background);
+            border: var(--primary-border);
+            color: var(--primary-text);
+        }
+
+        .dataset-item button.btn-download:hover {
+            background: var(--primary-hover);
+        }
+
+        .dataset-item button.btn-remove {
+            background: rgba(229, 83, 75, 0.1);
+            border: 1px solid rgba(229, 83, 75, 0.3);
+            color: var(--user);
+        }
+
+        .dataset-item button.btn-remove:hover {
+            background: rgba(229, 83, 75, 0.2);
+            border: 1px solid rgba(229, 83, 75, 0.5);
+        }
+
+        .dataset-msg {
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            text-align: center;
+            min-height: 1rem;
+        }
+
+        .dataset-msg.success { color: var(--green); }
+        .dataset-msg.error { color: var(--user); }
+
+                /* ── Auto-Load Progress Popup ── */
+        .loading-popup {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(4px);
+        }
+        .loading-content {
+            background: var(--panel, #1a1b1e);
+            padding: 2rem;
+            border-radius: var(--radius, 8px);
+            border: 1px solid var(--border-strong, #333);
+            width: 320px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        }
+        .loading-content h4 {
+            margin: 0 0 1rem 0;
+            color: var(--heading, #fff);
+            font-size: 1.1rem;
+        }
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background: var(--field, #2a2a2a);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-background, #4caf50);
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+        .loading-status {
+            font-size: 0.85rem;
+            color: var(--text-dim, #aaa);
+            margin-top: 1rem;
+            min-height: 1.2em;
+        }
+
+
+        /* ── markdown styling ── */
+        .markdown-body {
+            line-height: 1.6;
+        }
+        .markdown-body p {
+            margin: 0.5em 0;
+        }
+        .markdown-body p:first-child {
+            margin-top: 0;
+        }
+        .markdown-body p:last-child {
+            margin-bottom: 0;
+        }
+        .markdown-body a {
+            color: var(--intro);
+            text-decoration: underline;
+            text-underline-offset: 0.15em;
+        }
+        .markdown-body code {
+            background: var(--field);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.9em;
+            color: var(--text);
+        }
+        .markdown-body pre {
+            background: var(--field);
+            padding: 0.8rem;
+            border-radius: var(--radius);
+            overflow-x: auto;
+            border: var(--border);
+            margin: 0.5em 0;
+        }
+        .markdown-body pre code {
+            background: transparent;
+            padding: 0;
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+        .markdown-body ul, .markdown-body ol {
+            margin: 0.5em 0;
+            padding-left: 1.5em;
+        }
+        .markdown-body strong {
+            color: var(--heading);
+            font-weight: 650;
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
 </head>
 
 <body>
+    <!-- Auto-Load Progress Popup -->
+    <div id="loading-popup" class="loading-popup" style="display: none;">
+        <div class="loading-content">
+            <h4 id="loading-title">Loading Dataset...</h4>
+            <div class="progress-bar-container">
+                <div id="loading-progress" class="progress-bar" style="width: 0%;"></div>
+            </div>
+            <p id="loading-status" class="loading-status">Initializing...</p>
+        </div>
+    </div>
     <meta id="theme-color-meta" name="theme-color" content="#04090b">
     <div class="top-bar">
         <h3>NPC-Forge Chat</h3>
-        <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">Light</button>
+        <div style="display: flex; gap: 0.5rem;">
+            <button class="theme-toggle" id="dataset-btn" onclick="toggleDatasetPanel()">Datasets</button>
+            <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">Light</button>
+        </div>
     </div>
+    
+    <div id="dataset-panel" class="dataset-panel" style="display: none;">
+        <div class="dataset-panel-header">
+            <h4>Manage Datasets</h4>
+            <button onclick="toggleDatasetPanel()" style="padding: 0.2rem 0.5rem; font-size: 0.8rem;">Close</button>
+        </div>
+        <div id="dataset-list" class="dataset-list">Loading registry...</div>
+    </div>
+
     <div id="chat-window"></div>
     <div class="input-bar">
         <input type="text" id="input-box" placeholder="Write a message..."
@@ -25,6 +252,7 @@
     </div>
 </body>
 <script>
+    
     const CHAT_THEME = {
         dark: { class: '', btnText: 'Light', metaColor: '#04090b' },
         light: { class: 'light-mode', btnText: 'Dark', metaColor: '#f4f7f5' }
@@ -38,6 +266,58 @@
 
     // {{NPC_BUNDLE_DATA}}
 
+    // {{DATASET_REGISTRY}}
+
+    class WebDatasetManager {
+        constructor(npcInstance, registryUrl = null, injectedData = null) {
+            this.npc = npcInstance;
+            this.registryUrl = registryUrl;
+            this.availableDatasets = injectedData?.datasets || [];
+            // CRITICAL: This prevents fetch("null") if injectedData was provided
+            this._isLoaded = (injectedData !== null && injectedData !== undefined); 
+        }
+
+        async loadRegistry() {
+            // CRITICAL: If injected, return immediately. DO NOT FETCH.
+            if (this._isLoaded) {
+                console.log("[WebDatasetManager] ✅ Using injected registry. Skipping network fetch.");
+                return this.availableDatasets;
+            }
+
+            if (!this.registryUrl) {
+                console.warn("[WebDatasetManager] No registry URL or injected data provided.");
+                return [];
+            }
+
+            try {
+                const response = await fetch(this.registryUrl);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+                this.availableDatasets = data.datasets || [];
+                return this.availableDatasets;
+            } catch (error) {
+                console.error("[WebDatasetManager] Failed to load dataset registry:", error);
+                return [];
+            }
+        }
+
+        async toggleDataset(datasetId) {
+            const dataset = this.availableDatasets.find(d => d.id === datasetId);
+            if (!dataset) return { success: false, message: "Dataset not found in registry" };
+
+            if (this.npc.loaded_datasets.has(datasetId)) {
+                return this.npc.removeRemoteDataset(datasetId);
+            } else {
+                return await this.npc.addRemoteDataset(dataset);
+            }
+        }
+
+        isDatasetActive(datasetId) {
+            return this.npc.loaded_datasets.has(datasetId) || 
+                (this.npc.config.active_datasets && this.npc.config.active_datasets.includes(datasetId));
+        }
+    }
+
     let captain = new Captain();
     const npcName = "{{NPC_NAME}}";
     const bot = new FlintNPC(npcName);
@@ -50,27 +330,90 @@
     const win = document.getElementById("chat-window");
     const box = document.getElementById("input-box");
     
-    // Username state for chat
     let currentUsername = localStorage.getItem('npc_context_username') || 'You';
 
-    // Display system startup message with sci-fi flair
-    function showSystemMessage() {
-        const systemMsg = `Chat with <strong>${npcName.toUpperCase()}</strong> is now <strong>READY</strong>.`;
+    // Dataset Manager Initialization
+    // 1. Check if the Python bundler successfully injected the registry
+    const initialRegistryData = (typeof INJECTED_DATASET_REGISTRY !== 'undefined') 
+        ? INJECTED_DATASET_REGISTRY 
+        : { datasets: [] };
+
+    // 2. Pass 'null' for the URL, and the injected data as the 3rd argument
+    const datasetManager = new WebDatasetManager(bot, null, initialRegistryData);
+
+    function toggleDatasetPanel() {
+        const panel = document.getElementById("dataset-panel");
+        if (panel.style.display === "none" || panel.style.display === "") {
+            panel.style.display = "flex";
+            renderDatasets();
+        } else {
+            panel.style.display = "none";
+        }
+    }
+
+    async function renderDatasets() {
+        const container = document.getElementById("dataset-list");
+        container.innerHTML = "Loading registry...";
+        
+        const datasets = await datasetManager.loadRegistry();
+        container.innerHTML = "";
+
+        if (datasets.length === 0) {
+            container.innerHTML = "<p style='color: var(--text-dim); font-size: 0.85rem;'>No additional datasets available.</p>";
+            return;
+        }
+
+        datasets.forEach(ds => {
+            const isActive = datasetManager.isDatasetActive(ds.id);
+            const btnText = isActive ? "Remove" : "Download";
+            const btnClass = isActive ? "btn-remove" : "btn-download";
+
+            const div = document.createElement("div");
+            div.className = "dataset-item";
+            div.innerHTML = `
+                <h5>${ds.id} <span style="font-weight: normal; font-size: 0.75rem; color: var(--text-dim);">${ds.size || 'Unknown size'}</span></h5>
+                <p>${ds.description || 'No description'}</p>
+                <button id="btn-${ds.id}" class="${btnClass}" onclick="handleToggle('${ds.id}')">${btnText}</button>
+            `;
+            container.appendChild(div);
+        });
+    }
+
+    async function handleToggle(datasetId) {
+        const btn = document.getElementById(`btn-${datasetId}`);
+        const msg = document.getElementById(`msg-${datasetId}`);
+        
+        btn.disabled = true;
+        btn.textContent = "Processing...";
+        msg.textContent = "";
+
+        const result = await datasetManager.toggleDataset(datasetId);
+        
+        msg.textContent = result.message;
+        msg.className = `dataset-msg ${result.success ? 'success' : 'error'}`;
+        btn.disabled = false;
+
+        if (result.success) {
+            setTimeout(renderDatasets, 800); 
+        } else {
+            btn.textContent = datasetManager.isDatasetActive(datasetId) ? "Remove" : "Download";
+        }
+    }
+
+    function showSystemMessage(message) {
         const div = document.createElement("div");
         div.className = "msg intro";
-        div.innerHTML = systemMsg;
+        div.innerHTML = message;
         win.appendChild(div);
         win.scrollTop = win.scrollHeight;
     }
 
-    // Show system message when page loads
-    showSystemMessage();
+    showSystemMessage(`Chat with <strong>${npcName.toUpperCase()}</strong> is now <strong>READY</strong>.`);
 
-    // Resolve context variable placeholders: $(npc_context_key) -> localStorage value
     function resolveContextVars(jsonStr) {
         return jsonStr.replace(/\$\(npc_context_(\w+)\)/g, (match, key) => {
             const val = localStorage.getItem(`npc_context_${key}`) || '';
-            return val.replace(/"/g, '\\"'); // Escape quotes for JSON
+            return val.replace(/"/g, '\\"');
         });
     }
 
@@ -85,14 +428,12 @@
             let toolFn = null;
             let parsedArgs = null;
             console.log(toolCall);
-            // Copilot format: { "name": "tool_name", "arguments": {...} }
             if (toolCall.name && toolCall.arguments) {
                 toolFn = captain.tools[toolCall.name];
                 parsedArgs = typeof toolCall.arguments === 'string' 
                     ? JSON.parse(resolveContextVars(toolCall.arguments))
                     : toolCall.arguments;
             }
-            // OpenAI format: { "function": { "name": "...", "arguments": "JSON string" } }
             else if (toolCall.function && toolCall.function.name && toolCall.function.arguments) {
                 console.log("OPENAI PARSING", toolCall.function.name, captain.tools);
                 toolFn = captain.tools[toolCall.function.name];
@@ -106,7 +447,6 @@
 
             const output = await toolFn([parsedArgs]);
 
-            // Accumulate output
             if (output && output.type === "text") {
                 accumulatedHtml += `<div>${output.content}</div>`;
             } else if (output && output.type === "html") {
@@ -117,11 +457,17 @@
         return accumulatedHtml;
     }
 
+    window.scrollChatToBottom = function() {
+        win.scrollTo({top: win.scrollHeight, behavior: "smooth"});
+    }
+
     async function sendMessage(msg) {
-        const text = (msg) ? msg : box.value.trim();
+        const inputBox = document.getElementById("input-box");
+        const text = (msg !== undefined) ? String(msg).trim() : inputBox.value.trim();
         if (!text) return;
+        
         appendMessage(currentUsername, text, "user");
-        box.value = "";
+        inputBox.value = ""; // Clear the box immediately
 
         try {
             if (isTtsEnabled && window.speechSynthesis) {
@@ -131,20 +477,47 @@
             console.warn("[TTS] Synthesis block intercepted", e);
         }
 
-
-        // Normal flow: process user input
+        const startTime = performance.now();
         const payload = bot.process_messages(text);
-        
-        // Check if first tool is Question
-        const firstTool = payload.tools && payload.tools.length > 0 ? payload.tools[0] : null;
-        const firstToolName = firstTool ? (firstTool.name || (firstTool.function && firstTool.function.name)) : null;
-        console.log(payload);
-        // Execute tool chain and collect output
+        const endTime = performance.now();
+        const responseTime = (endTime - startTime).toFixed(1);
+
         const toolsHtml = await executeToolChain(payload.tools || []);
         speak(payload.response);
+        
+        let relatedHtml = "";
+        if (payload.status === "rejected" && payload.related && payload.related.length > 0) {
+            relatedHtml += `<div class="related-intents" style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border);">`;
+            relatedHtml += `<span style="display: block; font-size: 0.75rem; color: var(--text-dim); font-weight: 650; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;">Did you mean?</span>`;
+            relatedHtml += `<div style="display: flex; flex-wrap: wrap; gap: 8px;">`;
+            
+            payload.related.forEach((intent) => {
+                if (intent.input && intent.input.length > 0) {
+                    const suggestionText = intent.input[0];
+                    const safeText = suggestionText.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                    const jsSafeText = suggestionText.replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, " ");
+                    
+                    relatedHtml += `
+                        <button class="related-btn" onclick="sendMessage('${jsSafeText}')">
+                            ${safeText}
+                        </button>
+                    `;
+                }
+            });
+            relatedHtml += `</div></div>`;
+        }
+
+        const stats = {
+            npc: payload.npc || npcName,
+            emoji: payload.emoji || "😑",
+            status: payload.status || "rejected",
+            interpreter: "neuro-symbolic",
+            confidence: (payload.confidence * 100).toFixed(2),
+            responseTime: responseTime
+        };
+
         const combinedHtml = toolsHtml ? toolsHtml : "";
-        appendMessage(npcName, payload.response, "npc", payload.emoji, payload.thinking, combinedHtml);
-    
+        appendMessage(npcName, payload.response, "npc", payload.emoji, payload.thinking, combinedHtml, relatedHtml, stats);
     }
 
     function speak(text) {
@@ -153,15 +526,58 @@
         try {
             window.speechSynthesis.cancel();
 
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = bot.config.lang || "en-US";
-            utterance.volume = 0.5;
-            utterance.pitch = 0.5;
+            // 1. CLEAN THE TEXT: Remove markdown and symbols so the TTS doesn't try to pronounce them
+            const cleanText = text
+                .replace(/\*\*/g, "")          // Remove bold markers
+                .replace(/\*/g, "")            // Remove italic markers
+                .replace(/__/g, "")            // Remove underline markers
+                .replace(/#+\s/g, "")          // Remove header markers
+                .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // Convert [link](url) to just "link"
+                .replace(/<[^>]+>/g, "")       // Strip any stray HTML tags
+                .replace(/\s+/g, " ")          // Normalize multiple spaces/newlines into single spaces
+                .trim();
 
+            if (!cleanText) return;
+
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            utterance.lang = bot.config.lang || "en-US";
+            utterance.volume = 1.0;
+            utterance.rate = 1.0;
+
+            // 2. INTELLIGENT MALE VOICE SELECTION
             const voices = window.speechSynthesis.getVoices();
+            
             if (voices.length > 0) {
-                utterance.voice = voices[0];
-            } else console.error("TTS failed: no voices available");
+                let bestVoice = null;
+                const maleKeywords = ['male', 'david', 'guy', 'mark', 'james', 'daniel', 'george', 'oliver', 'matthew', 'ryan', 'fred', 'arthur'];
+
+                // Priority 1: Explicitly labeled "Male" English voices
+                bestVoice = voices.find(v => v.name.toLowerCase().includes('male') && v.lang.startsWith('en'));
+                
+                // Priority 2: Common male voice names in OS/Browsers
+                if (!bestVoice) {
+                    bestVoice = voices.find(v => maleKeywords.some(keyword => v.name.toLowerCase().includes(keyword)) && v.lang.startsWith('en'));
+                }
+                
+                // Priority 3: Any English voice (as a last resort)
+                if (!bestVoice) {
+                    bestVoice = voices.find(v => v.lang === 'en-US' || v.lang === 'en-GB' || v.lang.startsWith('en'));
+                }
+                
+                utterance.voice = bestVoice || voices[0];
+
+                // Priority 4: Pitch adjustment fallback
+                // If we couldn't find a definitively male voice, lower the pitch slightly 
+                // to make a female/neutral voice sound more masculine.
+                const isLikelyMale = bestVoice && maleKeywords.some(k => bestVoice.name.toLowerCase().includes(k));
+                utterance.pitch = isLikelyMale ? 1.0 : 0.85; 
+                
+            } else {
+                // Chrome sometimes loads voices asynchronously. Retry briefly if empty.
+                console.warn("[TTS] Voices not loaded yet, retrying...");
+                setTimeout(() => speak(cleanText), 100);
+                return;
+            }
 
             window.speechSynthesis.speak(utterance);
         } catch (e) {
@@ -169,29 +585,151 @@
         }
     }
 
-    function appendMessage(sender, text, className, emoji = "😑", thinking = null, html = "") {
+    function appendMessage(sender, text, className, emoji = "😑", thinking = null, html = "", relatedHtml = "", stats = null) {
         const div = document.createElement("div");
         div.className = `msg ${className}`;
-        let prefix = `${sender}: `;
-        prefix = prefix.charAt(0).toUpperCase() + prefix.slice(1);
-        
+
+        const prefix = sender.charAt(0).toUpperCase() + sender.slice(1);
         let messageHTML = "";
-        
-        if (thinking && className === "npc") {
-            messageHTML += `<div class="thinking">Thinking: ${thinking}</div>`;
+
+        if (className === "npc") {
+            // Build the compact inline header: Smith 😑 │ Status: ... Confidence: ... Response time: ...
+            let statsHtml = "";
+            if (stats) {
+                statsHtml = `
+                    <span class="msg-stats">
+                        Status: <b>${stats.status}</b>
+                        Confidence: <b>${stats.confidence}%</b>
+                        Response time: <b>${stats.responseTime}ms</b>
+                    </span>`;
+            }
+
+            messageHTML += `
+                <div class="msg-header">
+                    <strong style="color: var(--intro)">${prefix} ${emoji}</strong>
+                    ${statsHtml}
+                </div>`;
+
+            if (thinking) { 
+                messageHTML += `<div class="thinking">Thinking: ${thinking}</div>`;
+            }
+
+            // Then the actual response body underneath
+            if (text && text.trim() !== "") {
+                messageHTML += `<div class="markdown-body">${marked.parse(text)}</div>`;
+            } else {
+                messageHTML += `<div class="markdown-body">I'm not quite sure I understand, but perhaps one of these is what you're looking for:</div>`;
+            }
+        } else {
+            // User messages keep your original styling
+            messageHTML += `<div class="markdown-body"><strong style="color: var(--intro)">${prefix}</strong>${marked.parse(text)}</div>`;
         }
 
-        messageHTML += `<span>${prefix}${text}${(emoji != "😑") ? " " + emoji : ""}</span>`;
-        
         if (html) {
             messageHTML += `<div style="margin-top: 10px;">${html}</div>`;
         }
-        
+
+        if (relatedHtml) {
+            messageHTML += relatedHtml;
+        }
+
         div.innerHTML = messageHTML;
         win.appendChild(div);
-        win.scrollTop = win.scrollHeight;
+        scrollChatToBottom();
     }
 
+    async function autoLoadDatasetsOnStart() {
+        const datasetsToLoad = bot.config.active_datasets || [];
+        
+        if (datasetsToLoad.length === 0) {
+            console.log("[AutoLoad] No 'active_datasets' specified in config.json. Skipping auto-load.");
+            return;
+        }
+
+        const popup = document.getElementById("loading-popup");
+        const progressBar = document.getElementById("loading-progress");
+        const statusText = document.getElementById("loading-status");
+        const titleText = document.getElementById("loading-title");
+
+        // Reset and show popup
+        popup.style.display = "flex";
+        progressBar.style.width = "0%";
+        progressBar.style.background = "var(--primary-background, #4caf50)"; // Reset color
+        statusText.textContent = "Initializing...";
+
+        try {
+            // Step 1: Load Registry (0% -> 20%)
+            progressBar.style.width = "10%";
+            statusText.textContent = "Connecting to registry...";
+            const registryDatasets = await datasetManager.loadRegistry();
+            
+            progressBar.style.width = "20%";
+            statusText.textContent = "Registry loaded.";
+            
+            // Yield to let the browser paint the 20% state
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            // Step 2: Loop through datasets (20% -> 80%)
+            // stepSize ensures the bar moves proportionally whether there is 1 or 10 datasets
+            const stepSize = 60 / datasetsToLoad.length;
+            
+            for (let i = 0; i < datasetsToLoad.length; i++) {
+                const targetId = datasetsToLoad[i];
+                
+                if (bot.loaded_datasets.has(targetId)) {
+                    console.log(`[AutoLoad] Dataset '${targetId}' is already active.`);
+                    continue;
+                }
+
+                const dataset = registryDatasets.find(d => d.id === targetId);
+                if (!dataset) {
+                    console.warn(`[AutoLoad] Dataset '${targetId}' not found in registry. Skipping.`);
+                    continue;
+                }
+
+                // Start of this dataset's download
+                const currentProgress = 20 + (i * stepSize);
+                progressBar.style.width = `${currentProgress}%`;
+                statusText.textContent = `Loading dataset ${i + 1}/${datasetsToLoad.length}: '${targetId}'...`;
+
+                const result = await bot.addRemoteDataset(dataset);
+                if (!result.success) {
+                    console.error(`[AutoLoad] Failed to load '${targetId}': ${result.message}`);
+                }
+                
+                // Mid-step: Show engine rebuild
+                progressBar.style.width = `${currentProgress + (stepSize / 2)}%`;
+                statusText.textContent = `Rebuilding engine for '${targetId}'...`;
+                
+                // Yield to let the browser paint the progress smoothly
+                await new Promise(resolve => setTimeout(resolve, 300));
+            }
+
+            // Step 3: Completion (80% -> 100%)
+            progressBar.style.width = "100%";
+            statusText.textContent = "Complete!";
+            titleText.textContent = "Datasets Loaded Successfully";
+
+            setTimeout(() => {
+                popup.style.display = "none";
+                const loadedCount = datasetsToLoad.filter(id => bot.loaded_datasets.has(id)).length;
+                showSystemMessage(`Automatically loaded ${loadedCount} dataset(s) from config.`);
+            }, 600);
+
+        } catch (error) {
+            console.error("[AutoLoad] Failed:", error);
+            progressBar.style.width = "100%";
+            progressBar.style.background = "var(--user, #e5534b)"; // Red for error
+            statusText.textContent = `Error: ${error.message}`;
+            titleText.textContent = "Loading Failed";
+            
+            setTimeout(() => {
+                popup.style.display = "none";
+                showSystemMessage(`⛔ Failed to auto-load datasets: ${error.message}`);
+            }, 2500);
+        }
+    }
+    
     function applyTheme(theme) {
         const config = CHAT_THEME[theme];
         const root = document.documentElement;
@@ -207,9 +745,10 @@
         applyTheme(newTheme);
     }
 
-    // Apply saved theme on page load
-    const savedTheme = localStorage.getItem('chat-theme') || 'dark';
-    applyTheme(savedTheme);
+    // Trigger auto-load when the DOM is fully ready
+    window.addEventListener("DOMContentLoaded", () => {
+        autoLoadDatasetsOnStart();
+    });
 </script>
 
 </html>

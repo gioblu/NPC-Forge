@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import signal
 import sys
 from pathlib import Path
 
@@ -20,21 +21,29 @@ from interpreters.deterministic import DeterministicInterpreter
 from interpreters.probabilistic import ProbabilisticInterpreter
 from interpreters.hybrid import HybridInterpreter
 from decomposers import DeterministicDecomposer, ProbabilisticDecomposer
-from storage.dataset import DatasetStorage
 
 storage = DatasetStorage()
 tui = TuiTools()
-storage = DatasetStorage()
 console = Console()
 
+def _graceful_exit(signum, frame):
+    """Cleanly exits the application when Ctrl+C (SIGINT) is pressed."""
+    # Using sys.stdout.write ensures no Rich rendering deadlocks in signal handlers
+    sys.stdout.write("\n\nTERMy was terminated!\n\n")
+    sys.stdout.flush()
+    sys.exit(0)
+
 def run_cli() -> int:
+    signal.signal(signal.SIGINT, _graceful_exit)
+    
     home_dir = os.path.expanduser("~")
     config_path = os.path.join(home_dir, ".local/share/termy/")
     
     config = storage.load_json(CURRENT_BOT_DIR, "config.json") or {}
     context = storage.load_json(Path(config_path), "config.json") or {}
     
-    if not isinstance(context.get("summary"), list): context["summary"] = []
+    if not isinstance(context.get("summary"), list): 
+        context["summary"] = []
     
     llm_config = config.get("llm", {})
     
@@ -45,7 +54,7 @@ def run_cli() -> int:
     
     parser.add_argument("query", nargs="*", help="Prompt input string.")
     parser.add_argument("--npc", default="termy", help="Target NPC instance (default: termy)")
-    parser.add_argument("-i", "--interpreter", choices=["d", "p", "h"], default="d", help="interpreter strategy: deterministic (d), probabilistic (p), or hybrid (d)")
+    parser.add_argument("-i", "--interpreter", choices=["d", "p", "h"], default="d", help="interpreter strategy: deterministic (d), probabilistic (p), or hybrid (h)")
     parser.add_argument("-d", "--decomposer", choices=["d", "p"], default="d", help="Decomposition strategy for hybrid interpreter: deterministic (d) or probabilistic (p)")
     parser.add_argument("-c", "--context", nargs="?", const=llm_config.get('num_ctx', 4096), default=0, type=int, help="Include system context with an optional response buffer size")
     parser.add_argument("-a", "--agent", action="store_true", help="Includes session context (for agentic workflows)")
@@ -100,46 +109,52 @@ def run_cli() -> int:
     elif args.interpreter == "h":
         interpreter = HybridInterpreter(decomposer)
         
-    result: ExecutionResult = interpreter.interpret(
-        user_input, 
-        context, 
-        exec_ctx
-    )
-    
-    if result.meta.get("generate", False): 
-        interpreter = ProbabilisticInterpreter()
+    try:
         result: ExecutionResult = interpreter.interpret(
             user_input, 
             context, 
             exec_ctx
-        )   
-    
-    if result.status == "success" or result.status == "partial" and len(result.ndf_objects) == 1:
-        final_ndf = result.ndf_objects[0] 
-        perm_execute = (
-            final_ndf.get("permission") == "yolo" or 
-            exec_ctx.cli_args.yes or 
-            exec_ctx.cli_args.force_yes
         )
-        if not perm_execute:
-            save_intent = exec_ctx.tui.confirm("\nDo you want to save this final entry in the dataset?")
-            if save_intent:
-                dataset_dir = Path(exec_ctx.current_bot_dir) / "dataset"
-                dataset_dir.mkdir(parents=True, exist_ok=True)           
-                save_filename = f"dataset_{os.environ.get('USER', 'user')}.json"
-                
-                for tool in final_ndf['tools']:
-                    if 'arguments' in tool:
-                        tool['arguments'].pop('scripts_dir', None)
+        
+        if result.meta.get("generate", False): 
+            interpreter = ProbabilisticInterpreter()
+            result = interpreter.interpret(
+                user_input, 
+                context, 
+                exec_ctx
+            )   
+        
+        if result.status == "success" or (result.status == "partial" and len(result.ndf_objects) == 1):
+            final_ndf = result.ndf_objects[0] 
+            perm_execute = (
+                final_ndf.get("permission") == "yolo" or 
+                exec_ctx.cli_args.yes or 
+                exec_ctx.cli_args.force_yes
+            )
+            if not perm_execute:
+                save_intent = exec_ctx.tui.confirm("\nDo you want to save this final entry in the dataset?")
+                if save_intent:
+                    dataset_dir = Path(exec_ctx.current_bot_dir) / "dataset"
+                    dataset_dir.mkdir(parents=True, exist_ok=True)           
+                    save_filename = f"dataset_{os.environ.get('USER', 'user')}.json"
+                    
+                    for tool in final_ndf['tools']:
+                        if 'arguments' in tool:
+                            tool['arguments'].pop('scripts_dir', None)
 
-                storage.save_entry(final_ndf, str(dataset_dir), save_filename)
-                exec_ctx.console.print("[green]Entry saved to dataset.[/green]")
+                    storage.save_entry(final_ndf, str(dataset_dir), save_filename)
+                    exec_ctx.console.print("[green]Entry saved to dataset.[/green]")
 
-    Path(exec_ctx.context_path).parent.mkdir(parents=True, exist_ok=True)
-    with open(exec_ctx.context_path, "w", encoding="utf-8") as f:
-        json.dump(context, f, indent=4, ensure_ascii=False)
+        Path(exec_ctx.context_path).parent.mkdir(parents=True, exist_ok=True)
+        with open(exec_ctx.context_path, "w", encoding="utf-8") as f:
+            json.dump(context, f, indent=4, ensure_ascii=False)
 
-    return result.exit_code
+        return result.exit_code
+        
+    except (KeyboardInterrupt, EOFError):
+        sys.stdout.write("\n\nTERMy was terminated!\n\n")
+        sys.stdout.flush()
+        return 0
 
 if __name__ == "__main__":
     sys.exit(run_cli())

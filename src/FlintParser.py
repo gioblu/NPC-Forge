@@ -1,6 +1,5 @@
 import re
 import string
-import math
 from logger import logger
 
 class FlintParser:
@@ -366,7 +365,7 @@ class FlintParser:
             "max_score": max_score,
             "synonym_weight": synonym_weight,
             "token_count": len(tokens),
-            "max_weight_sums": max_weight_sums  # <-- NEW
+            "max_weight_sums": max_weight_sums
         }
 
     def fast_score_calculation(self, query_tokens: list, data: dict, threshold: float) -> float:
