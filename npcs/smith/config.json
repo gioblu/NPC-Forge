@@ -3,5 +3,9 @@
   "creator": "Giovanni Blu Mitolo",
   "tts": true,
   "sentence_threshold": 0.6668,
-  "word_threshold": 0.751
+  "word_threshold": 0.751,
+  "active_datasets": [
+    "NPC-Forge-Python-Base-Dataset",
+    "NPC-Forge-General-Knowledge-Dataset"
+  ]
 }
