@@ -105,7 +105,7 @@ class DeterministicInterpreter(Interpreter):
                 ]
                 menu_text = f"Type [bold green]1-{len(related)}[/] or [bold green]q[/] to quit\n"
                 exec_ctx.console.print()
-                choice = exec_ctx.tui.multi_choice(f"[bold green]{res.get('npc', 'NPC')}[/] {res.get('emoji', '')} {meta}", related_intents, menu_text, 'g')
+                choice = exec_ctx.tui.multi_choice(f"[bold green]{res.get('npc', 'NPC')}[/] {res.get('emoji', '')} {meta} \n\n{res.get("response", "")}", related_intents, menu_text, 'g')
                 if isinstance(choice, int) and -1 < choice < len(related):
                     try:
                         res_proc = subprocess.run([os.path.abspath(sys.argv[0]), related_intents[choice]], env=os.environ)
@@ -127,7 +127,15 @@ class DeterministicInterpreter(Interpreter):
                     return result
             else:
                 if exec_ctx.fallback: 
-                    exec_ctx.console.print(f"[yellow]Intent not understood.[/yellow]")
+                    print()            
+                    exec_ctx.tui.render_action(
+                        thinking=res.get("thinking", ""),
+                        response=Markdown(str(res.get("response", "")).strip()),
+                        command="",
+                        description="",
+                        title=f"[bold green]{res.get('npc', 'NPC')}[/] {res.get('emoji', '')} {meta}"
+                    )
+                    print()
                 result.exit_code = 0
                 return result
 
