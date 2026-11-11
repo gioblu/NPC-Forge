@@ -78,11 +78,10 @@ termy_say() {
 # the text response inside a variable reference.
 
 termy_question() {
-    local -n dest_var=$2
     tput cuu 1
     termy_say -s "$1"
     printf "\r\n%s: " "$1"
-    read -r dest_var
+    read -r "$2"
 }
 
 # Displays a multi-choice menu from the 
