@@ -88,7 +88,9 @@ class FlintNPC {
         for (const block of allBlocks) {
             if (block && block.input && Array.isArray(block.input)) {
                 for (const inp of block.input) {
-                    this.exact_match_map[String(inp).toLowerCase().trim()] = block;
+                    if (typeof inp === 'string') {
+                        this.exact_match_map[inp.toLowerCase().trim()] = block;
+                    }
                 }
             }
         }

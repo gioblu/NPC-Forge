@@ -41,6 +41,7 @@ class FlintParser {
     }
 
     _tokenize(text) {
+        if (typeof text !== 'string') text = String(text ?? "");
         if (this._tokenize_cache.has(text)) return this._tokenize_cache.get(text);
         const tokens = text.toLowerCase().trim().split(/\s+/).filter(Boolean);
         if (this._tokenize_cache.size > 10000) this._tokenize_cache.clear();
@@ -93,6 +94,7 @@ class FlintParser {
             const inputArray = Array.isArray(inputs) ? inputs : [inputs];
             
             for (const sentence of inputArray) {
+                if (typeof sentence !== 'string') continue;
                 const words = this._tokenize(sentence);
                 for (const word of words) uniqueWordsInIntent.add(word);
             }
@@ -244,7 +246,10 @@ class FlintParser {
         let total_score = 0.0;
         const matched_indices = new Array(query_tokens.length).fill(false);
         let effective_max_score = data.max_score;
-        const synonym_weight = data.synonym_weight !== undefined ? data.synonym_weight : 0.0;
+        
+        const synonym_weight = (
+            data.synonym_weight !== undefined && data.synonym_weight > 0
+        ) ? data.synonym_weight : 1.0;
         
         for (const [t_anchor, anchor_weight, t_anchor_len] of data.anchor_info) {
             let best_word_sim = 0.0;
@@ -256,11 +261,20 @@ class FlintParser {
                 const t_query = query_tokens[idx];
                 const t_query_len = t_query.length;
 
-                if (t_anchor === t_query) { best_word_sim = 1.0; best_match_idx = idx; break; }
+                if (t_anchor === t_query) { 
+                    best_word_sim = 1.0; 
+                    best_match_idx = idx; 
+                    break; 
+                }
 
                 const anchor_tag = this._synonym_map.get(t_anchor);
                 const query_tag = this._synonym_map.get(t_query);
-                if (anchor_tag && query_tag && anchor_tag === query_tag) { best_word_sim = synonym_weight; best_match_idx = idx; break; }
+                
+                if (anchor_tag && query_tag && anchor_tag === query_tag) { 
+                    best_word_sim = synonym_weight; 
+                    best_match_idx = idx; 
+                    break; 
+                }
 
                 if (Math.abs(t_anchor_len - t_query_len) > max_diff) continue;
 
@@ -273,7 +287,10 @@ class FlintParser {
                 }
 
                 const sim = this.levenshtein_similarity(t_anchor, t_query, threshold);
-                if (sim > best_word_sim) { best_word_sim = sim; best_match_idx = idx; }
+                if (sim > best_word_sim) { 
+                    best_word_sim = sim; 
+                    best_match_idx = idx; 
+                }
             }
 
             if (best_word_sim >= threshold) {
@@ -388,9 +405,7 @@ class FlintParser {
                             ([type, tag]) => type === "vocab" && this.tag_matches(possible_match, tag)
                         );
                         
-                        // FIX: Strictly ignore vocab tags that are not specified in the semantic path at this position.
-                        // This prevents unexpected tags from polluting the structure array and causing a downstream reject.
-                        if (!expects_this_vocab) {
+                        if (structure.length > 0 && expects_variable && !expects_this_vocab) {
                             match = null;
                         } else {
                             match = possible_match;
@@ -399,7 +414,11 @@ class FlintParser {
                 }
             }
             
-            if (match) { structure.push(match); i++; continue; }
+            if (match) { 
+                structure.push(match); 
+                i++; 
+                continue; 
+            }
             
             let matched_variable = false;
             for (const [type, tag] of candidates) {
