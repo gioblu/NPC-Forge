@@ -9,6 +9,7 @@ from pathlib import Path
 from datetime import datetime
 
 from storage.dataset import DatasetStorage
+from logger import log_file_path
 
 RED = "\033[31m"
 GREEN = "\033[32m"
@@ -17,7 +18,7 @@ RESET = "\033[0m"
 
 # Standard XDG Directory for local user
 FORGE_DATA_DIR = Path.home() / ".local" / "share" / "npc-forge"
-LOG_FILE_PATH = FORGE_DATA_DIR / "npc_forge.log"
+LOG_FILE_PATH = log_file_path
 SERVICE_NAME = "npc-forge.service"
 
 storage = DatasetStorage()
