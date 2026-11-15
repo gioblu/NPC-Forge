@@ -8,8 +8,8 @@ NPC-Forge is a neuro-symbolic AI agent framework that combines the capabilities 
 
 Many problems you encounter can be solved without machine-learning or LLMs. NPC-Forge gives you the tools to solve those problems more efficiently:
 
-* **Deterministic engine**: fast, safe and reliable deterministic engine to handle known questions.
-* **Probabilistic engine**: uses [ollama](https://ollama.com) to answer questions that require reasoning or generative abilities.
+* **Deterministic engine**: fast, safe and reliable, designed to handle known tasks.
+* **Probabilistic engine**: uses [ollama](https://ollama.com) to solve tasks that require reasoning or generative abilities.
 * **Extensible**: craft datasets with ease thanks to the [NDF 0.0 (NPC-Forge Dataset Format)](docs/dataset.md) specification.
 * **Continuous learning**: NPCs learn and respond to known questions thousands of times faster than LLMs.
 * **Plug-and-play**: implements an OpenAI-compatible API that connects NPCs to your favorite harness.
