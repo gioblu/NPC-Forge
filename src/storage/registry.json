@@ -9,10 +9,17 @@
     },
     {
       "id": "NPC-Forge-General-Knowledge-Dataset",
-      "file": "NPC-Forge-General-Knowledge-Dataset.jsonl",
-      "size": "60MB",
-      "description": "General Knowledge",
-      "url": "https://raw.githubusercontent.com/gioblu/NPC-Forge-General-Knowledge-Dataset/refs/heads/main/jsonl/NPC-Forge-General-Knowledge-Dataset.jsonl"
+      "file": "dataset_NPC-Forge-General-Knowledge-Dataset.jsonl",
+      "size": "15MB",
+      "description": "General knowledge primer for NPCs",
+      "url": "https://raw.githubusercontent.com/gioblu/NPC-Forge-General-Knowledge-Dataset/refs/heads/main/jsonl/dataset_NPC-Forge-General-Knowledge-Dataset.jsonl"
+    },
+    {
+      "id": "NPC-Forge-CIA-Factbook-Dataset",
+      "file": "dataset_CIA_Factbook_2025_all_countries.jsonl",
+      "size": "19MB",
+      "description": "CIA Country factbook dataset",
+      "url": "https://raw.githubusercontent.com/gioblu/NPC-Forge-CIA-Factbook-Dataset/refs/heads/main/dataset_CIA_Factbook_2025_all_countries.jsonl"
     }
   ]
 }
