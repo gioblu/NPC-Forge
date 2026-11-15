@@ -72,6 +72,11 @@ Consider that this experimental release of `npc-forge` works only on Linux and W
 - [TCS 0.0 (Terminal Commands Security)](docs/commands-security.md)
 - [NPC creation guide](docs/create-npc.md)
 
+### Datasets
+- [NPC-Forge-General-Knowledge-Dataset](https://github.com/gioblu/NPC-Forge-General-Knowledge-Dataset)
+- [NPC-Forge-CIA-Factbook-Dataset](https://github.com/gioblu/NPC-Forge-CIA-Factbook-Dataset)
+- [NPC-Forge-Python-Base-Dataset](https://github.com/gioblu/NPC-Forge-Python-Base-Dataset)
+  
 ### Contributing to the forge
 I am developing NPC-Forge with the conviction that democratic and sustainable use of Artificial Intelligence can be achieved with **neuro-symbolic designs** driven by curated and tested datasets crafted by the community; if you can, help me out.
 
