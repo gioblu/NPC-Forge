@@ -1,5 +1,8 @@
+from array import array
 import re
 import string
+from functools import lru_cache
+import sys
 from logger import logger
 
 class FlintParser:
@@ -50,7 +53,12 @@ class FlintParser:
                 normalized_tag = str(tag).lower().strip()
                 self._synonym_map[normalized_tag] = normalized_tag
                 for syn in synonyms:
-                    self._synonym_map[str(syn).lower().strip()] = normalized_tag                  
+                    self._synonym_map[str(syn).lower().strip()] = normalized_tag  
+        
+        self._strip_cache = {}
+        self._cand_cache = {}
+        # word-pair similarity is a pure function, we cache it
+        self._word_sim = lru_cache(maxsize=100000)(self.levenshtein_similarity)                
         return
 
     def _compile_templates(self, templates):
@@ -129,68 +137,42 @@ class FlintParser:
         return weights
     
     def get_rarest_word(self, prompt: str) -> str | None:
-        """Extract the word with highest IDF weight (rarest/most specific) from prompt."""
         if not prompt or not self.weights:
             return None
         tokens = prompt.lower().split()
         if not tokens:
             return None
-        rarest = max(
-            tokens, 
-            key=lambda w: self.weights.get(w, 0.0)
-        )
-        weight = self.weights.get(rarest, 0.0)
-        return rarest if weight > 0.0 else None
+        rarest = max(tokens, key=lambda w: self.weights.get(w, 0.0))
+        return rarest if self.weights.get(rarest, 0.0) > 0.0 else None
     
     def strip_and_count(self, text, words_list):
-        """
-        Sanitization function that strips words 
-        outside strings and tags. While stripping it also
-        counts the occurrences; this information is used
-        later in the pipeline to compute the sentiment
-        analysis.
-        """
-        if not words_list:
+        if not words_list: return str(text).strip(), 0
+        key = tuple(words_list)
+        pattern = self._strip_cache.get(key)
+        if pattern is None:
+            parts = []
+            for w in sorted(set(words_list), key=len, reverse=True):
+                if not w: continue
+                pre = r"\b" if (w[0].isalnum() or w[0] == "_") else ""
+                post = r"\b" if (w[-1].isalnum() or w[-1] == "_") else ""
+                parts.append(pre + re.escape(w) + post)
+            pattern = re.compile(r"\s*(?:" + "|".join(parts) + r")\s*", re.IGNORECASE) if parts else None
+            self._strip_cache[key] = pattern
+        if pattern is None:
             return str(text).strip(), 0
-
-        # avoid stripping tags or content of string literals
-        protected_pattern = r"(<\|\|.*?\|\|>|\".*?\"|'.*?')"
-        tokens = re.split(protected_pattern, str(text))
-        
-        # escape text tokens to match raw string vocabulary structures
-        escaped_words = "|".join(map(re.escape, words_list))
-        total_removed = 0
-
-        # Clean occurrences anywhere handling boundaries 
-        # leading and trailing spaces and punctuation
-        anywhere_pattern = rf"\s*\b(?:{escaped_words})\b\s*"
-
-        
-        for idx in range(len(tokens)):
-            t = tokens[idx]
-            # Skip if token falls under protected formats
-            if (
-                t.startswith("<||") and 
-                t.endswith("||>")
-            ) or (
-                t.startswith('"') and 
-                t.endswith('"')
-            ) or (t.startswith("'") and t.endswith("'")): continue
-            
-            # Recursive cleanup to catch sequential instances in the same token
+        tokens = re.split(r"(<\|\|.*?\|\|>|\".*?\"|'.*?')", str(text))
+        edges = (("<||", "||>"), ('"', '"'), ("'", "'"))
+        total = 0
+        for idx, t in enumerate(tokens):
+            if any(t.startswith(a) and t.endswith(b) for a, b in edges):
+                continue
             while True:
-                cleaned, count = re.subn(
-                    anywhere_pattern, " ", t, flags=re.IGNORECASE
-                )
-                if count == 0: break
-                total_removed += count
+                cleaned, n = pattern.subn(" ", t)
+                if n == 0: break
+                total += n
                 t = cleaned
             tokens[idx] = t
-
-        # Final reconstruction and spacing normalization
-        cleaned_text = "".join(tokens).strip()
-        cleaned_text = re.sub(r'\s+', ' ', cleaned_text)  
-        return cleaned_text, total_removed
+        return re.sub(r"\s+", " ", "".join(tokens).strip()), total
     
     def strip_and_sentiment(
         self,
@@ -270,7 +252,7 @@ class FlintParser:
         if thx == 2 or enc == 2: return "😃"
         if thx == 3 or enc == 3: return "😆"
         if thx == 4 or enc == 4: return "😜"
-        if thx >= 5 or enc == 5: return "😘"
+        if thx >= 5 or enc >= 5: return "😘"
         if inj == 1: return "😏" 
         if inj == 2: return "😒" 
         if inj == 3: return "🧐" 
@@ -279,180 +261,143 @@ class FlintParser:
         return "😑"
 
     def levenshtein_similarity(self, s1, s2, threshold=0.0):
-        """
-            Computes optimized Levenshtein distance with a single row vector 
-            allocation and accurate early exit pruning based on the required 
-            similarity cutoff score.
-        """
-        
         s1, s2 = s1.lower().strip(), s2.lower().strip()
-        len1, len2 = len(s1), len(s2)
-        max_len = max(len1, len2)
-        if max_len == 0: return 1.0
-        
-        # Pre-calculate the maximum theoretical score possible
-        max_possible_score = 1.0 - (abs(len1 - len2) / max_len)
-        if max_possible_score < threshold: return 0.0
-
-        # Ensure s1 is always the longer string
-        if len1 < len2:
+        if len(s1) < len(s2):
             s1, s2 = s2, s1
-            len1, len2 = len2, len1
-
-        current_row = list(range(len2 + 1))
-        max_dist = int((1.0 - threshold) * max_len)
-
-        for i in range(1, len1 + 1):
-            prev_cell = i
-            c1 = s1[i - 1]
-            min_row_dist = i 
-            
-            for j in range(1, len2 + 1):
-                substitutions = current_row[j - 1] + (c1 != s2[j - 1])
-                insertions = current_row[j] + 1
-                deletions = prev_cell + 1
-                
-                current_value = min(insertions, deletions, substitutions)
+        len1, len2 = len(s1), len(s2)
+        max_len = len1
+        if max_len == 0: return 1.0
+        if s1 == s2: return 1.0
+        if 1.0 - (len1 - len2) / max_len < threshold: return 0.0
+        max_dist = int((1.0 - threshold) * max_len + 1e-9)   # FIX #6
+        p = 0
+        while p < len2 and s1[p] == s2[p]: p += 1
+        s1, s2 = s1[p:], s2[p:]
+        q = 0
+        while q < len(s2) and s1[-1 - q] == s2[-1 - q]: q += 1
+        if q: s1, s2 = s1[:-q], s2[:-q]
+        n1, n2 = len(s1), len(s2)
+        if n2 == 0:
+            return 1.0 - n1 / max_len if n1 <= max_dist else 0.0
+        current_row = list(range(n2 + 1))
+        for i in range(1, n1 + 1):
+            prev_cell, c1, min_row_dist = i, s1[i - 1], i
+            for j in range(1, n2 + 1):
+                cur = min(current_row[j] + 1, prev_cell + 1,
+                          current_row[j - 1] + (c1 != s2[j - 1]))
                 current_row[j - 1] = prev_cell
-                prev_cell = current_value
-                
-                if current_value < min_row_dist:
-                    min_row_dist = current_value
-                    
-            current_row[len2] = prev_cell
-            
-            # The absolute minimum distance to reach the end 
-            # from the current row i is: min_row_dist + (len1 - i)
+                prev_cell = cur
+                if cur < min_row_dist: min_row_dist = cur
+            current_row[n2] = prev_cell
             if min_row_dist > max_dist: return 0.0
+        return 1.0 - (current_row[n2] / max_len)
 
-        return 1.0 - (current_row[len2] / max_len)
-
-    def precompute_intent_signature(self, target_input: str, block: dict, synonym_weight: float = 0.0) -> dict:
-        tokens = target_input.lower().split()
-        anchor_info = []
-        max_score = 0.0
-        token_set = set(tokens)
-        tag_set = set()
-        
+    def precompute_intent_signature(
+        self, 
+        target_input: str, 
+        block: dict,
+        synonym_weight: float = 0.0
+    ) -> dict:
+        tokens = tuple(sys.intern(t) for t in target_input.lower().split())
         weights_list = []
-
+        max_score = 0.0
+        tags = None
         for t in tokens:
-            t_len = len(t)
-            weight = self.weights.get(t, 1.0)
-            anchor_info.append((t, weight, t_len))
-            max_score += weight
-            weights_list.append(weight)
-            
+            w = self.weights.get(t, 1.0)
+            weights_list.append(w)
+            max_score += w
             tag = self._synonym_map.get(t)
-            if tag: tag_set.add(tag)
+            if tag:
+                if tags is None:
+                    tags = set()
+                tags.add(tag)
 
-        # PRECOMPUTE IDF-AWARE BOUND:
-        # Sort weights descending and compute cumulative sums.
-        # This allows O(1) lookup of the absolute maximum possible score 
-        # for any query length Q, properly accounting for IDF weights.
         weights_list.sort(reverse=True)
-        max_weight_sums = []
-        current_sum = 0.0
+        bounds = array('d')
+        s = 0.0
         for w in weights_list:
-            current_sum += w
-            max_weight_sums.append(current_sum)
+            s += w
+            bounds.append(s)
 
         return {
             "block": block,
-            "token_set": token_set,
-            "tag_set": tag_set,
-            "anchor_info": anchor_info,
+            "tokens": tokens,                      
+            "tag_set": tuple(tags) if tags is not None else (),
             "max_score": max_score,
             "synonym_weight": synonym_weight,
             "token_count": len(tokens),
-            "max_weight_sums": max_weight_sums
+            "max_weight_sums": bounds,
         }
-
-    def fast_score_calculation(self, query_tokens: list, data: dict, threshold: float) -> float:
+        
+    def _score_and_matched(self, query_tokens, data, threshold):
+        """Identical scoring to fast_score_calculation, plus matched-query-token count."""
         total_score = 0.0
-        matched_indices = [False] * len(query_tokens)
-        effective_max_score = data["max_score"]
-        synonym_weight = data.get("synonym_weight", 0.0)
+        matched = [False] * len(query_tokens)
+        eff_max = data["max_score"]
+        syn_w = data.get("synonym_weight", 0.0)
+        smap = self._synonym_map
+        weights = self.weights
+        q_info = [(t, smap.get(t), len(t)) for t in query_tokens]
+        word_sim = self._word_sim
 
-        for t_anchor, anchor_weight, t_anchor_len in data["anchor_info"]:
-            best_word_sim = 0.0
-            best_match_idx = -1
-            max_diff = int(max(t_anchor_len, 10) * (1.0 - threshold)) + 2
+        for t_anchor in data["tokens"]:
+            a_w = weights.get(t_anchor, 1.0)
+            a_len = len(t_anchor)
+            best_sim, best_idx = 0.0, -1
+            max_diff = int(max(a_len, 10) * (1.0 - threshold)) + 2
+            a_tag = smap.get(t_anchor)
+            for idx, (t_q, q_tag, q_len) in enumerate(q_info):
+                if matched[idx]: continue
+                if t_anchor == t_q:
+                    best_sim, best_idx = 1.0, idx; break
+                if a_tag and q_tag and a_tag == q_tag:
+                    best_sim, best_idx = syn_w, idx; break
+                if abs(a_len - q_len) > max_diff: continue
+                sim = word_sim(t_anchor, t_q, threshold)
+                if sim > best_sim:
+                    best_sim, best_idx = sim, idx
+            if best_sim >= threshold:
+                total_score += best_sim * a_w
+                if best_idx != -1: matched[best_idx] = True
 
-            for idx, t_query in enumerate(query_tokens):
-                if matched_indices[idx]: continue
+        for idx, (t_q, q_tag, _) in enumerate(q_info):
+            if not matched[idx] and t_q not in weights and q_tag is None:
+                eff_max += 0.5
+        score = total_score / eff_max if eff_max else 0.0
+        return score, sum(matched)
 
-                if t_anchor == t_query:
-                    best_word_sim = 1.0
-                    best_match_idx = idx
-                    break
-
-                anchor_tag = self._synonym_map.get(t_anchor)
-                query_tag = self._synonym_map.get(t_query)
-                if anchor_tag and query_tag and anchor_tag == query_tag:
-                    best_word_sim = synonym_weight
-                    best_match_idx = idx
-                    break
-
-                if abs(t_anchor_len - len(t_query)) > max_diff: continue
-
-                sim = self.levenshtein_similarity(t_anchor, t_query, threshold)
-                if sim > best_word_sim:
-                    best_word_sim = sim
-                    best_match_idx = idx
-
-            if best_word_sim >= threshold:
-                total_score += best_word_sim * anchor_weight
-                if best_match_idx != -1:
-                    matched_indices[best_match_idx] = True
-
-        for idx, t_query in enumerate(query_tokens):
-            if not matched_indices[idx] and len(t_query) >= 3:
-                if t_query not in self.weights and t_query not in self._synonym_map:
-                    effective_max_score += 0.5
-
-        return total_score / effective_max_score if effective_max_score else 0.0
+    def fast_score_calculation(self, query_tokens, data, threshold):
+        return self._score_and_matched(query_tokens, data, threshold)[0]
     
     def find_candidates(self, structure, candidates):
-        clean_user = [tag for tag in structure if tag.startswith("<||")]
-        u_len = len(clean_user)
-        
-        for template in self.templates:
-            if not template or "structure" not in template: continue
-            for path in template["structure"]:
-                p_idx = 0
-                u_idx = 0
-
-                while p_idx < len(path) and u_idx < u_len:
-                    if self.tag_matches(clean_user[u_idx], path[p_idx]["tag"]):
-                        u_idx += 1
-                        p_idx += 1
-                    elif not path[p_idx]["required"]: p_idx += 1
-                    else: break
-                    
-                # If all nodes are processed gathers candidates 
-                # compatible with the actual position
-                if u_idx == u_len:
-                    if p_idx < len(path):
-                        target_node = path[p_idx]
-                        type = target_node["type"]
-                        normalized_tag = target_node["tag"] if isinstance(
-                            target_node["tag"], list
-                        ) else target_node["tag"]
-                        
-                        if (type, normalized_tag) not in candidates:
-                            candidates.append((type, normalized_tag))
-                        
-                        # If the actual node is optional
-                        # gather the next as an alternative
-                        if not target_node["required"] and (p_idx + 1) < len(path):
-                            next_node = path[p_idx + 1]
-                            next_type = next_node["type"]
-                            next_tag = next_node["tag"]
-                            next_normalized_tag = next_tag if isinstance(next_tag, list) else next_tag
-                            
-                            if (next_type, next_normalized_tag) not in candidates:
-                                candidates.append((next_type, next_normalized_tag))
+        key = tuple(structure)
+        cached = self._cand_cache.get(key)
+        if cached is None:
+            cached = []
+            u_len = len(structure)
+            for template in self.templates:
+                if not template or "structure" not in template:
+                    continue
+                for path in template["structure"]:
+                    p_idx = u_idx = 0
+                    while p_idx < len(path) and u_idx < u_len:
+                        if self.tag_matches(structure[u_idx], path[p_idx]["tag"]):
+                            u_idx += 1; p_idx += 1
+                        elif not path[p_idx].get("required", True):
+                            p_idx += 1
+                        else: break
+                    if u_idx != u_len or p_idx >= len(path):
+                        continue
+                    node = path[p_idx]
+                    nodes = [node]
+                    if not node.get("required", True) and p_idx + 1 < len(path):
+                        nodes.append(path[p_idx + 1])
+                    for n in nodes:
+                        k = (n["type"], n["tag"])
+                        if k not in cached:
+                            cached.append(k)
+            self._cand_cache[key] = cached
+        candidates.extend(cached)
             
     def find_template(self, token, threshold):
         """
@@ -461,28 +406,19 @@ class FlintParser:
             threshold the matched template is returned
             otherise None is retuned
         """
-        if hasattr(self, 'templates_vocabulary'):
-            match = None
-            similarity = 0.0
-
-            for tag, synonyms in self.templates_vocabulary.items():
-                for synonym in synonyms:
-                    if token == synonym:
-                        match = tag
-                        similarity = 1.0
-                        break
-                    
-                    if len(token) > 4 and len(synonym) >= 4:
-                        sim = self.levenshtein_similarity(token, synonym)
-                        if sim >= threshold and sim > similarity:
-                            similarity = sim
-                            match = tag
-                
-                if similarity == 1.0: break
-
-            if match:
-                if similarity < 1.0:
-                    logger.info(f"{self.log_info}[find_template] Typo: '{token}' matched to '{match}' (Confidence: {similarity:.2f})")
+        low = token.lower()
+        exact = self._synonym_map.get(low)
+        if exact: return exact
+        match, similarity = None, 0.0
+        if len(low) > 4:
+            for syn, tag in self._synonym_map.items():
+                if len(syn) >= 4:
+                    sim = self._word_sim(low, syn, threshold)
+                    if sim >= threshold and sim > similarity:
+                        similarity, match = sim, tag
+                        if sim == 1.0: break
+        if match and similarity < 1.0:
+            logger.info(f"{self.log_info}[find_template] Typo: '{token}' matched to '{match}' (Confidence: {similarity:.2f})")
         return match
     
     def parse_structure(self, sub_prompt, threshold):
