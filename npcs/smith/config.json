@@ -2,10 +2,11 @@
   "name": "Smith",
   "creator": "Giovanni Blu Mitolo",
   "tts": true,
-  "sentence_threshold": 0.6668,
-  "word_threshold": 0.751,
+  "synonym_contribution": 0.825,
+  "word_threshold": 0.6668,
   "active_datasets": [
     "NPC-Forge-Python-Base-Dataset",
-    "NPC-Forge-General-Knowledge-Dataset"
+    "NPC-Forge-General-Knowledge-Dataset",
+    "NPC-Forge-CIA-Factbook-Dataset"
   ]
 }
