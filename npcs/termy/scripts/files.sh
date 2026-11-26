@@ -278,7 +278,7 @@ termy_execute() {
     local file_ext=""
     if [[ "$file_name" == *.* ]]; then
         file_ext="${file_name##*.}"
-        file_ext="${file_ext,,}" # Force lowercase
+        file_ext=$(printf '%s' "$file_ext" | tr '[:upper:]' '[:lower:]')
     fi
 
     # Create a secure temporary file to capture live output
